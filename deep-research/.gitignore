@@ -1,0 +1,9 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+checkpoints.sqlite3*
+reports/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

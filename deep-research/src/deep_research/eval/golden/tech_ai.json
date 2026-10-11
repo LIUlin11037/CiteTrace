@@ -1,0 +1,95 @@
+{
+  "name": "tech_ai_golden",
+  "version": "0.1",
+  "note": "种子集 8 题，目标扩至 20-30 题。expected_key_points 须为可判定的具体事实，避免空泛表述。",
+  "questions": [
+    {
+      "id": "gq-agent-memory",
+      "topic": "2025年以来 LLM Agent 记忆机制的主流方案有哪些？各自代表工作是什么？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "存在基于外部向量库/RAG 的检索式记忆方案",
+        "存在将记忆写入模型上下文或参数的方案（如长上下文、压缩、编辑）",
+        "提到至少一个代表性开源记忆框架或论文（如 MemGPT/Letta 或同类）",
+        "区分了短期（会话内）记忆与长期（跨会话）记忆"
+      ]
+    },
+    {
+      "id": "gq-agentic-rag",
+      "topic": "什么是 Agentic RAG？它相比传统 RAG 在架构上的关键差异是什么？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "传统 RAG 是固定的检索-生成流水线",
+        "Agentic RAG 引入 LLM 驱动的规划、工具调用或迭代检索",
+        "提到自我纠错或反思机制（如 CRAG / Self-RAG 类思路）",
+        "给出至少一个相关论文或开源实现"
+      ]
+    },
+    {
+      "id": "gq-mcp",
+      "topic": "Model Context Protocol (MCP) 解决了什么问题？其基本架构是什么？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "MCP 由 Anthropic 提出并开源",
+        "目标是标准化 LLM 应用与外部工具/数据源的连接",
+        "采用 client-server 架构，server 暴露 tools/resources/prompts",
+        "提到传输方式（stdio 或 HTTP/SSE 类）"
+      ]
+    },
+    {
+      "id": "gq-deepseek-r1",
+      "topic": "DeepSeek-R1 的核心技术路线是什么？它对推理模型训练范式的影响是什么？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "R1 以强化学习为核心提升推理能力",
+        "涉及 GRPO 或类似的组相对策略优化方法",
+        "展示了纯 RL 可涌现长链推理（R1-Zero 现象）",
+        "提到蒸馏小模型或开源权重的影响"
+      ]
+    },
+    {
+      "id": "gq-moe",
+      "topic": "混合专家模型（MoE）在大模型中的主流做法与关键工程挑战是什么？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "MoE 通过稀疏激活扩大参数量而控制计算量",
+        "路由/负载均衡是核心机制与挑战",
+        "提到至少一个代表性 MoE 模型（如 Mixtral / DeepSeek-V 系列 / Qwen MoE）",
+        "提到训练稳定性或专家坍缩问题"
+      ]
+    },
+    {
+      "id": "gq-swe-agent",
+      "topic": "自动修 bug 的 Coding Agent（如 SWE-agent 类）当前在 SWE-bench 上的技术水平如何？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "SWE-bench 是该领域主流评测基准",
+        "给出大致的解决率量级并注明来源",
+        "提到至少一个代表性系统（SWE-agent / OpenHands 或同类）",
+        "指出主要难点（如长上下文定位、测试验证）"
+      ]
+    },
+    {
+      "id": "gq-multimodal",
+      "topic": "2025年多模态大模型的主流架构路线有哪些？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "存在视觉编码器+投影+LLM 的模块化路线",
+        "存在原生/端到端多模态（统一 token 化）路线",
+        "提到至少一个代表性模型（GPT-4o 类 / Gemini 类 / Qwen-VL 等）",
+        "区分理解任务与生成任务的技术差异"
+      ]
+    },
+    {
+      "id": "gq-eval",
+      "topic": "如何评估一个 LLM Agent 系统的好坏？主流评测维度与方法是什么？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "区分最终结果质量与过程质量（轨迹/工具使用）",
+        "提到 LLM-as-judge 方法及其局限",
+        "提到基准评测（如 AgentBench / WebArena / SWE-bench 类）",
+        "提到可观测/追踪在生产评估中的作用"
+      ]
+    }
+  ]
+}
