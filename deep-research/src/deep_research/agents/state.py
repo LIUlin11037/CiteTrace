@@ -93,6 +93,9 @@ class ResearchState(TypedDict, total=False):
     report: str
     messages: Annotated[list[Any], add_messages]
 
+    # long-term memory recall injected before planning (M3)
+    recalled_memories: list[str]
+
 
 class ResearcherInput(TypedDict):
     """Payload delivered to one Researcher branch via Send."""

@@ -1,22 +1,21 @@
 # 外围模块交接契约（Handoff）
 
-> **状态：任务 1–4 已全部实现并验证通过（2026-10-10）。**
-> 核心层（core/ agents/ tools/mcp_client.py）**禁止修改**。
+> **状态：任务 1–4 已全部实现并验证通过（2026-10-10）。**  
+> 核心层（core/ agents/ tools/mcp_client.py）**禁止修改**。  
 > 本文档保留作为接口说明与回归依据；如需迭代外围，按下方契约扩展。
 
 ## 实现与验证结果
 
-| 模块 | 文件 | 验证 |
-|---|---|---|
-| 三个 MCP server | `mcp_servers/{arxiv,github,web}_server.py` | `scripts/verify_mcp.py` 经核心加载器实测：6 工具齐全，arXiv 真实调用 200 |
-| CLI | `src/deep_research/cli.py` | import 正常，`run` 命令注册；含 interrupt 审批 + 编辑计划 |
-| FastAPI + SSE | `src/deep_research/api.py` | 路由齐全：`/research`、`/research/{id}/events`、`/research/{id}/resume` |
-| 部署 | `.env.example` / `Dockerfile` / `docker-compose.yml` | 与 config 字段对齐 |
+| 模块            | 文件                                                   | 验证                                                               |
+| ------------- | ---------------------------------------------------- | ---------------------------------------------------------------- |
+| 三个 MCP server | `mcp_servers/{arxiv,github,web}_server.py`           | `scripts/verify_mcp.py` 经核心加载器实测：6 工具齐全，arXiv 真实调用 200           |
+| CLI           | `src/deep_research/cli.py`                           | import 正常，`run` 命令注册；含 interrupt 审批 + 编辑计划                       |
+| FastAPI + SSE | `src/deep_research/api.py`                           | 路由齐全：`/research`、`/research/{id}/events`、`/research/{id}/resume` |
+| 部署            | `.env.example` / `Dockerfile` / `docker-compose.yml` | 与 config 字段对齐                                                    |
 
 待真实 `DR_DEFAULT_API_KEY` 后即可端到端联调（唯一未跑的是真实 LLM 调用）。
 
 ---
-
 
 ## 已固定的核心接口（只读，直接 import）
 
@@ -28,10 +27,10 @@ from deep_research.agents.state import ResearchState, ResearchPlan, Evidence, Cr
 
 - `build_graph(checkpointer)` → 编译后的图；checkpointer **必传**（开发用 `langgraph.checkpoint.sqlite.SqliteSaver`）。
 - 启动一次研究：`graph.ainvoke(initial_input(topic), config=new_thread_config())`
-- 图会在 planner 处 `interrupt`。**注意（已实测）**：带 checkpointer 时 `ainvoke` 不抛异常，
-  而是返回含 `result["__interrupt__"]` 的字典，取 `result["__interrupt__"][0].value`
-  得到 `{"type": "approve_plan", "plan": {...}}`；
-  用 `graph.ainvoke(Command(resume={"approved": True, "edited_plan": None}), config=同一config)` 恢复。
+- 图会在 planner 处 `interrupt`。**注意（已实测）**：带 checkpointer 时 `ainvoke` 不抛异常，  
+  而是返回含 `result["__interrupt__"]` 的字典，取 `result["__interrupt__"][0].value`  
+  得到 `{"type": "approve_plan", "plan": {...}}`；  
+  用 `graph.ainvoke(Command(resume={"approved": True, "edited_plan": None}), config=同一config)` 恢复。  
   `Command` 从 `langgraph.types` 导入。流式场景同理监听 `__interrupt__` 事件。
 - 事件流：`graph.astream_events(..., version="v2")` 供 SSE/CLI 订阅。
 
@@ -47,11 +46,11 @@ from deep_research.agents.state import ResearchState, ResearchPlan, Evidence, Cr
 
 ## 任务 3：三个 MCP server（独立包 `mcp_servers/`，不进核心）
 
-| Server | 工具 | 数据源 |
-|---|---|---|
-| `arxiv_server.py` | `search_papers(query, max_results)` / `get_paper(arxiv_id)` | arXiv API（export.arxiv.org/api/query） |
-| `github_server.py` | `search_repos(query)` / `get_repo_detail(owner/repo)` | GitHub REST（token 走环境变量） |
-| `web_server.py` | `web_search(query)` / `fetch_page(url)` | Brave/Tavily 搜索 API + 正文抽取 |
+| Server             | 工具                                                          | 数据源                                   |
+| ------------------ | ----------------------------------------------------------- | ------------------------------------- |
+| `arxiv_server.py`  | `search_papers(query, max_results)` / `get_paper(arxiv_id)` | arXiv API（export.arxiv.org/api/query） |
+| `github_server.py` | `search_repos(query)` / `get_repo_detail(owner/repo)`       | GitHub REST（token 走环境变量）              |
+| `web_server.py`    | `web_search(query)` / `fetch_page(url)`                     | Brave/Tavily 搜索 API + 正文抽取            |
 
 - 用 `mcp.server.fastmcp.FastMCP`（官方 SDK，stdio 传输），每个工具返回纯文本或 JSON 字符串。
 - 每个 server 可独立 `python -m mcp_servers.arxiv_server` 启动。

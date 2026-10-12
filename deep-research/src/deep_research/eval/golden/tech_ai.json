@@ -1,7 +1,7 @@
 {
   "name": "tech_ai_golden",
-  "version": "0.1",
-  "note": "种子集 8 题，目标扩至 20-30 题。expected_key_points 须为可判定的具体事实，避免空泛表述。",
+  "version": "0.2",
+  "note": "24 题（agent 9 / llm 8 / rag 7）。expected_key_points 须为可判定的具体事实，避免空泛表述。",
   "questions": [
     {
       "id": "gq-agent-memory",
@@ -89,6 +89,204 @@
         "提到 LLM-as-judge 方法及其局限",
         "提到基准评测（如 AgentBench / WebArena / SWE-bench 类）",
         "提到可观测/追踪在生产评估中的作用"
+      ]
+    },
+    {
+      "id": "gq-react",
+      "topic": "ReAct 范式的核心思想是什么？它与纯 Chain-of-Thought 的关键区别是什么？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "ReAct 交替进行推理（Thought）与行动（Action/Observation）",
+        "行动通常对应工具调用或环境交互",
+        "纯 CoT 只有内部推理链、不与外部环境交互",
+        "提到 ReAct 原始论文（Yao et al.）"
+      ]
+    },
+    {
+      "id": "gq-multi-agent",
+      "topic": "多智能体系统（multi-agent LLM）的主流协作模式有哪些？什么场景下多智能体优于单智能体？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "存在编排/层级式（orchestrator-worker）模式",
+        "存在对等协作或辩论式模式",
+        "提到至少一个多智能体框架（如 AutoGen / CrewAI / LangGraph 类）",
+        "指出多智能体的代价（成本、协调复杂度、错误传播）"
+      ]
+    },
+    {
+      "id": "gq-tool-use",
+      "topic": "LLM 的工具调用（function calling）能力是如何训练和对齐的？主流模型在工具使用上的评测怎么做？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "工具调用通常以结构化 schema（JSON）描述函数签名",
+        "训练依赖工具使用轨迹数据（SFT/RL）",
+        "提到至少一个工具使用评测基准（如 BFCL / ToolBench 类）",
+        "区分单轮调用与多轮/并行/嵌套调用的难度差异"
+      ]
+    },
+    {
+      "id": "gq-context-eng",
+      "topic": "什么是上下文工程（Context Engineering）？它和提示词工程的关系与差异是什么？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "上下文工程关注整个上下文窗口的信息组织，不只是单条提示词",
+        "涉及检索、记忆、工具结果、历史压缩等信息调度",
+        "与 prompt engineering 是包含/演进关系而非对立",
+        "提到长上下文的失效模式（如 lost-in-the-middle 或上下文腐坏）"
+      ]
+    },
+    {
+      "id": "gq-human-in-loop",
+      "topic": "Human-in-the-loop 在 LLM Agent 系统中有哪些主流实现模式？各自适合什么场景？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "审批/断点模式（关键动作前人工确认）",
+        "人工编辑中间产物再放行的模式",
+        "需要状态持久化（checkpoint）才能支持中断与恢复",
+        "提到适用场景差异（高风险操作 vs 质量把关）"
+      ]
+    },
+    {
+      "id": "gq-agent-framework-compare",
+      "topic": "LangGraph、AutoGen、CrewAI 三个 Agent 框架在设计理念和适用场景上有何差异？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "LangGraph 以状态机/图编排为核心",
+        "AutoGen 以多智能体会话为核心抽象",
+        "CrewAI 以角色/任务编排为核心抽象",
+        "给出至少一个维度的客观对比（如状态持久化、流式、生态）"
+      ]
+    },
+    {
+      "id": "gq-rl-scaling",
+      "topic": "推理模型的 RL scaling（如 o1/R1 路线）与预训练 scaling 的关系是什么？test-time compute 为何重要？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "RL scaling 在推理阶段投入更多计算换质量",
+        "test-time compute 与模型能力存在可测量的 scaling 关系",
+        "提到 OpenAI o1 或 DeepSeek-R1 作为代表",
+        "与预训练 scaling law 是互补而非替代关系"
+      ]
+    },
+    {
+      "id": "gq-long-context",
+      "topic": "把上下文窗口做到 100 万 token 级别的主流技术手段有哪些？长上下文是否让 RAG 过时？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "位置编码外推/插值（如 RoPE 扩展类技术）",
+        "注意力优化（稀疏/线性注意力或 KV cache 优化）",
+        "长上下文存在 lost-in-the-middle 等检索质量衰减",
+        "给出 RAG 与长上下文互补的结论及理由"
+      ]
+    },
+    {
+      "id": "gq-distillation",
+      "topic": "大模型知识蒸馏的主流做法是什么？DeepSeek-R1 蒸馏小模型的效果如何？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "蒸馏用大模型生成的数据训练小模型",
+        "R1 蒸馏基于 Qwen/Llama 等开源底座",
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ]
+    },
+    {
+      "id": "gq-tokenizer",
+      "topic": "大模型的 tokenizer 如何影响模型能力与成本？BPE 类方法的基本原理是什么？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "BPE 通过频繁字节对合并构建词表",
+        "词表大小影响序列长度进而影响计算成本",
+        "tokenizer 对非英语语言的分词效率影响该语言成本与效果",
+        "提到具体模型词表量级（数万到数十万）"
+      ]
+    },
+    {
+      "id": "gq-hallucination",
+      "topic": "LLM 幻觉的主流缓解手段有哪些？各自的有效性边界在哪里？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "检索增强（RAG/引用约束）是一类手段",
+        "训练侧手段（RLHF/事实性对齐）是一类手段",
+        "解码侧手段（如采样参数、验证式解码）是一类手段",
+        "指出幻觉无法完全消除、只能降低频率"
+      ]
+    },
+    {
+      "id": "gq-open-weights-2025",
+      "topic": "2025年开源权重大模型的格局如何？主要玩家和代表性模型有哪些？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "提到 DeepSeek 系列（V3/R1）",
+        "提到 Qwen 系列",
+        "提到 Llama 系列或其地位变化",
+        "区分开源权重与真正开源（许可证差异）"
+      ]
+    },
+    {
+      "id": "gq-rag-chunking",
+      "topic": "RAG 中文档切分（chunking）的主流策略有哪些？切分粒度如何影响检索质量？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "固定长度切分与语义/结构切分的差异",
+        "chunk 过大引入噪声、过小丢失上下文",
+        "提到重叠（overlap）策略及其作用",
+        "提到至少一种进阶策略（如递归切分、父子块、命题切分）"
+      ]
+    },
+    {
+      "id": "gq-hybrid-search",
+      "topic": "混合检索（向量+关键词）为什么优于单一检索？主流融合方法有哪些？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "向量检索擅长语义、BM25 擅长精确词匹配，错误模式互补",
+        "提到 RRF（倒数排名融合）或加权融合",
+        "提到重排（rerank）阶段及其与融合的区别",
+        "给出至少一个常用实现（如 Elasticsearch/Qdrant/Weaviate 的混合检索）"
+      ]
+    },
+    {
+      "id": "gq-reranker",
+      "topic": "RAG 中 reranker 的作用是什么？cross-encoder 与 bi-encoder 的差异是什么？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "bi-encoder 独立编码查询与文档，快但交互弱",
+        "cross-encoder 联合编码查询-文档对，准但慢",
+        "reranker 通常在粗排之后小集合上精排",
+        "提到至少一个常用 reranker 模型（如 BGE-reranker / Cohere rerank 类）"
+      ]
+    },
+    {
+      "id": "gq-graph-rag",
+      "topic": "GraphRAG 相比传统向量 RAG 解决什么问题？其索引构建的基本流程是什么？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "面向跨文档的全局性/汇总性问题（向量检索不擅长）",
+        "索引阶段抽取实体与关系构建知识图谱",
+        "涉及社区检测/社区摘要的分层组织",
+        "提到微软 GraphRAG 论文或开源实现"
+      ]
+    },
+    {
+      "id": "gq-rag-eval",
+      "topic": "如何评测一个 RAG 系统？检索侧与生成侧分别看哪些指标？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "检索侧指标：命中率/recall、MRR 或 nDCG",
+        "生成侧指标：忠实度（faithfulness）与答案相关性",
+        "提到至少一个 RAG 评测框架（如 RAGAS 类）",
+        "区分有标注与无标注（LLM-as-judge）两种评测方式"
+      ]
+    },
+    {
+      "id": "gq-vector-db",
+      "topic": "向量数据库的主流选型（Qdrant/Milvus/pgvector/Weaviate）有何差异？pgvector 何时是合理选择？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "专用向量库与数据库扩展（pgvector）的路线差异",
+        "提到索引类型差异（HNSW/IVF 等）",
+        "pgvector 在已有 PostgreSQL、数据规模中等时是合理选择",
+        "给出至少一个选择专用库的场景理由（如超大规模/QPS）"
       ]
     }
   ]

@@ -108,7 +108,10 @@ async def main() -> None:
             cover=fake_cover,
         )
 
-    assert summary.n_questions == 8, summary.n_questions
+    from deep_research.eval.dataset import load_dataset
+
+    n_expected = len(load_dataset())
+    assert summary.n_questions == n_expected, (summary.n_questions, n_expected)
     assert abs(summary.mean_citation_existence - 0.8) < 1e-9
     assert abs(summary.mean_alignment - 0.75) < 1e-9  # (1.0 + 0.5) / 2
     assert abs(summary.mean_coverage - 0.75) < 1e-9   # 3/4 covered
@@ -116,7 +119,6 @@ async def main() -> None:
     print(f"[ok] 3. pipeline: {summary.n_questions} golden questions scored, "
           f"means cite={summary.mean_citation_existence:.0%} "
           f"align={summary.mean_alignment:.0%} cover={summary.mean_coverage:.0%}")
-
     # --- 4) artifacts were written ---
     with tempfile.TemporaryDirectory() as tmp:
         await run_eval(

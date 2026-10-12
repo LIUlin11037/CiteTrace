@@ -16,14 +16,16 @@ from typing import Any, AsyncIterator
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
-from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.types import Command
 from pydantic import BaseModel
 
 from deep_research.agents.graph import build_graph, initial_input
-from deep_research.core.config import get_settings
+from deep_research.core.compat import use_compatible_event_loop
+from deep_research.core.persistence import open_checkpointer
 
-_saver: AsyncSqliteSaver | None = None
+use_compatible_event_loop()
+
+_saver: Any = None
 _graph: Any = None
 # thread_id -> events queue consumed by the SSE endpoint
 _streams: dict[str, asyncio.Queue[dict[str, Any] | None]] = {}
@@ -32,8 +34,7 @@ _streams: dict[str, asyncio.Queue[dict[str, Any] | None]] = {}
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     global _saver, _graph
-    settings = get_settings()
-    async with AsyncSqliteSaver.from_conn_string(settings.checkpoint_db_path) as saver:
+    async with open_checkpointer() as saver:
         _saver = saver
         _graph = build_graph(checkpointer=saver)
         yield

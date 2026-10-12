@@ -16,7 +16,6 @@ from pathlib import Path
 from typing import Any
 
 import typer
-from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.types import Command
 from rich.console import Console
 from rich.markdown import Markdown
@@ -24,7 +23,7 @@ from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
 
 from deep_research.agents.graph import build_graph, initial_input, new_thread_config
-from deep_research.core.config import get_settings
+from deep_research.core.persistence import open_checkpointer
 
 app = typer.Typer(add_completion=False, help="Deep Research Agent CLI")
 console = Console()
@@ -44,10 +43,9 @@ def _render_plan(draft: dict[str, Any]) -> None:
 
 
 async def _run(topic: str, output: Path | None) -> None:
-    settings = get_settings()
     output = output or Path("reports") / _slug(topic)
 
-    async with AsyncSqliteSaver.from_conn_string(settings.checkpoint_db_path) as saver:
+    async with open_checkpointer() as saver:
         graph = build_graph(checkpointer=saver)
         config = new_thread_config()
 
@@ -103,6 +101,9 @@ def run(
     output: Path | None = typer.Option(None, "--output", "-o", help="报告输出路径"),
 ) -> None:
     """对给定课题执行一次深度研究。"""
+    from deep_research.core.compat import use_compatible_event_loop
+
+    use_compatible_event_loop()
     asyncio.run(_run(topic, output))
 
 

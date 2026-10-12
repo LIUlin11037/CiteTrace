@@ -33,6 +33,11 @@ cli = [
     "typer>=0.15",
     "rich>=13.9",
 ]
+pg = [
+    "psycopg[binary]>=3.2",
+    "langgraph-checkpoint-postgres>=2.0",
+    "fastembed>=0.4",
+]
 
 [build-system]
 requires = ["hatchling"]

@@ -18,7 +18,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Awaitable, Callable
 
-from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 
 from deep_research.agents.graph import build_graph, initial_input, new_thread_config
@@ -41,13 +40,16 @@ CitationsFn = Callable[[str], Awaitable[CitationReport]]
 
 async def default_run_research(topic: str) -> tuple[str, list[Evidence]]:
     """Drive the real graph with an auto-approved plan (eval is unattended)."""
-    graph = build_graph(checkpointer=InMemorySaver())
-    config = new_thread_config()
-    result = await graph.ainvoke(initial_input(topic), config=config)
-    if result.get("__interrupt__"):
-        result = await graph.ainvoke(
-            Command(resume={"approved": True, "edited_plan": None}), config=config
-        )
+    from deep_research.core.persistence import open_checkpointer
+
+    async with open_checkpointer() as saver:
+        graph = build_graph(checkpointer=saver)
+        config = new_thread_config()
+        result = await graph.ainvoke(initial_input(topic), config=config)
+        if result.get("__interrupt__"):
+            result = await graph.ainvoke(
+                Command(resume={"approved": True, "edited_plan": None}), config=config
+            )
     return result.get("report", ""), result.get("evidences", [])
 
 
@@ -103,29 +105,48 @@ async def run_eval(
     align: AlignmentFn = judge_alignment,
     cover: CoverageFn = judge_coverage,
     max_questions: int | None = None,
+    question_ids: list[str] | None = None,
+    max_concurrency: int = 3,
 ) -> EvalSummary:
     questions = load_dataset(dataset_path)
-    if max_questions:
+    if question_ids:
+        wanted = set(question_ids)
+        questions = [q for q in questions if q.id in wanted]
+        missing = wanted - {q.id for q in questions}
+        if missing:
+            raise ValueError(f"unknown golden question ids: {sorted(missing)}")
+    elif max_questions:
         questions = questions[:max_questions]
 
-    scores: list[QuestionScore] = []
+    scores: list[QuestionScore | None] = []
     reports_dir = out_dir / "reports"
-    for q in questions:
-        score = await evaluate_question(
-            q,
-            run_research=run_research,
-            check_citations=check_citations,
-            align=align,
-            cover=cover,
-            reports_dir=reports_dir,
-        )
-        scores.append(score)
-        print(
-            f"[eval] {q.id}: cite={score.citation_existence_rate:.0%} "
-            f"align={score.alignment_rate:.0%} cover={score.coverage_rate:.0%}"
-        )
+    sem = asyncio.Semaphore(max_concurrency)
 
-    summary = aggregate(scores)
+    async def one(q: GoldenQuestion) -> QuestionScore | None:
+        async with sem:
+            try:
+                score = await evaluate_question(
+                    q,
+                    run_research=run_research,
+                    check_citations=check_citations,
+                    align=align,
+                    cover=cover,
+                    reports_dir=reports_dir,
+                )
+            except Exception as exc:
+                # One bad question must not kill the whole benchmark run.
+                print(f"[eval] {q.id}: FAILED ({type(exc).__name__}: {exc}), skipped")
+                return None
+            print(
+                f"[eval] {q.id}: cite={score.citation_existence_rate:.0%} "
+                f"align={score.alignment_rate:.0%} cover={score.coverage_rate:.0%}"
+            )
+            return score
+
+    scores = await asyncio.gather(*(one(q) for q in questions))
+    final_scores = [s for s in scores if s is not None]
+
+    summary = aggregate(final_scores)
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"eval-{stamp}.json").write_text(
@@ -137,4 +158,7 @@ async def run_eval(
 
 
 if __name__ == "__main__":
+    from deep_research.core.compat import use_compatible_event_loop
+
+    use_compatible_event_loop()
     asyncio.run(run_eval())

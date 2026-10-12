@@ -24,6 +24,7 @@ from deep_research.core.llm import invoke_with_retry, structured_output
 from deep_research.eval.citations import extract_citations
 
 CLAIM_SAMPLE_SIZE = 12  # judged claims per report; keeps cost bounded
+EXCERPT_LIMIT = 600  # raw_excerpt chars per source shown to the judge
 
 _CLAIM_SENTENCE = re.compile(r"([^\n。！？]{10,200}?(?:\[\^\d+\])+[。！？]?)")
 _REF_NUM = re.compile(r"\[\^(\d+)\]")
@@ -108,9 +109,15 @@ def resolve_claim_sources(
 
 
 _ALIGNMENT_SYSTEM = """\
-你是严格的审稿人。给定若干带引用的论断，以及该论断引用来源实际提供的证据要点，
-逐条判定：supported（证据直接支撑）/ partial（部分支撑或过度引申）/ unsupported
-（证据中没有依据，属编造或张冠李戴）。只依据给定证据判断，不用你自己的知识。"""
+你是严格的审稿人。给定若干带引用的论断，以及该论断引用来源实际提供的证据要点
+（含"原文摘录"，即抓取到的来源正文节选），逐条判定：supported（证据直接支撑）/
+partial（部分支撑或过度引申）/ unsupported（证据中没有依据，属编造或张冠李戴）。
+重要规则：
+- 每条论断下方列出的来源就是其脚注对应的全部抓取内容，不要怀疑来源缺失，
+  不要臆测"还有其他未抓取的脚注"——脚注映射已由程序核验，以给定证据为准。
+- 论断若是对摘录中信息的合理概括、归纳或计算（如由摘录中的数据推得的比例），也算
+  supported，不要求逐字对应。
+只依据给定证据判断，不用你自己的知识。"""
 
 _COVERAGE_SYSTEM = """\
 你是评测员。给定一份研究报告和一组该课题应当覆盖的关键知识点，
@@ -128,11 +135,18 @@ async def judge_alignment(
     blocks: list[str] = []
     for i, (claim, matched, unresolved) in enumerate(resolved, 1):
         lines = [f"论断 {i}：{claim}"]
+        footnotes = "、".join(f"[^{n}]" for n in _REF_NUM.findall(claim))
         if matched:
-            lines.append("其引用来源实际提供的证据要点：")
+            lines.append(
+                f"该论断引用的脚注（{footnotes}）已全部解析到以下来源，"
+                "它们都在证据库中、均为研究员实际抓取的内容："
+            )
             for ev in matched:
                 lines.append(f"  来源《{ev.title}》({ev.url})：")
                 lines.extend(f"    - {p}" for p in ev.key_points)
+                if ev.raw_excerpt:
+                    excerpt = ev.raw_excerpt[:EXCERPT_LIMIT]
+                    lines.append(f"    原文摘录：{excerpt}")
         if unresolved:
             lines.append(
                 "注意：该论断还引用了以下 URL，但它们不在证据库中"

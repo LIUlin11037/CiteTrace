@@ -88,6 +88,20 @@ class Settings(BaseSettings):
 
     # ---- persistence ----
     checkpoint_db_path: str = "checkpoints.sqlite3"
+    # sqlite（开发默认，零依赖）或 postgres（M3 生产形态）
+    checkpoint_backend: Literal["sqlite", "postgres"] = "sqlite"
+    database_url: str = (
+        "postgresql://deepresearch:deepresearch@localhost:5432/deepresearch"
+    )
+
+    # ---- long-term memory (requires postgres + pgvector) ----
+    # Off by default: everything runs without PG. Flip on once PG is up.
+    enable_long_term_memory: bool = False
+    memory_namespace: str = "research"
+    memory_embedding_model: str = "BAAI/bge-small-zh-v1.5"  # fastembed, 512d
+    memory_embedding_dim: int = 512
+    memory_recall_limit: int = 5
+    memory_min_score: float = 0.35  # cosine similarity floor for recall
 
     def model_config_for(self, role: RoleName) -> ModelConfig:
         override = getattr(self, f"{role}_model")

@@ -30,6 +30,12 @@ from deep_research.core.config import RoleName, get_settings
 
 T = TypeVar("T", bound=BaseModel)
 
+# The writer emits a full report plus a complete footnote reference list; the
+# shared 4096 default truncates the reference section on source-heavy reports
+# (observed in eval: gq-mcp/gq-moe cut off mid-list, leaving cited footnotes
+# undefined). deepseek-chat supports 8192 output tokens — give writer the max.
+WRITER_MIN_MAX_TOKENS = 8192
+
 
 def get_chat_model(role: RoleName, *, streaming: bool = False) -> BaseChatModel:
     """Build a chat model for the given agent role.
@@ -38,12 +44,15 @@ def get_chat_model(role: RoleName, *, streaming: bool = False) -> BaseChatModel:
     other roles always run non-streaming because their outputs are structured.
     """
     cfg = get_settings().model_config_for(role)
+    max_tokens = cfg.max_tokens
+    if role == "writer":
+        max_tokens = max(max_tokens, WRITER_MIN_MAX_TOKENS)
     return ChatOpenAI(
         model=cfg.model,
         base_url=cfg.base_url,
         api_key=cfg.api_key,
         temperature=cfg.temperature,
-        max_tokens=cfg.max_tokens,
+        max_tokens=max_tokens,
         timeout=cfg.request_timeout,
         streaming=streaming,
         max_retries=0,  # retries are handled by invoke_with_retry below
@@ -82,7 +91,12 @@ async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
         # callers pass {"messages": [...]} for readability — unwrap here.
         if isinstance(input_, dict) and set(input_) == {"messages"}:
             input_ = input_["messages"]
-        return await runnable.ainvoke(input_)
+        result = await runnable.ainvoke(input_)
+        if result is None:
+            # Provider answered with plain text instead of a tool call —
+            # retryable: the next attempt usually emits the tool call.
+            raise LLMCallError("structured output returned None (no tool call emitted)")
+        return result
     except (TimeoutError, ConnectionError):
         raise
     except Exception as exc:  # provider 5xx / rate limit surface as APIError

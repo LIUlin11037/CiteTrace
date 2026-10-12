@@ -42,6 +42,25 @@ async def planner_node(state: ResearchState) -> dict[str, Any]:
     """
     settings = get_settings()
     runnable = structured_output("planner", ResearchPlan)
+
+    recall_block = ""
+    recalled: list[str] = []
+    if settings.enable_long_term_memory:
+        try:
+            from deep_research.core.memory import get_memory_store
+
+            store = await get_memory_store()
+            hits = await store.search(state["topic"])
+            if hits:
+                recalled = [h.content for h in hits]
+                recall_block = (
+                    "\n\n相关历史研究（可复用其来源与结论，避免重复劳动；"
+                    "内容可能过时，关键事实仍需重新核验）：\n"
+                    + "\n".join(f"- [{h.kind}] {h.content[:500]}" for h in hits)
+                )
+        except Exception:  # memory is an optimization, never a blocker
+            recalled = []
+
     draft: ResearchPlan = await invoke_with_retry(
         runnable,
         {
@@ -52,7 +71,7 @@ async def planner_node(state: ResearchState) -> dict[str, Any]:
                         max_sub_questions=settings.max_sub_questions,
                     )
                 ),
-                HumanMessage(f"研究课题：{state['topic']}"),
+                HumanMessage(f"研究课题：{state['topic']}{recall_block}"),
             ]
         },
     )
@@ -71,7 +90,7 @@ async def planner_node(state: ResearchState) -> dict[str, Any]:
         plan = ResearchPlan(**decision["edited_plan"])
     approved = bool(decision.get("approved", True))
 
-    return {"plan": plan, "plan_approved": approved}
+    return {"plan": plan, "plan_approved": approved, "recalled_memories": recalled}
 
 
 def route_after_planner(state: ResearchState) -> list[Any]:
@@ -286,4 +305,32 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
         ]
     )
 
-    return {"report": result.content, "messages": [result]}
+    report = result.content
+
+    if get_settings().enable_long_term_memory:
+        await _store_memories(state["topic"], report, evidences)
+
+    return {"report": report, "messages": [result]}
+
+
+async def _store_memories(topic: str, report: str, evidences: list[Evidence]) -> None:
+    """Persist what future research runs can reuse. Failures are non-fatal."""
+    try:
+        from deep_research.core.memory import get_memory_store
+
+        store = await get_memory_store()
+        summary = report[:1200]  # 摘要段在报告开头，截断即可，不值得再花一次 LLM 调用
+        items: list[tuple[str, str, dict]] = [
+            ("report_summary", f"课题：{topic}\n{summary}", {"topic": topic})
+        ]
+        by_sq: dict[str, list[Evidence]] = {}
+        for ev in evidences:
+            by_sq.setdefault(ev.sub_question_id, []).append(ev)
+        for sq_id, evs in by_sq.items():
+            digest = f"课题：{topic} | 子问题 {sq_id} 已检索来源：\n" + "\n".join(
+                f"- {e.title} | {e.url}（{len(e.key_points)} 要点）" for e in evs[:8]
+            )
+            items.append(("evidence_digest", digest, {"topic": topic, "sub_question": sq_id}))
+        await store.add_many(items)
+    except Exception:  # 记忆写入失败不影响报告交付
+        pass
