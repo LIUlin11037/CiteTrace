@@ -32,6 +32,9 @@ def _get_embedder():
     if _embedder is None:
         from fastembed import TextEmbedding
 
+        from deep_research.core.compat import ensure_hf_compat
+
+        ensure_hf_compat()  # safety net if no entry point ran compat first
         _embedder = TextEmbedding(get_settings().memory_embedding_model)
     return _embedder
 

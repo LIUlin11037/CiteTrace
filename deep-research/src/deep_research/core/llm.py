@@ -18,7 +18,7 @@ from typing import TypeVar
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.runnables import Runnable
 from langchain_openai import ChatOpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 from tenacity import (
     retry,
     retry_if_exception_type,
@@ -82,9 +82,10 @@ class LLMCallError(Exception):
 async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
     """Invoke a structured-output runnable with retry on transient failures.
 
-    Validation errors from the provider returning malformed structured output
-    are NOT retried here (they surface immediately) — that is a prompt bug,
-    not a transient failure, and retrying would burn quota.
+    ValidationError from the provider emitting malformed structured output
+    (e.g. a list where a string belongs — observed in M3 testing) is model
+    nondeterminism, not a deterministic prompt bug: a fresh attempt usually
+    emits a well-formed payload, so it is retried like a None tool call.
     """
     try:
         # langchain chat models require a bare message list / PromptValue;
@@ -99,6 +100,8 @@ async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
         return result
     except (TimeoutError, ConnectionError):
         raise
+    except ValidationError as exc:
+        raise LLMCallError(f"malformed structured output: {exc}") from exc
     except Exception as exc:  # provider 5xx / rate limit surface as APIError
         if _is_transient(exc):
             raise LLMCallError(str(exc)) from exc

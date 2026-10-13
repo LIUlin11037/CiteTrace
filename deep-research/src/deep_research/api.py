@@ -12,10 +12,11 @@ import asyncio
 import json
 import uuid
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any, AsyncIterator
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from langgraph.types import Command
 from pydantic import BaseModel
 
@@ -24,6 +25,8 @@ from deep_research.core.compat import use_compatible_event_loop
 from deep_research.core.persistence import open_checkpointer
 
 use_compatible_event_loop()
+
+_STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 _saver: Any = None
 _graph: Any = None
@@ -80,7 +83,9 @@ def _to_sse(event: dict[str, Any]) -> str:
     name = event.get("name", "")
     kind = event.get("event", "")
     data: dict[str, Any] = {"event": kind, "name": name}
-    if kind == "on_chat_model_stream":
+    if kind == "error":  # synthetic event from _drive's exception handler
+        data["message"] = event.get("data", {}).get("message", "unknown error")
+    elif kind == "on_chat_model_stream":
         chunk = event.get("data", {}).get("chunk")
         if chunk is not None and getattr(chunk, "content", ""):
             data["token"] = chunk.content
@@ -136,3 +141,9 @@ async def resume_research(thread_id: str, req: ResumeRequest) -> dict[str, str]:
 @app.get("/healthz")
 async def healthz() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/", include_in_schema=False)
+async def index() -> FileResponse:
+    """Serve the minimal web UI (single static file, no build step)."""
+    return FileResponse(_STATIC_DIR / "index.html")

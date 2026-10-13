@@ -65,3 +65,72 @@ from deep_research.agents.state import ResearchState, ResearchPlan, Evidence, Cr
 1. `uv sync --extra cli --extra serve` 后 `python -m deep_research.cli run "Agentic RAG 最新进展"` 全流程走通（含人工审批中断恢复）。
 2. SSE 接口逐 token 输出 writer 内容。
 3. 三个 MCP server 各自独立启动并通过 `tools/mcp_client.get_mcp_tools()` 加载。
+
+---
+
+# 任务 5：极简 Web 页（2026-10-13 新增，交低端模型）
+
+> 目标：一个**单文件、无构建步骤**的演示页面，让人能在浏览器里走完
+> 「输入课题 → 看计划 → 审批 → 看流式报告」全流程。面试演示用。
+>
+> **只允许新建一个文件：`src/deep_research/static/index.html`。**
+> `api.py` 已改好（`GET /` 返回该文件、error 事件转发 message），**禁止再动后端**。
+
+## 启动方式
+
+```bash
+uvicorn deep_research.api:app --port 8000
+# 浏览器打开 http://localhost:8000/
+```
+
+## API 时序（必须严格按此实现，已实测）
+
+```
+POST /research            {"topic": "..."}         -> {"thread_id": "..."}
+GET  /research/{id}/events   (SSE, EventSource)    -> 事件帧，见下
+POST /research/{id}/resume {"approved": true, "edited_plan": null}
+GET  /research/{id}/events   (重新连接！每段流独立)
+```
+
+**关键时序坑（都已踩过）：**
+1. 一次研究的 SSE 流分成**多段**：planner 中断前一段、resume 后一段。
+   每段以命名事件 `event: done` + `data: {}` 结束，前端要 `source.close()`。
+2. 收到 `interrupt` 后**先关旧连接**，用户点审批后 **先 POST /resume，
+   再新建 EventSource** 连同一 URL（后端会换新队列，旧连接收不到后续事件）。
+3. POST /research 后事件已在后端队列里缓冲，紧接着再开 EventSource 不会丢事件。
+
+## SSE 帧格式（每帧 `data: {json}`，JSON 字段如下）
+
+| 判定条件 | 含义 | 前端动作 |
+|---|---|---|
+| `json.interrupt` 存在 | planner 等待审批 | 渲染计划 + 审批按钮，见下 |
+| `json.event == "on_chat_model_stream"` 且 `json.token` | writer 报告 token | 追加到报告区 |
+| `json.event == "on_chain_start"` 且 `json.node` | 节点开始（planner/researcher/critic/writer） | 进度指示 |
+| `json.event == "error"` | 后端异常 | 显示 `json.message` |
+| SSE 命名事件 `done`（不是 data 里的字段） | 本段流结束 | `source.close()` |
+
+其他帧一律忽略。
+
+**interrupt 载荷结构**（`json.interrupt`）：
+```json
+{"type": "approve_plan",
+ "plan": {"topic": "...", "sub_questions": [{"id": "q1", "question": "...", "rationale": "..."}]}}
+```
+`recalled_memories`（字符串数组）可能存在，有就折叠展示「召回的历史记忆」。
+
+## 页面要求
+
+- 单文件 HTML，原生 JS + `EventSource`，**禁止任何构建工具/框架/npm**。
+- Markdown 渲染：可用 CDN 的 marked（`<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">`），
+  加载失败时降级为 `<pre>` 纯文本（判断 `window.marked` 是否存在）。
+- 布局不限制，但必须同时可见三块：节点进度状态、报告流式输出区、（中断时的）计划审批区。
+- 审批交互：「批准」按钮（POST 上述 resume body）；「编辑计划」为可选加分项
+  （textarea 编辑 JSON 后作为 `edited_plan` 提交），不做也不影响验收。
+- 全程中文 UI；出错（网络断开、error 帧）要有可见提示，不允许静默卡死。
+
+## 验收（我会照此逐条实测）
+
+1. `uvicorn deep_research.api:app --port 8000` 后访问 `/` 返回 200 HTML。
+2. 输入课题提交 → 能看到 planner 计划渲染 → 点「批准」→ writer 报告逐 token 出现 → 完整显示。
+3. F12 网络面板里 SSE 连接在 `done` 后正常关闭，无悬挂连接、无控制台报错。
+4. 后端进程日志无异常（页面引起的 404/500 都算失败）。
