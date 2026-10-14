@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from typing import TypeVar
 
+import httpx
 from langchain_core.exceptions import OutputParserException
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.runnables import Runnable
@@ -78,8 +79,8 @@ class LLMCallError(Exception):
 
 @retry(
     retry=retry_if_exception_type((TimeoutError, ConnectionError, LLMCallError)),
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=2, max=20),
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=2, max=30),
     reraise=True,
 )
 async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
@@ -118,9 +119,20 @@ async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
 
 
 def _is_transient(exc: Exception) -> bool:
+    """Network-level failures and 429/5xx are worth another attempt.
+
+    openai wraps httpx errors (APIConnectionError / APITimeoutError) and does
+    NOT carry a status code, so class-name checks alone miss them — check the
+    httpx transport error and its `__cause__` chain. Observed 2026-10-14: a
+    network blip failed 17 of 26 benchmark questions outright because these
+    were treated as permanent.
+    """
+    for err in (exc, exc.__cause__):
+        if isinstance(err, httpx.TransportError):
+            return True
     status = getattr(exc, "status_code", None) or getattr(
         getattr(exc, "response", None), "status_code", None
     )
     if status is None:
-        return False
+        return type(exc).__name__ in {"APIConnectionError", "APITimeoutError", "ConnectError"}
     return status == 429 or status >= 500

@@ -38,6 +38,9 @@ pg = [
     "langgraph-checkpoint-postgres>=2.0",
     "fastembed>=0.4",
 ]
+observe = [
+    "langfuse>=3.0",
+]
 
 [build-system]
 requires = ["hatchling"]

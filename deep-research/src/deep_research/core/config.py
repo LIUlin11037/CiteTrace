@@ -103,6 +103,25 @@ class Settings(BaseSettings):
     memory_recall_limit: int = 5
     memory_min_score: float = 0.35  # cosine similarity floor for recall
 
+    # ---- observability (Langfuse) ----
+    # Auto-detected: tracing turns on as soon as a public+secret key pair is
+    # configured. Set langfuse_enabled=False to force-off, True to require it.
+    langfuse_enabled: bool | None = None
+    langfuse_public_key: str = ""
+    langfuse_secret_key: str = ""
+    langfuse_host: str = "https://cloud.langfuse.com"
+
+    @property
+    def tracing_active(self) -> bool:
+        if self.langfuse_enabled is False:
+            return False
+        configured = bool(self.langfuse_public_key and self.langfuse_secret_key)
+        if self.langfuse_enabled is True and not configured:
+            raise RuntimeError(
+                "DR_LANGFUSE_ENABLED=true but DR_LANGFUSE_PUBLIC_KEY / DR_LANGFUSE_SECRET_KEY missing"
+            )
+        return configured
+
     def model_config_for(self, role: RoleName) -> ModelConfig:
         override = getattr(self, f"{role}_model")
         return ModelConfig(

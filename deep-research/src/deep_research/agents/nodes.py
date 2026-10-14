@@ -9,6 +9,8 @@ Concurrency rules honored here (violating them corrupts merged state):
 
 from __future__ import annotations
 
+import logging
+import re
 from typing import Any
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
@@ -28,6 +30,62 @@ from deep_research.agents.state import (
 from deep_research.core.config import get_settings
 from deep_research.core.llm import get_chat_model, invoke_with_retry, structured_output
 from deep_research.tools.mcp_client import get_mcp_tools
+
+logger = logging.getLogger(__name__)
+
+_REF_DEFINITION = re.compile(r"^\[\^(\d+)\]:", re.MULTILINE)
+_CITED_FOOTNOTE = re.compile(r"\[\^(\d+)\]")
+
+# Guards against an empty/aborted writer generation. Real report bodies are
+# thousands of characters; this floor is deliberately far below that so it
+# never rejects a legitimately short report.
+_MIN_BODY_CHARS = 200
+
+# The provider caps a single response at ~8192 output tokens; heavy reports are
+# assembled from consecutive segments, each following a finish_reason=="length".
+_MAX_WRITER_SEGMENTS = 5
+
+
+def _extract_text(message: AIMessage) -> str:
+    """Message content may be a string or a list of content blocks."""
+    content = message.content
+    if isinstance(content, str):
+        return content
+    return "".join(
+        block.get("text", "") if isinstance(block, dict) else str(block) for block in content
+    )
+
+
+def _missing_reference_definitions(report: str) -> list[int]:
+    """Footnote numbers cited in the body but never defined at the end."""
+    cited = {int(n) for n in _CITED_FOOTNOTE.findall(report)}
+    defined = {int(n) for n in _REF_DEFINITION.findall(report)}
+    return sorted(cited - defined)
+
+
+def _sanitize_citations(body: str, n_sources: int) -> tuple[str, list[int]]:
+    """Drop citation markers pointing past the evidence list (model invention)."""
+    out_of_range = sorted({int(n) for n in _CITED_FOOTNOTE.findall(body) if int(n) > n_sources})
+    for n in out_of_range:
+        body = body.replace(f"[^{n}]", "")
+    return body, out_of_range
+
+
+def _build_reference_list(body: str, evidences: list[Evidence]) -> str:
+    """Deterministic footnote definitions for the sources the body actually cites.
+
+    Numbering is fixed by the prompt (source i in the evidence list == [^i]), so
+    the mapping never depends on the model reproducing it correctly.
+    """
+    cited = sorted({int(n) for n in _CITED_FOOTNOTE.findall(body)})
+    if not cited:
+        cited = list(range(1, len(evidences) + 1))
+    lines = []
+    for n in cited:
+        ev = evidences[n - 1]
+        suffix = f", {ev.published_at}" if ev.published_at else ""
+        lines.append(f"[^{n}]: {ev.title} — {ev.url}（{ev.source_type}{suffix}）")
+    return "\n".join(lines)
 
 # ---------------------------------------------------------------------------
 # Planner
@@ -292,25 +350,61 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
                 f"- {i.claim}: {i.problem}" for i in unresolved
             )
 
+    # The provider silently caps output at ~8192 tokens for this model (probed
+    # 2026-10-14: every truncated report used exactly 8192 output tokens; no
+    # call in a 3011-call run exceeded 8000). Source-heavy questions therefore
+    # cannot be written in one call, so generate in segments: whenever the
+    # provider reports finish_reason=="length", ask it to continue from the
+    # breakpoint and concatenate. The reference list is appended afterwards by
+    # code, so the model never has to spend budget reproducing it.
     model = get_chat_model("writer", streaming=True)
-    result: AIMessage = await model.ainvoke(
-        [
-            SystemMessage(prompts.render(prompts.WRITER_SYSTEM)),
-            HumanMessage(
-                f"课题：{state['topic']}\n\n"
-                f"可用证据（编号即引用编号，共 {len(evidences)} 条）：\n{evidence_body}\n\n"
-                f"参考来源列表（照此输出，编号一致）：\n{source_list}"
-                f"{issues_note}"
-            ),
-        ]
-    )
+    base_messages = [
+        SystemMessage(prompts.render(prompts.WRITER_SYSTEM)),
+        HumanMessage(
+            f"课题：{state['topic']}\n\n"
+            f"可用证据（编号即引用编号，共 {len(evidences)} 条）：\n{evidence_body}\n\n"
+            f"编号对照表（引用时使用左侧编号，正文中不要重复输出这张表）：\n{source_list}"
+            f"{issues_note}"
+        ),
+    ]
 
-    report = result.content
+    segments: list[str] = []
+    messages = list(base_messages)
+    result: AIMessage | None = None
+    for segment_no in range(1, _MAX_WRITER_SEGMENTS + 1):
+        result = await invoke_with_retry(model, {"messages": messages})
+        text = _extract_text(result)
+        truncated = (result.response_metadata or {}).get("finish_reason") == "length"
+        if not text.strip():
+            logger.warning("writer 第 %d 段输出为空，重试", segment_no)
+            continue
+        segments.append(text)
+        if not truncated:
+            break
+        logger.warning(
+            "writer 第 %d 段撞到输出上限（finish_reason=length），续写", segment_no
+        )
+        messages = messages + [
+            AIMessage(content=text),
+            HumanMessage(content="输出被截断，请从中断处继续写，不要重复已写内容，也不要写参考来源列表。"),
+        ]
+    else:
+        logger.warning("writer 续写段数达到上限 %d，最后一段可能仍被截断", _MAX_WRITER_SEGMENTS)
+
+    body = "\n".join(segments).strip()
+    if len(body) < _MIN_BODY_CHARS:
+        raise RuntimeError(f"writer 输出过短（{len(body)} 字符），放弃该题")
+
+    body, dropped = _sanitize_citations(body, len(evidences))
+    if dropped:
+        logger.warning("剔除越界引用标记 %s（证据仅 %d 条）", dropped[:6], len(evidences))
+
+    report = body.rstrip() + "\n\n" + "## 参考来源\n\n" + _build_reference_list(body, evidences)
 
     if get_settings().enable_long_term_memory:
         await _store_memories(state["topic"], report, evidences)
 
-    return {"report": report, "messages": [result]}
+    return {"report": report, "messages": [result] if result is not None else []}
 
 
 async def _store_memories(topic: str, report: str, evidences: list[Evidence]) -> None:

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import asyncio
 import itertools
+import re
 import sys
 from pathlib import Path
 
@@ -44,13 +45,29 @@ class _FakeRunnable:
 
 
 class _FakeChatModel:
-    """Stands in for get_chat_model(...): bind_tools -> self, ainvoke -> text."""
+    """Stands in for get_chat_model(...): bind_tools -> self, ainvoke -> text.
+
+    The writer body is deliberately citation-only (no reference list) — that is
+    the contract now: writer_node appends the definitions deterministically.
+    """
 
     def bind_tools(self, tools):
         return self
 
     async def ainvoke(self, messages):
-        return AIMessage(content="# 调研报告（mock）\n\n结论：一切正常。[^1]\n\n[^1]: Mock — http://example.com (web)")
+        body = (
+            "# 调研报告（mock）\n\n"
+            "## 摘要\n结论：一切正常。[^1]\n\n"
+            "## 分节正文\n本节用于冒烟测试，覆盖了 Planner 拆题、Researcher 并行取证、"
+            "Critic 审校与 Writer 成文四段链路，并保留足够长度以通过 writer 的最小正文"
+            "长度校验。证据不足处显式声明「现有公开资料不足以确认」，不引入证据之外的"
+            "任何事实；每条事实性论断都紧跟引用标记，编号对应上游给定的证据编号，"
+            "参考来源列表由 writer_node 依据正文引用确定性生成，不依赖模型复现。"
+            "多份来源互相印证同一结论[^1][^2]，未出现互相矛盾之处；对于未覆盖的角度，"
+            "报告在「矛盾与不确定性」一节中如实说明证据缺口，而不是用常识补全。\n\n"
+            "## 矛盾与不确定性\n无未解决的矛盾；剩余不确定性已在正文中标注。\n"
+        )
+        return AIMessage(content=body)
 
 
 def _install_fakes() -> dict[str, itertools.count]:
@@ -136,7 +153,10 @@ async def main() -> None:
     print("[ok] 3. critic loop: round1 rejected -> follow-up researched -> round2 passed")
 
     assert final.get("report", "").startswith("# 调研报告")
-    print("[ok] 4. writer produced final report")
+    report = final["report"]
+    assert "## 参考来源" in report, "writer_node 未追加参考来源章节"
+    assert re.search(r"^\[\^1\]: ", report, re.MULTILINE), "参考来源缺少脚注定义行"
+    print("[ok] 4. writer produced final report (含确定性生成的参考来源)")
 
     print("\nSMOKE TEST PASSED")
 

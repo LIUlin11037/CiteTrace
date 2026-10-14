@@ -40,10 +40,15 @@ _streams: dict[str, asyncio.Queue[dict[str, Any] | None]] = {}
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     global _saver, _graph
+    from deep_research.core.tracing import flush_tracing
+
     async with open_checkpointer() as saver:
         _saver = saver
         _graph = build_graph(checkpointer=saver)
-        yield
+        try:
+            yield
+        finally:
+            flush_tracing()  # ship the last batch before the process exits
 
 
 app = FastAPI(title="Deep Research API", lifespan=lifespan)
@@ -59,7 +64,11 @@ class ResumeRequest(BaseModel):
 
 
 def _config(thread_id: str) -> dict[str, Any]:
-    return {"configurable": {"thread_id": thread_id}}
+    from deep_research.core.tracing import apply_tracing
+
+    return apply_tracing(
+        {"configurable": {"thread_id": thread_id}}, tags=["web"]
+    )
 
 
 async def _pending_interrupt(config: dict[str, Any]) -> Any | None:

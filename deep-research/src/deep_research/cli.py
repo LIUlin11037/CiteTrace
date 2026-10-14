@@ -24,6 +24,7 @@ from rich.prompt import Confirm, Prompt
 
 from deep_research.agents.graph import build_graph, initial_input, new_thread_config
 from deep_research.core.persistence import open_checkpointer
+from deep_research.core.tracing import apply_tracing, flush_tracing
 
 app = typer.Typer(add_completion=False, help="Deep Research Agent CLI")
 console = Console()
@@ -48,6 +49,7 @@ async def _run(topic: str, output: Path | None) -> None:
     async with open_checkpointer() as saver:
         graph = build_graph(checkpointer=saver)
         config = new_thread_config()
+        apply_tracing(config, tags=["cli"])
 
         with console.status("[bold green]Planner 正在拆解课题...") as status:
             result = await graph.ainvoke(initial_input(topic), config=config)
@@ -104,7 +106,10 @@ def run(
     from deep_research.core.compat import use_compatible_event_loop
 
     use_compatible_event_loop()
-    asyncio.run(_run(topic, output))
+    try:
+        asyncio.run(_run(topic, output))
+    finally:
+        flush_tracing()
 
 
 if __name__ == "__main__":
