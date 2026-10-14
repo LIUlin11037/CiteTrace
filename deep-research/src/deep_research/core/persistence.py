@@ -51,9 +51,11 @@ async def open_checkpointer() -> AsyncIterator[BaseCheckpointSaver[Any]]:
             await saver.setup()
             yield saver
     else:
+        # AsyncSqliteSaver.from_conn_string() takes no serde argument, so the
+        # connection is opened here and the saver constructed directly.
+        import aiosqlite
+
         from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 
-        async with AsyncSqliteSaver.from_conn_string(
-            settings.checkpoint_db_path, serde=_serde()
-        ) as saver:
-            yield saver
+        async with aiosqlite.connect(settings.checkpoint_db_path) as conn:
+            yield AsyncSqliteSaver(conn, serde=_serde())

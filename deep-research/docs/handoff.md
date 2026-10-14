@@ -73,15 +73,21 @@ from deep_research.agents.state import ResearchState, ResearchPlan, Evidence, Cr
 > 目标：一个**单文件、无构建步骤**的演示页面，让人能在浏览器里走完
 > 「输入课题 → 看计划 → 审批 → 看流式报告」全流程。面试演示用。
 >
-> **只允许新建一个文件：`src/deep_research/static/index.html`。**
-> `api.py` 已改好（`GET /` 返回该文件、error 事件转发 message），**禁止再动后端**。
+> **状态：已由主模型实现并验收通过（2026-10-14）**，文件 `src/deep_research/static/index.html`。
+> 验收脚本 `scripts/verify_web_e2e.py`，sqlite 与 Postgres 两种后端各跑通一遍。
+> 契约保留作为回归依据；如需改动页面，按下方时序与帧格式实现。
+>
+> `api.py` 已改好（`GET /` 返回该文件、error 帧转发 message、中断帧补发），**禁止再动后端**。
 
 ## 启动方式
 
 ```bash
-uvicorn deep_research.api:app --port 8000
-# 浏览器打开 http://localhost:8000/
+python -m deep_research.serve --port 8000     # 不要用 uvicorn CLI（见下）
+# 浏览器打开 http://127.0.0.1:8000/
 ```
+
+Windows + Postgres 下 `uvicorn deep_research.api:app` **不可用**：uvicorn 对 win32
+写死 ProactorEventLoop，psycopg async 会拒绝，必须走 `serve.py`（显式 selector loop）。
 
 ## API 时序（必须严格按此实现，已实测）
 
@@ -110,6 +116,10 @@ GET  /research/{id}/events   (重新连接！每段流独立)
 | SSE 命名事件 `done`（不是 data 里的字段） | 本段流结束 | `source.close()` |
 
 其他帧一律忽略。
+
+> 实现说明：中断帧由后端在流末尾**主动补发**（`{"event":"interrupt","interrupt":{...}}`），
+> 因为本版本 langgraph 的 `astream_events` 输出里不含 `__interrupt__`，只有
+> checkpoint state 里有。前端只需认 `json.interrupt` 字段，无需关心来源。
 
 **interrupt 载荷结构**（`json.interrupt`）：
 ```json

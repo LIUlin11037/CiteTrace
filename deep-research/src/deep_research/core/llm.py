@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from typing import TypeVar
 
+from langchain_core.exceptions import OutputParserException
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.runnables import Runnable
 from langchain_openai import ChatOpenAI
@@ -32,9 +33,11 @@ T = TypeVar("T", bound=BaseModel)
 
 # The writer emits a full report plus a complete footnote reference list; the
 # shared 4096 default truncates the reference section on source-heavy reports
-# (observed in eval: gq-mcp/gq-moe cut off mid-list, leaving cited footnotes
-# undefined). deepseek-chat supports 8192 output tokens — give writer the max.
-WRITER_MIN_MAX_TOKENS = 8192
+# (eval 2026-10-12: gq-mcp/gq-moe cut off mid-list). 8192 was still not enough
+# (eval 2026-10-14: gq-agent-memory lost its whole 参考来源 section). The
+# endpoint accepts >=65536 (probed), so give the writer generous headroom —
+# a high cap costs nothing, only actually generated tokens are billed.
+WRITER_MIN_MAX_TOKENS = 32768
 
 
 def get_chat_model(role: RoleName, *, streaming: bool = False) -> BaseChatModel:
@@ -102,6 +105,12 @@ async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
         raise
     except ValidationError as exc:
         raise LLMCallError(f"malformed structured output: {exc}") from exc
+    except OutputParserException as exc:
+        # The model can emit a tool call name that isn't in the current
+        # runnable's tool set (e.g. it replays a search tool from the ReAct
+        # transcript while we are asking for EvidenceBundle) — observed in
+        # eval 2026-10-14 (gq-graph-rag). Re-sampling usually fixes it.
+        raise LLMCallError(f"tool-call parse failure: {exc}") from exc
     except Exception as exc:  # provider 5xx / rate limit surface as APIError
         if _is_transient(exc):
             raise LLMCallError(str(exc)) from exc

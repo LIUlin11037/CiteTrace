@@ -1,8 +1,11 @@
 """FastAPI service: create research runs, stream events over SSE, resume on HITL.
 
-    uvicorn deep_research.api:app --reload
+    python -m deep_research.serve --port 8000     # ← use this entry point
+    # `uvicorn deep_research.api:app` does NOT work on Windows with the
+    # Postgres checkpointer: uvicorn hard-codes ProactorEventLoop for win32 and
+    # psycopg async rejects it. serve.py passes an explicit selector loop.
 
-No auth (M2 scope). Sessions are kept in-process; a single shared SQLite
+No auth (M2 scope). Sessions are kept in-process; a single shared
 checkpointer persists graph state so /resume works across requests.
 """
 
@@ -59,19 +62,33 @@ def _config(thread_id: str) -> dict[str, Any]:
     return {"configurable": {"thread_id": thread_id}}
 
 
+async def _pending_interrupt(config: dict[str, Any]) -> Any | None:
+    """Read a pending HITL interrupt from the checkpoint state.
+
+    astream_events' on_chain_end output does NOT carry __interrupt__ in this
+    langgraph version (only ainvoke's return value does), so the graph state
+    is the authoritative source. Returns the interrupt value or None.
+    """
+    state = await _graph.aget_state(config)
+    for task in state.tasks or []:
+        for intr in getattr(task, "interrupts", ()) or ():
+            return intr.value
+    return None
+
+
 async def _drive(thread_id: str, resume: Command | None, payload: dict[str, Any]) -> None:
     """Run the graph and push events into the thread's queue."""
     queue = _streams[thread_id]
+    config = _config(thread_id)
     try:
-        kwargs = {"config": _config(thread_id)}
+        kwargs = {"config": config}
         arg = resume if resume is not None else payload
         async for event in _graph.astream_events(arg, version="v2", **kwargs):
             await queue.put(event)
-            # stop pumping once the graph pauses for human input or finishes
-            if event.get("event") in {"on_chain_end"} and event.get("name") == "LangGraph":
-                data = event.get("data", {}).get("output", {})
-                if data.get("__interrupt__"):
-                    break
+        # the graph is done or paused — surface a pending human-approval gate
+        interrupt_value = await _pending_interrupt(config)
+        if interrupt_value is not None:
+            await queue.put({"event": "interrupt", "data": {"value": interrupt_value}})
     except Exception as exc:  # surface errors to the client instead of hanging
         await queue.put({"event": "error", "data": {"message": f"{type(exc).__name__}: {exc}"}})
     finally:
@@ -85,6 +102,8 @@ def _to_sse(event: dict[str, Any]) -> str:
     data: dict[str, Any] = {"event": kind, "name": name}
     if kind == "error":  # synthetic event from _drive's exception handler
         data["message"] = event.get("data", {}).get("message", "unknown error")
+    elif kind == "interrupt":  # synthetic event: graph paused for approval
+        data["interrupt"] = event.get("data", {}).get("value")
     elif kind == "on_chat_model_stream":
         chunk = event.get("data", {}).get("chunk")
         if chunk is not None and getattr(chunk, "content", ""):

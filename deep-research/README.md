@@ -17,9 +17,14 @@ cp .env.example .env   # 填入 DR_DEFAULT_API_KEY，按需填 GITHUB_TOKEN / TA
 # 3. CLI 运行
 uv run python -m deep_research.cli run "Agentic RAG 最新进展"
 
-# 4. 或起 API 服务
-uv run uvicorn deep_research.api:app --reload
+# 4. 或起 Web 服务（含极简演示页，浏览器打开 http://127.0.0.1:8000/）
+uv run python -m deep_research.serve --port 8000
 ```
+
+> Windows + Postgres 后端下请勿使用 `uvicorn deep_research.api:app`：uvicorn 对 win32
+> 写死 ProactorEventLoop，psycopg async 无法运行；`serve.py` 会显式使用 selector loop。
+> 演示页为单文件零构建（`src/deep_research/static/index.html`），
+> 端到端验收脚本：`python scripts/verify_web_e2e.py`（需服务已启动）。
 
 ## 结构
 
