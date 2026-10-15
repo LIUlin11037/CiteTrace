@@ -64,6 +64,19 @@ class Settings(BaseSettings):
     critic_model: str | None = None
     writer_model: str | None = None
 
+    # Per-role endpoint overrides — this is what makes per-role routing
+    # cross-vendor: e.g. run the token-heavy researcher on a cheap model while
+    # the critic sits on a stronger model from another provider. Every endpoint
+    # must speak the OpenAI chat-completions protocol.
+    planner_base_url: str = ""
+    planner_api_key: str = ""
+    researcher_base_url: str = ""
+    researcher_api_key: str = ""
+    critic_base_url: str = ""
+    critic_api_key: str = ""
+    writer_base_url: str = ""
+    writer_api_key: str = ""
+
     researcher_temperature: float = 0.2
     planner_temperature: float = 0.5
     critic_temperature: float = 0.0
@@ -74,12 +87,6 @@ class Settings(BaseSettings):
     max_critique_rounds: int = 2
     max_researcher_steps: int = 8
     evidence_content_limit: int = 4000  # chars kept per evidence piece
-
-    # ---- weak/strong model collaboration ----
-    # Researcher runs on the cheap model; when its self-assessed confidence is
-    # below this threshold, extraction is re-run once with the critic's
-    # (stronger) model. Set DR_RESEARCHER_MODEL == DR_CRITIC_MODEL to disable.
-    escalation_confidence_threshold: float = 0.6
 
     # ---- MCP servers: JSON object, e.g.
     # DR_MCP_SERVERS={"arxiv": {"transport": "stdio", "command": "python",
@@ -126,8 +133,8 @@ class Settings(BaseSettings):
         override = getattr(self, f"{role}_model")
         return ModelConfig(
             model=override or self.default_model,
-            base_url=self.default_base_url,
-            api_key=self.default_api_key,
+            base_url=getattr(self, f"{role}_base_url") or self.default_base_url,
+            api_key=getattr(self, f"{role}_api_key") or self.default_api_key,
             temperature=getattr(self, f"{role}_temperature"),
         )
 

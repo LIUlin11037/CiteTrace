@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import sys
+from pathlib import Path
 from typing import Any
 
 from langchain_core.tools import BaseTool
@@ -25,6 +27,33 @@ logger = logging.getLogger(__name__)
 _tools_cache: list[BaseTool] | None = None
 _cache_lock = asyncio.Lock()
 
+_BARE_INTERPRETERS = {"python", "python3", "python.exe", "py"}
+
+
+def _resolve_command(command: str) -> str:
+    """Resolve the interpreter used to launch a stdio MCP server.
+
+    The same `.env` has to work on the dev host (where it may hold an absolute
+    venv path such as `.../.venv/Scripts/python.exe`) and inside the container
+    (where only `python` exists). A literal command therefore rarely works in
+    both, so:
+      - bare interpreter names -> this process's interpreter
+      - an absolute path missing here -> same fallback, with a warning
+    Without this, a Windows path leaked into the container and every MCP server
+    failed at launch with FileNotFoundError (found by the first real deployment
+    run).
+    """
+    if Path(command).name.lower() in _BARE_INTERPRETERS:
+        return sys.executable
+    if not Path(command).exists():
+        logger.warning(
+            "mcp stdio command %r does not exist here; falling back to %s",
+            command,
+            sys.executable,
+        )
+        return sys.executable
+    return command
+
 
 def _server_params() -> dict[str, dict[str, Any]]:
     servers: dict[str, dict[str, Any]] = {}
@@ -35,7 +64,7 @@ def _server_params() -> dict[str, dict[str, Any]]:
                 continue
             servers[name] = {
                 "transport": "stdio",
-                "command": cfg.command,
+                "command": _resolve_command(cfg.command),
                 "args": cfg.args,
                 "env": cfg.env or None,
             }

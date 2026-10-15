@@ -180,10 +180,10 @@ _EXTRACTION_INSTRUCTION = (
 async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
     """ReAct loop over MCP tools for ONE sub-question, then structured extraction.
 
-    Weak/strong collaboration: extraction first runs on the cheap researcher
-    model; low self-confidence triggers one escalation re-extraction with the
-    critic's (stronger) model over the same tool transcript — no extra tool
-    budget spent.
+    The tool-call budget is capped by max_researcher_steps; a dead source or a
+    failing tool degrades that single step instead of killing the branch. The
+    model used here is whatever the researcher role resolves to (see
+    Settings.model_config_for).
     """
     settings = get_settings()
     sq: SubQuestion = input_["sub_question"]
@@ -222,15 +222,15 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
                 )
             )
 
-    # ---- structured extraction (with strong-model escalation) ----
+    # ---- structured extraction ----
+    # NOTE: a self-assessed-confidence cascade (re-extract with a stronger model
+    # when confidence is low) was implemented and then removed on 2026-10-15. It
+    # was never exercised in the benchmark runs (every role resolved to the same
+    # model), and the trigger — the model's own confidence score — is not
+    # calibrated, so the extra call could not be shown to improve anything.
+    # Strong/weak collaboration is now purely static per-role routing; see
+    # Settings.model_config_for and README.
     bundle = await _extract_evidences("researcher", transcript, sq)
-    escalated = False
-    if (
-        bundle.confidence < settings.escalation_confidence_threshold
-        and settings.researcher_model != settings.critic_model
-    ):
-        bundle = await _extract_evidences("critic", transcript, sq)
-        escalated = True
 
     for ev in bundle.evidences:
         ev.sub_question_id = sq.id
@@ -241,8 +241,7 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
             AIMessage(
                 content=(
                     f"[researcher {sq.id}] {len(bundle.evidences)} evidences, "
-                    f"confidence={bundle.confidence:.2f}"
-                    f"{' (escalated)' if escalated else ''}. gaps: {bundle.gap_notes}"
+                    f"confidence={bundle.confidence:.2f}. gaps: {bundle.gap_notes}"
                 )
             )
         ],

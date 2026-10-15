@@ -1,5 +1,12 @@
-# M4 目标部署形态：app + postgres(pgvector) + redis + langfuse。
-# M2 阶段只需 app 服务即可跑通（数据层尚用 SQLite checkpointer）。
+# 部署形态：app + postgres(pgvector)。
+#
+# 数据层固定用 PostgreSQL：检查点（langgraph AsyncPostgresSaver）与长期记忆
+# （pgvector HNSW）共用同一个库，因此 app 要等 postgres 健康后再启动。
+#
+# 关于可观测性：本项目用 Langfuse Cloud（.env 里配 DR_LANGFUSE_* 即可，
+# 见 core/tracing.py）。**不自建 Langfuse 服务**——v3 自建还需额外拉起
+# ClickHouse + MinIO/S3 + Redis + langfuse-worker 四个组件，本 compose 不承担；
+# 确需自建请参考 https://langfuse.com/self-hosting 单独编排。
 services:
   app:
     build: .
@@ -7,14 +14,26 @@ services:
       - "8000:8000"
     env_file: .env
     environment:
-      DR_CHECKPOINT_DB_PATH: /data/checkpoints.sqlite3
+      # 覆盖 .env：容器内连 compose 网络里的 postgres 服务名，而不是 localhost
+      DR_CHECKPOINT_BACKEND: postgres
+      DR_DATABASE_URL: postgresql://deepresearch:deepresearch@postgres:5432/deepresearch
+      DR_ENABLE_LONG_TERM_MEMORY: "true"
     volumes:
       - ./reports:/app/reports
-      - app_data:/data
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
 
   postgres:
     image: pgvector/pgvector:pg16
@@ -26,26 +45,11 @@ services:
       - pg_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-
-  # 可观测后端（M4 接入 deep_research 内的 tracing）
-  langfuse:
-    image: langfuse/langfuse:latest
-    depends_on:
-      - postgres
-      - redis
-    environment:
-      DATABASE_URL: postgresql://deepresearch:deepresearch@postgres:5432/deepresearch
-      REDIS_CONNECTION_STRING: redis://redis:6379
-      NEXTAUTH_SECRET: change-me
-      SALT: change-me
-    ports:
-      - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U deepresearch -d deepresearch"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
-  app_data:
   pg_data:
