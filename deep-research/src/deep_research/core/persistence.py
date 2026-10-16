@@ -1,4 +1,4 @@
-"""Checkpointer factory: SQLite for dev, PostgreSQL for the M3 topology.
+"""Checkpointer factory: PostgreSQL by default, SQLite as an explicit fallback.
 
 Single place that decides the persistence backend — CLI, API and the eval
 runner all call open_checkpointer() instead of constructing savers directly.

@@ -29,7 +29,7 @@ async def rejudge(qid: str) -> None:
     result = await judge_alignment(report, evidences)
     print(f"\n=== {qid}: align={result.alignment_rate:.0%} ({len(result.verdicts)} claims) ===")
     for v in result.verdicts:
-        mark = {"supported": "+", "partial": "~", "unsupported": "X"}[v.verdict]
+        mark = {"supported": "+", "partial": "~", "unsupported": "X", "meta": "M"}[v.verdict]
         print(f"  [{mark}] {v.claim[:60]}...")
         print(f"      {v.reason}")
 

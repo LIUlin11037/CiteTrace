@@ -86,7 +86,13 @@ class Settings(BaseSettings):
     max_sub_questions: int = 6
     max_critique_rounds: int = 2
     max_researcher_steps: int = 8
-    evidence_content_limit: int = 4000  # chars kept per evidence piece
+    # chars kept per fetched document (tool result truncation).
+    # 4000 cut long papers before their results tables: measured 2026-10-15 on
+    # gq-distillation, the R1 paper WAS fetched but its benchmark table never
+    # entered context, so the writer honestly reported "no quantitative
+    # support" (coverage 50%). At 12000 the same question scores 100% coverage
+    # for +60% input tokens. Tune down if token cost matters more than depth.
+    evidence_content_limit: int = 12000
 
     # ---- MCP servers: JSON object, e.g.
     # DR_MCP_SERVERS={"arxiv": {"transport": "stdio", "command": "python",
@@ -94,9 +100,10 @@ class Settings(BaseSettings):
     mcp_servers: str = "{}"
 
     # ---- persistence ----
-    checkpoint_db_path: str = "checkpoints.sqlite3"
-    # sqlite（开发默认，零依赖）或 postgres（M3 生产形态）
-    checkpoint_backend: Literal["sqlite", "postgres"] = "sqlite"
+    checkpoint_db_path: str = "checkpoints.sqlite3"  # 仅当 backend=sqlite 时使用
+    # 统一走 PostgreSQL：检查点与 pgvector 长期记忆同库（见 docker-compose.yml）。
+    # sqlite 只在显式设置 DR_CHECKPOINT_BACKEND=sqlite 时启用，属零依赖后备选项。
+    checkpoint_backend: Literal["sqlite", "postgres"] = "postgres"
     database_url: str = (
         "postgresql://deepresearch:deepresearch@localhost:5432/deepresearch"
     )

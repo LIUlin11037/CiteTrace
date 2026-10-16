@@ -16,9 +16,12 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 # 之前把源码和安装放在同一层，导致每次改代码都要重装并重下全部依赖（慢网络下十几分钟）。
 # uv 下载缓存挂成 BuildKit cache mount：即使这一层确实需要重跑，wheel 也从本地缓存取，
 # 不再联网重下。`-r pyproject.toml --extra ...` 只装第三方依赖，不含本项目。
+# 默认走清华 PyPI 镜像（国内直连官方源要十几分钟）；海外或企业内网可覆盖：
+#   UV_INDEX_URL=https://pypi.org/simple docker compose build
+ARG UV_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
 COPY pyproject.toml README.md ./
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv pip install --system -r pyproject.toml \
+    uv pip install --system --index-url "${UV_INDEX_URL}" -r pyproject.toml \
         --extra cli --extra serve --extra pg --extra observe
 
 # ---- 代码层 ----（改代码只重建这几层，秒级）

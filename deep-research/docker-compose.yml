@@ -9,7 +9,11 @@
 # 确需自建请参考 https://langfuse.com/self-hosting 单独编排。
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        # PyPI 镜像源，默认清华；海外可 UV_INDEX_URL=https://pypi.org/simple 覆盖
+        UV_INDEX_URL: ${UV_INDEX_URL:-https://pypi.tuna.tsinghua.edu.cn/simple}
     ports:
       - "8000:8000"
     env_file: .env

@@ -42,6 +42,8 @@ CitationsFn = Callable[[str], Awaitable[CitationReport]]
 # so traces can be tagged with the question id — the research callable itself
 # only knows the topic string.
 _LABEL: ContextVar[str] = ContextVar("eval_label", default="")
+# 本轮研究对应的 LangGraph thread_id（= Langfuse session id），供分数回挂使用。
+_SESSION_ID: ContextVar[str] = ContextVar("eval_session_id", default="")
 
 
 async def default_run_research(topic: str) -> tuple[str, list[Evidence]]:
@@ -53,6 +55,7 @@ async def default_run_research(topic: str) -> tuple[str, list[Evidence]]:
     async with open_checkpointer() as saver:
         graph = build_graph(checkpointer=saver)
         config = new_thread_config()
+        _SESSION_ID.set(config["configurable"]["thread_id"])
         tags = ["eval"] + ([_LABEL.get()] if _LABEL.get() else [])
         apply_tracing(config, tags=tags)
         attach_usage(config)
@@ -62,6 +65,19 @@ async def default_run_research(topic: str) -> tuple[str, list[Evidence]]:
                 Command(resume={"approved": True, "edited_plan": None}), config=config
             )
     return result.get("report", ""), result.get("evidences", [])
+
+
+async def _push_scores(score: QuestionScore) -> None:
+    """Best-effort: mirror this run's metrics onto its Langfuse trace."""
+    session_id = _SESSION_ID.get()
+    if not session_id:
+        return
+    try:
+        from deep_research.eval.scores import push_question_scores
+
+        await push_question_scores(session_id, score)
+    except Exception as exc:  # noqa: BLE001 - never break a run for tracing
+        print(f"[eval] {score.question_id}: 分数推送失败（不影响结果）: {exc}")
 
 
 async def evaluate_question(
@@ -157,6 +173,7 @@ async def run_eval(
                 f"[eval] {q.id}: cite={score.citation_existence_rate:.0%} "
                 f"align={score.alignment_rate:.0%} cover={score.coverage_rate:.0%}"
             )
+            await _push_scores(score)
             return score
 
     async def round_of(batch: list[GoldenQuestion], attempt: int) -> tuple[list[QuestionScore], list[GoldenQuestion]]:

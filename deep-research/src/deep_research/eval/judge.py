@@ -33,7 +33,7 @@ _ARXIV_VER = re.compile(r"(arxiv\.org/(?:abs|pdf)/\d{4}\.\d{4,5})v\d+")
 
 class ClaimVerdict(BaseModel):
     claim: str
-    verdict: Literal["supported", "partial", "unsupported"]
+    verdict: Literal["supported", "partial", "unsupported", "meta"]
     reason: str = Field(description="One sentence citing what matched or missed")
 
 
@@ -42,10 +42,18 @@ class AlignmentResult(BaseModel):
 
     @property
     def alignment_rate(self) -> float:
-        if not self.verdicts:
+        # "meta" = the sentence is not a factual assertion about the world but a
+        # statement about the report itself (scope, method, what it deliberately
+        # did not cite). Scoring those as unsupported punished honest hedging —
+        # observed 2026-10-15 on gq-long-context, where "本报告因此未在第二节
+        # 引用…" was judged as an unsupported claim. Excluded from the rate.
+        scored = [v for v in self.verdicts if v.verdict != "meta"]
+        if not scored:
             return 0.0
-        score = sum({"supported": 1.0, "partial": 0.5, "unsupported": 0.0}[v.verdict] for v in self.verdicts)
-        return score / len(self.verdicts)
+        score = sum(
+            {"supported": 1.0, "partial": 0.5, "unsupported": 0.0}[v.verdict] for v in scored
+        )
+        return score / len(scored)
 
 
 class CoverageResult(BaseModel):
@@ -111,12 +119,15 @@ def resolve_claim_sources(
 _ALIGNMENT_SYSTEM = """\
 你是严格的审稿人。给定若干带引用的论断，以及该论断引用来源实际提供的证据要点
 （含"原文摘录"，即抓取到的来源正文节选），逐条判定：supported（证据直接支撑）/
-partial（部分支撑或过度引申）/ unsupported（证据中没有依据，属编造或张冠李戴）。
+partial（部分支撑或过度引申）/ unsupported（证据中没有依据，属编造或张冠李戴）/
+meta（不是关于事实的陈述，而是报告对自身范围、方法、取舍的说明）。
 重要规则：
 - 每条论断下方列出的来源就是其脚注对应的全部抓取内容，不要怀疑来源缺失，
   不要臆测"还有其他未抓取的脚注"——脚注映射已由程序核验，以给定证据为准。
 - 论断若是对摘录中信息的合理概括、归纳或计算（如由摘录中的数据推得的比例），也算
   supported，不要求逐字对应。
+- 形如「本报告未引用 X」「本节不讨论 Y」「因证据矛盾而不采用 Z」的句子属于 meta：
+  那是写作取舍而非事实主张，判 meta，不要判 unsupported。
 只依据给定证据判断，不用你自己的知识。"""
 
 _COVERAGE_SYSTEM = """\

@@ -1,4 +1,4 @@
-"""Verify MCP servers load through the CORE loader (handoff acceptance #3).
+"""Verify MCP servers load through the CORE loader (MCP 接入验收 #3).
 
 Runs the real tools/mcp_client.get_mcp_tools() against all three servers,
 then exercises one live tool call (arXiv, no API key needed).
