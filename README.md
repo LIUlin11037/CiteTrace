@@ -169,3 +169,7 @@ docs/          # 架构文档与技术选型
 - 检索质量依赖搜索后端（Tavily / Brave / DuckDuckGo 逐级降级），无 key 时走 DuckDuckGo
 - 可观测性依赖 Langfuse Cloud；仓库不含自建 Langfuse 编排（v3 自建需额外  
   ClickHouse + MinIO + Redis + worker 四个组件）
+<<<<<<< HEAD
+=======
+
+>>>>>>> c01ae57a290ef0826b460a476db1f3b99b0be555
