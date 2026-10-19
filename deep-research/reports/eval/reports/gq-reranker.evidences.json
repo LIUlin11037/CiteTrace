@@ -1,0 +1,620 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Passage Re-ranking with BERT (Nogueira & Cho, 2019)",
+    "url": "https://arxiv.org/abs/1901.04085",
+    "published_at": "2019-01-13",
+    "key_points": [
+      "论文提出对 BERT 的简单重实现，用于基于 query 的 passage re-ranking（query-based passage re-ranking）。",
+      "该系统在 TREC-CAR 数据集上达到 state of the art，并在 MS MARCO passage retrieval 任务排行榜上位列第一。",
+      "相对此前 state of the art，在 MRR@10 指标上相对提升 27%。",
+      "作者为 Rodrigo Nogueira 与 Kyunghyun Cho，属 cs.IR（信息检索）方向；v1 提交于 2019-01-13，最新版 v5 修订于 2020-04-14。",
+      "复现代码发布于 https://github.com/nyu-dl/dl4marco-bert。"
+    ],
+    "raw_excerpt": "In this paper, we describe a simple re-implementation of BERT for query-based passage re-ranking. Our system is the state of the art on the TREC-CAR dataset and the top entry in the leaderboard of the MS MARCO passage retrieval task, outperforming the previous state of the art by 27% (relative) in MRR@10."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks (Reimers & Gurevych, 2019)",
+    "url": "https://arxiv.org/abs/1908.10084",
+    "published_at": "2019-08-27",
+    "key_points": [
+      "BERT/RoBERTa 在语义文本相似度（STS）等句对回归任务上达到 SOTA，但要求两句同时输入网络，导致巨大计算开销。",
+      "在 10,000 句集合中寻找最相似句对，用 BERT 约需 5000 万次推理计算（约 65 小时）。",
+      "BERT 的构造使其不适合语义相似度搜索以及聚类等无监督任务。",
+      "论文提出 Sentence-BERT（SBERT），用 siamese 与 triplet 网络结构改造预训练 BERT，得到可用余弦相似度比较的语义句向量。",
+      "SBERT 将寻找最相似句对的开销从 BERT/RoBERTa 的约 65 小时降至约 5 秒，同时保持 BERT 的准确率。"
+    ],
+    "raw_excerpt": "Finding the most similar pair in a collection of 10,000 sentences requires about 50 million inference computations (~65 hours) with BERT. ... This reduces the effort for finding the most similar pair from 65 hours with BERT / RoBERTa to about 5 seconds with SBERT, while maintaining the accuracy from BERT."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Node Postprocessor Modules (reranker 阶段定义)",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/querying/node_postprocessors/node_postprocessors/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 将 node postprocessor 定义为运行在 retrieval 与 response synthesis 之间的组件：接收 retriever 返回的 nodes，在 LLM 看到它们之前对其进行 transform、filter 或 re-order。",
+      "文档明确指出最常见的一类 node postprocessor 就是 reranker。",
+      "LlamaIndex 将 SentenceTransformerRerank 描述为 cross-encoder（基于 sentence-transformers），并列为无 API key、本地、推荐的默认选项。",
+      "文档给出 reranker 分类：本地 cross-encoder（如 cross-encoder/ms-marco-MiniLM-L6-v2、Qwen/Qwen3-Reranker-0.6B）、托管 API（CohereRerank、JinaRerank、VoyageAIRerank、MixedbreadAIRerank、NVIDIARerank）、LLM 判定（LLMRerank、RankGPTRerank、RankLLMRerank）、token 级 late interaction（ColbertRerank）、多模态（ColPaliRerank）。"
+    ],
+    "raw_excerpt": "Node postprocessors run between retrieval and response synthesis: they take the nodes returned by a retriever and transform, filter, or re-order them before the LLM sees them. The most common kind is a reranker, covered immediately below."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Building Performant RAG Applications for Production",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 在生产级 RAG 优化指南中，将 \"Reranking retrieved nodes for precision\" 列为一项通用技术。",
+      "该指南把标准 RAG 栈描述为 top-k retrieval + basic text splitting，并指出其在文档规模扩大时表现不佳。",
+      "指南将优化目标表述为提升 retrieval 与 generation 性能，以在更复杂数据集上更准确作答并减少幻觉。"
+    ],
+    "raw_excerpt": "Here are some top Considerations for Building Production-Grade RAG ... Reranking retrieved nodes for precision ... A big issue with the standard RAG stack (top-k retrieval + basic text splitting) is that it doesn't do well as the number of documents scales up"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Cohere Docs — How Rerank Works (Rerank API Overview)",
+    "url": "https://docs.cohere.com/docs/rerank-overview",
+    "published_at": null,
+    "key_points": [
+      "Cohere 将 Rerank API endpoint 定义为：给定一个 query 和一个 documents 列表，Rerank 将文档按与 query 的语义相关性从最相关到最不相关排序（indexes the documents from most to least semantically relevant to the query）。",
+      "Rerank 由 Rerank models 驱动，被 Cohere 描述为用于语义搜索的简单且强大的工具。",
+      "API 返回带 relevance_score 的排序结果，示例中 top_n=5，最高分文档 relevance_score 为 0.943264。",
+      "Cohere 建议：若文档含结构化数据，为获得最佳性能应格式化为 YAML 字符串。"
+    ],
+    "raw_excerpt": "The Rerank API endpoint, powered by the Rerank models, is a simple and very powerful tool for semantic search. Given a query and a list of documents, Rerank indexes the documents from most to least semantically relevant to the query."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+    "url": "https://ar5iv.labs.arxiv.org/html/1908.10084",
+    "published_at": "2019-08-27",
+    "key_points": [
+      "BERT 本身使用 cross-encoder：两个句子被一起送入 transformer 网络，然后预测目标值（'BERT uses a cross-encoder: Two sentences are passed to the transformer network and the target value is predicted'）。",
+      "cross-encoder 设置不适合成对回归任务，因为可能的组合数过多：在 n=10,000 的句子集合中找最相似的一对需要 n·(n-1)/2 = 49,995,000 次推理计算，在 V100 GPU 上约需 65 小时。",
+      "对 Quora 的 4000 万问题做单次查询的最相似匹配，用 BERT 成对比较需超过 50 小时。",
+      "SBERT 使用 siamese / triplet 网络结构，为输入句子导出固定大小的向量（fixed-sized vectors），可用 cosine-similarity 或 Manhattan/Euclidean 距离比较。",
+      "SBERT 将找最相似对的耗时从 BERT/RoBERTa 的约 65 小时降到约 5 秒，同时保持 BERT 的准确率。",
+      "把单句独立输入 BERT 再取平均输出层或 [CLS] token 作为句向量的常见做法效果很差，常常比平均 GloVe 词向量还差——这是 SBERT 需要专门训练 siamese 结构的原因。",
+      "SBERT 使 BERT 可用于大规模语义相似度比较、聚类与语义检索等此前不适用 BERT 的任务。"
+    ],
+    "raw_excerpt": "BERT uses a cross-encoder: Two sentences are passed to the transformer network and the target value is predicted. However, this setup is unsuitable for various pair regression tasks due to too many possible combinations. Finding in a collection of n=10,000 sentences the pair with the highest similarity requires with BERT n·(n−1)/2 = 49,995,000 inference computations. On a modern V100 GPU, this requires about 65 hours. ... This reduces the effort for finding the most similar pair from 65 hours with BERT / RoBERTa to about 5 seconds with SBERT."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+    "url": "https://arxiv.org/abs/2004.04906v3",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "检索可以用纯稠密表示实现，嵌入由一个简单的 dual-encoder（双编码器）框架从少量问题和段落中学习得到。",
+      "该稠密检索器在 top-20 段落检索准确率上比强 Lucene-BM25 系统绝对提升 9%-19%，并帮助端到端 QA 系统在多个开放域 QA 基准上达到新的 SOTA。",
+      "论文将稠密检索定位为对 TF-IDF / BM25 等稀疏向量空间模型的替代方案，用于开放域 QA 中高效选取候选上下文。"
+    ],
+    "raw_excerpt": "In this work, we show that retrieval can be practically implemented using dense representations alone, where embeddings are learned from a small number of questions and passages by a simple dual-encoder framework. When evaluated on a wide range of open-domain QA datasets, our dense retriever outperforms a strong Lucene-BM25 system largely by 9%-19% absolute in terms of top-20 passage retrieval accuracy."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Passage Re-ranking with BERT",
+    "url": "https://arxiv.org/abs/1901.04085v5",
+    "published_at": "2019-01-13",
+    "key_points": [
+      "论文描述了一个用于基于查询的段落重排序（query-based passage re-ranking）的 BERT 简单重实现，即 cross-encoder 式 reranker 的代表工作（monoBERT）。",
+      "该系统在 TREC-CAR 数据集上达到 SOTA，并在 MS MARCO 段落检索任务排行榜上位列第一，在 MRR@10 上相对此前 SOTA 提升 27%。",
+      "该工作提供了可复现代码仓库 https://github.com/nyu-dl/dl4marco-bert。"
+    ],
+    "raw_excerpt": "In this paper, we describe a simple re-implementation of BERT for query-based passage re-ranking. Our system is the state of the art on the TREC-CAR dataset and the top entry in the leaderboard of the MS MARCO passage retrieval task, outperforming the previous state of the art by 27% (relative) in MRR@10."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-m3 (Hugging Face model card)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+    "published_at": "2024-03-15",
+    "key_points": [
+      "bge-reranker-v2-m3 的 safetensors 参数总量为 567,755,777（约 5.68 亿参数，F32），单文件非分片，总文件大小约 2.27 GB。",
+      "该模型基座为 bge-m3，语言标注为 multilingual，pipeline_tag 为 text-classification，transformers 自动类为 AutoModelForSequenceClassification。",
+      "模型卡明确 reranker 与 embedding 模型的区别：reranker 以 query 和 document 同时作为输入，直接输出相似度而非 embedding；分数可经 sigmoid 映射到 [0,1]。",
+      "模型卡列出 BGE reranker 家族：bge-reranker-base（xlm-roberta-base）、bge-reranker-large（xlm-roberta-large）、bge-reranker-v2-m3（bge-m3）、bge-reranker-v2-gemma（gemma-2b）、bge-reranker-v2-minicpm-layerwise（MiniCPM-2B-dpo-bf16，支持 8-40 层 layerwise 输出）。",
+      "该模型卡关联论文 arXiv:2312.15503 与 arXiv:2402.03216，许可为 apache-2.0。"
+    ],
+    "raw_excerpt": "\"safetensors\":{\"parameters\":{\"F32\":567755777},\"total\":567755777,\"sharded\":false,\"totalFileSize\":2271071852} ... \"Different from embedding model, reranker uses question and document as input and directly output similarity instead of embedding.\" ... \"BAAI/bge-reranker-v2-minicpm-layerwise | MiniCPM-2B-dpo-bf16 | Multilingual | 8-40 | ... allows freedom to select layers for output, facilitating accelerated inference.\""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-gemma (Hugging Face model card)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-gemma",
+    "published_at": "2024-03-16",
+    "key_points": [
+      "bge-reranker-v2-gemma 的 safetensors 参数总量为 2,506,172,416（约 25.06 亿参数，F32），分片存储，总文件大小约 10.02 GB。",
+      "该模型基座为 gemma-2b，语言标注为 multilingual，transformers 自动类为 AutoModelForCausalLM，pipeline_tag 为 text-generation。",
+      "模型卡称其适用于多语言场景，在英文能力与多语言能力上表现良好。",
+      "模型卡关联论文 arXiv:2312.15503 与 arXiv:2402.03216，许可为 apache-2.0。"
+    ],
+    "raw_excerpt": "\"safetensors\":{\"parameters\":{\"F32\":2506172416},\"total\":2506172416,\"sharded\":true,\"totalFileSize\":10024722026} ... \"BAAI/bge-reranker-v2-gemma | gemma-2b | Multilingual | - | Suitable for multilingual contexts, performs well in both English proficiency and multilingual capabilities.\""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "FlagEmbedding research/reranker README (BGE reranker training data & usage)",
+    "url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
+    "published_at": null,
+    "key_points": [
+      "BGE reranker（base 版）由 xlm-roberta-base 初始化，在多语言数据集混合上训练。",
+      "训练数据规模与来源（中文）：788,491 个文本对，来自 T2ranking、MMmarco、dulreader、Cmedqa-v2、nli-zh。",
+      "训练数据规模与来源（英文）：933,090 个文本对，来自 msmarco、nq、hotpotqa、NLI(SimCSE)。",
+      "训练数据规模与来源（其他语言）：97,458 个文本对，来自 Mr.TyDi（含阿拉伯语、孟加拉语、英语、芬兰语、印尼语、日语、韩语、俄语、斯瓦希里语、泰卢固语、泰语）。",
+      "为增强跨语言检索能力，基于 MMarco 构造了两个跨语言检索数据集：采样 100,000 条英文 query 检索中文 passage，以及 100,000 条中文 query 检索英文 passage；数据集发布于 Shitao/bge-reranker-data。",
+      "reranker 以 cross-entropy loss 优化，因此相关性分数不限定在特定范围内。",
+      "官方使用示例中 tokenizer 采用 max_length=512 进行截断（代码示例，非规格声明）。",
+      "该模型主要支持中英文，其他低资源语言可能出现性能下降。"
+    ],
+    "raw_excerpt": "\"This reranker is initialized from xlm-roberta-base, and we train it on a mixture of multilingual datasets: - Chinese: 788,491 text pairs from T2ranking, MMmarco, dulreader, Cmedqa-v2, and nli-zh - English: 933,090 text pairs from msmarco, nq, hotpotqa, and NLI - Others: 97,458 text pairs from Mr.TyDi\" ... \"we sample 100,000 english queries to retrieve the chinese passages, and also sample 100,000 chinese queries to retrieve english passages.\" ... \"The reranker is optimized based cross-entropy loss, so the relevance score is not bounded to a specific range.\""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "RankZephyr: Effective and Robust Zero-Shot Listwise Reranking is a Breeze! (arXiv:2312.02724)",
+    "url": "https://arxiv.org/abs/2312.02724",
+    "published_at": "2023-12-05",
+    "key_points": [
+      "RankZephyr 被定位为开源 LLM 的 listwise zero-shot reranker，作者 Ronak Pradeep、Sahel Sharifymoghaddam、Jimmy Lin。",
+      "摘要称 RankZephyr 弥合了与 GPT-4 的效果差距，并在某些情况下超越该专有模型。",
+      "评测覆盖多个数据集：TREC Deep Learning Tracks，以及 BEIR 中的 NEWS 和 COVID 子集。",
+      "作者称 RankZephyr 对初始文档排序变化和被重排文档数量具有鲁棒性。",
+      "作者称在 NovelEval 测试集（查询与 passage 均在其训练期之后）上优于 GPT-4，以回应数据污染担忧。",
+      "代码开源以复现结果。"
+    ],
+    "raw_excerpt": "\"we introduce RankZephyr, a state-of-the-art, open-source LLM for listwise zero-shot reranking. RankZephyr not only bridges the effectiveness gap with GPT-4 but in some cases surpasses the proprietary model. Our comprehensive evaluations across several datasets (TREC Deep Learning Tracks; NEWS and COVID from BEIR) showcase this ability.\" ... \"our model outperforms GPT-4 on the NovelEval test set, comprising queries and passages past its training period, which addresses concerns about data contamination.\""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "castorini/rank_llm — RankLLM: A Python toolkit for reproducible information retrieval research using rerankers, with a focus on listwise reranking",
+    "url": "https://github.com/castorini/rank_llm",
+    "published_at": null,
+    "key_points": [
+      "RankLLM 提供三类 reranker 的完整谱系：pointwise（如 MonoT5）、pairwise（如 DuoT5）、以及以开源 LLM 为主的 listwise 模型，后者兼容 vLLM 推理。",
+      "仓库同时支持 RankGPT 与 RankGemini 变体，README 明确将其归类为「proprietary listwise rerankers」（专有/闭源 listwise 重排器）。",
+      "仓库支持「仅使用 first-token logits 进行重排」以提升推理效率（reranking with the first-token logits only to improve inference efficiency）。",
+      "README 的 News 记录显示：2025.05.25 RankLLM 资源论文被 SIGIR 2025 接收；2025.07.23 支持 YAML 自定义 prompt 模板（v0.25.0）；2025.08.25 增加 OpenRouter API 支持（v0.25.7）；2026.03.26 新增 rank-llm 命令行界面。",
+      "仓库提供 Model Zoo、Training、End-to-end Run and 2CR 等章节，并包含 trec_eval_aggregated_results.jsonl 聚合评测结果文件。",
+      "仓库提供轻量 HTTP API 依赖组（FastAPI、Flask、Uvicorn），以及 MCP 相关支持，指向服务化部署场景。"
+    ],
+    "raw_excerpt": "We offer a suite of rerankers - pointwise models like MonoT5, pairwise models like DuoT5 and listwise models with a focus on open source LLMs compatible with vLLM. We also support RankGPT and RankGemini variants, which are proprietary listwise rerankers. Addtionally, we support reranking with the first-token logits only to improve inference efficiency. [2025.05.25] Our RankLLM resource paper is accepted to SIGIR 2025!"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "FlagOpen/FlagEmbedding — BGE: One-Stop Retrieval Toolkit For Search and RAG",
+    "url": "https://github.com/FlagOpen/FlagEmbedding",
+    "published_at": null,
+    "key_points": [
+      "FlagEmbedding 仓库（BGE 工具包）在工具返回的仓库列表中未出现，因此其 stars 与最近提交时间未取得；仅确认仓库存在 master 分支、1,476 次提交历史。",
+      "2024/7/26 发布轻量 reranker bge-reranker-v2.5-gemma2-lightweight，基于 gemma-2-9b，支持 token compression 与 layerwise lightweight 操作，项目方自述「在节省大量资源的同时仍能保证良好性能」。",
+      "2024/7/26 同时发布 embedding 模型 bge-en-icl（引入 in-context learning 能力）与 bge-multilingual-gemma2（基于 gemma-2-9b 的多语言 embedding 模型）。",
+      "2025/3/6 发布 BGE-VL 多模态 embedding 模型与 MegaPairs 合成数据集，采用 MIT 许可，声明学术与商业用途均免费。",
+      "2024/12/5 建立集中式 BGE 文档；2024/9/2 开始维护 tutorials 并声明将持续更新。",
+      "2024/5/21 与 Jina AI、Zilliz、HuggingFace 等合作发布 AIR-Bench，定位为面向 Neural IR & RAG 的公平分布外（out-of-distribution）评测基准，并设有 leaderboard。"
+    ],
+    "raw_excerpt": "7/26/2024: Release a new lightweight reranker bge-reranker-v2.5-gemma2-lightweight, a lightweight reranker based on gemma-2-9b, which supports token compression and layerwise lightweight operations, can still ensure good performance while saving a significant amount of resources. 5/21/2024: Release a new benchmark AIR-Bench together with Jina AI, Zilliz, HuggingFace, and other partners. AIR-Bench focuses on a fair out-of-distribution evaluation for Neural IR & RAG."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果（reranker 关键词，按 stars 排序）",
+    "url": "https://github.com/search?q=reranker&s=stars",
+    "published_at": null,
+    "key_points": [
+      "AnswerDotAI/rerankers：★1641，forks 106，定位为「轻量、低依赖、统一 API 以调用所有常见 reranking 与 cross-encoder 模型」，最近 push 2025-12-20。",
+      "castorini/rank_llm：★660，forks 105，定位为面向 listwise reranking 的可复现 IR 研究工具包，最近 push 2026-10-12。",
+      "netease-youdao/BCEmbedding：★1882，forks 129，定位为网易有道面向 RAG 产品的开源 embedding 与 reranker 模型，最近 push 2026-09-03。",
+      "NovaSearch-Team/RAG-Retrieval：★1136，forks 89，定位为统一 RAG 检索（Embedding、ColBERT、ReRanker）的高效微调框架，最近 push 2026-08-28。",
+      "anush008/fastembed-rs：★1037，forks 145，Rust 库，用于本地生成向量 embedding 与 reranking，最近 push 2026-10-12。",
+      "Marker-Inc-Korea/RAGchain：★282，forks 28，最近 push 2024-01-09，显示该仓库已长期不活跃。",
+      "该检索结果中未包含 FlagEmbedding/BGE 与 sentence-transformers 仓库，二者 stars 与活跃度数据缺失。"
+    ],
+    "raw_excerpt": "- AnswerDotAI/rerankers (★1641, forks 106) desc: A lightweight, low-dependency, unified API to use all common reranking and cross-encoder models. last push: 2025-12-20\n- castorini/rank_llm (★660, forks 105) desc: RankLLM is a Python toolkit for reproducible information retrieval research using rerankers, with a focus on listwise reranking. last push: 2026-10-12\n- netease-youdao/BCEmbedding (★1882, forks 129) desc: Netease Youdao's open-source embedding and reranker models for RAG products. last push: 2026-09-03\n- NovaSearch-Team/RAG-Retrieval (★1136, forks 89) last push: 2026-08-28"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "M3-Embedding: Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation (arXiv:2402.03216v5)",
+    "url": "https://arxiv.org/abs/2402.03216v5",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "该论文提出 M3-Embedding，支持 100+ 工作语言的语义检索，可同时完成 dense retrieval、multi-vector retrieval、sparse retrieval 三种检索功能。",
+      "模型可处理从短句到最长 8192 token 的长文档输入。",
+      "训练上提出 self-knowledge distillation，将不同检索功能的相关性分数整合为 teacher signal。",
+      "论文摘要声称在多语言、跨语言、长文档检索基准上取得新的 state-of-the-art 结果（属作者自述主张，未在本来源中给出具体数值）。"
+    ],
+    "raw_excerpt": "In this paper, we introduce a new embedding model called M3-Embedding, which is distinguished for its versatility in Multi-Linguality, Multi-Functionality, and Multi-Granularity. ... M3-Embedding exhibits a superior performance in our experiment, leading to new state-of-the-art results on multilingual, cross-lingual, and long-document retrieval benchmarks."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-m3 model card (Hugging Face)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3/raw/main/README.md",
+    "published_at": "2024-03-15",
+    "key_points": [
+      "bge-reranker-v2-m3 的基座模型是 bge-m3，语言为 Multilingual，定位为轻量、易部署、推理快的 reranker。",
+      "bge-reranker-base 基座为 xlm-roberta-base，bge-reranker-large 基座为 xlm-roberta-large，两者语言均为 Chinese and English。",
+      "bge-reranker-v2-gemma 基座为 gemma-2b，语言为 Multilingual。",
+      "bge-reranker-v2-minicpm-layerwise 基座为 MiniCPM-2B-dpo-bf16，支持 layerwise 8-40 层输出选择。",
+      "模型卡说明 reranker 与 embedding 模型不同：以 query 和 document 同时作为输入，直接输出相似度而非 embedding；分数可经 sigmoid 映射到 [0,1]。",
+      "模型卡正文在 Usage 章节处被截断，未包含 Evaluation 表格内容。"
+    ],
+    "raw_excerpt": "Different from embedding model, reranker uses question and document as input and directly output similarity instead of embedding. You can get a relevance score by inputting query and passage to the reranker. And the score can be mapped to a float value in [0,1] by sigmoid function."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-gemma model card (Hugging Face)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-gemma",
+    "published_at": "2024-03-16",
+    "key_points": [
+      "bge-reranker-v2-gemma 基座为 gemma-2b，语言为 Multilingual，模型卡描述其适合多语言场景，在英文能力与多语言能力上表现良好。",
+      "该模型卡与 bge-reranker-v2-m3 共享同一份 Model List 表格（含 base/large/v2-m3/v2-gemma/v2-minicpm-layerwise 五个模型）。",
+      "模型卡正文在 Usage 章节处被截断，未包含 Evaluation 表格内容。"
+    ],
+    "raw_excerpt": "BAAI/bge-reranker-v2-gemma | gemma-2b | Multilingual | - | Suitable for multilingual contexts, performs well in both English proficiency and multilingual capabilities."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "FlagEmbedding research/reranker README (Reranker)",
+    "url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
+    "published_at": null,
+    "key_points": [
+      "reranker 以 cross-entropy loss 优化，因此相关性分数不限定在特定范围内。",
+      "该 reranker 由 xlm-roberta-base 初始化，在多语言数据集混合上训练：中文 788,491 文本对（T2ranking、MMmarco、dulreader、Cmedqa-v2、nli-zh），英文 933,090 文本对（msmarco、nq、hotpotqa、NLI），其他语言 97,458 文本对（Mr.TyDi，含阿拉伯语、孟加拉语、英语、芬兰语、印尼语、日语、韩语、俄语、斯瓦希里语、泰卢固语、泰语）。",
+      "为增强跨语言检索能力，基于 MMarco 构造了两个跨语言检索数据集：采样 100,000 条英文 query 检索中文 passage，以及 100,000 条中文 query 检索英文 passage。",
+      "该模型主要支持中文和英文，其他低资源语言可能出现性能下降。",
+      "评测表格的表头为：Model | T2Reranking | T2RerankingZh2En* | T2RerankingEn2Zh* | MmarcoReranking | CMedQAv1 | CMedQAv2 | Avg —— 均为中文/跨语言检索基准，不含 BEIR、MS MARCO passage 或 MTEB reranking 的 nDCG@10/MRR@10 数值。",
+      "表格数值部分在抓取时被截断，未获得具体分数。"
+    ],
+    "raw_excerpt": "| Model | T2Reranking | T2RerankingZh2En* | T2RerankingEn2Zh* | MmarcoReranking | CMedQAv1 | CMedQAv2 | Avg |"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "FlagEmbedding main README (BGE: One-Stop Retrieval Toolkit For Search and RAG)",
+    "url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/README.md",
+    "published_at": null,
+    "key_points": [
+      "FlagEmbedding 是 BGE 系列模型的官方仓库，模型卡均指向该仓库获取更多细节。",
+      "仓库 News 记录：2024-07-26 发布轻量 reranker bge-reranker-v2.5-gemma2-lightweight（基于 gemma-2-9b，支持 token 压缩与 layerwise 轻量化）。",
+      "仓库 News 记录：2024-07-26 发布 embedding 模型 bge-multilingual-gemma2（基于 gemma-2-9b），声称在多语言基准 MIRACL、MTEB-fr、MTEB-pl 上取得新 SOTA（作者自述主张）。",
+      "抓取到的 README 内容在 News 章节处被截断，未进入 Model List 与 Evaluation 表格。"
+    ],
+    "raw_excerpt": "7/26/2024: Release a new lightweight reranker bge-reranker-v2.5-gemma2-lightweight, a lightweight reranker based on gemma-2-9b, which supports token compression and layerwise lightweight operations, can still ensure good performance while saving a significant amount of resources."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Rerank models — Cohere Documentation (v2 API)",
+    "url": "https://docs.cohere.com/docs/rerank",
+    "published_at": null,
+    "key_points": [
+      "Cohere 官方文档列出 rerank-v3.5 的 context length 为 4096 tokens。",
+      "rerank-v3.5 被描述为面向 documents 与 semi-structured data (JSON) 的模型，在英语与非英语语言上表现良好，并支持与 embed-multilingual-v3.0 相同的语言。",
+      "rerank-english-v3.0 与 rerank-multilingual-v3.0 的 context length 同样为 4096 tokens。",
+      "文档说明：每个文档的 query tokens 与 document tokens 合并计入单文档 context 上限；超出时文档会被自动分块并多次推理。",
+      "文档当前最新模型为 rerank-v4.0-pro 与 rerank-v4.0-fast（多语言，支持 JSON 半结构化数据）。"
+    ],
+    "raw_excerpt": "rerank-v3.5 A model for documents and semi-structured data (JSON). Performs well in English and non-English languages; supports the same languages as embed-multilingual-v3.0. This model has a context length of 4096 tokens ... For each document included in a request, Rerank combines the tokens from the query with the tokens from the document and the combined total counts toward the context limit for a single document."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Introducing Rerank 3.5: Precise AI Search (Cohere Blog)",
+    "url": "https://cohere.com/blog/rerank-3pt5",
+    "published_at": "2024-12-02",
+    "key_points": [
+      "Cohere 于 2024-12-02 发布 Rerank 3.5，官方定位为在复杂企业数据搜索上提供更强的 reasoning 与 multilingual 能力。",
+      "该页面正文为 JS 渲染，抓取仅获得标题、日期、作者与标签，未取到正文中的基准分数或语言数量。"
+    ],
+    "raw_excerpt": "Dec 02, 2024 ... Introducing Rerank 3.5: Precise AI Search Rerank 3.5 delivers improved reasoning and multilingual capabilities to search complex enterprise data with greater accuracy."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Introducing Rerank 3: A New Foundation Model for Efficient Enterprise Search & Retrieval (Cohere Blog)",
+    "url": "https://cohere.com/blog/rerank-3",
+    "published_at": "2024-04-11",
+    "key_points": [
+      "Cohere 于 2024-04-11 发布 Rerank 3，作者为 Sylvie Shi 与 Nils Reimers，定位为企业搜索与检索的基础模型。",
+      "该页面正文为 JS 渲染，抓取仅获得标题、日期、作者与标签，未取到正文中的基准分数、语言数量或相对前代的提升表述。"
+    ],
+    "raw_excerpt": "Apr 11, 2024 ... Introducing Rerank 3: A New Foundation Model for Efficient Enterprise Search & Retrieval Blog Written By Sylvie Shi Manager of Technical Staff Nils Reimers Director of Embeddings & Search"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "jinaai/jina-reranker-v2-base-multilingual (Hugging Face Model Card)",
+    "url": "https://huggingface.co/jinaai/jina-reranker-v2-base-multilingual",
+    "published_at": "2024-06-19",
+    "key_points": [
+      "Jina Reranker v2 是 cross-encoder 模型，输入 query-document 对并输出相关性分数。",
+      "模型 context length 上限为 1024 tokens；超过 1024 tokens 的长文本采用 sliding window 分块后分别 rerank。",
+      "模型采用 flash attention 机制。",
+      "模型卡称其相对前代 jina-reranker-v1-base-en 及当时 SOTA reranker 在文本检索、多语言、function-calling-aware、text-to-SQL-aware 与代码检索等基准上具有竞争力。",
+      "模型参数量为 278,437,633（约 0.28B，BF16 safetensors）。",
+      "许可证为 CC-BY-NC-4.0（仅限研究与评估用途）。"
+    ],
+    "raw_excerpt": "It is a cross-encoder model that takes a query and a document pair as input and outputs a score indicating the relevance of the document to the query ... The jina-reranker-v2-base-multilingual model is capable of handling long texts with a context length of up to 1024 tokens ... the model uses a sliding window approach to chunk the input text into smaller pieces and rerank each chunk separately."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "jinaai/jina-reranker-v3 (Hugging Face Model Card / README)",
+    "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+    "published_at": null,
+    "key_points": [
+      "jina-reranker-v3 是 0.6B 参数的多语言文档 reranker，采用 'last but not late interaction' 架构。",
+      "模型基于 Qwen3-0.6B，含 28 层 transformer 与轻量 MLP projector（1024→512→256）。",
+      "模型可在 131K token context 内同时处理最多 64 个文档。",
+      "模型卡给出 BEIR 61.94 nDCG@10，并称其为 SOTA，且比生成式 listwise reranker 小 10 倍。",
+      "对比表中 jina-reranker-v2（0.3B）BEIR 为 57.06、MIRACL 63.65、MKQA 67.90、CoIR 56.14。",
+      "对比表中 jina-reranker-m0（2.4B）BEIR 58.95、MIRACL 66.75、MKQA 68.19、CoIR 63.55。",
+      "对比表中 bge-reranker-v2-m3（0.6B）BEIR 56.51、MIRACL 69.32；mxbai-rerank-base-v2（0.5B）BEIR 58.40；mxbai-rerank-large-v2（1.5B）BEIR 61.44；Qwen3-Reranker-0.6B BEIR 56.28；Qwen3-Reranker-4B BEIR 61.16。",
+      "模型卡指向 arXiv 论文 2509.25085，并提示后继版本 jina-reranker-v3.5 为 drop-in 升级。",
+      "许可证为 CC-BY-NC-4.0。"
+    ],
+    "raw_excerpt": "jina-reranker-v3 is a 0.6B parameter multilingual document reranker with a novel last but not late interaction architecture ... Built on Qwen3-0.6B with 28 transformer layers and a lightweight MLP projector (1024→512→256), it processes up to 64 documents simultaneously within 131K token context. The model achieves state-of-the-art BEIR performance with 61.94 nDCG@10 while being 10× smaller than generative listwise rerankers."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "cross-encoder/ms-marco-MiniLM-L6-v2 (HuggingFace model card)",
+    "url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2",
+    "published_at": null,
+    "key_points": [
+      "该模型卡提供各 cross-encoder 在 V100 GPU 上的吞吐量（Docs/Sec）列：ms-marco-MiniLM-L6-v2 为 1800 docs/sec，ms-marco-MiniLM-L12-v2 为 960 docs/sec，ms-marco-MiniLM-L4-v2 为 2500 docs/sec，ms-marco-MiniLM-L2-v2 为 4100 docs/sec，TinyBERT-L2-v2 为 9000 docs/sec。",
+      "模型卡明确注明：'Runtime was computed on a V100 GPU.'（吞吐量数据基于 V100 GPU 测得）。",
+      "ms-marco-MiniLM-L6-v2 的 NDCG@10 (TREC DL 19) 为 74.30，MRR@10 (MS Marco Dev) 为 39.01。",
+      "该模型为 22.7M 参数的 cross-encoder，基于 microsoft/MiniLM-L12-H384-uncased，用于对已检索出的 passage 重排（'sort the passages in a decreasing order'）。",
+      "模型卡描述其用法为：给定 query，用 ElasticSearch 等检索出候选 passage，再用 cross-encoder 对候选打分排序（Retrieve & Re-rank 流程）。"
+    ],
+    "raw_excerpt": "cross-encoder/ms-marco-MiniLM-L6-v2 | 74.30 | 39.01 | 1800 ... Note: Runtime was computed on a V100 GPU."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-m3 (HuggingFace model card)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+    "published_at": "2024-03-15",
+    "key_points": [
+      "bge-reranker-v2-m3 是 cross-encoder 式 reranker：'reranker uses question and document as input and directly output similarity instead of embedding'，输入 query 与 passage 直接输出相关性分数，可经 sigmoid 映射到 [0,1]。",
+      "该模型基于 bge-m3，为多语言模型，参数量 567,755,777（约 5.68 亿，F32），模型文件约 2.27 GB。",
+      "模型卡将 bge-reranker-base / bge-reranker-large 描述为 'Lightweight reranker model, easy to deploy, with fast inference'（轻量、易部署、推理快），但未给出具体延迟数值。"
+    ],
+    "raw_excerpt": "Different from embedding model, reranker uses question and document as input and directly output similarity instead of embedding. ... BAAI/bge-reranker-v2-m3 | bge-m3 | Multilingual"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "FlagOpen/FlagEmbedding README (BGE toolkit)",
+    "url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/README.md",
+    "published_at": null,
+    "key_points": [
+      "FlagEmbedding 是 BGE 系列（含 bge-reranker）的官方开源仓库，README 定位为 'BGE: One-Stop Retrieval Toolkit For Search and RAG'。",
+      "README 提到发布了轻量级 reranker bge-reranker-v2.5-gemma2-lightweight，支持 token compression 与 layerwise lightweight 操作，'can still ensure good performance while saving a significant amount of resources'（在节省大量资源的同时保持良好性能）。",
+      "本次抓取到的 README 片段未包含 reranker 的延迟/吞吐量数值表。"
+    ],
+    "raw_excerpt": "Release a new lightweight reranker bge-reranker-v2.5-gemma2-lightweight ... which supports token compression and layerwise lightweight operations, can still ensure good performance while saving a significant amount of resources."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "FlagOpen/FlagEmbedding",
+    "url": "https://github.com/FlagOpen/FlagEmbedding",
+    "published_at": null,
+    "key_points": [
+      "FlagOpen/FlagEmbedding 当前 stars 数为 12247。",
+      "FlagOpen/FlagEmbedding 当前 forks 数为 943。",
+      "该仓库主语言为 Python，描述为 \"Retrieval and Retrieval-augmented LLMs\"。",
+      "该仓库最近一次 push 日期为 2026-08-24（工具返回的 last push 字段，非 commit 日期本身）。"
+    ],
+    "raw_excerpt": "FlagOpen/FlagEmbedding (★12247, forks 943)\n  desc: Retrieval and Retrieval-augmented LLMs\n  lang: Python | last push: 2026-08-24\n  url: https://github.com/FlagOpen/FlagEmbedding"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "huggingface/sentence-transformers (search result for 'sentence-transformers')",
+    "url": "https://github.com/huggingface/sentence-transformers",
+    "published_at": null,
+    "key_points": [
+      "搜索 'sentence-transformers' 返回的最高星仓库为 huggingface/sentence-transformers，stars 19171、forks 2954。",
+      "该仓库描述为 \"State-of-the-Art Embeddings, Retrieval, and Reranking\"，主语言 Python，last push 2026-10-14。",
+      "该结果的组织归属为 huggingface，而非子问题所问的 UKPLab；工具未说明两者是否为同一仓库的迁移关系。"
+    ],
+    "raw_excerpt": "huggingface/sentence-transformers (★19171, forks 2954)\n  desc: State-of-the-Art Embeddings, Retrieval, and Reranking\n  lang: Python | last push: 2026-10-14\n  url: https://github.com/huggingface/sentence-transformers"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "UKPLab/sentence-transformers README (repository page)",
+    "url": "https://github.com/UKPLab/sentence-transformers",
+    "published_at": null,
+    "key_points": [
+      "UKPLab/sentence-transformers 仓库页面可正常访问，默认分支为 main，累计 commit 数为 3,241。",
+      "README 正文说明该框架用于计算 embedding，并可用 Cross-Encoder（即 reranker）模型计算相似度分数。",
+      "README 称 Hugging Face 上有超过 15,000 个预训练 Sentence Transformers 模型可直接使用。",
+      "README 推荐 Python 3.10+、PyTorch 2.2+、transformers v5.0+。",
+      "该页面抽取文本中未包含 stars 数、forks 数或最近 commit 日期。"
+    ],
+    "raw_excerpt": "main Branches Tags Go to file Code Open more actions menu Latest commit History 3,241 Commits 3,241 Commits ... Sentence Transformers: Embeddings, Retrieval, and Reranking ... It can be used to compute embeddings using Sentence Transformer models ( quickstart ), to calculate similarity scores using Cross-Encoder (a.k.a. reranker) models ( quickstart ) ... A wide selection of over 15,000 pre-trained Sentence Transformers models are available for immediate use on 🤗 Hugging Face"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "BAAI/bge-reranker-v2-m3 (Hugging Face model card)",
+    "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+    "published_at": "2024-03-15",
+    "key_points": [
+      "该模型卡元数据显示 bge-reranker-v2-m3 参数量为 567,755,777（F32），总文件大小约 2.27 GB，采用 Apache-2.0 许可。",
+      "模型卡正文开头说明：与 embedding 模型不同，reranker 以 query 和 document 作为输入，直接输出相似度而非 embedding；分数可通过 sigmoid 映射到 [0,1]。",
+      "模型卡列出 bge-reranker-base / large / v2-m3 等型号，并称 base/large 为『轻量、易部署、推理快』的 reranker。",
+      "抓取内容未包含延迟、吞吐、量化、ONNX/TensorRT 或 top-k 召回配置等正文数据。"
+    ],
+    "raw_excerpt": "Different from embedding model, reranker uses question and document as input and directly output similarity instead of embedding. You can get a relevance score by inputting query and passage to the reranker. And the score can be mapped to a float value in [0,1] by sigmoid function."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing (arXiv:2404.14618)",
+    "url": "https://arxiv.org/abs/2404.14618",
+    "published_at": "2024-04-22",
+    "key_points": [
+      "该论文主题为 LLM 查询路由（在大小模型间按查询难度与目标质量分配），与 cross-encoder reranker 的 top-k 召回或加速无关。",
+      "论文报告其路由方法可减少最多 40% 的大模型调用且不降低响应质量。",
+      "此来源不能为 f5 提供任何关于 reranker 召回量、延迟预算或量化/蒸馏加速的证据。"
+    ],
+    "raw_excerpt": "Our approach uses a router that assigns queries to the small or large model based on the predicted query difficulty and the desired quality level... our approach allows us to make up to 40% fewer calls to the large model, with no drop in response quality."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "A characterization of compactness via bilinear T1 theorem (arXiv:2404.14013)",
+    "url": "https://arxiv.org/abs/2404.14013",
+    "published_at": "2024-04-22",
+    "key_points": [
+      "该论文属于数学（Classical Analysis and ODEs, math.CA），研究双线性 Calderón-Zygmund 算子的紧性刻画。",
+      "与 RAG、reranker、cross-encoder 或推理加速完全无关，属编号误猜，不可作为 f5 证据。"
+    ],
+    "raw_excerpt": "In this paper we solve a long standing problem about the bilinear T1 theorem to characterize the (weighted) compactness of bilinear Calderón-Zygmund operators."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "RankZephyr: Effective and Robust Zero-Shot Listwise Reranking is a Breeze!",
+    "url": "https://arxiv.org/abs/2312.02724",
+    "published_at": "2023-12-05",
+    "key_points": [
+      "RankZephyr 是一个开源（7B 参数）的 listwise 零样本 reranker，作者声称其弥合了与 GPT-4 的效果差距，并在部分情况下超越该专有模型。",
+      "评估数据集包括 TREC Deep Learning Tracks 以及 BEIR 中的 NEWS 和 COVID 子集。",
+      "作者声称 RankZephyr 对初始文档排序变化和被重排文档数量的变化具有鲁棒性。",
+      "作者声称 RankZephyr 在 NovelEval 测试集（查询与段落均晚于其训练期）上超过 GPT-4，以回应数据污染担忧。",
+      "代码发布于 https://github.com/castorini/rank_llm。"
+    ],
+    "raw_excerpt": "we introduce RankZephyr, a state-of-the-art, open-source LLM for listwise zero-shot reranking. RankZephyr not only bridges the effectiveness gap with GPT 4 but in some cases surpasses the proprietary model. Our comprehensive evaluations across several datasets (TREC Deep Learning Tracks; NEWS and COVID from BEIR) showcase this ability."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "RankZephyr: Effective and Robust Zero-Shot Listwise Reranking is a Breeze! (full text, Introduction)",
+    "url": "https://arxiv.org/html/2312.02724v1",
+    "published_at": "2023-12-05",
+    "key_points": [
+      "论文将 RankGPT、LRL 等 LLM listwise reranking 方法归类为“prompt-decoders”，并指出其共同局限是依赖专有模型、难以复现。",
+      "论文称 RankVicuna（开源）效果优于更大的专有模型 RankGPT-3.5，但仍落后于 SOTA 的 RankGPT-4。",
+      "论文提出的研究问题之一为：仅 7B 参数的开源 LLM（RankZephyr）能否在零样本设定下超越大得多的专有模型 RankGPT-4 的 listwise reranking 效果。"
+    ],
+    "raw_excerpt": "Recently, RankVicuna Pradeep et al. (2023b) helped address this pressing need ... improving over the much larger proprietary model RankGPT 3.5. However, RankVicuna still lags behind the state-of-the-art RankGPT 4 in effectiveness."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Is ChatGPT Good at Search? Investigating Large Language Models as Re-Ranking Agents (RankGPT)",
+    "url": "https://arxiv.org/abs/2304.09542",
+    "published_at": "2023-04-19",
+    "key_points": [
+      "论文研究生成式 LLM（ChatGPT、GPT-4）用于 IR 相关性排序，发现经恰当指令的 LLM 可给出与 SOTA 监督方法相当甚至更优的结果。",
+      "为应对数据污染，论文构建了 NovelEval 测试集，用于验证模型对未知知识的排序能力。",
+      "论文提出 permutation distillation 方案，将 ChatGPT 的排序能力蒸馏到小型专用模型；蒸馏得到的 440M 模型在 BEIR 基准上超过 3B 的监督模型。",
+      "该论文发表于 EMNLP 2023。"
+    ],
+    "raw_excerpt": "our experiments reveal that properly instructed LLMs can deliver competitive, even superior results to state-of-the-art supervised methods on popular IR benchmarks ... a distilled 440M model outperforms a 3B supervised model on the BEIR benchmark."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — Releases 页面",
+    "url": "https://github.com/castorini/rank_llm/releases",
+    "published_at": null,
+    "key_points": [
+      "该仓库的 GitHub Releases 页面显示没有任何 release（\"There aren't any releases here\"）",
+      "因此不存在以 GitHub Release 形式发布的、标注日期为 2026-03-26 的版本"
+    ],
+    "raw_excerpt": "Releases · castorini/rank_llm — There aren't any releases here. You can create a release to package software, along with release notes and links to binary files, for other people to use."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — Tags 页面",
+    "url": "https://github.com/castorini/rank_llm/tags",
+    "published_at": null,
+    "key_points": [
+      "该仓库的 Tags 页面同样显示没有任何 release/tag（\"There aren't any releases here\"）"
+    ],
+    "raw_excerpt": "There aren't any releases here. You can create a release to package software, along with release notes and links to binary files, for other people to use."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — commit 8754de9 \"docs: announce rank-llm CLI\"",
+    "url": "https://github.com/castorini/rank_llm/commit/8754de9",
+    "published_at": "2026-03-26",
+    "key_points": [
+      "2026 年 3 月 26 日存在一条 commit（SHA 8754de9），标题为 \"docs: announce rank-llm CLI\"，作者 ronakice",
+      "该 commit 仅修改 README.md，新增 1 行、删除 0 行",
+      "新增内容为 README 的 News 条目：\"[2026.03.26] RankLLM now supports the new `rank-llm` command-line interface (CLI).\"",
+      "README News 中相邻的历史条目包括 [2025.08.25] 支持 OpenRouter API - Release v0.25.7，以及 [2025.07.23] 支持 YAML 自定义 prompt 模板 - Release v0.25.0"
+    ],
+    "raw_excerpt": "## News\n+ - **[2026.03.26]** RankLLM now supports the new `rank-llm` command-line interface (CLI).\n - **[2025.08.25]** Added support for OpenRouter API - Release [v0.25.7](docs/release-notes/release-notes-v0.25.7.md)\n - **[2025.07.23]** Added support for custom prompt templates with YAML files - Release [v0.25.0](docs/release-notes/release-notes-v0.25.0.md)."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — main 分支 commit 历史（2026-03-01 至 2026-04-15 区间）",
+    "url": "https://github.com/castorini/rank_llm/commits/main/?since=2026-03-01&until=2026-04-15",
+    "published_at": null,
+    "key_points": [
+      "2026-03-26 当天有多条 commit，包括 \"docs: announce rank-llm CLI\"（8754de9）、\"docs: remove outdated macOS warning\"（baa5d0d）、\"Split RankLLM API and MCP extras (#369)\"（22412e9）",
+      "2026-03-26 前后集中出现一系列 CLI 相关 commit：Add RankLLM CLI response and parser scaffold (#356)、Extract shared RankLLM CLI execution handlers (#357)、Add canonical rank-llm rerank command (#358)、Add rerank validation and dry-run support (#359)、Add RankLLM prompt inspection commands (#360)、Add RankLLM artifact view command (#361)、Add RankLLM describe schema and doctor commands (#362)、Add RankLLM utility CLI commands (#363)、Add RankLLM FastAPI HTTP server (#364)、Add RankLLM MCP serve command (#365)、Add RankLLM legacy CLI wrappers (#366)、Document canonical RankLLM CLI and CI smoke checks (#367)",
+      "2026-03-27 有 \"Implement rank-llm CLI config defaults (#370)\" 与 \"Expand rank_llm CLI error taxonomy support (#371)\"",
+      "2026-03-31 有 \"Add per-request rerank overrides to HTTP server (#373)\"",
+      "2026-04-02 至 2026-04-04 有 #378、#379、#380 等后续 commit"
+    ],
+    "raw_excerpt": "Commits on Mar 26, 2026\ndocs: announce rank-llm CLI ronakice committed 8754de9\ndocs: remove outdated macOS warning ronakice committed baa5d0d\nSplit RankLLM API and MCP extras (#369) ronakice authored 22412e9\nDocument canonical RankLLM CLI and CI smoke checks (#367) ...\nAdd RankLLM legacy CLI wrappers (#366) ...\nAdd RankLLM MCP serve command (#365) ...\nAdd RankLLM FastAPI HTTP server (#364) ...\nAdd RankLLM utility CLI commands (#363) ..."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — src/rank_llm/cli 目录 commit 历史",
+    "url": "https://github.com/castorini/rank_llm/commits/main/src/rank_llm/cli",
+    "published_at": null,
+    "key_points": [
+      "src/rank_llm/cli 目录最早的相关 commit 出现在 2026-03-26（#367、#366、#365、#364、#363、#362、#361、#360 等）",
+      "该目录后续在 2026-03-27（#370、#371）、2026-03-31（#373）、2026-05-18（#385）、2026-05-30（#395）、2026-06-02（#391）、2026-08-29（#427）、2026-09-03（#432）、2026-09-29（#449）持续有 commit",
+      "2026-06-02 的 commit \"feat: add LiteLLM as listwise reranker for 100+ LLM providers (#391)\" 也修改了该 CLI 目录"
+    ],
+    "raw_excerpt": "Commits on Mar 26, 2026\nSplit RankLLM API and MCP extras (#369) ronakice authored 22412e9\nDocument canonical RankLLM CLI and CI smoke checks (#367) ...\nAdd RankLLM legacy CLI wrappers (#366) ...\nAdd RankLLM MCP serve command (#365) ...\nAdd RankLLM FastAPI HTTP server (#364) ...\nAdd RankLLM utility CLI commands (#363) ..."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "castorini/rank_llm — main 分支 commit 历史（全时段，最新在前）",
+    "url": "https://github.com/castorini/rank_llm/commits/main",
+    "published_at": null,
+    "key_points": [
+      "main 分支最新可见 commit 为 2026-10-12 \"docs: record onboarding reproduction results (#462)\"（4c586c2）",
+      "2026-10-05 有 \"Parameterized rerank_dataset_with_custom_index demo (#456)\"（1e6105b）",
+      "2026-10-04 有 \"Restore rank-llm rerank in the Colab onboarding guide. (#435)\"（e5f3ddc）与 \"Parameterized rerank_stored_retrieval_results.py (#455)\"（a025094）",
+      "2026-09-29 有 \"Use the rank-llm flag names in the README (#452)\"（f049ea9）与 \"fix(cli): validate direct rerank payloads (#449)\"（faf3774）",
+      "2026-08-30 有 \"Update the onboarding guides to use the new RankLLM CLI (#429)\"（a0f85a9）",
+      "2026-08-29 有 \"feat: bumped pyserini to v2.4.0 (#428)\"（a2...）"
+    ],
+    "raw_excerpt": "Commits on Oct 12, 2026\ndocs: record onboarding reproduction results (#462) MankyDanky authored 4c586c2\nCommits on Oct 5, 2026\nParameterized rerank_dataset_with_custom_index demo (#456) ...\nCommits on Oct 4, 2026\nRestore rank-llm rerank in the Colab onboarding guide. (#435) Evan-Lowry authored e5f3ddc\nCommits on Sep 29, 2026\nUse the rank-llm flag names in the README (#452) kuishou68 authored f049ea9\nfix(cli): validate direct rerank payloads (#449) ..."
+  }
+]

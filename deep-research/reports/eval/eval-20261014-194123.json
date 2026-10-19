@@ -1,0 +1,66 @@
+{
+  "n_questions": 3,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9583333333333334,
+  "mean_coverage": 0.8333333333333334,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9166666666666666,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9583333333333334,
+      "coverage": 0.5
+    },
+    "rag": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 1.0,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-agent-memory",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "计划点名 OpenAI、Anthropic、Google、Microsoft、AWS 五家，证据仅覆盖 Anthropic"
+      ]
+    },
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 31,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-graph-rag",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

@@ -92,7 +92,8 @@ async def get_mcp_tools() -> list[BaseTool]:
         tools: list[BaseTool] = []
         for name, params in servers.items():
             try:
-                client = MultiServerMCPClient({name: params})
+                # params 是运行时按 DR_MCP_SERVERS 构造的 dict，SDK 的联合类型无法静态覆盖
+                client = MultiServerMCPClient({name: params})  # type: ignore[dict-item]
                 server_tools = await client.get_tools()
                 tools.extend(server_tools)
                 logger.info("mcp server %s: loaded %d tools", name, len(server_tools))

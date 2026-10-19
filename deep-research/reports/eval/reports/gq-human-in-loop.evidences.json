@@ -1,0 +1,278 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Human-in-the-loop — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Human-in-the-loop",
+    "published_at": null,
+    "key_points": [
+      "HITL 被用于多个语境，可定义为「a model requiring human interaction」（需要人类交互的模型）。",
+      "HITL 与建模与仿真（M&S）中的 live/virtual/constructive 分类法相关联。",
+      "HITL 与相关的 human-on-the-loop 概念也被用于致命性自主武器（lethal autonomous weapons）语境。",
+      "在机器学习语境中，HITL 指人类协助计算机在构建模型时做出正确决策，通过选择最关键的、用于精炼模型的数据来改进机器学习（相较随机采样）。",
+      "HITL 在对话式 AI 中用于管理需要人类共情的复杂交互。"
+    ],
+    "raw_excerpt": "Human-in-the-loop (HITL) is used in multiple contexts. It can be defined as a model requiring human interaction. HITL is associated with modeling and simulation (M&S) in the live, virtual, and constructive taxonomy. HITL, along with the related human-on-the-loop, are also used in relation to lethal autonomous weapons. ... In machine learning, HITL is used in the sense of humans aiding the computer in making the correct decisions in building a model."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Article 14: Human Oversight — EU AI Act Explorer",
+    "url": "https://artificialintelligenceact.eu/article/14/",
+    "published_at": null,
+    "key_points": [
+      "EU AI Act 第14条要求高风险 AI 系统应以包含适当人机界面工具的方式设计与开发，使其在使用期间能够被自然人有效监督（effectively overseen by natural persons）。",
+      "人类监督的目标是预防或最小化高风险 AI 系统按预期用途使用时可能出现的对健康、安全或基本权利的风险。",
+      "该条款将 human oversight 定位为对高风险 AI 系统的强制性设计与开发要求，而非可选的交互模式。"
+    ],
+    "raw_excerpt": "High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which they are in use. ... Human oversight shall aim to prevent or minimise the risks to health, safety or fundamental rights that may emerge when a high-risk AI system is used in accordance with its intended purpose."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "LangGraph — Interrupts (Human-in-the-loop)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 的 HITL 原语是 interrupt() 函数，可在图节点内任意位置调用，接受任意 JSON 可序列化值并暴露给调用方。",
+      "interrupt 是动态的（dynamic），可放在代码任意位置并基于应用逻辑条件触发；区别于静态断点（static breakpoints，仅在特定节点前/后暂停）。",
+      "触发 interrupt 时 LangGraph 通过持久化层（checkpointer）保存图状态，并无限期等待直到恢复执行。",
+      "恢复方式：用 Command(resume=...) 重新调用图，该值成为节点内 interrupt() 调用的返回值。",
+      "持久化机制依赖 checkpointer；生产环境应使用持久化 checkpointer（如数据库支持）。thread_id 是持久游标：复用同一 thread_id 恢复同一 checkpoint，新值则开启全新线程与空状态。",
+      "配置形态：config={\"configurable\": {\"thread_id\": ...}} 告知 checkpointer 加载哪个状态。",
+      "中断载荷通过事件流暴露：graph.stream_events(..., version=\"v3\") 时出现在 stream.interrupts，stream.interrupted 为 True 表示因等待输入而暂停；默认 invoke() API 下出现在 __interrupt__ 下。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing... When an interrupt is triggered, LangGraph saves the graph state using its persistence layer and waits indefinitely until you resume execution... Unlike static breakpoints (which pause before or after specific nodes), interrupts are dynamic... The thread_id you choose is effectively your persistent cursor. Reusing it resumes the same checkpoint; using a new value starts a brand-new thread with an empty state."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "OpenAI Agents SDK — Human-in-the-loop",
+    "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Agents SDK 的 HITL 流程用于暂停 agent 执行，直到人工批准或拒绝敏感工具调用。",
+      "工具通过声明 needs_approval 表明需要审批：设为 True 表示始终需要审批，或提供 async 函数按调用逐次判定。该 callable 接收 run context、解析后的工具参数与 tool call ID。",
+      "审批面是 run 级别的（run-wide），不限于当前顶层 agent：工具属于当前 agent、经 handoff 到达的 agent、或嵌套 Agent.as_tool() 执行时，同一模式均适用。",
+      "嵌套 Agent.as_tool() 场景下，中断仍在外层 run 上浮现，需在外层 RunState 上批准/拒绝并恢复原始顶层 run。",
+      "Agent.as_tool() 可在两层发生审批：agent 工具本身可通过 Agent.as_tool(..., needs_approval=...) 要求审批，嵌套 agent 内部的工具也可在嵌套 run 启动后自行发起审批，两者都通过同一外层 run 中断流处理。",
+      "RunState 允许序列化被暂停的 run，并在决策做出后恢复。",
+      "callable 审批规则在 SDK 无法安全解析参数时 fail closed（参数缺失、为空、仅空白、JSON 畸形、合法 JSON 但非对象如 null/list、含 NaN/Infinity/-Infinity 等非标准常量时，callable 不被调用，该调用需人工审批）。",
+      "除手动中断审批外，部分工具类型还支持程序化审批回调（programmatic approval callbacks），使 run 无需暂停即可继续。"
+    ],
+    "raw_excerpt": "Use the human-in-the-loop (HITL) flow to pause agent execution until a person approves or rejects sensitive tool calls. Tools declare when they need approval, run results surface pending approvals as interruptions, and RunState lets you serialize paused runs and resume them after decisions are made... Callable approval rules fail closed when the SDK cannot safely inspect the arguments."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "AutoGen AgentChat — Human-in-the-Loop",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/human-in-the-loop.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen AgentChat 提供两种与团队交互的方式：(1) 在 run()/run_stream() 执行期间通过 UserProxyAgent 提供反馈；(2) run 终止后，通过下一次 run()/run_stream() 的输入提供反馈。",
+      "UserProxyAgent 是内置的特殊 agent，作为用户的代理向团队提供反馈；团队决定何时调用它。",
+      "在 RoundRobinGroupChat 中 UserProxyAgent 按传入团队的顺序被调用；在 SelectorGroupChat 中由 selector prompt 或 selector 函数决定何时调用。",
+      "UserProxyAgent 在 run 期间被调用时会阻塞团队执行，直到用户提供反馈或报错；这会使团队处于无法保存或恢复的不稳定状态（cannot be saved or resumed）。",
+      "由于阻塞特性，官方建议仅用于需要即时反馈的短交互，例如按钮点击式批准/拒绝，或需立即关注否则任务失败的告警。",
+      "示例用 TextMentionTermination(\"APPROVE\") 作为终止条件，用户说 APPROVE 时结束对话。"
+    ],
+    "raw_excerpt": "When UserProxyAgent is called during a run, it blocks the execution of the team until the user provides feedback or errors out. This will hold up the team's progress and put the team in an unstable state that cannot be saved or resumed. Due to the blocking nature of this approach, it is recommended to use it only for short interactions that require immediate feedback from the user, such as asking for approval or disapproval with a button click."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "CrewAI — Tasks (human_input attribute)",
+    "url": "https://docs.crewai.com/en/concepts/tasks",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 的 Task 提供 human_input 属性（Optional[bool]），表示该任务是否应由人工审查 agent 的最终答案，默认 False。",
+      "Task 还提供 guardrail / guardrails 属性（Callable 或 List[Callable]），用于在进入下一任务前验证任务输出，guardrail_max_retries 控制验证失败时的最大重试次数（默认 3）。",
+      "Task 提供 callback 属性（Any），为任务完成后执行的函数/对象。",
+      "任务执行流程有两种：Sequential（按定义顺序执行）与 Hierarchical（按角色与专长分配 agent），在创建 Crew 时通过 process 参数定义。"
+    ],
+    "raw_excerpt": "Human Input (optional) human_input Optional[bool] Whether the task should have a human review the final answer of the agent. Defaults to False... Guardrail (optional) guardrail Optional[Callable] Function to validate task output before proceeding to next task."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "LlamaIndex Workflows — Introduction (event-driven steps)",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/workflow/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex Workflows 是事件驱动、基于 step 的执行流控制模型：step 接收一个 event，做工作，返回另一个 event，返回的 event 触发下一个类型注解可接受它的 step。",
+      "文档明确列出 step 可执行的动作包括：调用 LLM、运行检索、请求人工输入（ask for human input）、更新共享状态、派发一批工作。",
+      "Workflows 库可独立安装（pip install llama-index-workflows）；llama-index-core 自带 Workflows，可通过 llama_index.core.workflow 导入。",
+      "Workflows 以 async 为一等公民，假设运行在 async 环境。",
+      "分支是普通 if 语句返回不同 event 类型；循环是返回被更早 step 处理的 event；并发工作是返回 list[Event] 的 step 配合接受 list[Event] 的 step；需要动态流时可直接从 Context 发送 event。"
+    ],
+    "raw_excerpt": "A step can call an LLM, run retrieval, ask for human input, update shared state, or dispatch a batch of work. The event types describe the edges of the workflow, and regular Python describes the logic inside each edge."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "cordum-io/cordum — The action firewall for AI agents (Agent Control Plane)",
+    "url": "https://github.com/cordum-io/cordum",
+    "published_at": null,
+    "key_points": [
+      "Cordum 自我定位为「The action firewall for AI agents」，在风险性工具调用、shell 命令、工作流和生产变更执行前强制策略与人工审批，并保留可审计证据（auditable evidence）。",
+      "仓库描述明确其核心机制为「Enforce policy and human approval before risky tool calls, shell commands, workflows, and production changes」——即审批发生在动作执行之前（pre-execution gate）。",
+      "README 正文说明其包含 Cordum Edge，定位为面向 Claude Code 及其他本地 AI-agent 动作的「Compliance Firewall」。",
+      "系统架构包含独立的 Safety Kernel（gRPC，端口 50051）与 Context Engine（gRPC，端口 50400），以及 API gateway、scheduler、workflow engine、dashboard、NATS、TLS-secured Redis 等组件。",
+      "部署后内置 smoke test（platform_smoke.sh）会创建一个 approval-gated workflow、启动一次 run、批准该 gate，并校验 run 达到 succeeded 状态——证明审批门（approval gate）是工作流的一等原语。",
+      "README 提供 Helm chart（cordum-helm）与 docker-compose 多环境配置（dev / enterprise override / HA / release），并支持 cosign keyless OIDC 镜像签名验证，面向生产部署。",
+      "仓库包含 GOVERNANCE.md、SECURITY.md、ADOPTERS.md、BENCHMARKS.md 等治理与合规相关文档，暗示其面向受监管/企业环境。",
+      "该仓库 stars 约 509、最近 push 时间 2026-10-06（来自检索元数据），表明 2024-2026 期间此类「审批防火墙」工具处于活跃开发状态。"
+    ],
+    "raw_excerpt": "The action firewall for AI agents. Enforce policy and human approval before risky tool calls, shell commands, workflows, and production changes, with auditable evidence. ... Includes Cordum Edge — a Compliance Firewall for Claude Code and other local AI-agent actions. ... a post-deploy smoke test that exercises a real approval workflow ... creates an approval-gated workflow, starts a run, approves the gate, and checks the run reaches `succeeded`."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Guidelines for Human-AI Interaction (Amershi et al., CHI 2019) — Microsoft Research publication page",
+    "url": "https://www.microsoft.com/en-us/research/publication/guidelines-for-human-ai-interaction/",
+    "published_at": "2019-05",
+    "key_points": [
+      "作者为 Saleema Amershi, Dan Weld, Mihaela Vorvoreanu, Adam Fourney, Besmira Nushi, Penny Collisson, Jina Suh, Shamsi Iqbal, Paul Bennett, Kori Inkpen, Jaime Teevan, Ruth Kikin-Gil, Eric Horvitz，发表于 CHI 2019，获 CHI 2019 Honorable Mention Award。",
+      "论文提出 18 条「generally applicable design guidelines for human-AI interaction」。",
+      "这些 guideline 经过多轮评估验证，包括一项有 49 名设计从业者参与、针对 20 款流行 AI 产品的用户研究。",
+      "论文自述其定位是综合了 HCI 社群二十余年的相关原则讨论（'Principles for human-AI interaction have been discussed in the human-computer interaction community for over two decades'）。",
+      "该 guideline 集合被定位为面向从业者的设计资源，而非自动化等级（levels of automation）的量化分级框架。"
+    ],
+    "raw_excerpt": "We propose 18 generally applicable design guidelines for human-AI interaction. These guidelines are validated through multiple rounds of evaluation including a user study with 49 design practitioners who tested the guidelines against 20 popular AI-infused products."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "HAX Design Library — the 18 Guidelines for Human-AI Interaction (Microsoft HAX Toolkit)",
+    "url": "https://www.microsoft.com/en-us/haxtoolkit/library/guidelines/",
+    "published_at": null,
+    "key_points": [
+      "HAX Design Library 是 18 条 Guidelines for Human-AI Interaction 的交互式集合，配有 design patterns 与 examples。",
+      "18 条 guideline 的完整标题为：G1 Make clear what the system can do; G2 Make clear how well the system can do what it can do; G3 Time services based on context; G4 Show contextually relevant information; G5 Match relevant social norms; G6 Mitigate social biases; G7 Support efficient invocation; G8 Support efficient dismissal; G9 Support efficient correction; G10 Scope services when in doubt; G11 Make clear why the system did what it did; G12 Remember recent interactions; G13 Learn from user behavior; G14 Update and adapt cautiously; G15 Encourage granular feedback; G16 Convey the consequences of user actions; G17 Provide global controls; G18 Notify users about changes。",
+      "与人类监督/控制直接相关的条目包括 G7（支持高效调用）、G8（支持高效撤销）、G9（支持高效纠正）、G15（鼓励细粒度反馈）、G17（提供全局控制）、G18（变更通知）。",
+      "该 guideline 集合按目标（Goals）分类，包含 Appropriate reliance、Fairness、Personalization、Reliability、Transparency 等。"
+    ],
+    "raw_excerpt": "Interactive collection of the 18 Guidelines for Human-AI Interaction, with design patterns for applying them and examples. ... G7: Support efficient invocation. G8: Support efficient dismissal. G9: Support efficient correction. ... G17: Provide global controls. G18: Notify users about changes."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "HAX Toolkit overview — positioning of the Guidelines within the human-centered AI design lifecycle",
+    "url": "https://www.microsoft.com/en-us/haxtoolkit/",
+    "published_at": null,
+    "key_points": [
+      "HAX Toolkit 面向构建面向用户 AI 产品的团队，用于在设计流程早期概念化 AI 系统将做什么以及将如何行为。",
+      "工具链包含四部分：Guidelines for Human-AI Interaction（行为最佳实践）、HAX Design Library（模式与示例）、HAX Workbook（团队优先级规划）、HAX Playbook（针对 NLP 应用的失败场景规划）。",
+      "Guidelines 被描述为规定「an AI system should behave」的规范性行为准则，而非自动化程度的等级划分。"
+    ],
+    "raw_excerpt": "Guidelines for Human-AI Interaction — Best practices for how AI systems should behave during interaction. Use them to guide your AI product planning."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "What are Filters? — Semantic Kernel (Microsoft Learn)",
+    "url": "https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/filters",
+    "published_at": null,
+    "key_points": [
+      "Semantic Kernel 提供三类 filter：Function Invocation Filter、Prompt Render Filter、Auto Function Invocation Filter。",
+      "Function Invocation Filter 在每次 KernelFunction 被调用时执行，可访问函数及其参数信息、处理执行异常、在调用前或调用后覆盖函数结果（如缓存、负责任 AI 场景）、以及在失败时重试函数（如切换到备用 AI 模型）。",
+      "Prompt Render Filter 在 prompt 渲染操作前触发，可查看/修改将发送给 AI 的 prompt（如 RAG、PII 脱敏），也可通过覆盖函数结果阻止 prompt 提交给 AI（如语义缓存）。",
+      "Auto Function Invocation Filter 在自动函数调用范围内运行，提供额外上下文，包括 chat history、待执行的全部函数列表以及迭代计数器，并允许终止自动函数调用流程（例如在三个计划函数中的第二个就得到所需结果时）。",
+      "每个 filter 都包含一个 context 对象，携带函数执行或 prompt 渲染的相关信息。",
+      "文档指出 filters 用于在审批流程开始前校验权限（'filters are leveraged to validate permissions before an approval flow begins'），即 filter 可作为审批流程的前置控制点。"
+    ],
+    "raw_excerpt": "There are three types of filters: Function Invocation Filter ... Prompt Render Filter ... Auto Function Invocation Filter - similar to the function invocation filter, this filter operates within the scope of automatic function calling, providing additional context, including chat history, a list of all functions to be executed, and iteration counters. It also allows termination of the auto function calling process (e.g., if a desired result is obtained from the second of three planned functions)."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Function calling with chat completion — Semantic Kernel (Microsoft Learn)",
+    "url": "https://learn.microsoft.com/en-us/semantic-kernel/concepts/ai-services/chat-completion/function-calling/",
+    "published_at": "2023-07-12",
+    "key_points": [
+      "Semantic Kernel 中 auto function calling 是默认行为，也可选择手动调用函数。",
+      "auto function calling 的循环为 6 步：(1) 用 JSON schema 序列化 kernel 中所有可用函数及其输入参数；(2) 将序列化函数与当前 chat history 作为输入发送给模型；(3) 模型处理输入并生成响应，响应可能是 chat message 或一个/多个 function call；(4) 若为 chat message 则返回调用方，若为 function call 则提取函数名与参数；(5) 用提取的函数名与参数在 kernel 中调用该函数；(6) 将函数结果作为 chat history 的一部分回传给模型。",
+      "步骤 2-6 会重复执行，直到模型返回 chat message 或达到最大迭代次数（max iteration number）。",
+      "文档以 OrderPizzaPlugin 为例，包含 get_pizza_menu、add_pizza_to_cart、remove_pizza_from_cart、get_pizza_from_cart、get_cart、checkout 等函数，C# 中用 [KernelFunction(\"...\")] 与 [Description(...)] 标注。"
+    ],
+    "raw_excerpt": "The result of the function is then sent back to the model as part of the chat history. Steps 2-6 are then repeated until the model returns a chat message or the max iteration number has been reached."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "run-llama/template-workflow-human-in-the-loop — src/human_in_the_loop/workflow.py",
+    "url": "https://raw.githubusercontent.com/run-llama/template-workflow-human-in-the-loop/main/src/human_in_the_loop/workflow.py",
+    "published_at": null,
+    "key_points": [
+      "官方模板从 workflows.events 导入 StartEvent、StopEvent、InputRequiredEvent、HumanResponseEvent 四个事件类，用于构建 human-in-the-loop 工作流。",
+      "自定义事件通过继承实现：FlightSearchEvent(InputRequiredEvent) 携带 candidate_flights 字段；FlightChoiceEvent(HumanResponseEvent) 携带 chosen_flight 与 continue_booking 字段。",
+      "步骤函数通过类型注解声明输入/输出事件，例如 search_for_flight 返回 StopEvent | FlightSearchEvent，chosen_flight 接收 FlightChoiceEvent 并返回 StopEvent。",
+      "步骤可注入 Context 参数（ctx: Context）以及通过 Annotated[..., Resource(get_llm)] 注入资源。",
+      "运行方式：handler = w.run(message=message)，然后 async for ev in handler.stream_events() 流式消费事件；当收到 FlightSearchEvent 时向用户提问。",
+      "人工响应通过 handler.ctx.send_event(FlightChoiceEvent(...)) 回送到工作流，而非直接返回值。",
+      "Workflow 实例化时可传 timeout 与 verbose 参数，例如 FlightSearchWorkflow(timeout=100, verbose=False)。"
+    ],
+    "raw_excerpt": "from workflows.events import (StartEvent, StopEvent, InputRequiredEvent, HumanResponseEvent,) ... class FlightSearchEvent(InputRequiredEvent): candidate_flights: list[str] ... class FlightChoiceEvent(HumanResponseEvent): chosen_flight: str continue_booking: bool ... handler = w.run(message=message) async for ev in handler.stream_events(): if isinstance(ev, FlightSearchEvent): ... handler.ctx.send_event(FlightChoiceEvent(chosen_flight=\"\", continue_b"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LlamaIndex Workflows — Introduction (官方文档)",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/workflow/",
+    "published_at": null,
+    "key_points": [
+      "Workflow 是事件驱动、基于步骤的执行流控制模型：每个 step 接收一个事件、执行工作、返回另一个事件，返回的事件触发下一个接受该类型的 step。",
+      "官方文档明确列出 step 可以做的事包括 'ask for human input'（请求人工输入），即 HITL 是 Workflow 的一等能力。",
+      "分支是普通 if 语句返回不同事件类型；循环是返回被更早 step 处理的事件；并发是返回 list[Event] 并由接受 list[Event] 的 step 处理。",
+      "当流程需要动态化时，可以直接从 Context 发送事件（'you can send events directly from the Context'）。",
+      "Workflows 库可独立安装（pip install llama-index-workflows），llama-index-core 也内置；为保持 API 稳定，通过 llama-index-core 安装时导入路径为 llama_index.core.workflow。",
+      "Workflows 以 async 为一等公民，官方建议使用单一 async 入口点（asyncio.run(main())）。"
+    ],
+    "raw_excerpt": "A step receives an event, does some work, and returns another event. That returned event triggers the next step whose type annotation accepts it. ... A step can call an LLM, run retrieval, ask for human input, update shared state, or dispatch a batch of work. ... When the flow needs to become dynamic, you can send events directly from the Context."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Managing State — AutoGen AgentChat User Guide (microsoft/autogen)",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/state.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 提供 save_state() 与 load_state() 方法，可保存/加载 agent、team 以及 termination condition 的状态。",
+      "对 team 调用 save_state 时，会一并保存团队中所有 agent 的状态。",
+      "文档给出的动机场景是 Web 应用：无状态端点响应请求时需要从持久化存储中加载应用状态。",
+      "AssistantAgent 的状态内容为其 model_context（LLM 消息历史）；示例中保存的状态包含 type='AssistantAgentState'、version='1.0.0' 与 llm_messages 列表。",
+      "自定义 agent 可覆写 save_state()/load_state() 以定制行为，默认实现保存和加载空状态。"
+    ],
+    "raw_excerpt": "In many cases, it is useful to save the state of these components to disk and load them back later. This is particularly useful in a web application where stateless endpoints respond to requests and need to load the state of the application from persistent storage. ... When we call save_state on a team, it saves the state of all the agents in the team."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Human-in-the-Loop — AutoGen AgentChat User Guide (microsoft/autogen)",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/human-in-the-loop.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 文档将人机交互分为两种主要方式：一是在团队 run()/run_stream() 执行期间通过 UserProxyAgent 提供反馈；二是在 run 终止之后，通过下一次 run()/run_stream() 调用的输入提供反馈。",
+      "UserProxyAgent 是内置的特殊 agent，作为用户的代理向团队提供反馈，需在运行前加入团队；团队自行决定何时调用它（RoundRobinGroupChat 按传入顺序，SelectorGroupChat 由 selector prompt/函数决定）。",
+      "官方明确警告：UserProxyAgent 在 run 期间被调用时会阻塞团队执行直到用户提供反馈或报错，这会拖住团队进度并使团队进入「无法保存或恢复」的不稳定状态。",
+      "由于阻塞特性，官方建议 UserProxyAgent 仅用于需要用户立即反馈的短交互，例如按钮点击式的批准/否决，或需要立即关注否则任务失败的告警。",
+      "文档提供了与 Web/UI 框架集成的代码示例链接：AgentChat + FastAPI、AgentChat + ChainLit、AgentChat + Streamlit。"
+    ],
+    "raw_excerpt": "There are two main ways to interact with the team from your application: During a team's run – execution of run() or run_stream(), provide feedback through a UserProxyAgent. Once the run terminates, provide feedback through input to the next call to run() or run_stream(). ... Note: When UserProxyAgent is called during a run, it blocks the execution of the team until the user provides feedback or errors out. This will hold up the team's progress and put the team in an unstable state that cannot be saved or resumed."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "EU AI Act Article 14: Human Oversight (AI Act Explorer)",
+    "url": "https://artificialintelligenceact.eu/article/14/",
+    "published_at": null,
+    "key_points": [
+      "第14条标题为 'Human Oversight'（人工监督），适用于高风险 AI 系统。",
+      "第14条第1款要求：高风险 AI 系统应被设计和开发为（包括配备适当的人机界面工具）能够在其使用期间被自然人有效监督。",
+      "第14条第2款要求：人工监督应旨在预防或最小化在按预期用途使用高风险 AI 系统时可能出现的对健康、安全或基本权利的风险。",
+      "该条生效时间：Annex III 下的高风险系统为 2027年12月2日；Annex I 下的高风险系统为 2028年8月2日（依据第113(c)条）。",
+      "该条关联 recital 66 与 recital 73。"
+    ],
+    "raw_excerpt": "Article 14 : Human Oversight ... 1. High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which they are in use. 2. Human oversight shall aim to prevent or minimise the risks to health, safety or fundamental rights ... Comes into force 2 December 2027 (high-risk under Annex III) / 2 August 2028 (high-risk under Annex I), according to Article 113(c)"
+  }
+]

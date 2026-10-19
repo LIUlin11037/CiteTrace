@@ -1,0 +1,579 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Effective context engineering for AI agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "published_at": "2025-09-29",
+    "key_points": [
+      "Anthropic 将 context 定义为「采样 LLM 时所包含的 token 集合」（the set of tokens included when sampling from a large-language model）。",
+      "Anthropic 将 context engineering 定义为「在 LLM 推理过程中，策展与维护最优 token（信息）集合的策略集合，包括提示词之外所有可能进入上下文的信息」。",
+      "Anthropic 明确把 context engineering 定位为 prompt engineering 的「自然演进」（natural progression），而非替代。",
+      "Anthropic 界定 prompt engineering 为「为获得最优结果而撰写与组织 LLM 指令的方法」，其重点是写好提示词、尤其是系统提示。",
+      "Anthropic 指出，随着 agent 在多轮推理与更长时域上运行，需要管理「整个上下文状态」，并明确列举其组成：system instructions、tools、Model Context Protocol (MCP)、external data、message history。",
+      "Anthropic 强调 context engineering 是迭代式的（iterative），策展阶段在每次决定向模型传入什么时都会发生，区别于写提示词这一离散任务。",
+      "Anthropic 提出 context 是有限资源，存在边际收益递减，并引用 needle-in-a-haystack 基准中的 context rot 现象：上下文 token 数增加时模型准确召回信息的能力下降。",
+      "Anthropic 用「attention budget（注意力预算）」类比人类有限工作记忆，说明每引入一个新 token 都会消耗该预算。"
+    ],
+    "raw_excerpt": "Context engineering refers to the set of strategies for curating and maintaining the optimal set of tokens (information) during LLM inference, including all the other information that may land there outside of the prompts. ... we need strategies for managing the entire context state (system instructions, tools, Model Context Protocol (MCP), external data, message history, etc). ... Context engineering is the art and science of curating what will go into the limited context window from that constantly evolving universe of possible information."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Context Engineering (LangChain Blog)",
+    "url": "https://blog.langchain.com/context-engineering-for-agents/",
+    "published_at": "2025-07-02",
+    "key_points": [
+      "LangChain 将 context engineering 定义为「在 agent 轨迹的每一步，用恰到好处的信息填充上下文窗口的艺术与科学」。",
+      "LangChain 引用 Andrej Karpathy 的类比：LLM 像新型操作系统，LLM 是 CPU、上下文窗口是 RAM（工作记忆），context engineering 扮演类似操作系统策展 RAM 内容的角色。",
+      "LangChain 引用 Karpathy 对 context engineering 的表述：「为下一步填充恰到好处信息的精妙艺术与科学」。",
+      "LangChain 将 context engineering 定位为覆盖多种上下文类型的「伞形（umbrella）」概念，并列出三类常见上下文：Instructions（提示词、记忆、few-shot 示例、工具描述等）、Knowledge（事实、记忆等）、Tools（工具调用的反馈）。",
+      "LangChain 引用 Drew Breunig 归纳的长上下文导致性能问题的四类失效模式：Context Poisoning（幻觉进入上下文）、Context Distraction（上下文淹没训练分布）、Context Confusion（多余上下文影响回答）、Context Clash（上下文各部分相互矛盾）。",
+      "LangChain 引用 Cognition 的观点：「context engineering 实际上是构建 AI agent 工程师的头号工作（#1 job）」。",
+      "LangChain 将 agent 上下文工程的常见策略归为四类：write（写入）、select（选择）、compress（压缩）、isolate（隔离）。",
+      "LangChain 指出 agent 交错进行 LLM 调用与工具调用，长任务与工具反馈累积会消耗大量 token，可能导致超出上下文窗口、成本/延迟膨胀或性能下降。"
+    ],
+    "raw_excerpt": "Context engineering is the art and science of filling the context window with just the right information at each step of an agent's trajectory. ... Context engineering as an umbrella that applies across a few different context types: Instructions – prompts, memories, few-shot examples, tool descriptions, etc; Knowledge – facts, memories, etc; Tools – feedback from tool calls. ... We group common strategies for agent context engineering into four buckets — write, select, compress, and isolate."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Context engineering (LangChain Docs)",
+    "url": "https://docs.langchain.com/oss/python/langchain/context-engineering",
+    "published_at": null,
+    "key_points": [
+      "LangChain 官方文档将 context engineering 定义为「以正确格式提供正确的信息与工具，使 LLM 能完成任务」，并称其为 AI 工程师的头号工作。",
+      "文档指出 agent 失败的两大原因：底层 LLM 能力不足，或「正确的」上下文未被传给 LLM；并称后者更常导致 agent 不可靠。",
+      "文档将 agent 循环拆为两步：Model call（带提示词与可用工具调用 LLM，返回响应或工具执行请求）与 Tool execution（执行工具并返回结果）。",
+      "文档将上下文按可控性分为三类：Model Context（进入模型调用的内容：instructions、message history、tools、response format）、Tool Context（工具可读写的内容：state、store、runtime context）、Life-cycle Context（模型与工具调用之间发生的事：summarization、guardrails、logging）。",
+      "文档区分 transient context（单次调用 LLM 所见，可修改 messages/tools/prompts 而不改变 state）与 persistent context（跨轮次保存在 state 中，由生命周期钩子与工具写入永久修改）。",
+      "文档列出 agent 访问的数据源三类：Runtime Context（静态配置，会话级，如 user ID、API keys、权限）、State（短期记忆，会话级，如当前消息、上传文件、工具结果）、Store（长期记忆，跨会话，如用户偏好、提取的洞察、历史数据）。",
+      "文档明确列出 Model Context 的组成：System Prompt（开发者给 LLM 的基础指令）、Messages（发送给 LLM 的完整消息/对话历史）、Tools（agent 可用于采取行动的工具）、Model（被调用的实际模型及配置）、Response Format（模型最终响应的 schema 规范）。",
+      "文档指出上述各类 model context 均可取自 state（短期记忆）、store（长期记忆）或 runtime context（静态配置）。"
+    ],
+    "raw_excerpt": "Context engineering is providing the right information and tools in the right format so the LLM can accomplish a task. This is the number one job of AI Engineers. ... Model Context: What goes into model calls (instructions, message history, tools, response format). ... System Prompt: Base instructions from the developer to the LLM. Messages: The full list of messages (conversation history) sent to the LLM. Tools: Utilities the agent has access to for taking actions. Model: The actual model (including configuration) to be called. Response Format: Schema specification for the model's final response."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Language Models are Few-Shot Learners (GPT-3)",
+    "url": "https://arxiv.org/abs/2005.14165v4",
+    "published_at": "2020-05-28",
+    "key_points": [
+      "提出并验证了 few-shot / in-context learning 范式：GPT-3（1750 亿参数）在推理时不做任何梯度更新或微调，任务与少量示例完全通过文本交互（prompt）指定。",
+      "few-shot 性能随模型规模放大而显著提升，有时可与当时的微调 SOTA 相竞争。",
+      "论文同时指出 GPT-3 的 few-shot 学习在某些数据集上仍然表现挣扎，并存在与大规模网络语料训练相关的方法论问题。",
+      "该工作把「通过提示文本指定任务」确立为一种无需参数更新的任务适配方式，是提示词工程范式的奠基性来源。"
+    ],
+    "raw_excerpt": "For all tasks, GPT-3 is applied without any gradient updates or fine-tuning, with tasks and few-shot demonstrations specified purely via text interaction with the model. ... we also identify some datasets where GPT-3's few-shot learning still struggles"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    "url": "https://arxiv.org/abs/2201.11903v6",
+    "published_at": "2022-01-28",
+    "key_points": [
+      "提出 chain-of-thought (CoT) prompting：在提示中提供少量包含中间推理步骤的示例（few chain of thought demonstrations as exemplars）。",
+      "CoT 在算术、常识与符号推理任务上提升了大语言模型的表现。",
+      "具体结果：用仅 8 个 CoT 示例提示 540B 参数模型，在 GSM8K 数学应用题基准上达到当时 SOTA，超过带 verifier 的微调 GPT-3。",
+      "CoT 推理能力在足够大的模型中「自然涌现」（emerge naturally in sufficiently large language models）。"
+    ],
+    "raw_excerpt": "prompting a 540B-parameter language model with just eight chain of thought exemplars achieves state of the art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "url": "https://arxiv.org/abs/2210.03629v3",
+    "published_at": "2022-10-06",
+    "key_points": [
+      "提出 ReAct：让 LLM 以交错（interleaved）方式同时生成推理轨迹（reasoning traces）与任务特定动作（actions）。",
+      "推理轨迹帮助模型归纳、跟踪、更新行动计划并处理异常；动作使模型能对接外部来源（如知识库或环境）以获取额外信息。",
+      "在 HotpotQA 问答与 Fever 事实验证上，ReAct 通过与简单 Wikipedia API 交互，克服了 CoT 推理中普遍存在的幻觉与错误传播问题。",
+      "在两个交互式决策基准 ALFWorld 与 WebShop 上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅用一到两个 in-context 示例提示。"
+    ],
+    "raw_excerpt": "we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner ... actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "url": "https://arxiv.org/abs/2307.03172v3",
+    "published_at": "2023-07-06",
+    "key_points": [
+      "研究语言模型对长输入上下文的使用能力，任务为多文档问答与键值检索（均需在输入上下文中定位相关信息）。",
+      "发现当相关信息在上下文中的位置改变时，模型性能会显著下降，说明当前语言模型无法稳健利用长输入上下文中的信息。",
+      "性能通常在相关信息位于上下文开头或结尾时最高，而当模型必须访问长上下文中间的信息时性能显著退化——即使对显式支持长上下文的模型也是如此。",
+      "该结果直接支撑「上下文窗口/长上下文利用」是提示词工程的一项公认局限。"
+    ],
+    "raw_excerpt": "we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Meirtz/Awesome-Context-Engineering — README（上下文工程综述资源库）",
+    "url": "https://github.com/Meirtz/Awesome-Context-Engineering",
+    "published_at": null,
+    "key_points": [
+      "该仓库自我定位为「Context Engineering 的综合综述与资源集合」，描述其主题为「从静态提示（static prompting）到动态、上下文感知的 AI 系统的演进」，并进一步延伸到 agent runtime、记忆系统、协议、编码 agent 与可观测性栈。",
+      "README 明确将上下文工程与提示词工程对立表述：『Unlike traditional prompt engineering, context engineering encompasses the complete information payload provided to LLMs at inference time, including all structured informational components necessary for plausible task completion.』即上下文工程覆盖推理时提供给 LLM 的完整信息载荷，而非仅提示词本身。",
+      "README 给出该领域局限性的动机表述：『the limitations of static prompting have become increasingly apparent』，并将上下文工程定位为应对 LLM 不确定性、实现生产级 AI 部署的「自然演进」。",
+      "README 声明其配套综述论文已发表，arXiv 编号为 2507.13334，标题为 'A Survey of Context Engineering for Large Language Models'，并给出 Hugging Face Papers 链接。",
+      "README 记录了 2026 年 3 月的立场更新：『As of March 2026, context engineering remains a useful and necessary concept, but it is no longer the whole story.』重心已从『如何打包最好的提示词』转向 agent 系统如何管理运行时状态、记忆、工具、协议、审批与长时程执行。",
+      "README 列出该仓库保留的原始综述结构涵盖：long context、RAG、memory、agent communication、tool use、evaluation、applications；并新增 agent harness、生产环境上下文管理（compaction、caching、artifact-backed context、scoped instruction loading）、记忆工件与可移植性、开放协议（MCP、A2A、AG-UI、ACP）等主题。",
+      "仓库元数据（来自搜索结果）：stars 3326，forks 293，最近 push 时间 2026-05-28。"
+    ],
+    "raw_excerpt": "Unlike traditional prompt engineering, context engineering encompasses the complete information payload provided to LLMs at inference time, including all structured informational components necessary for plausible task completion. ... As of March 2026, context engineering remains a useful and necessary concept, but it is no longer the whole story. The center of gravity has shifted from \"how to pack the best prompt\" to how agent systems manage runtime state, memory, tools, protocols, approvals, and long-horizon execution."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "MemGPT: Towards LLMs as Operating Systems",
+    "url": "https://arxiv.org/abs/2310.08560v2",
+    "published_at": "2023-10-12",
+    "key_points": [
+      "MemGPT 提出 'virtual context management'（虚拟上下文管理），借鉴传统操作系统的分层内存系统，通过在快/慢内存之间移动数据，营造出比实际更大的内存资源。",
+      "MemGPT 在 LLM 有限的上下文窗口内智能管理不同的内存层级（memory tiers），以提供扩展上下文。",
+      "MemGPT 使用 interrupts（中断）来管理其与用户之间的控制流。",
+      "论文在两个领域评估该 OS 启发式设计：文档分析（可分析远超底层 LLM 上下文窗口的大文档）与多轮会话聊天（可创建在长期交互中记忆、反思、演化的对话代理）。",
+      "论文代码与数据发布于 https://memgpt.ai（即后续 Letta 项目的前身）。"
+    ],
+    "raw_excerpt": "we propose virtual context management, a technique drawing inspiration from hierarchical memory systems in traditional operating systems that provide the appearance of large memory resources through data movement between fast and slow memory. Using this technique, we introduce MemGPT (Memory-GPT), a system that intelligently manages different memory tiers in order to effectively provide extended context within the LLM's limited context window, and utilizes interrupts to manage control flow between itself and the user."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "A Survey of Context Engineering for Large Language Models (arXiv:2507.13334, abs page)",
+    "url": "https://arxiv.org/abs/2507.13334",
+    "published_at": "2025-07-17",
+    "key_points": [
+      "论文标题为 'A Survey of Context Engineering for Large Language Models'，arXiv 编号 2507.13334，分类 cs.CL（Computation and Language）。",
+      "作者共 15 位：Lingrui Mei, Jiayu Yao, Yuyao Ge, Yiwei Wang, Baolong Bi, Yujun Cai, Jiazhi Liu, Mingyu Li, Zhong-Zhi Li, Duzhen Zhang, Chenlin Zhou, Jiayi Mao, Tianze Xia, Jiafeng Guo, Shenghua Liu。",
+      "提交时间：v1 于 2025-07-17 提交，v2（最新版本）于 2025-07-21 修订。",
+      "Comments 字段标注：ongoing work; 166 pages, 1411 citations（166 页，1411 条引用）。",
+      "摘要核心主张：LLM 的性能根本上由推理时提供的上下文信息决定；本综述提出 Context Engineering 作为一门超越简单提示词设计的正式学科，涵盖对 LLM 信息载荷的系统性优化。",
+      "摘要指出该综述系统分析了超过 1400 篇研究论文，并揭示一个关键研究缺口：模型能力存在根本性不对称——模型在理解复杂上下文方面表现优异，但在生成同等复杂的长文本输出方面存在明显局限。"
+    ],
+    "raw_excerpt": "The performance of Large Language Models (LLMs) is fundamentally determined by the contextual information provided during inference. This survey introduces Context Engineering, a formal discipline that transcends simple prompt design to encompass the systematic optimization of information payloads for LLMs. ... Comments: ongoing work; 166 pages, 1411 citations ... [Submitted on 17 Jul 2025 (v1), last revised 21 Jul 2025 (this version, v2)]"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "A Survey of Context Engineering for Large Language Models (arXiv:2507.13334v2, HTML full text)",
+    "url": "https://arxiv.org/html/2507.13334v2",
+    "published_at": "2025-07-21",
+    "key_points": [
+      "该综述提出一个两层分类法（taxonomy），将 Context Engineering 分解为 foundational Components（基础组件）与 System Implementations（系统实现）。",
+      "基础组件共 3 类：(1) Context Retrieval and Generation（上下文检索与生成），涵盖 prompt-based generation 与 external knowledge acquisition；(2) Context Processing（上下文处理），涵盖 long sequence processing、self-refinement、structured information integration；(3) Context Management（上下文管理），涵盖 memory hierarchies、compression、optimization。",
+      "注意：原文将 retrieval 与 generation 合并为同一组件（Context Retrieval and Generation），因此基础组件为 3 类，而非 retrieval/generation/processing/management 四类并列。",
+      "系统实现共 4 类：(1) Retrieval-Augmented Generation (RAG)，含 modular、agentic、graph-enhanced 架构；(2) Memory Systems，支持持久化交互；(3) Tool-Integrated Reasoning，用于函数调用与环境交互；(4) Multi-Agent Systems，协调通信与编排。",
+      "论文关键词为 Context Engineering, Large Language Models, LLM Agent, Multi-Agent Systems；论文标注日期为 July 21, 2025。",
+      "作者机构包括中科院计算所（ICT, CAS）、中国科学院大学、UC Merced、昆士兰大学、北京大学、清华大学等。"
+    ],
+    "raw_excerpt": "We present a comprehensive taxonomy decomposing Context Engineering into its foundational Components and the sophisticated Implementations that integrate them into intelligent systems. We first examine the foundational Components: (1) Context Retrieval and Generation, encompassing prompt-based generation and external knowledge acquisition; (2) Context Processing, addressing long sequence processing, self-refinement, and structured information integration; and (3) Context Management, covering memory hierarchies, compression, and optimization. We then explore how these components are architecturally integrated to create sophisticated System Implementations: (1) Retrieval-Augmented Generation (RAG), including modular, agentic, and graph-enhanced architectures; (2) Memory Systems, enabling persistent interactions; (3) Tool-Integrated Reasoning, for function calling and environmental interaction; and (4) Multi-Agent Systems, coordinating communication and orchestration."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "How Long Contexts Fail",
+    "url": "https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html",
+    "published_at": "2025-06-22",
+    "key_points": [
+      "原始文章标题为 \"How Long Contexts Fail\"，副标题 \"Managing Your Context is the Key to Successful Agents\"，作者 Drew Breunig，发表于 2025 年 6 月 22 日。",
+      "文章提出上下文会以四种方式失效：poisoned（中毒）、distracting（分心）、confusing（混淆）、conflicting（冲突）。",
+      "文章开头的 \"Context Fails\" 列表给出四类失效模式的一句话定义：Context Poisoning = When a hallucination makes it into the context；Context Distraction = When the context overwhelms the training；Context Confusion = When superfluous context influences the response；Context Clash = When parts of the context disagree。",
+      "Context Poisoning 定义：当幻觉或其他错误进入上下文并被反复引用时发生（\"when a hallucination or other error makes it into the context, where it is repeatedly referenced\"）。",
+      "Poisoning 例证：DeepMind 在 Gemini 2.5 技术报告中记录，玩 Pokémon 的 Gemini agent 偶尔产生幻觉并污染其上下文，导致 goals/summary 等部分被错误信息污染，模型会执着于不可能或不相关的目标，发展出无意义策略并重复行为。",
+      "Context Distraction 定义：当上下文变得过长，模型过度关注上下文而忽略训练中学到的内容（\"when a context grows so long that the model over-focuses on the context, neglecting what it learned during training\"）。",
+      "Distraction 例证：Gemini 2.5 Pro 支持 1M+ token 上下文，但在 agentic 设置中上下文显著超过 100k token 后，agent 倾向于重复其庞大历史中的动作，而非综合出新的计划。",
+      "Distraction 补充例证：Databricks 研究发现 Llama 3.1 405b 的模型正确率在约 32k 上下文时开始下降，更小的模型下降更早。"
+    ],
+    "raw_excerpt": "Context Fails — Context Poisoning: When a hallucination makes it into the context; Context Distraction: When the context overwhelms the training; Context Confusion: When superfluous context influences the response; Context Clash: When parts of the context disagree. ... Context Poisoning is when a hallucination or other error makes it into the context, where it is repeatedly referenced. ... Context Distraction is when a context grows so long that the model over-focuses on the context, neglecting what it learned during training."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Don't Build Multi-Agents (Cognition 官方博客)",
+    "url": "https://cognition.ai/blog/dont-build-multi-agents",
+    "published_at": null,
+    "key_points": [
+      "该博文主题为构建长时运行 Agent 的理论，核心主张是不要使用多智能体架构。",
+      "博文点名批评 OpenAI 的 swarm 与 Microsoft 的 autogen 库，称其 'actively push concepts which I believe to be the wrong way of building agents'。",
+      "博文将 Context Engineering 定位为可靠性的核心：'At the core of reliability is Context Engineering.'",
+      "博文给出 '#1 job' 原始表述：'Context engineering' is the next level of this. It is about doing this automatically in a dynamic system. It takes more nuance and is effectively the #1 job of engineers building AI agents.",
+      "博文将 context engineering 描述为 prompt engineering 的 'next level'（更高一层），强调其是在动态系统中自动完成。",
+      "博文提出两条原则（页面导航列出）：Principle 1 'Share context, and share full agent traces, not just individual messages'；Principle 2 'Actions carry implicit decisions'。",
+      "博文用 'build a Flappy Bird clone' 拆分为子任务的例子说明多智能体架构的脆弱性：子智能体误解子任务导致最终合并失败。",
+      "页面正文未显示明确发布日期，仅出现 'It is now 2025'。"
+    ],
+    "raw_excerpt": "'Prompt engineering' was coined as a term for the effort needing to write your task in the ideal format for a LLM chatbot. 'Context engineering' is the next level of this. It is about doing this automatically in a dynamic system. It takes more nuance and is effectively the #1 job of engineers building AI agents."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Effective context engineering for AI agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "published_at": "2025-09-29",
+    "key_points": [
+      "Anthropic 明确将 context engineering 定位为 prompt engineering 的自然演进：'At Anthropic, we view context engineering as the natural progression of prompt engineering.'",
+      "Anthropic 区分二者定义：Prompt engineering 指 'methods for writing and organizing LLM instructions for optimal outcomes'；Context engineering 指 'the set of strategies for curating and maintaining the optimal set of tokens (information) during LLM inference, including all the other information that may land there outside of the prompts'。",
+      "Anthropic 强调 context 是有限资源，提出 'context rot' 概念：随着 context window 中 token 数增加，模型准确召回信息的能力下降。",
+      "Anthropic 提出 'attention budget' 类比：LLM 解析大量 context 时会消耗注意力预算，每引入一个新 token 都会消耗该预算。",
+      "Anthropic 强调 context engineering 是迭代的：'In contrast to the discrete task of writing a prompt, context engineering is iterative and the curation phase happens each time we decide what to pass to the model.'",
+      "Anthropic 指出 agent 在循环中运行会产生越来越多可能相关的数据，这些信息必须被循环式地精炼（cyclically refined）。",
+      "Anthropic 列举需管理的 context 状态包括：system instructions、tools、Model Context Protocol (MCP)、external data、message history。"
+    ],
+    "raw_excerpt": "At Anthropic, we view context engineering as the natural progression of prompt engineering. Prompt engineering refers to methods for writing and organizing LLM instructions for optimal outcomes... Context engineering refers to the set of strategies for curating and maintaining the optimal set of tokens (information) during LLM inference, including all the other information that may land there outside of the prompts."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Context Engineering (LangChain 官方博客)",
+    "url": "https://blog.langchain.com/context-engineering-for-agents/",
+    "published_at": "2025-07-02",
+    "key_points": [
+      "LangChain 定义 context engineering：'the art and science of filling the context window with just the right information at each step of an agent's trajectory'。",
+      "LangChain 引用 Andrej Karpathy 的 OS 类比：LLM 像新的操作系统，LLM 是 CPU，context window 是 RAM（工作记忆）。",
+      "LangChain 将 context 分为三类：Instructions（prompts, memories, few-shot examples, tool descriptions）、Knowledge（facts, memories）、Tools（feedback from tool calls）。",
+      "LangChain 提出四类 context engineering 策略：write、select、compress、isolate。",
+      "LangChain 直接引用并背书 Cognition 的表述：'Cognition called out the importance of context engineering: \"Context engineering\" … is effectively the #1 job of engineers building AI agents.'",
+      "LangChain 同时引用 Anthropic：'Anthropic also laid it out clearly: Agents often engage in conversations spanning hundreds of turns, requiring careful context management strategies.'",
+      "LangChain 引用 Drew Breunig 归纳的长上下文问题：Context Poisoning、Context Distraction、Context Confusion、Context Clash。",
+      "LangChain 指出长上下文会导致超出 context window、成本/延迟膨胀、agent 性能下降等问题。"
+    ],
+    "raw_excerpt": "Cognition called out the importance of context engineering: \"Context engineering\" … is effectively the #1 job of engineers building AI agents. Anthropic also laid it out clearly: Agents often engage in conversations spanning hundreds of turns, requiring careful context management strategies."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangChain Docs — Short-term memory",
+    "url": "https://docs.langchain.com/oss/python/langchain/short-term-memory",
+    "published_at": null,
+    "key_points": [
+      "官方定义：短期记忆（short-term memory）让应用记住单个 thread / 会话内的先前交互；thread 把一次会话中的多次交互组织在一起。",
+      "官方明确短期记忆的实现机制是 checkpointer：为 agent 指定 checkpointer 即获得 thread 级持久化（thread-level persistence）。",
+      "短期记忆被作为 agent state 的一部分管理，状态通过 checkpointer 持久化到数据库或内存，因此 thread 可在任意时刻被恢复（resume）。",
+      "状态更新时机：agent 被 invoke 时或某个 step（如 tool call）完成时更新；每个 step 开始时读取 state。",
+      "官方给出的动机：完整历史可能放不进 LLM 上下文窗口，导致 context loss 或报错；即使模型支持完整上下文长度，多数 LLM 在长上下文上表现仍差，会被 stale 或 off-topic 内容『分心』，同时响应更慢、成本更高。",
+      "官方建议：因为上下文窗口有限，许多应用可从移除或『遗忘』陈旧信息的技术中获益。",
+      "跨会话记忆被明确指向 long-term memory（存储与召回跨 thread、跨 session 的用户级或应用级数据）。",
+      "代码示例使用 langgraph.checkpoint.memory.InMemorySaver 作为 checkpointer，并以 configurable.thread_id 区分会话。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangChain Docs — Messages",
+    "url": "https://docs.langchain.com/oss/python/langchain/messages",
+    "published_at": null,
+    "key_points": [
+      "官方定义：Messages 是 LangChain 中模型上下文的基本单位（fundamental unit of context），承载内容与元数据以表示对话状态。",
+      "Message 对象包含三部分：Role（消息类型，如 system、user）、Content（文本/图像/音频/文档等）、Metadata（可选字段，如响应信息、message ID、token usage）。",
+      "LangChain 提供跨所有模型提供商统一的标准消息类型，保证行为一致。",
+      "官方列出的消息类型：SystemMessage（设定模型行为与上下文）、HumanMessage（用户输入）、AIMessage（模型生成响应，含文本、tool calls 与元数据）、ToolMessage（工具调用输出）。",
+      "官方指出多轮 agent 会累积很长的消息历史，LangSmith 记录每一轮、工具结果与模型响应以便检查完整对话。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangChain Docs — Long-term memory",
+    "url": "https://docs.langchain.com/oss/python/langchain/long-term-memory",
+    "published_at": null,
+    "key_points": [
+      "官方定义：长期记忆让 agent 跨不同对话与 session 存储和召回信息；与仅限单个 thread 的短期记忆不同，长期记忆跨 thread 持久存在且可随时召回。",
+      "实现机制：长期记忆构建在 LangGraph stores 之上，数据以 JSON 文档形式保存，按 namespace 和 key 组织。",
+      "使用方式：创建 store 并传给 create_agent（示例为 InMemoryStore；生产环境建议用数据库支持的 store）。",
+      "官方提供 PostgreSQL 后端：langgraph.store.postgres.PostgresStore，通过 from_conn_string(DB_URI) 创建并需调用 store.setup()。",
+      "官方提到其他 store 后端包括 Redis 和 MongoDB，见 store integrations 列表。",
+      "工具可通过 runtime.store 参数读写 store（Read/Write long-term memory in tools）。",
+      "存储结构：每条记忆组织在自定义 namespace（类似文件夹）与独立 key（类似文件名）下；namespace 常包含 user 或 org ID 等标签，支持记忆的层级化组织，并可通过 content filters 进行跨 namespace 搜索。",
+      "InMemoryStore 支持 IndexConfig(embed=..., dims=...) 配置向量索引，store.search 支持 filter 内容过滤并按向量相似度排序。",
+      "官方指向 Memory conceptual guide 以深入了解记忆类型（semantic、episodic、procedural）与写入策略。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangGraph Docs — Add memory",
+    "url": "https://docs.langchain.com/oss/python/langgraph/add-memory",
+    "published_at": null,
+    "key_points": [
+      "官方将 LangGraph 记忆分为两类：作为 agent state 一部分的短期记忆（支持多轮对话），以及跨 session 存储用户级/应用级数据的长期记忆。",
+      "短期记忆的接入方式：在 StateGraph 上 builder.compile(checkpointer=checkpointer)，调用时传入 configurable.thread_id。",
+      "生产环境官方推荐使用数据库支持的 checkpointer，示例为 langgraph.checkpoint.postgres.PostgresSaver，通过 from_conn_string(DB_URI) 获取，并需在首次使用时调用 checkpointer.setup()。",
+      "官方同时提供异步版本 AsyncPostgresSaver（langgraph.checkpoint.postgres.aio）。",
+      "示例中 MessagesState 作为状态 schema，call_model 节点以 state['messages'] 调用模型并返回 {'messages': response}。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangGraph Docs — Memory (conceptual guide)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+    "published_at": null,
+    "key_points": [
+      "官方按召回范围（recall scope）把记忆分为两类：短期记忆（thread-scoped，维护会话内消息历史）与长期记忆（跨 session、跨 thread 共享）。",
+      "短期记忆由 LangGraph 作为 agent state 的一部分管理，通过 thread 级 checkpoint 持久化；state 通常包含对话历史以及其他有状态数据，如上传文件、检索到的文档、生成的产物。",
+      "长期记忆保存在自定义 namespace 中，而非仅限单个 thread ID；LangGraph 提供 stores 用于保存与召回长期记忆。",
+      "官方给出长期记忆的分析框架：记忆类型（semantic 事实 / episodic 经历 / procedural 规则）与更新时机（在应用逻辑中『热路径』更新，或由 agent 决定在回复前记住事实）。",
+      "官方重申长对话的挑战：完整历史可能放不进上下文窗口导致不可恢复错误；即使支持完整长度，多数 LLM 在长上下文上表现仍差，会被陈旧或离题内容分心，且响应更慢、成本更高。",
+      "官方指出因为上下文窗口有限且 token 密集的消息列表成本高，许多应用可从手动移除或遗忘陈旧信息的技术中获益，并指向 Add and manage memory 指南。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangChain Docs — create_agent / harness 概览（trim_messages 页面重定向后内容）",
+    "url": "https://python.langchain.com/docs/how_to/trim_messages",
+    "published_at": null,
+    "key_points": [
+      "官方对框架定位的表述：Agent = Model + Harness；LangChain 提供 create_agent 作为最小、高度可配置的 harness，harness 指模型循环之外的一切——prompt、tools 以及任何塑造行为的 middleware。",
+      "官方对三者分工的表述：Deep Agents 是『batteries-included』的 agent，具备 automatic context compression、虚拟文件系统、subagent-spawning 等特性；LangChain（create_agent）用于高度可定制的 harness；LangGraph 是低层编排框架，用于结合确定性工作流与 agentic 工作流的进阶需求。",
+      "官方明确 Deep Agents 构建在 LangChain agents 之上，而 LangChain agents 也可直接使用。",
+      "官方提到 LangSmith 用于对上述任一框架构建的 agent 进行 trace、debug 与 evaluate。",
+      "注：该 URL 原为 trim_messages 使用指南，但实际返回内容已被重定向为 create_agent 通用页面，未包含 trim_messages 的参数说明。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Letta Docs — Introduction to Stateful Agents (Memory / Core API concepts)",
+    "url": "https://docs.letta.com/guides/agents/memory",
+    "published_at": null,
+    "key_points": [
+      "Letta 将 agent 的全部状态（memories、user messages、reasoning、tool calls）持久化到数据库，即使被逐出上下文窗口也不会丢失。",
+      "Letta 的记忆被组织为 memory blocks（字符串形式的上下文片段），可由 agent 通过 memory tools 编辑，也可由开发者通过 API 直接编辑。",
+      "memory blocks 可被 attach/detach 到 agent；被 attach 的 block 处于 in-context 状态（pinned 到 system prompt）。",
+      "同一个 memory block 可同时 attach 到多个 agent，称为 shared blocks。",
+      "agent 的上下文窗口由 system prompt（含已 attach 的 memory blocks）与 messages 组成；messages 可由 user、assistant 或 tool calls 产生。",
+      "Letta API 存储全部 messages，因此在 compaction / eviction 之后，旧消息仍可通过 API（面向开发者）和 retrieval tools（面向 agent）取回。",
+      "一个 stateful agent 由 system prompt、memory blocks、messages（in-context 与 out-of-context）和 tools 构成。",
+      "单次 agent 调用对应一个 run，一个 run 可包含多个 steps，每个 step 执行一次 LLM 推理。",
+      "Conversations 是同一底层 agent 的独立消息线程，支持单 agent 与多用户并发消息。"
+    ],
+    "raw_excerpt": "In Letta, all state, includes memories, user messages, reasoning, tool calls, are all persisted in a database, so they are never lost, even once evicted from the context window. ... Memory (organized into blocks) are pieces of context (strings) that are editable by agents via memory tools ... Memory blocks can be attached and detached from agents - memory blocks that are attached to an agent are in-context (pinned to the system prompt). ... even after a compaction / eviction, an agent's old messages are still retrievable via the API (for developers) and retrieval tools (for agents)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Agents / Memory (Memory class, short-term & long-term)",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/memory/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 中记忆可通过现有 BaseMemory 类定制，或自定义实现；agent 运行时调用 memory.put() 存储、memory.get() 检索。",
+      "ChatMemoryBuffer 已被标记为 deprecated，未来版本默认将替换为更灵活的 Memory 类。",
+      "默认的 ChatMemoryBuffer 提供基础聊天历史缓冲，给 agent 最后 X 条能装进 token 限制的消息。",
+      "Memory 类可同时具备短期记忆（消息的 FIFO 队列）和可选长期记忆（随时间抽取信息）。",
+      "Memory 可通过 Memory.from_defaults(session_id=..., token_limit=...) 创建，并作为参数传入 agent.run()。",
+      "token_limit 默认 30000，表示短期与长期记忆合计可存储的最大 token 数。",
+      "chat_history_token_ratio 默认 0.7，表示短期聊天历史 token 占总 token 上限的比例；若聊天历史超过该比例，最旧的消息会被 flush 到长期记忆（若启用了长期记忆）。",
+      "记忆也可手动管理：调用 memory.put_messages() 与 memory.get()，并把 chat_history 传入 agent.run()（会覆盖已有记忆）。",
+      "可从 agent context 取回最新记忆：ctx.store.get(\"memory\")。"
+    ],
+    "raw_excerpt": "NOTE: The ChatMemoryBuffer is deprecated. In a future release, the default will be replaced with the Memory class ... token_limit (default: 30000): The maximum number of short-term and long-term tokens to store. chat_history_token_ratio (default: 0.7): The ratio of tokens in the short-term chat history to the total token limit. If the chat history exceeds this ratio, the oldest messages will be flushed into long-term memory (if long-term memory is enabled)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "stanfordnlp/dspy — README (official repository)",
+    "url": "https://raw.githubusercontent.com/stanfordnlp/dspy/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "DSPy 自我定位为“programming—rather than prompting—language models”的框架，用于构建模块化 AI 系统。",
+      "DSPy 提供用于优化 prompts 与 weights 的算法（optimizers），适用于分类器、RAG 流水线、Agent 循环等。",
+      "DSPy 全称 Declarative Self-improving Python；主张以可组合的 Python 代码替代脆弱的 prompt。",
+      "README 列出其研究论文，包括 2025 年 7 月的 GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning (arXiv:2507.19457)。",
+      "README 列出 2024 年 6 月的 Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs (arXiv:2406.11695)，即 MIPRO 相关工作。",
+      "README 列出 2023 年 10 月的 DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines (arXiv:2310.03714)。",
+      "README 列出 2024 年 7 月的 Fine-Tuning and Prompt Optimization: Two Great Steps that Work Better Together (arXiv:2407.10930)。"
+    ],
+    "raw_excerpt": "DSPy is the framework for programming—rather than prompting—language models. It allows you to iterate fast on building modular AI systems and offers algorithms for optimizing their prompts and weights ... DSPy stands for Declarative Self-improving Python. ... [Jul'25] GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning (https://arxiv.org/abs/2507.19457) [Jun'24] Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs (https://arxiv.org/abs/2406.11695)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "nadavlev/LlamaIndex-MemoryBlocks-Context-Management-Demo — README (third-party demo)",
+    "url": "https://github.com/nadavlev/LlamaIndex-MemoryBlocks-Context-Management-Demo",
+    "published_at": null,
+    "key_points": [
+      "该第三方仓库描述 LlamaIndex 的 MemoryBlocks 为“可组合的记忆块”，把记忆拆分为离散、可检查的层级，而非单一未分化的缓冲区。",
+      "该仓库主张“把所有内容塞进单一上下文窗口”是错误做法，MemoryBlocks 用于解决该问题。",
+      "注意：此为第三方演示仓库（0 stars），非 LlamaIndex 官方来源，仅作为对 MemoryBlocks 概念的旁证。"
+    ],
+    "raw_excerpt": "Minimal, runnable example showing why \"dump everything into one context window\" is a mistake, and how LlamaIndex's composable MemoryBlocks fix it by splitting memory into discrete, inspectable tiers instead of one undifferentiated buffer."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "api-evangelist/letta — third-party API profile (memory blocks / archival memory)",
+    "url": "https://github.com/api-evangelist/letta",
+    "published_at": null,
+    "key_points": [
+      "第三方 API 画像称 Letta（原 MemGPT）是围绕长期记忆、工具执行与多 agent 协调构建的 stateful AI agents 平台。",
+      "该画像称 Letta REST API 暴露 239 个端点、覆盖 36 个公开资源类别，其中包括 agents、memory blocks、archival memory、sources (RAG) 等。",
+      "注意：此为第三方（API Evangelist）非官方画像，仅作为 Letta 存在 memory blocks 与 archival memory 资源类别的旁证，具体数字未经官方文档核实。"
+    ],
+    "raw_excerpt": "Letta (formerly MemGPT) is a stateful AI agents platform built around long-term memory, tool execution, and multi-agent coordination. The Letta REST API exposes 239 endpoints across 36 public resource categories — agents, memory blocks, archival memory, sources (RAG..."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "langchain-ai/langchain",
+    "url": "https://github.com/langchain-ai/langchain",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "langchain-ai/langchain 的 star 数为 147843，fork 数为 24795。",
+      "该仓库主要语言为 Python。",
+      "该仓库最近一次 push 时间为 2026-10-14。",
+      "仓库描述为 'The agent engineering platform.'"
+    ],
+    "raw_excerpt": "langchain-ai/langchain (★147843, forks 24795)\n  desc: The agent engineering platform.\n  lang: Python | last push: 2026-10-14"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "langchain-ai/langgraph 的 star 数为 43254，fork 数为 7354。",
+      "该仓库主要语言为 Python。",
+      "该仓库最近一次 push 时间为 2026-10-14。",
+      "仓库描述为 'Build resilient agents.'"
+    ],
+    "raw_excerpt": "langchain-ai/langgraph (★43254, forks 7354)\n  desc: Build resilient agents.\n  lang: Python | last push: 2026-10-14"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "run-llama/llama_index",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "run-llama/llama_index 的 star 数为 52492，fork 数为 8336。",
+      "该仓库主要语言为 Python。",
+      "该仓库最近一次 push 时间为 2026-10-14。",
+      "仓库描述为 'LlamaIndex is the document processing platform for AI'。"
+    ],
+    "raw_excerpt": "run-llama/llama_index (★52492, forks 8336)\n  desc: LlamaIndex is the document processing platform for AI\n  lang: Python | last push: 2026-10-14"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "stanfordnlp/dspy",
+    "url": "https://github.com/stanfordnlp/dspy",
+    "published_at": "2026-10-13",
+    "key_points": [
+      "stanfordnlp/dspy 的 star 数为 38633，fork 数为 3423。",
+      "该仓库主要语言为 Python。",
+      "该仓库最近一次 push 时间为 2026-10-13。",
+      "仓库描述为 'DSPy: The framework for programming—not prompting—language models'。"
+    ],
+    "raw_excerpt": "stanfordnlp/dspy (★38633, forks 3423)\n  desc: DSPy: The framework for programming—not prompting—language models\n  lang: Python | last push: 2026-10-13"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "letta-ai/letta",
+    "url": "https://github.com/letta-ai/letta",
+    "published_at": "2026-09-10",
+    "key_points": [
+      "letta-ai/letta 的 star 数为 25132，fork 数为 2644。",
+      "该仓库最近一次 push 时间为 2026-09-10。",
+      "仓库描述为 'Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.'",
+      "该仓库主要语言字段返回为 n/a。"
+    ],
+    "raw_excerpt": "letta-ai/letta (★25132, forks 2644)\n  desc: Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.\n  lang: n/a | last push: 2026-09-10"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "modelcontextprotocol/servers (README 正文，未含 star 数)",
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "published_at": null,
+    "key_points": [
+      "该仓库是 Model Context Protocol (MCP) 参考实现的集合，同时收录社区构建的服务器与附加资源。",
+      "README 声明：该仓库仅托管由 MCP steering group 维护的少量参考服务器；完整服务器列表应查阅 MCP Registry。",
+      "README 警告：仓库内服务器为演示 MCP 特性与 SDK 用法的参考实现，定位为教学示例，并非生产就绪方案。",
+      "仓库列出的参考服务器包括 Everything、Fetch、Filesystem、Git、Memory、Sequential Thinking、Time。",
+      "仓库支持多种语言的 MCP SDK：C#、Go、Java、Kotlin、PHP、Python、Ruby、Rust、Swift、TypeScript。",
+      "抓取到的页面正文未包含 star 计数与最近提交日期。"
+    ],
+    "raw_excerpt": "This repository is a collection of reference implementations for the Model Context Protocol (MCP), as well as references to community-built servers and additional resources. ... The servers in this repository are intended as reference implementations to demonstrate MCP features and SDK usage. They are meant to serve as educational examples for developers building their own MCP servers, not as production-ready solutions."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "GPT-5 prompting guide (OpenAI Cookbook)",
+    "url": "https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide",
+    "published_at": "2025-08-07",
+    "key_points": [
+      "该指南由 OpenAI 员工（Anoop Kotha、Julian Lee、Erin Kavanaugh 等）撰写，主题为 GPT-5 的提示技巧。",
+      "文中使用 'context' 概念，例如给出 <context_gathering> 提示块，指导模型'快速获取足够上下文、并行发现、尽早停止'。",
+      "该页面通篇以 'prompting' 为框架，未出现对 'context engineering' 与 'prompt engineering' 关系的定义或对比。"
+    ],
+    "raw_excerpt": "GPT-5, our newest flagship model, represents a substantial leap forward in agentic task performance... in this guide we'll cover prompting tips to maximize the quality of model outputs... <context_gathering> Goal: Get enough context fast. Parallelize discovery and stop as soon as you can act."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Chip Huyen — Blog index",
+    "url": "https://huyenchip.com/blog/",
+    "published_at": null,
+    "key_points": [
+      "该博客索引列出 Chip Huyen 的全部文章，最新一篇为 2025-01-16 'Common pitfalls when building generative AI applications'。",
+      "索引中不存在标题含 'context engineering' 的文章，说明其 context engineering 论述不在独立博客文章中。"
+    ],
+    "raw_excerpt": "Jan 16, 2025 Common pitfalls when building generative AI applications / Jan 7, 2025 Agents / Jul 25, 2024 Building A Generative AI Platform ... subscribe via RSS"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Chip Huyen — Agents (blog post, adapted from AI Engineering 2025)",
+    "url": "https://huyenchip.com/2025/01/07/agents.html",
+    "published_at": "2025-01-07",
+    "key_points": [
+      "该文为 Chip Huyen 著作《AI Engineering》(2025) 中 Agents 章节的改编版。",
+      "文章框架围绕 agent 的 tools 与 planning 展开，讨论知识增强、能力扩展、写操作、函数调用、反思与错误纠正、失败模式与评估。",
+      "文章未出现 'context engineering' 一词，也未界定其与 prompt engineering 的边界。"
+    ],
+    "raw_excerpt": "This post is adapted from the Agents section of AI Engineering (2025) with minor edits to make it a standalone post... This section will start with an overview of agents and then continue with two aspects that determine the capabilities of an agent: tools and planning."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "The Prompt Report: A Systematic Survey of Prompt Engineering Techniques",
+    "url": "https://arxiv.org/abs/2406.06608v6",
+    "published_at": "2024-06-06",
+    "key_points": [
+      "该综述由 Sander Schulhoff 等 31 位作者撰写，v1 提交于 2024-06-06，v6 最后修订于 2025-02-26，属 2023–2026 时间窗内的综述。",
+      "论文提出了一套结构化 prompt engineering 分类法：包含 33 个词汇术语（vocabulary terms）、58 种 LLM prompting 技术、以及 40 种面向其他模态（other modalities）的技术。",
+      "论文动机是 prompt engineering 领域存在术语冲突（conflicting terminology）与本体理解碎片化（fragmented ontological understanding）。",
+      "论文提供了 prompt engineering 最佳实践与指南，包括针对 ChatGPT 等 SOTA LLM 的提示建议。",
+      "论文包含对自然语言 prefix-prompting 全部文献的元分析（meta-analysis）。",
+      "作者自称这是迄今最全面的 prompt engineering 综述（'the most comprehensive survey on prompt engineering to date'）——属作者自述主张。"
+    ],
+    "raw_excerpt": "We present a detailed vocabulary of 33 vocabulary terms, a taxonomy of 58 LLM prompting techniques, and 40 techniques for other modalities. ... Although prompt engineering is a widely adopted and extensively researched area, it suffers from conflicting terminology and a fragmented ontological understanding of what constitutes an effective prompt due to its relatively recent emergence."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "The Prompt Report: A Systematic Survey of Prompt Engineering Techniques (HTML full text)",
+    "url": "https://arxiv.org/html/2406.06608v6",
+    "published_at": "2024-06-06",
+    "key_points": [
+      "正文确认作者机构涵盖 University of Maryland、Stanford、Microsoft、OpenAI、Princeton、Vanderbilt 等，且与 Learn Prompting 相关。",
+      "正文指出 prompt 可以是文本（如 'Write a poem about trees.'），也可以是图像、音频、视频或其组合。",
+      "正文强调'知道如何有效地构建、评估 prompt 并执行其他任务，对使用这些模型至关重要'，并称经验上更好的 prompt 能在广泛任务上带来更好结果（引用 Wei et al. 2022b; Liu et al. 2023b; Schulhoff 2022）。"
+    ],
+    "raw_excerpt": "Knowing how to effectively structure, evaluate, and perform other tasks with prompts is essential to using these models. Empirically, better prompts lead to improved results across a wide range of tasks Wei et al. (2022b); Liu et al. (2023b); Schulhoff (2022)."
+  }
+]

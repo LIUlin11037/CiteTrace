@@ -70,7 +70,12 @@ def sample_cited_claims(report: str, limit: int = CLAIM_SAMPLE_SIZE) -> list[str
     """Sentences carrying a [^n] marker, deduped, evenly capped."""
     claims = [c.strip() for c in _CLAIM_SENTENCE.findall(report)]
     seen: set[str] = set()
-    unique = [c for c in claims if not (c in seen or seen.add(c))]
+    unique: list[str] = []
+    for c in claims:  # 显式去重（原写法依赖 set.add 的副作用，可读性差）
+        if c not in seen:
+            seen.add(c)
+            unique.append(c)
+
     if len(unique) <= limit:
         return unique
     step = len(unique) / limit
@@ -106,10 +111,10 @@ def resolve_claim_sources(
             if url is None:
                 unresolved.append(f"(undefined footnote [^{n}])")
                 continue
-            ev = ev_by_url.get(_norm_url(url))
-            if ev is not None:
-                if ev not in matched:
-                    matched.append(ev)
+            hit = ev_by_url.get(_norm_url(url))
+            if hit is not None:
+                if hit not in matched:
+                    matched.append(hit)
             else:
                 unresolved.append(url)
         out.append((claim, matched, unresolved))

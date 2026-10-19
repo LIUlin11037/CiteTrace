@@ -1,0 +1,551 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Neural Machine Translation of Rare Words with Subword Units (Sennrich, Haddow, Birch)",
+    "url": "https://arxiv.org/abs/1508.07909v5",
+    "published_at": "2015-08-31",
+    "key_points": [
+      "This is the original paper introducing BPE-based subword segmentation for NMT (arXiv 1508.07909, v5).",
+      "It proposes encoding rare and unknown words as sequences of subword units to enable open-vocabulary translation, replacing back-off-to-dictionary approaches.",
+      "The segmentation is based on the byte pair encoding compression algorithm; the paper also compares it against simple character n-gram models.",
+      "Empirically, subword models improve over a back-off dictionary baseline by 1.1 BLEU (En-De) and 1.3 BLEU (En-Ru) on WMT 15 tasks."
+    ],
+    "raw_excerpt": "we introduce a simpler and more effective approach, making the NMT model capable of open-vocabulary translation by encoding rare and unknown words as sequences of subword units... a segmentation based on the byte pair encoding compression algorithm, and empirically show that subword models improve over a back-off dictionary baseline for the WMT 15 translation tasks English-German and English-Russian by 1.1 and 1.3 BLEU, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "google/sentencepiece — README",
+    "url": "https://github.com/google/sentencepiece",
+    "published_at": null,
+    "key_points": [
+      "SentencePiece is a fast, lightweight, unsupervised text tokenizer/detokenizer for neural text generation where vocabulary size is fixed before training.",
+      "It implements subword units including Byte-Pair-Encoding (BPE) [Sennrich et al.] and the unigram language model [Kudo].",
+      "It trains directly from raw sentences, treating input as a raw sequence of Unicode characters, eliminating language-specific pre/post-processing.",
+      "It escapes whitespace with the meta-symbol ▁ (U+2581) and includes it in tokenization, making detokenization a lossless string-join operation independent of language.",
+      "It supports subword regularization and BPE-dropout (mentioned in the 'Why SentencePiece?' section)."
+    ],
+    "raw_excerpt": "It implements subword units —including Byte-Pair-Encoding (BPE) [Sennrich et al.] and the unigram language model [Kudo.]—with the ability to train directly from raw sentences. By treating input text as a raw sequence of Unicode characters, SentencePiece enables a purely end-to-end, language-independent pipeline... It escapes whitespaces with a meta-symbol ▁ (U+2581) and includes it in the tokenization. This design ensures that detokenization is a simple, lossless string join operation."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "openai/tiktoken — README",
+    "url": "https://github.com/openai/tiktoken",
+    "published_at": null,
+    "key_points": [
+      "tiktoken is described as a fast BPE tokeniser for use with OpenAI's models.",
+      "It provides encodings such as o200k_base and cl100k_base, and encoding_for_model() to get the tokeniser for a specific model (e.g., gpt-4o).",
+      "BPE is described as reversible/lossless, works on arbitrary text (even unseen text), compresses text (each token ~4 bytes on average), and lets the model see common subwords (e.g., 'ing').",
+      "tiktoken is claimed to be 3-6x faster than a comparable open-source tokeniser (measured on 1GB of text with the GPT-2 tokeniser).",
+      "It includes an educational submodule (tiktoken._educational) with code to train and visualise the BPE procedure."
+    ],
+    "raw_excerpt": "tiktoken is a fast BPE tokeniser for use with OpenAI's models... Byte pair encoding (BPE) is a way of converting text into tokens. It has a couple desirable properties: It's reversible and lossless... It works on arbitrary text, even text that is not in the tokeniser's training data... It compresses the text... On average, in practice, each token corresponds to about 4 bytes."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Hugging Face Transformers Docs — Tokenization algorithms (Summary of the tokenizers)",
+    "url": "https://huggingface.co/docs/transformers/en/tokenizer_summary",
+    "published_at": null,
+    "key_points": [
+      "Transformers supports three subword tokenization algorithms: Byte pair encoding (BPE), Unigram, and WordPiece.",
+      "BPE: a pre-tokenizer splits text into unique words with frequencies; a base vocabulary is built from all characters; BPE iteratively merges the most frequent adjacent pair until the target vocabulary size is reached.",
+      "BPE vocabulary size = base vocabulary size + number of merges (e.g., GPT uses 40,478 = 478 base tokens + 40,000 merges).",
+      "Any character not in the base vocabulary maps to an unknown token like <unk>; in practice the base vocabulary covers all characters seen during training."
+    ],
+    "raw_excerpt": "Transformers support three subword tokenization algorithms: Byte pair encoding (BPE), Unigram, and WordPiece... BPE starts with individual characters and iteratively merges the most frequent adjacent pair... BPE continues learning merge rules until it reaches the target vocabulary size, which equals the base vocabulary size plus the number of merges. GPT uses BPE with a vocabulary size of 40,478 (478 base tokens + 40,000 merges)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies",
+    "url": "https://arxiv.org/abs/2407.13623",
+    "published_at": "2024-07-18",
+    "key_points": [
+      "该论文研究词表大小如何影响 LLM 的 scaling law，训练了 33M 到 3B 参数、最多 500B 字符的模型，并配置不同词表大小。",
+      "论文提出三种互补方法预测 compute-optimal 词表大小：IsoFLOPs 分析、导数估计、损失函数的参数化拟合。",
+      "论文结论：最优词表大小取决于算力预算，更大的模型需要更大的词表。",
+      "论文指出多数 LLM 使用的词表偏小；预测 Llama2-70B 的最优词表至少应为 216K，是其实际 32K 词表的 7 倍。",
+      "论文用 3B 参数模型在不同 FLOPs 预算下做了实证验证：将词表从常规 32K 增至 43K，在相同 2.3e21 FLOPs 下 ARC-Challenge 分数从 29.1 提升到 32.0。",
+      "论文发表于 NeurIPS 2024，代码与 demo 位于 github.com/sail-sg/scaling-with-vocab 与 huggingface space sail/scaling-with-vocab-demo。"
+    ],
+    "raw_excerpt": "Our approaches converge on the conclusion that the optimal vocabulary size depends on the compute budget, with larger models requiring larger vocabularies. Most LLMs, however, use insufficient vocabulary sizes. For example, we predict that the optimal vocabulary size of Llama2-70B should have been at least 216K, 7 times larger than its vocabulary of 32K. ... By increasing the vocabulary size from the conventional 32K to 43K, we improve performance on ARC-Challenge from 29.1 to 32.0 with the same 2.3e21 FLOPs."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "huggingface/tokenizers — README (v1.0.0.rc.0)",
+    "url": "https://github.com/huggingface/tokenizers",
+    "published_at": null,
+    "key_points": [
+      "仓库自我定位为「The SOTA tokenization library on all languages, all models, all hardwares」，目标是成为「the industry's standard tokenization engine」。",
+      "当前处于 v1.0.0.rc.0 候选发布阶段，正从 0.23 迁移到 v1.0.0，迁移期库未包含全部功能。",
+      "Rust 为核心参考实现；Python 与 Node.js 绑定已完成；C / C++ / Java / Go 等绑定标注为 planned（🚧）。",
+      "v1 路线图包含：恢复训练（training）能力、批量编码零拷贝视图、dlpack 互操作、offset 输出、decode_stream、窗口/stride 编码等。",
+      "Rust 核心待办包含 bitnorm 归一化优化、训练/解码性能改进、修复 ModernBERT / OLMo 加载失败（64-bit hash collision）。",
+      "1.0.0 之后计划：重写 bitcannon crate、增加 Java/Go/Swift 绑定，以及探索性的 tk-devices（GPU 上做编码与批量解码，词表上传一次、并行计算输出位置）。",
+      "README 示例显示可直接 from_pretrained(\"meta-llama/Llama-3.1-8B\") 加载 Llama 3.1 的 tokenizer。"
+    ],
+    "raw_excerpt": "The SOTA tokenization library on all languages, all models, all hardwares. Our goal with tokenizers is to develop and maintain the industry's standard tokenization engine, making it the defacto place for everyone to contribute to the whole ecosystem. Release candidate: v1.0.0.rc.0 ... tk-devices — exploratory GPU encoding and batch decoding that keeps text and ids on the device: upload the vocabulary once, compute output positions in parallel, gather the bytes on the GPU."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Qwen3-8B config.json (HuggingFace)",
+    "url": "https://huggingface.co/Qwen/Qwen3-8B/raw/main/config.json",
+    "published_at": null,
+    "key_points": [
+      "Qwen3-8B 的 vocab_size 为 151936。",
+      "bos_token_id = 151643，eos_token_id = 151645。",
+      "架构为 Qwen3ForCausalLM，hidden_size 4096，36 层，32 个注意力头 / 8 个 KV 头，max_position_embeddings 40960。",
+      "配置文件未声明分词算法类型（BPE/Unigram），仅给出词表规模与特殊 token id。"
+    ],
+    "raw_excerpt": "\"bos_token_id\": 151643, \"eos_token_id\": 151645, ... \"model_type\": \"qwen3\", ... \"vocab_size\": 151936"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "DeepSeek-V3 config.json (HuggingFace)",
+    "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3/raw/main/config.json",
+    "published_at": null,
+    "key_points": [
+      "DeepSeek-V3 的 vocab_size 为 129280。",
+      "bos_token_id = 0，eos_token_id = 1。",
+      "架构为 DeepseekV3ForCausalLM，MoE 结构：256 个路由专家 + 1 个共享专家，每 token 激活 8 个专家，61 层。",
+      "max_position_embeddings 为 163840，采用 YaRN rope scaling（factor 40，original_max_position_embeddings 4096）。",
+      "配置文件未声明分词算法类型，仅给出词表规模与特殊 token id。"
+    ],
+    "raw_excerpt": "\"bos_token_id\": 0, \"eos_token_id\": 1, ... \"n_routed_experts\": 256, \"n_shared_experts\": 1, \"num_experts_per_tok\": 8, \"num_hidden_layers\": 61, ... \"vocab_size\": 129280"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Gemma 3 27B IT config.json (unsloth 镜像)",
+    "url": "https://huggingface.co/unsloth/gemma-3-27b-it/raw/main/config.json",
+    "published_at": null,
+    "key_points": [
+      "Gemma 3 27B 的 text_config.vocab_size 为 262208。",
+      "多模态特殊 token 索引：image_token_index = 262144，boi_token_index = 255999，eoi_token_index = 256000，每张图 256 个 token（mm_tokens_per_image = 256）。",
+      "bos_token_id = 2，eos_token_id = 106，pad_token_id = 0。",
+      "文本塔 62 层、hidden_size 5376，max_position_embeddings 131072，滑动窗口 1024（sliding_window_pattern 6）。",
+      "该 config 来自第三方镜像仓库 unsloth/gemma-3-27b-it（含 unsloth_fixed 标记），非 Google 官方仓库。"
+    ],
+    "raw_excerpt": "\"boi_token_index\": 255999, \"bos_token_id\": 2, \"eoi_token_index\": 256000, \"eos_token_id\": 106, \"image_token_index\": 262144, \"mm_tokens_per_image\": 256, ... \"vocab_size\": 262208"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果（tokenizer 相关，按 stars 排序）",
+    "url": "https://github.com/NLPOptimize/flash-tokenizer",
+    "published_at": null,
+    "key_points": [
+      "NLPOptimize/flash-tokenizer：★458，forks 11，C++，描述为「EFFICIENT AND OPTIMIZED TOKENIZER ENGINE FOR LLM INFERENCE SERVING」，最近 push 2026-02-02。",
+      "Systemcluster/kitoken：★62，forks 2，Rust，描述称兼容 SentencePiece、Tokenizers、Tiktoken，支持 BPE、Unigram、WordPiece，可在 JavaScript、Python、Rust 中使用，最近 push 2026-08-10。",
+      "actual-computer/toks：★98，forks 6，C，描述为「exact tokenizers ids, as fast as the hardware allows」，最近 push 2026-10-09。",
+      "SunayHegde2006/OmniToken：★1，Rust，声称统一 BPE/WordPiece/Unigram 为单一 trie-walker 自动机并带 AVX2 SIMD 加速，声称 3.02+ GB/s 多核吞吐（低星仓库，主张未验证）。",
+      "检索未命中 tiktoken、sentencepiece、huggingface/tokenizers 等主流仓库的 stars 数据，返回结果以低星/教学类仓库为主。"
+    ],
+    "raw_excerpt": "NLPOptimize/flash-tokenizer (★458, forks 11) desc: EFFICIENT AND OPTIMIZED TOKENIZER ENGINE FOR LLM INFERENCE SERVING | Systemcluster/kitoken (★62, forks 2) desc: Fast tokenizer for language models, compatible with SentencePiece, Tokenizers, Tiktoken and more. Supports BPE, Unigram and WordPiece tokenization in JavaScript, Python and Rust."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates (Kudo, ACL 2018)",
+    "url": "https://arxiv.org/abs/1804.10959",
+    "published_at": "2018-04-29",
+    "key_points": [
+      "论文提出一种基于 unigram 语言模型的新子词切分算法（unigram language model based subword segmentation algorithm），用于更好的子词采样。",
+      "论文提出 subword regularization：训练时按概率对多种子词切分进行采样，以提升 NMT 鲁棒性。",
+      "论文作者为 Taku Kudo（Google Inc.），2018 年 4 月 29 日提交，被 ACL 2018 接收为长文。",
+      "论文指出同一句子在同一词表下可存在多种子词切分（segmentation ambiguity），BPE 只产生唯一子词序列。"
+    ],
+    "raw_excerpt": "In addition, for better subword sampling, we propose a new subword segmentation algorithm based on a unigram language model. ... We present a simple regularization method, subword regularization, which trains the model with multiple subword segmentations probabilistically sampled during training."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Subword Regularization (Kudo 2018) — HTML full text, Introduction",
+    "url": "https://arxiv.org/html/1804.10959v1",
+    "published_at": "2018-04-29",
+    "key_points": [
+      "论文将 Schuster and Nakajima (2012) 列为把罕见词拆分为子词单元的早期工作之一，与 Chitnis & DeNero (2015)、Sennrich et al. (2016)、Wu et al. (2016) 并列。",
+      "论文指出 BPE（Sennrich et al. 2016）是事实标准的子词切分算法，将句子编码为唯一子词序列。",
+      "论文以 'Hello World' 为例展示同一句子在同一词表下可对应多种子词序列（如 _Hell/o/_world、_H/ello/_world 等），说明切分存在虚假歧义（spurious ambiguity）。",
+      "论文主张训练时使用多种切分候选可让模型对噪声与切分错误更鲁棒，并间接学习词的组合性（如 books = book + s）。"
+    ],
+    "raw_excerpt": "A common approach for dealing with the open vocabulary issue is to break up rare words into subword units Schuster and Nakajima (2012); Chitnis and DeNero (2015); Sennrich et al. (2016); Wu et al. (2016). Byte-Pair-Encoding (BPE) Sennrich et al. (2016) is a de facto standard subword segmentation algorithm ... BPE encodes a sentence into a unique subword sequence."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies",
+    "url": "https://arxiv.org/abs/2407.13623",
+    "published_at": "2024-07-18",
+    "key_points": [
+      "该研究训练了 33M 到 3B 参数规模的模型，训练数据最多 500B 字符，并配置了不同的词表大小，以考察词表大小如何影响 LLM 的缩放律。",
+      "论文提出三种互补方法来预测计算最优（compute-optimal）的词表大小：IsoFLOPs 分析、导数估计、以及损失函数的参数化拟合。",
+      "三种方法一致得出结论：最优词表大小取决于计算预算（compute budget），更大的模型需要更大的词表。",
+      "论文预测 Llama2-70B 的最优词表大小应至少为 216K，是其实际使用的 32K 词表的 7 倍。",
+      "论文用 3B 参数模型在不同 FLOPs 预算下训练，实证验证了预测结果。",
+      "在相同 2.3e21 FLOPs 预算下，将词表从常规的 32K 增大到 43K，ARC-Challenge 性能从 29.1 提升到 32.0。",
+      "论文结论强调：为高效预训练，需将 tokenization 与模型缩放联合考虑。",
+      "该论文发表于 NeurIPS 2024。"
+    ],
+    "raw_excerpt": "We investigate how vocabulary size impacts LLM scaling laws by training models ranging from 33M to 3B parameters on up to 500B characters with various vocabulary configurations. We propose three complementary approaches for predicting the compute-optimal vocabulary size: IsoFLOPs analysis, derivative estimation, and parametric fit of the loss function. Our approaches converge on the conclusion that the optimal vocabulary size depends on the compute budget, with larger models requiring larger vocabularies. ... we predict that the optimal vocabulary size of Llama2-70B should have been at least 216K, 7 times larger than its vocabulary of 32K. ... By increasing the vocabulary size from the conventional 32K to 43K, we improve performance on ARC-Challenge from 29.1 to 32.0 with the same 2.3e21 FLOPs."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Language Model Tokenizers Introduce Unfairness Between Languages",
+    "url": "https://arxiv.org/abs/2305.15425",
+    "published_at": "2023-05-17",
+    "key_points": [
+      "同一段文本翻译成不同语言后，tokenization 长度差异巨大，某些情况下可达 15 倍（differences up to 15 times in some cases）。",
+      "即使是为多语言支持而专门训练的 tokenizer，这种 token 长度差异依然存在。",
+      "字符级（character-level）和字节级（byte-level）模型在某些语言对上仍表现出超过 4 倍的编码长度差异（over 4 times the difference in the encoding length）。",
+      "该差异导致部分语言社区在商业语言服务成本、处理时间与延迟、以及可作为上下文提供给模型的内容量方面受到不公平对待——即 token 数直接影响可提供的上下文内容量。",
+      "作者主张未来语言模型应使用多语言公平的子词 tokenizer（multilingually fair subword tokenizers）。",
+      "论文发表于 NeurIPS 2023。"
+    ],
+    "raw_excerpt": "The same text translated into different languages can have drastically different tokenization lengths, with differences up to 15 times in some cases. These disparities persist even for tokenizers that are intentionally trained for multilingual support. Character-level and byte-level models also exhibit over 4 times the difference in the encoding length for some language pairs. This induces unfair treatment for some language communities in regard to the cost of accessing commercial language services, the processing time and latency, as well as the amount of content that can be provided as context to the models."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "OpenAI API Pricing (official pricing page)",
+    "url": "https://platform.openai.com/docs/pricing",
+    "published_at": null,
+    "key_points": [
+      "定价单位为每 1M tokens，区分 Input / Cached input / Cache writes / Output 四类计费项。",
+      "Standard 档短上下文：gpt-6-astra Input $10.00 / Cached input $1.00 / Cache writes $12.50 / Output $50.00。",
+      "Standard 档短上下文：gpt-6.1-sol Input $2.00 / Cached input $0.10 / Cache writes $2.50 / Output $10.00。",
+      "Standard 档短上下文：gpt-6-luna Input $0.10 / Cached input $0.01 / Cache writes $0.125 / Output $0.50。",
+      "缓存折扣：cached input 约为标准 input 的 1/10（astra $10→$1.00，sol $2→$0.10，luna $0.10→$0.01）。",
+      "输入/输出差异：output 约为 input 的 5 倍（astra 10→50，sol 2→10，luna 0.1→0.5）。",
+      "长上下文加价：长上下文档 input/output 翻倍（astra 长上下文 Input $20.00 / Output $75.00）。",
+      "存在 Batch / Flex / Fast / Ultrafast 多档服务层级：Batch 与 Flex 约为 Standard 的 5 折，Fast 为 2 倍，Ultrafast 为 6 倍。",
+      "区域处理（data residency）端点与 FedRAMP 端点对 2026-03-05 及之后发布的模型加收 10% uplift。",
+      "Priority processing 于 2026-07-30 更名为 Fast mode；GPT-5.6 Sol 促销价至少持续至 2026-11-21。"
+    ],
+    "raw_excerpt": "Flagship models Our latest models Prices per 1M tokens. Standard Batch Flex Fast Ultrafast ... gpt-6-astra $10.00 $1.00 $12.50 $50.00 ... gpt-6.1-sol $2.00 $0.10 $2.50 $10.00 ... gpt-6-luna $0.10 $0.01 $0.125 $0.50 ... Regional processing (data residency) endpoints are charged a 10% uplift for models released on or after March 5, 2026. FedRAMP endpoints are also charged a 10% uplift. Priority processing was renamed Fast mode on July 30, 2026."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "How to count tokens with Tiktoken (OpenAI Cookbook)",
+    "url": "https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken",
+    "published_at": "2022-12-16",
+    "key_points": [
+      "OpenAI 使用开源 tokenizer tiktoken，不同模型使用不同 encoding。",
+      "encoding 与模型对应关系：o200k_base → gpt-4o, gpt-4o-mini；cl100k_base → gpt-4-turbo, gpt-4, gpt-3.5-turbo, text-embedding-ada-002/3-small/3-large；p50k_base → Codex 系列；r50k_base(gpt2) → GPT-3 系列。",
+      "计费按 token 数：官方明确 API 调用成本由 token 数决定（usage is priced by token）。",
+      "英文中 token 长度通常从单字符到一个单词；空格通常与词首合并（如 \" is\" 而非 \"is \"）。",
+      "该页面为 2022-12-16 归档内容，可能引用过时模型或 API。"
+    ],
+    "raw_excerpt": "tiktoken is a fast open-source tokenizer by OpenAI. ... o200k_base → gpt-4o, gpt-4o-mini; cl100k_base → gpt-4-turbo, gpt-4, gpt-3.5-turbo ... Knowing how many tokens are in a text string can tell you (a) whether the string is too long for a text model to process and (b) how much an OpenAI API call costs (as usage is priced by token). This recipe is archived and may reference outdated models or APIs."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Anthropic Claude API Pricing (official docs)",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+    "published_at": null,
+    "key_points": [
+      "定价单位为 $/MTok（每百万 token），区分 Input / Output / 5m cache writes / 1h cache writes / Hits and refreshes 五类。",
+      "Claude Fable 5.1：Input $10 / MTok，Output $50 / MTok，5m writes $12.50 / MTok，1h writes $20 / MTok，Hits $0.25 / MTok。",
+      "Claude Opus 5.5：Input $4 / MTok，Output $20 / MTok，5m writes $5 / MTok，1h writes $8 / MTok，Hits $0.20 / MTok。",
+      "Claude Sonnet 5.5：Input $2 / MTok，Output $10 / MTok，5m writes $2.50 / MTok，1h writes $4 / MTok，Hits $0.10 / MTok。",
+      "Claude Haiku 5.5：≤100k tokens 时 Input $0.10 / MTok、Output $0.50 / MTok；>100k tokens 时 Input $0.50 / MTok、Output $2.50 / MTok；5m writes $0.125、1h writes $0.20、Hits $0.01。",
+      "缓存折扣：cache hits 约为标准 input 的 1/10（Opus 5.5 $4→$0.20，Sonnet 5.5 $2→$0.10）。",
+      "缓存写入高于标准 input：5m writes ≈ 1.25×，1h writes ≈ 2×。",
+      "输入/输出差异：output 为 input 的 5 倍（Fable 10→50，Opus 4→20，Sonnet 2→10）。",
+      "分词口径重大变化：Claude 4.7 及之后模型（含 Mythos Preview）使用新 tokenizer，对同一文本产生约多 30% 的 token；Claude Sonnet 4.6 及更早使用旧 tokenizer。",
+      "区域/多区域端点（Bedrock、Google Cloud）相对 global 端点有 10% 溢价。"
+    ],
+    "raw_excerpt": "Claude Fable 5.1 ... $10 / MTok $50 / MTok $12.50 / MTok $20 / MTok $0.25 / MTok ... Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer that contributes to their improved performance on a wide range of tasks. This tokenizer produces approximately 30% more tokens for the same text. The exact increase depends on the content and workload shape. Claude Sonnet 4.6 and earlier models use the previous tokenizer."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Gemini Developer API Pricing (official docs)",
+    "url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "published_at": null,
+    "key_points": [
+      "定价单位为 per 1M tokens in USD，区分 Input / Output（含 thinking tokens）/ Context caching。",
+      "Gemini 4 Argon（Standard 档）：Input $2.00（至 2026-11-30），2026-12-01 起 $4.00。",
+      "Gemini 4 Argon Output（含 thinking tokens）：$10.00（至 2026-11-30），2026-12-01 起 $20.00。",
+      "Gemini 4 Argon Context caching：$0.10（至 2026-11-30），2026-12-01 起 $0.20；仅支持隐式缓存（implicit caching），不支持显式缓存。",
+      "缓存折扣：context caching 约为标准 input 的 1/20（$2→$0.10）。",
+      "输入/输出差异：output 为 input 的 5 倍（$2→$10）。",
+      "Batch 与 Flex 档为 Standard 的 5 折（Input $1.00 / Output $5.00）；Priority 档为 1.8 倍（Input $3.60 / Output $18.00）。",
+      "官方称 Batch API 提供 50% cost reduction。",
+      "Gemini 4 Argon 不提供 Free tier，也不在 Google AI Pro 计划中。",
+      "Grounding with Google Search：每月 5,000 次免费（Gemini 3 及更新模型共享），之后 $14 / 1,000 次请求。"
+    ],
+    "raw_excerpt": "Gemini 4 Argon ... Input price ... $2.00 through November 30, 2026. $4.00 starting December 1, 2026. Output price (including thinking tokens) ... $10.00 ... Context caching price ... $0.10 ... Implicit caching only (explicit caching is not supported). ... Batch API (50% cost reduction)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Understand and count tokens (Gemini API official docs)",
+    "url": "https://ai.google.dev/gemini-api/docs/tokens",
+    "published_at": null,
+    "key_points": [
+      "Gemini 中 1 token ≈ 4 个字符；100 tokens ≈ 60–80 个英文单词。",
+      "所有输入与输出（含文本、图像文件及其他非文本模态）均被 tokenize。",
+      "计费由输入与输出 token 数决定（When billing is enabled, the cost of a call is determined in part by the number of input and output tokens）。",
+      "可通过 count_tokens 预先统计输入 token 数；通过 interaction response 的 usage 获取 total_input_tokens、total_output_tokens、total_thought_tokens、total_cached_tokens、total_tool_use_tokens、total_tokens。",
+      "token 定义为模型处理输入输出的粒度；全部 token 集合称为 vocabulary，切分过程称为 tokenization。"
+    ],
+    "raw_excerpt": "For Gemini models, a token is equivalent to about 4 characters. 100 tokens is equal to about 60-80 English words. ... All input to and output from the Gemini API is tokenized, including text, image files, and other non-text modalities. ... When billing is enabled, the cost of a call to the Gemini API is determined in part by the number of input and output tokens"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "DeepSeek Models & Pricing (official API docs)",
+    "url": "https://api-docs.deepseek.com/quick_start/pricing",
+    "published_at": null,
+    "key_points": [
+      "定价单位为 per 1M tokens，区分 Cache Hit / Cache Miss / Output，并区分 Peak / Off-peak 时段。",
+      "deepseek-flash（DeepSeek-V4.1-Flash）：Cache hit off-peak $0.003 / peak $0.006；Cache miss off-peak $0.15 / peak $0.30；Output off-peak $0.6 / peak $1.2。",
+      "deepseek-v4-pro（DeepSeek-V4-Pro-0813）：Cache hit off-peak $0.022 / peak $0.044；Cache miss off-peak $0.66 / peak $1.32；Output off-peak $1.98 / peak $3.96。",
+      "缓存折扣：cache hit 约为 cache miss 的 1/50（flash $0.15→$0.003；pro $0.66→$0.022）。",
+      "输入/输出差异：output 约为 cache-miss input 的 4 倍（flash 0.15→0.6；pro 0.66→1.98）。",
+      "时段折扣：off-peak 价格为 peak 的 5 折；peak 时段为 UTC 周一至周五 01:00–04:00 与 06:00–10:00（不含中国法定节假日），其余时段（含周末及中国法定节假日）均为 off-peak。",
+      "上下文长度 1M，最大输出 384K；支持 thinking 与非 thinking 模式（默认 thinking）。",
+      "计费公式：expense = number of tokens × price；优先扣减 granted balance。",
+      "官方声明产品价格可能变动并保留调价权。"
+    ],
+    "raw_excerpt": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.003 $0.022 PEAK $0.006 $0.044; 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32; 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96 ... Off-peak rates are half of the peak rates. Peak hours are 01:00 - 04:00 and 06:00 - 10:00 UTC, Monday through Friday, excluding Chinese public holidays."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "DeepSeek Token & Token Usage (official API docs)",
+    "url": "https://api-docs.deepseek.com/quick_start/token_usage",
+    "published_at": null,
+    "key_points": [
+      "token 是模型表示自然语言的基本单位，也是计费单位。",
+      "换算比：1 个英文字符 ≈ 0.3 token；1 个中文字符 ≈ 0.6 token。",
+      "官方说明不同模型 tokenization 方法不同，换算比会变化；实际 token 数以模型返回的 usage 为准。",
+      "提供离线 tokenizer 工具包（deepseek_tokenizer.zip）用于计算输入/输出 token 用量。",
+      "图像 token 用量可按尺寸估算，图像在推理前会自动缩放且有每图 token 上限；实际以 API 返回 usage 为准。"
+    ],
+    "raw_excerpt": "Tokens are the basic units used by models to represent natural language text, and also the units we use for billing. ... 1 English character ≈ 0.3 token. 1 Chinese character ≈ 0.6 token. However, due to the different tokenization methods used by different models, the conversion ratios can vary. The actual number of tokens processed each time is based on the model's return."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "openai/tiktoken — tiktoken_ext/openai_public.py (encoding definitions)",
+    "url": "https://raw.githubusercontent.com/openai/tiktoken/main/tiktoken_ext/openai_public.py",
+    "published_at": null,
+    "key_points": [
+      "cl100k_base 由 load_tiktoken_bpe 从 https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken 加载 mergeable_ranks，未设置 explicit_n_vocab 字段。",
+      "cl100k_base 的 special_tokens 为 {ENDOFTEXT: 100257, FIM_PREFIX: 100258, FIM_MIDDLE: 100259, FIM_SUFFIX: 100260, ENDOFPROMPT: 100276}。",
+      "cl100k_base 使用正则 pat_str: '(?i:[sdmt]|ll|ve|re)|[^\\r\\n\\p{L}\\p{N}]?+\\p{L}++|\\p{N}{1,3}+| ?[^\\s\\p{L}\\p{N}]++[\\r\\n]*+|\\s++$|\\s*[\\r\\n]|\\s+(?!\\S)|\\s'。",
+      "o200k_base 由 load_tiktoken_bpe 从 https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken 加载 mergeable_ranks，未设置 explicit_n_vocab 字段。",
+      "o200k_base 的 special_tokens 为 {ENDOFTEXT: 199999, ENDOFPROMPT: 200018}。",
+      "o200k_base 使用更复杂的分词正则，按 Unicode 大小写/标记类别（\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M} 等）区分，并含 \\p{N}{1,3} 数字切分。",
+      "作为对照，gpt2() 与 r50k_base() 均设置 explicit_n_vocab: 50257，p50k_base() 设置 explicit_n_vocab: 50281。",
+      "源码注释指出 o200k_base 的 token 分配在跨语言上仍可更高效（'I think you can allocate tokens more efficiently across languages'）。"
+    ],
+    "raw_excerpt": "def cl100k_base():\n    mergeable_ranks = load_tiktoken_bpe(\n        \"https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken\",\n        expected_hash=\"223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7\",\n    )\n    special_tokens = {\n        ENDOFTEXT: 100257,\n        FIM_PREFIX: 100258,\n        FIM_MIDDLE: 100259,\n        FIM_SUFFIX: 100260,\n        ENDOFPROMPT: 100276,\n    }\n...\ndef o200k_base():\n    mergeable_ranks = load_tiktoken_bpe(\n        \"https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken\",\n        expected_hash=\"446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d\",\n    )\n    special_tokens = {ENDOFTEXT: 199999, ENDOFPROMPT: 200018}"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "openai/tiktoken — README (BPE tokeniser for OpenAI models)",
+    "url": "https://github.com/openai/tiktoken",
+    "published_at": null,
+    "key_points": [
+      "tiktoken 被官方描述为 'a fast BPE tokeniser for use with OpenAI's models'。",
+      "README 示例使用 tiktoken.get_encoding(\"o200k_base\") 与 tiktoken.encoding_for_model(\"gpt-4o\")，表明 o200k_base 对应 gpt-4o 系列模型。",
+      "README 说明 BPE 是可逆无损、可处理任意文本、压缩文本（平均每 token 约 4 字节）并让模型看到常见子词。",
+      "README 示例中 cl100k_base 的 <|im_start|>/<|im_end|> 特殊 token 被赋值为 100264/100265（用于自定义 cl100k_im 编码）。"
+    ],
+    "raw_excerpt": "tiktoken is a fast BPE tokeniser for use with OpenAI's models.\n\nenc = tiktoken.get_encoding(\"o200k_base\")\n...\n# To get the tokeniser corresponding to a specific model in the OpenAI API:\nenc = tiktoken.encoding_for_model(\"gpt-4o\")"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "meta-llama/llama-models — Llama 3 MODEL_CARD.md",
+    "url": "https://raw.githubusercontent.com/meta-llama/llama-models/main/models/llama3/MODEL_CARD.md",
+    "published_at": "2024-04-18",
+    "key_points": [
+      "Llama 3 使用词表规模为 128K tokens 的 tokenizer（原文：'Llama 3 uses a tokenizer with a vocabulary of 128K tokens'）。",
+      "Llama 3 在 8,192 token 的序列上训练。",
+      "Llama 3 包含 8B 与 70B 两个规模，预训练与指令微调两个变体。",
+      "Llama 3 发布日期为 2024 年 4 月 18 日。"
+    ],
+    "raw_excerpt": "**Model Architecture** Llama 3 is an auto-regressive language model that uses an optimized transformer architecture. Llama 3 uses a tokenizer with a vocabulary of 128K tokens, and was trained on on sequences of 8,192 tokens."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "meta-llama/llama-models — Llama 3.1 MODEL_CARD.md",
+    "url": "https://raw.githubusercontent.com/meta-llama/llama-models/main/models/llama3_1/MODEL_CARD.md",
+    "published_at": "2024-07-23",
+    "key_points": [
+      "Llama 3.1 包含 8B、70B、405B 三个规模，上下文长度 128k，均使用 GQA。",
+      "Llama 3.1 预训练语料为 15T+ tokens，知识截止 2023 年 12 月。",
+      "Llama 3.1 支持语言为英语、德语、法语、意大利语、葡萄牙语、印地语、西班牙语、泰语。",
+      "该 model card 未提及 tokenizer 词表规模或分词方案。"
+    ],
+    "raw_excerpt": "The Meta Llama 3.1 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction tuned generative models in 8B, 70B and 405B sizes (text in/text out)."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "The Llama 3 Herd of Models (arXiv:2407.21783v3)",
+    "url": "https://arxiv.org/abs/2407.21783v3",
+    "published_at": "2024-07-31",
+    "key_points": [
+      "论文标题为 'The Llama 3 Herd of Models'，作者为 Llama Team, AI @ Meta。",
+      "v1 提交于 2024-07-31，v3 最后修订于 2024-11-23。",
+      "论文摘要称最大模型为 405B 参数的 dense Transformer，上下文窗口最高 128K tokens。",
+      "论文称 Llama 3 在约 15T 多语言 tokens 的语料上预训练。"
+    ],
+    "raw_excerpt": "Modern artificial intelligence (AI) systems are powered by foundation models. This paper presents a new set of foundation models, called Llama 3. ... Our largest model is a dense Transformer with 405B parameters and a context window of up to 128K tokens."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "meta-llama/llama-models — Llama 4 MODEL_CARD.md",
+    "url": "https://raw.githubusercontent.com/meta-llama/llama-models/main/models/llama4/MODEL_CARD.md",
+    "published_at": "2025-04-05",
+    "key_points": [
+      "Llama 4 包含 Scout（17B 激活/109B 总参数，16 experts）与 Maverick（17B 激活/400B 总参数，128 experts）两个 MoE 模型。",
+      "Llama 4 采用 mixture-of-experts 架构并支持原生多模态（early fusion）。",
+      "Llama 4 Scout 上下文长度 10M，Maverick 为 1M；训练 token 数分别约 40T 与 22T。",
+      "Llama 4 发布日期为 2025 年 4 月 5 日。",
+      "该 model card 未提及 tokenizer 词表规模、BPE 变体或 tiktoken 兼容性。"
+    ],
+    "raw_excerpt": "The Llama 4 collection of models are natively multimodal AI models that enable text and multimodal experiences. These models leverage a mixture-of-experts architecture ... Llama 4 Scout, a 17 billion parameter model with 16 experts, and Llama 4 Maverick, a 17 billion parameter model with 128 experts."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "openai/tiktoken — README",
+    "url": "https://github.com/openai/tiktoken",
+    "published_at": null,
+    "key_points": [
+      "tiktoken 自我定位为 'a fast BPE tokeniser for use with OpenAI's models'。",
+      "README 给出用法示例：tiktoken.get_encoding(\"o200k_base\") 与 tiktoken.encoding_for_model(\"gpt-4o\")。",
+      "README 声称 tiktoken 比同类开源 tokenizer 快 3-6 倍，基准为 1GB 文本、GPT-2 tokenizer，对比 tokenizers==0.13.2 / transformers==4.24.0 / tiktoken==0.2.0。",
+      "README 解释 BPE 的四个特性：可逆无损、可处理训练集外任意文本、压缩文本（平均每 token 约 4 字节）、让模型看到常见子词（如 'ing'）以助泛化。",
+      "tiktoken 含 _educational 子模块，提供 train_simple_encoding() 与 SimpleBytePairEncoding.from_tiktoken() 用于学习/可视化 BPE 过程。",
+      "仓库页面显示提交总数为 79 Commits（未显示 stars 数与最近提交日期）。"
+    ],
+    "raw_excerpt": "tiktoken is a fast BPE tokeniser for use with OpenAI's models. ... tiktoken is between 3-6x faster than a comparable open source tokeniser ... On average, in practice, each token corresponds to about 4 bytes."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "google/sentencepiece — README",
+    "url": "https://github.com/google/sentencepiece",
+    "published_at": null,
+    "key_points": [
+      "SentencePiece 自我定位为 'a fast, lightweight, and unsupervised text tokenizer and detokenizer designed for neural network-based text generation systems (such as Large Language Models) where the vocabulary size is fixed prior to training'。",
+      "README 声明其实现 subword units，包括 Byte-Pair-Encoding (BPE) [Sennrich et al.] 与 unigram language model [Kudo.]，可直接从原始句子训练。",
+      "核心设计：将输入文本视为原始 Unicode 字符序列，用元符号 ▁ (U+2581) 转义空白并纳入分词，使 detokenization 成为无损的字符串拼接操作，与语言无关。",
+      "README 强调无需语言相关的预分词器（如 Moses、MeCab、KyTea），对中文、日文、泰文等无显式词边界的语言尤为有效。",
+      "README 明确声明 'This is not an official Google product.'。",
+      "仓库页面显示提交总数为 1,539 Commits（未显示 stars 数与最近提交日期）。"
+    ],
+    "raw_excerpt": "SentencePiece is a fast, lightweight, and unsupervised text tokenizer and detokenizer designed for neural network-based text generation systems (such as Large Language Models) where the vocabulary size is fixed prior to training. ... This is not an official Google product."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "huggingface/tokenizers — README",
+    "url": "https://github.com/huggingface/tokenizers",
+    "published_at": null,
+    "key_points": [
+      "README 开篇自我宣称：'The SOTA tokenization library on all languages, all models, all hardwares.'（营销性主张，无第三方佐证）。",
+      "目标陈述：'develop and maintain the industry's standard tokenization engine, making it the defacto place for everyone to contribute to the whole ecosystem'。",
+      "当前处于 v1.0.0.rc.0 发布候选阶段，正从 0.23 迁移到 v1.0.0，当前库尚未包含全部功能。",
+      "安装方式为 pip install --pre tokenizers；用法示例 Tokenizer.from_pretrained(\"meta-llama/Llama-3.1-8B\")。",
+      "Rust 为参考实现，已提供 Python 与 Node.js 绑定；C/C++/Java/Go 等绑定标注为 planned。",
+      "v1.0.0 路线图包含：恢复训练能力、批量编码 API（零拷贝视图）、dlpack 互操作、组件组合、offset 输出、decode_stream 等。",
+      "仓库页面显示提交总数为 2,170 Commits（未显示 stars 数与最近提交日期）。"
+    ],
+    "raw_excerpt": "The SOTA tokenization library on all languages, all models, all hardwares. ... Release candidate: v1.0.0.rc.0 ... Rust ✅ reference implementation ... C / C++ / Java / Go/ etc 🚧 planned"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Byte Latent Transformer: Patches Scale Better Than Tokens",
+    "url": "https://arxiv.org/abs/2412.09871",
+    "published_at": "2024-12-13",
+    "key_points": [
+      "BLT 是一种字节级 LLM 架构，作者称其首次在规模上匹配基于分词的 LLM 性能，并在推理效率与鲁棒性上有显著改进。",
+      "BLT 将字节编码为动态大小的 patch（patches），patch 作为主要计算单元。",
+      "patch 的分段依据下一个字节的熵（entropy of the next byte），在数据复杂度高的地方分配更多计算与模型容量。",
+      "论文给出了首个字节级模型的 FLOP 受控扩展研究（FLOP controlled scaling study），规模达 8B 参数、4T 训练字节。",
+      "结论主张：在固定推理成本下，BLT 的扩展性显著优于基于分词的模型，可同时增大 patch 与模型规模。",
+      "论文报告在推理与长尾泛化（long tail generalization）上有定性改进。"
+    ],
+    "raw_excerpt": "We introduce the Byte Latent Transformer (BLT), a new byte-level LLM architecture that, for the first time, matches tokenization-based LLM performance at scale with significant improvements in inference efficiency and robustness. BLT encodes bytes into dynamically sized patches... Patches are segmented based on the entropy of the next byte... We present the first FLOP controlled scaling study of byte-level models up to 8B parameters and 4T training bytes."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "facebookresearch/blt (Byte Latent Transformer)",
+    "url": "https://github.com/facebookresearch/blt",
+    "published_at": null,
+    "key_points": [
+      "该仓库为论文 \"Byte Latent Transformer: Patches Scale Better Than Tokens\" 的官方代码库。",
+      "README 称 BLT 是字节级 LLM 架构，首次在规模上匹配基于分词的 LLM 性能，并在推理效率与鲁棒性上有显著改进。",
+      "README 描述 BLT 包含新的注意力机制以最大化字节与 patch 隐表示之间的信息流，以及一种新的字节序列记忆（byte-sequence memory）。",
+      "README 称其为首个可从字节端到端训练、无需分词或其他预处理的规模化模型（scaling study 至 8B 参数、8T 训练字节）。",
+      "已发布 BLT 1B 与 BLT 7B 的 HuggingFace 权重；作者称正与 HF 合作将 BLT 集成进 Transformers。",
+      "仓库处于活跃开发状态（65 commits），作者称正在持续更新代码以便复现结果。"
+    ],
+    "raw_excerpt": "This repository contains code for our paper: \"Byte Latent Transformer: Patches Scale Better Than Tokens\"... The BLT architecture includes new attention mechanisms to maximize the information flow between byte and patch hidden representations and a new type of byte-sequence memory. We present the first scaling study of byte-level models up to 8B parameters and 8T training bytes, showing for the first time that we can train a model end-to-end at scale from bytes with no tokenization or other preprocessing... We have released weights on HF for the BLT 1B Model and BLT 7B Model."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "unsloth/gemma-3-27b-it config.json (HuggingFace mirror)",
+    "url": "https://huggingface.co/unsloth/gemma-3-27b-it/raw/main/config.json",
+    "published_at": null,
+    "key_points": [
+      "config.json 中 text_config.vocab_size = 262208",
+      "顶层架构为 Gemma3ForConditionalGeneration，model_type 为 gemma3；文本子模型 model_type 为 gemma3_text",
+      "特殊 token 索引：boi_token_index=255999, eoi_token_index=256000, image_token_index=262144, bos_token_id=2, eos_token_id=106, pad_token_id=0",
+      "该镜像 config 含字段 unsloth_fixed: true，表明其为 unsloth 对官方权重的修复版本",
+      "transformers_version 为 4.51.3，torch_dtype 为 bfloat16"
+    ],
+    "raw_excerpt": "\"text_config\": { ... \"vocab_size\": 262208 }, ... \"unsloth_fixed\": true, ... \"boi_token_index\": 255999, \"eoi_token_index\": 256000, \"image_token_index\": 262144"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "Gemma 3 model card (Google AI for Developers)",
+    "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+    "published_at": null,
+    "key_points": [
+      "Gemma 3 为多模态模型，支持文本与图像输入、文本输出，含预训练与指令微调变体",
+      "27B 模型训练使用 14 万亿 tokens；知识截止日期为 2024 年 8 月",
+      "图像被归一化到 896x896 分辨率并编码为每张 256 个 token",
+      "4B/12B/27B 尺寸总输入上下文为 128K tokens，1B 与 270M 为 32K tokens",
+      "模型卡正文未给出 vocab_size 数值，也未描述分词算法（BPE/SentencePiece）"
+    ],
+    "raw_excerpt": "Images, normalized to 896 x 896 resolution and encoded to 256 tokens each ... Total input context of 128K tokens for the 4B, 12B, and 27B sizes"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "Gemma 3 Technical Report (arXiv:2503.19786v1)",
+    "url": "https://arxiv.org/abs/2503.19786v1",
+    "published_at": "2025-03-25",
+    "key_points": [
+      "Gemma 3 技术报告由 Gemma Team (Google DeepMind) 于 2025-03-25 提交，arXiv 编号 2503.19786v1",
+      "摘要称 Gemma 3 为多模态模型，规模 1B 至 27B 参数，支持至少 128K tokens 上下文，并通过增加局部/全局注意力层比例来降低 KV-cache 内存",
+      "抓取仅获得摘要与作者列表，未读到正文 tokenizer 章节，故无法从该来源直接引用 vocab_size 或分词算法"
+    ],
+    "raw_excerpt": "We introduce Gemma 3, a multimodal addition to the Gemma family of lightweight open models, ranging in scale from 1 to 27 billion parameters. This version introduces vision understanding abilities, a wider coverage of languages and longer context - at least 128K tokens."
+  }
+]

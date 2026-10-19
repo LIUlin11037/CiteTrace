@@ -1,0 +1,446 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues? (arXiv:2310.06770v3)",
+    "url": "https://arxiv.org/abs/2310.06770v3",
+    "published_at": "2023-10-10",
+    "key_points": [
+      "SWE-bench 是一个评测框架，包含 2,294 个软件工程问题，取自 12 个流行 Python 仓库的真实 GitHub issues 及对应 pull requests。",
+      "任务设定：给定一个 codebase 和一段 issue 描述，语言模型需编辑代码库以解决该 issue。",
+      "解决 SWE-bench 中的 issue 常需跨多个函数、类甚至文件同时理解并协调修改，要求模型与执行环境交互、处理超长上下文并进行复杂推理。",
+      "论文报告当时最强模型 Claude 2 仅能解决 1.96% 的 issue，微调模型 SWE-Llama 也只能解决最简单的问题。"
+    ],
+    "raw_excerpt": "we introduce SWE-bench, an evaluation framework consisting of $2,294$ software engineering problems drawn from real GitHub issues and corresponding pull requests across $12$ popular Python repositories. ... The best-performing model, Claude 2, is able to solve a mere $1.96$% of the issues."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "SWE-bench (original benchmark) — Official Overview",
+    "url": "https://www.swebench.com/original.html",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench 通过爬取 12 个流行 Python 仓库的 Pull Requests 与 Issues，收集了 2,294 个 task instances。",
+      "每个实例基于一个 pull request，该 PR 需满足：(1) 关联一个 issue，(2) 修改了 1 个以上测试相关文件。",
+      "每个实例构建一个执行环境（Docker 镜像），仓库安装在 PR 所基于的 commit 上。",
+      "在未应用 PR 改动时，若干测试失败；PR 合并后，同一组测试通过——这些 'Fail-to-Pass' 测试是评测的主要信号。",
+      "评测流程：每个任务实例向 AI 系统提供 issue 文本，AI 系统修改代码库以解决问题；完成后运行上述 Fail-to-Pass 测试以检查 issue 是否被成功解决。",
+      "SWE-bench 于 2023 年 10 月发布，初始 RAG 基线仅得 1.96%；后续 SWE-agent 是首个面向软件工程任务的 agent 系统，在 SWE-bench 上取得 12.47%。"
+    ],
+    "raw_excerpt": "Each instance is based on a pull request that (1) is associated with an issue, and (2) modified 1+ testing related files. ... Without the Pull Request's changes, a number of test(s) fail. After the Pull Request is merged, the same set of test(s) pass. These \"Fail-to-Pass\" tests are the primary signal for evaluation."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards — Official (variant sizes)",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "官方排行榜列出多个变体及其规模：SWE-bench 2,294 instances；Bash Only 500 instances；Lite 300 instances；Verified 500 instances；Multilingual 300 instances；Multimodal 480 instances。",
+      "SWE-bench（原始）：来自 12 个 Python 仓库的真实 GitHub issues。",
+      "Bash Only 是默认的 Verified 视图：所有模型在同一个 mini-SWE-agent 环境中运行。",
+      "Lite：为降低评测成本而精选的子集。",
+      "Verified：SWE-bench 的人工筛选子集。",
+      "Multilingual：来自 42 个仓库、覆盖 9 种编程语言的任务。",
+      "Multimodal：以视觉元素描述的 issue。",
+      "排行榜每条记录报告 % Resolved，即已解决任务实例的百分比。"
+    ],
+    "raw_excerpt": "SWE-bench 2294 instances — The original benchmark: real GitHub issues from 12 Python repositories. ... Lite 300 instances — A subset curated for less costly evaluation. ... Verified 500 instances — A human-filtered subset of SWE-bench. ... Multilingual 300 instances — Tasks from 42 repositories across 9 programming languages. ... Multimodal 480 instances — Issues described with visual elements. ... Each entry reports % Resolved, the percentage of task instances solved."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "SWE-bench Verified — Official Overview",
+    "url": "https://www.swebench.com/verified.html",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench Verified 是从 SWE-bench 中人工筛选出的 500 个实例子集，与 OpenAI 合作创建。",
+      "人工标注者审查每个实例，以确保问题描述清晰、测试补丁正确、且在给定信息下任务可解。",
+      "Verified 排行榜包含多种 AI 编码系统的结果，从简单 LM agent 循环到 RAG 系统再到多轮 rollout 与 review 类系统。",
+      "Bash Only 设置：为便于 LM 之间的对等比较，所有 LM 都在最小 bash 环境中使用 mini-SWE-agent 评测（无工具、无特殊 scaffold，仅简单 ReAct agent 循环）。",
+      "release 1.x 与 2.x 结果不一定可比：2.x 使用 tool calling 调用动作，1.x 从输出字符串解析动作。",
+      "1.x 及更早结果在支持时温度设为 0.0；2.x 及以后不设置温度参数。"
+    ],
+    "raw_excerpt": "SWE-bench Verified is a human-filtered subset of 500 instances from SWE-bench, created in collaboration with OpenAI. Human annotators reviewed each instance to ensure the problem descriptions are clear, the test patches are correct, and the tasks are solvable given the available information."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "SWE-bench Lite — Official Overview (selection criteria)",
+    "url": "https://www.swebench.com/lite.html",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench Lite 是从完整基准中精选的 300 个任务子集，目的是降低评测成本、加快迭代、为研究团队提供更易上手的入口。",
+      "300 个任务被选出以保留原基准的分布与难度谱，同时聚焦更自包含的功能性 bug 修复。",
+      "完整 SWE-bench test split 含 2,294 个 issue-commit 对，覆盖 12 个 Python 仓库；Lite 覆盖其中 11 个仓库，并额外提供 23 个开发实例。",
+      "Lite 筛选标准：移除含图片、外部超链接、特定 commit SHA 引用、其他 PR/issue 引用的实例；移除问题陈述少于 40 词的实例；移除修改超过 1 个文件的实例；移除 gold patch 超过 3 个 edit hunks 的实例；移除创建或删除文件的实例；移除包含带错误消息检查的测试的实例；最后从剩余候选中采样 300 个测试实例和 23 个开发实例。",
+      "官方建议：当算力效率是考量时，未来系统在 SWE-bench 上评测应报告 SWE-bench Lite 的数字，而非完整集。",
+      "Lite 的生成源码位于 SWE-bench/swebench/collect/make_lite。"
+    ],
+    "raw_excerpt": "SWE-bench Lite instances were selected using the following criteria: Removed instances with images, external hyperlinks, references to specific commit SHAs and references to other pull requests or issues; Removed instances with fewer than 40 words in the problem statement; Removed instances that edit more than 1 file; Removed instances where the gold patch has more than 3 edit hunks; Removed instances that create or remove files; Removed instances that contain tests with error message checks; Finally, sampled 300 test instances and 23 development instances from the remaining candidates."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "SWE-bench/SWE-bench — Official Repository README",
+    "url": "https://raw.githubusercontent.com/SWE-bench/SWE-bench/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench 是用于评测大语言模型在真实 GitHub 软件问题上的基准：给定 codebase 和 issue，模型需生成解决该问题的 patch。",
+      "SWE-bench 使用 Docker 进行可复现评测。",
+      "2024 年 8 月 13 日发布 SWE-bench Verified：与 OpenAI Preparedness 合作的第二部分，是 500 个经真实软件工程师确认可解的问题子集。",
+      "2024 年 6 月 27 日起，在 OpenAI Preparedness 团队支持下，评测 harness 迁移为完全容器化的 Docker 方案以实现更可复现的评测。",
+      "2025 年 1 月 13 日集成 SWE-bench Multimodal（论文 arXiv:2410.03859）。",
+      "2026 年 9 月 1 日 SWE-bench Multimodal v2 完全开源，提供 480 个任务用于本地评测。",
+      "SWE-bench 论文被 ICLR 2024 接收为 oral presentation。"
+    ],
+    "raw_excerpt": "SWE-bench is a benchmark for evaluating large language models on real world software issues collected from GitHub. Given a *codebase* and an *issue*, a language model is tasked with generating a *patch* that resolves the described problem. ... [Aug. 13, 2024]: Introducing *SWE-bench Verified*! ... A subset of 500 problems that real software engineers have confirmed are solvable."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards (official site)",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "官方排行榜提供多个视图：SWE-bench (2294 instances, 原始基准, 12 个 Python 仓库)、Bash Only (500 instances, 默认 Verified 视图, 所有模型在同一个 mini-SWE-agent 环境中运行)、Lite (300 instances)、Verified (500 instances, 人工筛选子集)、Multilingual (300 instances, 42 仓库 9 语言)、Multimodal (480 instances)。",
+      "排行榜条目报告 % Resolved，即解决的 task instance 百分比。",
+      "排行榜支持按 resolved vs cost、resolved vs model release date、resolved vs step limit 等维度对比，并区分 open-weights 模型与由 SWE-bench 团队亲自运行/核验的结果。"
+    ],
+    "raw_excerpt": "Each entry reports % Resolved , the percentage of task instances solved. ... Bash Only 500 instances The default Verified view: every model in the same mini-SWE-agent environment. ... Verified 500 instances A human-filtered subset of SWE-bench."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards — News timeline",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "2025 年 7 月：mini-SWE-agent 在 SWE-bench Verified 上得分 65%，实现代码仅 100 行 Python。",
+      "2025 年 3 月：SWE-agent 1.0 是 SWE-bench Lite 上的开源 SOTA。",
+      "2024 年 8 月：SWE-bench Verified 由 SWE-bench 与 OpenAI 合作发布。",
+      "2024 年 3 月：SWE-agent 发布，在 SWE-bench 上得分 12.47%。",
+      "2026 年 5 月：发布 ProgramBench；2025 年 11 月：发布 CodeClash。"
+    ],
+    "raw_excerpt": "Jul 2025 mini-SWE-agent scores 65% on SWE-bench Verified in 100 lines of Python. ... Mar 2025 SWE-agent 1.0 is the open source SOTA on SWE-bench Lite. ... Mar 2024 Check out SWE-agent (12.47% on SWE-bench)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "SWE-bench/experiments — evaluation/verified directory listing",
+    "url": "https://github.com/SWE-bench/experiments/tree/main/evaluation/verified",
+    "published_at": null,
+    "key_points": [
+      "官方 experiments 仓库的 evaluation/verified 目录按日期前缀存放各次提交结果，条目命名格式为 YYYYMMDD_<agent/model>。",
+      "目录中可见的条目覆盖 2023-10 至 2025-01，例如 20240402_sweagent_claude3opus、20240620_sweagent_claude3.5sonnet、20241029_OpenHands-CodeAct-2.1-sonnet-20241022、20241202_agentless-1.5_claude-3.5-sonnet-20241022、20250118_codeshellagent 等。",
+      "该目录列表在本次抓取中仅返回到 20250118_codeshellagent 为止，未显示 2025 下半年及 2026 年的条目。"
+    ],
+    "raw_excerpt": "main / verified / ... 20240402_sweagent_claude3opus ... 20240620_sweagent_claude3.5sonnet ... 20241029_OpenHands-CodeAct-2.1-sonnet-20241022 ... 20250118_codeshellagent"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+    "url": "https://arxiv.org/abs/2405.15793v3",
+    "published_at": "2024-05-06",
+    "key_points": [
+      "SWE-agent 的核心主张是：LM agent 是一类新的终端用户，需要专门构建的 agent-computer interface (ACI) 来使用软件。",
+      "SWE-agent 的定制 ACI 旨在增强 agent 创建/编辑代码文件、导航整个仓库、执行测试与其他程序的能力。",
+      "在 SWE-bench 上取得 pass@1 = 12.5%，在 HumanEvalFix 上 pass@1 = 87.7%，论文称二者均为当时 state-of-the-art。",
+      "论文明确研究 ACI 设计如何影响 agent 的行为与性能（即接口设计消融）。"
+    ],
+    "raw_excerpt": "we introduce SWE-agent: a system that facilitates LM agents to autonomously use computers to solve software engineering tasks. SWE-agent's custom agent-computer interface (ACI) significantly enhances an agent's ability to create and edit code files, navigate entire repositories, and execute tests and other programs. We evaluate SWE-agent on SWE-bench and HumanEvalFix, achieving state-of-the-art performance on both with a pass@1 rate of 12.5% and 87.7%, respectively"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "AutoCodeRover: Autonomous Program Improvement",
+    "url": "https://arxiv.org/abs/2404.05427",
+    "published_at": "2024-04-08",
+    "key_points": [
+      "AutoCodeRover 将 LLM 与代码搜索能力结合，最终产出程序修改或补丁。",
+      "与将项目视为文件集合的 agent 不同，AutoCodeRover 以程序表示（abstract syntax tree, AST）为工作对象。",
+      "其代码搜索利用程序结构（类/方法）来增强 LLM 对 issue 根因的理解，并通过迭代搜索检索上下文。",
+      "在可用测试套件时，使用基于频谱的故障定位（spectrum-based fault localization using tests）进一步锐化上下文。",
+      "在 SWE-bench-lite（300 个真实 GitHub issue）上解决率 19%，高于当时报告的 SWE-agent；平均成本 $0.43 USD，低于其他基线。"
+    ],
+    "raw_excerpt": "We work on a program representation (abstract syntax tree) as opposed to viewing a software project as a mere collection of files. Our code search exploits the program structure in the form of classes/methods to enhance LLM's understanding of the issue's root cause, and effectively retrieve a context via iterative search. The use of spectrum-based fault localization using tests, further sharpens the context... Experiments on SWE-bench-lite (300 real-life GitHub issues) show increased efficacy in solving GitHub issues (19% on SWE-bench-lite)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Agentless: Demystifying LLM-based Software Engineering Agents",
+    "url": "https://arxiv.org/abs/2407.01489",
+    "published_at": "2024-07-01",
+    "key_points": [
+      "Agentless 采用无 agent 的三阶段流程：localization（定位）、repair（修复）、patch validation（补丁验证）。",
+      "与 agent 式方法不同，Agentless 不让 LLM 决定未来动作，也不使用复杂工具。",
+      "在 SWE-bench Lite 上达到 32.00%（96 个正确修复），成本 $0.70，论文称其性能最高且成本低，优于所有已有开源软件 agent。",
+      "论文称 Agentless 已被 OpenAI 采用，作为展示 GPT-4o 与新 o1 模型真实编码性能的默认方法。",
+      "作者人工分类 SWE-bench Lite 问题，发现存在精确 ground truth patch 或 issue 描述不足/误导的问题，据此构建 SWE-bench Lite-S 以进行更严格评估。"
+    ],
+    "raw_excerpt": "Agentless employs a simplistic three-phase process of localization, repair, and patch validation, without letting the LLM decide future actions or operate with complex tools. Our results on the popular SWE-bench Lite benchmark show that surprisingly the simplistic Agentless is able to achieve both the highest performance (32.00%, 96 correct fixes) and low cost ($0.70) compared with all existing open-source software agents!"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "OpenHands: An Open Platform for AI Software Developers as Generalist Agents",
+    "url": "https://arxiv.org/abs/2407.16741",
+    "published_at": "2024-07-23",
+    "key_points": [
+      "OpenHands（前身 OpenDevin）是一个平台，用于开发以类似人类开发者方式与世界交互的 AI agent：写代码、操作命令行、浏览网页。",
+      "平台支持实现新 agent、在沙箱环境中安全执行代码、多 agent 协调，以及集成评估基准。",
+      "基于已集成的基准，论文在 15 项挑战性任务上评估 agent，包括软件工程（如 SWE-BENCH）与网页浏览（如 WEBARENA）等。",
+      "以 MIT 许可发布，是横跨学术界与工业界的社区项目，有超过 188 名贡献者、2.1K+ 次贡献。",
+      "论文被 ICLR 2025 接收。"
+    ],
+    "raw_excerpt": "we introduce OpenHands (f.k.a. OpenDevin), a platform for the development of powerful and flexible AI agents that interact with the world in similar ways to those of a human developer: by writing code, interacting with a command line, and browsing the web. We describe how the platform allows for the implementation of new agents, safe interaction with sandboxed environments for code execution, coordination between multiple agents, and incorporation of evaluation benchmarks."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "SWE-Bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks?",
+    "url": "https://arxiv.org/abs/2509.16941",
+    "published_at": "2025-09-21",
+    "key_points": [
+      "SWE-Bench Pro 是一个比 SWE-bench 更具挑战性的基准，明确设计用于捕捉超出 SWE-bench 范围的、真实的企业级复杂问题。",
+      "SWE-Bench Pro 包含 1,865 个问题，来自 41 个活跃维护的仓库，覆盖业务应用、B2B 服务和开发者工具。",
+      "基准被划分为三个部分：公开集（11 个仓库，可公开访问）、held-out 集（12 个仓库）和商业集（18 个专有仓库，与早期创业公司有正式合作协议）。",
+      "held-out 集与商业集中的问题不公开可访问，但作者公开发布了在商业集上的结果。",
+      "该基准的任务是长时程（long-horizon）任务，专业软件工程师可能需要数小时到数天完成，通常涉及跨多个文件的补丁和大量代码修改。",
+      "所有任务均经人工验证，并补充了足够上下文以确保可解性（resolvability）。",
+      "作者对收集到的 agent 轨迹中的失败模式进行了聚类，以刻画当前模型的错误模式。",
+      "论文将 SWE-Bench Pro 定位为『抗污染（contamination-resistant）的测试平台』，声称更真实地反映现实软件开发的复杂性与多样性。",
+      "论文提交于 2025-09-21，v2 修订于 2025-11-14。"
+    ],
+    "raw_excerpt": "We introduce SWE-Bench Pro, a substantially more challenging benchmark that builds upon the best practices of SWE-BENCH [25], but is explicitly designed to capture realistic, complex, enterprise-level problems beyond the scope of SWE-BENCH. SWE-BENCH PRO contains 1,865 problems sourced from a diverse set of 41 actively maintained repositories spanning business applications, B2B services, and developer tools. ... Overall, SWE-BENCH PRO provides a contamination-resistant testbed that more faithfully captures the complexity and diversity of real-world software development, advancing the pursuit of truly autonomous software engineering agents at a professional level."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "SWE-bench Verified (official benchmark page)",
+    "url": "https://www.swebench.com/verified.html",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench Verified 是 SWE-bench 的一个经人工筛选的子集，包含 500 个实例，由 SWE-bench 团队与 OpenAI 合作创建。",
+      "人工标注者逐条审查每个实例，以确保问题描述清晰、测试补丁（test patches）正确、且在给定信息下任务可解。",
+      "该页面将 Verified 的详细说明指向 OpenAI 的博客文章（本工具未能访问该博客正文）。",
+      "Verified 排行榜同时收录多种 AI 编码系统，从简单的 LM agent 循环到 RAG 系统再到多轮 rollout 与 review 型系统。",
+      "为便于语言模型之间的对等比较，官方用 mini-SWE-agent 在极简 bash 环境中评估所有 LM：无工具、无特殊 scaffold 结构，仅一个简单 ReAct agent 循环。",
+      "官方声明其目标不是通过调参把分数越刷越高，而只对框架做通用修复与 prompt 澄清，以提供最大程度公平的评估环境。",
+      "mini-SWE-agent 的 1.x 与 2.x 版本结果不必然可比：2.x 使用 tool calling 调用动作，1.x 则从输出字符串中解析动作。"
+    ],
+    "raw_excerpt": "SWE-bench Verified is a human-filtered subset of 500 instances from SWE-bench, created in collaboration with OpenAI. Human annotators reviewed each instance to ensure the problem descriptions are clear, the test patches are correct, and the tasks are solvable given the available information. ... To make an apples-to-apples comparison of LMs easier, we evaluate all LMs using mini-SWE-agent in a minimal bash environment. No tools, no special scaffold structure; just a simple ReAct agent loop."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards (official site, benchmark variants & news)",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "官方站点列出多个 SWE-bench 变体及其规模：原始 SWE-bench（2294 实例，来自 12 个 Python 仓库的真实 GitHub issue）、Bash Only（500 实例）、Lite（300 实例）、Verified（500 实例）、Multilingual（300 实例，覆盖 9 种编程语言、42 个仓库）、Multimodal（480 实例，问题描述含视觉元素）。",
+      "SWE-bench Lite 被描述为『为降低评估成本而筛选的子集』。",
+      "SWE-bench Multilingual 覆盖 42 个仓库、9 种编程语言。",
+      "站点新闻时间线显示：2025 年 7 月 mini-SWE-agent 用 100 行 Python 在 SWE-bench Verified 上得分 65%。",
+      "2025 年 5 月发布 SWE-smith，用于训练自己的软件工程 agent 模型。",
+      "2025 年 3 月 SWE-agent 1.0 成为 SWE-bench Lite 上的开源 SOTA。",
+      "2026 年 5 月发布 ProgramBench，用于评测模型能否从零编写有意义的软件产物；2025 年 11 月发布 CodeClash，评测 LM 作为目标导向（而非任务导向）开发者。",
+      "SWE-bench Verified 于 2024 年 8 月由 SWE-bench 团队与 OpenAI 合作发布。"
+    ],
+    "raw_excerpt": "SWE-bench 2294 instances — The original benchmark: real GitHub issues from 12 Python repositories. ... Verified 500 instances — A human-filtered subset of SWE-bench. ... Multilingual 300 instances — Tasks from 42 repositories across 9 programming languages. ... Jul 2025 mini-SWE-agent scores 65% on SWE-bench Verified in 100 lines of Python."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards (official site)",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "官方排行榜页面提供多个 split 视图：SWE-bench (2294 instances)、Bash Only (500 instances)、Lite (300 instances)、Verified (500 instances)、Multilingual (300 instances)、Multimodal (480 instances)。",
+      "「Bash Only」被描述为默认的 Verified 视图：所有模型在同一个 mini-SWE-agent 环境中运行（'The default Verified view: every model in the same mini-SWE-agent environment'）。",
+      "Verified 被描述为 SWE-bench 的人工筛选子集（'A human-filtered subset of SWE-bench'），共 500 instances。",
+      "页面 News 区列出时间线：2025-07 'mini-SWE-agent scores 65% on SWE-bench Verified in 100 lines of Python'；2025-05 'SWE-smith is out!'；2025-03 'SWE-agent 1.0 is the open source SOTA on SWE-bench Lite'；2026-05 'We released ProgramBench'；2025-11 'Introducing CodeClash'。",
+      "页面说明每个条目报告 % Resolved（'Each entry reports % Resolved, the percentage of task instances solved'），并区分 open-weights 模型与由 SWE-bench 团队亲自运行/核验的条目。"
+    ],
+    "raw_excerpt": "Bash Only 500 instances — The default Verified view: every model in the same mini-SWE-agent environment. ... Verified 500 instances — A human-filtered subset of SWE-bench. ... Each entry reports % Resolved, the percentage of task instances solved. ... Jul 2025 mini-SWE-agent scores 65% on SWE-bench Verified in 100 lines of Python."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "SWE-bench/experiments — repository README",
+    "url": "https://github.com/SWE-bench/experiments",
+    "published_at": null,
+    "key_points": [
+      "该仓库保存 SWE-bench 排行榜的提交记录（'This repository contains records of submissions to the SWE-bench leaderboard'）。",
+      "目录结构为 evaluation/{lite,verified,multimodal,multilingual,test}，其中 verified 目录包含 mini-SWE-agent 的 'bash-only' 运行（'verified/ (includes the mini-SWE-agent \"bash-only\" runs)'）。",
+      "每个提交子文件夹包含 metadata.yaml（记录谁运行了什么、产物位置）、README.md（系统描述）、logo.png 与 results/（resolved instance ids 及细分）。",
+      "仓库只保存条目而非产物：预测、执行日志与推理轨迹存放在提交者自己的公开仓库中，由 metadata.yaml 的 assets 块指定。",
+      "2026 年中之前的条目其 assets 指向 s3://swe-bench-submissions/。"
+    ],
+    "raw_excerpt": "This repository contains records of submissions to the SWE-bench leaderboard. ... verified/ (includes the mini-SWE-agent \"bash-only\" runs) ... ├── <date>_<model> │ ├── metadata.yaml the entry: who ran what, and where the artifacts live │ ├── README.md description of the system"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "SWE-bench/experiments — Verified submission policy note (11/18/2025)",
+    "url": "https://raw.githubusercontent.com/SWE-bench/experiments/main/README.md",
+    "published_at": "2025-11-18",
+    "key_points": [
+      "自 2025-11-18 起，SWE-bench Verified 与 Multilingual 仅接受来自学术团队与研究机构的提交，要求开源方法且经同行评审。",
+      "提交须满足全部条件：包含 arXiv 预印本或技术报告链接；至少一位作者隶属于学术机构或成熟研究实验室（如大学、Google DeepMind、Meta FAIR、Microsoft Research、前沿实验室）。",
+      "政策举例：OpenHands、SWE-RL、FrogBoss、AutoCodeRover 仍符合资格；Augment Code、Solver AI、Honeycomb.sh 不再符合资格。",
+      "该日期之前的提交继续按旧规则处理；此日期之后不符合条件的提交将被关闭。",
+      "SWE-bench Multimodal 排行榜仍对所有人开放提交。"
+    ],
+    "raw_excerpt": "[11/18/2025] SWE-bench Verified and Multilingual now only accepts submissions from academic teams and research institutions with open source methods and peer-reviewed publications. ... Would still be eligible: OpenHands, SWE-RL, FrogBoss, AutoCodeRover. Are no longer eligible: Augment Code, Solver AI, Honeycomb.sh"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "SWE-bench/experiments — evaluation/verified directory listing (partial)",
+    "url": "https://github.com/SWE-bench/experiments/tree/main/evaluation/verified",
+    "published_at": null,
+    "key_points": [
+      "verified 目录下的提交文件夹以 <日期>_<模型/系统> 命名，例如 20241029_OpenHands-CodeAct-2.1-sonnet-20241022、20241212_google_jules_gemini_2.0_flash_experimental、20250117_wandb_programmer_o1_crosscheck5。",
+      "抓取到的目录列表在 20250118_codeshellagent 处被截断，未能显示 2025-02 及之后的条目。",
+      "列表中可见的 scaffold/系统命名包括 OpenHands-CodeAct、SWE-agent、AutoCodeRover、Agentless、MASAI、CodeStory Midwit、Amazon Q Developer Agent、Devlo、Emergent、Nebius、Marscode 等。"
+    ],
+    "raw_excerpt": "20241029_OpenHands-CodeAct-2.1-sonnet-20241022 ... 20241212_google_jules_gemini_2.0_flash_experimental ... 20250117_wandb_programmer_o1_crosscheck5 ... 20250118_codeshellagent"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "SWE-Bench+: Enhanced Coding Benchmark for LLMs",
+    "url": "https://arxiv.org/abs/2410.06992",
+    "published_at": "2024-10-09",
+    "key_points": [
+      "论文对 SWE-bench 数据集质量做了系统性人工筛查，比较 SWE-Agent+GPT-4 生成的补丁与真实 PR。",
+      "32.67% 的成功补丁属于「作弊」，因为解决方案直接出现在 issue 报告或评论中，作者称之为 solution leakage（解决方案泄漏）问题。",
+      "31.08% 通过的补丁是可疑补丁，源于弱测试用例（测试不足以验证补丁正确性）。",
+      "剔除这些问题实例后，SWE-Agent+GPT-4 的解决率从 12.47% 降至 3.97%。",
+      "同样的数据质量问题也存在于 SWE-bench Lite 和 SWE-bench Verified 两个变体中。",
+      "超过 94% 的 issue 创建于 LLM 知识截止日期之前，构成潜在的数据泄漏问题。"
+    ],
+    "raw_excerpt": "1) 32.67% of the successful patches involve cheating as the solutions were directly provided in the issue report or the comments. We refer to as solution leakage problem. 2) 31.08% of the passed patches are suspicious patches due to weak test cases... When we filtered out these problematic issues, the resolution rate of SWE-Agent+GPT-4 dropped from 12.47% to 3.97%... over 94% of the issues were created before LLM's knowledge cutoff dates, posing potential data leakage issues."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "The SWE-Bench Illusion: When State-of-the-Art LLMs Remember Instead of Reason",
+    "url": "https://arxiv.org/abs/2506.12286",
+    "published_at": "2025-06-14",
+    "key_points": [
+      "论文提出两个诊断任务来探测模型底层知识：仅凭 issue 描述识别 buggy 文件路径；仅凭当前文件上下文与 issue 描述复现 ground truth 函数。",
+      "作者给出实证证据表明 SWE-Bench-Verified 上的性能提升可能部分由记忆化（memorization）而非真实问题解决能力驱动。",
+      "SOTA 模型仅凭 issue 描述、不访问仓库结构，识别 buggy 文件路径的准确率最高达 76%。",
+      "在未包含于 SWE-Bench 的仓库任务上，同一任务准确率最高仅 53%，指向可能的数据污染或记忆化。",
+      "函数复现任务中，SWE-Bench Verified 上的逐字相似度显著高于其他同类编码基准：SWE-Bench Verified 与 Full 上连续 5-gram 准确率最高达 35%，而其他基准任务最高仅 18%。",
+      "作者据此对现有评估结果的有效性提出质疑，并呼吁更稳健、抗污染的基准。"
+    ],
+    "raw_excerpt": "We present empirical evidence that performance gains on SWE-Bench-Verified may be partially driven by memorization rather than genuine problem-solving. We show that state-of-the-art models achieve up to 76% accuracy in identifying buggy file paths using only issue descriptions, without access to repository structure. This performance is merely up to 53% on tasks from repositories not included in SWE-Bench, pointing to possible data contamination or memorization... up to 35% consecutive 5-gram accuracy on SWE-Bench Verified and Full, but only up to 18% for tasks in other benchmarks."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "SWE-bench Leaderboards (official site)",
+    "url": "https://www.swebench.com/",
+    "published_at": null,
+    "key_points": [
+      "官方站点列出 SWE-bench 各变体：原始 SWE-bench（2294 实例，12 个 Python 仓库）、Verified（500 实例，人工过滤子集）、Lite（300 实例）、Multilingual、Multimodal。",
+      "Verified 被描述为「SWE-bench 的人工过滤子集」，由 SWE-bench 团队与 OpenAI 合作于 2024 年 8 月发布。",
+      "站点 News 栏目未包含任何针对数据污染/泄漏指控的官方回应或反驳声明。"
+    ],
+    "raw_excerpt": "Verified 500 instances — A human-filtered subset of SWE-bench. ... Aug 2024 SWE-bench x OpenAI = SWE-bench Verified."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "SWE-Bench+: Enhanced Coding Benchmark for LLMs",
+    "url": "https://arxiv.org/abs/2410.06992",
+    "published_at": "2024-10-09",
+    "key_points": [
+      "该论文对 SWE-bench 数据集质量做了系统性实证分析，通过人工筛查 SWE-Agent+GPT-4 成功解决的实例，将模型生成补丁与真实 PR 对比。",
+      "32.67% 的成功补丁属于“作弊”（cheating），因为解决方案直接出现在 issue 报告或评论中，作者称之为 solution leakage（解决方案泄漏）问题。",
+      "31.08% 通过的补丁是“可疑补丁”（suspicious patches），原因是 weak test cases——测试不足以验证补丁的正确性。",
+      "过滤掉这些有问题的实例后，SWE-Agent+GPT-4 的解决率从 12.47% 下降到 3.97%。",
+      "相同的数据质量问题也存在于 SWE-bench 的两个变体中，即 SWE-bench Lite 和 SWE-bench Verified。",
+      "超过 94% 的 issue 创建于 LLM 知识截止日期之前，构成潜在的数据泄漏（data leakage）问题。"
+    ],
+    "raw_excerpt": "Our analysis reveals some critical issues with the SWE-bench dataset: 1) 32.67% of the successful patches involve cheating as the solutions were directly provided in the issue report or the comments. We refer to as solution leakage problem. 2) 31.08% of the passed patches are suspicious patches due to weak test cases, i.e., the tests were not adequate to verify the correctness of a patch. When we filtered out these problematic issues, the resolution rate of SWE-Agent+GPT-4 dropped from 12.47% to 3.97%. We also observed that the same data quality issues also exist in the two variants of SWE-bench, i.e., SWE-bench Lite and SWE-Bench Verified. In addition, over 94% of the issues were created before LLM's knowledge cutoff dates, posing potential data leakage issues."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "SWE-Bench Pro Public Leaderboard (Scale AI)",
+    "url": "https://scale.com/leaderboard/swe_bench_pro_public",
+    "published_at": null,
+    "key_points": [
+      "SWE-Bench Pro 由 Scale AI 开发，定位为对 AI 软件工程 agent 的严格、真实评测基准，声称针对四大局限：数据污染、任务多样性不足、问题过度简化、测试不可靠/不可复现。",
+      "抗污染设计：公开与 held-out OSS 子集采用强 copyleft 许可（如 GPL），私有子集来自创业公司合作伙伴的专有代码库；官方称该许可模式使代码「不太可能」被纳入专有训练语料。",
+      "任务来源覆盖消费级应用、B2B 服务与开发者工具等多样复杂代码库。",
+      "官方给出的难度对比：top models 在 SWE-Bench Pro public set 上得分约 23%，而在 SWE-Bench Verified 上为 70%+。",
+      "主指标为 Resolve Rate：仅当补丁同时满足「修复问题（fail-to-pass 测试通过）」且「无回归（pass-to-pass 测试保持通过）」时才计为 resolved。",
+      "任务构建为四阶段人工流程（Sourcing / Environment Creation / Harvesting / Augmentation），含三个人工在环检查点（环境构建、issue 增强、测试验证）。"
+    ],
+    "raw_excerpt": "The benchmark is significantly more challenging than its predecessors; top models score around 23% on the SWE-Bench Pro public set, compared to 70%+ on SWE-Bench Verified. ... To reduce contamination risk, the public and held-out OSS subsets use strong copyleft licenses (e.g., GPL). The private subset consists of proprietary codebases from startup partners."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "scaleapi/SWE-bench_Pro-os (official repository)",
+    "url": "https://github.com/scaleapi/SWE-bench_Pro-os",
+    "published_at": null,
+    "key_points": [
+      "仓库为 SWE-Bench Pro 的官方代码与数据，对应论文《SWE-bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks?》。",
+      "数据集托管于 HuggingFace（ScaleAI/SWE-bench_Pro），并设公开 leaderboard 与商业（私有）leaderboard 两个榜单。",
+      "V2（2025-09-22 发布）为已验证公开划分：642 个任务、覆盖 11 个仓库，每个任务以自包含 Harbor 任务目录形式提供（含 verifier、参考解、公开容器镜像），并含 HARD-51 子集与锁定协议工具（离线 agent 阶段、全新沙箱重评分）。",
+      "v1 为原始 731 个任务；HuggingFace 默认 config 现为 V2，v1 保留为 config v1 / tag v1.0。",
+      "官方提供 SWE-Agent scaffold 以复现结果，并称已确认可复现 Sonnet 4.5 的结果；另加入 mini-swe-agent，称其结果与 SWE-Agent 在 Sonnet 4.5 上相当。",
+      "官方公告承认榜单存在问题：2025-05-18「We have identified some issues with the leaderboard and are currently working on addressing them」；此前还移除过部分过时/误纳入的单元测试。",
+      "仓库提供 oracle 参考补丁可解析 642/642 任务（harbor run ... -a oracle # reference patch resolves 642/642）。"
+    ],
+    "raw_excerpt": "(05/18) We have identified some issues with the leaderboard and are currently working on addressing them. ... V2 is the validated public split: 642 tasks across 11 repositories ... plus the HARD-51 subset (v2/hard51_ids.txt) and the locked-protocol tooling (v2/tooling/). ... harbor run -p v2/tasks -e modal -n 50 -a oracle # reference patch resolves 642/642"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "OpenHands: An Open Platform for AI Software Developers as Generalist Agents",
+    "url": "https://arxiv.org/abs/2407.16741",
+    "published_at": "2024-07-23",
+    "key_points": [
+      "论文首次提交于 2024-07-23（v1），最后修订 v3 于 2025-04-18。",
+      "论文被 ICLR 2025 接收（Accepted by ICLR 2025）。",
+      "OpenHands 前身为 OpenDevin，采用 MIT 许可发布。",
+      "论文摘要称基于已集成的 benchmark 对 agent 在 15 个挑战性任务上进行了评测，其中包括软件工程任务（如 SWE-bench）与网页浏览（如 WebArena）。",
+      "摘要未给出 SWE-bench 的具体 resolve rate 数值，也未指明评测所用模型。"
+    ],
+    "raw_excerpt": "Based on our currently incorporated benchmarks, we perform an evaluation of agents over 15 challenging tasks, including software engineering (e.g., SWE-BENCH) and web browsing (e.g., WEBARENA), among others. ... Accepted by ICLR 2025"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "OpenHands/OpenHands (GitHub repository)",
+    "url": "https://github.com/OpenHands/OpenHands",
+    "published_at": "2024-03-13",
+    "key_points": [
+      "仓库 OpenHands/OpenHands 创建于 2024-03-13，最近 push 于 2026-10-14，约 90,873 stars、12,044 forks，语言为 TypeScript，MIT 许可。",
+      "当前 README 已改版为 'Agent Canvas' 产品介绍（自托管 coding agent 控制中心），不再包含 SWE-bench benchmark 分数表。",
+      "README 称 Agent Canvas 默认运行开源 OpenHands agent，也可接入 Claude Code、Codex、Gemini CLI、Pi、OpenCode 等第三方 agent。"
+    ],
+    "raw_excerpt": "Agent Canvas — The self-hosted developer control center for coding agents and automations. ... Agent Canvas runs the open source OpenHands agent out-of-the-box, but can use third-party agents such as Claude Code, Codex, Gemini CLI, Pi, and OpenCode."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "OpenHands: An Open Platform for AI Software Developers as Generalist Agents (HTML full text, v3)",
+    "url": "https://arxiv.org/html/2407.16741v3",
+    "published_at": "2025-04-18",
+    "key_points": [
+      "论文正文（v3 HTML）确认 OpenHands 前身为 OpenDevin，是一个允许 agent 通过写代码、操作命令行、浏览网页与外部世界交互的平台。",
+      "论文正文引言部分提及 SWE-bench（Jimenez et al., 2024）作为软件工程类评测任务之一。",
+      "本次抓取仅覆盖到引言部分，未取到包含 SWE-bench resolve rate 的结果表格。"
+    ],
+    "raw_excerpt": "we introduce OpenHands (f.k.a. OpenDevin), a platform for the development of powerful and flexible AI agents that interact with the world in similar ways to those of a human developer: by writing code, interacting with a command line, and browsing the web."
+  }
+]

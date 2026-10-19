@@ -1,0 +1,469 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Dense Passage Retrieval for Open-Domain Question Answering (DPR)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2004.04906",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "DPR 将稀疏检索定义为：使用 TF-IDF 或 BM25，通过倒排索引高效匹配关键词，可视为把问题和上下文表示为高维稀疏向量（带权重）。",
+      "DPR 将稠密检索定义为：dense, latent semantic encoding，与稀疏表示在设计上互补；同义或改写（完全不同的 token）仍可被映射到相近的向量。",
+      "论文给出稀疏检索失效的具体例子：问题 'Who is the bad guy in lord of the rings?' 可由上下文 'Sala Baker is best known for portraying the villain Sauron in the Lord of the Rings trilogy.' 回答；基于词项的系统难以检索到该上下文，而稠密检索能把 'bad guy' 与 'villain' 匹配上。",
+      "稠密编码可通过调整嵌入函数学习，提供任务特定表示的额外灵活性；检索可用最大内积搜索（MIPS）等内存数据结构与索引方案高效完成。",
+      "论文指出稠密检索的代价：通常认为学习好的稠密向量表示需要大量标注的问答对；在 ORQA 之前，稠密检索从未在开放域 QA 上被证明优于 TF-IDF/BM25。",
+      "实验结论：在广泛的开放域 QA 数据集上，DPR 稠密检索在 top-20 段落检索准确率上比强 Lucene-BM25 系统绝对高出 9%-19%。"
+    ],
+    "raw_excerpt": "Retrieval in open-domain QA is usually implemented using TF-IDF or BM25 Robertson and Zaragoza 2009, which matches keywords efficiently with an inverted index and can be seen as representing the question and context in high-dimensional, sparse vectors (with weighting). Conversely, the dense, latent semantic encoding is complementary to sparse representations by design. For example, synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other. ... A term-based system would have difficulty retrieving such a context, while a dense retrieval system would be able to better match \"bad guy\" with \"villain\" and fetch the correct context."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Dense Passage Retrieval for Open-Domain Question Answering (DPR) — arXiv metadata page",
+    "url": "https://arxiv.org/abs/2004.04906v3",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "DPR 论文发表于 EMNLP 2020，arXiv 版本 v3 最后修订于 2020-09-30。",
+      "摘要明确将 TF-IDF/BM25 称为开放域 QA 中 'de facto method'（事实标准）的稀疏向量空间模型。",
+      "DPR 使用简单的 dual-encoder（双编码器）框架，从少量问题-段落对学习嵌入，实现纯稠密表示的检索。"
+    ],
+    "raw_excerpt": "Open-domain question answering relies on efficient passage retrieval to select candidate contexts, where traditional sparse vector space models, such as TF-IDF or BM25, are the de facto method. In this work, we show that retrieval can be practically implemented using dense representations alone, where embeddings are learned from a small number of questions and passages by a simple dual-encoder framework."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Qdrant Documentation — Hybrid Queries (Hybrid and Multi-Stage Queries)",
+    "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 的混合查询能力自 v1.10.0 起提供，基于「每个 point 多个命名向量（named vectors）」与 Query API 的 prefetch 参数实现多阶段查询。",
+      "Qdrant 官方给出的融合方式有两种：rrf（Reciprocal Rank Fusion）与 dbsf（Distribution-Based Score Fusion）。",
+      "Qdrant 的 RRF 公式中 k 默认取 2，权重 w_r 默认取 1；采用零基排名（top 结果 r_d = 0），因此默认权重下公式可简化为 score = Σ 1/(k + r_d)。",
+      "官方示例展示了对 sparse 与 dense 两个命名向量各取 limit=20 的 prefetch，再用 {\"query\": {\"rrf\": {}}} 融合并返回 limit=10 的结果。",
+      "Qdrant 文档明确混合检索的动机：结合 dense 向量的语义理解与 sparse 向量的精确词匹配，以「get the best of both worlds」。",
+      "prefetch 可嵌套（prefetches can have prefetches themselves）；offset 参数只作用于主查询，prefetch 的 limit 需至少为 limit + offset。"
+    ],
+    "raw_excerpt": "Qdrant has a few ways of fusing the results from different queries: rrf and dbsf ... $k$ is a constant (set to 2 by default) ... $w_r$ is the weight of ranking $r$ (set to 1 by default) ... it is often useful to combine dense and sparse vectors to get the best of both worlds: semantic understanding from dense vectors and precise word matching from sparse vectors."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Weaviate Documentation — Hybrid search",
+    "url": "https://weaviate.io/developers/weaviate/search/hybrid",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 的混合检索将向量检索与关键词（BM25F）检索的结果集进行融合，融合方法与相对权重均可配置。",
+      "Weaviate 混合检索使用单一查询字符串（single query string）同时驱动向量与关键词两路检索。",
+      "对含命名向量（named vectors）的集合做混合检索时必须指定目标向量（target_vector），Weaviate 用查询向量在该目标向量空间中检索。",
+      "Weaviate 提供 Query Agent 将自然语言问题自动翻译为优化后的 Weaviate 查询（Cloud only）。"
+    ],
+    "raw_excerpt": "Hybrid search combines the results of a vector search and a keyword (BM25F) search by fusing the two result sets. The fusion method and the relative weights are configurable."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Milvus Documentation — Multi-Vector Hybrid Search",
+    "url": "https://milvus.io/docs/multi-vector-search.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 通过允许在多个向量字段上同时执行多个 ANN 搜索来实现混合检索（multi-vector hybrid search）。",
+      "Milvus 明确支持 sparse-dense 向量混合检索：dense 向量擅长捕捉语义关系，sparse 向量擅长精确关键词匹配，二者结合可同时提供概念理解与精确词相关性。",
+      "Milvus 文档点名可用于全文/稀疏检索的算法与模型：BM25，以及 BGE-M3、SPLADE 等稀疏嵌入模型。",
+      "Milvus 支持多模态混合检索（文本、图像、音频），示例中用 CLIP 生成图像嵌入、用 BERT/Transformers 或 OpenAI 生成文本嵌入。",
+      "Milvus 的混合检索流程包含 reranking（重排）策略以合并多路结果。"
+    ],
+    "raw_excerpt": "Sparse-Dense Vector Search: Dense Vector are excellent for capturing semantic relationships, while Sparse Vector are highly effective for precise keyword matching. Hybrid search combines these approaches ... Algorithms like BM25 or sparse embedding models such as BGE-M3 or SPLADE can be utilized for this purpose."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Milvus Documentation — Reranking",
+    "url": "https://milvus.io/docs/reranking.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 通过 hybrid_search() API 提供混合检索，并对多个 AnnSearchRequest 的结果应用重排策略。",
+      "Milvus 当前提供两种重排策略：WeightedRanker（加权评分）与 RRFRanker（基于排名的倒数排名融合）。",
+      "WeightedRanker 先对每路检索分数归一化到 [0,1]（Milvus 使用 arctan 函数处理不同度量类型，如 IP 范围 [-∞,+∞]、L2 范围 [0,+∞]），再按用户指定的权重（每路权重范围 [0,1]）做加权平均。",
+      "WeightedRanker 的权重个数必须等于 AnnSearchRequest 实例个数；示例中 WeightedRanker(0.8, 0.8, 0.7) 对应三路检索。",
+      "RRFRanker 基于各向量列中的排名（reciprocal of ranks）融合，适用于各路重要性无明显优先级时平衡各向量字段的影响。"
+    ],
+    "raw_excerpt": "Currently, Milvus offers these reranking strategies: WeightedRanker: This approach merges results by calculating a weighted average of scores ... RRFRanker: This strategy combines results based on their ranks across different vector columns. ... Milvus employs the arctan function, transforming values to the [0,1] range"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "OpenSearch Documentation — Hybrid search",
+    "url": "https://opensearch.org/docs/latest/vector-search/ai-search/hybrid-search/index/",
+    "published_at": null,
+    "key_points": [
+      "OpenSearch 的混合检索自 2.11 版本引入，结合关键词检索与语义检索以提升相关性。",
+      "OpenSearch 通过 search pipeline（搜索管道）在搜索时拦截中间结果并归一化、合并文档分数。",
+      "OpenSearch 提供两种 search phase results processor：normalization processor（基于分数，将各查询子句分数转换到统一尺度后合并，保留文档间分差）与 score ranker processor（基于排名，使用 RRF 按各查询子句结果中的位置合并文档，忽略分数本身）。",
+      "OpenSearch 建议：当文档间分数差本身包含需在最终排序中体现的信息、或需要细粒度控制（归一化技术、组合技术、分数边界）时选 normalization processor；当希望无需先测量各子句打分即可工作的配置时选 score ranker processor（RRF）。",
+      "OpenSearch 提供自动化 workflow 模板（use_case=hybrid_search）一键创建 ingest pipeline、index 与 search pipeline，默认模型维度为 1024（可通过 output_dimension 参数覆盖）。"
+    ],
+    "raw_excerpt": "The normalization processor is score based ... The score ranker processor is rank based. It uses reciprocal rank fusion (RRF) to combine documents according to their position in each query clause's results, ignoring the scores themselves. ... if the model dimensionality is different from the default (1024), specify the dimensionality of your model in the output_dimension parameter."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Elasticsearch Documentation — Hybrid search",
+    "url": "https://www.elastic.co/docs/solutions/search/hybrid-search",
+    "published_at": null,
+    "key_points": [
+      "Elasticsearch 的混合检索在单个请求中同时运行全文检索与向量检索，返回一个融合了关键词匹配与相似度检索的排序列表。",
+      "Elasticsearch 官方推荐使用 reciprocal rank fusion (RRF) 算法实现混合检索，用于合并全文查询与向量查询的排名。",
+      "Elasticsearch 文档说明 RRF 会给在任一查询中得分高的文档更多权重，最终列表在精确关键词匹配与基于相似度的匹配之间取得平衡。",
+      "Elasticsearch 推荐通过 semantic_text workflow 使用混合检索；对近似 kNN 在混合检索中的用法另有专门文档。"
+    ],
+    "raw_excerpt": "We recommend implementing hybrid search with the reciprocal rank fusion (RRF) algorithm. This approach merges rankings from the full-text and vector queries, giving more weight to documents that score well in either one."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub search results — hybrid search vector database (repo metadata)",
+    "url": "https://github.com/search?q=hybrid+search+vector+database&type=repositories",
+    "published_at": null,
+    "key_points": [
+      "搜索元数据显示 langchain-ai/langchain-milvus（★59）自述为 Milvus 的 LangChain 包装器，支持 vector search、full-text search、hybrid retrieval 与 RAG，最近 push 2026-10-10。",
+      "搜索元数据显示 infiniflow/infinity（★4741）自述为面向 LLM 应用的 AI-native 数据库，提供 dense vector、sparse vector、tensor（multi-vector）与 full-text 的快速混合检索。",
+      "搜索元数据显示 tensorchord/pgvecto.rs（★2190）自述为 Postgres 中可扩展、低延迟且支持混合的向量搜索，最近 push 2025-02-26。",
+      "搜索元数据显示 manticoresoftware/manticoresearch（★12056）自述为支持全文、向量与混合检索的开源搜索数据库。",
+      "搜索元数据显示 apache/doris（★16086）自述为面向 AI agent 的实时分析与混合检索数据库。"
+    ],
+    "raw_excerpt": "langchain-ai/langchain-milvus (★59) ... The LangChain wrapper of Milvus vector database for efficient vector search, full-text search, hybrid retrieval and RAG. | infiniflow/infinity (★4741) ... providing incredibly fast hybrid search of dense vector, sparse vector, tensor (multi-vector), and full-text."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Okapi BM25 — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Okapi_BM25",
+    "published_at": null,
+    "key_points": [
+      "BM25 是一种 bag-of-words 检索函数，根据查询词是否出现在文档中对文档排序，不考虑词在文档内的邻近关系（proximity）。",
+      "BM25 基于 1970–1980 年代由 Stephen E. Robertson、Karen Spärck Jones 等人发展的概率检索框架（probabilistic retrieval framework）。",
+      "BM25 评分公式为对查询词求和：score(D,Q)=Σ IDF(qi) · [ f(qi,D)·(k1+1) ] / [ f(qi,D) + k1·(1 − b + b·|D|/avgdl) ]，其中 f(qi,D) 为词 qi 在文档 D 中的出现次数，|D| 为文档长度，avgdl 为集合平均文档长度。",
+      "k1 与 b 为自由参数，在未做高级优化时通常取 k1 ∈ [1.2, 2.0]、b = 0.75。",
+      "IDF(qi) 通常计算为 ln( (N − n(qi) + 0.5) / (n(qi) + 0.5) + 1 )，其中 N 为集合中文档总数，n(qi) 为包含 qi 的文档数。",
+      "在 BM25 的原始推导中，IDF 分量源自二元独立模型（Binary Independence Model）。",
+      "BM25 及其变体（如可考虑文档结构与锚文本的 BM25F）属于用于文档检索的 TF-IDF 类检索函数。",
+      "BM25 的完整名称 Okapi BM25 中的 Okapi 来自首个使用该函数的系统，即 1980–1990 年代在伦敦 City University 实现的 Okapi 信息检索系统。"
+    ],
+    "raw_excerpt": "BM25 is a bag-of-words retrieval function that ranks a set of documents based on the query terms appearing in each document, regardless of their proximity within the document. ... k1 and b are free parameters, usually chosen, in absence of an advanced optimization, as k1 ∈ [1.2, 2.0] and b = 0.75. ... In the original BM25 derivation, the IDF component is derived from the Binary Independence Model."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models (arXiv:2104.08663v4)",
+    "url": "https://arxiv.org/abs/2104.08663v4",
+    "published_at": "2021-04-17",
+    "key_points": [
+      "BEIR 由 18 个公开数据集构成，覆盖多样文本检索任务与领域，用于评估检索模型的分布外（OOD）泛化能力。",
+      "BEIR 评估了 10 个 SOTA 检索系统，涵盖 lexical、sparse、dense、late-interaction 与 re-ranking 架构。",
+      "论文结论：BM25 是一个稳健的基线（robust baseline）。",
+      "论文结论：re-ranking 与 late-interaction 模型平均取得最佳 zero-shot 性能，但计算成本高。",
+      "论文结论：dense 与 sparse 检索模型计算上更高效，但常常表现不如其他方法，其泛化能力仍有相当大的改进空间。",
+      "论文动机：既有神经 IR 模型多在单一、同质的窄设定下研究，限制了对 OOD 泛化能力的认识。",
+      "论文指出：多数先前工作在训练集同分布数据上评估，展示了相对 BM25 的显著提升，但 zero-shot 场景下表现不明。",
+      "论文发表于 NeurIPS 2021 Dataset and Benchmark Track。"
+    ],
+    "raw_excerpt": "Our results show BM25 is a robust baseline and re-ranking and late-interaction-based models on average achieve the best zero-shot performances, however, at high computational costs. In contrast, dense and sparse-retrieval models are computationally more efficient but often underperform other approaches, highlighting the considerable room for improvement in their generalization capabilities."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models (arXiv:2104.08663v4) — Introduction",
+    "url": "https://arxiv.org/html/2104.08663v4",
+    "published_at": "2021-04-17",
+    "key_points": [
+      "BEIR 引言指出传统检索由 TF-IDF / BM25 等 lexical 方法主导，其缺陷是 lexical gap，只能检索包含查询关键词的文档，且将查询与文档视为 bag-of-words、不考虑词序。",
+      "BEIR 引言指出许多先前工作在大数据集（NQ 133k、MS MARCO 533k 训练样本）上训练神经检索系统，并在同一数据集上评估，从而展示出相对 BM25 的显著提升。",
+      "BEIR 引言强调：创建大规模训练语料耗时昂贵，因此许多检索系统在 zero-shot 设定下应用（无可用训练数据）。",
+      "BEIR 引言明确其核心问题：既有已训练神经模型在其他文本领域/检索任务上表现如何尚不清楚，稀疏 vs 稠密嵌入对 OOD 数据的泛化能力也不清楚。"
+    ],
+    "raw_excerpt": "However, creating a large training corpus is often time-consuming and expensive and hence many retrieval systems are applied in a zero-shot setup, with no available training data to train the system. So far, it is unclear how well existing trained neural models will perform for other text domains or textual retrieval tasks. Even more important, it is unclear how well different approaches, like sparse embeddings vs. dense embeddings, generalize to out-of-distribution data."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "SentenceTransformers Documentation (sbert.net)",
+    "url": "https://www.sbert.net/",
+    "published_at": null,
+    "key_points": [
+      "Sentence Transformers（a.k.a. SBERT）是用于使用与训练 embedding 与 reranker 模型的 Python 模块，由 UKP Lab 创建、现由 Hugging Face 维护。",
+      "SBERT 通过 Sentence Transformer 模型从文本计算 embeddings，并用余弦相似度（similarity）计算相似度分数。",
+      "官方文档示例展示用 model.encode() 得到句子嵌入、用 model.similarity() 计算嵌入间相似度，应用于 semantic search、semantic textual similarity、paraphrase mining。",
+      "文档为当前 v6.0 版本，介绍 MultiVectorEncoder（ColBERT 风格 late-interaction）等新特性，非 1908.10084 原文内容。"
+    ],
+    "raw_excerpt": "SentenceTransformers (a.k.a. SBERT) is the go-to Python module for using and training state-of-the-art embedding and reranker models. ... to calculate similarity scores using Cross-Encoder (a.k.a. reranker) models ... This unlocks a wide range of applications, including semantic search, semantic textual similarity, and paraphrase mining."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "An Analysis of Fusion Functions for Hybrid Retrieval",
+    "url": "https://arxiv.org/abs/2210.11934",
+    "published_at": "2022-10-21",
+    "key_points": [
+      "该论文研究文本检索中的 hybrid search，即把 lexical（词法）检索与 semantic（语义）检索的分数融合，其动机是两者在 relevance 建模上具有互补性。",
+      "论文考察了两类融合方法：lexical 与 semantic 分数的凸组合（convex combination, CC），以及 Reciprocal Rank Fusion（RRF）。",
+      "论文声称与既有研究相反，RRF 对其参数敏感（sensitive to its parameters）。",
+      "论文声称 CC 融合的学习通常对分数归一化（score normalization）的选择不敏感（agnostic）。",
+      "论文声称 CC 在 in-domain 与 out-of-domain 设置下均优于 RRF。",
+      "论文声称 CC 具有样本效率（sample efficient），仅需少量训练样本即可将其唯一参数调至目标域。",
+      "该论文为 v2 版本，2023-05-04 修订；关联 DOI 10.1145/3596512。",
+      "摘要层面未给出 BEIR / MS MARCO / TREC DL 上的 nDCG@10 或 Recall 具体百分点数值。"
+    ],
+    "raw_excerpt": "We study hybrid search in text retrieval where lexical and semantic search are fused together with the intuition that the two are complementary in how they model relevance. In particular, we examine fusion by a convex combination (CC) of lexical and semantic scores, as well as the Reciprocal Rank Fusion (RRF) method... Contrary to existing studies, we find RRF to be sensitive to its parameters; that the learning of a CC fusion is generally agnostic to the choice of score normalization; that CC outperforms RRF in in-domain and out-of-domain settings; and finally, that CC is sample efficient, requiring only a small set of training examples to tune its only parameter to a target domain."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+    "url": "https://arxiv.org/abs/2104.08663",
+    "published_at": "2021-04-17",
+    "key_points": [
+      "BEIR 由 18 个公开数据集构成，覆盖多样化的文本检索任务与领域，用于 IR 模型的零样本（zero-shot）异质评测。",
+      "BEIR 评测了 10 个当时的 SOTA 检索系统，涵盖 lexical、sparse、dense、late-interaction 与 re-ranking 架构。",
+      "论文结论称 BM25 是一个稳健的 baseline（robust baseline）。",
+      "论文结论称 re-ranking 与 late-interaction 类模型平均取得最佳零样本性能，但计算成本高。",
+      "论文结论称 dense 与 sparse-retrieval 模型计算效率更高，但常常不如其他方法，说明其泛化能力仍有较大提升空间。",
+      "该论文被 NeurIPS 2021 Dataset and Benchmark Track 接收，v4 版本 2021-10-21。",
+      "该摘要未直接给出 hybrid（BM25+dense 融合）相对纯 sparse/纯 dense 的 nDCG@10 提升百分点；其价值在于提供 BM25 与 dense 的零样本基线对比。"
+    ],
+    "raw_excerpt": "We leverage a careful selection of 18 publicly available datasets from diverse text retrieval tasks and domains and evaluate 10 state-of-the-art retrieval systems including lexical, sparse, dense, late-interaction and re-ranking architectures on the BEIR benchmark. Our results show BM25 is a robust baseline and re-ranking and late-interaction-based models on average achieve the best zero-shot performances, however, at high computational costs. In contrast, dense and sparse-retrieval models are computationally more efficient but often underperform other approaches, highlighting the considerable room for improvement in their generalization capabilities."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Elasticsearch Docs — Reciprocal rank fusion",
+    "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion",
+    "published_at": null,
+    "key_points": [
+      "RRF 的评分公式为 score = Σ 1/(k + rank(result(q), d))，其中 k 是 ranking constant，rank 从 1 开始计数。",
+      "Elasticsearch 的 RRF retriever 中 rank_constant 参数默认值为 60，且必须 ≥ 1。",
+      "rank_constant 值越大，表示排名靠后的文档影响力越大（higher value indicates that lower ranked documents have more influence）。",
+      "RRF 被描述为无需调参（requires no tuning），且不同相关性指标之间无需相互关联即可获得高质量结果。",
+      "RRF retriever 至少需要两个 child retriever，每个 child retriever 在 RRF 公式中权重相等。"
+    ],
+    "raw_excerpt": "score = 0.0\nfor q in queries:\n if d in result(q):\n  score += 1.0 / ( k + rank( result(q), d ) )\nreturn score\n# where\n# k is a ranking constant ... rank_constant (Optional, integer) ... Defaults to 60 ."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Elasticsearch Docs — Reciprocal rank fusion (rank_constant semantics)",
+    "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion",
+    "published_at": null,
+    "key_points": [
+      "rank_constant 的语义被官方文档明确为：决定单个结果集中文档对最终排名的影响程度，值越高则低排名文档影响越大。",
+      "文档给出 rank_constant 可被显式设为非 60 的值（示例中设为 20），说明 60 是默认而非强制值。"
+    ],
+    "raw_excerpt": "rank_constant (Optional, integer) This value determines how much influence documents in individual result sets per query have over the final ranked result set. A higher value indicates that lower ranked documents have more influence. This value must be greater than or equal to 1 . Defaults to 60 ."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+    "url": "https://arxiv.org/abs/2004.12832v2",
+    "published_at": "2020-04-27",
+    "key_points": [
+      "ColBERT 提出 late interaction 架构：用 BERT 分别独立编码 query 和 document，再用轻量交互步骤建模细粒度相似度。",
+      "通过延迟但保留细粒度交互，ColBERT 可离线预计算文档表示，从而显著加速查询处理。",
+      "ColBERT 的剪枝友好交互机制支持借助向量相似度索引直接从大规模文档集合做端到端检索，而不仅是重排传统模型召回的文档。",
+      "在 passage search 数据集上，ColBERT 效果与已有 BERT-based 模型相当（并优于所有非 BERT 基线），同时查询执行快两个数量级、每查询所需 FLOPs 少四个数量级。"
+    ],
+    "raw_excerpt": "ColBERT introduces a late interaction architecture that independently encodes the query and the document using BERT and then employs a cheap yet powerful interaction step that models their fine-grained similarity... Results show that ColBERT's effectiveness is competitive with existing BERT-based models (and outperforms every non-BERT baseline), while executing two orders-of-magnitude faster and requiring four orders-of-magnitude fewer FLOPs per query."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking",
+    "url": "https://arxiv.org/abs/2107.05720",
+    "published_at": "2021-07-12",
+    "key_points": [
+      "SPLADE 是一种基于显式稀疏正则化（explicit sparsity regularization）与词项权重 log-saturation 效应的 first-stage ranker，产生高度稀疏的表示。",
+      "该方法继承 bag-of-words 模型的优点：词项精确匹配（exact matching）与倒排索引的效率。",
+      "SPLADE 简单、单阶段端到端训练（trained end-to-end in a single stage）。",
+      "论文探索了通过控制稀疏正则化贡献来权衡效果与效率（effectiveness/efficiency trade-off）。",
+      "论文为 SIGIR'21 短文，5 页。"
+    ],
+    "raw_excerpt": "we present a new first-stage ranker based on explicit sparsity regularization and a log-saturation effect on term weights, leading to highly sparse representations and competitive results with respect to state-of-the-art dense and sparse methods. Our approach is simple, trained end-to-end in a single stage."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "SPLADE v2: Sparse Lexical and Expansion Model for Information Retrieval",
+    "url": "https://arxiv.org/abs/2109.10086",
+    "published_at": "2021-09-21",
+    "key_points": [
+      "SPLADE v2 在 SPLADE 基础上提出多项改进：修改 pooling 机制、benchmark 仅基于 document expansion 的模型、引入用蒸馏训练的模型。",
+      "SPLADE v2 报告了 BEIR benchmark 上的结果。",
+      "相比原 SPLADE，在 TREC DL 2019 上 NDCG@10 提升超过 9%，在 BEIR benchmark 上达到 state-of-the-art 结果。"
+    ],
+    "raw_excerpt": "we modify the pooling mechanism, benchmark a model solely based on document expansion, and introduce models trained with distillation. We also report results on the BEIR benchmark. Overall, SPLADE is considerably improved with more than 9% gains on NDCG@10 on TREC DL 2019, leading to state-of-the-art results on the BEIR benchmark."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Document Ranking with a Pretrained Sequence-to-Sequence Model (monoT5)",
+    "url": "https://arxiv.org/abs/2003.06713",
+    "published_at": "2020-03-14",
+    "key_points": [
+      "monoT5 将预训练 sequence-to-sequence 模型适配到文档排序任务，与基于 encoder-only 架构（如 BERT）的分类式排序范式根本不同。",
+      "该方法训练 seq2seq 模型生成相关性标签作为 target words，并将这些 target words 的底层 logits 解释为用于排序的相关性概率。",
+      "在 MS MARCO passage ranking 任务上，该方法至少与之前的分类式模型相当，且用更大、更新的模型可以超越它们。",
+      "在 TREC 2004 Robust Track 测试集上，零样本迁移方法优于此前需要 in-dataset 交叉验证的 SOTA 模型。",
+      "在数据稀缺（few training examples）场景下，该方法显著优于 encoder-only 模型。"
+    ],
+    "raw_excerpt": "We show how a sequence-to-sequence model can be trained to generate relevance labels as \"target words\", and how the underlying logits of these target words can be interpreted as relevance probabilities for ranking. On the popular MS MARCO passage ranking task, experimental results show that our approach is at least on par with previous classification-based models and can surpass them with larger, more-recent models."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Elasticsearch — Reciprocal rank fusion (RRF) reference",
+    "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion",
+    "published_at": null,
+    "key_points": [
+      "Elasticsearch 的 RRF retriever 提供 rank_constant 参数，官方文档明确其默认值为 60。",
+      "rank_constant 必须 >= 1；值越高，低排名文档影响力越大。",
+      "RRF 公式为 score += 1.0 / (k + rank(result(q), d))，rank 从 1 开始。",
+      "文档示例中可将 rank_constant 显式设为 20 以覆盖默认值。"
+    ],
+    "raw_excerpt": "rank_constant (Optional, integer) This value determines how much influence documents in individual result sets per query have over the final ranked result set. A higher value indicates that lower ranked documents have more influence. This value must be greater than or equal to 1. Defaults to 60."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "OpenSearch — Score ranker processor (RRF) reference",
+    "url": "https://docs.opensearch.org/latest/search-plugins/search-pipelines/score-ranker-processor/",
+    "published_at": null,
+    "key_points": [
+      "OpenSearch 的 score-ranker-processor 使用 RRF，combination.rank_constant 默认值为 60。",
+      "rank_constant 有效范围为 [1, 10000]。",
+      "文档说明：较大的 rank constant 使分数更均匀、降低头部结果影响；较小的值加大排名间分差、更重视头部结果。",
+      "文档示例明确写出「uses the rrf combination technique with the default rank constant of 60」。"
+    ],
+    "raw_excerpt": "combination.rank_constant Integer A constant added to each document's rank before calculating the reciprocal score. Valid values are in the [1, 10000] range. ... Optional. Default is 60."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "OpenSearch — Reciprocal rank fusion (concept page)",
+    "url": "https://docs.opensearch.org/latest/vector-search/ai-search/hybrid-search/rrf/",
+    "published_at": null,
+    "key_points": [
+      "OpenSearch RRF 公式为 score(d) = Σ 1/(k + rank_q(d))，rank 从 1 开始，k 由 rank_constant 参数配置。",
+      "该 RRF 能力自 OpenSearch 2.19 引入。",
+      "文档给出 RRF 与 score-based 归一化混合管线的对比：在六个 BEIR 数据集基准上，RRF 的 NDCG@10 平均比 score-based 管线低 3.86%。"
+    ],
+    "raw_excerpt": "score(d) = \\sum_{q \\in Q} \\frac{1}{k + rank_q(d)} ... k is the rank constant, configured by the rank_constant parameter. ... In benchmarks on six BEIR datasets, RRF averaged 3.86% lower NDCG@10 than the score-based hybrid pipeline"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Qdrant — Hybrid Queries (RRF documentation)",
+    "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 的 RRF 公式中 k 为常数，官方文档明确「set to 2 by default」。",
+      "Qdrant 使用零基排名（zero-based rank positions），top 结果 r_d = 0。",
+      "权重 w_r 默认值为 1；当权重为默认时公式简化为原始 RRF 函数 score = Σ 1/(k + r_d)。",
+      "Qdrant 提供 rrf 与 dbsf 两种融合方式，RRF 自 v1.10.0 起可用。"
+    ],
+    "raw_excerpt": "$k$ is a constant (set to 2 by default) ... Qdrant uses zero-based rank positions; the top result has $r_d = 0$. Because $w_r$ defaults to 1, without setting explicit weights, the formula can be simplified to the original RRF function: score(d\\in D) = \\sum_{r_d\\in R(d)} \\frac{1}{k + r_d}"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Milvus — RRF Ranker documentation",
+    "url": "https://milvus.io/docs/rrf-ranker.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 的 RRFRanker 公式中 k 为平滑参数，文档称「typically set at 60」。",
+      "文档示例中明确「Assume that the smoothing parameter k is set at 60」，并用 1/(60+rank) 计算最终分数。",
+      "RRFRanker 用于混合搜索，基于排名位置而非原始相似度分数来平衡多路检索结果。"
+    ],
+    "raw_excerpt": "k is a smoothing parameter typically set at 60. ... Use RRF to rearrange the rankings of the two sets of search results. Assume that the smoothing parameter k is set at 60."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Weaviate — Hybrid search concepts (fusion strategies)",
+    "url": "https://weaviate.io/developers/weaviate/concepts/search/hybrid-search",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 支持两种融合策略：relativeScoreFusion 与 rankedFusion。",
+      "rankedFusion（即 RRF 式排名融合）的分数按 1/(RANK + 60) 计算，隐含 k=60。",
+      "relativeScoreFusion 自 v1.24 起为默认策略；rankedFusion 是 v1.23 及更早版本的默认。",
+      "Weaviate 文档未将 k 暴露为可配置参数，仅在公式中硬编码 60。"
+    ],
+    "raw_excerpt": "With rankedFusion (default for v1.23 and lower), each object is scored according to its position in the results ... The score depends on the rank of each result and is computed according to 1/(RANK + 60)"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Hybrid Queries — Qdrant Documentation (Query API, prefetch, RRF/DBSF)",
+    "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 的混合检索通过 prefetch 参数实现：每个 prefetch 是一个子查询，主查询在其结果之上执行；prefetch 可嵌套。",
+      "prefetch 的 limit 必须至少等于主查询的 limit + offset，否则可能返回空结果（offset 只作用于主查询）。",
+      "官方示例中 dense 与 sparse 两个 prefetch 各设 limit=20，主查询 limit=10，融合方式为 RRF。",
+      "RRF 公式中 k 默认设为 2，权重 w_r 默认设为 1；Qdrant 使用零基排名（top 结果 r_d=0）。",
+      "Qdrant 提供两种融合方式：rrf 与 dbsf。"
+    ],
+    "raw_excerpt": "The main component for making the combinations of queries possible is the prefetch parameter... Using offset parameter only affects the main query. This means that the prefetches must have a limit of at least limit + offset of the main query, otherwise you can get an empty result. ... k is a constant (set to 2 by default) ... w_r is the weight of ranking r (set to 1 by default)."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Hybrid Search in Qdrant — Tuning Guide (cost, fusion, learned sparse)",
+    "url": "https://qdrant.tech/articles/hybrid-search/",
+    "published_at": null,
+    "key_points": [
+      "混合检索相对单一检索会增加存储、索引与查询开销（storage, indexing, and query work），官方建议实测收益是否值得该成本。",
+      "BM25 稀疏检索在查询时不需要模型推理（no model inference）。",
+      "稠密相似度分数有界，而 BM25 分数幅度取决于命中词数与词稀有度，因此固定权重无法在所有查询上保持平衡。",
+      "RRF 通过丢弃分数幅度（只读排名位置）来规避尺度不匹配；DBSF 则按查询对每个分数分布做归一化。",
+      "官方建议：先用 BM25（查询时无需模型），再实测 learned sparse 模型（如 miniCOIL、SPLADE）是否值得采用。"
+    ],
+    "raw_excerpt": "Compared with either retriever alone, hybrid search adds storage, indexing, and query work. Measure whether the gain is worth the cost instead of guessing. ... A fixed weight on the raw scores may balance one query but let BM25 dominate another. No single raw-score weight preserves the same balance across both. ... Start with BM25, which needs no model at query time, then measure a learned model against it before adopting one."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Hybrid Search Fusion Algorithms — Weaviate Blog (rankedFusion vs relativeScoreFusion)",
+    "url": "https://weaviate.io/blog/hybrid-search-fusion-algorithms",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 提供两种融合算法：rankedFusion 与 relativeScoreFusion。",
+      "rankedFusion 在 1.24 之前是默认算法；relativeScoreFusion 于 1.20 引入、1.24 起成为默认，官方认为对多数场景更优。",
+      "Weaviate 的混合检索在底层执行两次检索：一次向量检索、一次关键词（BM25F）检索，然后融合结果。",
+      "Weaviate 混合查询通过 alpha 参数（示例 alpha=0.5）控制向量与关键词的相对权重。"
+    ],
+    "raw_excerpt": "There are two fusion algorithms available in Weaviate: rankedFusion and relativeScoreFusion. rankedFusion was the default algorithm until 1.24. relativeScoreFusion is the newer algorithm, introduced in 1.20 and made default in 1.24, and likely the better choice for most. ... response = collection.query.hybrid(query=\"food\", alpha=0.5, limit=5,)"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Hybrid search — Weaviate Documentation (fusion method and weights configurable)",
+    "url": "https://weaviate.io/developers/weaviate/search/hybrid",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 混合检索融合向量检索与关键词（BM25F）检索的结果集，融合方法与相对权重均可配置。",
+      "在含命名向量（named vectors）的集合上做混合检索必须指定 target_vector。"
+    ],
+    "raw_excerpt": "Hybrid search combines the results of a vector search and a keyword (BM25F) search by fusing the two result sets. The fusion method and the relative weights are configurable."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Vector Search Benchmarks — Qdrant (single-node RPS/latency/p95/index time)",
+    "url": "https://qdrant.tech/benchmarks/",
+    "published_at": "2024-06",
+    "key_points": [
+      "Qdrant 公开单节点基准，指标包括 RPS、Latency、p95 latency、Index time，数据更新于 2024 年 1 月/6 月。",
+      "基准强调 ANN 检索是精度与速度的权衡，只有在精度相近时比较结果才有意义。",
+      "该基准对比的是各向量引擎的纯向量检索性能，未单独给出混合检索相对纯向量检索的延迟增量。"
+    ],
+    "raw_excerpt": "Updated: January/June 2024 ... This is important because ANN search is all about trading precision for speed. This means in any vector search benchmark, two results must be compared only when you have similar precision."
+  }
+]

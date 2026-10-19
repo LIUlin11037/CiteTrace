@@ -14,7 +14,7 @@ Key decisions:
 from __future__ import annotations
 
 import logging
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 import httpx
 from langchain_core.exceptions import OutputParserException
@@ -23,7 +23,7 @@ from langchain_core.messages import BaseMessage
 from langchain_core.runnables import Runnable, RunnableLambda
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langchain_openai import ChatOpenAI
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, SecretStr, ValidationError
 from tenacity import (
     retry,
     retry_if_exception_type,
@@ -36,6 +36,9 @@ from deep_research.core.config import RoleName, get_settings
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=BaseModel)
+# 调用方既传结构化 runnable（T 为 pydantic 模型），也传裸 chat model（AIMessage），
+# 因此重试包装的返回类型不绑定 BaseModel。
+TOut = TypeVar("TOut")
 
 # The writer emits a full report plus a complete footnote reference list; the
 # shared 4096 default truncates the reference section on source-heavy reports
@@ -63,16 +66,16 @@ def get_chat_model(role: RoleName, *, streaming: bool = False) -> BaseChatModel:
     return ChatOpenAI(
         model=cfg.model,
         base_url=cfg.base_url,
-        api_key=cfg.api_key,
+        api_key=SecretStr(cfg.api_key),
         temperature=cfg.temperature,
-        max_tokens=max_tokens,
+        max_tokens=max_tokens,  # type: ignore[call-arg]  # pydantic 动态字段，mypy 不识别
         timeout=cfg.request_timeout,
         streaming=streaming,
         max_retries=0,  # retries are handled by invoke_with_retry below
     )
 
 
-def structured_output(role: RoleName, schema: type[T]) -> Runnable:
+def structured_output(role: RoleName, schema: type[T]) -> Runnable[Any, T]:
     """A runnable that returns a validated pydantic instance of `schema`.
 
     Two transports, chosen per role:
@@ -103,7 +106,7 @@ def structured_output(role: RoleName, schema: type[T]) -> Runnable:
         if role in _unforced_roles:
             return await _unforced_call(messages)
         try:
-            return await forced.ainvoke(messages)
+            return cast(T, await forced.ainvoke(messages))
         except Exception as exc:  # noqa: BLE001 - provider-specific 400 shapes vary
             text = str(exc)
             if "tool_choice" in text and "does not support" in text:
@@ -130,7 +133,7 @@ class LLMCallError(Exception):
     wait=wait_exponential(multiplier=1, min=2, max=30),
     reraise=True,
 )
-async def invoke_with_retry(runnable: Runnable, input_: dict) -> BaseModel:
+async def invoke_with_retry(runnable: Runnable[Any, TOut], input_: dict[str, Any]) -> TOut:
     """Invoke a structured-output runnable with retry on transient failures.
 
     ValidationError from the provider emitting malformed structured output
@@ -182,4 +185,4 @@ def _is_transient(exc: Exception) -> bool:
     )
     if status is None:
         return type(exc).__name__ in {"APIConnectionError", "APITimeoutError", "ConnectError"}
-    return status == 429 or status >= 500
+    return bool(status == 429 or status >= 500)

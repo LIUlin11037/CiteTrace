@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 _embedder: Any = None
 
 
-def _get_embedder():
+def _get_embedder() -> Any:
     global _embedder
     if _embedder is None:
         from fastembed import TextEmbedding

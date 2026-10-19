@@ -1,0 +1,98 @@
+{
+  "n_questions": 6,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9583333333333334,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 3.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9722222222222222,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 1.0,
+      "coverage": 1.0
+    },
+    "rag": {
+      "n": 2.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9166666666666666,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-mcp",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 58,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-tool-use",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 51,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "方法将 TA-LLM 交互建模为马尔可夫决策过程（MDP），定义 5 个不同的对话状态，并依据状态转移轨迹把用户 query 分为 3 类"
+      ]
+    },
+    {
+      "question_id": "gq-agent-framework-compare",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 48,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-open-weights-2025",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 44,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-rag-eval",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 43,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "RAGBench v2 修订于 2025-01-16[^27]"
+      ]
+    },
+    {
+      "question_id": "gq-vector-db",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 27,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

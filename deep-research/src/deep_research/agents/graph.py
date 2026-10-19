@@ -32,12 +32,14 @@ from deep_research.agents.nodes import (
 from deep_research.agents.state import ResearchState
 
 
-def build_graph(checkpointer: BaseCheckpointSaver[Any]):
+def build_graph(checkpointer: BaseCheckpointSaver[Any]) -> Any:
     """Compile the research graph. A checkpointer is mandatory."""
     builder = StateGraph(ResearchState)
 
     builder.add_node("planner", planner_node)
-    builder.add_node("researcher", researcher_node)
+    # researcher 的输入是 Send 载荷（ResearcherInput），不是整份 state；
+    # LangGraph 的节点签名标注表达不了这一点，运行时由 Send 决定。
+    builder.add_node("researcher", researcher_node)  # type: ignore[arg-type]
     builder.add_node("critic", critic_node)
     builder.add_node("writer", writer_node)
 

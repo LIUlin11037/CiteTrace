@@ -38,7 +38,7 @@ _streams: dict[str, asyncio.Queue[dict[str, Any] | None]] = {}
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI):
+async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     global _saver, _graph
     from deep_research.core.tracing import flush_tracing
 
@@ -85,7 +85,9 @@ async def _pending_interrupt(config: dict[str, Any]) -> Any | None:
     return None
 
 
-async def _drive(thread_id: str, resume: Command | None, payload: dict[str, Any]) -> None:
+async def _drive(
+    thread_id: str, resume: Command[Any] | None, payload: dict[str, Any]
+) -> None:
     """Run the graph and push events into the thread's queue."""
     queue = _streams[thread_id]
     config = _config(thread_id)
@@ -115,7 +117,9 @@ def _to_sse(event: dict[str, Any]) -> str:
         data["interrupt"] = event.get("data", {}).get("value")
     elif kind == "on_chat_model_stream":
         chunk = event.get("data", {}).get("chunk")
-        if chunk is not None and getattr(chunk, "content", ""):
+        # chunk.content 的类型是 str | list[content-block]，这里只需要"是否非空"；
+        # mypy 对三参 getattr 推不出兼容 default，故忽略该处的 arg-type。
+        if chunk is not None and getattr(chunk, "content", ""):  # type: ignore[arg-type]
             data["token"] = chunk.content
     elif kind == "on_chain_end" and name == "LangGraph":
         out = event.get("data", {}).get("output", {})
@@ -161,7 +165,9 @@ async def resume_research(thread_id: str, req: ResumeRequest) -> dict[str, str]:
         raise HTTPException(status_code=404, detail="unknown thread_id")
     # fresh queue for the resumed segment so a reconnecting SSE client works
     _streams[thread_id] = asyncio.Queue()
-    resume = Command(resume={"approved": req.approved, "edited_plan": req.edited_plan})
+    resume: Command[Any] = Command(
+        resume={"approved": req.approved, "edited_plan": req.edited_plan}
+    )
     asyncio.create_task(_drive(thread_id, resume=resume, payload={}))
     return {"thread_id": thread_id, "status": "resumed"}
 

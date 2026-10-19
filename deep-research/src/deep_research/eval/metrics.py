@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+from typing import Any
 
 
 @dataclass
@@ -27,7 +28,7 @@ class EvalSummary:
     per_subdomain: dict[str, dict[str, float]]
     scores: list[QuestionScore]
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 

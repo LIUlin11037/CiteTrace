@@ -155,7 +155,7 @@ def route_after_planner(state: ResearchState) -> list[Any]:
     """Fan out one Researcher branch per approved sub-question (Send API)."""
     from langgraph.types import Send
 
-    plan = state["plan"]
+    plan = state.get("plan")
     if plan is None or not state.get("plan_approved", False):
         # Rejected plan ends the run; the entry layer decides whether to re-plan.
         return []
@@ -274,8 +274,9 @@ async def critic_node(state: ResearchState) -> dict[str, Any]:
         f"  excerpt: {ev.raw_excerpt[:300]}"
         for ev in evidences
     )
+    plan = state.get("plan")
     plan_digest = "\n".join(
-        f"- {sq.id}: {sq.question}" for sq in (state["plan"].sub_questions if state["plan"] else [])
+        f"- {sq.id}: {sq.question}" for sq in (plan.sub_questions if plan else [])
     )
 
     runnable = structured_output("critic", CritiqueResult)
@@ -305,7 +306,7 @@ def route_after_critic(state: ResearchState) -> Any:
     """Pass -> writer; fail -> fan out follow-up questions to researchers."""
     from langgraph.types import Send
 
-    critique = state["critique"]
+    critique = state.get("critique")
     if critique is None or critique.passed or not critique.follow_ups:
         return "writer"
     return [
@@ -342,8 +343,9 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
         for i, ev in enumerate(evidences, 1)
     )
     issues_note = ""
-    if state.get("critique") and state["critique"].issues:
-        unresolved = [i for i in state["critique"].issues if i.severity == "blocking"]
+    prev_critique = state.get("critique")
+    if prev_critique is not None and prev_critique.issues:
+        unresolved = [i for i in prev_critique.issues if i.severity == "blocking"]
         if unresolved:
             issues_note = "\n\n未解决的存疑项（须在报告中显式声明不确定性）：\n" + "\n".join(
                 f"- {i.claim}: {i.problem}" for i in unresolved
@@ -390,6 +392,10 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
     else:
         logger.warning("writer 续写段数达到上限 %d，最后一段可能仍被截断", _MAX_WRITER_SEGMENTS)
 
+    if result is None:
+        # 循环至少执行一次，这里只为满足类型检查并给出清晰错误
+        raise RuntimeError("writer 未返回任何响应")
+
     body = "\n".join(segments).strip()
     if len(body) < _MIN_BODY_CHARS:
         raise RuntimeError(f"writer 输出过短（{len(body)} 字符），放弃该题")
@@ -413,7 +419,7 @@ async def _store_memories(topic: str, report: str, evidences: list[Evidence]) ->
 
         store = await get_memory_store()
         summary = report[:1200]  # 摘要段在报告开头，截断即可，不值得再花一次 LLM 调用
-        items: list[tuple[str, str, dict]] = [
+        items: list[tuple[str, str, dict[str, Any]]] = [
             ("report_summary", f"课题：{topic}\n{summary}", {"topic": topic})
         ]
         by_sq: dict[str, list[Evidence]] = {}

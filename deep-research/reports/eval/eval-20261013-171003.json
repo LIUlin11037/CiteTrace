@@ -1,0 +1,29 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.8333333333333334,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.8333333333333334,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-tokenizer",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 33,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "8 个模型的真实 tokenizer 运行文本，输出 tokens、fertility、xEN、STRR、b/tok、gc/tok 等指标"
+      ]
+    }
+  ]
+}

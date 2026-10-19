@@ -17,7 +17,7 @@ from __future__ import annotations
 import asyncio
 import re
 from dataclasses import dataclass, field
-from typing import Awaitable, Callable, Literal
+from typing import Any, Awaitable, Callable, Literal
 
 import httpx
 
@@ -44,7 +44,7 @@ class CitationReport:
     exists: int = 0
     missing: int = 0
     unverifiable: int = 0
-    details: list[dict] = field(default_factory=list)
+    details: list[dict[str, Any]] = field(default_factory=list)
 
     @property
     def existence_rate(self) -> float:

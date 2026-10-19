@@ -11,7 +11,7 @@ Channel design (the part that breaks if you get it wrong):
 from __future__ import annotations
 
 import operator
-from typing import Annotated, Any, Literal, TypedDict
+from typing import Annotated, Any, Literal, Required, TypedDict
 
 from langgraph.graph.message import add_messages
 from pydantic import BaseModel, Field
@@ -80,7 +80,8 @@ class CritiqueResult(BaseModel):
 
 
 class ResearchState(TypedDict, total=False):
-    topic: str
+    # topic 由入口 initial_input 必定提供；其余通道按阶段产出，故整体 total=False。
+    topic: Required[str]
     plan: ResearchPlan | None
     plan_approved: bool
 

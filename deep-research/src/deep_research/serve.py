@@ -22,7 +22,7 @@ import sys
 from deep_research.core.compat import use_compatible_event_loop
 
 
-def _loop_factory():
+def _loop_factory() -> asyncio.AbstractEventLoop:
     # WindowsSelectorEventLoopPolicy only affects asyncio.run's default
     # factory on older Pythons; passing the factory explicitly is version-proof.
     if sys.platform == "win32":

@@ -1,0 +1,558 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG (arXiv:2501.09136v4)",
+    "url": "https://arxiv.org/abs/2501.09136v4",
+    "published_at": "2025-01-15",
+    "key_points": [
+      "该综述将 Agentic RAG 定义为：通过将自主 AI 智能体（autonomous AI agents）嵌入 RAG 流水线，超越传统 RAG 的静态工作流限制。",
+      "Agentic RAG 中的智能体运用四类 agentic 设计模式：reflection（反思）、planning（规划）、tool use（工具使用）、multi-agent collaboration（多智能体协作）。",
+      "这些智能体动态管理检索策略、迭代式精炼上下文理解，并通过从顺序步骤到自适应协作的运营结构来适配工作流。",
+      "论文指出传统 RAG 系统受限于静态工作流（static workflows），缺乏多步推理与复杂任务管理所需的适应性。",
+      "该综述提出基于 agent cardinality（智能体数量）、control structure（控制结构）、autonomy（自主性）、knowledge representation（知识表示）的 Agentic RAG 架构分类法（taxonomy）。",
+      "论文作者为 Aditi Singh, Abul Ehtesham, Saket Kumar, Tala Talaei Khoei, Athanasios V. Vasilakos；v1 提交于 2025-01-15，v4 修订于 2026-04-01。"
+    ],
+    "raw_excerpt": "Agentic Retrieval-Augmented Generation (Agentic RAG) transcends these limitations by embedding autonomous AI agents into the RAG pipeline. These agents leverage agentic design patterns reflection, planning, tool use, and multi-agent collaboration to dynamically manage retrieval strategies, iteratively refine contextual understanding, and adapt workflows through operational structures ranging from sequential steps to adaptive collaboration."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection (arXiv:2310.11511v1)",
+    "url": "https://arxiv.org/abs/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "Self-RAG 提出一种框架，训练单个 LM 按需自适应检索（adaptively retrieves passages on-demand），并通过特殊 token（reflection tokens）对检索到的段落及自身生成进行反思。",
+      "Self-RAG 的核心机制是 reflection tokens，使 LM 在推理阶段可控，从而针对不同任务需求调整行为。",
+      "Self-RAG 明确针对传统 RAG 的缺陷：不加区分地检索并纳入固定数量的段落（无论是否需要检索、段落是否相关）会削弱 LM 的通用性。",
+      "Self-RAG 实验使用 7B 与 13B 参数模型，在开放域 QA、推理与事实验证任务上优于 ChatGPT 及检索增强的 Llama2-chat。",
+      "作者为 Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, Hannaneh Hajishirzi。"
+    ],
+    "raw_excerpt": "We introduce a new framework called Self-Reflective Retrieval-Augmented Generation (Self-RAG) that enhances an LM's quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand, and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+    "url": "https://arxiv.org/abs/2312.10997v5",
+    "published_at": "2023-12-18",
+    "key_points": [
+      "该综述将 RAG 范式的演进明确划分为三类：Naive RAG、Advanced RAG、Modular RAG（原文：'the progression of RAG paradigms, encompassing the Naive RAG, the Advanced RAG, and the Modular RAG'）。",
+      "该综述将 RAG 框架的基础拆解为三部分：retrieval（检索）、generation（生成）、augmentation（增强）（原文：'the tripartite foundation of RAG frameworks, which includes the retrieval, the generation and the augmentation techniques'）。",
+      "该综述指出 RAG 被提出用于应对 LLM 的幻觉、知识过时、推理过程不透明不可追溯等问题（原文：'challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes'）。",
+      "该综述声明其内容涵盖各关键组件中的 SOTA 技术、评估框架与基准，并在结尾列出当前挑战与未来方向。",
+      "版本信息：v1 提交于 2023-12-18，最新版 v5 修订于 2024-03-27。"
+    ],
+    "raw_excerpt": "This comprehensive review paper offers a detailed examination of the progression of RAG paradigms, encompassing the Naive RAG, the Advanced RAG, and the Modular RAG. It meticulously scrutinizes the tripartite foundation of RAG frameworks, which includes the retrieval, the generation and the augmentation techniques."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Seven Failure Points When Engineering a Retrieval Augmented Generation System",
+    "url": "https://arxiv.org/abs/2401.05856v1",
+    "published_at": "2024-01-11",
+    "key_points": [
+      "该文将 RAG 系统的基本流程描述为：先找到与查询语义匹配的文档，再把文档传给 LLM（如 ChatGPT）以抽取正确答案（原文：'finding documents that semantically match a query and then passing the documents to a large language model (LLM) such as ChatGPT to extract the right answer'）。",
+      "该文指出 RAG 系统的三个设计目标：a) 减少 LLM 幻觉回答，b) 将来源/引用与生成回答关联，c) 免除为文档标注元数据的需求。",
+      "该文明确 RAG 系统存在两类固有限制：信息检索系统固有的限制，以及对 LLM 的依赖（原文：'RAG systems suffer from limitations inherent to information retrieval systems and from reliance on LLMs'）。",
+      "该文基于研究、教育、生物医学三个不同领域的案例研究，提出设计 RAG 系统时需考虑的 7 个失效点（failure points）。",
+      "该文两条核心结论：1) RAG 系统的验证只有在运行期间才可行；2) RAG 系统的鲁棒性是演化出来的，而非在起始阶段设计进去的（原文：'validation of a RAG system is only feasible during operation' 与 'the robustness of a RAG system evolves rather than designed in at the start'）。"
+    ],
+    "raw_excerpt": "However, RAG systems suffer from limitations inherent to information retrieval systems and from reliance on LLMs. In this paper, we present an experience report on the failure points of RAG systems from three case studies from separate domains: research, education, and biomedical. We share the lessons learned and present 7 failure points to consider when designing a RAG system."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG",
+    "url": "https://arxiv.org/abs/2501.09136",
+    "published_at": "2025-01-15",
+    "key_points": [
+      "该综述将 Agentic RAG 定义为在 RAG 流水线中嵌入自主 AI agent，以突破传统 RAG 的静态工作流限制。",
+      "论文明确指出传统 RAG 受限于 static workflows，缺乏多步推理与复杂任务管理所需的适应性（adaptability）。",
+      "论文归纳出四类 agentic 设计模式：reflection（反思）、planning（规划）、tool use（工具使用）、multi-agent collaboration（多智能体协作）。",
+      "论文提出一个基于四个维度的 Agentic RAG 架构分类法：agent cardinality（智能体数量）、control structure（控制结构）、autonomy（自主性）、knowledge representation（知识表示）。",
+      "论文称 Agentic RAG 的操作结构范围从 sequential steps（顺序步骤）到 adaptive collaboration（自适应协作）。",
+      "论文对现有框架做了设计权衡（design trade-offs）的比较分析。",
+      "论文列出的开放挑战包括 evaluation、coordination、memory management、efficiency、governance。"
+    ],
+    "raw_excerpt": "Agentic Retrieval-Augmented Generation (Agentic RAG) transcends these limitations by embedding autonomous AI agents into the RAG pipeline. These agents leverage agentic design patterns reflection, planning, tool use, and multi-agent collaboration to dynamically manage retrieval strategies, iteratively refine contextual understanding, and adapt workflows through operational structures ranging from sequential steps to adaptive collaboration. ... introduces a principled taxonomy of Agentic RAG architectures based on agent cardinality, control structure, autonomy, and knowledge representation"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "url": "https://arxiv.org/abs/2310.11511",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "Self-RAG 训练单个 LM，使其按需自适应检索（adaptively retrieves passages on-demand），而非固定数量地检索。",
+      "该框架使用特殊 token（reflection tokens）来生成并反思检索到的段落以及自身生成内容。",
+      "reflection tokens 使 LM 在推理阶段可控（controllable during the inference phase），可针对不同任务需求调整行为。",
+      "论文批评传统 RAG 的做法是 indiscriminately retrieving and incorporating a fixed number of retrieved passages，无论检索是否必要或段落是否相关。",
+      "Self-RAG 在 7B 与 13B 参数规模上，在开放域 QA、推理与事实核查任务上超过 ChatGPT 与 retrieval-augmented Llama2-chat。",
+      "Self-RAG 在长文本生成的 factuality 与 citation accuracy 上相对上述模型有显著提升。"
+    ],
+    "raw_excerpt": "We introduce a new framework called Self-Reflective Retrieval-Augmented Generation (Self-RAG) that enhances an LM's quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand, and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "url": "https://arxiv.org/abs/2210.03629",
+    "published_at": "2022-10-06",
+    "key_points": [
+      "ReAct 让 LLM 以交错（interleaved）方式同时生成 reasoning traces（推理轨迹）与 task-specific actions（任务特定动作）。",
+      "推理轨迹帮助模型归纳、跟踪并更新行动计划，以及处理异常情况。",
+      "动作使模型能够与外部来源（如知识库或环境）交互以获取额外信息。",
+      "在 HotpotQA（问答）与 Fever（事实核查）上，ReAct 通过与 Wikipedia API 交互，克服了 chain-of-thought 推理中普遍存在的 hallucination 与 error propagation 问题。",
+      "ReAct 生成的类人任务求解轨迹比无推理轨迹的基线更具可解释性。",
+      "在 ALFWorld 与 WebShop 两个交互式决策基准上，ReAct 相对模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅用一到两个 in-context 示例进行提示。"
+    ],
+    "raw_excerpt": "we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "infiniflow/ragflow — README (main branch)",
+    "url": "https://raw.githubusercontent.com/infiniflow/ragflow/main/README.md",
+    "published_at": "2026-09-29",
+    "key_points": [
+      "RAGFlow 自我定位为开源 RAG 引擎，将 RAG 与 Agent 能力融合，构建面向 LLM 的 context layer。",
+      "README 的 Latest Updates 记录：2026-08-19 引入 Agentic RAG，提供 Low、Medium、High、Ultra 四档 thinking mode。",
+      "README 的 Latest Updates 记录：2026-09-29 发布 RAGFlow 1.0.0-rc1。",
+      "Key Features 中的 'Agentic Retrieval' 描述为多步检索：模型分析问题，必要时拆解问题、检索知识、验证证据（verify evidence）。",
+      "Agentic Retrieval 通过多轮检索与推理（multiple rounds of retrieval and reasoning）收集更完整上下文以支撑有依据的回答。",
+      "四档 thinking mode 用于按问题复杂度控制检索与推理深度。",
+      "架构组件包括：基于模板的 chunking、Knowledge Compilation（生成 Wikis/Graphs/Trees/PageIndex/Mind Maps/Timelines/Skills）、多路召回配合融合重排（multiple recall paired with fused re-ranking）、可配置 LLM 与 embedding 模型。",
+      "search_repos 返回该仓库 stars 为 92201、forks 10985、语言 Go、last push 2026-10-14。"
+    ],
+    "raw_excerpt": "2026-08-19 Introduced Agentic RAG with Low, Medium, High, and Ultra thinking modes. ... Perform multi-step retrieval for complex questions: the model analyzes the question and, when needed, breaks it down, retrieves knowledge, and verifies evidence. ... Choose Low, Medium, High, or Ultra thinking modes to control retrieval and reasoning depth according to question complexity."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — README (main branch)",
+    "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 自我定位为用于构建有状态 agent 的 low-level orchestration framework。",
+      "README 列出核心能力：durable execution（持久化执行、故障后从断点恢复）、human-in-the-loop（执行中检查与修改 agent state）、comprehensive memory（短期工作记忆 + 跨会话长期记忆）、LangSmith 调试、生产级部署。",
+      "README 明确 LangGraph 本身是低层编排框架，不直接提供检索组件；高层 agent 能力由构建在其上的 Deep Agents 包提供（可 plan、使用 subagents、利用文件系统）。",
+      "README 提到被 Klarna、Replit、Elastic 等公司使用。",
+      "search_repos 返回该仓库 stars 为 43254、forks 7354、语言 Python、last push 2026-10-14。"
+    ],
+    "raw_excerpt": "LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents. ... Durable execution — Build agents that persist through failures ... Human-in-the-loop ... Comprehensive memory ... check out Deep Agents — a higher-level package built on LangGraph for agents that can plan, use subagents, and leverage file systems for complex tasks."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "run-llama/llama_index — README (main branch)",
+    "url": "https://raw.githubusercontent.com/run-llama/llama_index/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex Framework 自我定位为用于构建 agentic applications 的开源框架。",
+      "README 声明公司重心已从 OSS 框架转向 LlamaParse（agentic OCR/解析/抽取/索引平台）、LiteParse 与 ParseBench/ExtractBench 基准。",
+      "README 称该 OSS 框架自 2023 年发布以来一直是提供构建各类 RAG 与 agent 应用的编排工具集（broad set of orchestration tools）。",
+      "README 提出 'agents are the new consumers of documents' 的定位主张。",
+      "构建方式分两种：llama-index 起步包（含 core 与部分集成）与 llama-index-core 定制包（按需添加集成）。",
+      "README 称有超过 300 个 LlamaIndex 集成包可与 core 协同工作。",
+      "README 指向 LlamaAgents 文档作为 agent 相关能力入口。"
+    ],
+    "raw_excerpt": "LlamaIndex Framework ... is an open-source framework to build agentic applications. ... the framework has consisted of a broad set of orchestration tools enabling developers to build various RAG and agent applications. ... We have a strong belief that agents are the new consumers of documents ... There are over 300 LlamaIndex integration packages that work seamlessly with core."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "deepset-ai/haystack — README (main branch)",
+    "url": "https://raw.githubusercontent.com/deepset-ai/haystack/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "Haystack 自我定位为用于构建生产级 LLM 应用的开源 AI orchestration framework（Python）。",
+      "README 主张以模块化 pipeline 与 agent workflow 提供对 retrieval、routing、memory、generation 的显式控制（explicit control）。",
+      "README 列出的适用场景包括 scalable RAG systems、multimodal applications、semantic search、question answering、autonomous agents。",
+      "README 强调 transparent architecture，便于实验、深度定制与部署。",
+      "安装方式为 pip install haystack-ai，并提供 nightly 预发布版本。"
+    ],
+    "raw_excerpt": "Haystack is an open-source AI orchestration framework for building production-ready LLM applications in Python. Design modular pipelines and agent workflows with explicit control over retrieval, routing, memory, and generation. Build scalable RAG systems, multimodal applications, semantic search, question answering, and autonomous agents, all in a transparent architecture."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "microsoft/autogen — README (main branch)",
+    "url": "https://raw.githubusercontent.com/microsoft/autogen/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 自我定位为用于创建可自主行动或与人类协作的多 agent AI 应用的框架。",
+      "README 顶部标注 AutoGen 已进入 maintenance mode：不再接收新功能或增强，转为社区维护。",
+      "README 建议新用户改用 Microsoft Agent Framework（MAF），并称 MAF 是 AutoGen 的企业级继任者，已发布 production-ready 1.0 版本。",
+      "MAF 宣称提供企业级多 agent 编排、多 provider 模型支持，以及通过 A2A 与 MCP 实现的跨运行时互操作。",
+      "AutoGen 要求 Python 3.10 或更高版本；安装命令为 pip install -U \"autogen-agentchat\" \"autogen-ext[openai]\"。",
+      "README 示例使用 OpenAIChatCompletionClient 与 gpt-4.1 模型创建 AssistantAgent，并展示通过 McpWorkbench/StdioServerParams 接入 Playwright MCP server 的用法。"
+    ],
+    "raw_excerpt": "AutoGen is a framework for creating multi-agent AI applications that can act autonomously or work alongside humans. ... ⚠️ Maintenance Mode ... AutoGen is now in maintenance mode. It will not receive new features or enhancements and is community managed going forward. New users should start with Microsoft Agent Framework ... Microsoft Agent Framework (MAF) is the enterprise-ready successor to AutoGen."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — README (main branch)",
+    "url": "https://raw.githubusercontent.com/crewAIInc/crewAI/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 自我定位为开源 Python 多 agent 自动化框架，提供高层抽象与低层 API 以构建生产级多 agent workflow。",
+      "README 描述两种核心抽象：CrewAI Crews（基于角色的 agent 自主协作）与 CrewAI Flows（事件驱动自动化，结合精确 workflow 控制、单次 LLM 调用与对 Crews 的原生支持）。",
+      "README 称已有超过 100,000 名开发者通过 learn.crewai.com 社区课程获得认证。",
+      "README 提供商业控制平面 CrewAI AMP Suite（托管部署、可观测性、治理、安全、企业支持），其中 Crew Control Plane 可免费试用。",
+      "README 提供面向 AI coding agent 的 CrewAI skills 插件（Claude Code 通过 plugin marketplace 安装），技能覆盖 getting-started、design-agent、design-task 等。"
+    ],
+    "raw_excerpt": "CrewAI is an open-source Python framework with high-level abstractions and low-level APIs for building production-ready multi-agent workflows. It gives developers autonomous agent collaboration through Crews and precise, event-driven control through Flows. ... With over 100,000 developers certified through our community courses ..."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果（search_repos: 'agentic RAG' / 'RAGFlow' / 'langgraph agent'）",
+    "url": "https://github.com/search?q=agentic+RAG&type=repositories",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "search_repos 返回 langgenius/dify stars 158443、forks 25058、last push 2026-10-14，描述为构建 Agentic workflows 与 RAG pipelines 的协作工作区。",
+      "search_repos 返回 langchain-ai/langchain stars 147842、forks 24795、last push 2026-10-14，描述为 'The agent engineering platform'。",
+      "search_repos 返回 infiniflow/ragflow stars 92201、forks 10985、last push 2026-10-14。",
+      "search_repos 返回 langchain-ai/langgraph stars 43254、forks 7354、last push 2026-10-14。",
+      "search_repos 返回 bytedance/deer-flow stars 83852、forks 11680、last push 2026-10-14，描述为长时程 SuperAgent harness（sandboxes、memories、tools、skill、subagents、message gateway）。",
+      "search_repos 返回 mem0ai/mem0 stars 67164、forks 7903、last push 2026-10-14，定位为 AI agent 的 memory layer。",
+      "search_repos 返回 ruvnet/ruflo stars 74633、forks 8874、last push 2026-10-14，描述含 vector RAG integration 与多 agent swarm 编排。",
+      "search_repos 返回 headroomlabs-ai/headroom stars 75321、forks 5846、last push 2026-10-13，描述为在 RAG chunks 等进入 LLM 前压缩以降低 token 消耗。"
+    ],
+    "raw_excerpt": "Found 10 repos for 'agentic RAG' (sorted by stars): langgenius/dify (★158443 ...) ... infiniflow/ragflow (★92201, forks 10985) ... langchain-ai/langgraph (★43254, forks 7354) ... bytedance/deer-flow (★83852 ...) ... mem0ai/mem0 (★67164 ...)"
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/contextual-retrieval",
+    "published_at": "2024-09-19",
+    "key_points": [
+      "Anthropic 于 2024-09-19 发布 Contextual Retrieval 方法，包含 Contextual Embeddings 与 Contextual BM25 两个子技术。",
+      "该方法可将检索失败率降低 49%；与 reranking 结合后降低 67%。",
+      "Anthropic 指出传统 RAG 在编码信息时会丢失上下文，导致系统无法检索到相关信息。",
+      "Anthropic 建议：若知识库小于 200,000 tokens（约 500 页），可直接将整个知识库放入 prompt，无需 RAG。",
+      "Anthropic 称其 prompt caching 可将延迟降低 2 倍以上、成本降低最多 90%。"
+    ],
+    "raw_excerpt": "The method is called \"Contextual Retrieval\" and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%. ... Developers can now cache frequently used prompts between API calls, reducing latency by > 2x and costs by up to 90%."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Agentic RAG With LlamaIndex: Architecture Guide (LlamaIndex Blog)",
+    "url": "https://www.llamaindex.ai/blog/agentic-rag-with-llamaindex-2721b8a49ff6",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 将 Agentic RAG 描述为把 agent 引入现有 RAG 流水线，以实现增强的对话式搜索与检索。",
+      "其架构为：大语料被拆分为小文档，每个文档创建一个 document agent（具备 embedding 搜索与摘要能力），再在其上建立 top-level / meta-agent。",
+      "meta-agent 执行工具检索（tool retrieval），并使用 Chain-of-Thought 回答用户问题。",
+      "该示例中语料被限制为 100 个文档，并依赖 OpenAI 与 Cohere API key。",
+      "系统提示要求每个 document agent 必须至少使用一个工具作答，不得依赖先验知识。"
+    ],
+    "raw_excerpt": "The topic of Agentic RAG explores how agents can be incorporated into existing RAG pipelines for enhanced, conversational search and retrieval. ... A top-level agent is created over the set of document agents. The meta-agent / top-level agent performs tool retrieval and then uses Chain-of-Thought to answer the user's question."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": null,
+    "key_points": [
+      "search_repos 元数据返回：stars 43255，forks 7354，语言 Python，last push 2026-10-14。",
+      "仓库页面正文显示共 7,167 Commits。",
+      "README 自述为「Low-level orchestration framework for building stateful agents」（构建有状态 agent 的底层编排框架）。",
+      "README 列出核心能力：Durable execution、Human-in-the-loop、Comprehensive memory、Debugging with LangSmith、Production-ready deployment。"
+    ],
+    "raw_excerpt": "Low-level orchestration framework for building stateful agents. ... LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents. ... 7,167 Commits"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "run-llama/llama_index",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": null,
+    "key_points": [
+      "search_repos 元数据返回：stars 52492，forks 8336，语言 Python，last push 2026-10-14。",
+      "仓库描述为「LlamaIndex is the document processing platform for AI」。"
+    ],
+    "raw_excerpt": "run-llama/llama_index (★52492, forks 8336) desc: LlamaIndex is the document processing platform for AI | lang: Python | last push: 2026-10-14"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "deepset-ai/haystack",
+    "url": "https://github.com/deepset-ai/haystack",
+    "published_at": null,
+    "key_points": [
+      "search_repos 元数据返回：stars 26739，forks 3283，语言 Python，last push 2026-10-14。",
+      "仓库描述为「Open-source AI orchestration framework for building context-engineered, production-ready LLM applications」，强调对 retrieval、routing、memory、generation 的显式控制，面向 agents、RAG、多模态、语义搜索与对话系统。"
+    ],
+    "raw_excerpt": "deepset-ai/haystack (★26739, forks 3283) desc: Open-source AI orchestration framework for building context-engineered, production-ready LLM applications. Design modular pipelines and agent workflows with explicit control over retrieval, routing, memory, and generation."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "microsoft/autogen",
+    "url": "https://github.com/microsoft/autogen",
+    "published_at": null,
+    "key_points": [
+      "search_repos 元数据返回：stars 61397，forks 9280，语言 Python，last push 2026-04-15。",
+      "仓库描述为「A programming framework for agentic AI」。"
+    ],
+    "raw_excerpt": "microsoft/autogen (★61397, forks 9280) desc: A programming framework for agentic AI | lang: Python | last push: 2026-04-15"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "published_at": null,
+    "key_points": [
+      "search_repos 元数据返回：stars 59682，forks 8723，语言 Python，last push 2026-10-14。",
+      "仓库描述为「Framework for orchestrating role-playing, autonomous AI agents」，强调通过协作智能让 agent 协同完成复杂任务。"
+    ],
+    "raw_excerpt": "crewAIInc/crewAI (★59682, forks 8723) desc: Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LangGraph Agentic RAG tutorial (official docs)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/agentic-rag",
+    "published_at": null,
+    "key_points": [
+      "该教程目标是构建一个 retrieval agent，由 agent 自行决定何时检索向量库、何时直接回答用户。",
+      "教程步骤：抓取并预处理文档 → 建立语义检索索引并创建 retriever tool → 构建可自主决定是否调用 retriever 的 agentic RAG 系统。",
+      "文档切分默认参数：RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=100, chunk_overlap=50)。",
+      "向量库使用 InMemoryVectorStore，embedding 使用 OpenAIEmbeddings()（未显式指定 embedding 模型名）。",
+      "依赖包：langgraph、langchain、langchain-openai、langchain-text-splitters、beautifulsoup4、requests；需设置 OPENAI_API_KEY。"
+    ],
+    "raw_excerpt": "Build a retrieval agent with LangGraph that decides when to search a vector store versus answering the user directly. ... text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=100, chunk_overlap=50,) ... vectorstore = InMemoryVectorStore.from_documents(documents=doc_splits, embedding=OpenAIEmbeddings(),)"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LlamaIndex - Building an agent (official docs)",
+    "url": "https://docs.llamaindex.ai/en/stable/understanding/agent/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 中 agent 被定义为由 LLM 驱动的半自主软件，给定任务后执行一系列步骤，从工具集中选择最佳工具完成每一步，并判断任务是否完成或需继续循环。",
+      "提供预构建 agentic workflow：FunctionAgent（简单函数/工具调用 agent）与 AgentWorkflow（可管理多 agent）。",
+      "教程示例默认模型为 OpenAI 的 gpt-4o-mini：llm = OpenAI(model=\"gpt-4o-mini\")。",
+      "安装依赖：llama-index-core、llama-index-llms-openai、python-dotenv。",
+      "文档提示 agent 需要能力较强的模型，较小模型可能不太可靠。"
+    ],
+    "raw_excerpt": "In LlamaIndex, an agent is a semi-autonomous piece of software powered by an LLM that is given a task and executes a series of steps towards solving that task. ... Our agent will be powered by OpenAI's gpt-4o-mini LLM ... llm = OpenAI(model=\"gpt-4o-mini\")"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Haystack - Agent component (official docs, v3.3)",
+    "url": "https://docs.haystack.deepset.ai/docs/agent",
+    "published_at": null,
+    "key_points": [
+      "Haystack Agent 组件是 tool-using agent，与 chat-based LLM 和工具交互，迭代式解决复杂查询。",
+      "Agent 是 loop-based 系统，迭代调用工具、更新状态、生成 prompt，直到满足可配置的 exit_conditions 之一。",
+      "退出原因 exit_reason 取值包括：\"text\"（模型返回无工具调用的完整回复）、\"length\"（达到输出 token 上限）、\"content_filter\"、满足工具退出条件的工具名、\"max_agent_steps\"（达到 max_agent_steps 上限）、以及 hook 设置的自定义原因。",
+      "运行元数据输出：step_count、token_usage、tool_call_counts、exit_reason。",
+      "Agent 默认在 \"length\" 和 \"content_filter\" 时停止（原文：The Agent stops by default on \"length\" and \"cont...\"，句子被截断）。"
+    ],
+    "raw_excerpt": "The Agent component is a tool-using agent that interacts with chat-based LLMs and tools to solve complex queries iteratively. ... It works iteratively—calling tools, updating state, and generating prompts—until one of the configurable exit_conditions is met. ... \"max_agent_steps\": the agent reached max_agent_steps before meeting an exit condition."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Agentic retrieval in Azure AI Search (Microsoft Learn)",
+    "url": "https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview",
+    "published_at": null,
+    "key_points": [
+      "Microsoft 在 Azure AI Search 中提供明确命名为 'agentic retrieval' 的产品化能力，定位为面向 chat/copilot 应用中复杂问题的多查询（multi-query）检索管线，服务于 RAG 与 agent-to-agent 工作流。",
+      "该能力可用基于 LLM 的查询规划（query planning，preview）把复杂查询拆解为更聚焦的子查询，并可利用聊天历史补充上下文。",
+      "子查询并行执行，每个子查询经语义重排（semantically reranked）以提升最相关匹配。",
+      "系统将最佳结果合并为统一响应供 LLM 生成有依据的答案，并可返回来源引用（source references）与活动日志（activity log）。",
+      "该能力同时支撑 Microsoft Foundry 门户中的 Foundry IQ——面向 agent 的托管知识层（managed knowledge layer），也可通过 Azure 门户、Search Service REST API 或 Azure SDK 构建自定义方案。",
+      "文档说明 agentic retrieval 相比单查询管线会增加延迟，但能处理单查询无法应对的复杂度（多重提问、依赖对话上下文、需改写/同义词扩展、拼写错误等）。"
+    ],
+    "raw_excerpt": "In Azure AI Search, agentic retrieval is a multi-query pipeline designed for complex questions posed by users or agents in chat and copilot apps. It's intended for retrieval-augmented generation (RAG) patterns and agent-to-agent workflows. ... Can use LLM-based query planning (preview) to break down a complex query into smaller, focused subqueries ... Runs subqueries in parallel. Each subquery is semantically reranked ... Combines the best results into a unified response ... Can return source references and an activity log ..."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Agentic RAG With LlamaIndex: Architecture Guide (LlamaIndex Blog)",
+    "url": "https://www.llamaindex.ai/blog/agentic-rag-with-llamaindex-2721b8a49ff6",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 官方博客以 'Agentic RAG' 为名发布架构指南，主题为将 agent 融入既有 RAG 管线以实现增强的对话式搜索与检索。",
+      "其架构为：大语料被拆分为较小文档，为每个文档创建一个 document agent，每个 document agent 具备基于 embedding 的搜索与摘要能力。",
+      "在文档 agent 集合之上创建一个顶层 agent（meta-agent / top-level agent），执行工具检索（tool retrieval）并用 Chain-of-Thought 回答用户问题。",
+      "系统使用 Rerank 端点计算查询与每个文档的相关性分数，返回从最相关到最不相关的排序列表。",
+      "文中示例将语料限制为 100 个文档，并提供可运行的 Colab notebook（需 OpenAI 与 Cohere API key）。",
+      "文中给出各 document agent 与 meta-agent 的系统提示词，要求必须使用提供的工具、不得依赖先验知识。"
+    ],
+    "raw_excerpt": "The topic of Agentic RAG explores how agents can be incorporated into existing RAG pipelines for enhanced, conversational search and retrieval. ... The large corpus of data is broken up into smaller documents. An agent is created for each document ... A top-level agent is created over the set of document agents. The meta-agent / top-level agent performs tool retrieval and then uses Chain-of-Thought to answer the user's question."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic Engineering Blog)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": "2024-09-19",
+    "key_points": [
+      "Anthropic 于 2024-09-19 发布工程博客 'Introducing Contextual Retrieval'，提出名为 'Contextual Retrieval' 的方法以改进 RAG 的检索步骤。",
+      "该方法使用两个子技术：Contextual Embeddings 与 Contextual BM25。",
+      "Anthropic 称该方法可将检索失败率降低 49%，结合 reranking 后可降低 67%。",
+      "博客指出传统 RAG 在编码信息时会移除上下文，导致系统常常无法从知识库检索到相关信息。",
+      "Anthropic 提供可部署 Contextual Retrieval 的 Claude cookbook，并提及 prompt caching 可降低延迟（>2x）与成本（最高 90%）。",
+      "注意：该发布命名为 'Contextual Retrieval'，并非 'Agentic RAG' 或 'agentic retrieval'，属于检索增强技术而非 agentic 编排。"
+    ],
+    "raw_excerpt": "In this post, we outline a method that dramatically improves the retrieval step in RAG. The method is called \"Contextual Retrieval\" and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Self-Reflective RAG with LangGraph (LangChain Blog)",
+    "url": "https://blog.langchain.com/agentic-rag-with-langgraph/",
+    "published_at": "2024-02-07",
+    "key_points": [
+      "LangChain 官方博客该文实际标题为 'Self-Reflective RAG with LangGraph'（作者 Ankush Gola，2024-02-07），URL 虽含 'agentic-rag' 但正文未以 'Agentic RAG' 命名该能力。",
+      "文章介绍 'self-reflective RAG' 概念：用 LLM 自我纠正低质量检索与/或生成，并实现 CRAG 与 Self-RAG 论文思想。",
+      "文章强调用 LangGraph（LLM 状态机）实现带决策点（如文档评分）与循环（如重试检索）的 RAG 'flow engineering'。",
+      "文章描述基础 RAG 管线为：embedding 用户查询、检索相关文档、将文档传给 LLM 生成有依据的答案。",
+      "注意：该来源未以 'Agentic RAG'/'agentic retrieval' 命名产品化能力，仅作为 LangChain 官方在 agentic 检索编排方向的证据，命名口径不符。"
+    ],
+    "raw_excerpt": "The term self-reflective RAG (paper) has been introduced, which captures the idea of using an LLM to self-correct poor quality retrieval and / or generations. ... We recently launched LangGraph, which is an easy way to implement LLM state machines. This gives us a lot of flexibility in the layout of diverse RAG flows and supports the more general process of \"flow engineering\" for RAG with specific decision points (e.g., document grading) and loops (e.g., re-try retrieval)."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Is Agentic RAG worth it? An experimental comparison of RAG approaches",
+    "url": "https://arxiv.org/abs/2601.07711",
+    "published_at": "2026-01-12",
+    "key_points": [
+      "该论文对 'Enhanced' RAG 与 'Agentic' RAG 两种范式进行实证评估，评估维度明确包含性能与成本（performance and costs）。",
+      "论文将 Agentic RAG 定义为：由 LLM 作为编排者（orchestrator），自主决定执行哪些动作、何时执行、以及是否迭代。",
+      "论文将 Enhanced RAG 定义为固定工作流：router 决定是否触发检索、rewriter 改写查询、retriever 选块、reranker 排序后交给 generator。",
+      "论文被 ACL 2026 Industry Track 接收（v1 提交于 2026-01-12，v2 修订于 2026-04-20）。",
+      "作者单位为 Fondazione Bruno Kessler、University of Padova、Cargill Geneve、Alkemy、Komebi Studio。"
+    ],
+    "raw_excerpt": "In this work, we conduct an empirically driven evaluation of \"Enhanced\" and \"Agentic\" RAG across multiple scenarios and dimensions. Our results provide practical insights into the trade-offs between the two paradigms, offering guidance on selecting the most effective RAG design for real-world applications, considering both performance and costs."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Is Agentic RAG worth it? An experimental comparison of RAG approaches (HTML full text)",
+    "url": "https://arxiv.org/html/2601.07711v2",
+    "published_at": "2026-04-20",
+    "key_points": [
+      "论文正文指出 Agentic RAG 系统不再是固定流水线，而是由模型自身引导的迭代循环（iterative loops guided by the model itself）。",
+      "论文正文指出 Agentic RAG 中检索与上下文精炼可以被重复执行（Retrieval and context refinement can be repeated），因为 agent 依据任务演化状态自主选择操作——这是其相对固定流水线在调用次数上可能增加的结构性原因。",
+      "论文将 naïve RAG 定义为 retriever 与 generator 的简单组合，作为对比基线。"
+    ],
+    "raw_excerpt": "Such systems are no longer fixed pipelines, but rather iterative loops guided by the model itself. ... At each step, it can choose to call a RAG tool or proceed to answer generation. Retrieval and context refinement can be repeated, as the agent autonomously selects operations based on the evolving state of the task."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Why Do Multi-Agent LLM Systems Fail? (MAST)",
+    "url": "https://arxiv.org/abs/2503.13657",
+    "published_at": "2025-03-17",
+    "key_points": [
+      "论文指出，尽管多 agent LLM 系统（MAS）受到热捧，其在主流基准上的性能提升往往微乎其微（performance gains on popular benchmarks are often minimal）。",
+      "作者构建了 MAST-Data，一个覆盖 7 个流行 MAS 框架、1600+ 条标注执行轨迹的数据集，用于刻画 MAS 的失败动态。",
+      "作者提出首个多 agent 系统失败分类学 MAST，通过对 150 条轨迹的严格分析、由专家标注者指导并达到高标注者间一致性（kappa = 0.88）而建立。",
+      "MAST 识别出 14 种独特失败模式，归为 3 大类：(i) 系统设计问题（system design issues）、(ii) agent 间失配（inter-agent misalignment）、(iii) 任务验证（task verification）。",
+      "论文在 GPT4、Claude 3、Qwen2.5、CodeLlama 等模型以及编码、数学、通用 agent 任务上分析了失败模式，表明通过更好的 MAS 设计存在改进空间。",
+      "论文结论指出，所识别的失败需要更复杂的解决方案，而非简单修补。"
+    ],
+    "raw_excerpt": "Despite enthusiasm for Multi-Agent LLM Systems (MAS), their performance gains on popular benchmarks are often minimal... This process identifies 14 unique modes, clustered into 3 categories: (i) system design issues, (ii) inter-agent misalignment, and (iii) task verification."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "SoK: Agentic Retrieval-Augmented Generation (RAG): Taxonomy, Architectures, Evaluation, and Research Directions",
+    "url": "https://arxiv.org/abs/2603.07379",
+    "published_at": "2026-03-07",
+    "key_points": [
+      "该 SoK 论文指出，当前研究缺乏将 Agentic RAG 作为序列决策系统的系统性理解，导致架构高度碎片化、评估方法不一致、可靠性风险未解决。",
+      "论文将 agentic 检索-生成循环形式化为有限时域部分可观测马尔可夫决策过程（finite-horizon POMDP），显式建模其控制策略与状态转移。",
+      "论文识别出自主循环固有的严重系统性风险，包括：复合式幻觉传播（compounding hallucination propagation）、记忆投毒（memory poisoning）、检索失配（retrieval misalignment）、级联式工具执行漏洞（cascading tool-execution vulnerabilities）。",
+      "论文批评传统静态评估实践对 agentic 系统不适用，并指出需要成本感知编排（cost-aware orchestration）、稳定自适应检索、形式化轨迹评估与监督机制等研究方向。"
+    ],
+    "raw_excerpt": "identify severe systemic risks inherent to autonomous loops, including compounding hallucination propagation, memory poisoning, retrieval misalignment, and cascading tool-execution vulnerabilities... key doctoral-scale research directions spanning stable adaptive retrieval, cost-aware orchestration, formal trajectory evaluation, and oversight mechanisms"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Agentic RAG Failure Modes: Retrieval Thrash, Tool Storms, and Context Bloat (Towards Data Science)",
+    "url": "https://towardsdatascience.com/agentic-rag-failure-modes-retrieval-thrash-tool-storms-and-context-bloat-and-how-to-spot-them-early/",
+    "published_at": null,
+    "key_points": [
+      "文章指出 Agentic RAG 与传统 RAG 的失败方式不同：传统 RAG 是「检索一次、生成一次」的简单流水线，而 Agentic RAG 是一个控制循环（plan → retrieve → evaluate → decide → retrieve again），每次迭代都是 agent 做出错误决策的新机会，且错误会复合累积（bad decisions compound）。",
+      "文章列出三类在生产中反复出现的失败模式：Retrieval Thrash（检索反复但不收敛）、Tool storms（工具调用过度、级联并重试直至预算耗尽）、Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）。",
+      "文章称这些失败通常表现为「模型变差了」，但根因并非基础模型，而是缺乏预算控制（budgets）、弱停止规则（weak stopping rules）以及对 agent 决策循环零可观测性。",
+      "文章称 LangGraph 官方 agentic RAG 教程本身存在该 bug：一个无限检索循环，需要引入 rewrite_count 上限来修复；并评论「如果参考实现都能无限循环，生产系统肯定会」。",
+      "文章给出 retrieval thrash 的具体场景：用户询问加州远程员工报销政策，agent 反复改写查询（broadening→narrowing→broadening），多轮后耗尽检索预算，答案质量相比第一轮几乎没有提升。"
+    ],
+    "raw_excerpt": "It is not a pipeline. It is a control loop: plan → retrieve → evaluate → decide → retrieve again... Three failure modes show up repeatedly once teams move agentic RAG past prototyping: Retrieval Thrash... Tool storms... Context bloat... LangGraph's own official agentic RAG tutorial had exactly this bug: an infinite retrieval loop that required a rewrite_count cap to fix."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity",
+    "url": "https://arxiv.org/abs/2403.14403",
+    "published_at": "2024-03-21",
+    "key_points": [
+      "论文提出一个自适应 QA 框架，能根据查询复杂度（query complexity）动态选择从最简单到最复杂的检索增强 LLM 策略。",
+      "该选择过程由一个分类器（classifier）实现，分类器是一个较小的 LM，被训练来预测输入查询的复杂度等级。",
+      "分类器的训练标签是自动收集的，来源于模型的实际预测结果以及数据集中的固有归纳偏置（inductive biases）。",
+      "该框架在迭代式检索增强 LLM、单步检索增强 LLM 以及无检索方法之间自适应切换。",
+      "论文在覆盖多种查询复杂度的开放域 QA 数据集上验证，声称相比包括 adaptive retrieval 方法在内的基线提升了 QA 系统的整体效率与准确率。",
+      "论文发表于 NAACL 2024，代码位于 https://github.com/starsuzi/Adaptive-RAG。"
+    ],
+    "raw_excerpt": "we propose a novel adaptive QA framework, that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels... This approach offers a balanced strategy, seamlessly adapting between the iterative and single-step retrieval-augmented LLMs, as well as the no-retrieval methods, in response to a range of query complexities."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity (HTML full text)",
+    "url": "https://arxiv.org/html/2403.14403v2",
+    "published_at": "2024-03-28",
+    "key_points": [
+      "论文将现有检索增强 LLM 方法归纳为三类概念对比：(A) 单步方法（single-step）——针对查询检索相关文档后生成答案，但对需要多步推理的复杂查询可能不足；(B) 多步方法（multi-step）——迭代检索文档并生成中间答案，能力强但对简单查询效率低下（需多次访问 LLM）。",
+      "论文指出并非所有用户请求都只落入简单或复杂单一类别，因此需要按查询复杂度自适应选择策略。",
+      "论文动机是解决现有方法的两难：简单查询被施加不必要的计算开销，或复杂多步查询未被充分处理。"
+    ],
+    "raw_excerpt": "(A) In response to a query, this single-step approach retrieves relevant documents and then generates an answer. However, it may not be sufficient for complex queries that require multi-step reasoning. (B) This multi-step approach iteratively retrieves documents and generates intermediate answers, which is powerful yet largely inefficient for the simple query since it requires multiple accesses to both LLMs"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "The Effect of Text Chunk Size on Retrieval-Augmented Generation Performance",
+    "url": "https://arxiv.org/abs/2607.24767",
+    "published_at": "2026-06-08",
+    "key_points": [
+      "论文研究 chunk size 与检索段数（number of retrieved segments）如何共同影响生成质量与检索有效性。",
+      "实验设计：使用同一套完整本科教材的多种切分表示（句子、段落、章节等不同粒度），以隔离 chunk 粒度作为唯一自变量。",
+      "检索流程：chunk 经稠密嵌入模型编码并存入向量数据库，通过余弦相似度检索最相似 chunk 作为上下文输入 LLM。",
+      "论文指出 chunk size 常被随意选择而未经对其生成质量影响的评估。",
+      "论文陈述的权衡：小 chunk（如单句）检索更精确但信息量少，可能限制生成连贯性；大 chunk（如整章）信息广但引入噪声并增加计算成本。"
+    ],
+    "raw_excerpt": "This paper aims to explore the effect that text size has on generation quality by using multiple representations of identical full-length undergraduate textbooks, each split into different sized chunks, such as sentences, paragraphs, or chapters. As the same source material is used for all the chunks, it isolates chunk granularity as the primary variable. ... This paper evaluates how chunk size, along with the number of retrieved segments, influences generation quality and retrieval effectiveness."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Chunking Methods on Retrieval-Augmented Generation - Effectiveness Evaluation Against Computational Cost and Limitations",
+    "url": "https://arxiv.org/abs/2606.00881",
+    "published_at": "2026-05-30",
+    "key_points": [
+      "论文声称是首个系统评估广泛 chunking 方法有效性、并强调 RAG 中 chunking 策略潜在挑战的研究。",
+      "论文指出传统上 fixed-size chunking 与 semantic chunking 是标准方法，但新方法常声称优于传统方法却缺乏跨场景有效性证据。",
+      "论文引用既有研究：chunk 粒度对检索阶段与生成任务均有显著影响；大 chunk 可能含无关信息，小 chunk 可能信息不足，导致幻觉并干扰 LLM 提取关键信息。",
+      "论文引用 Renyi Qu et al. (2025) 的结论：semantic chunking 的计算成本并未被一致的性能提升所证明合理，其相对固定长度基线仅在部分场景改善检索性能。",
+      "论文引用 Zhou et al. (2026) 提出 dense retrieval 中文档 chunking 方法的分类学，按切分方式与嵌入范式对策略分类。"
+    ],
+    "raw_excerpt": "Traditionally, fixed-size chunking and semantic chunking have been the standard approaches. ... To the best of our knowledge, this study is the first to systematically evaluate the effectiveness of a wide range of chunking methods and emphasize the underlying challenges of chunking strategies in RAG systems. ... Renyi Qu et al. evaluate the effectiveness of semantic chunking and demonstrate that its computational costs are not justified by consistent performance gains."
+  }
+]

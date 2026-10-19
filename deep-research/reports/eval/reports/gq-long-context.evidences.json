@@ -1,0 +1,724 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Attention Is All You Need (Transformer 原论文)",
+    "url": "https://arxiv.org/abs/1706.03762v7",
+    "published_at": "2017-06-12",
+    "key_points": [
+      "提出 Transformer 架构，完全基于注意力机制，摒弃循环与卷积（'a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely'）",
+      "自注意力是长上下文注意力复杂度的理论根源：序列中任意两位置直接交互，是后续 O(n^2) 复杂度讨论的基准架构",
+      "在 WMT 2014 英德翻译上达到 28.4 BLEU，英法 41.8 BLEU，训练 3.5 天/8 GPU"
+    ],
+    "raw_excerpt": "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding (RoPE 原论文)",
+    "url": "https://arxiv.org/abs/2104.09864v5",
+    "published_at": "2021-04-20",
+    "key_points": [
+      "RoPE 用旋转矩阵编码绝对位置，同时在自注意力公式中融入显式相对位置依赖（'encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation'）",
+      "RoPE 具备序列长度灵活性（flexibility of sequence length）与随相对距离衰减的 token 依赖，是后续长度外推方法的基础",
+      "RoFormer 已集成进 HuggingFace transformers"
+    ],
+    "raw_excerpt": "Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Extending Context Window of Large Language Models via Positional Interpolation",
+    "url": "https://arxiv.org/abs/2306.15595v2",
+    "published_at": "2023-06-27",
+    "key_points": [
+      "Position Interpolation (PI) 将 RoPE 预训练 LLM（如 LLaMA）的上下文窗口扩展至最多 32768，仅需极少微调（1000 步内）",
+      "PI 通过线性下缩放输入位置索引以匹配原始上下文窗口，而非外推到训练长度之外——外推会导致灾难性高注意力分数、破坏自注意力机制",
+      "理论研究表明插值的上界至少比外推小约 600 倍，证明其稳定性",
+      "扩展后模型保留原架构，可复用大部分既有优化与基础设施"
+    ],
+    "raw_excerpt": "To achieve this goal, Position Interpolation linearly down-scales the input position indices to match the original context window size, rather than extrapolating beyond the trained context length which may lead to catastrophically high attention scores that completely ruin the self-attention mechanism."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "url": "https://arxiv.org/abs/2307.03172v3",
+    "published_at": "2023-07-06",
+    "key_points": [
+      "语言模型虽能接收长上下文输入，但对其利用能力有限（'relatively little is known about how well they use longer context'）",
+      "在多文档问答与键值检索任务中，改变相关信息位置会显著影响性能，说明模型不能稳健利用长输入上下文",
+      "性能通常在相关信息位于输入开头或结尾时最高，当相关信息位于长上下文中部时显著下降，即使对显式长上下文模型也如此",
+      "该现象即'lost in the middle'，是有效上下文长度低于名义上下文窗口的经典证据"
+    ],
+    "raw_excerpt": "we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "url": "https://arxiv.org/abs/2404.06654v3",
+    "published_at": "2024-04-09",
+    "key_points": [
+      "NIAH（needle-in-a-haystack）测试被广泛用于评测长上下文 LM，但仅反映表层检索能力",
+      "RULER 是可控序列长度与任务复杂度的合成基准，扩展 NIAH 并新增 multi-hop tracing 与 aggregation 任务类别",
+      "评测 17 个长上下文 LM、13 类任务：几乎所有模型在 vanilla NIAH 上近乎满分，但随上下文长度增加出现大幅性能下降",
+      "这些模型均声称支持 32K token 或更大上下文，但仅一半能在 32K 长度维持满意性能——即名义上下文窗口 ≠ 有效上下文长度",
+      "Yi-34B 声称支持 200K 上下文，随输入长度与任务复杂度增加仍有很大改进空间"
+    ],
+    "raw_excerpt": "While these models all claim context sizes of 32K tokens or greater, only half of them can maintain satisfactory performance at the length of 32K."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+    "url": "https://arxiv.org/abs/2403.05530v5",
+    "published_at": "2024-03-08",
+    "key_points": [
+      "Gemini 1.5 官方技术报告，标题即主张跨数百万 token 上下文的多模态理解（'across millions of tokens of context'）",
+      "是 1M token 级上下文窗口的权威官方来源之一（Google Gemini Team 出品）",
+      "注：仅取到摘要页元数据，正文中的具体上下文窗口数值与 NIAH 基准分数未在本次取证中读到"
+    ],
+    "raw_excerpt": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "The Llama 3 Herd of Models",
+    "url": "https://arxiv.org/abs/2407.21783v3",
+    "published_at": "2024-07-31",
+    "key_points": [
+      "Meta Llama 3 官方技术报告，涵盖模型族训练与长上下文能力（含长上下文预训练阶段）",
+      "是主流开源模型长上下文能力的权威官方文档来源",
+      "注：仅取到摘要页元数据，正文中长上下文阶段的具体配置与基准分数未在本次取证中读到"
+    ],
+    "raw_excerpt": "The Llama 3 Herd of Models"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+    "url": "https://arxiv.org/abs/2405.04434v5",
+    "published_at": "2024-05-07",
+    "key_points": [
+      "DeepSeek-V2 采用 Multi-head Latent Attention (MLA)，通过将 Key-Value (KV) cache 压缩为 latent vector 来实现高效推理。",
+      "DeepSeek-V2 支持 128K token 的上下文长度。",
+      "相比 DeepSeek 67B，DeepSeek-V2 将 KV cache 减少 93.3%，最大生成吞吐提升至 5.76 倍，训练成本节省 42.5%。",
+      "模型总参数 236B，每 token 激活 21B 参数，预训练语料为 8.1T tokens。"
+    ],
+    "raw_excerpt": "MLA guarantees efficient inference through significantly compressing the Key-Value (KV) cache into a latent vector... Compared with DeepSeek 67B, DeepSeek-V2 ... reduces the KV cache by 93.3%, and boosts the maximum generation throughput to 5.76 times."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Efficient Streaming Language Models with Attention Sinks (StreamingLLM)",
+    "url": "https://arxiv.org/abs/2309.17453v4",
+    "published_at": "2023-09-29",
+    "key_points": [
+      "论文观察到 attention sink 现象：即使初始 token 语义上不重要，注意力分数仍强烈指向它们；保留初始 token 的 KV 可大幅恢复 window attention 的性能。",
+      "提出 StreamingLLM 框架，使以有限长度注意力窗口训练的 LLM 无需微调即可泛化到无限序列长度。",
+      "StreamingLLM 可让 Llama-2、MPT、Falcon、Pythia 在高达 400 万 token 及以上长度下进行稳定高效的语言建模。",
+      "在流式设置下，StreamingLLM 相比滑动窗口重计算基线最高实现 22.2 倍加速。",
+      "论文发现预训练时加入一个占位 token 作为专用 attention sink 可进一步改善流式部署。"
+    ],
+    "raw_excerpt": "We observe an interesting phenomenon, namely attention sink, that keeping the KV of initial tokens will largely recover the performance of window attention... StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "url": "https://arxiv.org/abs/2404.06654",
+    "published_at": "2024-04-09",
+    "key_points": [
+      "RULER 是一个可灵活配置序列长度与任务复杂度的合成长上下文基准，扩展了原始 NIAH 测试，涵盖多种类型与数量的 needle。",
+      "RULER 引入 multi-hop tracing 与 aggregation 两类新任务，用于测试检索之外的行为。",
+      "论文评测了 17 个长上下文语言模型、13 类代表性任务。",
+      "几乎所有模型在 vanilla NIAH 上接近满分，但随着上下文长度增加出现大幅性能下降。",
+      "这些模型都宣称支持 32K 或更长的上下文，但只有一半能在 32K 长度维持令人满意的性能。",
+      "论文对支持 200K 上下文的 Yi-34B 的分析显示，随输入长度与任务复杂度增加仍有很大改进空间。",
+      "RULER 代码已开源（COLM 2024）。"
+    ],
+    "raw_excerpt": "We evaluate 17 long-context LMs with 13 representative tasks in RULER. Despite achieving nearly perfect accuracy in the vanilla NIAH test, almost all models exhibit large performance drops as the context length increases. While these models all claim context sizes of 32K tokens or greater, only half of them can maintain satisfactory performance at the length of 32K."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+    "url": "https://arxiv.org/abs/2403.05530",
+    "published_at": "2024-03-08",
+    "key_points": [
+      "Gemini 1.5 技术报告标题即宣称可在数百万 token 上下文上实现多模态理解。",
+      "论文由 Gemini Team Google 发布，v1 提交于 2024-03-08，最新版本 v5 修订于 2024-12-16。",
+      "该报告是 Gemini 1.5 Pro 长上下文能力（含 1M token 级上下文）的一手技术来源。"
+    ],
+    "raw_excerpt": "Title: Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-1M Technical Report",
+    "url": "https://arxiv.org/abs/2501.15383",
+    "published_at": "2025-01-26",
+    "key_points": [
+      "Qwen2.5-1M 系列将上下文长度扩展到 100 万 token。",
+      "相比此前 128K 版本，通过长上下文预训练与后训练显著增强长上下文能力，采用长数据合成、渐进式预训练、多阶段监督微调等技术。",
+      "开源了推理框架，包含长度外推方法，可在无需额外训练的情况下将上下文长度扩展至少 4 倍甚至更多。",
+      "为降低推理成本，实现了稀疏注意力（sparse attention）与 chunked prefill 优化，以及提升精度的 sparsity refinement 方法。",
+      "借助该推理框架，Qwen2.5-1M 在 100 万 token 上下文场景下实现 3x 到 7x 的 prefill 加速。",
+      "Qwen2.5-1M 系列包含开源模型 Qwen2.5-7B-Instruct-1M 与 Qwen2.5-14B-Instruct-1M，以及 API 访问的 Qwen2.5-Turbo。",
+      "评测显示 Qwen2.5-14B-Instruct-1M 在长上下文任务上显著优于 GPT-4o-mini，并支持 8 倍长的上下文。"
+    ],
+    "raw_excerpt": "We introduce Qwen2.5-1M, a series of models that extend the context length to 1 million tokens... The Qwen2.5-1M series currently includes the open-source models Qwen2.5-7B-Instruct-1M and Qwen2.5-14B-Instruct-1M, as well as the API-accessed model Qwen2.5-Turbo... the Qwen2.5-14B-Instruct-1M model significantly outperforms GPT-4o-mini in long-context tasks and supports contexts eight times longer."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+    "url": "https://arxiv.org/abs/2501.08313",
+    "published_at": "2025-01-14",
+    "key_points": [
+      "MiniMax-01 系列包含 MiniMax-Text-01 与 MiniMax-VL-01。",
+      "核心是 lightning attention 及其高效扩展，并与 Mixture of Experts (MoE) 结合。",
+      "模型共 32 个专家、4560 亿总参数，每个 token 激活 459 亿参数。",
+      "MiniMax-Text-01 的上下文窗口在训练时可达 100 万 token，推理时可外推到 400 万 token，且成本可负担。",
+      "MiniMax-VL-01 通过 5120 亿视觉-语言 token 的继续训练构建。",
+      "实验显示模型性能匹配 GPT-4o 与 Claude-3.5-Sonnet 等 SOTA 模型，同时提供 20-32 倍更长的上下文窗口。",
+      "MiniMax-01 已公开发布（开源）。"
+    ],
+    "raw_excerpt": "The context window of MiniMax-Text-01 can reach up to 1 million tokens during training and extrapolate to 4 million tokens during inference at an affordable cost... Experiments on both standard and in-house benchmarks show that our models match the performance of state-of-the-art models like GPT-4o and Claude-3.5-Sonnet while offering 20-32 times longer context window."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Kimi k1.5: Scaling Reinforcement Learning with LLMs",
+    "url": "https://arxiv.org/abs/2501.12599",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "Kimi k1.5 是月之暗面（Kimi Team）的多模态 LLM，使用强化学习训练。",
+      "长上下文 scaling（long context scaling）与改进的策略优化方法是该方法的关键组成部分。",
+      "论文报告在多个基准与模态上取得 SOTA 推理性能：AIME 77.5、MATH 500 96.2、Codeforces 94 百分位、MathVista 74.9，与 OpenAI o1 相当。",
+      "论文提出 long2short 方法，用长 CoT 技术改进短 CoT 模型，短 CoT 结果：AIME 60.8、MATH500 94.6、LiveCodeBench 47.3。"
+    ],
+    "raw_excerpt": "Long context scaling and improved policy optimization methods are key ingredients of our approach... our system achieves state-of-the-art reasoning performance across multiple benchmarks and modalities -- e.g., 77.5 on AIME, 96.2 on MATH 500, 94-th percentile on Codeforces, 74.9 on MathVista -- matching OpenAI's o1."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "LongRAG: Enhancing Retrieval-Augmented Generation with Long-context LLMs",
+    "url": "https://arxiv.org/abs/2406.15319",
+    "published_at": "2024-06-21",
+    "key_points": [
+      "提出 LongRAG 框架，由『long retriever』与『long reader』组成，主张传统 RAG 中短检索单元（如 100 词 Wikipedia 段落）造成『重检索器、轻阅读器』的不平衡，导致次优性能。",
+      "在 NQ 与 HotpotQA 两个 Wikipedia 数据集上，LongRAG 将整个语料处理为 4K-token 单元，大幅减少单元总数，仅需少于 8 个 top 单元即可获得强检索性能。",
+      "无需任何训练，LongRAG 在 NQ 上达到 EM 62.7%、HotpotQA 上 EM 64.3%，与（完全训练的）SoTA 模型相当。",
+      "在非 Wikipedia 数据集 Qasper 与 MultiFieldQA-en 上，将每篇文档作为单个长单元处理，取得 Qasper F1 25.9%、MultiFieldQA-en F1 57.5%。",
+      "论文定位为『结合 RAG 与长上下文 LLM 的未来路线图』，即长上下文与 RAG 融合而非替代。",
+      "该论文为 Technical Report，v1 提交于 2024-06-21，v3 修订于 2024-09-01。"
+    ],
+    "raw_excerpt": "In order to alleviate the imbalance, we propose a new framework LongRAG, consisting of a `long retriever' and a `long reader'. ... Without requiring any training, LongRAG achieves an EM of 62.7% on NQ and 64.3% on HotpotQA, which are on par with the (fully-trained) SoTA model. ... Our study offers insights into the future roadmap for combining RAG with long-context LLMs."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "TIGER-AI-Lab/LongRAG (official repo)",
+    "url": "https://github.com/TIGER-AI-Lab/LongRAG",
+    "published_at": "2024-06-18",
+    "key_points": [
+      "LongRAG 官方代码仓库，对应论文 arXiv:2406.15319，MIT 许可，语言 Python。",
+      "仓库 stars 249、forks 18、open issues 4。",
+      "创建于 2024-06-18，最后 push 为 2024-08-25，此后无更新（截至检索时已停滞约两年）。",
+      "README 自述『We are still in the process to polish our repo』，说明仓库未完成打磨。"
+    ],
+    "raw_excerpt": "This repo contains the code for \"LongRAG: Enhancing Retrieval-Augmented Generation with Long-context LLMs\". We are still in the process to polish our repo."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "memvid/memvid",
+    "url": "https://github.com/memvid/memvid",
+    "published_at": "2025-05-27",
+    "key_points": [
+      "memvid 定位为『AI agent 的单文件记忆层』，主张用 serverless、单文件记忆层替代复杂 RAG 流水线，为 agent 提供即时检索与长期记忆。",
+      "仓库 stars 16599、forks 1432、open issues 34，语言 Rust，Apache-2.0 许可。",
+      "创建于 2025-05-27，最后 push 为 2026-07-14，属活跃维护状态。",
+      "README 强调『Persistent, versioned, and portable memory, without databases』（持久、可版本化、可移植的记忆，无需数据库）。",
+      "仓库 topics 包含 rag、retrieval-augmented-generation、vector-database、semantic-search、knowledge-graph 等。"
+    ],
+    "raw_excerpt": "Memvid is a single-file memory layer for AI agents with instant retrieval and long-term memory. Persistent, versioned, and portable memory, without databases."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "Xnhyacinth/Awesome-LLM-Long-Context-Modeling",
+    "url": "https://github.com/Xnhyacinth/Awesome-LLM-Long-Context-Modeling",
+    "published_at": null,
+    "key_points": [
+      "该仓库为 LLM 长上下文建模的论文与博客精选列表（Awesome list）。",
+      "stars 2183、forks 106，最后 push 为 2026-08-17，说明长上下文建模方向持续有文献产出与社区维护。"
+    ],
+    "raw_excerpt": "📰 Must-read papers and blogs on LLM based Long Context Modeling 🔥"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "TeleAI-UAGI/Awesome-Agent-Memory",
+    "url": "https://github.com/TeleAI-UAGI/Awesome-Agent-Memory",
+    "published_at": null,
+    "key_points": [
+      "该仓库汇集 LLM/MLLM 记忆相关的系统、基准与论文，覆盖 long-term context、retrieval 与 reasoning。",
+      "stars 676、forks 132，最后 push 为 2026-10-15，属活跃维护。",
+      "仓库主题将『长期上下文』与『检索』并列为同一记忆体系下的组成部分。"
+    ],
+    "raw_excerpt": "Curated systems, benchmarks, and papers etc. on memory for LLMs/MLLMs --- long-term context, retrieval, and reasoning."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "MozerWang/Loong (EMNLP 2024 Oral)",
+    "url": "https://github.com/MozerWang/Loong",
+    "published_at": null,
+    "key_points": [
+      "Loong 为 EMNLP 2024 Oral 论文『Leave No Document Behind: Benchmarking Long-Context LLMs with Extended Multi-Doc QA』的官方仓库。",
+      "stars 154、forks 12，最后 push 为 2025-12-22。",
+      "该基准面向扩展多文档问答，用于评测长上下文 LLM。"
+    ],
+    "raw_excerpt": "[EMNLP 2024 (Oral)] Leave No Document Behind: Benchmarking Long-Context LLMs with Extended Multi-Doc QA"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "memoket/memoket-kite",
+    "url": "https://github.com/memoket/memoket-kite",
+    "published_at": null,
+    "key_points": [
+      "memoket-kite 自述为面向 AI agent 的开源、无向量（vector-free）长期记忆引擎。",
+      "仓库声称在 LoCoMo 与 LongMemEval 上以显著更少的上下文达到 SOTA。",
+      "stars 144、forks 12，最后 push 为 2026-10-12。",
+      "『SOTA』为仓库自述营销性主张，未在本次取证中找到独立权威来源验证。"
+    ],
+    "raw_excerpt": "An open-source, vector-free long-term memory engine for AI agents, achieving SOTA on LoCoMo and LongMemEval with significantly less context."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "usewhale/Whale",
+    "url": "https://github.com/usewhale/Whale",
+    "published_at": null,
+    "key_points": [
+      "Whale 为面向 DeepSeek 的终端优先 AI 编码 agent，自述约 98% prompt cache 命中率、1M 上下文、支持 MCP 工具。",
+      "stars 932、forks 74，语言 Go，最后 push 为 2026-10-14。",
+      "该仓库体现『1M 上下文 + 高 prompt cache 命中率』在工程实践中被作为卖点组合出现。"
+    ],
+    "raw_excerpt": "Whale — blazingly fast, terminal-first AI coding agent for DeepSeek. ~98% prompt cache hit rate, 1M context, MCP tools, dynamic workflows."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "os-tack/ostk-cache",
+    "url": "https://github.com/os-tack/ostk-cache",
+    "published_at": null,
+    "key_points": [
+      "ostk-cache 为面向 Anthropic 与 OpenAI 的上下文感知缓存代理，目标是通过把长生命周期上下文锚定到稳定边界来最大化 prompt-cache 命中率。",
+      "自述可作为 Claude Code、Codex、Cursor 及自定义 harness 的 drop-in 组件。",
+      "stars 10、forks 1，语言 Rust，最后 push 为 2026-06-12。",
+      "该仓库的存在表明『围绕 prompt caching 做工程优化』已形成独立工具类别。"
+    ],
+    "raw_excerpt": "Context-aware caching proxy for Anthropic and OpenAI — maximizes prompt-cache hit rates by anchoring long-lived context into stable boundaries. Drop-in for Claude Code, Codex, Cursor, and custom harnesses."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "aglio-lab/context-engineering-tools",
+    "url": "https://github.com/aglio-lab/context-engineering-tools",
+    "published_at": null,
+    "key_points": [
+      "该仓库为上下文工程工具的综合清单，收录 160+ 工具，覆盖 LLM 记忆、提示、上下文管理、压缩、缓存、MCP、检索与评测。",
+      "stars 4、forks 4，最后 push 为 2026-07-16。",
+      "清单将『缓存』『检索』『上下文压缩』并列为上下文工程的并列子领域。"
+    ],
+    "raw_excerpt": "The comprehensive list of context engineering tools: 160+ tools for LLM memory, prompts, context management, compression, caching, MCP, retrieval, and evaluation."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "YaRN: Efficient Context Window Extension of Large Language Models",
+    "url": "https://arxiv.org/abs/2309.00071",
+    "published_at": "2023-08-31",
+    "key_points": [
+      "YaRN 是一种计算高效的 RoPE 上下文窗口扩展方法，摘要声称相比此前方法需要 10x 更少的 token 和 2.5x 更少的训练步数。",
+      "YaRN 使 LLaMA 模型能够有效利用并外推到远超其原始预训练长度的上下文，同时声称超越此前上下文窗口扩展的 SOTA。",
+      "YaRN 展示了外推到超出微调数据集有限上下文之外的能力。",
+      "论文作者来自 Nous Research、EleutherAI、University of Geneva；代码发布于 https://github.com/jquesnelle/yarn。",
+      "论文于 2023-08-31 提交 v1，最新版本 v3 修订于 2026-02-06。"
+    ],
+    "raw_excerpt": "We present YaRN (Yet another RoPE extensioN method), a compute-efficient method to extend the context window of such models, requiring 10x less tokens and 2.5x less training steps than previous methods."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "YaRN: Efficient Context Window Extension of Large Language Models (full text, intro)",
+    "url": "https://arxiv.org/html/2309.00071v3",
+    "published_at": "2023-08-31",
+    "key_points": [
+      "YaRN 论文完整梳理了此前未正式发表的三种 NTK 类插值方法：NTK-aware、Dynamic NTK、NTK-by-parts。",
+      "NTK-aware 插值由 bloc97 (2023b) 提出，其核心思想是「taking the loss of high frequency into account」（考虑高频信息的损失）。",
+      "Dynamic NTK 插值由 emozilla (2023) 提出，面向无需微调的预训练模型。",
+      "NTK-by-parts 插值由 bloc97 (2023a) 提出，在少量长上下文数据微调时表现最好。",
+      "NTK-aware 与 Dynamic NTK 插值已被开源模型采用：Code Llama 使用 NTK-aware，Qwen 7B 使用 Dynamic NTK。",
+      "Position Interpolation (PI) 由 Chen et al. (2023) 与 kaiokendev (2023) 提出，通过轻微修改 RoPE 并在少量数据上微调来扩展上下文长度。"
+    ],
+    "raw_excerpt": "As an alternative, (bloc97, 2023b) proposed the \"NTK-aware\" interpolation by taking the loss of high frequency into account. Since then, two improvements of the \"NTK-aware\" interpolation have been proposed... the \"Dynamic NTK\" interpolation method (emozilla, 2023) for pre-trained models without fine-tuning... the \"NTK-by-parts\" interpolation method (bloc97, 2023a) which performs the best when fine-tuned on a small amount of longer-context data."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens",
+    "url": "https://arxiv.org/abs/2402.13753",
+    "published_at": "2024-02-21",
+    "key_points": [
+      "LongRoPE 首次将预训练 LLM 的上下文窗口扩展到 2048k (2M) token。",
+      "在 256k 训练长度内，LongRoPE 仅需最多 1k 微调步数（up to only 1k fine-tuning steps）。",
+      "LongRoPE 通过高效搜索识别并利用位置插值中的两种非均匀性（non-uniformities），为微调提供更好的初始化，并在非微调场景下实现 8x 扩展。",
+      "LongRoPE 采用渐进式扩展策略：先微调一个 256k 长度的 LLM，再对已扩展模型做第二次位置插值以达到 2048k 上下文。",
+      "LongRoPE 在 8k 长度上重新调整以恢复原始短上下文性能。",
+      "实验覆盖 LLaMA2 与 Mistral；扩展后的模型保留原始架构，仅对位置嵌入做微小修改。",
+      "论文指出当前扩展上下文窗口普遍受限于约 128k token，原因是高微调成本、长文本稀缺以及新 token 位置引入的灾难性数值。"
+    ],
+    "raw_excerpt": "This paper introduces LongRoPE that, for the first time, extends the context window of pre-trained LLMs to an impressive 2048k tokens, with up to only 1k fine-tuning steps at within 256k training lengths... (i) we identify and exploit two forms of non-uniformities in positional interpolation through an efficient search... enabling an 8x extension in non-fine-tuning scenarios; (ii) we introduce a progressive extension strategy that first fine-tunes a 256k length LLM and then conducts a second positional interpolation on the fine-tuned extended LLM to achieve a 2048k context window."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens (full text, intro)",
+    "url": "https://arxiv.org/html/2402.13753v1",
+    "published_at": "2024-02-21",
+    "key_points": [
+      "LongRoPE 作者来自 Microsoft Research。",
+      "论文指出从 4k 扩展到 >1000k 会引入超过 90% 的新位置（more than 90% new positions），这是微调难以收敛的核心挑战之一。",
+      "论文将 Position Interpolation (PI) 描述为线性插值 RoPE 的旋转角度（linearly interpolates RoPE's rotary angles by the extension ratio），以将新位置索引缩放到预训练范围内。",
+      "论文指出近期工作可将预训练 LLM 上下文窗口通过长文本微调扩展到约 128k。",
+      "论文列出扩展上下文窗口的三大障碍：未训练的新位置索引引入灾难性数值、长文本稀缺且训练昂贵、注意力分散导致原始短上下文性能下降。"
+    ],
+    "raw_excerpt": "This is particularly challenging when an extension from 4k to >> 1000k introduces more than 90% new positions... One approach to mitigate the first challenge is to interpolate RoPE positional embedding... Position Interpolation (PI) (Chen et al., 2023a) linearly interpolates RoPE's rotary angles by the extension ratio"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "url": "https://arxiv.org/abs/2205.14135v2",
+    "published_at": "2022-05-27",
+    "key_points": [
+      "提出 IO 感知（IO-aware）的精确注意力算法 FlashAttention，用 tiling 减少 GPU HBM 与片上 SRAM 之间的内存读写次数。",
+      "论文分析 FlashAttention 的 IO 复杂度，证明其 HBM 访问次数少于标准注意力，并在一定 SRAM 尺寸范围内达到最优。",
+      "实测端到端加速：BERT-large（seq 512）相比 MLPerf 1.1 训练速度记录有 15% 墙钟加速；GPT-2（seq 1K）3× 加速；long-range arena（seq 1K–4K）2.4× 加速。",
+      "使 Transformer 支持更长上下文：在 Path-X（seq 16K）达 61.4% 准确率、Path-256（seq 64K）达 63.1% 准确率，为首次优于随机水平的 Transformer。",
+      "该来源摘要中报告的最长序列为 64K，未涉及 1M token 的实测数据。"
+    ],
+    "raw_excerpt": "We propose FlashAttention, an IO-aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on-chip SRAM. ... 3× speedup on GPT-2 (seq. length 1K), and 2.4× speedup on long-range arena (seq. length 1K-4K)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+    "url": "https://arxiv.org/abs/2307.08691v1",
+    "published_at": "2023-07-17",
+    "key_points": [
+      "指出 FlashAttention 仅达到理论最大 FLOPs/s 的 25–40%，瓶颈在于线程块与 warp 之间的工作划分不佳，导致低占用率或不必要的共享内存读写。",
+      "FlashAttention-2 的三项改进：(1) 调整算法减少非 matmul FLOPs；(2) 即使对单个 head 也跨线程块并行化注意力计算以提高占用率；(3) 在线程块内将工作分配到各 warp 以减少共享内存通信。",
+      "相比 FlashAttention 约 2× 加速，在 A100 上达到理论最大 FLOPs/s 的 50–73%，接近 GEMM 运算效率。",
+      "端到端训练 GPT 类模型时，FlashAttention-2 在单张 A100 上达到最高 225 TFLOPs/s（72% 模型 FLOPs 利用率）。",
+      "该来源摘要未给出 1M token 序列的实测数据。"
+    ],
+    "raw_excerpt": "We propose FlashAttention-2, with better work partitioning to address these issues. ... These yield around 2× speedup compared to FlashAttention, reaching 50-73% of the theoretical maximum FLOPs/s on A100 ... FlashAttention-2 reaches training speed of up to 225 TFLOPs/s per A100 GPU (72% model FLOPs utilization)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision",
+    "url": "https://arxiv.org/abs/2407.08608v2",
+    "published_at": "2024-07-11",
+    "key_points": [
+      "指出 FlashAttention-2 在 H100 GPU 上仅达到 35% 利用率，未充分利用新硬件能力。",
+      "FlashAttention-3 的三项技术：(1) 利用 Tensor Core 与 TMA 的异步性，通过 warp-specialization 重叠计算与数据搬运；(2) 交错执行分块 matmul 与 softmax；(3) 块量化与 incoherent processing 以利用 FP8 低精度硬件支持。",
+      "在 H100 上实现 1.5–2.0× 加速，FP16 达最高 740 TFLOPs/s（75% 利用率），FP8 接近 1.2 PFLOPs/s。",
+      "FP8 FlashAttention-3 相比基线 FP8 注意力实现 2.6× 更低的数值误差。",
+      "该来源摘要未给出 1M token 序列的实测数据。"
+    ],
+    "raw_excerpt": "We demonstrate that our method, FlashAttention-3, achieves speedup on H100 GPUs by 1.5-2.0× with FP16 reaching up to 740 TFLOPs/s (75% utilization), and with FP8 reaching close to 1.2 PFLOPs/s."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Flash-Decoding for long-context inference (PyTorch Blog)",
+    "url": "https://pytorch.org/blog/flash-decoding/",
+    "published_at": null,
+    "key_points": [
+      "Flash-Decoding 基于 FlashAttention，新增一个并行维度：keys/values 的序列长度，先并行加载 KV，再分别 rescale 并合并结果以保持正确的注意力输出。",
+      "动机：解码时 query length 通常为 1，FlashAttention 只在 batch size 与 query 块上并行；若 batch size 小于 GPU 的 SM 数量（A100 为 108），则只用到 GPU 的一小部分——batch size 为 1 时 FlashAttention 使用不到 1% 的 GPU。",
+      "长上下文场景下需要更小 batch size 才能装入 GPU 显存，进一步加剧上述低占用率问题。",
+      "该技术对非常长的序列带来最高 8× 更快的生成速度（up to 8x faster generation for very long sequences）。",
+      "博客正文仅抓取到前半部分，未获取到具体序列长度与显存节省的量化数字。"
+    ],
+    "raw_excerpt": "We present a technique, Flash-Decoding, that significantly speeds up attention during inference, bringing up to 8x faster generation for very long sequences. The main idea is to load the keys and values in parallel as fast as possible, then separately rescale and combine the results to maintain the right attention outputs."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "Dao-AILab/flash-attention (official implementation repo)",
+    "url": "https://github.com/Dao-AILab/flash-attention",
+    "published_at": "2022-05-19",
+    "key_points": [
+      "该仓库为 FlashAttention 与 FlashAttention-2 的官方实现（official implementation）。",
+      "仓库 README 明确列出对应论文：FlashAttention (arXiv:2205.14135) 与 FlashAttention-2 (tridao.me/publications/flash2/flash2.pdf)。",
+      "仓库热度：25,137 stars、3,157 forks，最近一次 push 为 2026-10-14，采用 BSD-3-Clause 许可。",
+      "README 摘录仅覆盖到介绍与 Usage 开头，未读取到 benchmark 章节中的 1M token 实测数字。"
+    ],
+    "raw_excerpt": "This repository provides the official implementation of FlashAttention and FlashAttention-2 from the following papers. ... **FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness**"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
+    "url": "https://arxiv.org/abs/2305.13245v3",
+    "published_at": "2023-05-22",
+    "key_points": [
+      "MQA (multi-query attention) 只使用单个 key-value head，可大幅加速 decoder 推理。",
+      "MQA 可能导致质量下降，且为更快推理单独训练一个模型并不理想。",
+      "论文提出将现有多头 (multi-head) 语言模型 checkpoint 通过 uptraining 转为 MQA 模型的方案，仅使用原预训练算力的 5%。",
+      "论文提出 grouped-query attention (GQA)，是 multi-query attention 的泛化，使用介于 1 与 query head 数之间的中间数量 key-value heads。",
+      "论文声称 uptrained GQA 达到接近 multi-head attention 的质量，同时具备与 MQA 相当的速度。"
+    ],
+    "raw_excerpt": "Multi-query attention (MQA), which only uses a single key-value head, drastically speeds up decoder inference. However, MQA can lead to quality degradation... we (1) propose a recipe for uptraining existing multi-head language model checkpoints into models with MQA using 5% of original pre-training compute, and (2) introduce grouped-query attention (GQA), a generalization of multi-query attention which uses an intermediate (more than one, less than number of query heads) number of key-value heads. We show that uptrained GQA achieves quality close to multi-head attention with comparable speed to MQA."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "How to Train Long-Context Language Models (Effectively) (ProLong)",
+    "url": "https://arxiv.org/abs/2410.02660",
+    "published_at": "2024-10-03",
+    "key_points": [
+      "论文研究语言模型的继续训练（continued training）与监督微调（SFT），以使其有效利用长上下文信息。",
+      "作者建立了可靠的评测协议：不使用困惑度或简单 NIAH 测试，而使用广泛的长上下文下游任务，并在 SFT 之后评测模型，因为这样更能揭示长上下文能力。",
+      "数据配比结论(1)：代码仓库（code repositories）和书籍（books）是优秀的长数据来源，但关键是要将它们与高质量短上下文数据结合。",
+      "训练策略结论(2)：使用超过评测长度的序列长度（sequence length beyond the evaluation length）进行训练可提升长上下文性能。",
+      "SFT 结论(3)：仅使用短指令数据集即可在长上下文任务上取得强性能。",
+      "最终模型 ProLong-8B 从 Llama-3 初始化，在 40B tokens 上训练，在 128K 长度下于同规模模型中达到 SOTA 长上下文性能。",
+      "ProLong 在多数长上下文任务上超过 Llama-3.1-8B-Instruct，尽管其长上下文训练所用 token 数仅为后者的 5%。",
+      "ProLong 可有效处理最多 512K tokens，是公开可用 LM 中最长上下文窗口之一。",
+      "论文被 ACL 2025 接收，代码、数据与模型已开源。"
+    ],
+    "raw_excerpt": "We find that (1) code repositories and books are excellent sources of long data, but it is crucial to combine them with high-quality short-context data; (2) training with a sequence length beyond the evaluation length boosts long-context performance; (3) for SFT, using only short instruction datasets yields strong performance on long-context tasks. Our final model, ProLong-8B, which is initialized from Llama-3 and trained on 40B tokens, demonstrates state-of-the-art long-context performance among similarly sized models at a length of 128K."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Extending Context Window of Large Language Models via Positional Interpolation",
+    "url": "https://arxiv.org/abs/2306.15595",
+    "published_at": "2023-06-27",
+    "key_points": [
+      "提出 Position Interpolation (PI)，可将基于 RoPE 的预训练 LLM（如 LLaMA 系列）的上下文窗口扩展至最多 32768。",
+      "扩展仅需极少的微调（within 1000 steps），并在 passkey retrieval、语言建模、长文档摘要等长上下文任务上从 LLaMA 7B 到 65B 均表现良好。",
+      "PI 通过线性缩小（linearly down-scales）输入位置索引以匹配原始上下文窗口大小，而非外推超出训练上下文长度。",
+      "理论分析表明，插值的上界至少比外推小约 600 倍，说明其稳定性。",
+      "经 PI 扩展的模型保留原始架构，可复用大部分既有优化与基础设施。"
+    ],
+    "raw_excerpt": "We present Position Interpolation (PI) that extends the context window sizes of RoPE-based pretrained LLMs such as LLaMA models to up to 32768 with minimal fine-tuning (within 1000 steps)... Position Interpolation linearly down-scales the input position indices to match the original context window size, rather than extrapolating beyond the trained context length... Our theoretical study shows that the upper bound of interpolation is at least ~600x smaller than that of extrapolation."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Long Context Transfer from Language to Vision (LongVA)",
+    "url": "https://arxiv.org/abs/2406.16852",
+    "published_at": "2024-06-24",
+    "key_points": [
+      "论文从语言模型角度解决长视频理解问题：通过简单外推语言骨干的上下文长度，使 LMM 无需任何视频训练即可理解数量级更多的视觉 token，作者称之为 long context transfer。",
+      "提出 V-NIAH（Visual Needle-In-A-Haystack），一个受语言模型 NIAH 测试启发的纯合成长视觉基准，用于衡量 LMM 在视觉模态上泛化到长上下文的能力。",
+      "提出的 Long Video Assistant (LongVA) 可处理 2000 帧或超过 200K 视觉 token，无需额外复杂度。",
+      "LongVA 在 7B 规模模型中于 Video-MME 上达到 SOTA（通过更密集采样输入帧）。",
+      "代码、demo 与模型已开源。"
+    ],
+    "raw_excerpt": "By simply extrapolating the context length of the language backbone, we enable LMMs to comprehend orders of magnitude more visual tokens without any video training. We call this phenomenon long context transfer... Our proposed Long Video Assistant (LongVA) can process 2000 frames or over 200K visual tokens without additional complexities."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Claude 3.5 Sonnet (Anthropic official announcement)",
+    "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+    "published_at": "2024-06-21",
+    "key_points": [
+      "Claude 3.5 Sonnet 定价为每百万输入 token $3、每百万输出 token $15。",
+      "Claude 3.5 Sonnet 的上下文窗口为 200K token。",
+      "Claude 3.5 Sonnet 通过 Anthropic API、Amazon Bedrock 和 Google Cloud Vertex AI 提供。"
+    ],
+    "raw_excerpt": "The model costs $3 per million input tokens and $15 per million output tokens, with a 200K token context window."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Claude 3.7 Sonnet and Claude Code (Anthropic official announcement)",
+    "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+    "published_at": "2025-02-24",
+    "key_points": [
+      "Claude 3.7 Sonnet 在标准模式与扩展思考模式下定价相同：每百万输入 token $3、每百万输出 token $15（含思考 token）。",
+      "Claude 3.7 Sonnet 的输出上限为 128K token，用户可控制思考预算至多 N token（N 最大为输出上限）。",
+      "Claude 3.7 Sonnet 通过 Claude Developer Platform、Amazon Bedrock 和 Google Cloud Vertex AI 提供。"
+    ],
+    "raw_excerpt": "In both standard and extended thinking modes, Claude 3.7 Sonnet has the same price as its predecessors: $3 per million input tokens and $15 per million output tokens—which includes thinking tokens."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Introducing Claude 4 (Anthropic official announcement)",
+    "url": "https://www.anthropic.com/news/claude-4",
+    "published_at": "2025-05-22",
+    "key_points": [
+      "Claude Opus 4 定价为每百万 token $15 输入 / $75 输出。",
+      "Claude Sonnet 4 定价为每百万 token $3 输入 / $15 输出。",
+      "Claude Opus 4 与 Sonnet 4 通过 Anthropic API、Amazon Bedrock 和 Google Cloud Vertex AI 提供。"
+    ],
+    "raw_excerpt": "Pricing remains consistent with previous Opus and Sonnet models: Opus 4 at $15/$75 per million tokens (input/output) and Sonnet 4 at $3/$15."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Gemini 2.0 is now available to everyone (Google official blog)",
+    "url": "https://blog.google/technology/google-deepmind/gemini-model-updates-february-2025/",
+    "published_at": "2025-02-05",
+    "key_points": [
+      "Gemini 2.0 Flash 的上下文窗口为 100 万 token。",
+      "Gemini 2.0 Pro（实验版）具备 Google 迄今最大的上下文窗口，为 200 万 token。",
+      "Gemini 2.0 Pro 实验版在 Google AI Studio 与 Vertex AI 面向开发者提供，并在 Gemini app 面向 Gemini Advanced 用户提供。"
+    ],
+    "raw_excerpt": "It comes with our largest context window at 2 million tokens, which enables it to comprehensively analyze and understand vast amounts of information"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Qwen2.5-1M: Deploy Your 1M Context Length Solutions (Qwen official blog)",
+    "url": "https://qwenlm.github.io/blog/qwen2.5-1m/",
+    "published_at": "2025-01-27",
+    "key_points": [
+      "Qwen2.5-1M 系列开源两个 checkpoint：Qwen2.5-7B-Instruct-1M 与 Qwen2.5-14B-Instruct-1M，支持 1M token 上下文。",
+      "在 1M token 上下文的 Passkey Retrieval 任务上，模型能从最多 1M token 的文档中准确检索隐藏信息，仅 7B 模型出现少量错误。",
+      "复杂长上下文理解任务上，官方选用 RULER、LV-Eval、LongbenchChat 三个基准进行评估。",
+      "官方结论：Qwen2.5-1M 系列在多数长上下文任务上显著优于其 128K 版本，尤其在超过 64K 的序列上。",
+      "Qwen2.5-14B-Instruct-1M 在多个数据集上持续优于 GPT-4o-mini。",
+      "训练采用渐进式扩展：预训练阶段上下文从 4K 逐步增至 256K，RoPE base 从 10,000 提升到 10,000,000（Adjusted Base Frequency）。"
+    ],
+    "raw_excerpt": "For more complex long-context understanding tasks, we select RULER, LV-Eval, LongbenchChat used in this blog. ... The Qwen2.5-1M series models significantly outperform their 128K counterparts in most long-context tasks, especially for sequences exceeding 64K in length."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-1M Technical Report (arXiv:2501.15383)",
+    "url": "https://arxiv.org/abs/2501.15383",
+    "published_at": "2025-01-26",
+    "key_points": [
+      "论文将 Qwen2.5 系列上下文扩展到 1M token，采用长数据合成、渐进式预训练、多阶段 SFT。",
+      "推理框架含长度外推方法，可在不额外训练的情况下将上下文扩展至少 4 倍。",
+      "采用稀疏注意力 + chunked prefill 优化，在 1M token 场景下实现 3x–7x 的 prefill 加速。",
+      "系列包含开源 Qwen2.5-7B-Instruct-1M、Qwen2.5-14B-Instruct-1M 及 API 模型 Qwen2.5-Turbo。",
+      "论文声称 Qwen2.5-14B-Instruct-1M 在长上下文任务上显著优于 GPT-4o-mini，且支持 8 倍长的上下文。"
+    ],
+    "raw_excerpt": "Evaluations show that Qwen2.5-1M models have been greatly improved in long-context tasks without compromising performance in short-context scenarios. Specifically, the Qwen2.5-14B-Instruct-1M model significantly outperforms GPT-4o-mini in long-context tasks and supports contexts eight times longer."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "MiniMax-01: Scaling Foundation Models with Lightning Attention (arXiv:2501.08313)",
+    "url": "https://arxiv.org/abs/2501.08313",
+    "published_at": "2025-01-14",
+    "key_points": [
+      "MiniMax-Text-01 采用 lightning attention 与 MoE 结合，32 个专家、456B 总参数、每 token 激活 45.9B。",
+      "MiniMax-Text-01 训练时上下文窗口可达 1M token，推理时可外推到 4M token。",
+      "论文在长上下文 RULER 基准上评估 MiniMax-Text-01，并与领先商业/开源模型对比（Figure 1c）。",
+      "论文声称模型性能匹配 GPT-4o 与 Claude-3.5-Sonnet，同时提供 20–32 倍更长的上下文窗口。"
+    ],
+    "raw_excerpt": "The context window of MiniMax-Text-01 can reach up to 1 million tokens during training and extrapolate to 4 million tokens during inference at an affordable cost. ... (c) MiniMax-Text-01 on the long-context RULER (Hsieh et al., 2024) benchmark."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Anthropic Pricing (consumer plans page)",
+    "url": "https://www.anthropic.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "该页面为 Anthropic 面向个人/团队的订阅定价页，列出 Free / Pro ($17-20/月) / Max ($100-200/月) / Team ($20/seat/月) 等计划。",
+      "页面在 'Models and usage' 表中标注各计划 'Context window: Up to 1M varies by model'，即 Claude 部分模型支持最高 1M 上下文窗口。",
+      "该页面不含 API 按 token 计费的价格（每百万输入/输出 token 美元数），也不含任何 KV cache 显存占用数据。"
+    ],
+    "raw_excerpt": "Context window More information Up to 1M varies by model Up to 1M varies by model Up to 1M varies by model Up to 1M varies by model"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
+    "url": "https://arxiv.org/abs/2407.16833",
+    "published_at": "2024-07-23",
+    "key_points": [
+      "该论文对 RAG 与 long-context (LC) LLM 在多个公开数据集上、使用三个最新 LLM 进行了系统性对比评测（性能与效率两个维度）。",
+      "核心结论：在资源充足（resourced sufficiently）时，LC 在平均性能上一致地优于 RAG。",
+      "RAG 的显著更低成本仍是其明确优势（LLM API 按输入 token 计费，RAG 大幅缩短输入长度）。",
+      "论文提出 Self-Route 方法：基于模型自我反思（self-reflection）将查询路由到 RAG 或 LC，在保持与 LC 相当性能的同时显著降低计算成本。",
+      "论文指出 LC 与 RAG 的预测在超过 60% 的查询上完全相同（identical for over 60% of queries）。",
+      "该文与先前工作 Xu et al. (2023) 的发现不同，强调近期 LLM 在长上下文理解上的进步。",
+      "论文被 EMNLP 2024 industry track 接收，作者来自 Google DeepMind 与 University of Michigan。"
+    ],
+    "raw_excerpt": "Results reveal that when resourced sufficiently, LC consistently outperforms RAG in terms of average performance. However, RAG's significantly lower cost remains a distinct advantage. Based on this observation, we propose Self-Route, a simple yet effective method that routes queries to RAG or LC based on model self-reflection. ... our analysis reveals that the predictions from LC and RAG are identical for over 60% of queries."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "vLLM Design Document — Automatic Prefix Caching",
+    "url": "https://docs.vllm.ai/en/latest/design/prefix_caching.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 的 automatic prefix caching (APC) 采用 hash-based 方案：对每个 KV-cache block 用「块内 token + 块前 prefix token」共同计算哈希来唯一标识。",
+      "哈希组件包含三部分：parent hash value（父块哈希）、block tokens（本块 token 元组，用于降低哈希碰撞）、extra hashes（LoRA ID、多模态输入哈希、多租户隔离用的 cache salt）。",
+      "vLLM 只缓存完整的 block（'We only cache full blocks'）。",
+      "自 v0.11 起默认哈希算法为 sha256，以解决此前版本哈希键不保证无碰撞的问题；可通过 --prefix-caching-hash-algo 控制。",
+      "文档将 prefix caching 描述为「almost a free lunch」且不改变模型输出，并称其已被 OpenAI、Anthropic 等公开端点及多数开源推理框架（如 SGLang）广泛采用。"
+    ],
+    "raw_excerpt": "Prefix caching kv-cache blocks is a popular optimization in LLM inference to avoid redundant prompt computations. The core idea is simple – we cache the kv-cache blocks of processed requests, and reuse these blocks when a new request comes in with the same prefix as previous requests. ... While there are many ways to implement prefix caching, vLLM chooses a hash-based approach. ... Note 1: We only cache full blocks. Note 2: ... As of v0.11, the default hashing algorithm is sha256, which addresses collision risks."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "SGLang: Efficient Execution of Structured Language Model Programs (arXiv:2312.07104v2)",
+    "url": "https://arxiv.org/abs/2312.07104v2",
+    "published_at": "2023-12-12",
+    "key_points": [
+      "SGLang 运行时通过 RadixAttention 实现 KV cache 复用（KV cache reuse），是其核心优化之一。",
+      "论文摘要称 SGLang 在多种大语言与多模态模型、多类任务上相比当时 SOTA 推理系统实现最高 6.4x 吞吐提升。",
+      "受益任务明确包含 retrieval-augmented generation (RAG) pipelines、agent control、logical reasoning、few-shot learning、JSON decoding、multi-turn chat。",
+      "另一核心优化为 compressed finite state machines，用于加速结构化输出解码。"
+    ],
+    "raw_excerpt": "The runtime accelerates execution with novel optimizations like RadixAttention for KV cache reuse and compressed finite state machines for faster structured output decoding. Experiments show that SGLang achieves up to 6.4x higher throughput compared to state-of-the-art inference systems on various large language and multi-modal models on tasks including agent control, logical reasoning, few-shot learning benchmarks, JSON decoding, retrieval-augmented generation pipelines, and multi-turn chat."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "vllm-project/vllm (GitHub repository)",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2023-02-09",
+    "key_points": [
+      "vLLM 仓库 93,854 stars、23,416 forks，Apache-2.0 许可，主语言 Python，最近 push 时间 2026-10-15。",
+      "仓库 topics 覆盖 llm-serving、model-serving、inference、moe、deepseek、qwen 等，定位为通用 LLM 服务框架。",
+      "README 自述为 'Easy, fast, and cheap LLM serving for everyone'，并链接其论文 arXiv:2309.06180。"
+    ],
+    "raw_excerpt": "vllm-project/vllm\nstars: 93854 | forks: 23416 | ... license: Apache-2.0\nREADME excerpt: Easy, fast, and cheap LLM serving for everyone"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "sgl-project/sglang (GitHub repository)",
+    "url": "https://github.com/sgl-project/sglang",
+    "published_at": "2024-01-08",
+    "key_points": [
+      "SGLang 仓库 37,173 stars、9,585 forks，Apache-2.0 许可，主语言 Python，最近 push 时间 2026-10-15。",
+      "仓库 topics 包含 attention、inference、llm、moe、reinforcement-learning、vlm 等。",
+      "README 自述为 'SGLang: Fast inference for LLMs and multimodal models'。"
+    ],
+    "raw_excerpt": "sgl-project/sglang\nstars: 37173 | forks: 9585 | ... license: Apache-2.0\nREADME excerpt: # SGLang: Fast inference for LLMs and multimodal models"
+  }
+]
