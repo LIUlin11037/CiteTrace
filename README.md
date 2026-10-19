@@ -4,7 +4,7 @@
 并行取证（arXiv / GitHub / Web，经 MCP 协议接入）→ 审校证据 → 生成**每个事实都有引用、  
 每个引用都经程序核验**的中文研究报告。
 
-架构与选型详见 [docs/架构文档与技术选型.md](docs/架构文档与技术选型.md)；
+架构与选型详见 [deep-research/docs/架构文档与技术选型.md](deep-research/docs/架构文档与技术选型.md)；
 
 ## 核心能力
 
@@ -30,9 +30,9 @@
 
 分领域：agent（10 题）100% / 96.2% / 100% · llm（9 题）100% / 96.6% / 100% ·  
 rag（7 题）100% / 97.0% / 100%。26 题全部出分，无缺测；  
-明细见 `reports/eval/eval-20261015-214611-merged-26q.md`。
+明细见 `deep-research/reports/eval/eval-20261015-214611-merged-26q.md`。
 
-评测流程与产物：`eval/runner.py` 自动批准计划跑图 → 三指标评测 → 聚合 JSON/Markdown 到 `reports/eval/`；
+评测流程与产物：`eval/runner.py` 自动批准计划跑图 → 三指标评测 → 聚合 JSON/Markdown 到 `deep-research/reports/eval/`；
 
 每题报告与证据库落盘，改 judge 后可用 `scripts/refresh_alignment.py` **离线复判刷新口径**（不重跑研究）；
 
@@ -53,7 +53,7 @@ rag（7 题）100% / 97.0% / 100%。26 题全部出分，无缺测；
   **绝不让网络问题冒充幻觉**，且该情形不计入指标分母
 - 论断与其引用来源的匹配走「脚注 → 参考列表 URL → 归一化（去 arXiv 版本号 / 尾斜杠 / `.git`）  
   → 证据库查找」，**不做位置映射**
-- 每题的**报告与证据库都落盘**（`reports/eval/reports/<qid>.{md,evidences.json}`），  
+- 每题的**报告与证据库都落盘**（`deep-research/reports/eval/reports/<qid>.{md,evidences.json}`），  
   可用 `scripts/rejudge_alignment.py` 离线复判，改 judge 不必重跑研究
 - 修改提示词后用小样本对照（同题同条件重跑）验证效果，不靠单次跑分定论
 
@@ -77,11 +77,14 @@ rag（7 题）100% / 97.0% / 100%。26 题全部出分，无缺测；
 定位这些问题的过程本身也是方法：例如"服务端静默钳制 8192"这条，是通过  
 **Langfuse trace 反查**发现的——同一轮 3011 次调用里，被截断样本的输出 token  
 **精确等于 8192**，而正常样本只有 2～4k，由此锁定上限；失败报告会写入  
-`reports/eval/rejected/` 供事后分析。
+`deep-research/reports/eval/rejected/` 供事后分析。
 
 ## 快速开始
 
 ```bash
+# 0. 进入项目目录（本仓README在根目录，代码在 deep-research/ 下）
+cd deep-research
+
 # 1. 依赖（需 uv；也可 python -m venv .venv && pip install -e ".[cli,serve,observe]"）
 uv sync --extra cli --extra serve
 
@@ -105,6 +108,7 @@ uv run python -c "import asyncio; from deep_research.eval.runner import run_eval
 ### Docker 部署（推荐路径：app + postgres）
 
 ```bash
+cd deep-research         # 以下命令均在项目目录内执行
 cp .env.example .env     # 填 DR_DEFAULT_API_KEY
 docker compose up -d     # 起 postgres(pgvector) + app，app 会等 postgres 健康后再启动
 curl http://127.0.0.1:8000/healthz          # {"status":"ok"}
@@ -131,7 +135,8 @@ Postgres、长期记忆写入 pgvector（512 维）、MCP 工具在容器内正�
 ## 目录结构
 
 ```
-src/deep_research/
+deep-research/
+  src/deep_research/
   core/        # config（按角色模型）/ llm（唯一 LLM 入口）/ persistence（检查点工厂）
                # memory（pgvector 长期记忆）/ tracing（Langfuse）/ usage（token 与成本）
                # compat（平台与依赖兼容垫片）/ serve（API 启动入口）
@@ -150,26 +155,14 @@ docs/          # 架构文档与技术选型
 ## 验证脚本
 
 
-| 脚本                             | 作用                                            | 是否需 API key |
-| ------------------------------ | --------------------------------------------- | ----------- |
-| `scripts/smoke_test.py`        | mock LLM 驱动真实图：中断→恢复、并行合并、critic 回环、writer 成文 | 否           |
-| `scripts/smoke_eval.py`        | 假产物跑通评测流水线（核验 + judge + 聚合 + 报告）              | 否           |
-| `scripts/verify_mcp.py`        | 经核心加载器加载 MCP 工具并真实调用一次                        | 否           |
-| `scripts/verify_tracing.py`    | 证明 run config 的 callbacks 能传导到节点内 LLM 与工具调用   | 是           |
-| `scripts/verify_langfuse.py`   | 用本地假服务端验证上报链路（不依赖真实 Langfuse）                 | 是           |
-| `scripts/verify_m3.py`         | Postgres 检查点 + pgvector 记忆三步联调（含 planner 召回）  | 是           |
-| `scripts/verify_web_e2e.py`    | 按页面逻辑走完整 API 时序（中断 → 恢复 → 重连 SSE）             | 是           |
-| `scripts/rejudge_alignment.py` | 用已落盘证据库离线复判，不重跑研究                             | 是           |
-| `scripts/refresh_alignment.py` | 修正 judge 后对全部题目离线复判并刷新聚合口径（仅花 judge 调用，不重跑研究） | 是           |
-
-## 已知限制
-
-- 评测数字为 26 题 golden set 的口径；`deepseek-chat` 单次响应输出约 8192 token 上限，  
-  超长报告靠分段续写，极端来源量下仍可能受影响
-- 检索质量依赖搜索后端（Tavily / Brave / DuckDuckGo 逐级降级），无 key 时走 DuckDuckGo
-- 可观测性依赖 Langfuse Cloud；仓库不含自建 Langfuse 编排（v3 自建需额外  
-  ClickHouse + MinIO + Redis + worker 四个组件）
-<<<<<<< HEAD
-=======
-
->>>>>>> c01ae57a290ef0826b460a476db1f3b99b0be555
+| 脚本                                           | 作用                                            | 是否需 API key |
+| -------------------------------------------- | --------------------------------------------- | ----------- |
+| `deep-research/scripts/smoke_test.py`        | mock LLM 驱动真实图：中断→恢复、并行合并、critic 回环、writer 成文 | 否           |
+| `deep-research/scripts/smoke_eval.py`        | 假产物跑通评测流水线（核验 + judge + 聚合 + 报告）              | 否           |
+| `deep-research/scripts/verify_mcp.py`        | 经核心加载器加载 MCP 工具并真实调用一次                        | 否           |
+| `deep-research/scripts/verify_tracing.py`    | 证明 run config 的 callbacks 能传导到节点内 LLM 与工具调用   | 是           |
+| `deep-research/scripts/verify_langfuse.py`   | 用本地假服务端验证上报链路（不依赖真实 Langfuse）                 | 是           |
+| `deep-research/scripts/verify_m3.py`         | Postgres 检查点 + pgvector 记忆三步联调（含 planner 召回）  | 是           |
+| `deep-research/scripts/verify_web_e2e.py`    | 按页面逻辑走完整 API 时序（中断 → 恢复 → 重连 SSE）             | 是           |
+| `deep-research/scripts/rejudge_alignment.py` | 用已落盘证据库离线复判，不重跑研究                             | 是           |
+| `deep-research/scripts/refresh_alignment.py` | 修正 judge 后对全部题目离线复判并刷新聚合口径（仅花 judge 调用，不重跑研究） | 是           |
