@@ -29,6 +29,7 @@ from deep_research.agents.state import (
     CritiqueResult,
     Evidence,
     EvidenceBundle,
+    FollowUp,
     ResearchPlan,
     SubQuestion,
 )
@@ -106,7 +107,7 @@ def _install_fakes() -> dict[str, itertools.count]:
                     return CritiqueResult(
                         passed=False,
                         follow_ups=[
-                            {"id": "f1", "question": "追问：补充工程落地数据", "rationale": "gap"}
+                            FollowUp(id="f1", question="追问：补充工程落地数据", rationale="gap")
                         ],
                         summary="第一轮：工程维度覆盖不足",
                     )

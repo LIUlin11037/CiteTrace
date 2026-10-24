@@ -75,9 +75,10 @@ def extract_citations(report: str) -> list[Citation]:
 
 
 async def _default_verify_arxiv(client: httpx.AsyncClient, arxiv_id: str) -> Verdict:
-    resp = await client.get(
-        "https://export.arxiv.org/api/query", params={"id_list": arxiv_id}
-    )
+    # 显式标注：httpx 的 params 要求 Mapping[str, PrimitiveData | Sequence[...]]，
+    # 裸 dict 字面量会被推断成 dict[str, object] 而报类型错误。
+    params: dict[str, str] = {"id_list": arxiv_id}
+    resp = await client.get("https://export.arxiv.org/api/query", params=params)
     if resp.status_code != 200:
         return "unverifiable"
     return "exists" if "<entry>" in resp.text and "<title>" in resp.text else "missing"

@@ -27,6 +27,7 @@ from deep_research.agents.state import (
     SubQuestion,
     dedup_evidences,
 )
+from deep_research.core import guard
 from deep_research.core.config import get_settings
 from deep_research.core.llm import get_chat_model, invoke_with_retry, structured_output
 from deep_research.tools.mcp_client import get_mcp_tools
@@ -235,6 +236,19 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
     for ev in bundle.evidences:
         ev.sub_question_id = sq.id
 
+    # 注入痕迹检测：只留痕、不改内容。评测集里就有讨论"提示注入"的正常题目，
+    # 静默删改会污染报告，所以这里只告警，供 trace / 日志审计。
+    suspicious = guard.scan_key_points(
+        [p for ev in bundle.evidences for p in ev.key_points]
+    )
+    if suspicious:
+        logger.warning(
+            "researcher %s: %d 条 key_point 命中注入特征（未改动，仅记录）: %s",
+            sq.id,
+            len(suspicious),
+            list(suspicious.items())[:2],
+        )
+
     return {
         "evidences": bundle.evidences,
         "messages": [
@@ -397,6 +411,11 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
         raise RuntimeError("writer 未返回任何响应")
 
     body = "\n".join(segments).strip()
+
+    # 成稿后的注入痕迹扫描（仅留痕：报告里提到"忽略以上指令"可能是正常引用）
+    hits = guard.scan_text(body)
+    if hits:
+        logger.warning("writer 报告命中注入特征词 %s（未改动，仅记录）", hits)
     if len(body) < _MIN_BODY_CHARS:
         raise RuntimeError(f"writer 输出过短（{len(body)} 字符），放弃该题")
 

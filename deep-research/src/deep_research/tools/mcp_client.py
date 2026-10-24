@@ -12,15 +12,17 @@ Tool-level errors are handled inside researcher_node.
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import sys
 from pathlib import Path
 from typing import Any
 
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, StructuredTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from deep_research.core.config import get_settings
+from deep_research.core.guard import wrap_tool_output
 
 logger = logging.getLogger(__name__)
 
@@ -76,6 +78,33 @@ def _server_params() -> dict[str, dict[str, Any]]:
     return servers
 
 
+def _guarded(tool: BaseTool) -> BaseTool:
+    """Wrap one tool so every result is fenced as untrusted external data.
+
+    The fence is applied by code (see core/guard.py), which is what makes the
+    "tool output is data, not instruction" rule enforceable rather than merely
+    requested in a prompt. If wrapping fails for an exotic tool signature we
+    keep the original tool: a broken guard must not break research.
+    """
+
+    async def _call(**kwargs: Any) -> str:
+        raw = await tool.ainvoke(kwargs)
+        if not isinstance(raw, str):
+            raw = json.dumps(raw, ensure_ascii=False, default=str)
+        return wrap_tool_output(tool.name, raw)
+
+    try:
+        return StructuredTool.from_function(
+            coroutine=_call,
+            name=tool.name,
+            description=tool.description or tool.name,
+            args_schema=tool.args_schema,
+        )
+    except Exception:  # noqa: BLE001 - exotic schema, fall back to the raw tool
+        logger.warning("mcp tool %s: 无法加装注入隔离护栏，使用原始工具", tool.name)
+        return tool
+
+
 async def get_mcp_tools() -> list[BaseTool]:
     """All tools from all configured MCP servers (cached after first load)."""
     global _tools_cache
@@ -95,7 +124,8 @@ async def get_mcp_tools() -> list[BaseTool]:
                 # params 是运行时按 DR_MCP_SERVERS 构造的 dict，SDK 的联合类型无法静态覆盖
                 client = MultiServerMCPClient({name: params})  # type: ignore[dict-item]
                 server_tools = await client.get_tools()
-                tools.extend(server_tools)
+                # 每个工具的输出在进入模型之前就被包成"不可信外部数据"
+                tools.extend(_guarded(t) for t in server_tools)
                 logger.info("mcp server %s: loaded %d tools", name, len(server_tools))
             except Exception:
                 logger.exception("mcp server %s: failed to load, skipped", name)

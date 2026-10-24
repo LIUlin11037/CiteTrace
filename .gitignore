@@ -1,1 +1,19 @@
-.workbuddy/memory/2026-10-16.md
+# ---- 工作区 / 编辑器 ----
+.workbuddy/
+.vscode/
+.idea/
+
+# ---- Python ----
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# ---- 工具缓存 ----
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ---- 项目产物 ----
+reports/
+checkpoints.sqlite3*

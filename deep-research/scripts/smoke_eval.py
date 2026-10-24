@@ -19,7 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from deep_research.agents.state import Evidence
-from deep_research.eval.citations import extract_citations, verify_citations
+from deep_research.eval.citations import Verdict, extract_citations, verify_citations
 from deep_research.eval.judge import AlignmentResult, ClaimVerdict, CoverageResult
 from deep_research.eval.runner import run_eval
 
@@ -50,7 +50,7 @@ FAKE_EVIDENCES = [
     )
 ]
 
-VERDICT_MAP = {
+VERDICT_MAP: dict[str, Verdict] = {
     "2501.12948": "exists",
     "2402.03300": "exists",
     "deepseek-ai/DeepSeek-R1": "exists",
@@ -69,7 +69,7 @@ async def main() -> None:
     print("[ok] 1. citation parsing: 5 refs, kinds/targets correct")
 
     # --- 2) programmatic verification with mocked verifiers ---
-    async def fake_verify(_client, target):
+    async def fake_verify(_client: object, target: str) -> Verdict:
         return VERDICT_MAP[target]
 
     report = await verify_citations(

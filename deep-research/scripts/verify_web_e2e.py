@@ -34,7 +34,9 @@ def read_segment(thread_id: str, label: str) -> dict:
         for raw in r.iter_lines(decode_unicode=True):
             if raw is None:
                 continue
-            line = raw.strip()
+            # iter_lines(decode_unicode=True) 运行时给 str，但 requests 的 stub 标的是 bytes；
+            # 两种都兼容，静态检查与运行时都不吃亏。
+            line = (raw.decode() if isinstance(raw, bytes) else raw).strip()
             if not line:
                 continue
             if line.startswith("event:"):

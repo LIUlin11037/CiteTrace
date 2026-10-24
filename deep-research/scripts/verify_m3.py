@@ -19,6 +19,7 @@ from __future__ import annotations
 import asyncio
 import sys
 from pathlib import Path
+from typing import LiteralString
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
@@ -73,7 +74,7 @@ async def _run_research(topic: str) -> dict:
         return result
 
 
-async def _sql(query: str, *params):
+async def _sql(query: LiteralString, *params):
     import psycopg
 
     async with await psycopg.AsyncConnection.connect(get_settings().database_url) as conn:

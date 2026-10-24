@@ -62,21 +62,27 @@ class MemoryStore:
 
     async def setup(self) -> None:
         import psycopg
+        from psycopg import sql
 
         async with await psycopg.AsyncConnection.connect(self._url) as conn:
             await conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
+            # 维度必须进 DDL，用 psycopg 的 SQL 组合而不是 f-string：
+            # psycopg 3.3 的 Query 类型只接受 LiteralString / SQL / Composed，
+            # 拼接式 f-string 会被类型检查拒绝（也正是防注入的用意）。
             await conn.execute(
-                f"""
-                CREATE TABLE IF NOT EXISTS memories (
-                    id BIGSERIAL PRIMARY KEY,
-                    namespace TEXT NOT NULL,
-                    kind TEXT NOT NULL,
-                    content TEXT NOT NULL,
-                    metadata JSONB NOT NULL DEFAULT '{{}}',
-                    embedding vector({self._dim}) NOT NULL,
-                    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-                )
-                """
+                sql.SQL(
+                    """
+                    CREATE TABLE IF NOT EXISTS memories (
+                        id BIGSERIAL PRIMARY KEY,
+                        namespace TEXT NOT NULL,
+                        kind TEXT NOT NULL,
+                        content TEXT NOT NULL,
+                        metadata JSONB NOT NULL DEFAULT '{{}}',
+                        embedding vector({dim}) NOT NULL,
+                        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                    )
+                    """
+                ).format(dim=sql.Literal(self._dim))
             )
             await conn.execute(
                 """
