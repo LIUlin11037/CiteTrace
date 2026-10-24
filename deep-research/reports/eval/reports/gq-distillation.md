@@ -1,160 +1,98 @@
-# 大模型知识蒸馏的主流做法与 DeepSeek-R1 蒸馏小模型效果评估
-
 ## 摘要
 
-知识蒸馏（Knowledge Distillation, KD）最初由 Hinton、Vinyals 与 Dean 于 2015 年提出，目标是把集成模型或多个模型的知识压缩（compress）到单个更易部署的模型中[^1]。在大模型（LLM）语境下，KD 被重新定位为把领先闭源 LLM（如 GPT-4）的先进能力迁移到开源模型（如 LLaMA、Mistral）的方法论，并在开源生态中承担两类角色：压缩模型，以及以自身为教师实现自我改进[^2]。当前主流做法可归纳为三条技术脉络：基于教师生成序列的序列级监督蒸馏[^13][^14]、引入 rationale 的逐步蒸馏[^15][^16]、以及针对分布不匹配的 on-policy / 散度目标改进路线[^4][^17][^20]。DeepSeek-R1 走的是第一条路线的最直接形态——用 R1 生成的样本对 Qwen2.5 与 Llama3 系列 dense 模型做微调，开源了 1.5B 至 70B 共 6 个蒸馏模型[^5][^7][^9]。官方与论文报告的效果包括：Distill-Qwen-7B 在 AIME 2024 达 55.5%，超过 QwQ-32B-Preview；Distill-Qwen-32B 在 AIME 2024 得 72.6%、MATH-500 得 94.3%、LiveCodeBench 得 57.2%，与 o1-mini 相当[^7]。但需注意：这些数字属官方自我宣称[^5]，且 2025 年多项研究对「蒸馏 vs 从零 RL」路线提出质疑，指出蒸馏可引入新推理模式[^31]，而基于验证器的 RL 在固定算力预算下理论上更优[^28]，同时当前推理基准对实现细节高度敏感、宣称增益常被高估[^30]。本报告的核心不确定性在于：DeepSeek-R1 蒸馏训练数据规模（约 80 万条）在现有证据中无任何来源支撑；主流推理框架对 R1-Distill 系列的官方支持情况证据不足；争议双方未在同一证据面上对齐。
+大模型知识蒸馏的主流做法已从「在固定数据集上最小化 forward KL」演进为三条并行的技术路线：其一，以 reverse KL / generalized JSD 替代 forward KL 并配合 on-policy 学生自生成样本，缓解训练-推理分布不匹配 [1][2]；其二，以 skew KL 加自适应 off-policy 调度降低自生成样本带来的算力开销 [4]；其三，在数据侧用强模型生成的推理链（rationale / trace）做序列级 SFT 式蒸馏，把「能力迁移」而非「分布拟合」作为主要目标 [3][24][25]。DeepSeek-R1 走的是第三条路线的极端形态：不做 logit 级蒸馏，而是用 R1 生成的样本微调开源底座 [7]，6 个 dense 蒸馏模型覆盖 1.5B–70B [6]，其中 Qwen2.5-32B 底座上「直接蒸馏优于在该底座上直接做 RL」[6]，DeepSeek-R1-Distill-Qwen-32B 在 AIME 2024 达 72.6%、MATH-500 达 94.3%、LiveCodeBench 达 57.2%，与 o1-mini 相当 [6][7]。但蒸馏训练数据规模与 SFT 超参在现有证据中均无出处，工程热度证据亦严重不足，相关结论须谨慎。
 
----
+## 一、大模型知识蒸馏的主流做法
 
-## 一、知识蒸馏的定义与经典范式
+### 1.1 问题设定与两条传统路线
 
-### 1.1 标准定义
+LLM 蒸馏的既有格局可先用一组二分描述：早期工作把 KD 的适用对象分为白盒分类模型与黑盒模型 API（如 ChatGPT），并指出把白盒 LLM 的知识蒸馏进小模型仍属欠探索 [1]。在自回归序列模型上，既有方法被明确表述为两条路线——要么需要 teacher 生成固定的输出序列集合（成本高），要么使用固定数据集并由 teacher 赋予 token 级概率标注 [2]。前者即 SeqKD（用 teacher 生成的序列），后者即 supervised KD（用 ground-truth 序列 + teacher token 概率），二者共同的缺陷是：训练时所见序列与 student 推理时自回归生成的序列之间存在分布不匹配 [2]。综述层面，LLM 时代的 KD 被归纳为三类作用——以 GPT-4 等专有模型为 teacher 提升开源模型能力、传统压缩、以及用模型自身作 teacher 的自我改进——并以 algorithm、skill、verticalization 三个支柱组织文献 [3]。
 
-知识蒸馏的经典定义来自 Hinton 等人 2015 年的工作：将集成模型（ensemble）或多个模型的知识压缩（compress）到单个更易部署的模型中[^1]。该文明确以「compress the knowledge in an ensemble into a single model」描述蒸馏目标，并称使用了一种与 Caruana 等人不同的压缩技术[^1]。论文在 MNIST 上给出结果，并将一个商用系统的大型声学模型集成蒸馏为单一模型，报告了显著改进；此外还引入了一种由完整模型与多个 specialist 模型组成的新型集成，specialist 模型学习区分完整模型易混淆的细粒度类别[^1]。
+### 1.2 目标函数：从 forward KL 到 reverse KL 与 JSD(β)
 
-在序列生成任务上，Kim & Rush（EMNLP 2016）给出了更形式化的方法定义：压缩方法分为两类——(1) 剪枝（pruning）与 (2) 知识蒸馏；蒸馏是让较小的 student 网络通过最小化与 teacher 输出的损失（通常 L2 或交叉熵）来模仿 teacher[^14]。标准 word-level 蒸馏（word-level KD）在神经机器翻译（NMT）上直接套用多类交叉熵蒸馏：对每个位置最小化 student 分布与 teacher 分布之间的交叉熵，同时也可与 one-hot 数据分布做插值[^14]。蒸馏损失常与 NLL 损失插值：L(θ,θT) = (1-α)L_NLL(θ) + α L_KD(θ,θT)，α 为混合系数[^14]。
+标准 KD 使用 forward Kullback-Leibler divergence（KLD）作为目标 [1]。其问题在于 student 的表达能力可能不足以拟合 teacher 分布，从而生成 teacher 不太可能生成的样本 [2]。MiniLLM 的做法是把 forward KLD 替换为 reverse KLD，理由是防止 student 高估 teacher 分布中的低概率区域 [1]。GKD 则给出更一般的族：允许在 student 与 teacher 之间使用替代损失，包括 reverse KL 与 generalized JSD(β)，其中 JSD(β) 在 0<β<1 之间插值 forward 与 reverse KL，且其梯度在 β 接近 0 与接近 1 时分别表现得类似 forward KL 与 reverse KL [2]。序列级散度的定义被显式写作各 token 位置散度的平均：D(p_T||p_S)(y|x) = (1/L_y) Σ_n D(p_T(·|y_<n,x) || p_S(·|y_<n,x)) [2]。DistiLLM 进一步指出，自回归序列模型的现有 KD 方法缺少标准化目标函数，并提出 skew Kullback-Leibler divergence 损失及其理论性质 [4]。
 
-### 1.2 LLM 语境下的重新定位
+### 1.3 数据来源：on-policy 学生自生成样本
 
-Xu et al. 2024 的综述将 LLM 语境下的知识蒸馏定位为把领先闭源 LLM（如 GPT-4）的先进能力迁移到开源模型（如 LLaMA、Mistral）的方法论[^2]。该综述指出 KD 在开源 LLM 生态中承担两类角色：压缩模型（compressing these models）与以自身为教师实现自我改进（self-improvement by employing themselves as teachers）[^2]。其组织框架由三大支柱构成：algorithm（算法）、skill（技能）、verticalization（垂直化）[^2]，并强调数据增强（data augmentation, DA）与 KD 的交互，将 DA 视为 KD 框架内增强 LLM 性能的范式[^2]。该综述配有对应的 GitHub 仓库，将 KD 拆解为 Knowledge Elicitation（知识引出）与 Distillation Algorithms（蒸馏算法）两部分，并探讨 LLM 的 Skill & Vertical Distillation[^3]。
+GKD 把自回归序列模型的 KD 建模为「带交互式专家的模仿学习」问题 [2]，并区分三类训练数据来源：supervised KD 与 FT 使用 ground-truth 输出序列；SeqKD 使用 teacher 生成的输出序列；on-policy GKD 使用从 student 采样的输出序列 [2]。MiniLLM 同样提出 on-policy 优化方法来学习 reverse KLD 目标，学生模型覆盖 120M 到 13B 参数 [1]。效果上，相对初始 student 的性能提升，on-policy GKD 在摘要任务上为基线 KD 方法的 2.1 倍、机器翻译 1.7 倍、算术推理 1.9 倍；task-agnostic 蒸馏在 BBH 与 MMLU 上分别取得 2% 与 1% 绝对准确率提升 [2]。MiniLLM 在 instruction-following 设定下报告了精确性、整体质量、更低 exposure bias、更好校准与长文本生成上的优势 [1]。
 
----
+### 1.4 效率修正：自适应 off-policy
 
-## 二、大模型知识蒸馏的主流技术路线
+on-policy 路线自身带来新成本：DistiLLM 明确指出，近期使用学生自生成输出以缓解训练-推理不匹配的做法显著抬高了计算成本 [4]。其对策包含两部分——(1) 新的 skew KL 损失并揭示与利用其理论性质；(2) 一种自适应 off-policy 方法，用于提升学生自生成输出的利用效率 [4]。在包含 instruction-following 的实验中，DistiLLM 相比近期 KD 方法最高实现 4.3 倍加速，同时构建出高性能学生模型 [4]。
 
-### 2.1 序列级蒸馏（Sequence-Level KD）
+### 1.5 数据侧路线：rationale 蒸馏与自生成指令
 
-Kim & Rush 指出，NMT 与以往多类分类任务的区别在于：NMT 虽在 word-level 做多类预测，但任务目标是「在给定先前决策的条件下预测完整序列输出」[^14]。据此提出 sequence-level 蒸馏的核心做法：让 student 在一个新生成的数据集上训练，该数据集由 teacher 网络运行 beam search 产生，从而近似匹配 teacher 的 sequence-level（而非 word-level）分布[^14]。论文提出两种变体：sequence-level KD（student 训练于 teacher beam search 中得分最高的输出）与 sequence-level interpolation（student 训练于与目标序列 sim 最高的 teacher beam search 输出）[^14]。温度参数 τ 在 {1, 1.5, 2} 中测试后，发现 τ=1 效果最好[^14]。
+与上述「分布对齐」路线并列的是「数据构造」路线。Distilling Step-by-Step 的核心是从 LLM 中抽取 rationale（推理链）作为额外监督信号，在 multi-task 框架下训练小模型，即同时学习「预测标签」与「生成理由」两个任务 [24]；在 4 个 NLP 基准上，相比标准 finetuning 与标准 distillation，该机制用显著更少的标注/无标注训练样本即取得更好性能，且用体积小得多的模型即超过 few-shot prompting 的大模型 [24]。更早的 Self-Instruct 则确立了「自生成 + 筛选」范式：由语言模型自举生成 instruction、input、output 样本，过滤掉无效或高度相似的样本后用于微调原模型，被作者描述为「几乎无需标注」的对齐方法 [25]。综述把这一交织关系表述为：数据增强与 KD 相互交织，用 DA 生成富含上下文的、技能特定的训练数据，使开源模型逼近专有模型的行为；其关键词包含 supervised fine-tuning，即把 SFT 式（序列级）蒸馏纳入 LLM KD 框架内讨论 [3]。
 
-效果方面：作者称 sequence-level 蒸馏「似乎消除了对 beam search 的需求」，即使应用在原始 teacher 模型上也是如此；最佳 student 模型比其 SOTA teacher 快 10 倍，性能损失很小[^13]。相比不使用知识蒸馏训练的 baseline，student 在 greedy decoding / beam search 下分别提升 4.2 / 1.7 BLEU；在知识蒸馏之上再做权重剪枝，可得到参数量比原 teacher 少 13 倍的 student，BLEU 仅下降 0.4[^13]。实验设置上将 4×1000 LSTM 压缩为 2×500 LSTM，大致匹配完整系统性能[^14]。
+## 二、DeepSeek-R1 蒸馏小模型：路线与效果
 
-### 2.2 逐步蒸馏（Distilling Step-by-Step）：引入 rationale
+### 2.1 路线依据：蒸馏与纯 RL 并列
 
-Hsieh et al.（Findings of ACL 2023）提出 Distilling step-by-step：从 LLM 中提取 rationale（自然语言推理理由）作为额外监督信号，在多任务框架下训练小模型[^15]。方法分两步：先用 CoT prompting 让 LLM 生成标签及 rationale，再用这些 rationale 加任务标签训练下游小模型[^15]。
+R1 论文主张 LLM 的推理能力可通过纯强化学习激发，无需人工标注的推理轨迹，且自我反思、验证、动态策略调整等高级推理模式自发涌现 [5]。论文同时明确指出：大模型涌现出的推理模式可被系统地用于指导和增强更小模型的推理能力 [5]，并把蒸馏作为独立于纯 RL 的另一条能力迁移路径，与 R1-Zero 的 RL 路线并列呈现 [11]。这一区分有第三方支撑：有研究用大 k 值 pass@k 系统探测 RLVR 的推理边界，发现当前训练设置并未引出根本性的新推理模式，RLVR 模型在小 k（如 k=1）时优于 base model，但 k 较大时 base model 的 pass@k 更高，观察到的推理能力源自 base model 并受其上限约束；该论文明确对比指出，蒸馏可以从 teacher 引入新的推理模式，真正扩展模型的推理能力 [12]。
 
-该工作明确了一个核心视角转变：从「把 LLM 视为噪声标签来源」转为「把 LLM 视为能推理的 agent」，即 LLM 可生成为其预测标签辩护的自然语言 rationale[^16]。论文将 LLM 生成 rationale 视为「任务知识」的载体，认为 rationale 中包含如「Area = length × width」这类原本需要大量数据才能学到的任务知识[^15]。
+### 2.2 具体做法：用 R1 生成样本微调开源底座
 
-效果上，论文在 4 个 NLP benchmark 上得出三点结论：相比 finetuning 与 distillation，本方法用更少标注/无标注样本取得更好性能；相比 few-shot prompted LLM，用显著更小的模型取得更好性能；同时降低模型规模与所需数据量[^15]。具体数字：微调后的 770M T5 模型在某个 benchmark 上仅用 80% 可用数据即超过 few-shot prompted 的 540B PaLM，而标准微调同一 T5 模型即便用 100% 数据也难以匹敌[^15]。论文称其方法可用超过 500× 更少的模型参数超越 LLM，平均减少超过 50% 训练样本（最高超过 85% 减少）；在仅有未标注数据时，仅用 11B T5 模型即超过 540B PaLM 的性能[^15]。
+官方 README 明确说明：DeepSeek-R1-Distill 系列是在开源模型基础上微调，使用的是 DeepSeek-R1 生成的样本 [7]。这与 1.5 节的序列级 SFT 式蒸馏同构，而非 logit 级分布对齐。底座对应关系为：DeepSeek-R1-Distill-Qwen-7B 基于 Qwen2.5-Math-7B；DeepSeek-R1-Distill-Qwen-32B 基于 Qwen2.5-32B；DeepSeek-R1-Distill-Llama-8B 基于 Llama-3.1-8B（README 后文注明为 Llama3.1-8B-Base）；DeepSeek-R1-Distill-Llama-70B 基于 Llama-3.3-70B-Instruct [7]。论文开源了 6 个 dense 蒸馏模型，规模为 1.5B、7B、8B、14B、32B、70B，底座来自 Qwen 与 Llama 两个系列 [6]。
 
-### 2.3 On-Policy 蒸馏与散度目标改进
+### 2.3 效果：蒸馏模型评测数据
 
-**MiniLLM（reverse KLD）**：Gu et al. 提出用 reverse KLD 替换标准 KD 中的 forward KLD 目标，理由是 reverse KLD 更适合生成式语言模型的蒸馏，可防止学生模型高估教师分布中的低概率区域[^17]。论文论证标准 KD 目标本质是最小化近似的 forward KLD KL[p||q_θ]，它迫使学生分布覆盖教师分布的所有 mode；在开放式文本生成中，由于学生容量有限，forward KLD 会使学生给教师分布的 void 区域分配不合理的高概率，并在自由生成时产生教师分布下极不可能的样本[^18]。MiniLLM 改为最小化 reverse KLD KL[q_θ||p]，其 mode-seeking 行为使学生聚焦教师分布的主要 mode、对 void 区域分配低概率[^18]。reverse KLD 目标的梯度通过 Policy Gradient Theorem 推导，采用 on-policy 训练；为稳定和加速训练提出三项技巧：(1) single-step decomposition 降低方差，(2) teacher-mixed sampling 缓解 reward hacking，(3) length normalization 消除长度偏差[^18]。论文将 MiniLLM 与 sequence-level KD (SeqKD) 对比：SeqKD 最小化 forward KLD，强迫学生记忆教师生成的所有样本；MiniLLM 不强迫学生拟合教师分布的所有样本，而是鼓励学生在自身能力范围内生成教师偏好的样本[^18]。实验覆盖 GPT-2、GPT-J、OPT 等生成式模型家族，规模 120M–13B，使用 5 个数据集，评估指标包括 Rouge-L、GPT-4 feedback 和人工判断[^18]。该论文发表于 ICLR 2024[^17]，官方实现位于 microsoft/LMOps 的 minillm 子目录，已被 HuggingFace TRL 支持（trl/experimental/minillm）[^19]。
+评测配置为：所有模型最大生成长度 32,768 tokens；需要采样的 benchmark 使用 temperature 0.6、top-p 0.95，每问题生成 64 个回答以估计 pass@1 [7]。蒸馏模型成绩（AIME 2024 pass@1 / cons@64 / MATH-500 pass@1 / GPQA Diamond pass@1 / LiveCodeBench pass@1 / CodeForces rating）如下 [7]：
 
-**GKD（Generalized Knowledge Distillation）**：该论文针对自回归序列模型 KD 中「训练时见到的输出序列」与「学生模型推理时生成的序列」之间的分布不匹配（distribution mismatch）问题[^4]。GKD 不依赖固定的输出序列集合，而是让学生在自生成的输出序列上训练，并利用教师模型对这些序列的反馈[^4]。与监督式 KD 不同，GKD 允许在学生与教师之间采用替代的损失函数，论文指出这在学生表达能力不足以模仿教师分布时有用[^4]。论文将 on-policy 蒸馏形式化为：给定学生 p_S 与教师 p_T，在 token 级分布上最小化散度 D(p_T || p_S)，训练数据为学生自生成序列[^33]。论文强调学生-教师间最优散度（forward KL / reverse KL / JSD）具有任务依赖性[^33]。GKD 支持将蒸馏与 RL 微调（RLHF）无缝结合，这一组合此前未被探索[^4][^33]。论文在摘要中声明在摘要生成、翻译、算术推理任务上验证了 GKD 蒸馏自回归语言模型的有效性，并做了面向指令微调的任务无关蒸馏[^4]。
+- Qwen-1.5B：28.9 / 52.7 / 83.9 / 33.8 / 16.9 / 954
+- Qwen-7B：55.5 / 83.3 / 92.8 / 49.1 / 37.6 / 1189
+- Qwen-14B：69.7 / 80.0 / 93.9 / 59.1 / 53.1 / 1481
+- Qwen-32B：72.6 / 83.3 / 94.3 / 62.1 / 57.2 / 1691
+- Llama-8B：50.4 / 80.0 / 89.1 / 49.0 / 39.6 / 1205
+- Llama-70B：70.0 / 86.7 / 94.5 / 65.2 / 57.5 / 1633
 
-**DistiLLM（skew KLD + adaptive off-policy）**：Ko et al.（ICML 2024）提出 DistiLLM，由两个组件构成：(1) 一种新的 skew Kullback-Leibler divergence loss，论文揭示并利用其理论性质；(2) 一种 adaptive off-policy 方法，用于提升利用 student-generated outputs 的效率[^20]。论文针对现有自回归序列模型 KD 方法的两点问题：缺乏标准化目标函数，以及使用学生生成输出导致计算成本大幅上升[^20]。论文指出传统 KLD 因不对称性会导致 mode averaging / mode collapse：学生分布要么过度平滑无法覆盖教师分布，要么过度集中于高概率区域[^21]。Skew KLD 的设计目标：解决 KLD 优化中潜在梯度爆炸导致的不稳定性，以及缺乏对泛化性与收敛性的强调；声称具有稳定梯度与最小近似误差，经验上带来更快收敛与更优性能[^21]。Adaptive off-policy 模块用于自适应且高效地利用 student-generated outputs（SGO），因为持续生成 SGO 会显著增加训练时间且难以确定最优使用比例[^21]。论文声称 DistiLLM 在指令跟随、文本摘要等生成任务上取得学生 LM 的 state-of-the-art 性能，并相比 Gu et al. 2024 与 Agarwal et al. 2024 等近期 KD 技术实现 2.5~4.3 倍训练加速[^21]。官方实现基于 HuggingFace Transformers 的特定 commit，并沿用 MiniLLM 的实现[^22]。
+对照基线为：o1-mini 63.6 / 80.0 / 90.0 / 60.0 / 53.8 / 1820；QwQ-32B-Preview 44.0 / 60.0 / 90.6 / 54.5 / 41.9 / 1316；GPT-4o-0513 9.3 / 13.4 / 74.6 / 49.9 / 32.9 / 759；Claude-3.5-Sonnet-1022 16.0 / 26.7 / 78.3 / 65.0 / 38.9 / 717 [7]。教师模型 DeepSeek-R1 自身对应分数为 AIME 2024 Pass@1 79.8、MATH-500 97.3、GPQA-Diamond 71.5、LiveCodeBench (Pass@1-COT) 65.9、Codeforces Rating 2029（Percentile 96.3）[7]；论文正文另给出 GPQA Diamond 71.5、MMLU 90.8、MMLU-Pro 84.0，以及 Codeforces 2029 Elo 超过 96.3% 人类参赛者 [6]。R1 与 R1-Zero 均为 671B 总参数、37B 激活参数的 MoE 模型，上下文长度 128K [7]。
 
-### 2.4 蒸馏的边界条件：Scaling Law 视角
+论文正文给出的关键结论包括：以 Qwen2.5-32B 为底座时，直接从 DeepSeek-R1 蒸馏的效果优于在该底座上直接做 RL [6]；DeepSeek-R1-Distill-Qwen-7B 在 AIME 2024 上达到 55.5%，超过 QwQ-32B-Preview [6]；DeepSeek-R1-Distill-Qwen-32B 在 AIME 2024 得 72.6%、MATH-500 得 94.3%、LiveCodeBench 得 57.2%，显著超过此前开源模型，与 o1-mini 相当 [6]。作为 RL 路线的参照，R1-Zero 在 AIME 2024 上 pass@1 从 15.6% 提升到 71.0%，配合多数投票（cons@64）进一步提升到 86.7% [6]；另一处记录为 pass@1 从 15.6% 升至 77.9%，self-consistency 解码下达 86.7% [11]。R1-Zero 的 RL 配置为学习率 3e-6、KL 系数 0.001、rollout 采样温度 1，每题采样 16 个输出，8.2k step 前最大长度 32,768 tokens、之后 65,536 tokens，共训练 10,400 steps（约 1.6 个 epoch），每步 32 个不同问题、batch size 512，每 400 步用最新策略模型替换 reference model [11][14]。
 
-Distillation Scaling Laws 提出用算力预算及师生算力分配来估计蒸馏模型性能，支持计算最优的师生算力分配[^29]。论文给出两种场景的计算最优蒸馏配方：教师已存在时，以及教师也需训练时[^29]。关键边界条件：在涉及多个学生或已有教师的场景下，蒸馏在某个算力水平内优于监督学习，该水平随学生规模可预测地扩展；反之，若只蒸馏单个学生且教师也需从头训练，则监督学习通常更可取[^29]。
+### 2.4 第三方复现与生态
 
----
+open-r1 把 R1 pipeline 拆成三步复现，其中 Step 1 即用从 DeepSeek-R1 蒸馏的高质量语料复现 R1-Distill 模型 [9]。2025/05/26 宣布 Step 1 完成，发布 Mixture-of-Thoughts——一个从 R1 蒸馏的 350k 条已验证推理轨迹数据集，覆盖数学、代码与科学，并提供训练 OpenR1-Distill-7B 的 recipe，称其复现了 deepseek-ai/DeepSeek-R1-Distill-Qwen-7B 的推理能力 [9]。更早的 2025/02/10 发布 OpenR1-Math-220k（220k 条从 R1 蒸馏的 trace，基于新版 NuminaMath），README 称在该数据集上训练的模型与 DeepSeek 的蒸馏模型性能相当 [9]。2025/03/11 发布 CodeForces-CoTs（10k 竞赛编程题、100k 条从 R1 蒸馏的解）与 IOI24 基准，README 称在 CodeForces-CoTs 上训练的 7B Qwen 模型可在 IOI24 上超过 Claude 3.7 Sonnet，32B 模型可超过 R1 本身 [9]。README 另给出把蒸馏 recipe 迁移到更小 base model 的示例：以 Qwen/Qwen3-0.6B-Base 为底座训练 OpenR1-Distill-0.6B [9]。需注意该仓库已声明不再维护，并指引 GRPO/SFT/蒸馏训练迁移到 TRL 库 [9]。
 
-## 三、DeepSeek-R1 蒸馏小模型：做法与效果
+与蒸馏路线形成对照的是小模型 RL 的可行性边界：TinyZero 在 countdown 与 multiplication 任务上复现 R1-Zero，README 称通过 RL，3B base LM 能自行发展出自我验证与搜索能力，成本低于 30 美元；同时明确记录规模边界——单 GPU 配置适用于 ≤1.5B 模型，但对 Qwen2.5-0.5B base「已知无法学会推理」，3B+ 模型才能发展出复杂推理技能 [10]。simpleRL-reason 从 Qwen2.5-Math-7B base 直接做 RL，无 SFT、无 reward model，仅用 MATH 数据集的 8K 样本，其 SimpleRL-Zero 平均 48.8 对比 base 的 30.2；同数据 SFT 对照（8K MATH SFT）AIME 2024 仅 3.3、平均 26.5，低于 base 的 30.2 [20]。1-shot RLVR 进一步显示，仅用一条训练样本即可在 Qwen2.5-Math-1.5B 上把 MATH500 从 36.0% 提升到 73.6%，并在包括 DeepSeek-R1-Distill-Qwen-1.5B 在内的模型上观察到类似大幅提升 [21]。这些结果说明「小模型 + RL」并非不可行，但任务复杂度与底座规模存在明确门槛 [10]。
 
-### 3.1 蒸馏做法
+厂商侧的公开表述较为间接：Qwen3 技术报告摘要写明「借助旗舰模型的知识，显著降低了构建小规模模型所需的算力，同时保证其性能具有高度竞争力」，即把「用强模型知识构建小模型」作为既定路线写入摘要 [22]；Qwen3 系列覆盖 0.6B–235B，全部以 Apache 2.0 公开权重 [22][23]，且 dense base 模型在更低参数规模上达到上一代更高参数规模的性能 [22]。但 QwenLM/Qwen3 README 未在抓取到的正文中给出「蒸馏 vs 直接 RL」的路线对比表述或相关实验数据，其 Training 一节标注后训练（含 SFT 与 RLHF）复现说明在抓取时仍为 TODO [23]。
 
-DeepSeek-R1 论文摘要指出：大模型涌现出的推理模式可被系统性地用于引导和增强更小模型的推理能力（即蒸馏路线）[^6]。论文正文称，蒸馏做法是使用 DeepSeek-R1 生成的推理数据（reasoning data generated by DeepSeek-R1）对若干社区常用 dense 模型做微调[^7]。官方 README 进一步明确：蒸馏模型的训练方式是——基于开源模型微调，使用 DeepSeek-R1 生成的样本（samples generated by DeepSeek-R1），官方对蒸馏模型的 config 与 tokenizer 做了轻微改动，并建议使用官方设置运行[^5][^9]。
+## 矛盾与不确定性
 
-官方开源了 6 个从 DeepSeek-R1 蒸馏的 dense 模型，参数量分别为 1.5B、7B、8B、14B、32B、70B，基于 Qwen2.5 与 Llama3 系列[^5][^7]。具体基座对应关系为：DeepSeek-R1-Distill-Qwen-1.5B 基于 Qwen2.5-Math-1.5B；Qwen-7B 基于 Qwen2.5-Math-7B；Llama-8B 基于 Llama-3.1-8B；Qwen-14B 基于 Qwen2.5-14B；Qwen-32B 基于 Qwen2.5-32B；Llama-70B 基于 Llama-3.3-70B-Instruct[^5][^9]。
+**（1）蒸馏训练数据规模与 SFT 超参无出处。** 常被引用的「约 80 万条 R1 生成样本」这一数字在本次 25 条证据中无任何一条给出出处；相反，证据明确记录「论文正文中未在此处给出蒸馏 SFT 阶段的对应超参数」[14]。因此本报告不采用该数字，蒸馏阶段的学习率、epoch、batch、max length 等均属**现有公开资料不足以确认**。可确认的仅是 README 层面的定性描述——蒸馏模型使用 DeepSeek-R1 生成的样本微调 [7]。
 
-作为对照，R1 主模型为 MoE 架构，671B 总参数 / 37B 激活参数，上下文 128K，基于 DeepSeek-V3-Base 训练[^9]。R1-Zero 与 R1 均采用 GRPO 作为 RL 框架；R1-Zero 的 RL 训练超参为：学习率 3e-6，KL 系数 0.001，rollout 采样温度 1；每问采样 16 个输出，8.2k step 前最大长度 32,768 tokens、之后 65,536 tokens；共训练 10,400 步，约 1.6 个 epoch；每步 32 个不同问题，训练 batch size 为 512；每 400 步用最新策略模型替换参考模型[^8]。R1-Zero 使用基于规则的奖励，由 accuracy reward 与 format reward 等权相加构成，format reward 要求把推理过程放在 <think> 与 </think> 标签内[^8]。Nature 版正文确认 DeepSeek-R1 采用多阶段框架，整合拒绝采样、RL 与监督微调[^23]。
+**（2）工程落地热度无法从现有证据推断。** 热度侧证据仅来自 4 个 1–258 星的小型个人仓库（r1-ktransformers-guide 258 星、last push 2025-03-03 [15]；Deepseek-R1-qwen1.5B 29 星、2025-01-24 [16]；deepseek-server 2 星、2025-02-24 [17]；IA_2025 1 星、2025-02-08 [18]；DeepSeekQwen_AIO 1 星、2025-01-25 [19]），且均停在 2025 年 1–3 月。核心的 deepseek-ai/DeepSeek-R1 官方仓库只取了 README 内容，未记录 stars/commits/最近提交时间 [7]；unsloth 虽显示 12,050 次 commits 并声称微调「2× faster with 70% less VRAM with no accuracy loss」（属厂商自述性能主张，需第三方验证）[13]，但未覆盖 unsloth DeepSeek-R1-GGUF 的 HuggingFace 下载量。以这些样本推断「工程落地热度」会严重失真。
 
-### 3.2 官方报告的效果
+**（3）「蒸馏 vs 小模型 RL」的厂商表态与争议缺乏证据。** 仅有 Qwen3 技术报告一句「leveraging the knowledge from the flagship models」的间接表述 [22]，且 QwenLM/Qwen3 README 明确未给出路线对比 [23]。Llama/Meta 侧表态、以及第三方独立 benchmark 对 R1-Distill 分数的复现验证完全缺失——open-r1 的「性能相当」「复现推理能力」均为项目自述 [9]，不构成独立验证。因此「2025–2026 年存在厂商路线争议」这一判断**现有公开资料不足以确认**。
 
-论文正文称：以 Qwen2.5-32B 为基座时，直接从 DeepSeek-R1 蒸馏的效果优于在该基座上直接做 RL，说明大基座模型发现的推理模式对提升推理能力至关重要[^7]。官方明确表述：大模型的推理模式可以被蒸馏进小模型，且效果优于在小模型上通过 RL 自行发现的推理模式[^9]。
+**（4）R1-Zero 分数在证据间存在口径差异。** 一处记录 pass@1 从 15.6% 到 71.0%、cons@64 达 86.7% [6]，另一处记录升至 77.9%、16 样本自洽解码达 86.7% [8][11]。差异可能源于版本或评测口径，但证据未给出解释。另需注意 alphaXiv 页面指出：GRPO 与 PPO 的对比实验使用的是 MATH 数据集与 DeepSeek-Coder-V2-Lite（16B 总参数、2.4B 激活参数），并非 671B 的 DeepSeek-R1-Zero [8]——引用该类对比时不可张冠李戴。论文版本方面，v1 于 2025-01-22 提交、v2 于 2026-01-04 修订，且已发表于 Nature（DOI 10.1038/s41586-025-09422-z）[8][11]，引用具体数字时应标注版本。
 
-具体基准数字（均来自论文正文，属官方报告）[^7]：
-- DeepSeek-R1-Distill-Qwen-7B 在 AIME 2024 上达到 55.5%，超过 QwQ-32B-Preview；
-- DeepSeek-R1-Distill-Qwen-32B 在 AIME 2024 得 72.6%、MATH-500 得 94.3%、LiveCodeBench 得 57.2%，显著超过此前的开源模型，与 o1-mini 相当；
-- 蒸馏出的 14B 模型大幅超过当时 SOTA 的开源模型 QwQ-32B-Preview，蒸馏的 32B 与 70B 模型在 dense 模型的推理基准上创下新纪录。
-
-作为教师模型的参照：DeepSeek-R1 在 AIME 2024 上 Pass@1 为 79.8%，在 MATH-500 上为 97.3%，Codeforces Elo 为 2029（超过 96.3% 人类参赛者）[^7]。DeepSeek-R1-Zero 在 AIME 2024 上 pass@1 从初始 15.6% 升至 77.9%，自一致性解码下达 86.7%[^23]。
-
-官方 README 称 DeepSeek-R1-Distill-Qwen-32B 在多个基准上超过 OpenAI-o1-mini，并在 dense 模型上取得新的 SOTA[^5][^9]。**需注意：这一表述属官方自我宣称**[^5]。评估设置方面，官方采用最大生成长度 32768 tokens，采样温度 0.6、top-p 0.95，每 query 生成 64 个响应估计 pass@1[^9]。
-
-### 3.3 第三方复现与对比
-
-**Open-R1（HuggingFace）**：目标是复现 R1 流水线，分三步：Step 1 复现 R1-Distill 模型（从 R1 蒸馏高质量语料）；Step 2 复现 R1-Zero 的纯 RL 流水线；Step 3 实现 base model 经多阶段训练到 RL-tuned[^10]。2025/05/26 宣布 Step 1 完成：发布 Mixture-of-Thoughts，350k 条从 R1 蒸馏并经验证的推理轨迹，覆盖数学、代码、科学，并提供训练 OpenR1-Distill-7B 的配方，称其复现了 DeepSeek-R1-Distill-Qwen-7B 的推理能力[^10]。2025/03/11 发布 CodeForces-CoTs（10k 竞赛编程题、100k 从 R1 蒸馏的解法）与 IOI24 基准；称 7B 模型在 IOI24 上可超过 Claude 3.7 Sonnet，32B 模型可超过 R1 本身[^10]。2025/02/10 发布 OpenR1-Math-220k（220k 条从 R1 蒸馏的轨迹，基于新版 NuminaMath），称在该数据集上训练的模型可匹配 DeepSeek 蒸馏模型的性能[^10]。该仓库 README 顶部声明项目已不再维护，GRPO、SFT 与蒸馏的训练侧工作已迁移到 TRL[^10]。
-
-**Open Thoughts（Bespoke Labs 与 DataComp 社区）**：首要目标是策展推理数据集以训练超越 DeepSeek-R1-Distill-Qwen-32B 和 DeepSeek-R1-Distill-Qwen-7B 的小型推理模型[^11]。README 结果表显示：OpenThinker3-7B 在 AIME24 得 69.0、AIME25 得 53.3、AMC23 得 93.5、MATH500 得 90.0、GPQA-D 得 53.7、JEEBench 得 72.4；对比 DeepSeek-R1-Distill-Qwen-32B 分别为 51.3 / 38.0 / 92.0 / 88.0 / 33.2 / 50.4[^11]。OpenR1-Distill-7B 在表中 AIME24 为 57.7、AIME25 为 39.7、MATH500 为 88.0、GPQA-D 为 58.9[^11]。值得注意的是，OpenThoughts3-1.2M 的推理轨迹改用 QwQ-32B 生成（而非 R1 标注），是 1000+ 次实验的结果[^11]。该项目声明完全开源：模型权重、数据集、数据生成代码、评估代码、训练代码均公开[^11]。其数据策展工具 Bespoke Curator 支持 LiteLLM、vLLM 及主流 batch API 等多种推理后端[^12]。
-
-**s1**：用仅 1000 条精选问题-推理轨迹（s1K）对 Qwen2.5-32B-Instruct 做监督微调（即蒸馏式 SFT），并配合 budget forcing 控制测试时算力[^32]。s1-32B 在竞赛数学题（MATH、AIME24）上超过 o1-preview 最多 27%；通过 budget forcing 扩展，s1-32B 在 AIME24 上从 50% 提升到 57%，超出无测试时干预时的性能[^32]。该工作是「少量高质量蒸馏数据即可获得强推理」的代表性证据[^32]。
-
----
-
-## 四、蒸馏 vs 从零 RL：路线争议
-
-### 4.1 支持蒸馏的证据
-
-Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? 用大 k 值的 pass@k 作为评测指标，跨多个模型家族、RL 算法及数学/代码/视觉推理基准，系统探测 RLVR 训练模型的推理能力边界[^31]。发现当前训练设置并未引出根本性的新推理模式：RLVR 模型在小 k（如 k=1）时优于基座模型，但大 k 时基座模型 pass@k 更高；覆盖度与困惑度分析表明，观察到的推理能力源自基座模型并受其约束；六种主流 RLVR 算法表现相近，且远未充分利用基座模型潜力[^31]。对比之下，该研究认为蒸馏可以从教师引入新的推理模式，真正扩展模型的推理能力[^31]。
-
-DeepSeek-R1 论文自身的核心主张也支持蒸馏路线：以 Qwen2.5-32B 为基座时，直接从 DeepSeek-R1 蒸馏的效果优于在该基座上直接做 RL[^7]；官方明确表述大模型的推理模式可以被蒸馏进小模型，且效果优于在小模型上通过 RL 自行发现的推理模式[^9]。
-
-### 4.2 质疑蒸馏路线的证据
-
-**Scaling Test-Time Compute Without Verification or RL is Suboptimal** 明确把社区争议表述为两条路线：一是蒸馏成功的搜索/思考轨迹（verifier-free, VF），二是用验证器（0/1 结果奖励、奖励模型或 verifier）引导 RL 与搜索（verifier-based, VB）[^28]。理论证明：在固定算力/数据预算下，基于验证器的 RL 或搜索方法远优于基于蒸馏或克隆搜索轨迹的无验证器方法；当基座 LLM 对正确解轨迹呈异质分布（长度、风格不同）且奖励分布非尖锐时，随测试时算力（输出 token 长度）与训练数据扩展，VF 方法的次优性比 VB 恶化得更快[^28]。该结论意味着 VB 方法渐近扩展性更好，且随测试时预算增大，VB 与 VF 的性能差距会扩大；在 3B/8B/32B 预训练 LLM 的教学与数学推理问题上做了实证验证[^28]。
-
-**SFT Memorizes, RL Generalizes** 直接对比 SFT（含蒸馏式监督微调）与 RL 在泛化与记忆上的差异，覆盖文本规则变体与视觉变体两类任务[^27]。结论：RL（尤其使用基于结果的奖励）能在文本与视觉规则变体上泛化；SFT 倾向于记忆训练数据，难以泛化到分布外（OOD）场景；分析显示 RL 提升了模型底层的视觉识别能力，从而增强视觉域泛化[^27]。但该研究同时指出：尽管 RL 泛化更优，SFT 仍是有效 RL 训练的前提——SFT 稳定输出格式，使后续 RL 能取得性能增益[^27]。
-
-**A Sober Look at Progress in Language Model Reasoning** 指出当前数学推理基准对细微实现选择高度敏感，包括解码参数、随机种子、提示格式，甚至硬件与软件配置；近期研究报告的性能增益常依赖不清晰的比较或未报告的方差来源[^30]。用标准化评测框架重新评估后发现：多数 RL 方法仅带来适度改进，远低于此前宣称，且容易过拟合，尤其在小规模基准（如 AIME'24）上；相反，在其研究的设定中，监督微调（SFT）方法表现出持续更强的泛化能力[^30]。
-
----
-
-## 五、矛盾与不确定性
-
-### 5.1 关键事实缺失：R1 蒸馏数据规模
-
-本报告无法确认 DeepSeek-R1 蒸馏训练数据的具体规模（如「约 80 万条样本」）。在现有 33 条证据中，无任何一条给出该数字或可推导该数字的来源——R1 论文正文[^7]、官方 README[^5][^9]、Nature 版[^23]均未在已收集证据中出现相关表述。**该数字属无来源支撑的关键事实，不应被引用。**
-
-### 5.2 推理框架支持情况：证据不足
-
-关于主流推理框架（vLLM / SGLang / llama.cpp）对 DeepSeek-R1-Distill 系列的支持与实测性能，现有证据不足以确认。vLLM 官方文档抓取正文在模型清单（List of Text-only Language Models）之前即被截断，未包含 DeepSeek-R1-Distill 系列的具体条目、推荐配置或性能数据[^24]；另两条证据为 0 star 与 1 star 的个人仓库，明确被标注「不构成官方支持情况的证据」[^25][^26]。SGLang 与 llama.cpp 零证据。**该子问题实际独立来源数为 0–1，不满足 ≥2 要求，无法给出可靠结论。**
-
-### 5.3 路线争议：双方未在同一证据面对齐
-
-已收集的 4 篇争议论文（SFT Memorizes, RL Generalizes[^27]；Scaling Test-Time Compute Without Verification or RL is Suboptimal[^28]；A Sober Look at Progress in Language Model Reasoning[^30]；Does RL Really Incentivize Reasoning Capacity[^31]）与 s1[^32] 均为 2025 年 1–4 月，且未包含 R1 论文自身「Qwen2.5-32B 上直接蒸馏优于在该基座上做 RL」这一原始主张[^7]与上述反驳之间的直接对照证据。**争议双方未在同一证据面上对齐，无法支撑「争议现状」的完整叙述。** 换言之，现有证据只能分别呈现「支持蒸馏」与「质疑蒸馏」两类主张，但无法判定哪一方在 R1 的具体设定下更成立。
-
-### 5.4 官方宣称与第三方复现的差异
-
-DeepSeek-R1-Distill-Qwen-32B 的「超过 o1-mini、dense 模型新 SOTA」属官方自我宣称[^5]。第三方复现中，Open Thoughts 的 OpenThinker3-7B 在 AIME24（69.0 vs 51.3）、AIME25（53.3 vs 38.0）、GPQA-D（53.7 vs 33.2）、JEEBench（72.4 vs 50.4）上超过 DeepSeek-R1-Distill-Qwen-32B，但在 AMC23（93.5 vs 92.0）与 MATH500（90.0 vs 88.0）上仅小幅领先[^11]。**需注意：OpenThoughts3-1.2M 的推理轨迹改用 QwQ-32B 生成而非 R1 标注**[^11]，因此该对比并非纯粹的「R1 蒸馏 vs 其他蒸馏」对照，其结论不能直接用于评估 R1 蒸馏路线的优劣。
-
-### 5.5 评测方法学风险
-
-A Sober Look at Progress in Language Model Reasoning 的发现对上述所有基准数字构成方法学警示：当前数学推理基准对解码参数、随机种子、提示格式乃至硬件与软件配置高度敏感，近期研究报告的性能增益常依赖不清晰的比较或未报告的方差来源[^30]。因此，本报告中引用的 AIME 2024、MATH-500 等具体数字，在跨论文比较时应保持谨慎。
+**（5）蒸馏「扩展能力」的结论依赖单一来源。** 「蒸馏可引入新推理模式、真正扩展推理能力」这一判断出自一篇 RLVR 批判性研究 [12]，其对照论证有力但仍是单一论文的主张；本报告未找到第二个独立来源对该结论做交叉验证。
 
 ## 参考来源
 
-[^1]: Distilling the Knowledge in a Neural Network (Hinton, Vinyals, Dean 2015) — https://arxiv.org/abs/1503.02531v1（arxiv, 2015-03-09）
-[^2]: A Survey on Knowledge Distillation of Large Language Models (Xu et al. 2024) — https://arxiv.org/abs/2402.13116v4（arxiv, 2024-02-20）
-[^3]: Tebmer/Awesome-Knowledge-Distillation-of-LLMs — https://github.com/Tebmer/Awesome-Knowledge-Distillation-of-LLMs（github, 2025-03-09）
-[^4]: On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (GKD) — https://arxiv.org/abs/2306.13649v3（arxiv, 2023-06-23）
-[^5]: deepseek-ai/DeepSeek-R1 — README (Model Downloads: DeepSeek-R1-Distill Models) — https://raw.githubusercontent.com/deepseek-ai/DeepSeek-R1/main/README.md（github, 2025-01-22）
-[^6]: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2) — 摘要与引言 — https://arxiv.org/abs/2501.12948v2（arxiv, 2025-01-22）
-[^7]: DeepSeek-R1 (ar5iv HTML full text) — Introduction / Contributions: Distillation — https://ar5iv.labs.arxiv.org/html/2501.12948（arxiv, 2025-01-22）
-[^8]: DeepSeek-R1 (arXiv HTML v2) — Section 2: DeepSeek-R1-Zero 训练配置（GRPO） — https://arxiv.org/html/2501.12948v2（arxiv, 2025-01-22）
-[^9]: deepseek-ai/DeepSeek-R1 (official repository README) — https://github.com/deepseek-ai/DeepSeek-R1（github）
-[^10]: huggingface/open-r1 — A fully open reproduction of DeepSeek-R1 — https://github.com/huggingface/open-r1（github）
-[^11]: open-thoughts/open-thoughts — Curating the best open reasoning datasets — https://github.com/open-thoughts/open-thoughts（github）
-[^12]: bespokelabsai/curator — Bulk Inference and Scalable Data Curation for Post-Training — https://github.com/bespokelabsai/curator（github）
-[^13]: Sequence-Level Knowledge Distillation (Kim & Rush, EMNLP 2016) — https://arxiv.org/abs/1606.07947（arxiv, 2016-06-25）
-[^14]: Sequence-Level Knowledge Distillation — 方法章节（ar5iv 全文） — https://ar5iv.org/abs/1606.07947（arxiv, 2016-06-25）
-[^15]: Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes (Hsieh et al., Findings of ACL 2023) — https://arxiv.org/abs/2305.02301（arxiv, 2023-05-03）
-[^16]: Distilling Step-by-Step — 引言与相关工作（ar5iv 全文） — https://ar5iv.org/abs/2305.02301（arxiv, 2023-05-03）
-[^17]: MiniLLM: On-Policy Distillation of Large Language Models (arXiv:2306.08543v6) — https://arxiv.org/abs/2306.08543v6（arxiv, 2023-06-14）
-[^18]: MiniLLM 论文正文（方法章节，arXiv HTML v6） — https://arxiv.org/html/2306.08543v6（arxiv, 2023-06-14）
-[^19]: microsoft/LMOps — minillm README — https://raw.githubusercontent.com/microsoft/LMOps/main/minillm/README.md（github）
-[^20]: DistiLLM: Towards Streamlined Distillation for Large Language Models (arXiv:2402.03898v2) — https://arxiv.org/abs/2402.03898v2（arxiv, 2024-02-06）
-[^21]: DistiLLM (arXiv:2402.03898v2) — 正文：方法动机与贡献 — https://arxiv.org/html/2402.03898v2（arxiv, 2024-07-03）
-[^22]: jongwooko/distillm — Official PyTorch implementation of DistiLLM (ICML 2024) — https://github.com/jongwooko/distillm（github）
-[^23]: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning (Nature 645:633-638) — https://www.nature.com/articles/s41586-025-09422-z（web, 2025-09-17）
-[^24]: vLLM Supported Models (official documentation) — https://docs.vllm.ai/en/latest/models/supported_models.html（web）
-[^25]: jbrcoleman/eks-deepseek-model-inference — https://github.com/jbrcoleman/eks-deepseek-model-inference（github）
-[^26]: ai-xcode/vllm-blackwell-nvfp4 — https://github.com/ai-xcode/vllm-blackwell-nvfp4（github）
-[^27]: SFT Memorizes, RL Generalizes: A Comparative Study of Foundation Model Post-training — https://arxiv.org/abs/2501.17161v2（arxiv, 2025-01-28）
-[^28]: Scaling Test-Time Compute Without Verification or RL is Suboptimal — https://arxiv.org/abs/2502.12118v2（arxiv, 2025-02-17）
-[^29]: Distillation Scaling Laws — https://arxiv.org/abs/2502.08606v2（arxiv, 2025-02-12）
-[^30]: A Sober Look at Progress in Language Model Reasoning: Pitfalls and Paths to Reproducibility — https://arxiv.org/abs/2504.07086v2（arxiv, 2025-04-09）
-[^31]: Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? — https://arxiv.org/abs/2504.13837v5（arxiv, 2025-04-18）
-[^32]: s1: Simple test-time scaling — https://arxiv.org/abs/2501.19393v3（arxiv, 2025-01-31）
-[^33]: On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (arXiv:2306.13649v3) — full text — https://arxiv.org/html/2306.13649v3（arxiv, 2023-06-23）
+[^1]: MiniLLM: On-Policy Distillation of Large Language Models — https://arxiv.org/abs/2306.08543v6（arxiv, 2023-06-14）
+[^2]: On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (GKD) — https://arxiv.org/abs/2306.13649v3（arxiv, 2023-06-23）
+[^3]: A Survey on Knowledge Distillation of Large Language Models — https://arxiv.org/abs/2402.13116v4（arxiv, 2024-02-20）
+[^4]: DistiLLM: Towards Streamlined Distillation for Large Language Models — https://arxiv.org/abs/2402.03898v2（arxiv, 2024-02-06）
+[^5]: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning — https://arxiv.org/abs/2501.12948v2（arxiv, 2025-01-22）
+[^6]: DeepSeek-R1 论文正文（ar5iv HTML 版）：引言中的蒸馏结论与 DeepSeek-R1 主模型分数 — https://ar5iv.labs.arxiv.org/html/2501.12948（arxiv, 2025-01-22）
+[^7]: deepseek-ai/DeepSeek-R1 官方仓库 README（模型清单与蒸馏模型评测表） — https://raw.githubusercontent.com/deepseek-ai/DeepSeek-R1/main/README.md（github）
+[^8]: alphaXiv 论文页（arXiv:2501.12948）——版本与发表信息 — https://www.alphaxiv.org/abs/2501.12948（web）
+[^9]: huggingface/open-r1 — A fully open reproduction of DeepSeek-R1 — https://github.com/huggingface/open-r1（github, 2025-05-26）
+[^10]: Jiayi-Pan/TinyZero — Minimal reproduction of DeepSeek R1-Zero — https://github.com/Jiayi-Pan/TinyZero（github）
+[^11]: DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2) — https://arxiv.org/abs/2501.12948（arxiv, 2025-01-22）
+[^12]: Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? (arXiv:2504.13837v5) — https://arxiv.org/abs/2504.13837（arxiv, 2025-04-18）
+[^13]: unslothai/unsloth — README（Finetune/Run 能力与支持平台） — https://github.com/unslothai/unsloth（github）
+[^14]: DeepSeek-R1 (arXiv HTML v2，第 2 节 DeepSeek-R1-Zero 训练配置) — https://arxiv.org/html/2501.12948v2（arxiv, 2025-01-22）
+[^15]: ubergarm/r1-ktransformers-guide — https://github.com/ubergarm/r1-ktransformers-guide（github）
+[^16]: fabiomatricardi/Deepseek-R1-qwen1.5B — https://github.com/fabiomatricardi/Deepseek-R1-qwen1.5B（github）
+[^17]: rybruscoe/deepseek-server — https://github.com/rybruscoe/deepseek-server（github）
+[^18]: Elixx007/IA_2025 — https://github.com/Elixx007/IA_2025（github）
+[^19]: fabiomatricardi/DeepSeekQwen_AIO — https://github.com/fabiomatricardi/DeepSeekQwen_AIO（github）
+[^20]: simpleRL-reason (hkust-nlp/simpleRL-reason) — README — https://github.com/hkust-nlp/simpleRL-reason（github, 2025-01-25）
+[^21]: Reinforcement Learning for Reasoning in Large Language Models with One Training Example (1-shot RLVR) — https://arxiv.org/abs/2504.20571（arxiv, 2025-04-29）
+[^22]: Qwen3 Technical Report — https://arxiv.org/abs/2505.09388（arxiv, 2025-05-14）
+[^23]: QwenLM/Qwen3 (official GitHub repository README) — https://github.com/QwenLM/Qwen3（github）
+[^24]: Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes — https://arxiv.org/abs/2305.02301v2（arxiv, 2023-05-03）
+[^25]: Self-Instruct: Aligning Language Models with Self-Generated Instructions — https://arxiv.org/abs/2212.10560v2（arxiv, 2022-12-20）

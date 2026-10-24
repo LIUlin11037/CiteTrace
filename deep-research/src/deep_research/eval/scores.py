@@ -64,7 +64,7 @@ async def push_question_scores(
             "alignment",
             score.alignment_rate,
             f"未对齐论断 {len(score.unsupported_claims)} 条",
-        ),
+        ) if score.alignment_rate is not None else None,
         (
             "coverage",
             score.coverage_rate,
@@ -72,7 +72,11 @@ async def push_question_scores(
         ),
     ]
     pushed = 0
-    for name, value, comment in metrics:
+    for metric in metrics:
+        if metric is None:  # alignment 无样例时记 N/A，不往云端送假 0
+            logger.info("Langfuse: %s 没有可判定论断，跳过 alignment 分数", score.question_id)
+            continue
+        name, value, comment = metric
         try:
             client.create_score(
                 name=name,

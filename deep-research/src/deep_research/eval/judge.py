@@ -41,7 +41,7 @@ class AlignmentResult(BaseModel):
     verdicts: list[ClaimVerdict]
 
     @property
-    def alignment_rate(self) -> float:
+    def alignment_rate(self) -> float | None:
         # "meta" = the sentence is not a factual assertion about the world but a
         # statement about the report itself (scope, method, what it deliberately
         # did not cite). Scoring those as unsupported punished honest hedging —
@@ -49,7 +49,11 @@ class AlignmentResult(BaseModel):
         # 引用…" was judged as an unsupported claim. Excluded from the rate.
         scored = [v for v in self.verdicts if v.verdict != "meta"]
         if not scored:
-            return 0.0
+            # Nothing to judge is NOT the same as judging everything wrong.
+            # Returning 0.0 here silently dragged aggregates down: on 2026-10-24
+            # gq-distillation sampled 0 claims (writer used [n] instead of [^n])
+            # and the run reported "align=0%" while the real value was 86%.
+            return None
         score = sum(
             {"supported": 1.0, "partial": 0.5, "unsupported": 0.0}[v.verdict] for v in scored
         )

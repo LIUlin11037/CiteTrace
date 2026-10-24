@@ -22,6 +22,7 @@ from langchain_core.tools import BaseTool, StructuredTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from deep_research.core.config import get_settings
+from deep_research.core.context import estimate_tokens, trim_document
 from deep_research.core.guard import wrap_tool_output
 
 logger = logging.getLogger(__name__)
@@ -78,20 +79,47 @@ def _server_params() -> dict[str, dict[str, Any]]:
     return servers
 
 
-def _guarded(tool: BaseTool) -> BaseTool:
-    """Wrap one tool so every result is fenced as untrusted external data.
+def _as_text(raw: Any) -> str:
+    """Flatten a tool result (str / MCP content blocks) into plain text."""
+    if isinstance(raw, str):
+        return raw
+    if isinstance(raw, list):
+        parts: list[str] = []
+        for item in raw:
+            if isinstance(item, dict) and isinstance(item.get("text"), str):
+                parts.append(item["text"])
+            else:
+                parts.append(json.dumps(item, ensure_ascii=False, default=str))
+        return "\n\n".join(parts)
+    return json.dumps(raw, ensure_ascii=False, default=str)
 
-    The fence is applied by code (see core/guard.py), which is what makes the
-    "tool output is data, not instruction" rule enforceable rather than merely
-    requested in a prompt. If wrapping fails for an exotic tool signature we
-    keep the original tool: a broken guard must not break research.
+
+def _guarded(tool: BaseTool) -> BaseTool:
+    """Wrap one tool so every result is bounded and fenced as untrusted data.
+
+    Two contracts are enforced here, both in code rather than in a prompt:
+    - **budget**: the text is trimmed by information density (core/context.py),
+      not by prefix, so a results table in the middle survives;
+    - **fence**: the text is wrapped as untrusted external data (core/guard.py).
+
+    If wrapping fails for an exotic tool signature we keep the original tool: a
+    broken guard must not break research.
     """
 
     async def _call(**kwargs: Any) -> str:
-        raw = await tool.ainvoke(kwargs)
-        if not isinstance(raw, str):
-            raw = json.dumps(raw, ensure_ascii=False, default=str)
-        return wrap_tool_output(tool.name, raw)
+        text = _as_text(await tool.ainvoke(kwargs))
+        limit = get_settings().evidence_content_limit
+        trimmed_text, was_trimmed = trim_document(text, limit)
+        if was_trimmed:
+            logger.info(
+                "tool %s: 裁剪 %d → %d 字符（约 %d → %d tokens，按信息密度保留）",
+                tool.name,
+                len(text),
+                len(trimmed_text),
+                estimate_tokens(text),
+                estimate_tokens(trimmed_text),
+            )
+        return wrap_tool_output(tool.name, trimmed_text)
 
     try:
         return StructuredTool.from_function(

@@ -169,9 +169,14 @@ async def run_eval(
             except Exception as exc:
                 print(f"[eval] {q.id}: FAILED on attempt {attempt} ({type(exc).__name__}: {exc})")
                 raise _Failed from exc
+            align_txt = (
+                "N/A"
+                if score.alignment_rate is None
+                else f"{score.alignment_rate:.0%}"
+            )
             print(
                 f"[eval] {q.id}: cite={score.citation_existence_rate:.0%} "
-                f"align={score.alignment_rate:.0%} cover={score.coverage_rate:.0%}"
+                f"align={align_txt} cover={score.coverage_rate:.0%}"
             )
             await _push_scores(score)
             return score
