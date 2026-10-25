@@ -25,6 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from deep_research.core.compat import use_compatible_event_loop  # noqa: E402
+from deep_research.core.llm import get_chat_model  # noqa: E402
 from deep_research.core.kb import get_kb_store  # noqa: E402
 
 DATA = Path("kb_demo/financebench/data/financebench_open_source.jsonl")
@@ -44,15 +45,50 @@ def _page_of(anchor: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def load_questions() -> list[dict]:
+def load_questions(only_docs: set[str] | None = None) -> list[dict]:
     rows = [json.loads(line) for line in DATA.read_text(encoding="utf-8").splitlines()]
-    return [r for r in rows if r["doc_name"] in DOCS]
+    want = only_docs or set(DOCS)
+    return [r for r in rows if r["doc_name"] in want]
 
 
-async def main(ks: list[int]) -> None:
-    use_compatible_event_loop()
+EXPAND_PROMPT = """把下面这道财报问题改写成 3 条**检索用**查询，要求：
+- 每条都是英文，包含财报里的具体科目/指标名（如 current ratio、cash and cash equivalents、capital expenditures）
+- 不要照抄原句，要覆盖不同的可能表述
+- 每行一条，不要编号，不要解释
+
+问题：{q}"""
+
+
+async def expand_query(question: str) -> list[str]:
+    """LLM 把问题改写成多条财务术语查询（query expansion）。
+
+    动机：检索失败的主因是"问题用自然语言、页面上只有科目名"——问"流动性是否健康"，
+    页面上写的是 "Current ratio 2.5 / Cash 4,826"。没有共同词，向量也就无从匹配。
+    """
+    model = get_chat_model("planner")
+    resp = await model.ainvoke(EXPAND_PROMPT.format(q=question))
+    lines = [ln.strip(" -•\t") for ln in str(resp.content).splitlines() if ln.strip()]
+    return [ln for ln in lines if len(ln) > 8][:3]
+
+
+def _rrf_merge(groups: list[list], k: int = 60) -> list:
+    """RRF 融合多路检索结果（按 source_path#anchor 去重）。"""
+    scores: dict[str, float] = {}
+    first: dict[str, object] = {}
+    for hits in groups:
+        for rank, h in enumerate(hits, 1):
+            key = f"{h.source_path}#{h.anchor}"
+            scores[key] = scores.get(key, 0.0) + 1.0 / (k + rank)
+            first.setdefault(key, h)
+    ordered = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
+    return [first[key] for key, _ in ordered]
+
+
+async def main(
+    ks: list[int], only_docs: set[str] | None = None, expand: bool = False
+) -> None:
     store = await get_kb_store()
-    questions = load_questions()
+    questions = load_questions(only_docs)
     depth = max(ks)
     print(f"题目: {len(questions)} 道 / {len(DOCS)} 份 10-K | 检索深度 {depth}")
     print(f"库规模: {(await store.stats())['chunks']} 块\n")
@@ -62,7 +98,20 @@ async def main(ks: list[int]) -> None:
         evidence = q["evidence"][0]
         gold_page = int(evidence["evidence_page_num"]) + 1  # 0-indexed → 1-indexed
         gold_text = _norm(evidence["evidence_text"])[:120]
-        hits = await store.search(q["question"], top_k=depth)
+        if expand:
+            queries = [q["question"]] + await expand_query(q["question"])
+            groups = [await store.search(x, top_k=depth, rerank=False) for x in queries]
+            merged = _rrf_merge(groups)[:depth]
+            # 精排只做一次（在多路融合之后），避免 4 倍 rerank 成本
+            if store._rerank_enabled():
+                try:
+                    hits = await store._rerank(q["question"], merged, depth)
+                except Exception:
+                    hits = merged
+            else:
+                hits = merged
+        else:
+            hits = await store.search(q["question"], top_k=depth)
         pages = [(_page_of(h.anchor), h) for h in hits]
         page_rank = next(
             (
@@ -137,7 +186,11 @@ async def main(ks: list[int]) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--ks", type=int, nargs="+", default=[1, 3, 5, 10, 20, 50])
+    ap.add_argument("--docs", nargs="+", help="只跑这些文档（如 BOEING_2022_10K）")
+    ap.add_argument("--expand", action="store_true", help="LLM 改写查询后多路检索并融合")
     args = ap.parse_args()
     # 必须在 asyncio.run 之前：psycopg 不能跑在 ProactorEventLoop 上
     use_compatible_event_loop()
-    asyncio.run(main(sorted(set(args.ks))))
+    asyncio.run(
+        main(sorted(set(args.ks)), set(args.docs) if args.docs else None, args.expand)
+    )

@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Any
@@ -79,7 +80,15 @@ def _embed_api(texts: list[str], text_type: str = "document") -> list[list[float
                 "encoding_format": "float",
                 "text_type": text_type,
             }
-            resp = client.post(url, json=payload, headers=headers)
+            # 服务端会按 RPM/TPM 限流（实测 429）。批量入库时这很常见，
+            # 直接抛错会让"嵌了一半"的库处于不一致状态，所以退避重试。
+            for attempt in range(6):
+                resp = client.post(url, json=payload, headers=headers)
+                if resp.status_code != 429:
+                    break
+                wait = min(2 ** attempt, 30)
+                logger.warning("embedding 限流(429)，%ss 后重试（第 %d 次）", wait, attempt + 1)
+                time.sleep(wait)
             resp.raise_for_status()
             data = sorted(resp.json()["data"], key=lambda d: d.get("index", 0))
             out.extend([[float(x) for x in d["embedding"]] for d in data])

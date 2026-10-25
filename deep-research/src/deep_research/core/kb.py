@@ -24,6 +24,7 @@ from pathlib import Path
 import re
 
 import httpx
+from psycopg import sql
 from dataclasses import dataclass
 from typing import Any
 
@@ -331,7 +332,9 @@ class KBStore:
             await conn.commit()
         return len(rows)
 
-    async def search(self, query: str, top_k: int = 8) -> list[Hit]:
+    async def search(
+        self, query: str, top_k: int = 8, rerank: bool | None = None
+    ) -> list[Hit]:
         """Hybrid search: dense + lexical, fused by RRF.
 
         A pure-dense ranking was measurably wrong on short queries: 「ReAct 与
@@ -387,7 +390,8 @@ class KBStore:
             ]
 
         s = get_settings()
-        if s.rerank_provider == "api" and ordered:
+        want_rerank = s.rerank_provider == "api" if rerank is None else rerank
+        if want_rerank and s.rerank_provider == "api" and ordered:
             # 先多取候选（默认 50），交给 reranker 精排后再截 top_k
             depth = max(top_k, s.rerank_candidates)
             cands = _to_hits(ordered[:depth])
@@ -414,6 +418,9 @@ class KBStore:
             Hit(source_path=r[0], title=r[1], anchor=r[2], text=r[3], score=float(r[4]))
             for r in rows
         ]
+
+    def _rerank_enabled(self) -> bool:
+        return get_settings().rerank_provider == "api"
 
     async def _rerank(self, query: str, hits: list[Hit], top_k: int) -> list[Hit]:
         """Rerank fused candidates with an external reranker.
@@ -457,6 +464,24 @@ class KBStore:
             )
             rows = await cur.fetchall()
         return [(f"{r[0]}#{r[1]}", float(r[2])) for r in rows]
+
+    async def delete_docs(self, source_paths: list[str]) -> int:
+        """Delete all chunks of the given documents from **this** store's table.
+
+        改切块策略后必须整篇重灌；删除要落在当前表上（曾把表名写死在别处，
+        结果"重置"清的是另一张表，旧块残留导致指标不可信）。
+        """
+        if not source_paths:
+            return 0
+        async with await self._connect() as conn:
+            cur = await conn.execute(
+                sql.SQL("DELETE FROM {table} WHERE source_path = ANY(%s)").format(
+                    table=sql.Identifier(self._table)
+                ),
+                (source_paths,),
+            )
+            await conn.commit()
+            return int(cur.rowcount or 0)
 
     async def stats(self) -> dict[str, int]:
         async with await self._connect() as conn:

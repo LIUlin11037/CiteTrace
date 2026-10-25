@@ -22,7 +22,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from deep_research.core.compat import use_compatible_event_loop  # noqa: E402
-from deep_research.core.kb import get_kb_store, split_document, split_pdf_pages  # noqa: E402
+from deep_research.core.kb import (  # noqa: E402
+    Chunk,
+    get_kb_store,
+    split_document,
+    split_pdf_pages,
+)
 
 SUPPORTED = {".md", ".markdown", ".txt", ".pdf"}
 
@@ -35,8 +40,27 @@ def _rel(path: Path, root: Path) -> str:
         return path.resolve().as_posix()
 
 
-def _pdf_chunks(path: Path, rel: str):  # type: ignore[no-untyped-def]
-    """Parse a PDF into per-page chunks (anchor = page number)."""
+def _pdf_chunks(path: Path, rel: str, tables: bool = False):  # type: ignore[no-untyped-def]
+    """Parse a PDF into per-page chunks (anchor = page number).
+
+    ``tables=True`` 时用 pdfplumber 还原表格（单独成块，锚点 p{n}#t{k}），
+    解决 pypdf 把表格拉平后"标签与数值分离"的问题。
+    """
+    if tables:
+        from deep_research.core.pdf import extract_pdf, page_chunks
+
+        pages = extract_pdf(path)
+        return [
+            Chunk(
+                doc_id=rel,
+                source_path=rel,
+                title=c["title"],
+                anchor=c["anchor"],
+                chunk_idx=c["chunk_idx"],
+                text=c["text"],
+            )
+            for c in page_chunks(pages, rel, title=path.stem)
+        ]
     from pypdf import PdfReader
 
     reader = PdfReader(str(path))
@@ -59,7 +83,13 @@ def collect(paths: list[str]) -> list[Path]:
     return files
 
 
-async def main(paths: list[str], dry_run: bool, root: Path, reset: bool = False) -> None:
+async def main(
+    paths: list[str],
+    dry_run: bool,
+    root: Path,
+    reset: bool = False,
+    use_tables: bool = False,
+) -> None:
     use_compatible_event_loop()
     files = collect(paths)
     if not files:
@@ -70,7 +100,7 @@ async def main(paths: list[str], dry_run: bool, root: Path, reset: bool = False)
     for f in files:
         rel = _rel(f, root)
         if f.suffix.lower() == ".pdf":
-            chunks = _pdf_chunks(f, rel)
+            chunks = _pdf_chunks(f, rel, tables=use_tables)
             total_chunks += len(chunks)
             print(f"  {rel}: {len(chunks)} 块（PDF，按页切分）")
             continue
@@ -86,22 +116,14 @@ async def main(paths: list[str], dry_run: bool, root: Path, reset: bool = False)
 
     store = await get_kb_store()
     if reset:
-        import psycopg
-
-        from deep_research.core.config import get_settings
-
         rels = [_rel(f, root) for f in files]
-        async with await psycopg.AsyncConnection.connect(get_settings().database_url) as conn:
-            cur = await conn.execute(
-                "DELETE FROM kb_chunks WHERE source_path = ANY(%s)", (rels,)
-            )
-            await conn.commit()
-        print(f"  已清理 {len(rels)} 个文件的旧块（{cur.rowcount} 行）")
+        removed = await store.delete_docs(rels)
+        print(f"  已清理 {len(rels)} 个文件的旧块（{removed} 行，表 {store._table}）")
     written = 0
     for f in files:
         rel = _rel(f, root)
         if f.suffix.lower() == ".pdf":
-            written += await store.add_chunks(_pdf_chunks(f, rel))
+            written += await store.add_chunks(_pdf_chunks(f, rel, tables=use_tables))
             continue
         text = f.read_text(encoding="utf-8", errors="replace")
         title = next((ln.strip("# ").strip() for ln in text.splitlines() if ln.startswith("#")), f.name)
@@ -118,7 +140,12 @@ if __name__ == "__main__":
     ap.add_argument("--dry-run", action="store_true", help="只切块不写库")
     ap.add_argument("--root", default=".", help="相对路径的根目录（默认当前目录）")
     ap.add_argument("--reset", action="store_true", help="先删除这些文件的旧块（改切块策略后必用）")
+    ap.add_argument(
+        "--pdf-tables", action="store_true", help="PDF 用 pdfplumber 还原表格（表格单独成块）"
+    )
     args = ap.parse_args()
     # 必须在 asyncio.run 之前设置：psycopg 不能用 ProactorEventLoop
     use_compatible_event_loop()
-    asyncio.run(main(args.paths, args.dry_run, Path(args.root), args.reset))
+    asyncio.run(
+        main(args.paths, args.dry_run, Path(args.root), args.reset, args.pdf_tables)
+    )
