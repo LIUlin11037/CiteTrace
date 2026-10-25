@@ -25,7 +25,7 @@
 | | `online`（默认） | `offline` |
 |---|---|---|
 | 信源 | arXiv / GitHub / Web（MCP） | **只有本地知识库**（`kb`） |
-| 网络 | 必需 | **完全不需要**（检索、写作、embedding 全本地；模型随镜像交付） |
+| 网络 | 必需 | **取证不需要外网**（信源全部来自本地知识库）；LLM 与 embedding 可走 API，也可本地部署 |
 | 引用核验 | URL 存在性（arXiv API / GitHub API / HTTP） | **文件 + 章节**（文件在不在、引的那节在不在） |
 | 证据不足时 | Critic 追问 → 再联网取证 | 追问**无效**，直接标为存疑项，报告写明「当前知识库未收录」 |
 
@@ -51,6 +51,18 @@ uv run python -m deep_research.cli run "ReAct 与 Chain-of-Thought 的关键区�
 
 验证方式：清空父进程的 `HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 后，
 容器内 `search_knowledge_base` 仍能返回带出处的片段（不发起任何外网请求）。
+
+**一个容易混淆的点**：`offline` 约束的是**信源**（不联网抓取），不是**算力**。
+编排（Planner/Researcher/Critic/Writer）、审校、embedding 该调模型还是要调——只是
+不联网找资料。两者是两个独立维度：
+
+| 维度 | 取值 | 由谁控制 |
+|---|---|---|
+| 信源 | 联网抓取 / 本地知识库 | `DR_SOURCE_MODE` |
+| 算力 | 本地模型 / 云端 API | `DR_EMBEDDING_PROVIDER`、各角色 model 配置 |
+
+所以"内网部署"要做两件事：把信源换成本地库（`offline`）+ 把模型换成本地部署；
+只做前者叫"取证离线"，不叫"完全离线"。
 
 两条设计约束（不是可选项）：
 
