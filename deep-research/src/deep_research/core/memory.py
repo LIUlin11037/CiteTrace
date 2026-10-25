@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import json
 import logging
+import os
+from pathlib import Path
 from dataclasses import dataclass
 from typing import Any
 
@@ -35,12 +37,32 @@ def _get_embedder() -> Any:
         from deep_research.core.compat import ensure_hf_compat
 
         ensure_hf_compat()  # safety net if no entry point ran compat first
-        _embedder = TextEmbedding(get_settings().memory_embedding_model)
+        model = get_settings().memory_embedding_model
+        # 离线部署：镜像里预置了 fastembed 自认的离线布局
+        # （``<cache>/fast-<name>/``，实测这是它唯一认的形态；HF 的
+        # ``models--...`` 目录在 local_files_only 下会被判"不完整"）。
+        # 存在就直接离线加载，连一次网络探测都不做。
+        cache = os.environ.get("FASTEMBED_CACHE_PATH") or ""
+        offline_ready = bool(cache) and (
+            Path(cache) / f"fast-{model.split('/')[-1]}"
+        ).is_dir()
+        _embedder = TextEmbedding(model, local_files_only=True) if offline_ready else TextEmbedding(model)
     return _embedder
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
     return [list(map(float, v)) for v in _get_embedder().embed(texts)]
+
+
+# BGE 系列是「非对称检索」模型：文档侧裸文本，查询侧必须加指令前缀，否则
+# query 与 doc 落在不同分布上，相似度排序明显变差（实测 recall@3 见
+# scripts/verify_kb.py）。前缀用模型卡给出的中文检索指令。
+_QUERY_PREFIX = "为这个句子生成表示以用于检索相关文章："
+
+
+def embed_query(text: str) -> list[float]:
+    """Embed a search query with the retriever-side instruction prefix."""
+    return embed_texts([_QUERY_PREFIX + text])[0]
 
 
 @dataclass
@@ -121,7 +143,7 @@ class MemoryStore:
 
         settings = get_settings()
         limit = limit or settings.memory_recall_limit
-        vec = embed_texts([query])[0]
+        vec = embed_query(query)
         async with await psycopg.AsyncConnection.connect(self._url) as conn:
             cur = await conn.execute(
                 """
