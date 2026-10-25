@@ -22,6 +22,8 @@ import logging
 import math
 from pathlib import Path
 import re
+
+import httpx
 from dataclasses import dataclass
 from typing import Any
 
@@ -214,7 +216,14 @@ class KBStore:
     def __init__(self, database_url: str | None = None, dim: int | None = None) -> None:
         settings = get_settings()
         self._url = database_url or settings.database_url
-        self._dim = dim or settings.memory_embedding_dim
+        # API 模式下维度由 API 模型决定（如 DashScope text-embedding-v4 = 1024），
+        # 不能用本地的 memory_embedding_dim（512），否则建表/写入必错。
+        default_dim = (
+            settings.embedding_api_dim
+            if settings.embedding_provider == "api"
+            else settings.memory_embedding_dim
+        )
+        self._dim = dim or default_dim
         table = settings.kb_table
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", table):
             raise ValueError(f"非法 kb 表名: {table!r}")
@@ -256,7 +265,7 @@ class KBStore:
                     "CREATE INDEX IF NOT EXISTS {idx} ON {table} "
                     "USING hnsw (embedding vector_cosine_ops)"
                 ).format(
-                    idx=sql.Literal(f"{self._table}_embedding_hnsw"),
+                    idx=sql.Identifier(f"{self._table}_embedding_hnsw"),
                     table=sql.Identifier(self._table),
                 )
             )
@@ -363,18 +372,30 @@ class KBStore:
         for rank, (key, _) in enumerate(lexical, 1):
             # 词法通道权重略高：术语命中比"语义看起来像"更可信
             fused[key] = fused.get(key, 0.0) + 1.5 / (RRF_K + rank)
-        ordered = sorted(fused.items(), key=lambda kv: kv[1], reverse=True)[:top_k]
-        return [
-            Hit(
-                source_path=rows[k].source_path,
-                title=rows[k].title,
-                anchor=rows[k].anchor,
-                text=rows[k].text,
-                score=round(score, 6),
-            )
-            for k, score in ordered
-            if k in rows
-        ]
+        ordered = [(k, sc) for k, sc in sorted(fused.items(), key=lambda kv: kv[1], reverse=True) if k in rows]
+
+        def _to_hits(pairs: list[tuple[str, float]]) -> list[Hit]:
+            return [
+                Hit(
+                    source_path=rows[k].source_path,
+                    title=rows[k].title,
+                    anchor=rows[k].anchor,
+                    text=rows[k].text,
+                    score=round(score, 6),
+                )
+                for k, score in pairs
+            ]
+
+        s = get_settings()
+        if s.rerank_provider == "api" and ordered:
+            # 先多取候选（默认 50），交给 reranker 精排后再截 top_k
+            depth = max(top_k, s.rerank_candidates)
+            cands = _to_hits(ordered[:depth])
+            try:
+                return await self._rerank(query, cands, top_k)
+            except Exception as exc:  # noqa: BLE001 - rerank 挂了不能拖垮检索
+                logger.warning("rerank 失败，退回 RRF 结果: %s", exc)
+        return _to_hits(ordered[:top_k])
 
     async def _dense(self, vec: list[float], limit: int) -> list[Hit]:
         async with await self._connect() as conn:
@@ -393,6 +414,33 @@ class KBStore:
             Hit(source_path=r[0], title=r[1], anchor=r[2], text=r[3], score=float(r[4]))
             for r in rows
         ]
+
+    async def _rerank(self, query: str, hits: list[Hit], top_k: int) -> list[Hit]:
+        """Rerank fused candidates with an external reranker.
+
+        检索失败的典型形态不是"没找到"，而是"正确的页排在第 30 位"：RRF 靠向量
+        相似度排序，对"这个数字在哪一页"无能为力；reranker 直接判 query-doc 相关性，
+        正是治这个的（实测把 capex 相关句从无关句中挑出来：0.84 vs 0.15）。
+        """
+        s = get_settings()
+        base = s.rerank_api_base.rstrip("/")
+        url = (
+            base
+            if "rerank" in base.rsplit("/", 1)[-1]
+            else base + "/api/v1/services/rerank/text-rerank/text-rerank"
+        )
+        payload = {
+            "model": s.rerank_api_model,
+            "input": {"query": query, "documents": [h.text[:1500] for h in hits]},
+            "parameters": {"return_documents": False, "top_n": min(top_k, len(hits))},
+        }
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            resp = await client.post(
+                url, json=payload, headers={"Authorization": f"Bearer {s.rerank_api_key}"}
+            )
+            resp.raise_for_status()
+            results = resp.json()["output"]["results"]
+        return [hits[r["index"]] for r in results if 0 <= r["index"] < len(hits)]
 
     async def _sparse(self, query: str, limit: int) -> list[tuple[str, float]]:
         async with await self._connect() as conn:
