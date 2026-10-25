@@ -18,6 +18,43 @@
 | 可观测性              | Langfuse：一次调研一条 trace（node / LLM / MCP 工具三层 span，含 token 与成本），session 归并中断恢复产生的多段执行，tags 标注入口与题目；**评测指标自动回挂为 trace score**，可按分数排序并下钻到该次运行 |
 | 评测体系              | 26 题 golden set + 程序化引用核验 + LLM judge（详见下节）                                                                                               |
 
+## 两种信源模式（online / offline）
+
+同一套编排、同一套审校、同一套引用核验，只换「Researcher 手上有哪些工具」：
+
+| | `online`（默认） | `offline` |
+|---|---|---|
+| 信源 | arXiv / GitHub / Web（MCP） | **只有本地知识库**（`kb`） |
+| 网络 | 必需 | **完全不需要**（检索、写作、embedding 全本地；模型随镜像交付） |
+| 引用核验 | URL 存在性（arXiv API / GitHub API / HTTP） | **文件 + 章节**（文件在不在、引的那节在不在） |
+| 证据不足时 | Critic 追问 → 再联网取证 | 追问**无效**，直接标为存疑项，报告写明「当前知识库未收录」 |
+
+```bash
+# 1) 入库（支持 .md / .txt；PDF 需另装解析器，暂未开放）
+python scripts/ingest_kb.py docs/ reports/eval/reports/
+
+# 2) 离线跑一道题
+DR_SOURCE_MODE=offline \
+DR_MCP_SERVERS='{"kb": {"transport": "stdio", "command": "python", "args": ["-m", "mcp_servers.kb_server"], "network": false}}' \
+uv run python -m deep_research.cli run "ReAct 与 Chain-of-Thought 的关键区别"
+```
+
+离线部署的三个坑（都已在容器里实测并修掉，记录在此避免重犯）：
+
+| 坑 | 现象 | 修法 |
+|---|---|---|
+| fastembed 只认 `<cache>/fast-<name>/` | HF 的 `models--...` 目录在离线模式下被判「缓存不完整」 | 构建期把快照复制成 `fast-` 布局（Dockerfile） |
+| MCP 子进程的环境被整体替换 | `stdio_client` 用 `get_default_environment()`，`HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 全丢 → 去 huggingface.co（不可达） | 代码注入 HF 变量（`_child_env`） |
+| 同上，**`DR_*` 配置也会丢** | 子进程退回 `localhost:5432`，容器里连不上数据库 → `Connection closed` | 继承 `DR_*` 前缀变量 |
+
+验证方式：清空父进程的 `HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 后，
+容器内 `search_knowledge_base` 仍能返回带出处的片段（不发起任何外网请求）。
+
+两条设计约束（不是可选项）：
+
+- **模式互斥，不做混合**：离线时网络类 server 在装载前就被过滤掉，不是"禁用"——避免"以为离线其实在联网"。
+- **库内无覆盖就说没有**：实测拿库外题目跑，覆盖率为 0%，但报告会逐条说明"哪两条沾边证据为何不成立"，而不是编一个看起来合理的答案。
+
 ## 评测：结果与方法
 
 **评测结果**（26 题 golden set 全量，AI/科技三子领域）：

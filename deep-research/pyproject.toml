@@ -2,7 +2,9 @@
 name = "deep-research"
 version = "0.1.0"
 description = "Multi-agent deep research system for AI/tech domain, built with LangGraph"
-readme = "README.md"
+# README 在仓库根（../README.md），hatchling 要求 readme 必须在项目目录内，
+# 因此用内联描述：构建不再依赖 deep-research/README.md 存在。
+readme = { text = "多智能体深度研究系统（CiteTrace）：四角色编排 + 并行取证 + 可验证引用。完整说明见仓库根 README.md。", content-type = "text/markdown" }
 requires-python = ">=3.12"
 dependencies = [
     "langgraph>=0.2.60",
