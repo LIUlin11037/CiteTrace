@@ -63,3 +63,6 @@ python scripts/eval_financebench_retrieval.py --ks 1 5 10 20 50
 
 它是**代理**不是私有语料：README 里的结论必须写成"在 FinanceBench 开放子集上"，
 并注明许可限制；真实私有语料仍需自建 10–30 题的 golden set 做校准。
+
+实测结果（页面命中、召回上限、四组对照）见:
+[`docs/检索基准-FinanceBench.md`](../../docs/检索基准-FinanceBench.md)

@@ -59,6 +59,25 @@ uv run python -m deep_research.cli run "ReAct 与 Chain-of-Thought 的关键区�
 
 ## 评测：结果与方法
 
+### 检索层基准（私有语料 · FinanceBench 子集）
+
+私有语料没有公开基准，用 FinanceBench（真实 SEC 10-K + 专家标注 evidence）作同构代理，
+21 题、571 页，只测检索层：
+
+| 配置 | 页面命中@10 | 召回@50 |
+|---|---|---|
+| 本地 `bge-small-zh`（中文小模型） | 14% | 29% |
+| 换多语言大模型（API） | 38% | 76% |
+| ＋ rerank | 52% | 76% |
+| ＋ query 扩展 | 48% | **90%** |
+| **扩展 + 精排** | **57%** | — |
+
+结论：**embedding 决定召回上限、query 扩展决定能否捞到、rerank 只决定排序**。
+⚠️ 57% 是"页面命中"而非"答案正确率"（按 Oracle 85% 上限推算，端到端天花板约 48%）。
+详见 [`docs/检索基准-FinanceBench.md`](deep-research/docs/检索基准-FinanceBench.md)。
+
+
+
 **评测结果**（26 题 golden set 全量，AI/科技三子领域）：
 
 | 指标       | 数值        | 怎么算的                                                          |
