@@ -1,0 +1,713 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on the Memory Mechanism of Large Language Model based Agents",
+    "url": "https://arxiv.org/abs/2404.13501v1",
+    "published_at": "2024-04-21",
+    "key_points": [
+      "该综述由 Zeyu Zhang、Xiaohe Bo、Chen Ma、Rui Li、Xu Chen、Quanyu Dai、Jieming Zhu、Zhenhua Dong、Ji-Rong Wen 撰写，作者单位包括中国人民大学高瓴人工智能学院与华为诺亚方舟实验室。",
+      "论文提交日期为 2024-04-21（v1），篇幅 39 页、5 图、4 表，学科分类为 cs.AI。",
+      "作者自述这是「据我们所知，第一篇关于 LLM-based agents 记忆机制的综述」（first survey on the memory mechanism of LLM-based agents）。",
+      "论文围绕三个核心问题组织：(1) LLM-based agents 的记忆是什么；(2) 为什么需要记忆；(3) 如何实现与评估记忆。",
+      "论文指出记忆是使 agent 区别于原始 LLM 的关键模块，决定 agent 如何积累知识、处理历史经验、检索有用知识以支撑行动。",
+      "论文从认知心理学、自我进化（self-evolution）、agent 应用三个视角论证记忆的必要性。",
+      "论文声称提供「清晰的分类体系（clear taxonomies）」与设计/评估记忆模块的关键原则，并系统梳理记忆模块的信息来源、存储形式与操作机制。",
+      "论文配套维护了一个 GitHub 仓库 https://github.com/nuster1128/LLM_Agent_Memory_Survey 用于跟踪该领域最新进展。"
+    ],
+    "raw_excerpt": "While previous studies have proposed many promising memory mechanisms, they are scattered in different papers, and there lacks a systematical review to summarize and compare these works from a holistic perspective... To our knowledge, this is the first survey on the memory mechanism of LLM-based agents."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on the Memory Mechanism of Large Language Model based Agents (HTML 全文，第 1–3.1 节)",
+    "url": "https://arxiv.org/html/2404.13501v1",
+    "published_at": "2024-04-21",
+    "key_points": [
+      "论文在正文中明确表示将从「狭义（narrow）与广义（broad）两个视角」定义 agent 的记忆（该定义位于第 3 节，抓取内容在进入定义正文前被截断）。",
+      "论文将 agent 的执行过程划分为三个阶段，并指出「在所有这些阶段中，记忆都扮演着极其重要的角色」。",
+      "论文给出了形式化基础定义：在第 t 步，用 a_t 表示 agent 动作、o_t 表示环境观测；一个长度为 T 的 trial 可表示为 ξ_T = {a_1, o_1, a_2, o_2, …, o_T, a_T}。",
+      "论文区分了 step、trial、task 三个层级：每个 trial 中 agent 可执行多步形成潜在解，每个 task 中 agent 可探索多个 trial 来完成任务。",
+      "论文用贯穿全文的玩具示例（为 Alice 制定北京旅行计划、为 Alice 推荐电影）来说明记忆在跨任务/跨 trial 场景中的作用。",
+      "论文在相关工作部分指出，已有 LLM-based agent 综述（如 Wang et al.、Xi et al.、Zhao et al.、Cheng et al.、Ge et al.）各有不同的关注点与分类体系，但均未专门系统梳理记忆模块。"
+    ],
+    "raw_excerpt": "In the following, we first define the memory of the agent from both narrow and broad perspectives, and then, detail the execution processes of the above three phases based on the memory module. ... In all these phases, memory plays an extremely important role."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "A-MEM: Agentic Memory for LLM Agents",
+    "url": "https://arxiv.org/abs/2502.12110",
+    "published_at": "2025-02-17",
+    "key_points": [
+      "提出 A-Mem，一种面向 LLM Agent 的 agentic memory 系统，目标是让记忆组织不依赖预定义的存储结构与固定工作流。",
+      "机制源自 Zettelkasten 卡片盒笔记法：每写入一条新记忆，生成包含上下文描述（contextual description）、关键词（keywords）、标签（tags）等结构化属性以及嵌入向量的“笔记”。",
+      "写入时系统分析历史记忆库，基于语义相似度与共享属性为新笔记建立链接（link generation），形成互连的知识网络。",
+      "提出 memory evolution 机制：新记忆被整合时会触发对既有历史记忆的上下文表示与属性的更新，使记忆网络随经验累积持续演化。",
+      "作者将自身与 Mem0 对比，指出图数据库方案依赖预定义 schema 与关系，限制了跨任务适应性。",
+      "实验在长期对话数据集上进行，覆盖六个基础模型、六项评测指标，作者称相对现有 SOTA 基线有显著提升（正文结果表未在本次抓取范围内读到，具体分数待补）。",
+      "论文发表于 NeurIPS 2025；arXiv v1 提交于 2025-02-17，最新版 v11 修订于 2025-10-08。",
+      "代码分两个仓库：基准评测 https://github.com/WujiangXu/AgenticMemory ，生产版记忆系统 https://github.com/WujiangXu/A-mem-sys 。"
+    ],
+    "raw_excerpt": "Following the basic principles of the Zettelkasten method, we designed our memory system to create interconnected knowledge networks through dynamic indexing and linking. When a new memory is added, we generate a comprehensive note containing multiple structured attributes, including contextual descriptions, keywords, and tags. ... this process enables memory evolution - as new memories are integrated, they can trigger updates to the contextual representations and attributes of existing historical memories"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory",
+    "url": "https://arxiv.org/abs/2504.19413",
+    "published_at": "2025-04-28",
+    "key_points": [
+      "提出 Mem0，一种以记忆为中心的可扩展架构，针对 LLM 固定上下文窗口无法维持长多轮对话一致性的问题。",
+      "核心机制是从持续进行的对话中动态抽取（extract）、整合/归并（consolidate）、检索（retrieve）显著信息。",
+      "进一步提出增强变体，用基于图的记忆表示（graph-based memory）捕捉对话元素之间复杂的关系结构。",
+      "在 LOCOMO 基准上评测，对比六类基线：记忆增强系统、不同 chunk size 与 k 值的 RAG、处理全部对话历史的全上下文方法、开源记忆方案、闭源模型系统、专用记忆管理平台。",
+      "作者报告其方法在 single-hop、temporal、multi-hop、open-domain 四类问题上均优于所有已有记忆系统。",
+      "量化结果（摘要级）：LLM-as-a-Judge 指标上相对 OpenAI 提升 26%；带图记忆的 Mem0 总体分数比基础配置高约 2%。",
+      "效率结果（摘要级）：相比全上下文方法，p95 延迟降低 91%，token 成本节省超过 90%。",
+      "arXiv v1 提交于 2025-04-28，仅一个版本。"
+    ],
+    "raw_excerpt": "We introduce Mem0, a scalable memory-centric architecture that addresses this issue by dynamically extracting, consolidating, and retrieving salient information from ongoing conversations. ... Notably, Mem0 achieves 26% relative improvements in the LLM-as-a-Judge metric over OpenAI, while Mem0 with graph memory achieves around 2% higher overall score than the base configuration. ... Mem0 attains a 91% lower p95 latency and saves more than 90% token cost"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory",
+    "url": "https://arxiv.org/abs/2501.13956",
+    "published_at": "2025-01-20",
+    "key_points": [
+      "提出 Zep，一个面向 AI Agent 的记忆层服务，核心组件是 Graphiti——一个时序感知的知识图谱引擎。",
+      "Graphiti 动态综合非结构化对话数据与结构化业务数据，并在整合过程中保留历史关系（temporal knowledge graph）。",
+      "作者指出既有面向 LLM Agent 的 RAG 框架局限于静态文档检索，无法满足企业场景对多源动态知识整合的需求。",
+      "在 Deep Memory Retrieval (DMR) 基准上，Zep 报告 94.8% 对 MemGPT 的 93.4%。",
+      "在 LongMemEval 上，Zep 报告准确率最高提升 18.5%，同时相比基线实现降低 90% 的响应延迟。",
+      "作者称这些提升在跨会话信息综合与长期上下文维持等企业关键任务上尤为明显。",
+      "论文 12 页、3 张表；arXiv v1 提交于 2025-01-20，仅一个版本。"
+    ],
+    "raw_excerpt": "We introduce Zep, a novel memory layer service for AI agents that outperforms the current state-of-the-art system, MemGPT, in the Deep Memory Retrieval (DMR) benchmark. ... Zep addresses this fundamental limitation through its core component Graphiti -- a temporally-aware knowledge graph engine that dynamically synthesizes both unstructured conversational data and structured business data while maintaining historical relationships. In the DMR benchmark ... Zep demonstrates superior performance (94.8% vs 93.4%). ... In this evaluation, Zep achieves substantial results with accuracy improvements of up to 18.5% while simultaneously reducing response latency by 90%"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+    "url": "https://arxiv.org/abs/2410.10813",
+    "published_at": "2024-10-14",
+    "key_points": [
+      "LongMemEval 是评估聊天助手长期记忆能力的基准，定义五项核心能力：信息抽取（information extraction）、多会话推理（multi-session reasoning）、时间推理（temporal reasoning）、知识更新（knowledge updates）、拒答（abstention）。",
+      "基准包含 500 道人工精编问题，嵌入可自由扩展的用户-助手对话历史中。",
+      "作者报告商业聊天助手与长上下文 LLM 在跨持续交互记忆信息时出现 30% 的准确率下降。",
+      "提出把长期记忆设计拆解为索引（indexing）、检索（retrieval）、阅读（reading）三阶段的统一框架。",
+      "给出三项记忆设计优化：session decomposition（提升取值粒度）、fact-augmented key expansion（用于索引）、time-aware query expansion（细化检索范围）。",
+      "作者称这些优化同时提升了 LongMemEval 上的记忆召回率与下游问答表现。",
+      "论文发表于 ICLR 2025；arXiv v1 为 2024-10-14，v2 修订于 2025-03-04（首发在 2025-01 时间窗之前，宜作为基准来源而非 2025 年代表性方法计入）。"
+    ],
+    "raw_excerpt": "We introduce LongMemEval, a comprehensive benchmark designed to evaluate five core long-term memory abilities of chat assistants: information extraction, multi-session reasoning, temporal reasoning, knowledge updates, and abstention. With 500 meticulously curated questions embedded within freely scalable user-assistant chat histories ... with commercial chat assistants and long-context LLMs showing a 30% accuracy drop on memorizing information across sustained interactions. We then present a unified framework that breaks down the long-term memory design into three stages: indexing, retrieval, and reading."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "mem0ai/mem0 — The Memory Layer for AI Agents",
+    "url": "https://github.com/mem0ai/mem0",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库 stars 为 67773，forks 8011，open issues 872，语言 Python，license Apache-2.0，创建于 2023-06-20，最近 push 为 2026-10-23。",
+      "README 自述定位为「The Memory Layer for AI Agents - Drop-in memory infrastructure for AI agents and apps」，仓库 topics 含 agentic-memory、long-term-memory、memory-management、rag、state-management。",
+      "README 描述 2026 年 4 月的新记忆算法：单次 ADD-only 抽取（一次 LLM 调用，无 UPDATE/DELETE，记忆只累积不覆盖）。",
+      "新算法包含实体链接（实体被抽取、嵌入并跨记忆链接以提升检索）与多信号检索（semantic、BM25 keyword、entity matching 并行打分后融合）。",
+      "新算法包含 temporal reasoning，即时间感知检索，针对当前状态、过去事件与未来计划排序正确的带日期实例。",
+      "README 自报基准：LoCoMo 从 71.4 提升到 92.5，LongMemEval 从 67.8 提升到 94.4，BEAM(1M) 64.1，BEAM(10M) 48.6，token 用量约 6.7K–7.0K，p50 延迟约 0.88–1.09s。",
+      "README 明确声明上述分数反映 Mem0 托管平台，包含开源 SDK 中不可用的专有优化，开源用户只能期待方向相似而非相同数字。",
+      "README 提供三种部署形态：Library（pip install mem0ai）、Self-Hosted Server（docker compose）、Cloud Platform。",
+      "README 称支持多层级记忆（Multi-Level Memory），保留 User、Session、Agent 三层状态。",
+      "README 称默认 LLM 为 OpenAI 的 gpt-5-mini，并支持多种 LLM；安装 mem0ai[nlp] 可启用 BM25 关键词匹配与实体抽取的混合检索。"
+    ],
+    "raw_excerpt": "## New Memory Algorithm (April 2026) | Benchmark | Old | New | Tokens | Latency p50 | | **LoCoMo** | 71.4 | **92.5** | 7.0K | 0.88s | ... Scores reflect Mem0's managed platform, which includes proprietary optimizations not available in the open-source SDK; open-source users should expect directionally similar gains but not identical numbers. **What changed:** - **Single-pass ADD-only extraction** -- one LLM call, no UPDATE/DELETE. Memories accumulate; nothing is overwritten. - **Entity linking** ... - **Multi-signal retrieval** -- semantic, BM25 keyword, and entity matching scored in parallel and fused. - **Temporal Reasoning**"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "getzep/graphiti — A Framework for Building Temporal Knowledge Graphs",
+    "url": "https://github.com/getzep/graphiti",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库 stars 为 32191，forks 3311，open issues 514，语言 Python，license Apache-2.0，创建于 2024-08-08，最近 push 为 2026-10-25。",
+      "README 自述为「A Framework for Building Temporal Knowledge Graphs」，用于为 AI agent 构建和查询 temporal context graphs。",
+      "README 强调与静态知识图谱不同：context graph 追踪事实随时间的变化，保留到源数据的 provenance，并支持 prescribed 与 learned 两种 ontology。",
+      "context graph 由四类组件构成：Entities（节点，带随时间演化的摘要）、Facts/Relationships（边，三元组带 temporal validity window）、Episodes（原始数据，provenance 的 ground truth）、Custom Types（通过 Pydantic 模型定义的实体与边类型）。",
+      "README 描述 temporal fact management：事实有有效期窗口，信息变化时旧事实被 invalidated 而非删除，可查询当前为真或任一历史时点为真的事实。",
+      "README 称支持增量数据更新与精确历史查询，无需完整重算图。",
+      "README 称检索为 hybrid retrieval，结合 semantic + keyword + graph traversal。",
+      "README 明确 Graphiti 与 Zep 的分工：Graphiti 是开源 Python 框架，需自备图数据库、LLM 与 embedder；Zep 是面向企业的统一 context layer，Graphiti 是 Zep 内部的图构建框架。",
+      "README 称 Graphiti 支持自带图数据库 Neo4j、FalkorDB 或 Amazon Neptune；Zep 使用自研图数据库 Konig。",
+      "README 声明「Neither is an agent memory product: Graphiti is a framework for building graphs, and Zep unifies, governs, and serves an enterprise's context」。",
+      "README 引用论文 arXiv:2501.13956（Zep: A Temporal Knowledge Graph Architecture）。"
+    ],
+    "raw_excerpt": "Graphiti is a framework for building and querying temporal context graphs for AI agents. Unlike static knowledge graphs, Graphiti's context graphs track how facts change over time, maintain provenance to source data, and support both prescribed and learned ontology ... **Temporal Fact Management:** Facts have validity windows. When information changes, old facts are invalidated — not deleted. Query what's true now, or what was true at any point in time. ... Neither is an agent memory product: Graphiti is a framework for building graphs, and Zep unifies, governs, and serves an enterprise's context."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "letta-ai/letta — Build stateful agents with memory (README 已重定向至 letta-code)",
+    "url": "https://github.com/letta-ai/letta",
+    "published_at": "2026-10-18",
+    "key_points": [
+      "仓库 stars 为 25250，forks 2657，open issues 0，license Apache-2.0，创建于 2023-10-11，最近 push 为 2026-10-18。",
+      "README 自述「Build stateful agents with memory that can learn and improve over time」，并注明 Letta 前身为 MemGPT。",
+      "README 说明当前源码已迁至 letta-ai/letta-code，包含 agent harness、交互式终端 UI、App Server、channels 以及桌面与 Web 应用所用的 runtime。",
+      "README 说明 archive 分支保留已退役的 Letta V1 API server，活跃项目应使用 letta-code。",
+      "letta-ai/letta-code 仓库 stars 为 3707，forks 450，open issues 505，语言 TypeScript，license Apache-2.0，创建于 2025-10-25，最近 push 为 2026-10-25，topics 含 agent-memory、continual-learning、memgpt、stateful-agents。",
+      "letta-code README 自述为「a stateful agent harness for creating agents that are more like people than tools」，agent 通过重写自身 memory、skills、prompts 乃至 harness（通过 mods）来长期演化。"
+    ],
+    "raw_excerpt": "Build stateful agents with memory that can learn and improve over time. Letta (f.k.a. MemGPT) is actively developed. The current source code lives in [`letta-ai/letta-code`] ... The [`archive`] branch contains the retired Letta V1 API server. ... Letta Code is a stateful agent harness for creating agents that are more like people than tools. Letta Code agents have memory, identity, and a sense of experience over time. They learn and evolve over long horizons through rewriting their own memory, skills, prompts, and even the harness itself (through mods)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "Letta Docs — Memory & dreaming (MemFS)",
+    "url": "https://docs.letta.com/letta-code/memory",
+    "published_at": null,
+    "key_points": [
+      "Letta 官方文档称 Letta agent 使用 MemFS，一个 git-backed memory filesystem，agent 可以检视并编辑它。",
+      "记忆在 agent 的多个会话之间共享，并随 agent 学到关于用户与工作的持久信息而改进。",
+      "文档描述 /init 用于引导或刷新当前项目的记忆，/doctor 用于审计记忆层级是否漂移或过大（含重复与 system-prompt token 用量）。",
+      "文档描述 /remember 显式教学机制：agent 决定该经验应归属何处，并把更新 commit 到 MemFS；可用 /memory 或直接检视 $MEMORY_DIR 查看。",
+      "文档描述 Dreaming 机制：使用后台 subagent 回顾近期对话、整合有用经验并更新记忆，不打断当前工作；触发时机为完成一定数量 agent step 后或 context window 被压缩时。",
+      "文档描述记忆重组流程会先备份当前仓库，再拆分大文件、合并重复项或重构层级。",
+      "文档给出云记忆存储配额：Free 计划每个 memory repository 5 MiB，Pro 计划 50 MiB，按各分支或 tag 最新快照的文件计，不含 Git 历史。"
+    ],
+    "raw_excerpt": "Letta agents use MemFS , a git-backed memory filesystem that they can inspect and edit. Memory is shared across the agent's conversations and improves as the agent learns durable information about you and its work. ... Dreaming uses background subagents to review recent conversations, consolidate useful lessons, and update memory without interrupting your active work."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "topoteretes/cognee — The Free Open-Source AI Memory Platform for Agents",
+    "url": "https://github.com/topoteretes/cognee",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库 stars 为 32729，forks 3412，open issues 1033，语言 Python，license Apache-2.0，创建于 2023-08-16，最近 push 为 2026-10-23。",
+      "README 自述为「a free open-source AI memory platform that gives AI agents persistent long-term memory across sessions」，把文档、代码与对话转成可自托管的知识图谱。",
+      "README 称可完全本地免费运行、无需 API key，依赖使用 CPU 的免费小模型（本地 GLiNER 抽取模型 + 本地 embedding 模型）。",
+      "README 描述记忆构建方式：文本变成实体、关系与可检索 chunk；代码变成符号与依赖图；session distillation 把被接受的 lessons 固化进永久记忆。",
+      "README 描述查询时检索会选择相关的 graph、vector 或 code context，应用可检视检索到的证据。",
+      "README 列出四个核心操作：remember（存入永久记忆或 session）、recall（检索上下文与答案，支持自动路由或指定搜索策略）、improve（富化记忆、应用反馈、把 session 知识桥接进图）、forget（删除指定条目或数据集）。",
+      "README 引用论文 arXiv:2505.24478（Optimizing the Interface Between Knowledge Graphs and LLMs for Complex Reasoning，Markovic et al., 2025）。",
+      "README 称支持自定义数据模型与 ontology 来组织记忆，并提供 Claude Code 与 Codex 插件接入。"
+    ],
+    "raw_excerpt": "Cognee is a free open-source AI memory platform that gives AI agents persistent long-term memory across sessions. Turn documents, code, and conversations into a self-hosted knowledge graph your agents can search and reuse. ... Cognee builds connected memory from different sources. Text becomes entities, relationships, and searchable chunks; code becomes a graph of symbols and dependencies. Session distillation curates accepted lessons into permanent memory. At query time, retrieval selects relevant graph, vector, or code context."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "langchain-ai/langmem — memory for agents that learn over time",
+    "url": "https://github.com/langchain-ai/langmem",
+    "published_at": "2026-10-02",
+    "key_points": [
+      "仓库 stars 为 1722，forks 202，open issues 77，语言 Python，license MIT，创建于 2025-01-21，最近 push 为 2026-10-02。",
+      "README 自述 LangMem 帮助 agent 从交互中随时间学习与适应，提供从对话抽取重要信息、通过 prompt refinement 优化 agent 行为、维护长期记忆的工具。",
+      "README 称同时提供可与任意存储系统配合使用的 functional primitives，以及与 LangGraph 存储层的原生集成。",
+      "README 列出核心特性：可与任意存储系统配合的 Core memory API；agent 可在对话进行中（in the hot path）记录与搜索信息的 memory management tools；自动抽取、整合与更新 agent 知识的 background memory manager。"
+    ],
+    "raw_excerpt": "LangMem helps agents learn and adapt from their interactions over time. It provides tooling to extract important information from conversations, optimize agent behavior through prompt refinement, and maintain long-term memory. It offers both functional primitives you can use with any storage system and native integration with LangGraph's storage layer. ... 🧩 Core memory API that works with any storage system 🧠 Memory management tools that agents can use to record and search information during active conversations \"in the hot path\" ⚙️ Background memory manager that automatically extracts, consolidates, and updates agent know..."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "agiresearch/A-mem — Agentic Memory for LLM Agents",
+    "url": "https://github.com/agiresearch/A-mem",
+    "published_at": "2025-12-12",
+    "key_points": [
+      "仓库 stars 为 1207，forks 124，open issues 21，语言 Python，license MIT，创建于 2025-02-25，最近 push 为 2025-12-12。",
+      "README 自述为「A novel agentic memory system for LLM agents that can dynamically organize memories in an agentic way」。",
+      "README 指出传统记忆系统虽提供基本存储与检索功能，但缺乏高级的记忆组织能力，这是该项目的出发点。",
+      "README 称该系统让 LLM agent 以 agentic 方式动态组织记忆，以利用历史经验。"
+    ],
+    "raw_excerpt": "A novel agentic memory system for LLM agents that can dynamically organize memories in an agentic way. ... Traditional memory systems, while providing basic storage and retrieval functionality, often lack advanced memory organization capabilities. Our project introduces an innovative **Agentic Memory** system that revolutionizes how LLM agents manage and utilize their memories"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "memodb-io/memobase — 仅取得仓库元数据（README 正文未取到）",
+    "url": "https://github.com/memodb-io/memobase",
+    "published_at": "2026-01-11",
+    "key_points": [
+      "仓库 stars 为 2939，forks 238，open issues 34，语言 Python，license Apache-2.0，创建于 2024-09-03，最近 push 为 2026-01-11。",
+      "仓库 topics 含 ai-companion、ai-memory、llm-memory、long-term-memory、memory、rag、retrieval、user-memory。",
+      "README 正文未能读取（raw.githubusercontent 的 main 与 master 分支均返回 404，github.com 页面抓取失败），因此其架构主张未获正文取证，本条仅记录元数据。"
+    ],
+    "raw_excerpt": "memodb-io/memobase — stars: 2939 | forks: 238 | open issues: 34 | language: Python | created: 2024-09-03 | last push: 2026-01-11 | topics: ai-companion, ai-memory, chatgpt, llm-application, llm-memory, long-term-memory, memory, rag, retrieval, user-memory"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Anthropic — Bringing memory to Claude (官方发布页，含 2025-10-23 扩展更新)",
+    "url": "https://www.anthropic.com/news/memory",
+    "published_at": "2025-10-23",
+    "key_points": [
+      "Anthropic 在 Claude 应用中引入 memory 功能，使 Claude 记住用户及团队的项目与偏好，减少重复解释上下文。",
+      "Memory 为完全可选功能（fully optional），提供细粒度用户控制，用户可在设置中查看并编辑 Claude 记住的内容。",
+      "Claude 使用一份 memory summary 集中承载所有记忆，用户可随时通过与 Claude 对话来更新该摘要。",
+      "若使用 projects，Claude 为每个 project 创建独立记忆，项目边界用于隔离敏感对话，官方将其定位为安全护栏（safety guardrail）。",
+      "推出 Incognito chats：不进入对话历史、不写入记忆，对所有 Claude 用户可用。",
+      "Memory 首发面向 Team 与 Enterprise 套餐用户；企业管理员可随时为组织禁用 memory。",
+      "2025-10-23 更新：memory 扩展至 Pro 与 Max 套餐用户，与 Team/Enterprise 一样获得项目级记忆、查看编辑能力与 incognito 聊天。",
+      "上线前针对敏感福祉类话题与边缘案例做了安全测试，关注记忆是否会强化有害模式、导致过度迎合（over-accommodation）、以及被用于绕过安全防护。",
+      "支持将记忆从其他 AI 工具导入，或从 Claude 导出记忆用于备份与迁移。",
+      "采用分阶段（phased）发布策略，在扩大可用范围前持续评估记忆在不同使用方式下的表现。"
+    ],
+    "raw_excerpt": "Today, we're introducing memory to the Claude app, where Claude remembers you and your team's projects and preferences... Memory is fully optional, with granular user controls that help you manage what Claude remembers. We're also introducing Incognito chats that don't appear in your conversation history or save to memory. ... Claude uses a memory summary to capture all its memories in one place for you to view and edit. ... If you use projects, Claude creates a separate memory for each project. ... Update: Expanding to Pro and Max plans (Oct 23, 2025) — Memory is now rolling out to Pro and Max plan users."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Model Context Protocol Specification 2025-06-18（官方规范正文）",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 是一个开放协议，用于在 LLM 应用与外部数据源、工具之间建立标准化集成，目标是让模型获得其所需的上下文（context）。",
+      "协议基于 JSON-RPC 2.0，定义 Hosts（发起连接的 LLM 应用）、Clients（宿主内的连接器）、Servers（提供上下文与能力的服务）三类角色。",
+      "MCP 明确借鉴 Language Server Protocol 的思路，以标准化方式把额外上下文与工具接入 AI 应用生态。",
+      "服务端向客户端提供三类原语：Resources（供用户或模型使用的上下文与数据）、Prompts（模板化消息与工作流）、Tools（供模型执行的函数）。",
+      "客户端可向服务端提供 Sampling（服务端发起的 agentic 行为与递归 LLM 交互）、Roots（服务端查询 uri 或文件系统边界）、Elicitation（服务端请求用户补充信息）。",
+      "规范正文中未定义名为 memory 的原语；记忆相关能力只能通过 Resources/Tools 等通用原语间接承载。",
+      "安全与信任原则要求：用户必须明确同意并理解所有数据访问与操作；Hosts 在向服务端暴露用户数据前必须获得明确同意，未经用户同意不得将资源数据传输到别处。",
+      "工具代表任意代码执行，工具描述与注解应被视为不可信（除非来自可信服务端）；Hosts 调用任何工具前必须获得用户明确同意。",
+      "LLM Sampling 需用户明确批准，用户应能控制是否采样、实际发送的 prompt 内容、以及服务端可见的结果；协议有意限制服务端对 prompt 的可见性。",
+      "规范自述 MCP 无法在协议层面强制执行这些安全原则，实现方 SHOULD 自行构建同意与授权流程、访问控制与数据保护。"
+    ],
+    "raw_excerpt": "Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. ... Servers offer any of the following features to clients: Resources: Context and data, for the user or the AI model to use; Prompts: Templated messages and workflows for users; Tools: Functions for the AI model to execute. ... While MCP itself cannot enforce these security principles at the protocol level, implementors SHOULD: Build robust consent and authorization flows into their applications."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "A Survey on the Memory Mechanism of Large Language Model based Agents (arXiv:2404.13501v1)",
+    "url": "https://arxiv.org/abs/2404.13501v1",
+    "published_at": "2024-04-21",
+    "key_points": [
+      "论文为综述，作者 Zeyu Zhang, Xiaohe Bo, Chen Ma, Rui Li, Xu Chen, Quanyu Dai, Jieming Zhu, Zhenhua Dong, Ji-Rong Wen，2024-04-21 提交 v1，39 页、5 图、4 表，cs.AI。",
+      "摘要说明论文结构：先讨论 LLM-based agents 中记忆的 'what is' 与 'why do we need'，再系统回顾记忆模块的设计与评估，并给出 agent 应用、局限与未来方向。",
+      "论文配套仓库为 https://github.com/nuster1128/LLM_Agent_Memory_Survey。"
+    ],
+    "raw_excerpt": "In specific, we first discuss ''what is'' and ''why do we need'' the memory in LLM-based agents. Then, we systematically review previous studies on how to design and evaluate the memory module."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "A Survey on the Memory Mechanism of Large Language Model based Agents — Section 3 开头（HTML 全文，arxiv.org/html/2404.13501v1）",
+    "url": "https://arxiv.org/html/2404.13501v1",
+    "published_at": "2024-04-21",
+    "key_points": [
+      "第 3 节在进入 3.1 Basic Knowledge 之前明确声明：先从 narrow 与 broad 两个视角定义 agent 的记忆，再基于记忆模块详述三个阶段（记忆来源/形成/更新等）的执行过程。",
+      "论文自述贡献之一为「formally define the memory module and comprehensively analyze its necessity for LLM-based agents」。",
+      "论文自述贡献之一为「systematically summarize existing studies on designing and evaluating the memory module ... providing clear taxonomies and intuitive insights」，即分类体系出自该综述的设计章节。",
+      "3.1 Basic Knowledge 中给出 Definition 1 (Task)：每个 trial 中 agent 可执行多步形成潜在解，每个 task 可探索多个 trial；形式化地用 a_t 表示动作、o_t 表示环境观测，T 长度 trial 表示为 ξ_T = {a_1, o_1, a_2, o_2, …, o_T, a_T}。",
+      "论文使用一个贯穿全文的 toy example（任务 A：为 Alice 制定 5/1/2024–5/3/2024 北京旅行计划；任务 B：5/10/2024 为 Alice 推荐电影）来说明记忆的作用。"
+    ],
+    "raw_excerpt": "In the following, we first define the memory of the agent from both narrow and broad perspectives, and then, detail the execution processes of the above three phases based on the memory module."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "nuster1128/LLM_Agent_Memory_Survey（论文官方配套仓库）",
+    "url": "https://github.com/nuster1128/LLM_Agent_Memory_Survey",
+    "published_at": "2024-04-13",
+    "key_points": [
+      "该仓库为论文官方维护的文献列表仓库，517 stars、11 forks，创建于 2024-04-13，最近一次 push 为 2025-07-28，说明该综述仍在持续更新。",
+      "README 开头复述了论文摘要，与 arXiv 摘要一致（强调 LLM-based agents 的 self-evolving 能力与 memory 作为支撑 agent-environment 交互的关键组件）。"
+    ],
+    "raw_excerpt": "Large language model (LLM) based agents have recently attracted much attention from the research and industry communities. Compared with original LLMs, LLM-based agents are featured in their self-evolving capability ... The key component to support agent-environment interactions is the memory of the agents."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "A-MEM: Agentic Memory for LLM Agents (arXiv:2502.12110v11, NeurIPS 2025)",
+    "url": "https://arxiv.org/abs/2502.12110v11",
+    "published_at": "2025-02-17",
+    "key_points": [
+      "论文为 A-MEM: Agentic Memory for LLM Agents，作者 Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, Yongfeng Zhang；v1 提交于 2025-02-17，最新版本 v11 修订于 2025-10-08。",
+      "该版本被 NeurIPS 2025 接收（Comments 字段：Advances in Neural Information Processing Systems (NeurIPS 2025)）。",
+      "摘要仅给出定性结论「Empirical experiments on six foundation models show superior improvement against existing SOTA baselines」，未在摘要中出现任何 LoCoMo 或 LongMemEval 的具体分数。",
+      "摘要与元数据中均未提及 LongMemEval；论文自述的评测为「six foundation models」上的实验。",
+      "评测代码仓库为 https://github.com/WujiangXu/AgenticMemory，生产版系统仓库为 https://github.com/WujiangXu/A-mem-sys。"
+    ],
+    "raw_excerpt": "Empirical experiments on six foundation models show superior improvement against existing SOTA baselines. ... Comments: Advances in Neural Information Processing Systems (NeurIPS 2025)"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "A-MEM 论文正文（HTML 版，第 1–3 节）",
+    "url": "https://arxiv.org/html/2502.12110v11",
+    "published_at": "2025-10-08",
+    "key_points": [
+      "论文将 Mem0 描述为「following the principles of RAG, incorporates graph databases for storage and retrieval processes」，即把 Mem0 作为对比/相关工作基线之一。",
+      "论文贡献第 3 条自述：使用一个长期对话数据集（long-term conversational dataset），在六个基础模型上、用六种不同评测指标进行比较，并称取得显著提升。",
+      "方法核心为 Zettelkasten 式笔记结构：每条记忆表示为 m_i = {c_i, t_i, K_i, G_i, X_i, e_i, L_i}，即原始内容、时间戳、LLM 生成关键词、标签、上下文描述、稠密向量、链接集合。",
+      "链接生成基于嵌入余弦相似度 s_{n,j} = e_n·e_j/(|e_n||e_j|) 取 top-k 候选，再由 LLM 判定是否建立连接；新记忆可触发对既有记忆的「memory evolution」更新。",
+      "该 HTML 版本抓取内容在方法章节（3.1/3.2）处被截断，未包含实验设置与结果表格，因此无法从本来源取得任何 LoCoMo 分数。"
+    ],
+    "raw_excerpt": "We conduct comprehensive evaluations of our system using a long-term conversational dataset, comparing performance across six foundation models using six distinct evaluation metrics, demonstrating significant improvements. ... Meanwhile, to improve structured memory organization, Mem0 [8], following the principles of RAG, incorporates graph databases for storage and retrieval processes."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "WujiangXu/AgenticMemory — A-Mem 官方评测代码仓库 README",
+    "url": "https://raw.githubusercontent.com/WujiangXu/AgenticMemory/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "该仓库定位为复现论文结果（\"specifically designed to reproduce the results presented in our paper\"），生产可用实现另见 A-mem-sys。",
+      "README 明确评测数据集为 LoCoMo：运行命令使用 --dataset data/locomo10.json，即 LoCoMo 的 locomo10 子集。",
+      "README 列出 LoCoMo 的五类问题：Category 1 Multi-hop、Category 2 Temporal、Category 3 Open-domain、Category 4 Single-hop、Category 5 Adversarial。",
+      "README 的 Results 小节只有一句定性表述「Empirical experiments conducted on six foundation models demonstrate superior performance compared to existing SOTA baselines」，未给出任何数值表格或与 Mem0/Zep/全上下文基线的分数对比。",
+      "检索超参 --retrieve_k 默认 10，README 说明需按模型调整 k 才能达到论文报告的最优性能（\"To achieve the optimal performance reported in our paper, please adjust the hyperparameter k value accordingly\"），并提供了 run_k_sweep.sh 做 k 扫描。"
+    ],
+    "raw_excerpt": "## Results 📊\n\nEmpirical experiments conducted on six foundation models demonstrate superior performance compared to existing SOTA baselines.\n...\n3. Run the experiments in LoCoMo dataset:\n... python test_advanced_robust.py --backend openai --model gpt-4o-mini --dataset data/locomo10.json --output results_robust_gpt-4o-mini.json\n... **Note:** To achieve the optimal performance reported in our paper, please adjust the hyperparameter `k` value accordingly."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory (arXiv:2504.19413v1)",
+    "url": "https://arxiv.org/abs/2504.19413v1",
+    "published_at": "2025-04-28",
+    "key_points": [
+      "论文于 2025-04-28 提交（v1），作者为 Prateek Chhikara、Dev Khant、Saket Aryan、Taranjeet Singh、Deshraj Yadav，隶属 research@mem0.ai。",
+      "论文在 LOCOMO 基准上评测，覆盖四类问题：single-hop、temporal、multi-hop、open-domain。",
+      "论文摘要仅给出相对提升：Mem0 在 LLM-as-a-Judge 指标上相对 OpenAI 提升 26%（relative improvement），未在摘要中给出绝对分数。",
+      "带图记忆的 Mem0^g 总体分数比基础 Mem0 配置高约 2%（around 2% higher overall score）。",
+      "相对 full-context 方法，Mem0 的 p95 延迟低 91%，token 成本节省超过 90%。",
+      "对比基线共六类：记忆增强系统、不同 chunk size 与 k 值的 RAG、full-context、开源记忆方案、专有模型系统、专用记忆管理平台。",
+      "实验配置：m=10 条历史消息、s=10 条相似记忆用于比较；所有 LLM 操作使用 GPT-4o-mini 作为推理引擎；向量库使用稠密嵌入做相似度检索。"
+    ],
+    "raw_excerpt": "Notably, Mem0 achieves 26% relative improvements in the LLM-as-a-Judge metric over OpenAI, while Mem0 with graph memory achieves around 2% higher overall score than the base configuration. ... Mem0 attains a 91% lower p95 latency and saves more than 90% token cost"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Mem0 论文 HTML 全文（§1–§2.2 可读部分）",
+    "url": "https://arxiv.org/html/2504.19413v1",
+    "published_at": "2025-04-28",
+    "key_points": [
+      "论文提出两种架构：Mem0（抽取-更新两阶段的增量式记忆管线）与 Mem0^g（以实体为节点、关系为边的有向标签图记忆）。",
+      "Mem0 的抽取阶段以「对话摘要 S + 最近 m 条消息 + 当前消息对」构成 prompt，由 LLM 抽取候选记忆集合，再在更新阶段通过 Tool Call 机制对相似记忆执行操作。",
+      "Mem0^g 的更新阶段包含冲突检测与消解（conflict detection and resolution）机制；检索支持语义三元组匹配，按相似度阈值过滤并排序。",
+      "论文正文（可抓取到的 §1–§2.2 部分）未包含 LOCOMO 结果表格；抓取在 §2.2 处被截断，未能读到实验章节的绝对分数。"
+    ],
+    "raw_excerpt": "In our experimental evaluation, we configured the system with 'm' = 10 previous messages for contextual reference and 's' = 10 similar memories for comparative analysis. All language model operations utilized GPT-4o-mini as the inference engine."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "mem0ai/mem0 README（main 分支）",
+    "url": "https://raw.githubusercontent.com/mem0ai/mem0/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 将 92.5（LoCoMo）与 94.4（LongMemEval）标注在「New Memory Algorithm (April 2026)」标题下，即 2026 年 4 月的新算法，而非 2025-04 论文所述系统。",
+      "README 对照表给出同一基准的 Old → New 变化：LoCoMo 71.4 → 92.5，LongMemEval 67.8 → 94.4；即 92.5 相对旧算法提升 +21 分，94.4 提升 +27 分。",
+      "README 同时列出 BEAM (1M) 64.1、BEAM (10M) 48.6，以及对应 token 用量（LoCoMo 7.0K、LongMemEval 6.8K）与 p50 延迟（0.88s、1.09s）。",
+      "README 明确声明：所有基准跑在「production-representative model stack」上，采用单次检索（single-pass，一次调用、无 agentic loop），top_200 检索预算。",
+      "README 明确声明：这些分数反映 Mem0 托管平台（managed platform），包含开源 SDK 中不具备的专有优化；开源用户应预期方向相似但数值不完全一致的收益。",
+      "README 列出新算法的变更点：单次 ADD-only 抽取（一次 LLM 调用，无 UPDATE/DELETE）、agent 生成事实作为一等公民、实体链接、多信号检索（semantic + BM25 + entity 并行打分融合）、时间感知检索。",
+      "README 称评测框架已在 github.com/mem0ai/memory-benchmarks 开源以便复现。",
+      "README 的 Research Highlights 表述为「92.5 on LoCoMo -- +21 points over the previous algorithm」，属厂商自报口径。",
+      "仓库元数据：67,773 stars、8,011 forks、Apache-2.0 许可、Python、最后 push 2026-10-23。"
+    ],
+    "raw_excerpt": "## New Memory Algorithm (April 2026)\n\n| Benchmark | Old | New | Tokens | Latency p50 |\n| **LoCoMo** | 71.4 | **92.5** | 7.0K | 0.88s |\n| **LongMemEval** | 67.8 | **94.4** | 6.8K | 1.09s |\n\nAll benchmarks run on the same production-representative model stack. Single-pass retrieval (one call, no agentic loops) at a top_200 retrieval budget. Scores reflect Mem0's managed platform, which includes proprietary optimizations not available in the open-source SDK; open-source users should expect directionally similar gains but not identical numbers."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents (arXiv:2610.24955)",
+    "url": "https://arxiv.org/abs/2610.24955",
+    "published_at": "2026-10-17",
+    "key_points": [
+      "该工作把活跃上下文视为共享资源，在记忆与表示层级之间动态分配上下文预算，而非仅做相关性检索或压缩。",
+      "机制：将累积的记忆压力转化为对上下文的自适应价格，只有当某条细节的预估保留价值足以抵消其额外占用时才保留细节；该压力跨记忆刷新持续存在，从而在记忆内容演化时仍保持对上下文用量的长期控制。",
+      "作者声称可证明不可逆压缩在跟随自身记忆轨迹时会导致线性最坏情况 regret，并提出一个 same-state benchmark 用于在其实际记忆状态上评估分配策略。",
+      "评估设置：在匹配记忆预算下，于 LongMemEval、LoCoMo、AppWorld、WebShop 四个基准、三种基础模型上进行，覆盖 query-blind 记忆构建与目标导向的 agent 上下文管理两种场景。",
+      "摘要中未给出任何具体基准分数数值（仅描述评估基准与设置）。"
+    ],
+    "raw_excerpt": "We introduce MemPrice, which treats active context as a shared resource and dynamically allocates it across memories and representation levels. MemPrice turns accumulated memory pressure into an adaptive price on context, encouraging detail only when its estimated retention value justifies the additional footprint. ... We evaluate the framework under matched memory budgets on LongMemEval, LoCoMo, AppWorld, and WebShop across three foundation models"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "arXiv search listing: 'context compression LLM agent' (208 results, newest first)",
+    "url": "https://arxiv.org/search/?query=context+compression+LLM+agent&searchtype=all&order=-announced_date_first",
+    "published_at": null,
+    "key_points": [
+      "该检索式在 arXiv 全字段下共命中 208 条结果，按公告日期倒序排列，说明该方向在 2025 年以来有持续产出。",
+      "在返回的前若干条结果中，与本子问题直接相关的仅 MemPrice（arXiv:2610.24955）一篇；其余命中（如 MultiphaseHUB、Thinking from Above）属于科学数据压缩、视觉 token 等无关领域，表明该检索式召回噪声较高。",
+      "该页面仅提供标题与摘要级信息，未包含任何论文的方法章节或结果表格。"
+    ],
+    "raw_excerpt": "Showing 1–50 of 208 results for all: context compression LLM agent"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "GitHub repo search: 'LLM agent context compression memory' (top 10 by stars)",
+    "url": "https://github.com/Siddhant-K-code/distill",
+    "published_at": null,
+    "key_points": [
+      "按 stars 排序的前 10 个仓库星数区间为 ★2–★197，最高者为 Siddhant-K-code/distill（★197），其余多在 ★2–★40，均非该方向的代表性开源项目。",
+      "distill 自述为 LLM agent 的上下文智能层，提供持久记忆，含写入时去重、敏感度标注、冲突检测与分层衰减，声称约 12ms 且不调用 LLM，语言为 Go。",
+      "DJLougen/hive（★40）自述做 CPU 侧动作路由、上下文压缩与因果记忆，声称相比全 LLM 方案减少 58% LLM 调用、降低约 45% 成本。",
+      "上述仓库的 stars、简介与主张均来自搜索结果元数据，未读取任何 README 或模型卡正文，按研究纪律不得作为结论依据。"
+    ],
+    "raw_excerpt": "Context intelligence layer for LLM agents: persistent memory with write-time dedup, sensitivity tagging, conflict detection, and hierarchical decay. ~12ms. No LLM calls. MIT."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "SkeMex: Experience Makes Skillful — Enabling Generalizable Medical Agent Reasoning via Self-Evolving Skill Memory (NeurIPS 2026)",
+    "url": "https://github.com/manglu097/SkeMex",
+    "published_at": "2026-10-08",
+    "key_points": [
+      "仓库自我定位为「Self-Evolving Skill Memory」方案，用于医疗 agent 的可泛化推理，标题为「Experience Makes Skillful」。",
+      "README 徽章标注关联论文 arXiv:2606.09365，并标注 NeurIPS 2026。",
+      "README 徽章明确标注「Adaptation: No weight updates」，即该方法通过不更新模型权重的方式实现适应（对应外部记忆/技能沉淀路线）。",
+      "仓库为 Python 3.10+，MIT 许可，创建于 2026-10-08，最后推送 2026-10-12，stars 5、forks 0。"
+    ],
+    "raw_excerpt": "<h3>Experience Makes Skillful</h3> <p><b>Enabling Generalizable Medical Agent Reasoning<br>via Self-Evolving Skill Memory</b></p> ... <a href=\"https://arxiv.org/abs/2606.09365\">arXiv-2606.09365</a> ... <img alt=\"NeurIPS 2026\"> ... <img alt=\"Adaptation-No weight updates\">"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery",
+    "url": "https://github.com/minihellboy/factorminer",
+    "published_at": "2026-02-26",
+    "key_points": [
+      "README 自述为「Symbolic factor discovery with LLM-guided search, reproducible evaluation, and transferable research memory」，即带可迁移研究记忆的 LLM 引导搜索系统。",
+      "系统生成可解释公式并在市场数据上评估，同时记录公式的 lineage（血缘）、metrics 与 admission decisions（准入决策）。",
+      "README 提到「Shared evaluation and memory contracts」支持本地挖掘、受控实验与 agent 集成，说明记忆以可共享契约形式抽象。",
+      "仓库为 Python 3.12+、MIT 许可，stars 123、forks 37，创建于 2026-02-26，最后推送 2026-10-19。"
+    ],
+    "raw_excerpt": "**Symbolic factor discovery with LLM-guided search, reproducible evaluation, and transferable research memory.** ... FactorMiner generates interpretable formulas, evaluates them on market data, and records their lineage, metrics, and admission decisions. Shared evaluation and memory contracts support local mining, controlled experiments, and agent integrations."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "Awesome-LLM-Agent-Experience-Lifecycle (survey companion repo)",
+    "url": "https://github.com/EvaxHe/Awesome-LLM-Agent-Experience-Lifecycle",
+    "published_at": "2026-10-19",
+    "key_points": [
+      "仓库自述为「lifelong, self-evolving & memory-augmented LLM agents」的经验生命周期综述配套仓库。",
+      "其列出的经验生命周期阶段包括：acquisition（获取）、representation（表示）、retrieval（检索）、consolidation（巩固）、abstraction（抽象）、internalization（内化）、revision（修订）、distribution（分发）与 governance（治理）。",
+      "该仓库 stars 2、forks 1，规模很小，仅可作为文献索引线索，不能作为权威结论来源。"
+    ],
+    "raw_excerpt": "The Experience Lifecycle of lifelong, self-evolving & memory-augmented LLM agents — acquisition, representation, retrieval, consolidation, abstraction, internalization, revision, distribution + governance. Companion to the survey."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "GitHub 检索结果：'skill library agent' 前列仓库（Agent Skills 生态）",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+    "published_at": "2026-10-19",
+    "key_points": [
+      "以 'skill library agent' 检索 GitHub 时，按 stars 排序的前列结果均为「Agent Skills」技能包市场/分发型仓库，而非研究论文实现。",
+      "K-Dense-AI/scientific-agent-skills 自述为面向科学研究的 Agent Skills 库，含 177 个技能与 100+ 科学数据库，兼容 Cursor、Claude Code、Codex 等，stars 54493。",
+      "google-labs-code/stitch-skills 自述其每个 skill 遵循「Agent Skills open standard」，用于与 Antigravity、Gemini CLI、Claude Code、Cursor 等编码 agent 兼容，stars 8580。",
+      "这些仓库体现的是 2026 年出现的「Agent Skills 开放标准」工程生态，而非 agent 自主沉淀经验的程序性记忆研究方案。"
+    ],
+    "raw_excerpt": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science ... 177 ready-to-use validated skills plus 100+ scientific databases ... Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and the open Agent Skills standard."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "GitHub 检索结果：'self-evolving agent memory experience' 命中仓库（含 Cognitive-Enzyme-oss）",
+    "url": "https://github.com/7-e1even/Cognitive-Enzyme-oss",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "以 'self-evolving agent memory experience' 检索 GitHub，命中结果多为低星个人项目（stars 2–123），未见高热度代表性实现。",
+      "Cognitive-Enzyme-oss 自述为「self-evolving System 1 memory layer for AI agents」，功能为捕获经验、注入相关经验教训、并通过反馈精炼记忆，AGPL-3.0，stars 3。",
+      "noesis 自述为带 Neo4j 图原生记忆的自演化 agent，将经验蒸馏为可复用技能并自主扩展知识图谱，stars 2。",
+      "上述仓库均未读到方法/实验正文，仅凭简介不足以支撑结论。"
+    ],
+    "raw_excerpt": "🧠A self-evolving System 1 memory layer for AI agents: captures experience, injects relevant lessons, and refines memory through feedback. (AGPL-3.0)"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents (LoCoMo)",
+    "url": "https://arxiv.org/abs/2402.17753",
+    "published_at": "2024-02-27",
+    "key_points": [
+      "LoCoMo 的原始论文为 arXiv:2402.17753，标题《Evaluating Very Long-Term Conversational Memory of LLM Agents》，提交时间 2024-02-27（v1），学科分类 cs.CL（交叉 cs.AI、cs.LG），19 页。",
+      "作者为 Adyasha Maharana、Dong-Ho Lee、Sergey Tulyakov、Mohit Bansal、Francesco Barbieri、Yuwei Fang，机构含 UNC Chapel Hill、USC、Snap Inc。",
+      "数据集由 machine-human pipeline 生成：用 LLM-based agent 架构、以 persona 与 temporal event graph 为 grounding 生成对话，再由人工标注者校验/编辑长程一致性与事件图 grounding；每个 agent 具备分享图片与对图片作出反应的能力。",
+      "LoCoMo 规模：50 段超长期对话，每段平均 300 turns、约 9K tokens，跨最多 35 个 session。",
+      "评测基准包含三类任务：question answering、event summarization、multi-modal dialogue generation。",
+      "实验结论：LLM 在理解超长对话、把握对话内长程时序与因果动态方面存在困难；long-context LLM 或 RAG 能带来改进，但仍显著落后于人类表现。",
+      "论文指出既有长期对话工作评估的上下文不超过 5 个 chat session，LoCoMo 是首个超长期开放域多模态对话研究。"
+    ],
+    "raw_excerpt": "Using this pipeline, we collect LoCoMo, a dataset of very long-term conversations, each encompassing 300 turns and 9K tokens on avg., over up to 35 sessions. Based on LoCoMo, we present a comprehensive evaluation benchmark to measure long-term memory in models, encompassing question answering, event summarization, and multi-modal dialogue generation tasks."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Evaluating Very Long-Term Conversational Memory of LLM Agents — 全文（数据集统计与实验发现）",
+    "url": "https://arxiv.org/html/2402.17753v1",
+    "published_at": "2024-02-27",
+    "key_points": [
+      "Table 1 统计：LoCoMo 平均 304.9 turns、19.3 sessions、9,209.2 tokens 每段对话，时间跨度 few months，支持多模态，采集方式为 LLM-gen. + crowdsourc.；对比 MSC 为 53.3 turns / 4 sessions / 1,225.9 tokens。",
+      "论文称 LoCoMo 对话平均长度是 MSC 的 9 倍，分布在 6 倍多的 turns 与 4 倍多的 sessions 上。",
+      "论文认为传统基于词面重叠（如 BLEU）、语义重叠、一致性/矛盾/共情等指标不适合直接评估 agent 对长期上下文的理解，因此提出 event graph summarization 任务来衡量因果与时序理解，事件图作为标准答案。",
+      "实验发现(1)：long-context LLM 与 RAG 在 QA 任务上有效（提升 22–66%），但仍显著落后人类（低 56%），在时序推理上落后更多（低 73%）。",
+      "实验发现(2)：long-context LLM 在 QA 的对抗性问题上表现比 base model 低 83%，尤其容易把对话或事件错误归属到错误的说话人；在 event graph summarization 上比 base model 低 14%。",
+      "实验发现(3)：RAG 是较平衡的折中方案，把对话转成关于每个说话人生活与 persona 的 assertion（observation）数据库时表现尤佳。",
+      "论文列举长期对话框架的三类局限：检索模型按语义相似度而非此类对话训练导致检索精度受损（含指代与省略）、对检索文档的推理困难、时间区间推理困难。"
+    ],
+    "raw_excerpt": "Long-context LLMs and RAG demonstrate effectiveness in QA tasks, improving 'memory' capabilities of LLMs (with improvements ranging from 22-66%), but still significantly lag behind human levels (by 56%), especially in temporal reasoning, (by 73%)"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory",
+    "url": "https://arxiv.org/abs/2410.10813",
+    "published_at": "2024-10-14",
+    "key_points": [
+      "LongMemEval 原始论文为 arXiv:2410.10813，标题《LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory》，v1 提交 2024-10-14，v2 修订 2025-03-04，发表于 ICLR 2025。",
+      "作者为 Di Wu、Hongwei Wang、Wenhao Yu、Yuwei Zhang、Kai-Wei Chang、Dong Yu（UCLA / UC San Diego / Tencent AI Lab Seattle）。",
+      "基准设计为评估 chat assistant 的五项核心长期记忆能力：information extraction、multi-session reasoning、temporal reasoning、knowledge updates、abstention。",
+      "规模为 500 道人工精心构造的问题，嵌入可自由伸缩的 user-assistant 对话历史中；商业 chat assistant 与 long-context LLM 在跨持续交互记忆信息时出现约 30% 准确率下降。",
+      "论文提出把长期记忆设计拆成 indexing、retrieval、reading 三阶段的统一框架，并给出 session decomposition（value 粒度）、fact-augmented key expansion（索引）、time-aware query expansion（检索范围）等优化。",
+      "代码与基准公开于 https://github.com/xiaowu0162/LongMemEval。"
+    ],
+    "raw_excerpt": "We introduce LongMemEval, a comprehensive benchmark designed to evaluate five core long-term memory abilities of chat assistants: information extraction, multi-session reasoning, temporal reasoning, knowledge updates, and abstention. With 500 meticulously curated questions embedded within freely scalable user-assistant chat histories"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "LongMemEval 全文（v2）：与 LoCoMo 的评测设计差异、问题类型与实验结论",
+    "url": "https://arxiv.org/html/2410.10813v2",
+    "published_at": "2025-03-04",
+    "key_points": [
+      "LongMemEval 对既有基准（含 LoCoMo）提出两点批评：其一，它们不能准确反映 user-AI 交互——许多只做人-人对话（引 Xu 2022a、Maharana 2024、Kim 2024），另一些缺少任务导向对话，且交互历史长度不可配置、通常只有几千 token，随系统进步难度受限。",
+      "其二，问题覆盖的记忆能力有限：MemoryBank 与 PerLTQA 未充分评估跨多 session 综合信息、以及基于时间元数据/时间指代的推理；论文明确指出「包括较新的 LoCoMo 在内的所有长期记忆基准」都未能评估对 assistant 所提供信息的回忆，以及对已更新用户信息的推理。",
+      "Table 1 对比：LoCoMo 为 Personal 域、约 1k sessions、7512 道问题、上下文深度约 10k tokens，覆盖 IE/MR/TR/ABS 但 KU 标为 ✗；LongMemEval 为 50k sessions、500 题、上下文深度 115k 与 1.5M，五项能力全覆盖。",
+      "LongMemEval 的实例定义为四元组 (S, q, t_q, a)：S 为按时间排序的 N 个历史 session 序列，每个 session 是 user 与 assistant 的多轮交互并带时间戳 t_i。",
+      "受 needle-in-a-haystack 测试启发，为每题编译连贯且长度可配置的对话历史；提供两个标准设置：LongMemEval_S 每题约 115k tokens，LongMemEval_M 为 500 sessions（约 1.5 million tokens）。",
+      "LongMemEval 共设七种问题类型（Figure 1 示例），覆盖上述五项能力；abstention 要求模型识别历史中未被用户提及的信息并回答「I don't know」。",
+      "难度证据：long-context LLM 在 LongMemEval_S 上性能下降 30%~60%；人工评估显示最先进商业系统在比 LongMemEval_S 简单得多的设置下也只有 30%~70% 准确率。",
+      "设计结论：以 round 而非 session 作为存储与使用历史的粒度更优；进一步压缩为单条 user fact 会因信息损失损害整体表现，但能提升 multi-session reasoning 准确率；用抽取的用户事实扩展 key 可提升 recall@k 9.4%、下游 QA 准确率 5.4%；时间感知的索引与查询扩展在强 LLM 做查询扩展时把时序推理的记忆召回提升 6.8%~11.3%；即使召回完美，应用 Chain-of-Note 与结构化数据格式仍可提升最多 10 个绝对点的 QA 准确率。"
+    ],
+    "raw_excerpt": "All long-term memory benchmarks including recent ones such as LoCoMo (Maharana et al., 2024) also fail to evaluate recall of information provided by the assistant or reasoning with updated user information."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "memodb-io/memobase (GitHub repository metadata)",
+    "url": "https://github.com/memodb-io/memobase",
+    "published_at": "2024-09-03",
+    "key_points": [
+      "仓库 memodb-io/memobase 为 Python 项目，采用 Apache-2.0 许可证，创建于 2024-09-03，最近一次 push 为 2026-01-11。",
+      "仓库元数据：2939 stars、238 forks、34 open issues。",
+      "仓库 topics 包含 ai-companion、ai-memory、chatgpt、llm-application、llm-memory、long-term-memory、memory、rag、retrieval、user-memory。",
+      "README 头部仅含 logo、PyPI/npm/jsr/pkg.go.dev 徽章与标题 Memobase，未包含架构主张正文（抓取内容在此处被截断）。"
+    ],
+    "raw_excerpt": "memodb-io/memobase\nstars: 2939 | forks: 238 | open issues: 34 | language: Python\ncreated: 2024-09-03 | last push: 2026-01-11\ntopics: ai-companion, ai-memory, chatgpt, llm-application, llm-memory, long-term-memory, memory, rag, retrieval, user-memory\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Memobase Documentation — 首页（Architecture Overview 入口）",
+    "url": "https://docs.memobase.io/",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 Memobase 定位为面向 AI 应用的长期用户记忆后端（long-term user memory backend），目标是让应用“记住并理解其用户”。",
+      "文档首页设有 “Memobase Architecture Overview” 章节入口，但首页正文未展开具体架构内容。",
+      "Memobase 内置多语言 prompt，当前支持 English（默认）、Chinese、Japanese 三种语言，可按语言配置以提升非英文内容的准确率。",
+      "官方称项目仍在活跃开发中，正在招募 early adopters 作为 design partners。",
+      "官方愿景表述为“为 AI 应用提供强大的第二大脑（second brain）”，以建立持久的用户关系。"
+    ],
+    "raw_excerpt": "Struggling with short-term memory in your AI applications? Memobase is the solution. It’s a fast, scalable, long-term user memory backend for your AI, helping you build applications that remember and understand their users.\n\nMemobase Architecture Overview\n\nTo optimize performance across different languages, Memobase comes with built-in multi-lingual prompts. Currently supported languages include: English (en) - Default language; Chinese (zh); Japanese (ja).\n\nOur vision is to provide a powerful second brain for AI applications, enabling them to build lasting and meaningful user relationships."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "A-MEM: Agentic Memory for LLM Agents (arXiv:2502.12110v11, NeurIPS 2025)",
+    "url": "https://arxiv.org/abs/2502.12110",
+    "published_at": "2025-02-17",
+    "key_points": [
+      "论文将代码拆分为两部分：性能评估代码指向 https://github.com/WujiangXu/A-mem，agentic memory 系统代码指向 https://github.com/WujiangXu/A-mem-sys。",
+      "论文作者为 Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, Yongfeng Zhang。",
+      "论文发表于 NeurIPS 2025（Comments 字段标注 Advances in Neural Information Processing Systems (NeurIPS 2025)）。",
+      "arXiv v1 提交于 2025-02-17，最新版本 v11 修订于 2025-10-08。",
+      "论文方法基于 Zettelkasten 原则，通过动态索引与链接构建互联知识网络；新记忆加入时生成含上下文描述、关键词、标签的结构化笔记，并触发已有记忆的演化更新。",
+      "论文称在六个基础模型上的实验相对现有 SOTA 基线取得提升（此为论文自述主张）。"
+    ],
+    "raw_excerpt": "The source code for evaluating performance is available at https://github.com/WujiangXu/A-mem, while the source code of the agentic memory system is available at https://github.com/WujiangXu/A-mem-sys."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "agiresearch/A-mem README",
+    "url": "https://raw.githubusercontent.com/agiresearch/A-mem/main/README.md",
+    "published_at": "2025-02-25",
+    "key_points": [
+      "README 明确声明本仓库提供的是供 agent 构建使用的 memory system，若需复现论文结果请参考 https://github.com/WujiangXu/AgenticMemory，即把论文复现指向另一个仓库。",
+      "仓库提供 Python 包 agentic_memory.memory_system.AgenticMemorySystem，可通过 pip install . 安装。",
+      "该版本支持两种 LLM 后端：OpenAI（GPT-4/GPT-3.5）与 Ollama（本地部署）。",
+      "使用 ChromaDB 做向量嵌入存储与语义相似度检索，嵌入模型示例为 all-MiniLM-L6-v2。",
+      "提供 add_note / read / search_agentic / update / delete 等记忆操作接口。",
+      "README 的 BibTeX 引用与论文一致（Xu, Liang, Mei, Gao, Tan, Zhang，arXiv:2502.12110），表明与论文同源。",
+      "仓库元数据：1207 stars，124 forks，21 open issues，语言 Python，MIT 许可，创建于 2025-02-25，最近 push 于 2025-12-12。"
+    ],
+    "raw_excerpt": "**Note:** This repository provides a memory system to facilitate agent construction. If you want to reproduce the results presented in our paper, please refer to: https://github.com/WujiangXu/AgenticMemory"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "WujiangXu/A-mem-sys README",
+    "url": "https://raw.githubusercontent.com/WujiangXu/A-mem-sys/main/README.md",
+    "published_at": "2025-07-14",
+    "key_points": [
+      "README 同样声明本仓库提供的是供 agent 构建使用的 memory system，论文结果复现需参考 https://github.com/WujiangXu/AgenticMemory。",
+      "README 的标题、Introduction、Key Features、Results 段落与 agiresearch/A-mem 的 README 逐字相同，属同一代码库的分支或镜像。",
+      "相对 agiresearch/A-mem 版本，LLM 后端扩展为四种：OpenAI、Ollama、SGLang（本地推理，示例 Llama-3.1-8B-Instruct）、OpenRouter。",
+      "新增显式的 LLM 分析步骤：自动从内容生成 keywords、context、tags，并支持部分元数据补全（用户提供部分字段、LLM 填充其余）。",
+      "检索接口同时提供 search()（返回 relevance score）与 search_agentic()。",
+      "嵌入生成使用 content + 生成的 metadata 组合，以提升语义检索效果。",
+      "仓库元数据：405 stars，62 forks，3 open issues，语言 Python，MIT 许可，创建于 2025-07-14，最近 push 于 2026-03-15。"
+    ],
+    "raw_excerpt": "**Note:** This repository provides a memory system to facilitate agent construction. If you want to reproduce the results presented in our paper, please refer to: https://github.com/WujiangXu/AgenticMemory"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "GitHub API 对 WujiangXu/AgenticMemory 的响应（301 重定向）",
+    "url": "https://api.github.com/repos/WujiangXu/AgenticMemory",
+    "published_at": null,
+    "key_points": [
+      "对 WujiangXu/AgenticMemory 的 API 请求返回 301 Moved Permanently，重定向至 https://api.github.com/repositories/924725391，表明该仓库已被重命名或转移。",
+      "直接抓取 https://github.com/WujiangXu/AgenticMemory 页面失败（All connection attempts failed），无法读取其 README 正文。",
+      "按关键词 AgenticMemory A-mem WujiangXu 检索 GitHub 返回 No GitHub repos found，该名称当前不作为独立可检索仓库存在。",
+      "因此该仓库的 stars 数与最近提交时间未能取得。"
+    ],
+    "raw_excerpt": "Error executing tool get_repo_detail: Redirect response '301 Moved Permanently' for url 'https://api.github.com/repos/WujiangXu/AgenticMemory' Redirect location: 'https://api.github.com/repositories/924725391'"
+  },
+  {
+    "sub_question_id": "f13",
+    "source_type": "github",
+    "title": "modelcontextprotocol/servers — MCP 官方参考实现仓库",
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "published_at": "2024-11-19",
+    "key_points": [
+      "该仓库是 Model Context Protocol (MCP) 的 reference implementations 集合，同时收录社区构建服务器的引用与附加资源。",
+      "仓库明确说明：查找 MCP 服务器清单应浏览 MCP Registry (registry.modelcontextprotocol.io)；本仓库仅存放由 MCP steering group 维护的少量参考服务器。",
+      "仓库将其中服务器定位为演示 MCP 特性与 SDK 用法的教育性示例，而非生产级实现。",
+      "仓库规模指标：约 91.5k stars、11.9k forks，主语言 TypeScript，最近推送时间 2026-10-25。"
+    ],
+    "raw_excerpt": "This repository is a collection of *reference implementations* for the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP), as well as references to community-built servers and additional resources. ... If you are looking for a list of MCP servers, you can browse published servers on [the MCP Registry](https://registry.modelcontextprotocol.io/). The repository served by this README is dedicated to housing just the small number of reference servers maintained by the MCP steering group. ... The servers in this repository are intended as **reference implementations** to demonstrate MCP features and SDK usage."
+  },
+  {
+    "sub_question_id": "f13",
+    "source_type": "github",
+    "title": "GitHub 仓库搜索结果：MCP memory / knowledge-graph 类服务器（社区生态元数据）",
+    "url": "https://github.com/search?q=mcp+memory+server+knowledge+graph&type=repositories",
+    "published_at": null,
+    "key_points": [
+      "搜索命中多个以「为 AI 提供持久记忆」为目标的 MCP 服务器仓库，其中 star 较高的包括 shaneholloman/mcp-knowledge-graph（★886，描述为通过本地知识图谱为 Claude 提供持久记忆）、GreatScottyMac/context-portal（★765，memory bank MCP server，构建项目级知识图谱）、0xK3vin/MegaMemory（★726，面向编码 agent 的持久项目知识图谱 MCP server）、CheMiguel23/MemoryMesh（★354，基于 MCP 的结构化记忆持久化知识图谱服务器）。",
+      "这些仓库的最后推送时间分布在 2025-04 至 2026-07 之间，显示该方向社区维护仍在持续。",
+      "上述信息仅为仓库元数据（stars、描述、语言、最后推送时间），未读取任何 README 正文，不足以支撑关于其能力或数据模型的结论。"
+    ],
+    "raw_excerpt": "shaneholloman/mcp-knowledge-graph (★886) — MCP server enabling persistent memory for Claude through a local knowledge graph; GreatScottyMac/context-portal (★765) — Context Portal (ConPort): A memory bank MCP server building a project-specific knowledge graph...; 0xK3vin/MegaMemory (★726) — Persistent project knowledge graph for coding agents. MCP server with semantic search...; CheMiguel23/MemoryMesh (★354) — A knowledge graph server that uses the Model Context Protocol (MCP) to provide structured memory persistence for AI models."
+  }
+]

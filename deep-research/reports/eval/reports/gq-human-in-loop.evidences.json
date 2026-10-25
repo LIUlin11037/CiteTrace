@@ -1,0 +1,494 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "LangGraph Docs — Interrupts (human-in-the-loop patterns)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 将 HITL 实现为「中断（interrupt）」：在图的任意节点调用 interrupt() 暂停执行，通过持久化层保存图状态，并无限期等待外部输入后恢复。",
+      "中断是动态的（dynamic），可放在代码任意位置并依据应用逻辑条件触发；这与「静态断点（static breakpoints，仅在特定节点前/后暂停）」形成对照——即介入时机可按逻辑动态决定。",
+      "恢复执行通过 Command(resume=...) 完成，其值成为节点内 interrupt() 调用的返回值；必须使用与中断发生时相同的 thread_id。",
+      "文档列出的常见 HITL 模式包括：审批工作流（在执行 API 调用、数据库变更、金融交易等关键动作前暂停）、审查与编辑（让人修改 LLM 输出或工具调用）、中断工具调用（执行前审查并编辑 tool call）、校验人类输入。",
+      "interrupt 支持 response_schema（Pydantic / TypedDict / dataclass）来约束人类回复的结构，客户端可据此渲染带类型的输入表单——即介入的粒度可细化到结构化字段级。",
+      "恢复时节点会从该节点开头重新执行，因此 interrupt 之前的代码会再次运行（实现约束）。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. ... Unlike static breakpoints (which pause before or after specific nodes), interrupts are dynamic: they can be placed anywhere in your code and can be conditional based on your application logic."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "OpenAI Agents SDK — Human-in-the-loop",
+    "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Agents SDK 将 HITL 流程定义为：暂停 agent 执行，直到人类批准或拒绝敏感的工具调用（sensitive tool calls）。",
+      "审批由工具侧声明：needs_approval 可设为 True（总是需要审批）或一个异步函数（按调用逐次判定），即介入触发条件可配置为「全量」或「条件式」。",
+      "审批面是 run 级别的（run-wide），不限于当前顶层 agent：经由 handoff 到达的 agent、或嵌套 Agent.as_tool() 执行中的工具，其中断仍浮现在外层 run 上，需在外层 RunState 上批准/拒绝并恢复原始顶层 run。",
+      "暂停时 RunResult.interruptions 包含 ToolApprovalItem，携带 agent.name、tool_name、arguments 等细节；通过 result.to_state() 转为 RunState，调用 state.approve(...)/state.reject(...) 后以 Runner.run(agent, state) 恢复。",
+      "支持「粘性决策」：always_approve=True / always_reject=True 可将同一决定持久化到该工具后续调用；RunState 也存储粘性决策，可经 to_string()/to_json() 序列化后跨会话恢复。",
+      "对于函数工具，粘性决策按请求审批的 agent 作用域隔离：不同 agent 的同名工具不会继承该决定。",
+      "除暂停-恢复的人工审批外，部分工具类型还支持程序化审批回调（programmatic approval callbacks），使 run 无需暂停即可继续——即存在「不打断执行」的替代路径。",
+      "可调用审批规则在无法安全解析参数时采取 fail closed：参数缺失、为空、仅空白、JSON 畸形、JSON 合法但非对象（如 null 或 list）、或含 NaN/Infinity 等非标准常量时，不调用该 callable，而要求人工审批。"
+    ],
+    "raw_excerpt": "Use the human-in-the-loop (HITL) flow to pause agent execution until a person approves or rejects sensitive tool calls. Tools declare when they need approval, run results surface pending approvals as interruptions, and RunState lets you serialize paused runs and resume them after decisions are made. ... That approval surface is run-wide, not limited to the current top-level agent."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "LangGraph Interrupts（官方文档：中断/恢复与 checkpoint 机制）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "中断通过在图节点内任意位置调用 interrupt() 函数触发，参数可为任意 JSON 可序列化值，该值被呈现给调用方。",
+      "触发中断时 LangGraph 使用其 persistence 层保存图状态，并「无限期等待」直到恢复执行——文档未描述内建超时机制。",
+      "恢复方式为用 Command(resume=...) 重新调用图，resume 值成为节点内 interrupt() 调用的返回值。",
+      "使用 interrupt 的三个前提：一个 checkpointer（生产环境需持久化 checkpointer，如数据库后端）、config 中的 thread_id、以及在暂停点调用 interrupt()。",
+      "thread_id 充当持久游标：复用同一 thread_id 会恢复同一 checkpoint，使用新值则开启空状态的新线程。",
+      "中断负载通过 stream.interrupts 暴露（事件流式 API graph.stream_events(..., version=\"v3\")），stream.interrupted 为 True 表示运行因等待输入而暂停；默认 graph.invoke() API 则在 result[\"__interrupt__\"] 下暴露。",
+      "恢复时必须使用与中断发生时相同的 thread ID；节点恢复时会从该节点开头重新执行，因此 interrupt 之前的代码会再次运行。",
+      "interrupt 支持 response_schema 参数（需 langgraph>=1.2.12），可传 Pydantic 模型、TypedDict 或 dataclass，LangGraph 将其转为 JSON Schema 放入 Interrupt.response_schema，供客户端渲染带类型的输入表单；校验失败抛 pydantic.ValidationError，可用同一 thread_id 重试。",
+      "文档列出的典型 HITL 模式：审批工作流（在关键动作前暂停）、处理多个中断（用 interrupt ID 配对 resume 值）、审阅与编辑 LLM 输出或工具调用、在工具调用执行前中断、验证人类输入。",
+      "中断是动态的（可放在代码任意位置并可按应用逻辑条件触发），区别于在特定节点前后暂停的静态 breakpoint。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. ... When an interrupt is triggered, LangGraph saves the graph state using its persistence layer and waits indefinitely until you resume execution. ... Interrupts work by calling the interrupt() function at any point in your graph nodes. ... you resume execution by re-invoking the graph using Command, which then becomes the return value of the interrupt() call from inside the node."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "OpenAI Agents SDK — Human-in-the-loop（官方文档：needs_approval / RunState 审批流）",
+    "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+    "published_at": null,
+    "key_points": [
+      "HITL 流程用于暂停 agent 执行直到人工批准或拒绝敏感工具调用；工具声明何时需要审批，待审批项作为 interruption 暴露，RunState 允许序列化被暂停的运行并在决策后恢复。",
+      "审批面是 run 级别的（run-wide），不限于当前顶层 agent：无论工具属于当前 agent、通过 handoff 到达的 agent，还是嵌套的 Agent.as_tool() 执行，中断都在外层 run 上浮现，在外层 RunState 上批准/拒绝并恢复原始顶层 run。",
+      "工具通过 needs_approval 标记：设为 True 表示总是需要审批，或提供一个 async 函数按调用逐次判定；该可调用对象接收 run context、解析后的工具参数和 tool call ID。",
+      "可调用审批规则在无法安全检查参数时「fail closed」（失败即关闭）：参数缺失、为空、仅空白、JSON 畸形、是合法 JSON 但非对象（如 null 或 list）、或含 NaN/Infinity/-Infinity 等非标准常量时，不调用该可调用对象而直接要求人工审批。",
+      "needs_approval 适用于 function_tool、Agent.as_tool、ShellTool 和 ApplyPatchTool；本地 MCP server 通过 MCPServerStdio/MCPServerSse/MCPServerStreamableHttp 的 require_approval 支持审批；托管 MCP server 通过 HostedMCPTool 的 tool_config={\"require_approval\": \"always\"} 加可选 on_approval_request 回调支持。",
+      "对本地 ShellTool 与 ApplyPatchTool，审批是 opt-in：needs_approval 默认为 False，仅设置 on_approval 回调并不会启用审批。",
+      "ComputerTool 使用 on_safety_check 接受或拒绝 Responses API 返回的安全检查，该回调不采用本页描述的暂停-恢复审批流。",
+      "审批流步骤：runner 评估审批规则 → 若 RunContextWrapper 中已存该 tool call 的决策则直接继续 → 否则暂停执行，RunResult.interruptions（或 RunResultStreaming.interruptions）包含 ToolApprovalItem 条目（含 agent.name、tool_name、arguments）→ 用 result.to_state() 转为 RunState → 调用 state.approve(...) 或 state.reject(...) → 用 Runner.run(agent, state) 或 Runner.run_streamed(agent, state) 恢复。",
+      "粘性决策（sticky decisions）：传 always_approve=True 或 always_reject=True 可为同一工具身份持久化相同决策；RunState 也存储粘性决策，因此能经受 state.to_string()/RunState.from_string(...) 与 state.to_json()/RunState.from_json(...) 的序列化并在之后恢复。",
+      "对 function tools，粘性决策按请求审批的 agent 作用域隔离：另一个 agent 的同名函数工具不会仅因名称相同而继承该决策。",
+      "对本地 ShellTool 与 ApplyPatchTool，粘性决策按工具类型与名称匹配，而非按所属 agent/executor/editor 匹配；当多个 agent 共享审批状态时，always_approve=True 决策可能在 handoff 后作用于另一 agent 的同类型同名工具，即使其 executor 权限不同，且 SDK 不会重新提示或重新评估目标工具的 needs_approval 策略。",
+      "托管 MCP 的粘性决策以 server_label 与工具名的组合识别；仅当审批请求同时包含两个非空身份字段时才持久化 always-approve/always-reject 决策。",
+      "无需在同一轮解决所有待审批项：interruptions 可混合普通 function tools、托管 MCP 审批与嵌套 Agent.as_tool() 审批；只批准/拒绝部分项后重跑，已解决调用可继续而未解决项仍保持中断。"
+    ],
+    "raw_excerpt": "Use the human-in-the-loop (HITL) flow to pause agent execution until a person approves or rejects sensitive tool calls. Tools declare when they need approval, run results surface pending approvals as interruptions, and RunState lets you serialize paused runs and resume them after decisions are made. ... Convert the result to a RunState with result.to_state(), call state.approve(...) or state.reject(...), and then resume with Runner.run(agent, state)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "CrewAI Tasks 文档（human_input 属性定义）",
+    "url": "https://docs.crewai.com/en/concepts/tasks",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 的 Task 提供 human_input 可选属性（Optional[bool]），语义为「是否应由人工审阅 agent 的最终答案」，默认值为 False。",
+      "human_input 是任务级布尔开关，文档该节未描述中断/恢复 API、checkpoint 持久化或超时升级机制。",
+      "Task 还提供 guardrail / guardrails（在进入下一任务前校验任务输出）与 guardrail_max_retries（校验失败时的最大重试次数，默认 3），原 max_retries 属性已废弃并将在 v1.0.0 移除。",
+      "任务执行流程由 Crew 的 process 决定，支持 sequential（按定义顺序执行）与 hierarchical（按角色与专长分配 agent）两种。",
+      "CrewAI 文档导航将「Flows」描述为编排 start/listen/router 步骤、管理状态、持久化执行并恢复长时运行工作流；将「Tasks & Processes」描述为含 guardrails、callbacks 与 human-in-the-loop 触发器的顺序/层级/混合流程。"
+    ],
+    "raw_excerpt": "Human Input (optional) human_input Optional[bool] Whether the task should have a human review the final answer of the agent. Defaults to False."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果（第三方 HITL 示例仓库，非官方框架仓库）",
+    "url": "https://github.com/ahmad2b/canvas-callback",
+    "published_at": null,
+    "key_points": [
+      "search_repos 以 'langgraph human-in-the-loop interrupt' 检索返回的最高星仓库为第三方项目 ahmad2b/canvas-callback（★90，forks 17，TypeScript，last push 2025-03-19），描述为演示 Canvas UX 模式 + LangGraph human-in-the-loop 工作流。",
+      "同批检索返回 KirtiJha/langgraph-interrupt-workflow-template（★32，forks 10，Python，last push 2026-10-22），自称 production-ready 的 LangGraph interrupt 模板，FastAPI 后端 + Next.js 前端。",
+      "以 'openai agents sdk human in the loop approvals' 检索返回的最高星仓库为第三方 Deuz-AI/Deuz-SDK（★519，forks 5，TypeScript，last push 2026-10-16），描述含 durable execution 与 human-in-the-loop approvals。",
+      "以 'microsoft semantic-kernel agent' 检索返回 microsoft/spec-to-agents（★115，forks 57，Python，last push 2026-06-12），描述为结合 Semantic Kernel 企业编排与 AutoGen 多 agent 模式的 Microsoft Agent Framework 工作流。",
+      "以 'crewai human input agent' 检索返回的仓库 stars 均为 0，其中 api-evangelist/crewai-cloud 为第三方 API 画像，描述 CrewAI AMP 暴露 per-crew REST API 用于 kickoff、status、inputs 与 human-in-the-loop resume 操作。",
+      "上述结果均为第三方示例或第三方画像仓库，检索未返回 langchain-ai/langgraph、crewAIInc/crewAI、openai/openai-agents-python 等官方仓库条目，故不能据此得出官方框架的 stars 与活跃度。"
+    ],
+    "raw_excerpt": "Found 5 repos for 'langgraph human-in-the-loop interrupt' (sorted by stars): - ahmad2b/canvas-callback (★90, forks 17) desc: This open-source project & guide shows you exactly how to implement Canvas UX pattern + LangGraph human-in-the-loop workflows in your AI apps."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "EU AI Act Article 14: Human Oversight (AI Act Explorer 正文转载)",
+    "url": "https://artificialintelligenceact.eu/article/14/",
+    "published_at": null,
+    "key_points": [
+      "第 14(1) 款要求高风险 AI 系统在设计开发时（包括配备适当的人机界面工具）确保其在使用期间可被自然人有 效监督（effectively overseen by natural persons）。",
+      "第 14(2) 款规定人工监督的目标是预防或最小化系统按预期用途使用、以及可合理预见误用情形下对健康、安全或基本权利产生的风险，尤其针对其他条款要求已适用后仍残留的风险。",
+      "第 14(3) 款规定监督措施应与高风险 AI 系统的风险、自主性水平和使用情境相称（commensurate with the risks, level of autonomy and context of use）。",
+      "该条对附件 III 类高风险系统的生效时间为 2027 年 12 月 2 日，对附件 I 类为 2028 年 8 月 2 日（依第 113(c) 条）。",
+      "该条关联的 recital 为 66 与 73。",
+      "页面在读到第 3 款后即被截断，第 4 款（关于自动化偏差、忽略/覆盖输出、中止按钮等能力）未取得正文。"
+    ],
+    "raw_excerpt": "1. High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which they are in use. ... 3. The oversight measures shall be commensurate with the risks, level of autonomy and context of use of the high-risk AI system ... Comes into force 2 December 2027 (high-risk under Annex III) / 2 August 2028 (high-risk under Annex I), according to Article 113(c)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "NIST AI Risk Management Framework (官方页面)",
+    "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "published_at": null,
+    "key_points": [
+      "NIST 官方 AI RMF 落地页仅返回一句概述性表述：该指南旨在培育对 AI 技术的信任、促进 AI 创新并降低风险。",
+      "该页面未返回任何关于 human-AI configuration、人工监督具体职能或 2025 年更新的正文内容，不足以支撑关于 NIST 对 HITL 合规要求的结论。"
+    ],
+    "raw_excerpt": "New guidance seeks to cultivate trust in AI technologies and promote AI innovation while mitigating risk."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph README（低层有状态编排框架，HITL 为核心特性）",
+    "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 自我定位为「low-level orchestration framework for building stateful agents」，面向长时间运行、有状态的 agent 与工作流。",
+      "README 将 Human-in-the-loop 列为四大核心能力之一，描述为「Seamlessly incorporate human oversight by inspecting and modifying agent state at any point during execution」，即执行过程中任意点检查并修改 agent 状态。",
+      "与 HITL 并列的能力是 Durable execution（持久化执行，失败后从断点自动恢复）与 Comprehensive memory（短期工作记忆 + 跨会话长期记忆），说明 HITL 依赖持久化状态层实现。",
+      "README 将 HITL 文档指向 docs.langchain.com/oss/python/langgraph/interrupts，即其 HITL 实现路径是 interrupt 机制。",
+      "LangGraph 灵感来自 Pregel 与 Apache Beam，公共接口参考 NetworkX，可脱离 LangChain 独立使用。"
+    ],
+    "raw_excerpt": "- **[Durable execution](https://docs.langchain.com/oss/python/langgraph/durable-execution)** — Build agents that persist through failures and can run for extended periods, automatically resuming from exactly where they left off.\n- **[Human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts)** — Seamlessly incorporate human oversight by inspecting and modifying agent state at any point during execution."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "LangGraph 文档：Interrupts（暂停/恢复与 checkpointer 机制）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "interrupt() 函数可在图节点内任意位置调用，触发时 LangGraph 用持久化层保存图状态并无限期等待，直到被恢复。",
+      "恢复方式：用 Command(resume=...) 重新调用图，该值成为节点内 interrupt() 调用的返回值。",
+      "使用 interrupt 的三个前提：一个 checkpointer（生产环境需持久化后端，如数据库）、config 中的 thread_id、以及在暂停点调用 interrupt()（payload 必须 JSON 可序列化）。",
+      "interrupt 是动态的：可放在代码任意位置并依据应用逻辑条件触发，区别于「静态断点」（static breakpoints，仅在特定节点前/后暂停）。",
+      "checkpointing 保存精确图状态，即使处于 error 状态也可稍后恢复；thread_id 充当持久游标，复用同一 thread_id 恢复同一 checkpoint，新值则开启空状态的新线程。",
+      "恢复时必须使用与中断发生时相同的 thread ID；恢复时节点会从头重新执行，因此 interrupt 之前的代码会再次运行。",
+      "interrupt 支持 response_schema 参数（Pydantic 模型 / TypedDict / dataclass，需 langgraph>=1.2.12），LangGraph 将其转为 JSON Schema 放入 Interrupt.response_schema，供客户端渲染带类型的输入表单。",
+      "中断 payload 通过 stream.interrupts 暴露（事件流式 API，version=\"v3\"），stream.interrupted 为 True 表示运行因等待人工输入而暂停；默认 invoke() API 则在 result[\"__interrupt__\"] 下暴露。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. ... When an interrupt is triggered, LangGraph saves the graph state using its persistence layer and waits indefinitely until you resume execution. ... Unlike static breakpoints (which pause before or after specific nodes), interrupts are dynamic: they can be placed anywhere in your code and can be conditional based on your application logic."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "openai/openai-agents-python README（轻量多 agent 框架，HITL 列为核心概念）",
+    "url": "https://raw.githubusercontent.com/openai/openai-agents-python/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Agents SDK 定位为轻量级多 agent 工作流框架，provider-agnostic，支持 OpenAI Responses / Chat Completions API 及 100+ 其他 LLM。",
+      "README 的 Core concepts 列表中第 8 项为「Human in the loop: Built-in mechanisms for involving humans across agent runs」，即内置跨 agent 运行的人机协作机制。",
+      "其他核心概念包括 Agents、Handoffs（agent 间委派）、Guardrails（输入输出安全校验）、Sessions（自动对话历史管理）、Tracing（内置运行追踪）。",
+      "框架支持四种主要运行方式：text agent、sandbox agent（容器内长周期任务）、realtime agent（WebSocket 低延迟语音/多模态）、voice agent。"
+    ],
+    "raw_excerpt": "1. [**Human in the loop**](https://openai.github.io/openai-agents-python/human_in_the_loop/): Built-in mechanisms for involving humans across agent runs"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "OpenAI Agents SDK 文档：Human-in-the-loop（needs_approval + RunState 暂停/恢复）",
+    "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+    "published_at": null,
+    "key_points": [
+      "HITL 流程用于在人工批准或拒绝敏感工具调用之前暂停 agent 执行；工具自行声明何时需要审批，运行结果把待审批项作为 interruptions 暴露，RunState 允许序列化暂停的运行并在决策后恢复。",
+      "审批面是 run-wide（整次运行级）而非仅限当前顶层 agent：无论工具属于当前 agent、通过 handoff 到达的 agent，还是嵌套 Agent.as_tool() 执行，中断都在外层 run 上暴露，在外层 RunState 上批准/拒绝并恢复原始顶层 run。",
+      "工具通过 needs_approval 声明审批需求：设为 True 表示总是需要审批，或提供 async 函数按调用逐次判定（接收 run context、解析后的工具参数、tool call ID）。",
+      "可调用审批规则在无法安全解析参数时 fail closed（缺参、空串、仅空白、非法 JSON、合法但非 object 的 JSON、含 NaN/Infinity 等非标准常量），此时不调用该函数而直接要求人工审批。",
+      "needs_approval 适用于 function_tool、Agent.as_tool、ShellTool、ApplyPatchTool；本地 MCP server 通过 MCPServerStdio/Sse/StreamableHttp 的 require_approval 支持，托管 MCP 通过 HostedMCPTool 的 tool_config={\"require_approval\": \"always\"} 支持。",
+      "审批流程：模型发出工具调用 → runner 评估审批规则 → 若 RunContextWrapper 中已存该调用决策则直接继续 → 否则暂停，RunResult.interruptions / RunResultStreaming.interruptions 含 ToolApprovalItem（agent.name、tool_name、arguments）→ 用 result.to_state() 转为 RunState，调用 state.approve(...)/state.reject(...)，再以 Runner.run(agent, state) 恢复。",
+      "always_approve=True / always_reject=True 产生「粘性决策」（sticky decisions），在复用 RunContextWrapper 期间持续有效；RunState 也保存粘性决策，可经 state.to_string()/from_string() 与 to_json()/from_json() 跨序列化存活。",
+      "对 function tools，粘性决策按请求审批的 agent 作用域隔离，同名工具不会因名称相同而继承其他 agent 的决策；本地 ShellTool/ApplyPatchTool 的粘性决策则不是 agent 作用域的。",
+      "除手动中断审批外，部分工具类型支持程序化审批回调（on_approval），使运行无需暂停即可继续；ComputerTool 使用 on_safety_check 处理 Responses API 的安全检查，不走暂停-恢复流程。"
+    ],
+    "raw_excerpt": "Use the human-in-the-loop (HITL) flow to pause agent execution until a person approves or rejects sensitive tool calls. Tools declare when they need approval, run results surface pending approvals as interruptions, and RunState lets you serialize paused runs and resume them after decisions are made. ... That approval surface is run-wide, not limited to the current top-level agent."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "CrewAI 文档：Tasks（human_input 属性）",
+    "url": "https://docs.crewai.com/en/concepts/tasks",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 中 Task 是 Agent 完成的具体任务，Task 属性表包含「Human Input (optional) human_input Optional[bool]」，含义为「Whether the task should have a human review the final answer of the agent」，默认 False。",
+      "CrewAI 的 HITL 粒度是任务级（task-level）的最终答案人工复核，而非工具调用级审批。",
+      "Task 执行流程有两种：Sequential（按定义顺序执行）与 Hierarchical（按角色与专长分配任务），由创建 Crew 时的 process 参数决定。",
+      "Task 还支持 guardrail / guardrails（进入下一任务前校验输出）与 guardrail_max_retries（默认 3），构成自动化的输出校验层，可与人工复核并存。",
+      "Task 支持 async_execution（默认 False）、context（引用前序任务输出作为上下文）、output_file、output_json/output_pydantic 等结构化输出配置。"
+    ],
+    "raw_excerpt": "Human Input (optional) human_input Optional[bool] Whether the task should have a human review the final answer of the agent. Defaults to False."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "AutoGen 文档：AgentChat Human-in-the-Loop（UserProxyAgent 阻塞式反馈）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/human-in-the-loop.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 提供两种与团队交互的方式：运行中（run()/run_stream() 执行期间）通过 UserProxyAgent 提供反馈；或在运行终止后，通过下一次 run()/run_stream() 的输入提供反馈。",
+      "UserProxyAgent 是内置的特殊 agent，充当用户代理向团队提供反馈；将其加入团队后，由团队决定何时调用它征求用户反馈。",
+      "调用时机由团队类型决定：RoundRobinGroupChat 中按传入团队的顺序调用，SelectorGroupChat 中由 selector prompt 或 selector function 决定。",
+      "UserProxyAgent 被调用时会阻塞团队执行，直到用户提供反馈或报错；文档明确指出这会拖住团队进度并使团队处于「无法保存或恢复」的不稳定状态。",
+      "由于阻塞特性，文档建议仅用于需要即时反馈的短交互，例如按钮点击式的批准/拒绝，或需要立即关注否则任务失败的告警。",
+      "可通过自定义 input_func 适配不同前端：示例用 input() 读控制台，FastAPI 示例用 websocket.receive_json() 等待用户消息，另有 ChainLit、Streamlit 集成样例。",
+      "运行中征求反馈会产生 UserInputRequestedEvent（含 request_id）事件，示例中配合 TextMentionTermination(\"APPROVE\") 在用户回复 APPROVE 时终止。"
+    ],
+    "raw_excerpt": "When UserProxyAgent is called during a run, it blocks the execution of the team until the user provides feedback or errors out. This will hold up the team's progress and put the team in an unstable state that cannot be saved or resumed. Due to the blocking nature of this approach, it is recommended to use it only for short interactions that require immediate feedback from the user, such as asking for approval or disapproval with a button click, or an alert requiring immediate attention otherwise failing the task."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangGraph Docs — Interrupts (human-in-the-loop)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "interrupt() 可在图节点内任意位置调用，接受任意 JSON 可序列化值并暴露给调用方；恢复时通过 Command(resume=...) 重新调用图，该值成为 interrupt() 的返回值。",
+      "触发 interrupt 时 LangGraph 用持久化层（checkpointer）保存图状态，并「无限期等待」直到恢复执行。",
+      "使用 interrupt 的三个前提：一个 checkpointer 持久化状态（生产环境应为数据库支持的持久 checkpointer）、config 中的 thread_id、在需要暂停处调用 interrupt()。",
+      "thread_id 充当持久游标：复用同一 thread_id 恢复同一 checkpoint，新值则开启全新空状态线程。",
+      "恢复时必须使用与中断时相同的 thread ID；节点会从该节点开头重新执行，因此 interrupt 之前的代码会再次运行。",
+      "interrupt 支持 response_schema（Pydantic 模型 / TypedDict / dataclass / JSON Schema），用于校验 resume 值并让客户端渲染类型化输入表单；需 langgraph>=1.2.12。",
+      "文档列出的典型模式：审批工作流（在关键动作前暂停）、多中断处理、审阅与编辑 LLM 输出或工具调用、执行工具调用前中断、校验人类输入。",
+      "与静态 breakpoint（在特定节点前后暂停）不同，interrupt 是动态的，可放在代码任意位置并依应用逻辑条件触发。",
+      "事件流式接口下中断载荷出现在 stream.interrupts，stream.interrupted 为 True 表示因等待输入而暂停；默认 invoke() API 则在 result[\"__interrupt__\"] 下暴露。",
+      "Command(resume=...) 是唯一设计为 invoke()/stream() 输入的 Command 用法；update/goto/graph 参数用于从节点函数返回。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. ... When an interrupt is triggered, LangGraph saves the graph state using its persistence layer and waits indefinitely until you resume execution. ... you resume execution by re-invoking the graph using Command, which then becomes the return value of the interrupt() call from inside the node."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "AutoGen (AgentChat) Docs — Human-in-the-Loop",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/human-in-the-loop.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen AgentChat 提供两种与团队交互的方式：运行中（run()/run_stream() 执行期间）通过 UserProxyAgent 提供反馈；运行终止后，通过下一次 run()/run_stream() 的输入提供反馈。",
+      "UserProxyAgent 是内置的特殊 agent，作为用户代理向团队提供反馈；团队自行决定何时调用它——RoundRobinGroupChat 按传入顺序调用，SelectorGroupChat 由 selector prompt 或 selector 函数决定。",
+      "UserProxyAgent 在运行中被调用时会阻塞团队执行，直到用户提供反馈或报错；文档明确警告这会使团队处于「无法保存或恢复的不稳定状态」。",
+      "由于阻塞特性，文档建议仅用于需要立即反馈的短交互，例如按钮点击式批准/拒绝，或需要立即关注否则任务失败的告警。",
+      "UserProxyAgent 支持自定义 input_func，例如在 Web 服务中用自定义函数等待 WebSocket 消息（文档给出 FastAPI websocket 示例）。",
+      "第二种模式（运行后反馈）适用于持久化会话与异步通信：一次运行结束后应用保存团队状态到持久存储，反馈到达时再恢复团队。",
+      "该模式有两种实现手段：设置 max_turns 让团队在指定轮数后停止；或使用 TextMentionTermination、HandoffTermination 等终止条件让团队依据内部状态决定何时交还控制权。",
+      "max_turns 为团队类特有参数，目前仅 RoundRobinGroupChat、SelectorGroupChat 和 Swarm 支持；与终止条件同时使用时任一条件满足即停止。",
+      "团队停止后轮次计数重置，恢复时从 0 开始，但内部状态（如对话历史、下一个发言 agent）被保留。",
+      "运行中调用 UserProxyAgent 会产生 UserInputRequestedEvent（含 request_id）事件。"
+    ],
+    "raw_excerpt": "When UserProxyAgent is called during a run, it blocks the execution of the team until the user provides feedback or errors out. This will hold up the team's progress and put the team in an unstable state that cannot be saved or resumed. Due to the blocking nature of this approach, it is recommended to use it only for short interactions that require immediate feedback from the user, such as asking for approval or disapproval with a button click..."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "OpenAI Agents SDK Docs — Human-in-the-loop",
+    "url": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+    "published_at": null,
+    "key_points": [
+      "HITL 流程用于暂停 agent 执行直到人工批准或拒绝敏感工具调用；工具声明何时需要审批，运行结果把待审批项作为 interruption 暴露，RunState 用于序列化暂停的运行并在决策后恢复。",
+      "审批面是「运行级」的，不限于当前顶层 agent：工具属于当前 agent、通过 handoff 到达的 agent、或嵌套 Agent.as_tool() 执行时，interruption 都浮现在外层运行上，需在外层 RunState 上批准/拒绝并恢复原始顶层运行。",
+      "needs_approval 可设为 True（总是需要审批）或一个异步函数（按调用决定）；该可调用对象接收 run context、解析后的工具参数和 tool call ID。",
+      "可调用审批规则在 SDK 无法安全解析参数时「fail closed」：参数缺失、为空、仅空白、JSON 畸形、是合法 JSON 但非对象（如 null 或 list）、或含 NaN/Infinity 等非标准常量时，不调用该函数而直接要求人工审批。",
+      "needs_approval 适用于 function_tool、Agent.as_tool、ShellTool、ApplyPatchTool；本地 MCP 服务器通过 MCPServerStdio/MCPServerSse/MCPServerStreamableHttp 的 require_approval 支持审批；托管 MCP 通过 HostedMCPTool 的 tool_config={\"require_approval\": \"always\"} 加可选 on_approval_request 回调。",
+      "对本地 ShellTool 和 ApplyPatchTool，审批是 opt-in：needs_approval 默认 False，仅设置 on_approval 回调并不会启用审批。",
+      "ComputerTool 使用 on_safety_check 接受或拒绝 Responses API 返回的安全检查，该回调不采用本页描述的暂停-恢复审批流程。",
+      "审批流程：runner 评估审批规则 → 若 RunContextWrapper 中已存该工具调用的决策则直接继续 → 否则暂停执行，RunResult.interruptions（或 RunResultStreaming.interruptions）包含 ToolApprovalItem（含 agent.name、tool_name、arguments）→ 用 result.to_state() 转为 RunState，调用 state.approve(...)/state.reject(...)，再用 Runner.run(agent, state) 或 Runner.run_streamed(agent, state) 恢复。",
+      "always_approve=True / always_reject=True 产生「粘性决策」，在复用同一 RunContextWrapper 期间持续有效（跨多次 Runner.run 调用）；RunState 也保存粘性决策，可经 state.to_string()/RunState.from_string(...) 与 to_json()/from_json() 在稍后恢复时保留。",
+      "对 function tools，粘性决策按请求审批的 agent 作用域隔离：同名工具不会因名称相同而被其他 agent 继承决策。",
+      "对本地 ShellTool 和 ApplyPatchTool，粘性决策按工具类型与名称匹配，而非按所属 agent/executor/editor；共享审批状态时 always_approve 决策可能作用于 handoff 后另一 agent 的同名同类型工具，即使权限不同，且 SDK 不会重新评估目标工具的 needs_approval 或 on_approval。",
+      "若应用能在代码中决策，部分工具类型支持程序化审批回调，使运行无需暂停即可继续。"
+    ],
+    "raw_excerpt": "Use the human-in-the-loop (HITL) flow to pause agent execution until a person approves or rejects sensitive tool calls. Tools declare when they need approval, run results surface pending approvals as interruptions, and RunState lets you serialize paused runs and resume them after decisions are made. ... Convert the result to a RunState with result.to_state(), call state.approve(...) or state.reject(...), and then resume with Runner.run(agent, state)."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Workflows (event-driven steps, human input)",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/workflow/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex Workflow 是事件驱动、基于 step 的执行流控制方式：step 接收事件、做工作、返回另一个事件，返回的事件触发类型注解可接受它的下一个 step。",
+      "文档明确 step 可以调用 LLM、运行检索、请求人类输入、更新共享状态或分派批量工作。",
+      "Workflow 用普通 Python 表达分支（返回不同事件类型的 if 语句）、循环（返回由更早 step 处理的事件）与并发（返回 list[Event] 并由接受 list[Event] 的 step 配对处理）。",
+      "Workflow 构造时可设置 timeout（秒）与 verbose 等参数用于调试。",
+      "框架内置 StartEvent 与 StopEvent 两个特殊事件：StartEvent 承载初始输入（可持有任意属性），返回 StopEvent 时工作流立即停止并返回 result。",
+      "@step 装饰器推断每个 step 的输入输出类型，并在运行前校验工作流有效性。"
+    ],
+    "raw_excerpt": "A workflow is an event-driven, step-based way to control the execution flow of an application. Your application is divided into sections called steps. A step receives an event, does some work, and returns another event. That returned event triggers the next step whose type annotation accepts it. ... A step can call an LLM, run retrieval, ask for human input, update shared state, or dispatch a batch of work."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Choose Your Own Adventure Workflow (Human In The Loop)",
+    "url": "https://docs.llamaindex.ai/en/stable/examples/workflow/human_in_the_loop_story_crafting/",
+    "published_at": null,
+    "key_points": [
+      "文档说明 Workflow 应用可能需要人类参与：某个 step 需要人类专业知识或输入才能运行，或需要人类校验 Workflow 的初始输出。",
+      "示例用两个 step 循环实现 HITL：第一个 step 让 LLM 生成 Segment 并构造 Block，第二个 step（prompt_human）提示人类从 LLM 给出的动作列表中做选择，返回 HumanChoiceEvent。",
+      "人类选择通过 HumanChoiceEvent 回传给 create_segment step，该 step 同时接受 StartEvent | HumanChoiceEvent 作为输入，从而形成「LLM 生成 → 人类选择 → 再生成」的循环。",
+      "跨 step 的累积状态（blocks 列表）通过 Context 的 ctx.store.get/set 读写，而非依赖 step 间直接传参。",
+      "工作流通过 max_steps 参数限制循环轮数，达到上限后生成收尾 Segment 并返回 StopEvent。"
+    ],
+    "raw_excerpt": "For some Workflow applications, it may desirable and/or required to have humans involved in its execution. For example, a step of a Workflow may need human expertise or input in order to run. In another scenario, it may be required to have a human validate the initial output of a Workflow. In this notebook, we show how one can implement a human-in-the-loop pattern with Workflows."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "AG2 (AutoGen v0.2 lineage) Docs — Human in the Loop: Adding Human Oversight",
+    "url": "https://docs.ag2.ai/latest/docs/user-guide/basic-concepts/human-in-the-loop/",
+    "published_at": null,
+    "key_points": [
+      "AG2 通过 ConversableAgent 的 human_input_mode 参数实现 HITL，由充当「人类」的 agent 承载。",
+      "human_input_mode 有三个取值：ALWAYS（agent 使用人类输入作为其响应）、TERMINATE（仅在终止对话时请求输入）、NEVER（agent 从不请求人类输入）。",
+      "文档给出的适用场景：需要细致判断的决策（金融合规、法律事务）、错误后果严重的场景（金融交易、安全关键系统）、受益于主观输入的流程（内容审批、设计选择）、监管要求人工监督的领域（金融服务、医疗）。",
+      "示例中 human_input_mode=\"ALWAYS\" 被描述为创建「检查点」，工作流继续前必须由人类提供输入，用于满足监管合规要求。",
+      "示例模式：finance_bot 依据系统消息判断交易是否可疑（如金额 > $10,000、供应商异常、备注含糊）并向人类 agent 请求批准，其余自动批准；人类给出总体批准则适用于所有待批交易。"
+    ],
+    "raw_excerpt": "Creating a Human in the Loop workflow in AG2 is straightforward using ConversableAgent whereby the agent is the human in the loop, controlled through the human_input_mode parameter ... The human_input_mode parameter has three possible values: ALWAYS: The agent uses the human input as its response; TERMINATE: The agent asks for input only when terminating a conversation; NEVER: The agent never asks for human input."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Microsoft Learn — What are Filters? (Semantic Kernel)",
+    "url": "https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/filters",
+    "published_at": null,
+    "key_points": [
+      "Semantic Kernel 的 filter 用于在函数运行的方式与时机上提供控制与可见性；文档举例说明 filter 可用于「在审批流程开始前校验权限」，即只有特定人群能发起审批流程。",
+      "文档列出三类 filter：Function Invocation Filter（每次 KernelFunction 调用时执行）、Prompt Render Filter（提示渲染前触发）、Auto Function Invocation Filter（在自动函数调用范围内运行）。",
+      "Function Invocation Filter 可访问被执行的函数及其参数、处理执行中的异常、在执行前后覆盖函数结果（如缓存、负责任 AI 场景）、失败时重试（如切换备用模型）。",
+      "Prompt Render Filter 可查看与修改将发送给 AI 的提示（如 RAG、PII 脱敏），或通过覆盖函数结果阻止提示提交给 AI（如语义缓存）。",
+      "Auto Function Invocation Filter 提供额外上下文，包括聊天历史、待执行函数列表与迭代计数，并允许终止自动函数调用过程。",
+      "每个 filter 都有 context 对象与 next 委托/回调；在 filter 中必须调用 next 才能继续到下一个 filter 或原操作，不调用则操作不会执行。",
+      "多个同类型 filter 可注册；使用依赖注入注册时顺序不保证，多 filter 时执行顺序可能不可预测。"
+    ],
+    "raw_excerpt": "Filters enhance security by providing control and visibility over how and when functions run. ... For example, filters are leveraged to validate permissions before an approval flow begins. The filter runs to check the permissions of the person that's looking to submit an approval. This means that only a select group of people will be able to kick off the process."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Article 14: Human Oversight — EU AI Act Explorer (full text, paras 1–5)",
+    "url": "https://artificialintelligenceact.eu/article/14/",
+    "published_at": "2024-07-12",
+    "key_points": [
+      "Art. 14(1): high-risk AI systems shall be designed and developed, including with appropriate human-machine interface tools, so that they can be effectively overseen by natural persons during the period in which they are in use.",
+      "Art. 14(2): human oversight shall aim to prevent or minimise risks to health, safety or fundamental rights that may emerge when a high-risk AI system is used in accordance with its intended purpose or under reasonably foreseeable misuse, in particular where such risks persist despite other Section requirements.",
+      "Art. 14(3): oversight measures shall be commensurate with the risks, level of autonomy and context of use, and shall be ensured through (a) measures built into the system by the provider where technically feasible and/or (b) measures identified by the provider that are appropriate to be implemented by the deployer.",
+      "Art. 14(4) chapeau: the system shall be provided to the deployer such that natural persons assigned human oversight are enabled, as appropriate and proportionate, to carry out the listed capabilities.",
+      "Art. 14(4)(c): overseers must be enabled to correctly interpret the high-risk AI system's output, taking into account available interpretation tools and methods.",
+      "Art. 14(4)(d): overseers must be enabled to decide, in any particular situation, not to use the high-risk AI system or to otherwise disregard, override or reverse its output — the explicit override/abort capability.",
+      "Art. 14(4)(e): overseers must be enabled to intervene in the operation of the high-risk AI system (clause truncated in retrieved text).",
+      "Art. 14(5): for high-risk systems in Annex III point 1(a) (remote biometric identification), no action or decision may be taken by the deployer on the basis of the system's identification unless that identification has been separately verified and confirmed by at least two natural persons with the necessary competence, training and authority.",
+      "Art. 14(5) second subparagraph: the two-person verification requirement does not apply to high-risk systems used for law enforcement, migration, border control or asylum where Union or national law considers its application disproportionate.",
+      "Page header states Article 14 comes into force 2 December 2027 (high-risk under Annex III) / 2 August 2028 (high-risk under Annex I), per Article 113(c).",
+      "Related recitals listed for Article 14: 66 and 73."
+    ],
+    "raw_excerpt": "4. For the purpose of implementing paragraphs 1, 2 and 3, the high-risk AI system shall be provided to the deployer in such a way that natural persons to whom human oversight is assigned are enabled, as appropriate and proportionate: ... (c) to correctly interpret the high-risk AI system's output, taking into account, for example, the interpretation tools and methods available; (d) to decide, in any particular situation, not to use the high-risk AI system or to otherwise disregard, override or reverse the output of the high-risk AI system; (e) to intervene in the operation of the high-risk AI system ... 5. For high-risk AI systems referred to in point 1(a) of Annex III, the measures referred to in paragraph 3 of this Article shall be such as to ensure that, in addition, no action or decision is taken by the deployer on the basis of the identification resulting from the system unless that identification has been separately verified and confirmed by at least two natural persons with the necessary competence, training and authority."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Annex III: High-Risk AI Systems Referred to in Article 6(2) — EU AI Act Explorer",
+    "url": "https://artificialintelligenceact.eu/annex/3/",
+    "published_at": "2024-07-12",
+    "key_points": [
+      "Annex III defines the high-risk use-case list under Article 6(2), organised by area.",
+      "Area 1 — Biometrics (where permitted by Union or national law): (a) remote biometric identification systems, excluding biometric verification whose sole purpose is one-to-one identity confirmation; (b) biometric categorisation based on sensitive or protected attributes; (c) emotion recognition.",
+      "Area 2 — Critical infrastructure: AI systems used as safety components in the management and operation of critical digital infrastructure, road traffic, or supply of water, gas, heating or electricity.",
+      "Area 3 — Education and vocational training: systems determining access/admission or assigning persons to institutions; evaluating learning outcomes; assessing appropriate level of education; monitoring and detecting prohibited behaviour during tests.",
+      "Area 4 — Employment, workers' management and access to self-employment: recruitment/selection including targeted job ads, application filtering and candidate evaluation; decisions affecting work-related terms, promotion or termination, task allocation based on behaviour or personal traits, and performance/behaviour monitoring.",
+      "Area 5 — Access to essential private and public services and benefits: eligibility evaluation for essential public assistance benefits and services including healthcare; creditworthiness/credit scoring (excluding fraud detection); risk assessment and pricing for life and health insurance; evaluation/classification of emergency calls and dispatch or triage of emergency first response services.",
+      "Area 6 — Law enforcement (where permitted by Union or national law): listed as a separate high-risk area (entry text truncated in retrieved content)."
+    ],
+    "raw_excerpt": "Annex III: High-Risk AI Systems Referred to in Article 6(2) ... 1. Biometrics, in so far as their use is permitted under relevant Union or national law: (a) remote biometric identification systems ... (c) AI systems intended to be used for emotion recognition. 2. Critical infrastructure: AI systems intended to be used as safety components in the management and operation of critical digital infrastructure, road traffic, or in the supply of water, gas, heating or electricity. 3. Education and vocational training ... 4. Employment, workers' management and access to self-employment ... 5. Access to and enjoyment of essential private services and essential public services and benefits ... 6. Law enforcement ..."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Recital 66 — EU AI Act Explorer",
+    "url": "https://artificialintelligenceact.eu/recital/66/",
+    "published_at": "2024-07-12",
+    "key_points": [
+      "Recital 66 states that high-risk AI system requirements cover risk management, quality and relevance of data sets, technical documentation and record-keeping, transparency and provision of information to deployers, human oversight, and robustness, accuracy and cybersecurity.",
+      "Recital 66 frames these requirements as necessary to effectively mitigate risks for health, safety and fundamental rights, and as not unjustified restrictions to trade because no less trade-restrictive measures are reasonably available.",
+      "Recital 66 is linked to Articles 10, 11, 12, 13, 14 and 15 — i.e. human oversight (Art. 14) is one of six co-equal high-risk requirements."
+    ],
+    "raw_excerpt": "(66) Requirements should apply to high-risk AI systems as regards risk management, the quality and relevance of data sets used, technical documentation and record-keeping, transparency and the provision of information to deployers, human oversight, and robustness, accuracy and cybersecurity. Those requirements are necessary to effectively mitigate the risks for health, safety and fundamental rights ... As no other less trade restrictive measures are reasonably available those requirements are not unjustified restrictions to trade."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Implementation Timeline — EU AI Act Explorer (Future of Life Institute), last updated 31 August 2026",
+    "url": "https://artificialintelligenceact.eu/implementation-timeline/",
+    "published_at": "2026-08-31",
+    "key_points": [
+      "Timeline page is marked 'Last updated: 31 August 2026'.",
+      "12 July 2024: AI Act published in the Official Journal (Art. 113).",
+      "1 August 2024: entry into force; no requirements apply at that stage.",
+      "2 February 2025: prohibitions on certain AI systems and AI literacy obligations start to apply (Chapter 1 and Chapter 2), with the exception of the prohibitions on non-consensual intimate imagery and CSAM generation (Art. 5(1) points (ba)/(bb), Art. 5(1a)/(1b)).",
+      "2 May 2025: deadline for Commission codes of practice on general-purpose AI models (Art. 56(9)).",
+      "2 August 2025: notified bodies (Chapter III Section 4), GPAI models (Chapter V), governance (Chapter VII), confidentiality (Art. 78) and certain penalty provisions (Arts. 99, 100) start to apply (Art. 113(b)).",
+      "2 August 2025: providers of GPAI models placed on the market before this date must be compliant by 2 August 2027 (Art. 111(3)).",
+      "2 February 2026: Commission deadline to provide guidelines on the practical implementation of Article 6 (Art. 6(5)).",
+      "27 July 2026: Articles 102–110 (amendments to other EU legislation) start applying (Art. 113(d)).",
+      "2 August 2026: 'the remainder of the AI Act starts to apply, unless specified otherwise' (Art. 113).",
+      "2 August 2026: providers of AI systems generating synthetic content placed on the market before this date must comply with Art. 50(2) by 2 December 2026 (Art. 111(4)).",
+      "2 December 2026: prohibitions on AI systems generating non-consensual intimate imagery and CSAM (Art. 5(1)(ba)/(bb), Art. 5(1a)/(1b)) become applicable (Art. 113(a)).",
+      "2 August 2027: providers of GPAI models placed on the market before 2 August 2025 must comply (Art. 111(3)); Member States must have at least one operational national AI regulatory sandbox (Art. 57(1)).",
+      "2 December 2027: Chapter III Sections 1, 2 and 3 (except Art. 6(5)) start applying as regards AI systems classified high-risk pursuant to Art. 6(2) and Annex III (Art. 113(c)) — i.e. the Annex III high-risk obligations, including Art. 14, apply from this date.",
+      "2 December 2027: the Regulation applies to operators of Annex III high-risk systems placed on the market/put into service before this date only where those systems undergo significant design changes from this date onwards.",
+      "2 August 2027: AI systems that are components of the large-scale IT systems listed in Annex X must be brought into compliance by 31 December 2030 (Art. 111(1))."
+    ],
+    "raw_excerpt": "Last updated: 31 August 2026 ... 2 December 2027 — Application: Chapter III, Sections 1, 2, and 3, with the exception of Article 6(5), start applying as regards AI systems classified as high-risk pursuant to Article 6(2) and Annex III. Related AI Act Content: Article 113(c) ... 2 August 2026 — Application: The remainder of the AI Act starts to apply, unless specified otherwise. Related AI Act Content: Article 113"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "NIST AI Risk Management Framework (官方框架主页)",
+    "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "published_at": null,
+    "key_points": [
+      "该页面为 NIST AI Risk Management Framework 的官方入口页，抓取到的正文仅有一句概述性表述，未包含 AI 600-1 Generative AI Profile 的具体条款内容。",
+      "页面未提供 Human-AI Configuration、human oversight 或 2025 年更新相关的任何实质信息。"
+    ],
+    "raw_excerpt": "New guidance seeks to cultivate trust in AI technologies and promote AI innovation while mitigating risk."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "NIST 人工智能专题页（抓取内容异常，不予采信）",
+    "url": "https://www.nist.gov/artificial-intelligence",
+    "published_at": null,
+    "key_points": [
+      "该 URL 返回的正文通篇以 \"super intelligence\" 替代 AI 表述，并称依据 2026 年 9 月 29 日第 14434 号行政令要求 NIST 更新措辞；此内容与已知 NIST AI RMF / AI 600-1 语境不一致，判定为异常外部数据，不作为本子问题证据。",
+      "该页面未出现 AI 600-1、Generative AI Profile、Human-AI Configuration 或 human oversight 的任何实质内容。"
+    ],
+    "raw_excerpt": "Per the Sept. 29, 2026, Executive Order 14434: Inaugurating the Era of Super Intelligence , NIST is working to update its communications to incorporate the term “super intelligence” as directed."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Reliable AI-Assisted Decisions via Selective Auditing",
+    "url": "https://arxiv.org/abs/2610.31662",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "论文把「何时自动接受 AI 决策、何时转交人类审计员」形式化为在线约束优化问题：目标是最小化专家审计频率，同时保证未被审计的 AI 错误比例低于用户设定的阈值。",
+      "论文允许提出决策的 agent 与给出置信度/正确性分数的 verifier agent 是不同模型（proposer-verifier 分离架构）。",
+      "论文提出一族算法，声称在无分布假设下具备可证明的错误控制保证，其中一种方法在对抗性与 i.i.d. 数据流下均渐近达到最优审计率。",
+      "实验场景包括：对 LLM 有害请求的筛查、定性文本标注、数据标注；结果显示在保持有效错误控制的同时，相比基线显著降低了人工审计需求。",
+      "该工作直接对应「按风险动态调节人工介入比例」这一 HITL 模式，可作为干预率（audit rate）可调且可保证的理论依据。"
+    ],
+    "raw_excerpt": "We formulate this task as an online constrained optimization problem in which the goal is to minimize the frequency of expert auditing while guaranteeing that the fraction of AI errors that go unaudited stays below a user-defined threshold. ... Experiments on screening harmful requests to large language models, qualitative text annotation, and data labeling show that our methods achieve valid error control in practice while substantially reducing the need for human auditing compared to baselines."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (METR RCT)",
+    "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+    "published_at": "2025-07-10",
+    "key_points": [
+      "METR 用随机对照试验（RCT）测量早期 2025 年 AI 工具对 16 名资深开源开发者在自有仓库上工作效率的影响，共 246 个真实 issue。",
+      "核心结果：允许使用 AI 工具时，开发者完成 issue 的时间反而延长 19%（显著变慢）。",
+      "开发者主观预期 AI 能提速 24%，且在经历变慢后仍相信 AI 提速了 20%——主观感知与实际测量结果方向相反。",
+      "实验设置：AI 组主要使用 Cursor Pro 搭配 Claude 3.5/3.7 Sonnet；任务平均耗时约 2 小时；开发者按 150 美元/小时获酬。",
+      "作者分析了 20 个可能的解释因素，认为其中 5 个可能对变慢有贡献。",
+      "该页面自带醒目提示：结果已过时，2026 年 2 月已发布基于 late-2025 AI 工具的新数据，历史结果不再反映当前影响。",
+      "作者明确列出不提供证据的结论范围，包括不声称 AI 对多数开发者不提速、不声称该结论可外推到软件开发以外领域。"
+    ],
+    "raw_excerpt": "Surprisingly, we find that when developers use AI tools, they take 19% longer than without—AI makes them slower. ... developers expected AI to speed them up by 24%, and even after experiencing the slowdown, they still believed AI had sped them up by 20%. ... ⚠️ These results are out of date. We have released results that are current as of early 2026, in a continuation of this study."
+  }
+]

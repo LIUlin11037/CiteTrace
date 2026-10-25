@@ -1,0 +1,41 @@
+{
+  "n_questions": 2,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9545454545454546,
+  "mean_coverage": 0.75,
+  "per_subdomain": {
+    "llm": {
+      "n": 2.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9545454545454546,
+      "coverage": 0.75
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-long-context",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 45,
+      "citations_missing": [],
+      "alignment_rate": 0.9090909090909091,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 29,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for FY2022 — Item 3. Legal Proceedings (p.18)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p20 (Item 3, p.18)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing's entire Item 3 Legal Proceedings disclosure is a single cross-reference sentence pointing to Note 21 of the Consolidated Financial Statements.",
+      "Item 3 itself lists no specific cases, no jurisdictions and no claimed amounts.",
+      "The 10-K index confirms Item 3 Legal Proceedings sits on page 18, between Item 2 Properties (p.18) and Item 4 Mine Safety Disclosures (p.18)."
+    ],
+    "raw_excerpt": "Item 3. Legal Proceedings\nCurrently, we are involved in a number of legal proceedings. For a discussion of contingencies related to legal proceedings, see Note 21 to our Consolidated Financial Statements, which is hereby incorporated by reference.\nItem 4. Mine Safety Disclosures\nNot applicable"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21 – Legal Proceedings, opening scope and materiality standard (p.108)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p112 (Note 21, p.108)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Note 21 covers legal proceedings, claims and investigations related to products, contracts, employment and other matters.",
+      "Boeing is also subject to various U.S. government inquiries and investigations from which civil, criminal or administrative proceedings could result or have resulted in the past.",
+      "Such government proceedings could involve claims for fines, penalties, compensatory and treble damages, restitution and/or forfeitures.",
+      "Under government regulations a company or its divisions can be suspended or debarred from government contracts, or lose export privileges, based on investigation results.",
+      "Boeing states that, except as described in the note, it believes outcomes will not have a material effect on financial position, results of operations or cash flows.",
+      "Where a loss in excess of recorded amounts is reasonably possible, Boeing discloses either the amount/range or the reasons no estimate can be made."
+    ],
+    "raw_excerpt": "Note 21 – Legal Proceedings\nVarious legal proceedings, claims and investigations related to products, contracts, employment and other matters are pending against us. In addition, we are subject to various U.S. government inquiries and investigations from which civil, criminal or administrative proceedings could result or have resulted in the past. Such proceedings involve or could involve claims by the government for fines, penalties, compensatory and treble damages, restitution and/or forfeitures. Under government regulations, a company, or one or more of its operating divisions or subdivisions, can also be suspended or debarred from government contracts, or lose its export privileges, based on the results of investigations. Except as described below, we believe, based upon current information, that the outcome of any such legal proceeding, claim, or government dispute and investigation will not have a material effect on our financial position, results of operations or cash flows."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21: 737 MAX accident litigation (Lion Air Flight 610; Ethiopian Airlines Flight 302)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21, p.108–109)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Multiple legal actions have been filed against Boeing arising from the October 29, 2018 Lion Air Flight 610 accident and the March 10, 2019 Ethiopian Airlines Flight 302 accident.",
+      "Boeing states it cannot reasonably estimate a range of loss, if any, not covered by available insurance that it may incur from remaining pending lawsuits or other matters related to the accidents and the 737 MAX.",
+      "Item 1A Risk Factors cross-references Note 21 for these two accidents and notes that insurance coverage may be inadequate."
+    ],
+    "raw_excerpt": "Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302. … We cannot reasonably estimate a range of loss, if any, not covered by available insurance that we may incur as a result of any remaining pending lawsuits or other matters related to the accidents and the 737 MAX."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21 and MD&A: U.S. DOJ Deferred Prosecution Agreement (737 MAX / FAA evaluation)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21); p43 (MD&A Liquidity and Cash Flows)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "During 2021 Boeing entered into a Deferred Prosecution Agreement with the U.S. Department of Justice.",
+      "The DPA resolved DOJ's previously disclosed investigation into Boeing regarding the evaluation of the 737 MAX by the Federal Aviation Administration (FAA).",
+      "Boeing paid $0.7 billion in the first quarter of 2021 consistent with the terms of the Deferred Prosecution Agreement."
+    ],
+    "raw_excerpt": "During 2021, we entered into (i) a Deferred Prosecution Agreement with the U.S. Department of Justice that resolved the Department of Justice's previously disclosed investigation into us regarding the evaluation of the 737 MAX by the Federal Aviation Administration (FAA) … In the first quarter of 2021, we paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21: SEC settlement of 737 MAX-related investigation ($200M civil penalty)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21, p.109)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "In September 2022 Boeing settled a previously disclosed Securities and Exchange Commission investigation related to the 737 MAX accidents.",
+      "Boeing consented to a civil penalty in that settlement.",
+      "The SEC settlement resulted in an earnings charge of $200 (million) that was paid in October 2022."
+    ],
+    "raw_excerpt": "In September 2022, we settled a previously disclosed investigation by the Securities and Exchange Commission related to the 737 MAX accidents and consented to a civil penalty, which resulted in an earnings charge of $200 that was paid in October 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21: shareholder derivative lawsuit settlement ($219M received by the Company)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21, p.109)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "During 2021 Boeing entered into a proposed settlement with plaintiffs in a shareholder derivative lawsuit.",
+      "That derivative settlement resulted in the Company receiving $219 (million) in the second quarter of 2022 — a cash inflow to Boeing, not a payment by Boeing."
+    ],
+    "raw_excerpt": "(ii) a proposed settlement with plaintiffs in a shareholder derivative lawsuit that resulted in the Company receiving $219 in the second quarter of 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 21: Embraer joint-venture termination dispute in arbitration",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21, p.109)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "In 2019 Boeing entered agreements with Embraer S.A. to establish joint ventures including Embraer's commercial aircraft and services operations, with Boeing expected to acquire an 80 percent ownership stake for $4,200 (million).",
+      "In 2020 Boeing exercised its contractual right to terminate the agreements based on Embraer's failure to meet certain required closing conditions.",
+      "Embraer disputes Boeing's right to terminate, and the dispute is currently in arbitration.",
+      "Boeing cannot reasonably estimate a range of loss, if any, from the arbitration, which it expected to be completed in late 2023 or early 2024."
+    ],
+    "raw_excerpt": "During 2019, we entered into agreements with Embraer S.A. (Embraer) to establish joint ventures that included the commercial aircraft and services operations of Embraer, of which we were expected to acquire an 80 percent ownership stake for $4,200 … In 2020, we exercised our contractual right to terminate these agreements based on Embraer's failure to meet certain required closing conditions. Embraer has disputed our right to terminate the agreements, and the dispute is currently in arbitration. We cannot reasonably estimate a range of loss, if any, that may result from the arbitration, which we currently expect to be completed in late 2023 or early 2024."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 13: Environmental remediation accrual ($752M at Dec 31, 2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87 (Note 13, p.83); p47 (MD&A)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing recorded an environmental remediation liability of $752 million at December 31, 2022, versus $605 million at December 31, 2021.",
+      "The 2022 change reflects $43 million of payments made net of recoveries and $190 million of changes in estimates.",
+      "Environmental remediation is disclosed as an accrued liability in Note 13 and in MD&A, not as a named Item 3 legal proceeding."
+    ],
+    "raw_excerpt": "Environmental Remediation We are involved with various environmental remediation activities and have recorded a liability of $752 million at December 31, 2022. For additional information, see Note 13 to our Consolidated Financial Statements.\n[Note 13 table] Beginning balance – January 1 $605 … Reductions for payments made, net of recoveries (43) … Changes in estimates 190 … Ending balance – December 31 $752"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 13: 737 MAX grounding customer concessions liability (adjacent contingency, not litigation)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87 (Note 13, p.83); p43 (MD&A)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "737 MAX grounding customer concessions and other considerations liability was $1,864 million at December 31, 2022, down from $2,940 million at December 31, 2021.",
+      "Of the $1.9 billion balance, $1.6 billion is contracted customer concessions and other liabilities and $0.3 billion remains subject to negotiation with customers.",
+      "The contracted amount includes $0.8 billion expected to be liquidated by lower customer delivery payments, $0.7 billion expected to be paid in cash and $0.1 billion in other concessions.",
+      "Concessions paid to 737 MAX customers totaled $1.0 billion in 2022 and $2.5 billion in 2021."
+    ],
+    "raw_excerpt": "The liability balance of $1.9 billion at December 31, 2022 includes $1.6 billion of contracted customer concessions and other liabilities and $0.3 billion that remains subject to negotiation with customers. The contracted amount includes $0.8 billion expected to be liquidated by lower customer delivery payments, $0.7 billion expected to be paid in cash and $0.1 billion in other concessions. … Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year 2022 — Note 13 Liabilities, Commitments and Contingencies (legal matters narrative)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing entered into a Deferred Prosecution Agreement with the U.S. Department of Justice during 2021.",
+      "The DPA resolved the DOJ's previously disclosed investigation into Boeing regarding the evaluation of the 737 MAX by the Federal Aviation Administration.",
+      "Multiple legal actions have been filed against Boeing as a result of the October 29, 2018 Lion Air Flight 610 accident and the March 10, 2019 Ethiopian Airlines Flight 302 accident.",
+      "Boeing stated that, based upon current information, it believes the outcome of such legal proceedings, claims, or government disputes and investigations will not have a material effect on its financial position, results of operations or cash flows."
+    ],
+    "raw_excerpt": "Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302. During 2021, we entered into (i) a Deferred Prosecution Agreement with the U.S. Department of Justice that resolved the Department of Justice's previously disclosed investigation into us regarding the evaluation of the 737 MAX by the Federal [Aviation Administration] ... based upon current information, that the outcome of any such legal proceeding, claim, or government dispute and investigation will not have a material effect on our financial position, results of operations or cash flows."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Exhibit Index, Item 10.7 (Deferred Prosecution Agreement dated January 6, 2021)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p133",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice is dated January 6, 2021.",
+      "The DPA was filed as Exhibit 10.1 to Boeing's Current Report on Form 8-K dated January 6, 2021."
+    ],
+    "raw_excerpt": "10.7 Deferred Prosecution Agreement dated January 6, 2021 (Exhibit 10.1 to the Company's Current Report on Form 8-K dated January 6, 2021)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — MD&A Liquidity and Capital Resources (cash flows)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "In the first quarter of 2021, Boeing paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement with the U.S. Department of Justice.",
+      "Concessions paid to 737 MAX customers totaled $1.0 billion in 2022 and $2.5 billion in 2021 (separate from the DPA payment)."
+    ],
+    "raw_excerpt": "In the first quarter of 2021, we paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice. ... Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Unallocated Items, Eliminations and Other (Q4 2020 DOJ-related charge)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p26",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing recorded a $744 million charge in the fourth quarter of 2020 in anticipation of the agreement with the U.S. Department of Justice that was finalized in January 2021."
+    ],
+    "raw_excerpt": "$744 million in the fourth quarter of 2020 in anticipation of the agreement between Boeing and the U.S. Department of Justice that was finalized in January 2021"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Note 13, 737 MAX Grounding customer concessions liability",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The 737 MAX grounding customer concessions and other considerations liability was $1,864 million at December 31, 2022 versus $2,940 million at December 31, 2021.",
+      "The $1.9 billion balance at December 31, 2022 comprises $1.6 billion of contracted customer concessions and other liabilities plus $0.3 billion still subject to negotiation with customers.",
+      "Of the cash payments to customers, Boeing expected to pay $0.1 billion in 2023 and the remaining $0.6 billion in future years."
+    ],
+    "raw_excerpt": "The liability balance of $1.9 billion at December 31, 2022 includes $1.6 billion of contracted customer concessions and other liabilities and $0.3 billion that remains subject to negotiation with customers. ... Of the cash payments to customers, we expect to pay $0.1 billion in 2023 and the remaining $0.6 billion in future years."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Capital Resources contractual obligations table",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p45",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing's contractual obligations table lists '737 MAX customer concessions and consideration' of $100 million current, $600 million long-term, $700 million total as of December 31, 2022."
+    ],
+    "raw_excerpt": "737 MAX customer concessions and consideration 100 600 700"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year ended December 31, 2022 — Note 21 Legal Proceedings (737 MAX accident litigation status and remaining exposure)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21 – Legal Proceedings)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Multiple legal actions have been filed against Boeing as a result of the October 29, 2018 Lion Air Flight 610 accident and the March 10, 2019 Ethiopian Airlines Flight 302 accident.",
+      "As of the FY2022 10-K, Boeing states it cannot reasonably estimate a range of loss, if any, not covered by available insurance that it may incur as a result of any remaining pending lawsuits or other matters related to the accidents and the 737 MAX.",
+      "The note's general policy statement is that, based on current information, the outcome of legal proceedings is not expected to have a material effect on financial position, results of operations or cash flows, and that where losses in excess of recorded amounts are reasonably possible Boeing discloses either the amount/range or the reasons no estimate can be made."
+    ],
+    "raw_excerpt": "Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302. ... We cannot reasonably estimate a range of loss, if any, not covered by available insurance that we may incur as a result of any remaining pending lawsuits or other matters related to the accidents and the 737 MAX."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Note 21: shareholder derivative lawsuit settlement ($219M received in Q2 2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21 – Legal Proceedings)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "During 2021 Boeing entered into a proposed settlement with plaintiffs in a shareholder derivative lawsuit.",
+      "That derivative settlement resulted in the Company receiving $219 million in the second quarter of 2022 (a cash inflow to Boeing, not a payment by Boeing).",
+      "The same sentence groups this settlement with the January 2021 Deferred Prosecution Agreement with the U.S. Department of Justice as the two 2021 resolutions of 737 MAX-related matters."
+    ],
+    "raw_excerpt": "During 2021, we entered into (i) a Deferred Prosecution Agreement with the U.S. Department of Justice that resolved the Department of Justice's previously disclosed investigation into us regarding the evaluation of the 737 MAX by the Federal Aviation Administration (FAA) as well as (ii) a proposed settlement with plaintiffs in a shareholder derivative lawsuit that resulted in the Company receiving $219 in the second quarter of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Note 21: SEC settlement and $200M civil penalty (September 2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21 – Legal Proceedings)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "In September 2022 Boeing settled a previously disclosed Securities and Exchange Commission investigation related to the 737 MAX accidents and consented to a civil penalty.",
+      "The SEC settlement resulted in an earnings charge of $200 million, which was paid in October 2022."
+    ],
+    "raw_excerpt": "In September 2022, we settled a previously disclosed investigation by the Securities and Exchange Commission related to the 737 MAX accidents and consented to a civil penalty, which resulted in an earnings charge of $200 that was paid in October 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — MD&A Liquidity and Cash Flows: $0.7B paid under DOJ Deferred Prosecution Agreement",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43 (MD&A – Liquidity and Capital Resources, Cash Flows)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "In the first quarter of 2021 Boeing paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice.",
+      "The Deferred Prosecution Agreement is dated January 6, 2021 and is listed as Exhibit 10.7 in the exhibit index."
+    ],
+    "raw_excerpt": "In the first quarter of 2021, we paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Note 13 Liabilities, Commitments and Contingencies: 737 MAX customer concessions accrual",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87 (Note 13 – Liabilities, Commitments and Contingencies)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The '737 MAX grounding customer concessions and other considerations' accrued liability was $1,864 million at December 31, 2022, down from $2,940 million at December 31, 2021.",
+      "The $1.9 billion balance at December 31, 2022 comprises $1.6 billion of contracted customer concessions and other liabilities plus $0.3 billion that remains subject to negotiation with customers.",
+      "The contracted amount includes $0.8 billion expected to be liquidated by lower future payments/reductions rather than cash.",
+      "This accrual is a customer-concession liability, not a litigation reserve; Note 13's accrued liabilities table contains no separate legal-proceedings line item."
+    ],
+    "raw_excerpt": "737 MAX grounding customer concessions and other considerations 1,864 2,940 ... The liability balance of $1.9 billion at December 31, 2022 includes $1.6 billion of contracted customer concessions and other liabilities and $0.3 billion that remains subject to negotiation with customers."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Item 1A Risk Factors: insurance coverage may be inadequate for 737 MAX claims",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p19 (Item 1A – Risk Factors)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing states that the amount of insurance coverage it maintains may be inadequate to cover the 737 MAX accident claims or other claims or liabilities.",
+      "The risk factor cross-references Note 21 of the Consolidated Financial Statements for discussion of legal proceedings resulting from the Lion Air Flight 610 and Ethiopian Airlines Flight 302 accidents."
+    ],
+    "raw_excerpt": "See Note 21 of the Consolidated Financial Statements for discussion of legal proceedings resulting from the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302. The amount of insurance coverage we maintain may be inadequate to cover these or other claims or liabilities."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Note 21: Embraer joint-venture termination arbitration (adjacent contingency)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113 (Note 21 – Legal Proceedings)",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing exercised its contractual right in 2020 to terminate the Embraer joint-venture agreements; Embraer disputed the termination and the dispute is in arbitration.",
+      "Boeing cannot reasonably estimate a range of loss, if any, that may result from the arbitration, which it expected to be completed in late 2023 or early 2024.",
+      "This is an arbitration of a commercial contract dispute, not one of the three civil litigation streams named in the sub-question."
+    ],
+    "raw_excerpt": "Embraer has disputed our right to terminate the agreements, and the dispute is currently in arbitration. We cannot reasonably estimate a range of loss, if any, that may result from the arbitration, which we currently expect to be completed in late 2023 or early 2024."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 13 法律诉讼：SEC 和解与民事罚款",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年 9 月，Boeing 就 SEC 此前披露的、与 737 MAX 事故相关的调查达成和解，并同意支付民事罚款。",
+      "该民事罚款导致 2 亿美元（$200 million）的收益费用（earnings charge），于 2022 年 10 月支付。",
+      "公司表示无法合理估计与事故及 737 MAX 相关的剩余未决诉讼中、超出可用保险覆盖范围的损失区间。"
+    ],
+    "raw_excerpt": "In September 2022, we settled a previously disclosed investigation by the Securities and Exchange Commission related to the 737 MAX accidents and consented to a civil penalty, which resulted in an earnings charge of $200 that was paid in October 2022. We cannot reasonably estimate a range of loss, if any, not covered by available insurance that we may incur as a result of any remaining pending lawsuits or other matters related to the accidents and the 737 MAX."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 流动性：DOJ 延期起诉协议付款",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2021 年第一季度，Boeing 依据与美国司法部（DOJ）的延期起诉协议（DPA）支付了 7 亿美元（$0.7 billion）。",
+      "该 DPA 签署日期为 2021 年 1 月 6 日（见 10-K 附件清单第 10.7 项）。",
+      "该 DPA 解决了 DOJ 此前披露的、关于 FAA 对 737 MAX 评估问题的调查。"
+    ],
+    "raw_excerpt": "In the first quarter of 2021, we paid $0.7 billion consistent with the terms of the Deferred Prosecution Agreement between Boeing and the U.S. Department of Justice. / 10.7 Deferred Prosecution Agreement dated January 6, 2021"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 13 法律诉讼：股东派生诉讼和解",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2021 年，Boeing 与股东派生诉讼原告达成拟议和解（proposed settlement）。",
+      "该和解使公司在 2022 年第二季度收到 2.19 亿美元（$219 million）。"
+    ],
+    "raw_excerpt": "During 2021, we entered into (i) a Deferred Prosecution Agreement with the U.S. Department of Justice ... as well as (ii) a proposed settlement with plaintiffs in a shareholder derivative lawsuit that resulted in the Company receiving $219 in the second quarter of 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 MAX 客户让步/赔偿金额（现金流量表说明与 Note 13 应计负债）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43；p87",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年向 737 MAX 客户支付的让步（concessions）为 10 亿美元，2021 年为 25 亿美元。",
+      "2021 年向 737 MAX 客户支付的补偿款为 25 亿美元，2020 年为 22 亿美元。",
+      "737 MAX 停飞客户让步及其他对价负债余额：2022 年末 18.64 亿美元，2021 年末 29.40 亿美元。",
+      "2022 年该负债因付款减少 10.31 亿美元，因让步及实物对价减少 0.29 亿美元，因估计变更减少 0.16 亿美元。",
+      "2020 年另有 4.98 亿美元的 737 MAX 客户对价费用。"
+    ],
+    "raw_excerpt": "Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021. / 737 MAX grounding customer concessions and other considerations 1,864 2,940 / Reductions for payments made (1,031) (2,535)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA 积压订单：订单取消金额",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p32",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "截至 2022 年 12 月 31 日止年度，飞机订单取消总额为 112.51 亿美元（$11,251 million），涉及 737 和 787 机型。",
+      "同期 ASC 606 调整使积压订单净减少 46.75 亿美元（$4,675 million），主要因 777X 在 ASC 606 储备中的净增加，部分被 737 与 787 的净减少抵消。",
+      "BCA 总积压订单 2022 年末为 3,298.24 亿美元，2021 年末为 2,968.82 亿美元。"
+    ],
+    "raw_excerpt": "Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million and relate to 737 and 787 aircraft. The net ASC 606 adjustments for the year ended December 31, 2022 resulted in a decrease to backlog of $4,675 million primarily due to a net increase of 777X aircraft in the ASC 606 reserve, partially offset by net decreases in 737 and 787 aircraft in the ASC 606 reserve."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 项目：交付暂停、FAA 恢复交付授权与异常生产成本",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35；p9",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "787 交付于 2021 年 5 月暂停，原因是生产质量问题（包括供应链中的问题）；此前 2021 年 3 月至 5 月间已交付 14 架。",
+      "2022 年 7 月 28 日获得 FAA 恢复交付授权，2022 年 8 月恢复交付；2022 年全年交付 31 架。",
+      "2022 年末与 2021 年末分别约有 100 架和 110 架 787 在库存中；2022 年末库存中的大部分飞机预计在 2024 年底前交付。",
+      "2022 年第四季度将 787 异常生产成本总额估计上调至 28 亿美元，其中大部分将在 2023 年底前发生；2021 年末预期累计约 20 亿美元。",
+      "2022 年 787 异常生产成本计入 12.40 亿美元。",
+      "公司仍在低速率生产，预计 2023 年逐步恢复至每月 5 架。"
+    ],
+    "raw_excerpt": "We received FAA authorization to resume delivery on July 28, 2022 and deliveries resumed in August. During 2022, we delivered 31 aircraft to customers. ... we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 项目：生产速率、FAA 型号认证与 ACSAA 第 116 条修订",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33；p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年将 737 生产速率提升至每月 31 架，并计划依据市场需求与供应链能力进一步逐步提产。",
+      "737 异常生产成本：2022 年 1.88 亿美元，2021 年 18.87 亿美元。",
+      "737-7 与 737-10 正在接受 FAA 型号认证；公司预计 737-7 于 2023 年取证并交付，737-10 于 2023 年开始 FAA 认证试飞、2024 年首交付。",
+      "《2023 年综合拨款法》修订了 ACSAA 第 116 条，使 2020 年 12 月 27 日前提交的原始或修订型号认证申请（含 737-7 与 737-10）不再受第 116 条机组告警规格约束。",
+      "自 FAA 颁发 737-10 型号合格证满一年起，任何新的 737 MAX 飞机须包含特定安全增强才能获得原始适航认证；公司已为相关改装成本计提，且预计不重大。",
+      "2022 年末库存中有 27 架 737-7 和 3 架 737-10，积压订单中有 236 架 737-7 和 720 架 737-10；已累计交付 1,033 架 737 MAX。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022 ... The Consolidated Appropriations Act, 2023 amended Section 116 of the ACSAA, such that applications for original or amended type certifications that were submitted to the FAA prior to December 27, 2020, including those of the 737-7 and 737-10, are no longer subject to the crew alerting specifications of Section 116."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 13：Embraer 合资终止后的仲裁",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2019 年 Boeing 与 Embraer 签订协议设立合资公司，拟以 42 亿美元（$4,200 million）收购 80% 股权，另设一家推广 C-390 Millennium 的合资公司。",
+      "2020 年 Boeing 行使合同权利终止上述协议。",
+      "相关争议目前处于仲裁程序中，公司预计 2023 年末或 2024 年初完成。",
+      "公司表示无法合理估计该仲裁可能产生的损失区间。"
+    ],
+    "raw_excerpt": "of which we were expected to acquire an 80 percent ownership stake for $4,200 ... In 2020, we exercised our contractual right to terminate these agreements based ... currently in arbitration. We cannot reasonably estimate a range of loss, if any, that may result from the arbitration, which we currently expect to be completed in late 2023 or early 2024."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 777X 项目：生产暂停、进度推迟与异常生产成本",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34；p81",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年 4 月决定在 2022 与 2023 年暂停 777X-9 生产，该暂停于 2022 年第二季度实施。",
+      "该生产暂停预计产生约 15 亿美元（approximately $1.5 billion）的异常生产成本；2022 年计入 3.25 亿美元。",
+      "2022 年第一季度将 777X-9 首交付时间从此前预期的 2023 年末推迟至 2025 年。",
+      "777X-8 货机于 2022 年第一季度启动，首交付预计 2027 年。",
+      "777X 项目在 2022 年 12 月 31 日毛利率接近盈亏平衡，未来期间可能产生额外 reach-forward 损失。"
+    ],
+    "raw_excerpt": "In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n] ... We expensed abnormal production costs of $325 during the year ended December 31, 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 13 或有负债总体表述",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "公司基于现有信息认为，各项法律程序、索赔及政府争议与调查的结果不会对其财务状况、经营成果或现金流产生重大影响。",
+      "对超出已记录金额、且合理可能发生的损失，公司或披露金额/区间，或在无法合理估计时说明原因。"
+    ],
+    "raw_excerpt": "based upon current information, that the outcome of any such legal proceeding, claim, or government dispute and investigation will not have a material effect on our financial position, results of operations or cash flows. Where it is reasonably possible that we will incur losses in excess of recorded amounts in connection with any of the matters set forth below, we will disclose either the amount or range of reasonably possible losses in excess of such amounts or, where no such amount or range can be reasonably estimated, the reasons why no such estimate can be made."
+  }
+]

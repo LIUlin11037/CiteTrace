@@ -1,0 +1,429 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Dense Passage Retrieval for Open-Domain Question Answering (DPR)",
+    "url": "https://arxiv.org/abs/2004.04906v3",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "稠密检索把检索实现为双编码器（dual-encoder）框架：用两个独立 BERT-base（uncased）分别编码问题与段落，取 [CLS] 表示，维度 d=768。",
+      "相似度函数必须可分解（decomposable），以便段落的表示可以离线预计算；大多数可分解相似度函数是欧氏距离的某种变换（cosine 等价于单位向量内积，Mahalanobis 等价于变换空间中的 L2）。",
+      "DPR 选择内积（inner product）作为相似度，并用 FAISS 对全部段落向量离线建索引，在线时对问题编码后做最大内积搜索（MIPS）取 top-k。",
+      "训练被形式化为度量学习（metric learning）问题：目标是构造一个向量空间，使相关的问题-段落对距离小于不相关对；损失为对正样本的负对数似然，分母包含 n 个负样本。",
+      "负样本类型分三种：Random（语料中随机段落）、BM25（BM25 返回但不含答案、且匹配最多问题词的 top 段落）、Gold（训练集中与其他问题配对的段落）；最佳模型使用同 batch 的 gold 段落 + 一个 BM25 负样本。",
+      "论文明确指出词项（term-based）系统的失效模式：对于「Sala Baker is best known for portraying the villain Sauron...」这类上下文，词项系统难以检索到，而稠密检索能更好地把「bad guy」与「villain」匹配起来。",
+      "实验语料为 2018-12-20 英文维基百科，按 100 词切分为 21,015,324 个段落作为检索单元；k 通常取 20–100。",
+      "检索器被形式化定义为 R:(q,C)→C_F，返回远小于语料的过滤集（|C_F|=k≪|C|），并以 top-k retrieval accuracy 单独评估。",
+      "DPR 大幅超过 BM25：Top-5 accuracy 65.2% vs 42.9%；在多个开放域 QA 数据集上 top-20 段落检索准确率绝对提升 9%–19%。",
+      "端到端效果：在 open Natural Questions 设定下，DPR 的端到端 QA 准确率 41.5%，对比 ORQA 的 33.3%。",
+      "论文承认稠密检索的边界条件：一般认为学习好的稠密向量表示需要大量标注的问题-上下文对；在 ORQA 之前，稠密检索从未在开放域 QA 上被证明优于 TF-IDF/BM25。",
+      "论文指出检索质量是端到端 QA 的瓶颈：SQuAD v1.1 的 exact match 从 80% 以上降到不足 40%（Yang et al. 2019a），说明需要改进检索。"
+    ],
+    "raw_excerpt": "Retrieval in open-domain QA is usually implemented using TF-IDF or BM25 Robertson and Zaragoza 2009, which matches keywords efficiently with an inverted index ... \"Sala Baker is best known for portraying the villain Sauron in the Lord of the Rings trilogy.\" A term-based system would have difficulty retrieving such a context, while a dense retrieval system would be able to better match \"bad guy\" with \"villain\" and fetch the correct context. ... It not only outperforms BM25 by a large margin (65.2% vs. 42.9% in Top-5 accuracy) ... the similarity function needs to be decomposable so that the representations of the collection of passages can be pre-computed."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking",
+    "url": "https://arxiv.org/abs/2107.05720v1",
+    "published_at": "2021-07-12",
+    "key_points": [
+      "词袋（BOW）模型如 BM25 依赖倒排索引，仍是强基线，但存在长期未解的词汇不匹配（vocabulary mismatch）问题：相关文档可能不包含查询中出现的词。",
+      "学习型稀疏表示（learned sparse）的动机是继承 BOW 模型的可取性质：精确匹配（exact-match，可能是潜在词项）、倒排索引的效率、可解释性；同时通过隐式/显式（潜在、上下文化）的扩展机制缓解词汇不匹配。",
+      "论文明确指出稠密检索的边界：基于近似最近邻（ANN）的稠密检索效果显著，但仍需与 BOW 模型结合，原因是它无法显式建模词项匹配（inability to explicitly model term matching）。",
+      "SPLADE 在 SparTerm 基础上引入对数饱和（log-saturation）激活：w_j = Σ_{i∈t} log(1 + ReLU(w_ij))，防止某些词项主导，并天然带来稀疏性——无需正则化即可得到稀疏解。",
+      "稀疏性由正则项控制：ℓ1 或 ℓ_FLOPS；ℓ_FLOPS 是检索所需平均浮点运算数的平滑松弛，相比 ℓ1 能产生更均衡的倒排索引（ℓ1 不保证 posting list 均匀分布，且词频分布呈 Zipf 特性）。",
+      "查询与文档使用两个不同的正则权重（λ_d、λ_q），对查询施加更强的稀疏压力，因为这对快速检索至关重要。",
+      "训练使用 in-batch negatives 的 ranking loss（L_rank-IBN），该策略在图像检索中常用，并被证明对学习第一阶段排序器有效。",
+      "论文指出 ANN 对 IR 指标影响的研究很少，且由于 MS MARCO 规模适中，结果通常用精确暴力搜索报告，因此无法反映真实计算成本。",
+      "ColBERT 的延迟 token 级交互虽有效，但需为每个（子）词存储嵌入，引发大规模语料下的可扩展性担忧。",
+      "DeepCT 类方法只学习上下文化词权重、文档词表不变，因此不解决词汇不匹配问题（需配合查询扩展）。"
+    ],
+    "raw_excerpt": "While BOW models remain strong baselines (Yang et al. 2019), they suffer from the long standing vocabulary mismatch problem, where relevant documents might not contain terms that appear in the query. ... Dense retrieval with approximate nearest neighbors search has shown impressive results ... but is still combined with BOW models because of its inability to explicitly model term matching. ... models can inherit from the desirable properties of BOW models like exact-match of (possibly latent) terms, efficiency of inverted indexes and interpretability."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+    "url": "https://ar5iv.labs.arxiv.org/html/2104.08663",
+    "published_at": "2021-04-17",
+    "key_points": [
+      "BEIR 构建了 18 个公开数据集、覆盖 9 类检索任务（事实核查、引文预测、重复问题检索、论点检索、新闻检索、问答、推文检索、生物医学 IR、实体检索），评估 10 个系统，涵盖 lexical、sparse、dense、late-interaction、re-ranking 五类架构。",
+      "核心结论：没有任何单一方法在所有数据集上持续优于其他方法（no single approach consistently outperforms other approaches on all datasets）。",
+      "BM25 是稳健的零样本基线；平均而言，re-ranking 与 late-interaction 模型零样本表现最好，但计算成本高。",
+      "稠密与稀疏检索模型计算更高效，但常常不如其他方法，说明其泛化能力仍有相当大的改进空间。",
+      "词法方法（TF-IDF/BM25）的失效模式被形式化为 lexical gap：只能检索包含查询中关键词的文档；且把查询与文档当作词袋处理，不考虑词序。",
+      "稠密检索的机制被描述为：把查询与文档映射到共享的稠密向量空间，使文档表示可预计算并建索引；能捕捉语义匹配、试图克服（潜在的）词汇不匹配。",
+      "域内表现与泛化能力不相关：用相同训练数据微调的模型可能有不同的泛化表现。",
+      "数据集可能存在强词法偏置（lexical bias），因为标注/构建数据集时主要使用词法模型，这可能对非词法方法不公平；作者对 TREC-COVID 手工补标缺失的相关性判断后，非词法方法性能显著提升。",
+      "混合式（hybrid lexical-dense）方法被描述为旨在结合两类方法优势的后续方向。"
+    ],
+    "raw_excerpt": "Our results show BM25 is a robust baseline and re-ranking and late-interaction based models on average achieve the best zero-shot performances, however, at high computational costs. In contrast, dense and sparse-retrieval models are computationally more efficient but often underperform other approaches, highlighting the considerable room for improvement in their generalization capabilities. ... lexical approaches like TF-IDF or BM25 ... suffer from lexical gap and are able to only retrieve documents containing keywords present within the query. Further, lexical approaches treat queries and documents as bag-of-words by not taking word ordering into consideration."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts",
+    "url": "https://arxiv.org/abs/2610.30612",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "该研究把「不融合」(do not fuse) 当作一等结果，考察融合在单条查询层面的代价，而非只看聚合平均增益。",
+      "实验设置：标准 Anserini BM25 + 五个稠密编码器（22M–596M 参数，跨三个模型世代）+ 一个学习型稀疏替代方案 SPLADE + 一个 cross-encoder 二阶段重排，在七个 BEIR 数据集、三种融合函数上评测。",
+      "即使最好的方法（dense-weighted score interpolation，稠密加权分数插值），在 13–48% 的查询上把相关文档排在其两个组件中较好者的后面；在 8–21% 的查询上排在其可部署的纯稠密检索器后面。",
+      "在 leave-one-corpus-out 验证下选定权重时，上述两个比例分别为 14–48% 与 11–25%。",
+      "尽管存在上述单查询损失，在使用主编码器时，该方法在每一个语料上聚合指标都优于纯稠密检索。",
+      "在七个语料中的六个上，按损失厌恶的风险敏感评估口径，这一下行损失是统计显著的。",
+      "作者将这一损失命名为 fusion tax（融合税）；它主要是排序效应，聚合层面召回率得以保持。",
+      "融合税最可能出现在「只有一个检索器能覆盖」的查询上，并且在编码器规模阶梯与 SPLADE 替换下都持续存在。",
+      "RRF 在稠密检索器明显更强时承担更高的融合税，只有在两个组件势均力敌时才优于纯稠密检索。",
+      "融合失败在单一语料内只有弱可预测性，跨语料迁移不可靠，因为预测它的特征会随稀疏-稠密平衡而改变符号。",
+      "cross-encoder 只能在其自身可靠的范围内挽回部分融合税。",
+      "论文给出的实践建议是：把是否融合的决策绑定到目标语料实测的稀疏-稠密平衡上。",
+      "该文发表于 IEEE Access, vol. 14, pp. 159620-159637, 2026，ACM Class H.3.3。"
+    ],
+    "raw_excerpt": "Hybrid retrieval, which fuses a sparse lexical retriever with a dense neural one, is widely recommended in the software documentation surveyed in September 2026, usually with reciprocal rank fusion (RRF), on the strength of aggregate gains. We ask what fusion costs on individual queries, treating \"do not fuse\" as a first-class outcome ... Even the best method, dense-weighted score interpolation, ranks relevant documents below the better of its two components on 13-48% of queries and below the deployable dense-only retriever on 8-21% (14-48% and 11-25% at a weight selected under leave-one-corpus-out validation), while beating dense-only in aggregate on every corpus with the primary encoder; the downside is significant under loss-averse risk-sensitive evaluation on six of the seven corpora. We call this loss the fusion tax. It is mostly a ranking effect that preserves recall in aggregate, it is most likely on the queries that only one retriever covers, and it persists across the encoder ladder and the SPLADE substitution. RRF carries the higher tax wherever the dense retriever is clearly stronger and only beats dense-only where the two components are balanced."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "StrucChunk: Structure-Aware Retrieval for Legal Document RAG",
+    "url": "https://arxiv.org/abs/2610.26313",
+    "published_at": "2026-10-19",
+    "key_points": [
+      "该工作用 BM25 与 BGE-M3 经 Reciprocal Rank Fusion 组合成混合稠密-稀疏检索，用于层级化法律文档。",
+      "在 LegalBench-RAG（6,858 个 query-passage 对）上达到 Char-Recall@8 = 48.18%，最佳基线为 23.59%（+104%）。",
+      "在印度法律 CrPC 的 501 条查询上 Recall@5 从 0.557 提升到 0.804（+44.4%）；CPC 上从 0.158 提升到 0.259（+64.6%）。",
+      "作者明确归因：分块（chunking）贡献了上述增益的 88%（CrPC）与 73%（CPC），即增益主要来自结构感知分块而非混合检索本身。",
+      "在 GDPR 的 501 条查询上 Recall@5 为 0.868，R@1 提升 +59%。",
+      "在 NitiBench-CCL（3,730 条泰语金融法律查询）上 HR@5 为 0.856，朴素分块为 0.594（+44.1%）；跨引用增强在跨引用查询上仅再贡献 +2.3%。"
+    ],
+    "raw_excerpt": "It treats documents as directed acyclic graphs of provisions, preserves clause boundaries, resolves cross-references before embedding, and combines BM25 with BGE-M3 via Reciprocal Rank Fusion ... On LegalBench-RAG (6,858 query-passage pairs), it achieves Char-Recall@8 of 48.18% vs. 23.59% for the best baseline (+104%) ... On 501 queries each for CrPC and CPC (Indian law), Recall@5 improves from 0.557 to 0.804 (+44.4%) and from 0.158 to 0.259 (+64.6%); chunking accounts for 88% and 73% of the gain."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Preference Is Not Position: Evaluating Reranking on NevIR in Fixed Hybrid Candidate Pools",
+    "url": "https://arxiv.org/abs/2610.26260",
+    "published_at": "2026-10-19",
+    "key_points": [
+      "该研究在固定候选池（来自稠密、学习型稀疏与 BM25 三种检索）上评估 NevIR 官方 query-passage 对，共 2,736 个 Test 查询方向。",
+      "一个 pairwise 训练的排序器把严格逐查询偏好率从固定融合的 52.30% 提升到 56.62%，但把偏好段落的 MRR 从 0.5764 降到 0.3055——说明「偏好正确」与「排得靠前」是两件事。",
+      "对融合 top-20 做有界 pointwise 重排可同时改善两个指标。",
+      "Qwen3-14B-AWQ 配合融合 tie-breaking 达到 77.45% 严格偏好率、1,363 个完整对上的 NevIR 式配对准确率 58.99%、偏好段落 MRR 0.7509。",
+      "BGE cross-encoder 达到 69.77% 严格偏好率与 MRR 0.7404。",
+      "后验分析发现：两个指定段落被 Qwen 判为同分从而触发融合 tie-breaking 的分支占被评估方向的 27%，并包含大部分剩余的严格偏好失败。"
+    ],
+    "raw_excerpt": "We examine this distinction using official NevIR pairs jointly covered by fixed candidate pools from dense, learned sparse, and BM25 retrieval. On 2,736 Test query directions, a pairwise-trained ranker improves strict per-query preference over fixed fusion (56.62% versus 52.30%) while reducing preferred-passage mean reciprocal rank (MRR) from 0.5764 to 0.3055 ... A post-hoc analysis finds that the branch where equal Qwen grades for the two designated passages trigger fusion tie-breaking accounts for 27% of evaluated directions and contains most remaining strict-preference failures."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "An Analysis of Fusion Functions for Hybrid Retrieval (Bruch, Gai, Ingber; arXiv:2210.11934v2; ACM TOIS, DOI 10.1145/3596512)",
+    "url": "https://arxiv.org/html/2210.11934v2",
+    "published_at": "2022-10-21 (v1); 2023-05-04 (v2)",
+    "key_points": [
+      "加权分数线性融合（论文称 convex combination, CC）的算法定义为 f_Convex = α·f_Sem + (1−α)·f_Lex，其中 0 ≤ α ≤ 1，f_Lex 为词法检索分数（如 BM25），f_Sem 为语义/向量检索分数。",
+      "关键超参数：CC 只有一个可调参数 α（词法/语义的相对权重），论文称其为 'its only parameter'，并强调该参数高度可解释（highly interpretable），无训练样本时可依据领域知识手工设定。",
+      "分数尺度不可比问题的处理：由于 BM25 等词法分数与点积等语义分数可能无界（unbounded），融合前通常用 min-max scaling 归一化；论文指出归一化的作用是构造有界函数、使融合在不同领域间保持一致（consistency）。",
+      "论文的核心论点之一：归一化的具体选择只是很小的细节——对 min-max、standard score（标准化）或任意其他线性变换归一化后的分数，总存在彼此 rank-equivalent 的 CC 组合；以 per-query 学习问题表述时，用一种归一化方案在某数据集上求得的解，与用另一种归一化方案求得的解等价。",
+      "论文摘要明确结论：'the learning of a CC fusion is generally agnostic to the choice of score normalization'（CC 融合的学习总体上对分数归一化的选择不敏感）。",
+      "论文反驳了 RRF 是'非参数、可零样本使用'的既有说法：作者采用参数化视角看 RRF，认为待融合的每个检索函数各有一个参数，参数数量总比 CC 多一个；并发现 RRF 对其参数敏感（'RRF to be sensitive to its parameters'）。",
+      "论文指出 RRF 因是 rank 的函数，会忽略分数的分布信息（'it disregards the distribution of scores and, as such, discards useful information'），原始分数之间的距离对混合分数没有任何作用。",
+      "论文报告 CC 在 in-domain 与 out-of-domain 设置下均优于 RRF，且 CC 样本高效（sample efficient），只需少量训练样本即可把唯一参数调到目标领域；相反，调过参的 RRF 在 out-of-domain 数据集上泛化很差（'a tuned RRF generalizes poorly to out-of-domain datasets'）。",
+      "论文将 hybrid search 形式化为：给定词法检索与语义检索分别产出的两个有序列表 R_Lex 与 R_Sem，融合任务是构造最终列表 R_Fusion 以提升检索质量。",
+      "论文引用 Chen et al. (2022) 的观点作为被检验对象：该文认为 convex combination 对参数 α 与分数归一化选择敏感（原文引述 'This fusion method is sensitive to the score scales …which needs careful score normalization'），因而主张 RRF 更合适。",
+      "实验评价指标：论文同时报告 recall 与 NDCG，在篇幅受限时以 NDCG 为主。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "An Analysis of Fusion Functions for Hybrid Retrieval — arXiv 摘要页（元数据与摘要）",
+    "url": "https://arxiv.org/abs/2210.11934v2",
+    "published_at": "2022-10-21 (v1); 2023-05-04 (v2)",
+    "key_points": [
+      "该论文同时考察两类融合方法：词法与语义分数的 convex combination（CC）以及 Reciprocal Rank Fusion（RRF），并识别各自的优势与潜在陷阱。",
+      "论文摘要原文列出四项发现：RRF 对其参数敏感；CC 融合的学习对分数归一化的选择总体不敏感；CC 在 in-domain 与 out-of-domain 设置下均优于 RRF；CC 样本高效，只需少量训练样本即可把唯一参数调到目标领域。",
+      "论文发表于 Information Retrieval (cs.IR)，关联 DOI 10.1145/3596512（ACM 期刊），作者单位为 Pinecone（Sebastian Bruch, Siyu Gai, Amir Ingber）。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Hybrid and Multi-Stage Queries — Qdrant Documentation",
+    "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 自 v1.10.0 起提供 Hybrid and Multi-Stage Queries，通过 Query API 的 prefetch 参数实现：先跑子查询（prefetch），再把主查询作用于子查询结果，且 prefetch 可嵌套。",
+      "Qdrant 原生支持的融合方式有两种：rrf（Reciprocal Rank Fusion）与 dbsf（Distribution-Based Score Fusion）。",
+      "Qdrant 的 RRF 公式中 k 常量默认取 2，各 ranking 的权重 w_r 默认取 1；当权重均为 1 时公式退化为原始 RRF：score = Σ 1/(k + r_d)。",
+      "Qdrant 使用 zero-based 排名，即首位结果 r_d = 0。",
+      "可融合的查询类型包括：dense 向量、sparse 向量（如 SPLADE++ 等学习型稀疏模型）、以及对建有全文索引的 payload 字段做 BM25 全文检索。",
+      "使用 offset 参数只影响主查询，因此 prefetch 的 limit 必须至少为「主查询 limit + offset」，否则可能返回空结果。",
+      "官方示例中 prefetch 子查询的 limit 取 20、主查询 limit 取 10，并以 {\"query\": {\"rrf\": {}}} 表示使用 RRF 默认参数。",
+      "Qdrant Edge 部署形态同样支持融合查询，其 Fusion.Rrf 接口显式暴露 k 参数（示例中 k = 2）。"
+    ],
+    "raw_excerpt": "Hybrid and Multi-Stage Queries Available as of v1.10.0 ... Qdrant has a few ways of fusing the results from different queries: rrf and dbsf ... k is a constant (set to 2 by default) ... w_r is the weight of ranking r (set to 1 by default) ... Qdrant uses zero-based rank positions; the top result has r_d = 0. ... Using offset parameter only affects the main query. This means that the prefetches must have a limit of at least limit + offset of the main query, otherwise you can get an empty result."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Hybrid search concepts — Weaviate Documentation",
+    "url": "https://docs.weaviate.io/weaviate/concepts/search/hybrid-search",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 的混合检索并行执行向量检索与 BM25 关键词检索，再用融合方法合并归一化后的分数并返回排序结果。",
+      "Weaviate 支持两种融合策略：relativeScoreFusion 与 rankedFusion；relativeScoreFusion 自 v1.24 起为默认，rankedFusion 是 v1.23 及更早版本的默认。",
+      "rankedFusion 的分数按 1/(RANK + 60) 计算，仅保留排名信息，与原始分数大小无关。",
+      "relativeScoreFusion 将最高分归一化为 1、最低分归一化为 0，其余按相对距离线性缩放，再对归一化向量距离与归一化 BM25 分数做加权求和。",
+      "官方认为 relativeScoreFusion 通常是更好的选择，理由是它比只保留排名的 rankedFusion 保留了更多原始检索信息。",
+      "alpha 参数控制向量检索在最终结果中的权重，取值 0–1：alpha=0 为纯关键词检索，alpha=0.5 为等权，alpha=1 为纯向量检索。",
+      "alpha 的服务器默认值为 0.75（偏向向量检索），但该默认仅在请求未携带 alpha 时生效（GraphQL 场景，以及 v1.36.7 起 gRPC 允许客户端不设 alpha）。",
+      "官方明确警告：各客户端库并非都会不设 alpha，因此实际生效权重可能偏离 0.75，某些情况下甚至退化为纯关键词检索；建议在权重重要时显式设置 alpha。",
+      "混合检索支持 max vector distance 阈值，但该阈值只作用于向量检索分量，不过滤关键词分数；BM25 分量与最终融合分数没有等价阈值，因为 BM25 分数未归一化、无界。",
+      "混合检索支持 BM25 的全部参数，包括分词方法、停用词、BM25 的 k1 与 b、搜索操作符（and / or / and_cross）、指定检索属性与属性加权。"
+    ],
+    "raw_excerpt": "With relativeScoreFusion (default from v1.24), each object is scored by normalizing the metrics output by the vector search and keyword search respectively ... With rankedFusion (default for v1.23 and lower) ... The score depends on the rank of each result and is computed according to 1/(RANK + 60) ... alpha > 0.5 : More weight to vector search ( 0.75 is the default) ... Set alpha explicitly 0.75 is the server default. It applies only when a request reaches Weaviate with no alpha value ... Client libraries do not all leave alpha unset. Depending on your client and your server version, the effective weighting can differ from 0.75 , and in some cases can be a pure keyword search."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Reciprocal rank fusion — Elasticsearch Reference",
+    "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion",
+    "published_at": null,
+    "key_points": [
+      "Elasticsearch 原生提供 RRF 检索器（rrf retriever），作为 search 请求 retriever 参数的一部分，用于把多组不同相关性指标的结果集合并为单一排序结果。",
+      "RRF 检索器要求至少两个子检索器（child retrievers），且每个子检索器在 RRF 公式中权重相等。",
+      "rank_constant 参数默认值为 60，取值必须 ≥ 1；值越大表示排名靠后的文档影响越大。",
+      "rank_window_size 参数默认等于请求的 size 参数，取值必须 ≥ size 且 ≥ 1；值越大相关性越好但性能开销越高，最终结果会被裁剪到 size。",
+      "若 knn 检索的 k 大于 rank_window_size，结果会被截断到 rank_window_size；若 k 小于 rank_window_size，则结果数为 k。",
+      "官方说明 RRF 无需调参（requires no tuning），且不同相关性指标之间无需相关即可获得高质量结果。",
+      "官方称 RRF 相比线性组合免去了确定合适权重的麻烦，并称 RRF 已被证明比任一单独查询带来更好的相关性。",
+      "rrf retriever 支持 aggregations、from、suggesters、highlighting、collapse、profiling；不支持 scroll、sort、rescore，使用不支持的特性会抛异常。",
+      "官方建议不要在请求中提供 point in time，因为 RRF 内部会创建一个由所有子检索器共享的 PIT 以保证结果一致。",
+      "基于 sub searches 的 RRF 用法已不再支持，官方要求改用 retriever API。",
+      "官方给出的典型用例是把传统 BM25 查询与 ELSER 稀疏向量查询的 top documents 合并。"
+    ],
+    "raw_excerpt": "RRF requires no tuning, and the different relevance indicators do not have to be related to each other to achieve high-quality results ... rank_constant (Optional, integer) ... Defaults to 60 ... rank_window_size ... Defaults to the size parameter ... The rrf retriever does not currently support: scroll, sort, rescore ... Not only does this remove the need to figure out what the appropriate weighting is using linear combination, but RRF is also shown to give improved relevance over either query individually."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Blended RAG: Improving RAG (Retriever-Augmented Generation) Accuracy with Semantic Search and Hybrid Query-Based Retrievers",
+    "url": "https://arxiv.org/html/2404.07220v2",
+    "published_at": "2024-03-22",
+    "key_points": [
+      "论文报告 NQ 数据集上 Blended RAG 的 NDCG@10 为 0.67，相对其引用的 monoT5-3B benchmark 0.633 提升 5.8%。",
+      "论文报告 TREC-COVID 数据集上 Blended RAG 的 NDCG@10 为 0.87，相对其引用的 COCO-DR Large benchmark 0.804 提升 8.2%。",
+      "论文的混合检索由 BM25 索引、dense vector (KNN) 索引与 Sparse Encoder 索引分别搭配 hybrid query（Multi-Fields / Best Fields）构成，并非 BM25 与 dense 的 RRF 或加权分数融合。",
+      "论文以 top-10 retrieval accuracy 作为筛选六种最佳 blended retriever（index + hybrid query）组合的依据。",
+      "论文报告 NQ 上 Sparse Encoder + Best Fields 的 top-10 retrieval accuracy 为 88.77%，TREC-COVID（relevancy=2）上同一组合为 98% top-10 accuracy。",
+      "论文未在 BEIR 或 MS MARCO 上报告结果，也未报告 Recall@100。",
+      "论文的对照基线是文献中既有的 benchmark 分数（monoT5-3B、COCO-DR Large），而非同一实验设置下重跑的纯 BM25 与纯 dense 检索。"
+    ],
+    "raw_excerpt": "Our pipeline provides the best NDCG@10 score of 0.67, which is 5.8% higher than the current benchmark score of 0.633 achieved by the monoT5-3B model. ... Blended Retrievers achieved an NDCG@10 score of 0.87, which marks an 8.2% increment over the benchmark score of 0.804 established by the COCO-DR Large model (Table II)."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "M3-Embedding: Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation",
+    "url": "https://arxiv.org/html/2402.03216v5",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "M3-Embedding 的混合检索采用加权分数融合：s_rank ← w1·s_dense + w2·s_lex + w3·s_mul，权重 w1/w2/w3 依下游场景确定。",
+      "混合流程为：先由各方法（dense、lexical/sparse）分别召回候选，再基于整合后的相关性分数重排；multi-vector 因开销大被豁免于候选召回阶段。",
+      "该模型的 lexical（sparse）分支由模型自身输出词权重得到，不是 BM25。",
+      "训练数据规模：来自无标注语料的 12 亿文本对，覆盖 194 种语言与 2655 组跨语言对应关系。",
+      "英文微调数据包含 8 个数据集（HotpotQA、TriviaQA、NQ、MS MARCO、COLIEE、PubMedQA、SQuAD、SimCSE NLI）。",
+      "抓取到的正文片段未包含结果表格，因此未能提取 BEIR / MS MARCO 上的 nDCG@10 或 Recall@100 绝对数值。"
+    ],
+    "raw_excerpt": "Thanks to the multi-functionality of the embedding model, the retrieval process can be conducted in a hybrid process. First of all, the candidate results can be individually retrieved by each of the methods (the multi-vector method can be exempted from this step due to its heavy cost). Then, the final retrieval result is re-ranked based on the integrated relevance score: s_rank ← w1·s_dense + w2·s_lex + w3·s_mul"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts (arXiv:2610.30612v1)",
+    "url": "https://arxiv.org/abs/2610.30612",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "arXiv 条目真实存在：arXiv:2610.30612v1，标题 \"The Fusion Tax: A Diagnostic Analysis of When Hybrid Retrieval Hurts\"，作者 Aaditya Chauhan、Arun Agarwal，提交时间 2026-10-22 02:24:08 UTC，主分类 cs.IR，交叉分类 cs.CL，ACM classes H.3.3。",
+      "arXiv 元数据标注 journal reference: \"IEEE Access, vol. 14, pp. 159620-159637, 2026\"，Related DOI 为 https://doi.org/10.1109/ACCESS.2026.3743502，即该预印本对应一篇已在 IEEE Access 发表的期刊论文。",
+      "论文核心量化结论：即使最佳融合方法（dense-weighted score interpolation），在 13-48% 的查询上把相关文档排在其两个组件中较好者之下，在 8-21% 的查询上低于可部署的 dense-only 检索器；在 leave-one-corpus-out 验证选出的权重下为 14-48% 与 11-25%。",
+      "同一论文报告：尽管存在上述 per-query 损失，融合在主编码器下于每一个语料上都在聚合指标上优于 dense-only；在七个语料中的六个上，损失在损失厌恶的风险敏感评估下显著。",
+      "实验设置：标准 Anserini BM25 + 五个 dense 编码器（22M-596M 参数、三个模型世代）+ learned-sparse SPLADE 替代 + cross-encoder 第二阶段，覆盖七个 BEIR 数据集与三种融合函数。",
+      "论文称该损失主要是排序位置效应、聚合 recall 得以保持，最可能出现在只有一个检索器能覆盖的查询上，并在编码器规模阶梯与 SPLADE 替换下持续存在。",
+      "论文称 RRF 在 dense 检索器明显更强时承担更高的税，只有在两个组件均衡时才优于 dense-only。",
+      "论文报告负面迁移结果：融合失败在语料内弱可预测（held-out AUC 0.63），跨语料迁移不可靠（平均 0.59，范围 0.49-0.74），基于这些特征的 held-out 融合/dense-only 路由器从未胜过静态插值。",
+      "论文自述其贡献之一是\"falsifies the 'stronger retrieval dissolves the tax' hypothesis\"：在最新最大的编码器上税仍为 14-43%。"
+    ],
+    "raw_excerpt": "Even the best method, dense-weighted score interpolation, ranks relevant documents below the better of its two components on 13-48% of queries and below the deployable dense-only retriever on 8-21% (14-48% and 11-25% at a weight selected under leave-one-corpus-out validation), while beating dense-only in aggregate on every corpus with the primary encoder; the downside is significant under loss-averse risk-sensitive evaluation on six of the seven corpora. We call this loss the fusion tax."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "The Fusion Tax — 作者版全文（arXiv HTML, v1）",
+    "url": "https://arxiv.org/html/2610.30612v1",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "全文页以 IEEE Access 期刊排版呈现（页眉 \"\\vol 14 2026\"），标注 \"Date of publication October 15, 2026\"、DOI 10.1109/ACCESS.2026.3743502，并声明 \"This is the author-prepared version of the article published in IEEE Access, vol. 14, pp. 159620-159637, 2026 ... under a Creative Commons Attribution 4.0 (CC BY 4.0) license\"，表明该文已正式发表。",
+      "作者单位为两位独立研究者：Aaditya Chauhan（Independent Researcher, Bothell, WA 98012 USA）、Arun Agarwal（Independent Researcher, Issaquah, WA 98027 USA），无大学或企业机构隶属。",
+      "论文声明 \"This work received no external funding. The authors declare no conflict of interest.\"，即无外部资助、无利益冲突。",
+      "论文在引言中明确承认该现象并非首次观察：\"That fusion can help on average while hurting individual queries is not a new observation.\"，并称 risk-sensitive evaluation of rank fusion、fusion-oriented query performance prediction、per-query routing between retrievers 三条既有研究线均以此为出发点（正文引文 [4]-[9]）。",
+      "论文自述其增量在于给出实践者决策所需的量：现代 sparse-dense 融合把相关文档排到其两个组件中较好者之下、以及排到本可单独部署的单一组件之下的频率与幅度。",
+      "论文明确界定研究范围：研究对象为第一阶段检索质量（标准排序指标）加一个 reranking 阶段的恢复效果，不评估答案生成（\"We do not evaluate answer generation\"）。",
+      "论文指出该损失主要是排序位置效应，recall@10 在聚合上得以保持，但少数受损查询确实会丢失 top-10 中的相关文档。",
+      "论文报告 cross-encoder 的修复效果有限：在三个语料上，可部署税的普遍程度在一个语料上下降三分之一、另两个完全没有下降，71-90% 原本受损的查询被单独修复但同时有新的受损查询补位。",
+      "论文报告 rerank 后 interpolated 与 dense 候选集的差距至多 0.011 nDCG@10（配对区间 ±0.02 内），但 sparse 与 dense 均衡的情形除外。"
+    ],
+    "raw_excerpt": "That fusion can help on average while hurting individual queries is not a new observation. Risk-sensitive evaluation of rank fusion [4], fusion-oriented query performance prediction [5, 6], and per-query routing between retrievers [7, 8, 9] all start from it."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "OpenSearch Documentation — Hybrid search (search pipelines, normalization vs score ranker)",
+    "url": "https://docs.opensearch.org/latest/vector-search/ai-search/hybrid-search/index/",
+    "published_at": null,
+    "key_points": [
+      "OpenSearch 原生支持混合检索，自 2.11 引入（页面标注 \"Introduced 2.11\"）。",
+      "实现方式为搜索阶段的 search pipeline（phase_results_processors），在中间阶段对文档分数做归一化与合并。",
+      "提供两种 search phase results processor：normalization processor（基于分数）与 score ranker processor（基于排名，使用 RRF）。",
+      "normalization processor 示例默认配置：normalization.technique = min_max，combination.technique = arithmetic_mean，weights 数组按小数百分比为各 query clause 赋权。",
+      "自动化 workflow 模板中模型维度默认 output_dimension = 1024。"
+    ],
+    "raw_excerpt": "Hybrid search combines keyword and semantic search to improve search relevance. To implement hybrid search, you need to set up a search pipeline that runs at search time... Two search phase results processors are available for hybrid search... The normalization processor is score based... The score ranker processor is rank based. It uses reciprocal rank fusion (RRF) to combine documents according to their position in each query clause's results, ignoring the scores themselves."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "OpenSearch Documentation — Reciprocal rank fusion (score ranker processor, rank_constant)",
+    "url": "https://docs.opensearch.org/latest/vector-search/ai-search/hybrid-search/rrf/",
+    "published_at": null,
+    "key_points": [
+      "OpenSearch 的 RRF 由 score ranker processor 实现，自 2.19 引入（页面标注 \"Introduced 2.19\"）。",
+      "RRF 打分公式为 score(d) = Σ_{q∈Q} 1/(k + rank_q(d))，其中 rank_q(d) 从 1 开始计数，未出现的 query clause 不贡献分数。",
+      "k 为 rank constant，通过 rank_constant 参数配置；score ranker processor 的可调参数为 rank_constant 与可选 weights。",
+      "官方对比：在六个 BEIR 数据集基准上，RRF 的 NDCG@10 平均比基于分数的混合流水线低 3.86%，搜索延迟与协调节点 CPU 利用率相当。",
+      "官方建议：当各 query clause 分数不可比、数据有离群值/高方差、相关性信号稀疏、数据持续变化，或希望奖励在多个结果列表中排名都靠前的文档时，优先用 RRF。",
+      "normalization processor 自 2.10 可用，score ranker processor 自 2.19 可用。"
+    ],
+    "raw_excerpt": "OpenSearch calculates the RRF score of a document d as follows: score(d) = Σ_{q ∈ Q} 1/(k + rank_q(d)) ... k is the rank constant, configured by the rank_constant parameter. ... The trade-off for RRF is a small reduction in relevance. In benchmarks on six BEIR datasets, RRF averaged 3.86% lower NDCG@10 than the score-based hybrid pipeline, with comparable search latency and coordinator node CPU utilization."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Milvus Documentation — Multi-Vector Hybrid Search",
+    "url": "https://milvus.io/docs/multi-vector-search.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 原生支持混合检索：允许在多个向量字段上同时执行多次 ANN 搜索，再以 reranking 策略融合。",
+      "官方明确混合检索的动机是结合 dense vector（语义）与 sparse vector（精确关键词匹配，如 BM25、BGE-M3、SPLADE）以提升检索质量。",
+      "Milvus 内置 BM25 全文检索能力（通过 schema 中的 Function 启用，字段需 enable_analyzer=True）。",
+      "默认一个 collection 的向量字段数受 proxy.maxVectorFieldNum 限制，可调整至最多 10 个向量字段。"
+    ],
+    "raw_excerpt": "Milvus supports this by allowing search on multiple vector fields, conducting several Approximate Nearest Neighbor (ANN) searches simultaneously... Sparse-Dense Vector Search: Dense Vector are excellent for capturing semantic relationships, while Sparse Vector are highly effective for precise keyword matching. Hybrid search combines these approaches..."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Milvus Documentation — RRF Ranker (default k = 60)",
+    "url": "https://milvus.io/docs/rrf-ranker.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 提供 RRFRanker 作为混合检索的 reranking 策略，基于各检索路径中的排名位置而非原始相似度分数进行融合。",
+      "RRF 公式中的 k 为平滑参数，官方文档写明 \"typically set at 60\"。",
+      "k 的默认值为 60，可调范围为 (0, 16384)，须为浮点数，官方推荐取值区间为 [10, 100]。",
+      "Milvus 2.6.x 及以后版本可通过 Function API 直接配置 reranking 策略；v2.6.0 之前版本需参考旧 Reranking 文档配置。",
+      "官方文档给出 topK=5、k=60 的完整算例：如文档 101 在 sparse 排第 1、dense 排第 2，最终分数为 1/(60+1)+1/(60+2)=0.03252247。"
+    ],
+    "raw_excerpt": "k is a smoothing parameter typically set at 60. ... When using the RRF reranking strategy, you need to configure the parameter k. It is a smoothing parameter that can effectively alter the relative weights of full-text search versus vector search. The default value of this parameter is 60, and it can be adjusted within a range of (0, 16384). The value should be floating-point numbers. The recommended value is between [10, 100]."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "GitHub — opensearch-project/OpenSearch (repository metadata)",
+    "url": "https://github.com/opensearch-project/OpenSearch",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库 opensearch-project/OpenSearch 当前 stars 数为 13904，forks 2982。",
+      "主要语言为 Java，描述为 \"Open source distributed and RESTful search engine\"。",
+      "最近一次 push 时间为 2026-10-24。"
+    ],
+    "raw_excerpt": "opensearch-project/OpenSearch (★13904, forks 2982) desc: 🔎 Open source distributed and RESTful search engine. lang: Java | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "GitHub — pgvector/pgvector (repository metadata)",
+    "url": "https://github.com/pgvector/pgvector",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库 pgvector/pgvector 当前 stars 数为 23472，forks 1365。",
+      "主要语言为 C，描述为 \"Open-source vector similarity search for Postgres\"。",
+      "最近一次 push 时间为 2026-10-24。"
+    ],
+    "raw_excerpt": "pgvector/pgvector (★23472, forks 1365) desc: Open-source vector similarity search for Postgres lang: C | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "GitHub — langchain-ai/langchain (repository metadata)",
+    "url": "https://github.com/langchain-ai/langchain",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库 langchain-ai/langchain 当前 stars 数为 148407，forks 24907。",
+      "主要语言为 Python，描述为 \"The agent engineering platform\"。",
+      "最近一次 push 时间为 2026-10-25。"
+    ],
+    "raw_excerpt": "langchain-ai/langchain (★148407, forks 24907) desc: The agent engineering platform. lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "[Feature / Research] Hybrid search alpha parameter auto-tuning for domain-specific corpora — financial document retrieval benchmarks (weaviate/weaviate #11627)",
+    "url": "https://github.com/weaviate/weaviate/issues/11627",
+    "published_at": "2026-06-03",
+    "key_points": [
+      "Weaviate 的混合检索（BM25 + 向量）要求用户手动设置 alpha 参数来平衡关键词与语义检索，官方无自动调优机制。",
+      "提交者指出通用语料上 alpha≈0.5 尚可，但在金融文档（10-K、财报电话会、资产负债表）上最优 alpha 随查询类型剧烈变化：精确匹配查询 alpha≈0.2、语义查询 alpha≈0.8、表格单元格查询 alpha≈0.1。",
+      "提交者称在自建的 finrag-eval 实验中，盲目使用 alpha=0.5 在金融 QA 上 precision@5 约 58%，而按查询扫描出的最优 alpha 约 78%，差距约 20 个百分点。",
+      "该 issue 明确列出 Weaviate 当前缺失的三项能力：按查询类型自动调优 alpha、在标注数据集上跨 alpha 值基准测试混合检索质量、报告每个 alpha 的 precision/recall 以帮用户找到最优设置。",
+      "评论者 cschanhniem 指出 alpha 接近 0.0（BM25 主导）时结果集词汇精确但稀疏——高 precision、低 recall；alpha 接近 1.0（向量主导）时 recall 提升但 precision 常下降，因为语义相似但不相关的片段会浮现。",
+      "评论者提出用 'regret'（静态 alpha 相对 oracle 逐查询 alpha 损失的精度）来判断查询类型感知选择是否值得实现，并指出若 oracle 仅比静态 alpha=0.5 高 3-4% nDCG@5，则工程复杂度可能不划算。",
+      "提交者承认查询分类器方案存在误差累积风险：把表格单元格查询误判为语义查询并使用 alpha=0.8 而非 0.1，会在 LLM 看到上下文之前就造成检索失败。",
+      "该 issue 由社区用户（Ruthwik-Data）提交，标签为 community / originated from the community，截至抓取时状态为 Open，非厂商官方工程报告。"
+    ],
+    "raw_excerpt": "Weaviate's hybrid search (BM25 + vector) requires manually setting the alpha parameter to balance keyword vs. semantic search. For general corpora, a value around 0.5 is reasonable. But for financial documents (10-Ks, earnings calls, balance sheets), the optimal alpha varies significantly by query type ... In my finrag-eval experiments, blind alpha=0.5 gives ~58% precision@5 on financial QA. Optimal per-query alpha (swept) gives ~78% precision@5. That 20-point gap is significant for production financial QA systems. ... When alpha is near 0.0 (BM25-heavy), the result set tends to be lexically exact but sparse — high precision, low recall. At alpha near 1.0 (vector-heavy), recall improves but precision often drops because semantically similar but irrelevant chunks surface."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "Weaviate issue tracker search results: 'hybrid search latency slow' (9 results, incl. #12351 'Build the filtered hybrid allow list once per shard, not once per leg')",
+    "url": "https://github.com/weaviate/weaviate/issues?q=hybrid+search+latency+slow",
+    "published_at": null,
+    "key_points": [
+      "在 Weaviate 官方 issue 库中检索 'hybrid search latency slow' 返回 9 条结果，其中多条为性能优化类 PR/issue，说明混合检索的延迟是该项目持续处理的工程问题。",
+      "issue #12351 标题为 'Build the filtered hybrid allow list once per shard, not once per leg'（由 etiennedi 于 2026-07-25 开启），标题本身表明带过滤的混合检索会按 'leg'（各路检索）重复构建 allow list，存在重复计算开销。",
+      "issue #12078 'feat: node-level query admission control (P1b)' 于 2026-09-09 合并，属查询准入控制类改动，与大规模负载下的查询压力管理相关。",
+      "issue #4572 'Poor performance with scaling bug'（标签 bug、community）于 2026-03-31 关闭，涉及扩展性下的性能问题。",
+      "以上仅为 issue 标题与元数据，未读取正文，因此不能据此断言混合检索延迟收益不及预期的具体量化结论。"
+    ],
+    "raw_excerpt": "Search issues hybrid search latency slow — 9 results ... Build the filtered hybrid allow list once per shard, not once per leg — weaviate/weaviate #12351 · etiennedi opened Jul 25, 2026 ... Poor performance with scaling bug — community — weaviate/weaviate#4572 · by rrajp was closed on Mar 31, 2026"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Improving Zero-Shot Ranking with Vespa Hybrid Search (Vespa Blog, Jo Kristian Bergum)",
+    "url": "https://blog.vespa.ai/improving-zero-shot-ranking-with-vespa/",
+    "published_at": "2023-01-05",
+    "key_points": [
+      "Vespa 官方博客该文的核心论点是：在域内（in-domain）训练并评测时，稠密向量、late interaction、cross-encoder 三类神经排序方法都优于 BM25 词法基线。",
+      "文章明确指出该优势不一定能迁移到零样本（zero-shot）场景：把在 MS MARCO 等域内数据上训练的排序模型直接应用到新领域而不做适配或微调时，域内嵌入排序的有效性并不延续到不同领域。",
+      "文章以 BEIR 基准（18 个跨领域数据集，常用其中 13 个可下载数据集报告 nDCG@10）作为零样本评测框架，并强调需说明平均值包含哪些数据集，因为各数据集检索难度差异显著。",
+      "文章批评业界常用的 LGTM（Looks Good To Me）@10 指标——即仅凭少量查询目测判断——不足以评估排序方法优劣。",
+      "该文为 Vespa 官方博客（厂商工程博客），但抓取内容被截断于数据集统计部分，未读到混合检索的延迟/成本数据或收益不及预期的结论章节。"
+    ],
+    "raw_excerpt": "In the first post, we will discuss the distinction between in-domain and out-of-domain (zero-shot) ranking and present the BEIR benchmark. Furthermore, we highlight situations where in-domain embedding ranking effectiveness does not carry over to a different domain in a zero-shot setting. ... Evaluation like this contrasts with the industry's most commonly used IR evaluation metric, LGTM (Looks Good To Me)@10, for a small number of queries."
+  }
+]

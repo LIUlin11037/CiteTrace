@@ -1,0 +1,255 @@
+{
+  "n_questions": 20,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9583333333333334,
+  "mean_coverage": 0.9625,
+  "per_subdomain": {
+    "agent": {
+      "n": 7.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9642857142857143,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 8.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9583333333333334,
+      "coverage": 0.90625
+    },
+    "rag": {
+      "n": 5.0,
+      "citation_existence": 1.0,
+      "alignment": 0.95,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-agent-memory",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 40,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-agentic-rag",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 36,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-moe",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 32,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-swe-agent",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 20,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-multimodal",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-eval",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 40,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-react",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 37,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-multi-agent",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-context-eng",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 35,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-human-in-loop",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 15,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-rl-scaling",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 21,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-long-context",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 33,
+      "citations_missing": [],
+      "alignment_rate": 0.875,
+      "coverage_rate": 0.75,
+      "missed_key_points": [
+        "给出 RAG 与长上下文互补的结论及理由"
+      ],
+      "unsupported_claims": [
+        "矛盾未解决前，任何关于 Gemini 当前窗口规格的表述都不可靠，本报告因此未在第二节产品侧现状中引用"
+      ]
+    },
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-hallucination",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 31,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-rag-chunking",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-hybrid-search",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 27,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-graph-rag",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 20,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-deepseek-r1",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-tokenizer",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-reranker",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 36,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

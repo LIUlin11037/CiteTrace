@@ -1,0 +1,579 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 Segment Reporting：分部净营收与经营利润汇总表（2022/2021/2020）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Data Center 净营收：2022 年 $6,043M；2021 年 $3,694M；2020 年 $1,685M",
+      "Client 净营收：2022 年 $6,201M；2021 年 $6,887M；2020 年 $5,189M",
+      "Gaming 净营收：2022 年 $6,805M；2021 年 $5,607M；2020 年 $2,746M",
+      "Embedded 净营收：2022 年 $4,552M；2021 年 $246M；2020 年 $143M",
+      "总净营收：2022 年 $23,601M；2021 年 $16,434M；2020 年 $9,763M",
+      "分部经营利润 2022 年：Data Center $1,848M、Client $1,190M、Gaming $953M、Embedded $2,252M、All Other $(4,979)M，合计 $1,264M",
+      "分部经营利润 2021 年：Data Center $991M、Client $2,088M、Gaming $934M、Embedded $44M、All Other $(409)M，合计 $3,648M",
+      "All Other 2022 年经营亏损 $4,979M 包含：股权激励费用 $1,081M、收购相关成本 $452M、收购相关无形资产摊销 $3,548M、许可收益 $(102)M"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations：报告分部口径变更说明",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 财年第二季度起，AMD 变更报告分部，以与 CODM 评估财务业绩和分配资源的方式保持一致",
+      "变更后公司按四个报告分部报告：Data Center、Client、Gaming、Embedded",
+      "该页同时给出 2022 与 2021 年分部净营收与经营利润的可比列示（2021 年数据已按新口径重述）"
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. ... As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Overview：总营收 YoY 与各分部变动归因",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 年净营收 $23.6B，较 2021 年 $16.4B 增长 44%",
+      "增长驱动之一：Data Center 分部营收增长 64%，主因 EPYC 服务器处理器销量提升",
+      "增长驱动之二：Gaming 分部营收增长 21%，主因半定制产品销售提升",
+      "增长驱动之三：Embedded 分部营收较上年显著增长，主因并入 Xilinx 嵌入式产品销售",
+      "部分抵消项：Client 分部营收下降 10%，主因 PC 市场疲弱与供应链库存修正导致处理器出货下降",
+      "2022 年毛利率 45%，2021 年 48%；下降主因 Xilinx 收购相关无形资产摊销",
+      "2022 年经营利润 $1.3B，2021 年 $3.6B；2022 年净利润 $1.3B，2021 年 $3.2B",
+      "2022 年 2 月完成对 Xilinx 的战略收购，使公司进入此前未涉足的多个嵌入式市场"
+    ],
+    "raw_excerpt": "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the prior year period driven by the inclusion of Xilinx embedded product sales. This growth was partially offset by a 10% decrease in Client segment revenue ..."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A：Data Center / Client / Gaming / Embedded 分部逐段讨论",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48–p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Data Center：2022 年净营收 $6B，较 2021 年 $3.7B 增长 64%，主因 EPYC 服务器处理器销量提升；经营利润 $1.8B vs $991M",
+      "Client：2022 年净营收 $6.2B，较 2021 年 $6.9B 下降 10%，主因出货量下降 24%，部分被平均售价上升 19% 抵消",
+      "Client 出货量下降源于 PC 市场挑战与 2022 年下半年 PC 供应链的大幅库存修正；ASP 上升主因 Ryzen 移动处理器销售占比提升",
+      "Client 经营利润 $1.2B（2022）vs $2.1B（2021），下降主因营收降低",
+      "Gaming：2022 年净营收 $6.8B，较 2021 年 $5.6B 增长 21%，主因游戏主机 SoC 需求带动半定制产品销售增长，部分被游戏显卡销量下降抵消（2022 下半年宏观走弱致消费需求疲软）；经营利润 $953M vs $934M",
+      "Embedded：2022 年净营收 $4.6B，较 2021 年 $246M 大幅增长，主因 2022 年 2 月完成 Xilinx 收购后并入其嵌入式产品收入；经营利润 $2.3B vs $44M"
+    ],
+    "raw_excerpt": "Client net revenue of $6.2 billion in 2022 decreased by 10%, compared to net revenue of $6.9 billion in 2021, primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. ... Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 附注：Xilinx 收购及 2022 年归属 Xilinx 的营收与经营利润",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p73",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 年合并报表中归属 Xilinx 的净营收为 $4,612M，经营利润为 $2,247M",
+      "归属 Xilinx 的经营利润记于 Embedded 与 Data Center 分部，不含记于 All Other 的 $4.2B 摊销、股权激励与收购相关成本",
+      "Xilinx 收购于 2022 年 2 月 14 日完成，总对价 $48.8B（扣除现金后 $46.4B）",
+      "2022 年 Xilinx 收购相关成本 $350M 计入销售成本、研发及营销/一般/管理费用"
+    ],
+    "raw_excerpt": "The Consolidated Statements of Operations include the following revenue and operating income attributable to Xilinx in 2022: Net revenue $ 4,612 / Operating income $ 2,247 ... On February 14, 2022, the Company completed the acquisition of all issued and outstanding shares of Xilinx ... for a total purchase consideration of $48.8 billion"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A：合并利润表关键行（总营收交叉核对）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "合并利润表净营收：2022 年 $23,601M，2021 年 $16,434M（与分部汇总表一致）",
+      "销售成本：2022 年 $11,550M，2021 年 $8,505M",
+      "毛利：2022 年 $10,603M，2021 年 $7,929M；毛利率 45% vs 48%",
+      "研发费用 $5,005M vs $2,845M；营销/一般/管理费用 $2,336M vs $1,448M",
+      "收购相关无形资产摊销（费用项）$2,100M（2022），2021 年为 0"
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 / Cost of sales 11,550 8,505 / Amortization of acquisition-related intangibles 1,448 — / Gross profit 10,603 7,929 / Gross margin 45 % 48 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview（净收入同比 +44%）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 净收入为 $23.6 billion，较 FY2021 的 $16.4 billion 增长 44%。",
+      "10-K 将收入增长归因于：Data Center 分部收入 +64%（主要因 EPYC 服务器处理器销量提升）、Gaming 分部 +21%（主要因半定制产品销量提升）、以及 Embedded 分部收入因并入 Xilinx embedded 产品销售而显著增长。",
+      "Client 分部收入下降 10%，主要因 PC 市场疲弱及 PC 供应链的大幅库存修正。",
+      "毛利率由 48% 降至 45%，10-K 明确主因是与 Xilinx 收购相关的无形资产摊销。",
+      "经营利润由 FY2021 的 $3.6 billion 降至 FY2022 的 $1.3 billion，10-K 明确主因是 Xilinx 收购相关无形资产摊销。"
+    ],
+    "raw_excerpt": "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the prior year period driven by the inclusion of Xilinx embedded product sales. This growth was partially offset by a 10% decrease in Client segment revenue ... Gross margin, as a percentage of net revenue for 2022, was 45%, compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition. Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 分部净收入与经营利润表（2022 vs 2021）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "分部净收入 FY2022 / FY2021（百万美元）：Data Center 6,043 / 3,694；Client 6,201 / 6,887；Gaming 6,805 / 5,607；Embedded 4,552 / 246；合计 23,601 / 16,434。",
+      "由此计算的分部增量：Data Center +2,349；Client −686；Gaming +1,198；Embedded +4,306；合计 +7,167。",
+      "Embedded 分部增量 +$4,306M 约占总增量 +$7,167M 的 60%。",
+      "分部经营利润 FY2022 / FY2021（百万美元）：Data Center 1,848 / 991；Client 1,190 / 2,088；Gaming 953 / 934；Embedded 2,252 / 44；All Other −4,979 / −409；合计 1,264 / 3,648。",
+      "10-K 说明公司在 FY2022 第二季度变更了报告分部，以与业务管理方式对齐。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434 ... Operating income (loss): Data Center $ 1,848 $ 991 / Client 1,190 2,088 / Gaming 953 934 / Embedded 2,252 44 / All Other (4,979) (409) / Total operating income (loss) $ 1,264 $ 3,648 ... During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Embedded 分部讨论（Xilinx 并入驱动）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Embedded 净收入 FY2022 为 $4.6 billion，FY2021 为 $246 million。",
+      "10-K 明确 Embedded 收入显著增长「主要因 2022 年 2 月收购 Xilinx 后并入 Xilinx embedded 产品收入」。",
+      "Embedded 经营利润 FY2022 为 $2.3 billion，FY2021 为 $44 million，增长主要因并入 Xilinx embedded 产品收入。",
+      "All Other 经营亏损 $5.0 billion，主要由 $3.5 billion 收购相关无形资产摊销、$1.1 billion 股权激励费用、$452 million 收购相关成本构成（后者主要包括交易成本与 Xilinx 存货公允价值 step-up 摊销）。",
+      "合并利润表摘要：净收入 23,601 / 16,434；Cost of sales 11,550 / 8,505；Amortization of acquisition-related intangibles（计入 cost of sales）1,448 / 0；毛利率 45% / 48%；R&D 5,005 / 2,845；MG&A 2,336 / 1,448；Amortization of acquisition-related intangibles（计入营业费用）2,100 / 0。"
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022. Embedded operating income was $2.3 billion in 2022, compared to operating income of $44 million in 2021 ... All Other operating loss of $5.0 billion in 2022 primarily consisted of $3.5 billion of amortization of acquisition-related intangibles, $1.1 billion of stock-based compensation expense, and $452 million of acquisition-related costs"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 收购完成日与合并范围（部分年度合并）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx 收购完成日为 2022 年 2 月 14 日（Xilinx Acquisition Date）。",
+      "Pensando 收购完成日为 2022 年 5 月 26 日（Pensando Acquisition Date）。",
+      "FY2022 为 53 周，FY2021 与 FY2020 各为 52 周；FY2022 结束于 2022-12-31，FY2021 结束于 2021-12-25。"
+    ],
+    "raw_excerpt": "On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. (Pensando). ... Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 业务合并：Xilinx 合并期间与归属收入",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx 的业绩自 Xilinx Acquisition Date 起至 2022-12-31 纳入合并财务报表，即 FY2022 仅合并约 10.5 个月而非完整 12 个月。",
+      "Xilinx 业绩分别报告于 Embedded 与 Data Center 两个分部，因此 Xilinx 收入贡献不等于 Embedded 分部增量。",
+      "Xilinx 股票对价按 2022 年 2 月 11 日收盘价 $113.18/股确定（交易在 Xilinx Acquisition Date 开盘前完成）。"
+    ],
+    "raw_excerpt": "results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments. ... As the transaction closed prior to the opening of markets on the Xilinx Acquisition Date, the fair value of the common stock issued to Xilinx stockholders was based on the closing price of the Company's common stock on February 11, 2022 of $113.18 per share."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5：Xilinx 归属收入与经营利润、收购相关成本",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p73",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 合并利润表中归属 Xilinx 的净收入为 $4,612 million，经营利润为 $2,247 million。",
+      "上述 Xilinx 经营利润未包含 $4.2 billion 的收购相关无形资产摊销、股权激励费用与收购相关成本，这些计入 All Other 分部。",
+      "FY2022 计入 Cost of sales、R&D、MG&A 的 Xilinx 收购相关成本为 $350 million。",
+      "备考（pro forma）口径：假设 Xilinx 与 Pensando 收购均于 FY2021 年初（2020-12-27）完成，FY2022 净收入 $24,117M、净利 $2,311M；FY2021 净收入 $20,150M、净利 $8M。",
+      "公司承担 Xilinx 未归属 RSU 公允价值 $1.2 billion，其中 $275 million 计入购买对价，$951 million 于收购后确认为费用。"
+    ],
+    "raw_excerpt": "The Consolidated Statements of Operations include the following revenue and operating income attributable to Xilinx in 2022: 2022 (In millions) Net revenue $ 4,612 / Operating income $ 2,247 ... does not include $4.2 billion of amortization of acquisition-related intangibles, employee stock-based compensation expense and acquisition-related costs, which are recorded under the \"All Other\" segment. In 2022, Xilinx acquisition-related costs of $350 million were recorded under Cost of sales, Research and development, and Marketing, general and ... as if the acquisitions had been consummated as of the beginning of the fiscal year 2021 (i.e., December 27, 2020). Net revenue $ 24,117 $ 20,150 / Net income $ 2,311 $ 8"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5：Xilinx 购买对价分摊",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p72",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx 总购买对价为 $48,793 million。",
+      "对价分摊：现金及等价物 $2,366M、短期投资 $1,582M、应收账款 $299M、存货 $539M、物业设备 $692M、收购相关无形资产 $27,308M、递延税资产 $15M、其他非流动资产 $418M，总资产 $33,341M。",
+      "承担的负债合计 $7,332M，其中长期债务 $1,474M、递延税负债 $4,346M。",
+      "按公允价值计量的净资产为 $26,009M，商誉为 $22,784M。"
+    ],
+    "raw_excerpt": "The purchase consideration was allocated as follows: (In millions) Cash and cash equivalents $ 2,366 / Short-term investments 1,582 / ... Acquisition-related intangibles 27,308 ... Deferred tax liabilities 4,346 ... Fair value of net assets acquired 26,009 / Goodwill 22,784 / Total purchase consideration $ 48,793"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 6：收购相关无形资产明细与摊销",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p74",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "截至 2022-12-31 收购相关无形资产：Developed technology 账面 $12,360M（剩余加权平均年限 15 年）、Customer relationships $12,324M（13 年）、Customer backlog $809M（1 个月）、Corporate trade name $65M（1 个月）、Product trademarks $914M（11 年）。",
+      "可摊销无形资产合计 $26,472M，累计摊销 $3,548M，净额 $22,924M；另有 IPR&D $1,194M 不摊销；总额 $27,666M。",
+      "FY2022 收购相关无形资产摊销费用为 $3.5 billion。",
+      "2021-12-25 的收购相关无形资产余额「not material」。",
+      "未来年度摊销指引：2023 $2,804M、2024 $2,286M、2025 $2,061M、2026 $1,951M、2027 $1,844M、2028 及以后 $11,978M，合计 $22,924M。",
+      "备考口径下，Xilinx 存货公允价值 step-up 摊销在 FY2021 为 $184 million，FY2022 为零。"
+    ],
+    "raw_excerpt": "Developed technology 15 years $ 12,360 $ (738) $ 11,622 / Customer relationships 13 years 12,324 (1,973) 10,351 / Customer backlog 1 month 809 (712) 97 / Corporate trade name 1 month 65 (57) 8 / Product trademarks 11 years 914 (68) 846 / Identified intangible assets subject to amortization 26,472 (3,548) 22,924 / IPR&D not subject to amortization N/A 1,194 — 1,194 ... Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022. ... 2023 $ 2,804 / 2024 2,286 / 2025 2,061 / 2026 1,951 / 2027 1,844 / 2028 and thereafter 11,978"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A 费用讨论：摊销在成本与费用间的拆分",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 计入 cost of sales 的收购相关无形资产摊销为 $1.4 billion，计入营业费用的为 $2.1 billion（合计 $3.5 billion）。",
+      "R&D 费用由 $2.8B 增至 $5.0B（+76%），主因各分部战略投入，包括通过收购与有机增长带来的人员增加。",
+      "MG&A 费用由 $1.4B 增至 $2.3B（+61%），主因通过收购与有机增长带来的人员增加、市场推广活动及收购相关成本。",
+      "利息费用由 $34M 增至 $88M，主因承担的 Xilinx Notes（2.95% Senior Notes due 2024、2.375% Senior Notes due 2030）以及 2022 年发行的 3.924% 与 4.393% Notes。"
+    ],
+    "raw_excerpt": "In 2022, cost of sales and operating expense included $1.4 billion and $2.1 billion, respectively, of amortization expense from intangible assets acquired as a ... Research and development expenses of $5.0 billion in 2022 increased by $2.2 billion, or 76% ... including an increase in headcount through acquisitions and organic growth. Marketing, General and Administrative Expenses ... increased by $888 million, or 61% ... primarily due to an increase in headcount through acquisitions and organic growth, go-to-market activities, and acquisition-related costs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 合并利润表（FY2022/FY2021/FY2020）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "净收入：FY2022 $23,601M、FY2021 $16,434M、FY2020 $9,763M。",
+      "Cost of sales：11,550 / 8,505 / 5,416；另列 Amortization of acquisition-related intangibles 1,448 / 0 / 0，Total cost of sales 12,998 / 8,505 / 5,416。",
+      "营业费用中另列 Amortization of acquisition-related intangibles 2,100 / 0 / 0。",
+      "经营利润：1,264 / 3,648 / 1,369。",
+      "净利润：1,320 / 3,162 / 2,490；稀释每股收益 0.84 / 2.57 / 2.06。"
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347 ... Amortization of acquisition-related intangibles 2,100 — — ... Operating income 1,264 3,648 1,369 ... Net income $ 1,320 $ 3,162 $ 2,490"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 分部附注：All Other 构成与三年分部数据",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "三年分部净收入（2022/2021/2020，百万美元）：Data Center 6,043/3,694/1,685；Client 6,201/6,887/5,189；Gaming 6,805/5,607/2,746；Embedded 4,552/246/143；合计 23,601/16,434/9,763。",
+      "All Other 经营亏损构成（2022/2021/2020）：股权激励 1,081/379/274；收购相关成本 452/42/14；收购相关无形资产摊销 3,548/0/0；许可收益 −102/−12/0；合计 4,979/409/288。",
+      "FY2021 与 FY2020 的收购相关无形资产摊销均为零，说明该摊销为 FY2022 新增项目。"
+    ],
+    "raw_excerpt": "Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763 ... Operating loss: Stock-based compensation expense $ 1,081 $ 379 $ 274 / Acquisition-related costs 452 42 14 / Amortization of acquisition-related intangibles 3,548 — — / Licensing gain (102) (12) — / Total operating loss $ 4,979 $ 409 $ 288"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 合并现金流量表（折旧摊销、存货公允价值调整）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "折旧与摊销由 FY2021 的 $407M 增至 FY2022 的 $4,174M。",
+      "FY2022 存货公允价值调整摊销为 $189M，FY2021 为零。",
+      "股权激励费用 1,081 / 379 / 274（2022/2021/2020）。",
+      "投资活动：收到 Xilinx 收购带来的现金 $2,366M；收购 Pensando 净现金支出 $1,544M。",
+      "筹资活动：回购普通股 $3,702M（FY2021 为 $1,762M）。"
+    ],
+    "raw_excerpt": "Depreciation and amortization 4,174 407 312 / Stock-based compensation 1,081 379 274 ... Amortization of inventory fair value adjustment 189 — — ... Cash received from acquisition of Xilinx 2,366 — — / Acquisition of Pensando, net of cash acquired (1,544) — —"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 会计政策变更与 Xilinx 相关递延税负债",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p65",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "因 Xilinx 收购确认了 $857 million 的递延税负债。",
+      "该会计政策变更使 FY2022 所得税费用减少、净利润增加 $296 million，基本与稀释每股收益增加 $0.19。",
+      "该会计政策变更对公司历史合并财务报表无重大影响。"
+    ],
+    "raw_excerpt": "This accounting policy change resulted in the recording of $857 million of deferred tax liabilities in connection with the Xilinx acquisition as disclosed in Note 14 - Income Taxes. In addition, for the year ended December 31, 2022, it resulted in a decrease in the income tax provision with a corresponding increase to net income of $296 million and an increase in basic and diluted earnings per share of $0.19"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5：Pensando 收购对价分摊",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p70",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Pensando 交易估值约 $1.9 billion，记录的购买对价为 $1.7 billion（已扣除需未来支付的递延现金补偿）。",
+      "Pensando 对价分摊：收购相关无形资产 $349M、商誉 $1,098M、按公允价值计量的净资产 $557M、总对价 $1,655M。",
+      "10-K 未单独披露 Pensando 对 FY2022 收入的贡献金额。"
+    ],
+    "raw_excerpt": "On May 26, 2022, the Company completed the acquisition of all issued and outstanding shares of Pensando ... for a transaction valued at approximately $1.9 billion. The recorded purchase consideration of $1.7 billion is net of deferred cash compensation requiring future ... Acquisition-related intangibles 349 ... Fair value of net assets acquired 557 / Goodwill 1,098 / Total purchase consideration $ 1,655"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 审计师关键审计事项：Xilinx 业务合并",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p95",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "审计师（Ernst & Young LLP）将 Xilinx 业务合并列为关键审计事项，FY2022 完成的对价金额为 $48.8 billion。",
+      "审计报告签署日期为 2023 年 2 月 27 日。"
+    ],
+    "raw_excerpt": "Business Combination — Description of the Matter During fiscal year 2022, the Company completed the acquisition of Xilinx, Inc. (\"Xilinx\") for consideration of $48.8 billion ... /s/ Ernst & Young LLP ... February 27, 2023"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations: Client segment (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "Client FY2022 net revenue was $6.2 billion, a 10% decrease from $6.9 billion in FY2021.",
+      "The decrease was primarily driven by a 24% decrease in unit shipments, partially offset by a 19% increase in average selling price.",
+      "The unit shipment decrease was attributed to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022.",
+      "The ASP increase was primarily driven by a richer mix of Ryzen mobile processor sales.",
+      "Client operating income fell to $1.2 billion in FY2022 from $2.1 billion in FY2021, driven by lower revenue and higher operating expenses."
+    ],
+    "raw_excerpt": "Client net revenue of $6.2 billion in 2022 decreased by 10%, compared to net revenue of $6.9 billion in 2021, primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. The decrease in unit shipments was due to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022. The increase in average selling price was primarily driven by a richer mix of Ryzen mobile processor sales."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Risk Factors: Client segment revenue decline (p19)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19",
+    "published_at": "2023",
+    "key_points": [
+      "The filing states the Client segment revenue decline resulted from weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022."
+    ],
+    "raw_excerpt": "We experienced a decline in our Client segment revenue as a result of weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Segment net revenue and operating income table, FY2020–FY2022 (p48 / p68, Note 4)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023",
+    "key_points": [
+      "Net revenue (in millions) 2022 / 2021 / 2020: Data Center 6,043 / 3,694 / 1,685; Client 6,201 / 6,887 / 5,189; Gaming 6,805 / 5,607 / 2,746; Embedded 4,552 / 246 / 143; Total 23,601 / 16,434 / 9,763.",
+      "Operating income (loss) (in millions) 2022 / 2021 / 2020: Data Center 1,848 / 991 / 198; Client 1,190 / 2,088 / 1,608; Gaming 953 / 934 / (138); Embedded 2,252 / 44 / (11); All Other (4,979) / (409) / (288); Total 1,264 / 3,648 / 1,369.",
+      "All Other operating loss of $4,979 million in FY2022 included $3,548 million of amortization of acquisition-related intangibles, $1,081 million of stock-based compensation, and $452 million of acquisition-related costs."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685; Client 6,201 6,887 5,189; Gaming 6,805 5,607 2,746; Embedded 4,552 246 143; Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Data Center segment (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "Data Center net revenue was $6 billion in FY2022, up 64% from $3.7 billion in FY2021.",
+      "The increase was primarily driven by higher sales of EPYC server processors.",
+      "Data Center operating income rose to $1.8 billion from $991 million, driven by higher revenue partially offset by higher operating expenses."
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Gaming segment (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023",
+    "key_points": [
+      "Gaming net revenue was $6.8 billion in FY2022, up 21% from $5.6 billion in FY2021.",
+      "The increase was driven by higher semi-custom product sales due to higher demand for gaming console SoCs.",
+      "This was partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions in the second half of 2022.",
+      "Gaming operating income was $953 million versus $934 million in FY2021."
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Embedded segment (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023",
+    "key_points": [
+      "Embedded net revenue was $4.6 billion in FY2022 versus $246 million in FY2021.",
+      "The increase was primarily driven by the inclusion of Xilinx embedded product revenue following the Xilinx acquisition completed in February 2022.",
+      "Embedded operating income was $2.3 billion versus $44 million in FY2021."
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview: total revenue growth and gross margin (p43)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 net revenue was $23.6 billion, an increase of 44% compared to FY2021 net revenue of $16.4 billion.",
+      "The filing attributes FY2022 results to the strength of a diversified business model despite challenging PC market conditions in the second half of 2022.",
+      "Gross margin was 45% in FY2022 versus 48% in FY2021, with the decrease primarily due to amortization of intangible assets associated with the Xilinx acquisition.",
+      "FY2022 operating income was $1.3 billion versus $3.6 billion in FY2021; net income was $1.3 billion versus $3.2 billion."
+    ],
+    "raw_excerpt": "Our 2022 financial results reflect the strength of our diversified business model despite the challenging PC market conditions in the second half of 2022. Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Segment reporting structure change (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "Effective Q2 of fiscal 2022, AMD changed its reporting segments to four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "The change aligned financial reporting with how the CODM assesses performance and allocates resources."
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. ... we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Overview（全年营收变化与总归因）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43 (ITEM 7. MD&A, Overview)",
+    "published_at": "2023-02",
+    "key_points": [
+      "FY2022 净营收 236.01 亿美元，较 2021 年的 164.34 亿美元增长 44%。",
+      "营收增长主要由 Data Center 分部营收 +64% 驱动，原因是 EPYC 服务器处理器销量上升。",
+      "Gaming 分部营收 +21%，亦为增长贡献项。",
+      "管理层称 2022 年业绩体现多元化业务模式的韧性，尽管 2022 年下半年 PC 市场环境严峻。",
+      "2022 年 2 月完成对 Xilinx 的收购，将可编程硬件平台纳入产品组合。"
+    ],
+    "raw_excerpt": "Our 2022 financial results reflect the strength of our diversified business model despite the challenging PC market conditions in the second half of 2022. Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue … driven by a weak PC market and significant inventory correction actions across the PC supply chain."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 分部营收与经营利润表（Results of Operations / Note 4 Segment Reporting）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48 与 p68 (Results of Operations; Note 4 – Segment Reporting)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Data Center 净营收 60.43 亿美元（2021: 36.94 亿；2020: 16.85 亿）。",
+      "Client 净营收 62.01 亿美元（2021: 68.87 亿；2020: 51.89 亿）。",
+      "Gaming 净营收 68.05 亿美元（2021: 56.07 亿；2020: 27.46 亿）。",
+      "Embedded 净营收 45.52 亿美元（2021: 2.46 亿；2020: 1.43 亿）。",
+      "分部经营利润：Data Center 18.48 亿、Client 11.90 亿（2021: 20.88 亿）、Gaming 9.53 亿、Embedded 22.52 亿、All Other -49.79 亿。",
+      "2022 年 Q2 起将报告分部调整为 Data Center、Client、Gaming、Embedded 四个分部。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763 … Operating income (loss): Data Center $ 1,848 $ 991 $ 198 / Client 1,190 2,088 1,608 / Gaming 953 934 (138) / Embedded 2,252 44 (11) / All Other (4,979) (409) (288)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Data Center 分部讨论（EPYC 驱动的服务器需求）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48 (Results of Operations, Data Center)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Data Center 营收 2022 年约 60 亿美元，同比 +64%（2021 年 37 亿美元）。",
+      "该增长主要归因于 EPYC 服务器处理器销量上升。",
+      "Data Center 经营利润由 2021 年 9.91 亿美元升至 2022 年 18.48 亿美元，主因营收增长，部分被运营费用增加抵消。"
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors. Data Center operating income was $1.8 billion in 2022, compared to operating income of $991 million in 2021."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Client 分部讨论（出货量 -24% 与 ASP +19%）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48 (Results of Operations, Client)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Client 营收 2022 年 62 亿美元，同比 -10%（2021 年 69 亿美元）。",
+      "下滑主要由出货量（unit shipment）下降 24% 造成，被平均售价（ASP）上升 19% 部分抵消。",
+      "出货量下降归因于 PC 市场环境严峻，以及 2022 年下半年 PC 供应链的大幅库存修正。",
+      "ASP 上升主要归因于 Ryzen 移动处理器销售结构（mix）更优。",
+      "Client 经营利润由 2021 年 20.88 亿美元降至 2022 年 11.90 亿美元，主因营收下降与运营费用上升。"
+    ],
+    "raw_excerpt": "Client net revenue of $6.2 billion in 2022 decreased by 10%, compared to net revenue of $6.9 billion in 2021, primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. The decrease in unit shipments was due to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022. The increase in average selling price was primarily driven by a richer mix of Ryzen mobile processor sales."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Gaming 分部讨论（主机 SoC 需求 vs 显卡消费需求疲软）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49 (Results of Operations, Gaming)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Gaming 营收 2022 年 68 亿美元，同比 +21%（2021 年 56 亿美元）。",
+      "增长由半定制产品销售上升驱动，原因是游戏主机 SoC 需求增加。",
+      "增长部分被游戏显卡销售下降抵消，后者源于 2022 年下半年宏观环境走弱导致消费需求疲软、出货量减少。",
+      "Gaming 经营利润 9.53 亿美元（2021: 9.34 亿美元），增长主因营收上升，部分被运营费用增加抵消。"
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Embedded 分部讨论（Xilinx 并表贡献）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49 (Results of Operations, Embedded)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Embedded 营收 2022 年 45.52 亿美元，2021 年仅 2.46 亿美元。",
+      "该显著增长主要归因于 2022 年 2 月完成 Xilinx 收购后并入 Xilinx 嵌入式产品营收。",
+      "Embedded 经营利润 22.52 亿美元（2021: 0.44 亿美元），增长主因并入 Xilinx 嵌入式产品营收。"
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 毛利率与 All Other 项目（Xilinx 摊销对利润的影响）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49 (Gross Margin; All Other)",
+    "published_at": "2023-02",
+    "key_points": [
+      "毛利率由 2021 年 48% 降至 2022 年 45%，主因 Xilinx 收购相关无形资产摊销。",
+      "2022 年毛利 106.03 亿美元（2021: 79.29 亿），但计入 14.48 亿美元收购相关无形资产摊销于销售成本。",
+      "All Other 经营亏损 49.79 亿美元，主要含 35.48 亿美元收购相关无形资产摊销、10.81 亿美元股权激励费用、4.52 亿美元收购相关成本。",
+      "经营利润由 2021 年 36.48 亿美元降至 2022 年 12.64 亿美元；净利润由 31.62 亿降至 13.20 亿美元。"
+    ],
+    "raw_excerpt": "Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition. … All Other operating loss of $5.0 billion in 2022 primarily consisted of $3.5 billion of amortization of acquisition-related intangibles, $1.1 billion of stock-based compensation expense, and $452 million of acquisition-related costs"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 风险因素：Q3 2022 库存/定价相关计提与 ASP 下行风险",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p28 (Item 1A Risk Factors — inventory ordering and shipment)",
+    "published_at": "2023-02",
+    "key_points": [
+      "公司在 2022 年第三季度就 Gaming 与 Client 分部计提了主要与库存、定价及相关准备有关的费用。",
+      "文件将平均售价（ASP）下降或毛利率下降列为可能导致存货过剩或过时的因素之一。",
+      "文件重申 2022 年下半年 Client 分部营收因 PC 市场宏观环境疲软与 PC 供应链库存修正而下滑。"
+    ],
+    "raw_excerpt": "For example, in the third quarter of 2022, we recorded certain charges primarily for inventory, pricing and related reserves in the Gaming and Client segments. Other factors that may result in excess or obsolete inventory include, a reduction in the average selling price, or a reduction in our gross margin include: a sudden or significant decrease in demand for our products…"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 6 商誉：无减值结论与商誉分配",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p75 (Note 6 – Acquisition-related Intangible Assets and Goodwill, Goodwill)",
+    "published_at": "2023-02",
+    "key_points": [
+      "2022 年 Q2 因分部报告结构调整重分配商誉，调整前后均判定不存在商誉减值迹象。",
+      "2022 年 Q4 年度商誉减值测试结论为各报告单元无商誉减值（2021 年 Q4 同样无减值）。",
+      "商誉账面值 2022 年末 241.77 亿美元（2021 年末 2.89 亿美元），其中 Embedded 210.55 亿、Data Center 28.84 亿、Gaming 2.38 亿。",
+      "2022 年收购相关无形资产摊销费用为 35 亿美元；2023 年预计摊销约 28.04 亿美元。"
+    ],
+    "raw_excerpt": "During the fourth quarter of fiscal years 2022 and 2021, the Company conducted its annual impairment tests of goodwill and concluded that there was no goodwill impairment with respect to its reporting units. … The carrying amount of goodwill as of December 31, 2022 and December 25, 2021 was $24.2 billion and $289 million, respectively"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 风险因素：第三方晶圆代工依赖（供给约束的结构性表述）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p23 (Item 1A Risk Factors — third-party wafer foundries)",
+    "published_at": "2023-02",
+    "key_points": [
+      "公司 7nm 及以下节点的微处理器与 GPU 晶圆全部依赖 TSMC，大于 7nm 节点主要依赖 GLOBALFOUNDRIES。",
+      "文件指出若因制造供应商供应波动或延迟而无法满足客户需求，可能导致销售损失。",
+      "该表述位于风险因素章节，10-K 未将 FY2022 营收变化归因于供给约束。"
+    ],
+    "raw_excerpt": "We rely on Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm. … if we are unable to meet customer demand due to fluctuating or late supply from our manufacturing suppliers, it could result in lost sales"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 主要客户集中度（需求侧结构）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69 (Note 4 – Segment Reporting, major customers)",
+    "published_at": "2023-02",
+    "key_points": [
+      "2022 年 Customer A 占合并净营收 16%（2021: 14%），其销售来自 Gaming 分部产品。",
+      "Customer B 在 2021 年占合并净营收 11%，2022 年低于 10%，其销售来自 Client 分部产品。",
+      "2022 年按开票地区的外部客户销售：美国 80.49 亿、中国（含香港）52.07 亿、日本 41.77 亿、台湾 23.69 亿、欧洲 17.73 亿、新加坡 13.80 亿。"
+    ],
+    "raw_excerpt": "Customer A 16 % 14 % * / Customer B * 11 % * / Less than 10% … Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Xilinx 收购与 pro forma 合并口径营收",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p73–p74 (Note 5 – Business Combinations, pro forma)",
+    "published_at": "2023-02",
+    "key_points": [
+      "Xilinx 自 2022 年 2 月 14 日（收购日）起并入合并报表，归属 Embedded 与 Data Center 分部。",
+      "2022 年 Xilinx 贡献净营收 46.12 亿美元、经营利润 22.47 亿美元（不含 42 亿美元收购相关摊销、股权激励与收购成本）。",
+      "若收购自 2021 年初完成，pro forma 净营收 2022 年 241.17 亿美元、2021 年 201.50 亿美元。",
+      "2022 年 Xilinx 收购相关成本 3.50 亿美元计入销售成本、研发与营销管理费用。"
+    ],
+    "raw_excerpt": "Net revenue $ 4,612 / Operating income $ 2,247 … Operating income attributable to Xilinx recorded under the Embedded and Data Center segments does not include $4.2 billion of amortization of acquisition-related intangibles … Net revenue $ 24,117 $ 20,150 / Net income $ 2,311 $ 8"
+  }
+]

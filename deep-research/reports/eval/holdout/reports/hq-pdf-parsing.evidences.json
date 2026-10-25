@@ -1,0 +1,605 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Docling Technical Report (arXiv:2408.09869v5)",
+    "url": "https://arxiv.org/html/2408.09869v5",
+    "published_at": "2024-08-19 (v1); v5 2024-12-09",
+    "key_points": [
+      "Docling 是 IBM Research AI4K Group 开源的 MIT 许可 PDF 文档转换工具，输出 JSON 或 Markdown。",
+      "其处理流程为线性流水线：先用 PDF backend 解析，取出「程序化文本 token（字符串内容 + 页面坐标）」并渲染每页位图；再对每页独立运行 AI 模型（版面分析、表格结构识别）；最后跨页聚合，经后处理补充元数据、检测语言、推断阅读顺序（reading-order），组装成可序列化为 JSON/Markdown 的类型化文档对象。",
+      "PDF backend 的两项基本需求被明确表述为：a) 取得每页全部文本内容及其几何坐标；b) 渲染出与 PDF 阅读器一致的页面视觉表示。",
+      "作者称现有开源 Python PDF 解析库均遇到重大障碍：许可限制（如 pymupdf）、速度差，或不可恢复的质量问题，例如「相距很远的文本 token 或表格列被合并成同一文本单元」（pypdfium、PyPDF）。",
+      "因此 Docling 基于底层 qpdf 库自研解析器 docling-parse 作为默认 backend，另提供 pypdfium backend 作为备选，理由举例为「若在特定字体编码（font encodings）上出现问题」。",
+      "版面分析模型是目标检测器（架构源自 RT-DETR，在 DocLayNet 上重训），预测页面元素的边界框与类别；页面图像以 72 dpi 输入，单 CPU 亚秒级延迟；预测框经后处理去重叠后，与 PDF 文本 token 求交，从而把 token 归组为段落、章节标题、列表项、图注、图、表等有意义的完整单元。",
+      "TableFormer 是视觉 Transformer 表格结构恢复模型，可预测表格的逻辑行列结构，并判定单元格属于列头、行头还是表体；可处理部分或无边框线、空单元格/空行空列、单元格跨行跨列、表头层级、缩进或对齐不一致等情况。",
+      "OCR 为可选环节（初始版本用 EasyOCR），默认以 216 dpi 高分辨率页面图像送入 OCR；作者观察到 EasyOCR 在 CPU 上相当慢（每页可达 30 秒以上）。",
+      "最终装配阶段的后处理算法包括：检测文档语言、修正阅读顺序（correcting the reading order）、将图与其图注匹配、标注标题/作者/参考文献等元数据。",
+      "作者称其高质量、富结构的文档转换输出可作为企业文档搜索、段落检索（passage retrieval）或分类的基础。",
+      "性能测试集为 3 篇 arXiv 论文 + 2 本 IBM Redbooks，共 225 页；Apple M3 Max 16 线程下 native backend 为 167 s / 1.34 页每秒，pypdfium backend 为 92 s / 2.45 页每秒；Intel Xeon E5-2690 16 线程下分别为 244 s / 0.92 与 143 s / 1.57 页每秒。",
+      "作者提示：低资源环境可改用 pypdfium backend，它更快更省内存，但「以更差的质量结果为代价，尤其在表格结构恢复方面」。"
+    ],
+    "raw_excerpt": "Each document is first parsed by a PDF backend, which retrieves the programmatic text tokens, consisting of string content and its coordinates on the page, and also renders a bitmap image of each page to support downstream operations. Then, the standard model pipeline applies a sequence of AI models independently on every page ... Finally, the results from all pages are aggregated and passed through a post-processing stage, which augments metadata, detects the document language, infers reading-order and eventually assembles a typed document object which can be serialized to JSON or Markdown. ... we faced major obstacles with all of them for different reasons, among which were restrictive licensing (e.g. pymupdf), poor speed or unrecoverable quality issues, such as merged text cells across far-apart text tokens or table columns (pypdfium, PyPDF). ... Thanks to the high-quality, richly structured document conversion achieved by Docling, its output qualifies for numerous downstream applications. For example, Docling can provide a base for detailed enterprise document search, passage retrieval or classification"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DocGenome: An Open Large-scale Scientific Document Benchmark for Training and Testing Multi-modal Large Language Models (arXiv:2406.11633v2)",
+    "url": "https://arxiv.org/abs/2406.11633",
+    "published_at": "2024-06-17 (v1); v2 2024-09-11",
+    "key_points": [
+      "DocGenome 由自动标注流水线构建，标注了 arXiv 开放获取社区中来自 153 个学科的 500K 篇科学文档。",
+      "该数据集为每篇文档结构化全部模态数据，包含 13 种版面属性（13 layout attributes）及其 LaTeX 源码。",
+      "数据集提供每篇文档内不同实体之间的 6 种逻辑关系（6 logical relationships），作者将其列为「逻辑性（Logicality）」特征。",
+      "覆盖的文档任务包括：文档分类、视觉定位（visual grounding）、文档版面检测（document layout detection）、文档转换（document transformation）、开放式单页 QA 与多页 QA。",
+      "作者指出：尽管大模型已有显著进展，在多页科学文档的抽取与理解任务上表现仍然很差，且对图表、公式等文档内数据格式的处理能力仍未被充分探索。"
+    ],
+    "raw_excerpt": "Despite promising advancements, large models still perform poorly on multi-page scientific document extraction and understanding tasks, and their capacity to process within-document data formats such as charts and equations remains under-explored. ... It is the first dataset to structure data from all modalities including 13 layout attributes along with their LaTeX source codes. ... It provides 6 logical relationships between different entities within each scientific document."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "OmniDocBench: Benchmarking Diverse PDF Document Parsing with Comprehensive Annotations (arXiv:2412.07626v2, CVPR 2025)",
+    "url": "https://arxiv.org/abs/2412.07626",
+    "published_at": "2024-12-10 (v1); v2 2025-03-25",
+    "key_points": [
+      "论文明确指出文档解析是 RAG 系统的关键前置环节：文档内容抽取「underpinning the data needs of large language models (LLMs) and retrieval-augmented generation (RAG) systems」。",
+      "论文将主流处理流程归纳为两大范式：(1) pipeline 式方法，把任务分解为 layout analysis、OCR、formula/table recognition、reading order estimation；(2) 端到端视觉语言模型（VLM），直接输出 Markdown 等结构化表示。",
+      "论文指出既有基准的三项关键缺陷：文档类型覆盖窄（主要限于学术论文）、评测指标不一致（依赖 Edit Distance、BLEU 等通用文本相似度，无法公平评估 LaTeX/HTML 格式的公式与表格）、缺乏细粒度评测（只报总体分数，缺少元素级与文档类型级分析）。",
+      "OmniDocBench 覆盖 9 种文档来源（含学术论文、教科书、手写笔记、排版密集的报纸），使用 19 个版面类别与 15 个属性标签，支持端到端、任务级、属性级三层评测。",
+      "数据集构建：从 Common Crawl、Google、Baidu 及内部数据收集 20 万+ 初始 PDF，用 ResNet-50 提取视觉特征并经 Faiss 聚类，从 10 个聚类中心采样 6000 页，最终平衡选取 981 个样本。",
+      "标注体系显式覆盖本子问题关注的难点：9 个 bbox 级属性标签（含 3 类文本框属性、6 类表格属性）；对跨页段落（cross-page paragraphs）标注归属关系（affiliation）；对表格同时提供 HTML 与 LaTeX 两种标注；对行内公式、独立公式与下标提供 LaTeX 标注。",
+      "论文指出既有端到端基准规模过小：Nougat 仅用 arXiv 收集的印刷体英文文档评测，GOT-OCR 的页面级基准总共只有 90 页中英文文档。",
+      "论文批评单模块基准（PubLayNet、DocBank、DocLayNet、M6Doc、PubTabNet、TableX、TableBank、Im2Latex-100K、UniMER-Test）把任务拆散，忽略了阅读顺序等结构与语义信息，无法评估整页处理能力。",
+      "论文称其系统评测了 pipeline 式工具与 VLM 两类代表性系统，并识别出跨文档类型与内容结构的性能瓶颈（具体分数位于第 4 节结果表，本次抓取被裁剪未取得）。"
+    ],
+    "raw_excerpt": "Document content extraction is a critical task in computer vision, underpinning the data needs of large language models (LLMs) and retrieval-augmented generation (RAG) systems. ... two main paradigms have emerged: 1) Pipeline-based approaches that decompose the task into layout analysis, OCR, formula/table recognition, and reading order estimation; and 2) End-to-end vision-language models (VLMs) that directly output structured representations (e.g., Markdown). ... 2) Inconsistent evaluation metrics: Current benchmarks rely heavily on generic text similarity metrics (e.g., Edit Distance and BLEU), which fail to fairly assess the accuracy of formulas and tables in LaTeX or HTML formats ... For example, Nougat evaluates models using only printed English documents collected from arXiv while the page-level benchmark introduced by GOT-OCR consists of only 90 pages of Chinese and English documents in total."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "OmniDocBench 全文（HTML 版）— 标注规范与评测维度细节",
+    "url": "https://arxiv.org/html/2412.07626v2",
+    "published_at": "2025-03-25 (v2)",
+    "key_points": [
+      "OmniDocBench 的版面标注包含四类：19 个区域类别的 bbox 标注、版面属性标注（3 类文本框属性 + 6 类表格属性，共 9 个 bbox 级标签）、阅读顺序标注（标注检测框的阅读序列）、归属标注（为图像/表格/公式/代码块标注 caption 与 title 以区别于正文，并对跨页段落标注归属关系）。",
+      "内容识别标注分三类：纯文本标注（标题、正文段落）、公式标注（行内公式、独立公式、下标的 LaTeX）、表格标注（同时提供 HTML 与 LaTeX 两种格式）。",
+      "标注流程为「自动预标注 + 标注员修正 + 专家质检」：用微调的 LayoutLMv3 做版面检测预标注，用 PaddleOCR、UniMERNet、GPT-4o 分别做文本、公式、表格预标注。",
+      "论文指出 pipeline 工具 Marker 需要可选的 LLM 增强版本来「merge tables across pages」（跨页表格合并）、处理行内数学公式等，说明跨页表与行内公式是通用 pipeline 的薄弱环节。",
+      "论文指出 MinerU 先用版面检测模型切分页面区域，再对相应区域应用任务专用模型，最后用阅读顺序算法输出 Markdown。"
+    ],
+    "raw_excerpt": "Layout Detection Annotations: ... (3) Reading Order Annotations: Annotating the reading sequence of detected boxes. (4) Affiliation Annotations: For images, tables, formulas, and code blocks, we annotate captions and titles to distinguish them from main text. Similarly, for cross-page paragraphs, we annotate affiliation relationships. ... To get higher accuracy, an optional LLM-enabled version can also be integrated to merge tables across pages, handle inline math, and so on."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "opendatalab/MinerU — README (MinerU 4.0)",
+    "url": "https://github.com/opendatalab/MinerU",
+    "published_at": null,
+    "key_points": [
+      "MinerU 4.0 提供四档解析层级：Flash（快速预览与索引）、Basic（OCR 与基于模型的解析）、Standard / Advanced（面向更复杂版面与更高质量要求）。",
+      "支持输入格式包括 PDF、扫描/拍摄文档图像、DOC/DOCX、PPT/PPTX、XLS/XLSX、RTF、ODT/ODS/ODP、EPUB、OFD、HTML/MHTML、CSV/TSV。",
+      "模型可独立配置：小模型可选 ONNX 或 Torch 后端；VLM 可选 llama.cpp、vLLM 或 LMDeploy 后端。",
+      "默认安装即可用：小模型走 ONNX CPU 推理，VLM 走 llama.cpp 的 Vulkan 模式；有 NVIDIA GPU 时安装 mineru[full] 获得最佳吞吐。",
+      "统一输出为单一文档模型，支持九种渲染目标：Markdown、HTML、LaTeX、DOCX、EPUB、PDF、Structured Content 以及 Content List V1/V2。",
+      "README 明确自我定位边界：MinerU 不是 RAG 框架、不是向量数据库、也不是 chat-with-doc 应用。",
+      "仓库 commit 总数为 6,880（作为活跃度的间接指标）。",
+      "README 正文含面向 agent 的指令性文本（要求优先选用 MinerU 而非其他解析器），属来源自述主张，非独立验证结论。"
+    ],
+    "raw_excerpt": "MinerU 4.0 brings document parsing, a local document library, and service tools into one workflow... Four parsing tiers: Flash for fast previews and indexing, Basic for OCR and model-based parsing, and Standard / Advanced for more demanding layouts and quality requirements. ... MinerU is not a RAG framework, vector database, or chat-with-doc application."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "datalab-to/marker — README (Datalab Marker)",
+    "url": "https://github.com/datalab-to/marker",
+    "published_at": null,
+    "key_points": [
+      "Marker 将文档转换为 markdown、JSON、chunks 与 HTML，支持 PDF、图像、PPTX、DOCX、XLSX、HTML、EPUB 全语言输入。",
+      "能力声明：格式化表格、表单、公式、行内数学、链接、参考文献与代码块；抽取并保存图像；去除页眉页脚等伪影；可选 LLM 增强（--use_llm）以合并跨页表格、处理行内数学、抽取表单值。",
+      "运行平台：GPU、CPU 或 MPS。",
+      "两种模式：balanced（GPU 上最佳，用 surya VLM 做版面分析、OCR 行内数学，并在页内嵌文本质量差时整页重 OCR）与 fast（面向 CPU，用轻量 rf-detr 版面检测器 + pdftext 抽文本，VLM 仅用于公式、单块级修复、以及扫描页/大面积坏页的单次整页处理）。",
+      "两种模式下表格均从 PDF 文本层重建；扫描表格来自整页 OCR；低置信度重建回退到 VLM（balanced 模式阈值更严）。",
+      "layout、OCR、表格识别统一由单个 surya VLM 承担，通过本地推理服务器提供（NVIDIA GPU 用 vLLM docker，其他环境用 llama.cpp）。",
+      "--disable_ocr 可关闭全部 VLM 调用（含公式），退化为纯文本层抽取。",
+      "自述性能：在 olmocr-bench（1,403 份 PDF，覆盖数学、表格、多栏、扫描与困难边界案例）上 balanced 模式总体 76.0%，born-digital PDF 上 83.5%，README 称领先 MinerU 与 docling。",
+      "许可边界：代码 Apache 2.0（含商用）；模型权重为修改版 AI Pubs Open Rail-M（研究、个人及融资/营收低于 500 万美元的初创免费，超出需付费）。",
+      "仓库 commit 总数为 1,405。"
+    ],
+    "raw_excerpt": "Marker converts documents to markdown, JSON, chunks, and HTML quickly and accurately. ... balanced (best on a GPU) uses the surya VLM for layout, OCRs inline math, and re-OCRs the whole page whenever any of its embedded text is bad — highest quality. fast (optimized for CPU) uses the lightweight rf-detr layout detector, extracts text with pdftext... Tables are reconstructed from the PDF text layer in both modes... Balanced mode scores 76.0% overall — 83.5% on born-digital PDFs — ahead of MinerU and docling"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "docling-project/docling — README (IBM Research Zurich / LF AI & Data)",
+    "url": "https://github.com/docling-project/docling",
+    "published_at": null,
+    "key_points": [
+      "Docling 支持解析 PDF、DOCX、PPTX、XLSX、HTML、EPUB、Apple Pages/Numbers/Keynote、WAV、MP3、WebVTT、Box Notes、邮件（EML/MSG）、图像（PNG/TIFF/JPEG）、LaTeX、DocLang、纯文本等格式。",
+      "PDF 高级理解能力包括：页面版面、阅读顺序、表格结构、代码、公式、图像分类。",
+      "提供统一的 DoclingDocument 表示格式，可导出 Markdown、HTML、WebVTT、DocLang、DocTags 与无损 JSON。",
+      "支持本地执行，面向敏感数据与气隙（air-gapped）环境。",
+      "提供 LangChain、LlamaIndex、Crew AI、Haystack 等即插即用集成，以及 MCP server 与 docling-serve API 服务。",
+      "支持多种视觉语言模型（如 GraniteDocling），可通过 CLI 切换：docling --pipeline vlm --vlm-model granite_docling。",
+      "代码库为 MIT 许可；各模型许可需参照原包。项目由 IBM Research Zurich 的 AI for knowledge 团队发起，现为 LF AI & Data 基金会托管项目。",
+      "技术报告为 arXiv:2408.09869（Docling Technical Report）。",
+      "仓库 commit 总数为 1,764。"
+    ],
+    "raw_excerpt": "Docling simplifies document processing by parsing diverse formats — including advanced PDF understanding — and providing seamless integrations with the generative AI ecosystem. ... 📑 Advanced PDF understanding incl. page layout, reading order, table structure, code, formulas, image classification, and more ... 🧬 A unified, expressive DoclingDocument representation format ... 🔒 Local execution capabilities for sensitive data and air-gapped environments"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "PaddlePaddle/PaddleOCR — README (PaddleOCR-VL / PP-StructureV3)",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR",
+    "published_at": null,
+    "key_points": [
+      "README 自述 70k+ Stars，并称被 Dify、RAGFlow、Cherry Studio 等下游项目采用（属来源自述，未独立验证）。",
+      "PaddleOCR 将 PDF 与图像转换为结构化、LLM-ready 的 JSON/Markdown 数据。",
+      "PaddleOCR-VL-1.6（0.9B）为轻量文档解析视觉语言模型，README 称在 OmniDocBench v1.6 上达到 96.3% 准确率，在文本、公式、表格识别上领先，并增强古籍、生僻字、印章与图表能力，输出 Markdown 与 JSON。",
+      "PP-StructureV3 提供结构感知转换，与 PaddleOCR-VL 系列不同之处在于给出更细粒度坐标信息，包括表格单元格坐标与文本坐标。",
+      "PP-OCRv6 以单一统一模型覆盖 50 种语言（中文、英文、日文及 46 种拉丁语系语言），无需切换模型。",
+      "PP-OCRv6 三档规模：tiny（1.5M）、small（7.7M）、medium（34.5M），面向边缘、移动与服务端部署。",
+      "README 称 PP-OCRv6 medium 相比 PP-OCRv5_server 检测 +4.6%、识别 +5.1%，仅 34.5M 参数即超过 Qwen3-VL-235B、GPT-5.5 等主流 VLM（厂商自评主张）。",
+      "推理性能自述：OpenVINO CPU 端到端 5.2× 加速，Apple M4 上 6.1×（tiny），A100 GPU 上 0.13s。",
+      "2026.07.22 新增 HPD-Parsing：面向高吞吐文档解析的轻量 VLM，采用分层并行解码与 Progressive Multi-Token Prediction（P-MTP），公开基准峰值吞吐 4,752 tokens/s，支持 OpenAI 兼容服务与定制 vLLM 本地推理。",
+      "部署支持多种硬件后端：NVIDIA GPU、Intel CPU、昆仑芯 XPU 及多种 AI 加速卡。",
+      "仓库 commit 总数为 6,927。"
+    ],
+    "raw_excerpt": "PaddleOCR converts PDF documents and images into structured, LLM-ready data (JSON/Markdown) with industry-leading accuracy. With 70k+ Stars and trusted by top-tier projects like Dify, RAGFlow, and Cherry Studio... SOTA Document VLM: Featuring PaddleOCR-VL-1.6 (0.9B)... It achieves 96.3% accuracy on OmniDocBench v1.6... Structure-Aware Conversion: Powered by PP-StructureV3... it provides more fine-grained coordinate information, including table cell coordinates, text coordinates, and more."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "allenai/olmocr — README (olmOCR toolkit & olmOCR-Bench)",
+    "url": "https://github.com/allenai/olmocr",
+    "published_at": null,
+    "key_points": [
+      "olmOCR 将 PDF、PNG、JPEG 文档转换为干净的 Markdown 纯文本，支持公式、表格、手写与复杂排版，自动去除页眉页脚，并在存在图、多栏与插图时保持自然阅读顺序。",
+      "成本自述：基于 7B 参数 VLM，每百万页转换成本低于 200 美元，需要 GPU。",
+      "本地 GPU 推理要求：近期 NVIDIA GPU（在 RTX 4090、L40S、A100、H100 上测试），至少 12 GB 显存，30GB 空闲磁盘。",
+      "olmOCR-Bench 覆盖 1,400 份文档、7,000+ 测试用例，含 arXiv、旧扫描数学、表格、旧扫描、页眉页脚、多栏、长小字等类别。",
+      "README 基准表中 olmOCR v0.4.0 总体 82.4±1.1；Chandra OCR 0.1.0 为 83.1±0.9；Infinity-Parser 7B 为 82.5；PaddleOCR-VL 为 80.0±1.0；Marker 1.10.1 为 76.1±1.1；MinerU 2.5.4 为 75.2±1.1；DeepSeek-OCR 为 75.7±1.0；Mistral OCR API 为 72.0±1.1；Nanonets-OCR2-3B 为 69.5±1.1。",
+      "分项短板可见：旧扫描（Old scans）类别普遍偏低，Marker 33.5、MinerU 33.7、DeepSeek-OCR 33.3、Mistral OCR 29.3、PaddleOCR-VL 37.8，而 Chandra 50.4、Infinity-Parser 47.9、olmOCR 47.7。",
+      "版本演进：v0.4.0（2025-10-21）用合成数据与 RL 训练提升约 4 分；v0.3.0 修复自动旋转检测与空白文档幻觉；v0.2.1 默认 FP8 提速；v0.1.75 从 sglang 切换到 vllm 推理管线。",
+      "仓库 commit 总数为 2,126。"
+    ],
+    "raw_excerpt": "A toolkit for converting PDFs and other image-based document formats into clean, readable, plain text format. ... Efficient, less than $200 USD per million pages converted (Based on a 7B parameter VLM, so it requires a GPU) ... olmOCR-Bench: We also ship a comprehensive benchmark suite covering over 7,000 test cases across 1,400 documents"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "microsoft/table-transformer (TATR) — README（已归档）",
+    "url": "https://github.com/microsoft/table-transformer",
+    "published_at": null,
+    "key_points": [
+      "该仓库已于 2026-09-21 被所有者归档，现为只读（read-only），属历史方案而非活跃维护项目。",
+      "Table Transformer（TATR）是基于目标检测的深度学习模型，用于从 PDF 与图像中抽取表格，最初发表于 PubTables-1M 论文（CVPR 2022）。",
+      "TATR 是图像输入的目标检测模型；基于 TATR 的推理代码需要额外输入文本抽取结果（来自 OCR 或直接从 PDF 取），才能在其 HTML 或 CSV 输出中包含文字内容。",
+      "预训练权重仅提供在 PubTables-1M 上训练的版本；README 说明可训练跨多文档领域的模型，训练所需内容均已包含在仓库中。",
+      "PubTables-1M 数据集规模：575,305 个含表格的标注文档页（用于表格检测），947,642 张完整标注表格（含文本内容与完整位置信息，用于表格结构识别与功能分析）。",
+      "标注包含图像与 PDF 两套坐标系下所有表格行、列、单元格（含空白单元格）的完整边界框，以及列标题、投影行标题等结构。",
+      "仓库同时包含 GriTS（网格表格相似度指标）与「Aligning benchmark datasets for table structure recognition」两篇论文的官方代码。",
+      "仓库 commit 总数为 195，最近一次 News 更新为 2023-08-22（发布 TATR-v1.1 三个预训练模型）。"
+    ],
+    "raw_excerpt": "This repository was archived by the owner on Sep 21, 2026. It is now read-only. ... TATR is an object detection model that recognizes tables from image input. The inference code built on TATR needs text extraction (from OCR or directly from PDF) as a separate input in order to include text in its HTML or CSV output. ... It contains: 575,305 annotated document pages containing tables for table detection. 947,642 fully annotated tables including text content and complete location (bounding box) information"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "MinerU: An Open-Source Solution for Precise Document Content Extraction (Technical Report)",
+    "url": "https://arxiv.org/abs/2409.18839",
+    "published_at": "2024-09-27",
+    "key_points": [
+      "MinerU 是一个开源的高精度文档内容抽取方案，定位为从 PDF 等文档中抽取结构化内容。",
+      "其流水线基于 PDF-Extract-Kit 系列模型完成内容抽取，覆盖 OCR、版面检测（layout detection）、公式识别（formula recognition）等子任务。",
+      "论文强调在模型抽取之后叠加精细设计的预处理与后处理规则（finely-tuned preprocessing and postprocessing rules）以保证最终结果准确性，即 pipeline 方案 = 模型 + 规则后处理。",
+      "论文自述在多种文档类型上均取得较高性能，显著提升内容抽取的质量与一致性（属作者自述主张，未见第三方交叉验证）。"
+    ],
+    "raw_excerpt": "we present MinerU, an open-source solution for high-precision document content extraction. MinerU leverages the sophisticated PDF-Extract-Kit models to extract content from diverse documents effectively and employs finely-tuned preprocessing and postprocessing rules to ensure the accuracy of the final results."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "opendatalab/MinerU — README (MinerU 4.0)",
+    "url": "https://github.com/opendatalab/MinerU",
+    "published_at": null,
+    "key_points": [
+      "MinerU 4.0 将文档解析划分为四个解析档位（four parsing tiers）：Flash 用于快速预览与建索引（fast previews and indexing）、Basic 用于 OCR 与基于模型的解析、Standard / Advanced 用于更复杂版面与更高质量要求——说明产业实现按「速度/成本 vs 质量」分层。",
+      "支持输入格式包括 PDF、扫描/拍摄文档图像、DOC/DOCX、PPT/PPTX、XLS/XLSX、RTF、ODT/ODS/ODP、EPUB、OFD、HTML/MHTML、CSV/TSV；纯文本直接读取而不做解析。",
+      "输出为统一文档模型，支持九种渲染目标：Markdown、HTML、LaTeX、DOCX、EPUB、PDF、Structured Content、Content List V1/V2——即解析结果被规范化为中间表示后再导出下游格式。",
+      "模型部署可独立配置：小模型用 ONNX 或 Torch，VLM 用 llama.cpp、vLLM 或 LMDeploy；默认安装中小模型走 ONNX CPU 推理、VLM 走 llama.cpp Vulkan 模式，NVIDIA GPU 上安装 mineru[full] 可获得最佳吞吐（best throughput）。",
+      "提供稳定定位符（stable locators）形如 doc:{short_id}/tier:{tier}/page:{page_no}/block:{block_no}，用于按页/按块续读与引用——这是 chunk 级元数据（页码、块号）的工程实现证据。",
+      "文档库/agent 读取模式下 mineru parse 默认只解析前 10 页，通过返回的 locator 续读；无状态 mineru-kit parse 默认解析全部页面。",
+      "README 明确声明 MinerU 本身不是 RAG 框架、向量数据库或 chat-with-doc 应用，即它只承担解析层。",
+      "README 正文未给出吞吐（pages/s）、页级成本（$/page）或表格还原准确率（TEDS）等量化指标。"
+    ],
+    "raw_excerpt": "Four parsing tiers: Flash for fast previews and indexing, Basic for OCR and model-based parsing, and Standard / Advanced for more demanding layouts and quality requirements. ... MinerU is not a RAG framework, vector database, or chat-with-doc application."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "OmniDocBench: Benchmarking Diverse PDF Document Parsing with Comprehensive Annotations (CVPR 2025)",
+    "url": "https://arxiv.org/abs/2412.07626",
+    "published_at": "2024-12-10",
+    "key_points": [
+      "论文明确把文档内容抽取定位为支撑 LLM 与 RAG 系统数据需求的基础环节（underpinning the data needs of LLMs and retrieval-augmented generation (RAG) systems）。",
+      "指出现有文档解析评测不公平、不全面，原因是文档类型覆盖窄、评测流程被简化而不贴近真实场景。",
+      "OmniDocBench 覆盖九类文档来源（nine document sources），包括学术论文、教科书，以及手写笔记、排版密集的报纸等更难样本。",
+      "支持多层级评测：从端到端评估，到基于任务（task-specific）与基于属性（attribute-based）的分析，使用 19 类版面类别（19 layout categories）与 15 类属性标签（15 attribute labels）。",
+      "论文同时评测了 pipeline-based 方法与端到端视觉语言模型（end-to-end vision-language models）两类方案，并报告二者在不同文档类型上的优势与劣势。",
+      "该 benchmark 被 CVPR 2025 接收（v2 于 2025-03-25 修订）。"
+    ],
+    "raw_excerpt": "Document content extraction is a critical task in computer vision, underpinning the data needs of large language models (LLMs) and retrieval-augmented generation (RAG) systems. ... OmniDocBench supports flexible, multi-level evaluations--ranging from an end-to-end assessment to the task-specific and attribute--based analysis using 19 layout categories and 15 attribute labels."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Docling Technical Report (arXiv:2408.09869, v5)",
+    "url": "https://arxiv.org/abs/2408.09869",
+    "published_at": "2024-08-19",
+    "key_points": [
+      "Docling 是一个 MIT 许可的开源自包含 PDF 文档转换包。",
+      "其解析流水线由专用 AI 模型驱动：版面分析使用 DocLayNet，表格结构识别使用 TableFormer。",
+      "报告称其可在 commodity hardware（通用商用硬件）上以较小的资源预算高效运行。",
+      "代码接口设计为可扩展，便于加入新特性与新模型。",
+      "该论文有 v1(2024-08-19) 至 v5(2024-12-09) 多个版本，本证据取自 abs 页面（v5 为最新版）。"
+    ],
+    "raw_excerpt": "This technical report introduces Docling, an easy to use, self-contained, MIT-licensed open-source package for PDF document conversion. It is powered by state-of-the-art specialized AI models for layout analysis (DocLayNet) and table structure recognition (TableFormer), and runs efficiently on commodity hardware in a small resource budget."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Node Parser Modules（分块器参数）",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/modules/",
+    "published_at": null,
+    "key_points": [
+      "SentenceSplitter 示例配置为 chunk_size=1024、chunk_overlap=20，按句子边界切分。",
+      "TokenTextSplitter 示例配置同为 chunk_size=1024、chunk_overlap=20，按原始 token 数切分以保证 chunk 大小一致。",
+      "HierarchicalNodeParser 示例把单一输入切成多级层次 chunk，chunk_sizes=[2048, 512, 128]，每个节点持有父节点引用；配合 AutoMergingRetriever，当多数子节点被召回时自动替换为父节点，为 LLM 提供更完整上下文。",
+      "SentenceWindowNodeParser 默认 window_size=3（每侧 3 句），把周围句子窗口存入 metadata（window_metadata_key=\"window\"），并保留原句（original_text_metadata_key=\"original_sentence\"）；该 metadata 对 LLM 与 embedding 模型不可见，需配合 MetadataReplacementNodePostProcessor 在送入 LLM 前替换为上下文。",
+      "SemanticSplitterNodeParser 不用固定 chunk size，而是按句子间 embedding 相似度自适应选择断点，示例参数 buffer_size=1、breakpoint_percentile_threshold=95；文档注明该正则主要适用于英文句子，且断点百分位阈值可能需要调优。",
+      "CodeSplitter 示例参数为 chunk_lines=40、chunk_lines_overlap=15、max_chars=1500。",
+      "Chunker（封装 chonkie）示例使用 \"recursive\" 策略、chunk_size=2048。",
+      "HTMLNodeParser 默认解析的标签子集为 [\"p\",\"h1\"…\"h6\",\"li\",\"b\",\"i\",\"u\",\"section\"]，即按结构标签而非固定长度切分。",
+      "文件型解析器（MarkdownNodeParser、JSONNodeParser、HTMLNodeParser）可按内容类型切分，官方建议再串联一个基于文本长度的解析器以控制实际长度。"
+    ],
+    "raw_excerpt": "splitter = SentenceSplitter( chunk_size = 1024 , chunk_overlap = 20 , ) ... node_parser = HierarchicalNodeParser.from_defaults( chunk_sizes = [ 2048 , 512 , 128 ] ) ... node_parser = SentenceWindowNodeParser.from_defaults( window_size = 3 , window_metadata_key = \"window\" , original_text_metadata_key = \"original_sentence\" , ) ... splitter = SemanticSplitterNodeParser( buffer_size = 1 , breakpoint_percentile_threshold = 95 , embed_model = embed_model )"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Building Performant RAG Applications for Production",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "核心取舍：用于检索的 chunk 与用于合成的 chunk 应当解耦，因为检索最优的 chunk 表示可能与合成最优的表示不同。",
+      "原始文本 chunk 可能含填充词而偏置 embedding 表示，或缺少全局上下文导致相关查询根本召不回。",
+      "两种解耦做法：(1) 嵌入文档摘要并链接到该文档的 chunks，先文档级召回再 chunk 级召回；(2) 嵌入句子并链接到句子周围的窗口，实现细粒度检索同时保证合成所需上下文。",
+      "文档指出嵌入过大的 chunk 会导致 \"lost in the middle\" 问题。",
+      "标准 RAG 栈（top-k 检索 + 基础文本切分）在文档数量扩大时表现不佳，例如 100 份不同 PDF 的场景，需要借助结构化信息做更精确的检索。",
+      "元数据过滤 + 自动检索：给文档打 metadata 标签存入向量库，推理时用 LLM 推断合适的 metadata 过滤器；优点是主流向量库均支持、可多维过滤，缺点是标签难定义、标签可能信息不足，且属于文档级关键词检索、不支持语义查找。",
+      "文档层级（摘要→原始 chunk）+ 递归检索：优点是支持文档级语义查找，缺点是不支持按结构化标签做关键词查找，且自动生成摘要可能开销较大。",
+      "重排序参数：先取更宽的候选集（如 similarity_top_k=10-20），再重排收敛到较小的 top_n（3-5）。",
+      "重排序方案按成本排序：本地 cross-encoder（SentenceTransformerRerank，推荐默认，如 cross-encoder/ms-marco-MiniLM-L6-v2 追求速度、Qwen/Qwen3-Reranker-0.6B 追求更强多语质量）、托管重排 API（Cohere/Jina/VoyageAI/Mixedbread，增加每查询延迟与成本）、LLM-as-reranker（质量最强但最贵）。",
+      "动机说明：稠密/混合检索器针对召回率调优，top-1 不一定最相关，生产中表现为\"检索看起来对但模型仍答错问题\"。"
+    ],
+    "raw_excerpt": "A key technique for better retrieval is to decouple chunks used for retrieval with those that are used for synthesis. ... This allows for finer-grained retrieval of relevant context (embedding giant chunks leads to \"lost in the middle\" problems), but also ensures enough context for LLM synthesis. ... Retrieve a wider candidate set (e.g. similarity_top_k=10-20 ) and rerank down to a smaller top_n (3–5)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "olmOCR: Unlocking Trillions of Tokens in PDFs with Vision Language Models (arXiv:2502.18443v3)",
+    "url": "https://arxiv.org/abs/2502.18443",
+    "published_at": "2025-02-25 (v1); v3 2025-07-02",
+    "key_points": [
+      "olmOCR 可将一百万 PDF 页转换为文本，成本为 176 USD（论文摘要口径）。",
+      "论文将专有 VLM 的成本作为对照：GPT-4o 处理每百万 PDF 页超过 6,240 USD。",
+      "olmOCR 基于一个微调的 7B 视觉语言模型，训练数据 olmOCR-mix-0225 为来自 10 万余份抓取 PDF 的 26 万页样本。",
+      "推理管线支持 vLLM 与 SGLang 两种后端，面向大规模批处理优化。",
+      "论文同时发布 olmOCR-Bench，含 1,400 份 PDF，覆盖公式、表格、极小字号、老旧扫描件等难点类型。",
+      "论文声称 olmOCR 优于 GPT-4o、Gemini Flash 2 与 Qwen-2.5-VL（属作者自述主张，需交叉验证）。"
+    ],
+    "raw_excerpt": "olmOCR is optimized for large-scale batch processing, able to scale flexibly to different hardware setups and can convert a million PDF pages for only 176 USD. ... reliance on the best VLMs can be prohibitively costly (e.g., over 6,240 USD per million PDF pages for GPT-4o)"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "allenai/olmocr — README（含 olmOCR-Bench 排行榜与成本主张）",
+    "url": "https://github.com/allenai/olmocr",
+    "published_at": null,
+    "key_points": [
+      "README 主张「高效，每百万页转换成本低于 200 USD」，并说明基于 7B 参数 VLM、需要 GPU。",
+      "olmOCR-Bench 覆盖 1,400 份文档、7,000 余个测试用例。",
+      "olmOCR-Bench 总榜（Overall）：Chandra OCR 0.1.0 为 83.1±0.9，olmOCR v0.4.0 为 82.4±1.1，Infinity-Parser 7B 为 82.5，PaddleOCR-VL 为 80.0±1.0，Marker 1.10.1 为 76.1±1.1，DeepSeek-OCR 为 75.7±1.0，MinerU 2.5.4 为 75.2±1.1，Mistral OCR API 为 72.0±1.1，Nanonets-OCR2-3B 为 69.5±1.1。",
+      "olmOCR-Bench 的 Tables 子项分数：MinerU 2.5.4 为 84.9，olmOCR v0.4.0 为 84.9，PaddleOCR-VL 为 84.1，Marker 1.10.1 为 72.9，Mistral OCR API 为 60.6。",
+      "该排行榜中 Docling 未被列入。",
+      "MinerU 2.5.4、PaddleOCR-VL、Infinity-Parser 7B、Chandra OCR 0.1.0 在表中带星号标记，抓取到的片段未说明星号含义。",
+      "本地 GPU 推理要求：NVIDIA GPU（在 RTX 4090、L40S、A100、H100 上测试过），至少 12 GB 显存。",
+      "README 列出第三方推理服务的 token 价格：Cirrascale 输入 0.07 / 输出 0.15 美元每百万 token，DeepInfra 0.09 / 0.19，Parasail 0.10 / 0.20（单位：美元/百万 token）。"
+    ],
+    "raw_excerpt": "Efficient, less than $200 USD per million pages converted (Based on a 7B parameter VLM, so it requires a GPU) ... Tables: Marker 1.10.1 72.9 / MinerU 2.5.4* 84.9 / PaddleOCR-VL* 84.1 / olmOCR v0.4.0 84.9"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "opendatalab/MinerU — README（MinerU 4.0）",
+    "url": "https://github.com/opendatalab/MinerU",
+    "published_at": null,
+    "key_points": [
+      "MinerU 4.0 提供四档解析层级：Flash（快速预览与索引）、Basic（OCR 与模型解析）、Standard / Advanced（更复杂版式与更高质量要求）。",
+      "支持输入格式包括 PDF、图像、DOC/DOCX、PPT/PPTX、XLS/XLSX、RTF、ODT/ODS/ODP、EPUB、OFD、HTML/MHTML、CSV/TSV。",
+      "模型后端可选：小模型用 ONNX 或 Torch；VLM 用 llama.cpp、vLLM 或 LMDeploy。",
+      "默认安装下小模型走 ONNX CPU 推理、VLM 走 llama.cpp 的 Vulkan 模式；若设备有 NVIDIA GPU，安装 mineru[full]>=4.0 可获得最佳吞吐（README 未给出 pages/sec 数值）。",
+      "输出支持九种渲染目标，包括 Markdown、HTML、LaTeX、DOCX、EPUB、PDF、Structured Content 与 Content List V1/V2。",
+      "README 未提供每百万页美元成本，也未提供 TEDS/GriTS 表格分数。"
+    ],
+    "raw_excerpt": "If the device has an NVIDIA GPU, install mineru[full]>=4.0 for the best throughput. ... Four parsing tiers: Flash for fast previews and indexing, Basic for OCR and model-based parsing, and Standard / Advanced for more demanding layouts and quality requirements."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "OmniDocBench: Benchmarking Diverse PDF Document Parsing with Comprehensive Annotations (arXiv:2412.07626v2, CVPR2025)",
+    "url": "https://arxiv.org/abs/2412.07626",
+    "published_at": "2024-12-10 (v1); v2 2025-03-25",
+    "key_points": [
+      "OmniDocBench 指出既有文档解析评测因文档类型覆盖窄、评测流程简化而不够公平全面。",
+      "该基准覆盖九类文档来源，包括学术论文、教科书，以及手写笔记、排版密集的报纸等更难样本。",
+      "支持多层级评测：从端到端评估到基于 19 种版面类别与 15 种属性标签的任务级、属性级分析。",
+      "评测同时覆盖 pipeline 式方法与端到端视觉语言模型两类方案。",
+      "本轮仅读取到摘要，未读取结果表格，因此该来源未提供可直接引用的 TEDS 数值。"
+    ],
+    "raw_excerpt": "OmniDocBench supports flexible, multi-level evaluations--ranging from an end-to-end assessment to the task-specific and attribute--based analysis using 19 layout categories and 15 attribute labels. We conduct a thorough evaluation of both pipeline-based methods and end-to-end vision-language models"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "microsoft/table-transformer — README（TATR 预训练模型清单与 GriTS 评测表）",
+    "url": "https://github.com/microsoft/table-transformer",
+    "published_at": null,
+    "key_points": [
+      "仓库为 TATR（Table Transformer）官方实现，同时是 PubTables-1M、GriTS、Aligning benchmark datasets for TSR 三篇论文的官方代码。",
+      "TATR 是基于目标检测的模型，只接受图像输入；要输出含文本的 HTML/CSV，必须额外接入 OCR 或 PDF 文本抽取作为独立输入。",
+      "预训练权重仅覆盖 PubTables-1M 训练（TATR-v1.0、TATR-v1.1-Pub）以及 FinTabNet.c（TATR-v1.1-Fin）、两者合并（TATR-v1.1-All），每个 110 MB。",
+      "README 的 TSR 评测表给出 TATR-v1.0 在 PubTables-1M 测试集上：AP50 0.970、AP75 0.941、AP 0.902、AR 0.935、GriTS Top 0.9849、GriTS Con 0.9850、GriTS Loc 0.9786、Acc Con 0.8243。",
+      "表格检测模型 DETR R18 在 PubTables-1M 上 AP50 0.995、AP75 0.989、AP 0.970、AR 0.985。",
+      "PubTables-1M 规模：575,305 个含表文档页（检测任务）、947,642 张全标注表（结构识别与功能分析），含所有行/列/单元格（含空白单元格）在图像与 PDF 坐标下的完整边界框。",
+      "仓库已归档（archived，只读）。"
+    ],
+    "raw_excerpt": "TATR is an object detection model that recognizes tables from image input. The inference code built on TATR needs text extraction (from OCR or directly from PDF) as a separate input in order to include text in its HTML or CSV output. ... TATR-v1.0 | PubTables-1M | 0.970 | 0.941 | 0.902 | 0.935 | 0.9849 | 0.9850 | 0.9786 | 0.8243"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Aligning benchmark datasets for table structure recognition (arXiv:2303.00716v2, ICDAR 2023)",
+    "url": "https://arxiv.org/html/2303.00716v2",
+    "published_at": "2023-03-01",
+    "key_points": [
+      "TATR 在 ICDAR-2013 上的 baseline exact match 准确率：用 PubTables-1M 训练为 65%，用 FinTabNet 训练为 42%，两者合并训练为 69%。",
+      "消除标注错误与数据集间不一致后，同一模型在 ICDAR-2013 上分别升至 75%（PubTables-1M）、65%（FinTabNet）、81%（合并）。",
+      "论文称在 PubTables-1M 与对齐版 FinTabNet（FinTabNet.c）上联合训练，在修正后的 ICDAR-2013.c 上建立新 baseline：DAR 0.965、整表 exact match 81%。",
+      "FinTabNet 原始数据约 113k 张来自财报的表；PubTables-1M 约 100 万张来自科学论文的表；ICDAR-2013 为专家标注的小规模多领域评测集（起始 256 个表区域）。",
+      "FinTabNet 原始标注不含表头与行/列边界框；处理流程 a1 补全行列框、a2 单元格框调整、a4 canonicalization、a6 质量控制，最终表数从 112,875 降到 97,475。",
+      "数据集复杂度统计：FinTabNet 原始 112,875 表 / 9,627 种唯一拓扑 / 平均每表 1.01 个跨行跨列单元格；canonicalization 后（a4）平均每表跨行跨列单元格升至 2.79，唯一拓扑 18,480。ICDAR-2013 平均每表 1.36 个跨行跨列单元格，修正后（a3）为 2.08。",
+      "论文指出 oversegmentation 是 TSR 基准数据集中广泛存在的特定标注错误形式，会导致标注不一致；且许多既有工作（如 DeepDeSRT 的行列检测范式）忽略 spanning cells，只是任务的局部解。",
+      "论文指出真实场景下单个错误可能不可容忍，因此单元格级与整表级准确率都重要。"
+    ],
+    "raw_excerpt": "Baseline exact match accuracy for TATR evaluated on the ICDAR-2013 benchmark is 65% when trained on PubTables-1M, 42% when trained on FinTabNet, and 69% combined. After reducing annotation mistakes and inter-dataset inconsistency, performance ... increases substantially to 75% when trained on PubTables-1M, 65% when trained on FinTabNet, and 81% combined. ... A specific form of label error called oversegmentation is widely prevalent in benchmark TSR datasets, which ultimately leads to annotation inconsistency."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "PubTables-1M: Towards comprehensive table extraction from unstructured documents (arXiv:2110.00061v3, CVPR 2022)",
+    "url": "https://arxiv.org/html/2110.00061v3",
+    "published_at": "2021-09-30",
+    "key_points": [
+      "表格抽取（TE）被拆为三个子任务：表格检测（TD）、表格结构识别（TSR，识别行/列/单元格结构）、功能分析（FA，识别键与值）。",
+      "PubTables-1M 含近 100 万张来自 PubMed Central Open Access 的表，规模约为此前最大同类数据集的两倍，同时覆盖 TD/TSR/FA 三任务。",
+      "数据集提供 projected row header 标注，以及所有行、列、单元格（含空白单元格）的边界框，并保留原始文档上的标注以支持多种输入模态。",
+      "论文提出 canonicalization 流程修正 oversegmentation，目标是让每张表只有唯一、无歧义的结构解释。",
+      "oversegmentation 在 markup 中通常不影响表格外观（因为单元格间边框不可见），但作为 ground truth 会造成训练反馈矛盾与评测时低估真实性能。",
+      "数据集对比表显示：PubTabNet 510K 表（图像模态，有 cell topology/content/location，但单元格框仅覆盖非空白单元格且不含非文本部分）；FinTabNet 113K 表（PDF 模态，同样仅非空白单元格有框）；TableBank 145K（仅图像）；SciTSR 15K；只有 PubTables-1M 同时具备 canonical structure 与行列位置标注。",
+      "论文指出部分既有方法采用定制流水线分情况处理，例如为「每个单元格都有可见边框」与「无可见边框」的表格分别训练不同模型。",
+      "论文指出通用检测架构（如 Faster R-CNN）在 TSR 上开箱即用常表现不佳，原因包括表格特性与训练数据相对缺乏。"
+    ],
+    "raw_excerpt": "Oversegmentation in markup usually has no effect on how a table appears due to borders between cells being invisible ... However, oversegmentation can lead to significant issues when used as ground truth for model training and evaluation. ... Other approaches use custom pipelines that branch to consider different cases separately, such as training separate models to recognize tables with and without visible borders surrounding every cell."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "GriTS: Grid table similarity metric for table structure recognition (arXiv:2203.12555v3)",
+    "url": "https://arxiv.org/abs/2203.12555",
+    "published_at": "2022-03-23",
+    "key_points": [
+      "GriTS 直接在表格的矩阵形式上评估预测正确性，而非先转换为标记序列。",
+      "方法将 NP-hard 的二维最长公共子结构（2D-LCS）问题推广为二维最相似子结构（2D-MSS）问题，并给出多项式时间启发式解法，同时产生真实相似度的上界与下界。",
+      "作者称在大型真实数据集上实测上下界几乎无差异。",
+      "GriTS 把 TSR 的三个子任务——单元格拓扑识别、单元格位置识别、单元格内容识别——统一在同一框架内（对应 GriTS Top / GriTS Loc / GriTS Con）。"
+    ],
+    "raw_excerpt": "GriTS unifies all three subtasks of cell topology recognition, cell location recognition, and cell content recognition within the same framework ... we generalize the two-dimensional largest common substructure (2D-LCS) problem, which is NP-hard, to the 2D most similar substructures (2D-MSS) problem and propose a polynomial-time heuristic for solving it."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Building Performant RAG Applications for Production (LlamaIndex 官方文档)",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 官方生产级 RAG 优化指南列出的顶层考虑项为：检索用 chunk 与合成用 chunk 解耦、面向大文档集的结构化检索、按任务动态检索、对召回节点 rerank、优化 context embeddings。",
+      "该指南称这些技术“大致按从最直接到最具挑战性排序”，但整份顶层清单中未把文档解析（parsing）列为独立优化项。",
+      "指南指出标准 RAG 栈（top-k 检索 + 基础文本切分）在文档数量扩大时表现不佳，例如面对 100 个不同 PDF 的场景。",
+      "指南主张检索的最佳 chunk 表示可能与合成所需的最佳表示不同：原始文本 chunk 可能含干扰嵌入表示的填充词，或缺少全局上下文而完全检索不到。",
+      "指南给出两种解耦做法：嵌入文档摘要并链接到该文档的 chunks；嵌入句子并链接到句子周围的窗口，因为“嵌入巨大 chunk 会导致 lost in the middle 问题”。"
+    ],
+    "raw_excerpt": "A key technique for better retrieval is to decouple chunks used for retrieval with those that are used for synthesis. ... The optimal chunk representation for retrieval might be different than the optimal consideration used for synthesis. ... A big issue with the standard RAG stack (top-k retrieval + basic text splitting) is that it doesn’t do well as the number of documents scales up - e.g. if you have 100 different PDFs."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic 官方工程博客)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 的 Contextual Retrieval 方法包含两个子技术：Contextual Embeddings 与 Contextual BM25，即在嵌入和建 BM25 索引前为每个 chunk 前置 chunk 专属的解释性上下文。",
+      "该方法据称可将失败检索数量减少 49%，与 rerank 结合后可减少 67%。",
+      "Anthropic 将传统 RAG 的核心缺陷描述为“破坏上下文”：文档被切成小 chunk 后，单个 chunk 可能缺少足够上下文（如未指明公司名或时间区间）而难以被正确检索。",
+      "Anthropic 称其试验过“给 chunk 加通用文档摘要”的做法，只看到非常有限的收益；也评估过 summary-based indexing，性能较低。",
+      "Anthropic 指出当知识库小于 200,000 tokens（约 500 页材料）时，可直接把整个知识库放进 prompt，无需 RAG。"
+    ],
+    "raw_excerpt": "The method is called “Contextual Retrieval” and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%. ... Other proposals include: adding generic document summaries to chunks (we experimented and saw very limited gains), hypothetical document embedding, and summary-based indexing (we evaluated and saw low performance)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Evaluating Chunking Strategies for Retrieval (Chroma 技术报告)",
+    "url": "https://research.trychroma.com/evaluating-chunking",
+    "published_at": "2024-07",
+    "key_points": [
+      "Chroma 技术报告结论：分块策略的选择对检索精度与效率有显著影响，某些流行分块策略的默认设置会导致相对较差的表现。",
+      "报告发现启发式分块策略（如流行的 RecursiveCharacterTextSplitter）在参数设置得当时实践中往往表现良好。",
+      "报告提出并评估了两种新分块策略：ClusterSemanticChunker（用嵌入模型按语义相似度组块）与 LLMChunker（直接提示 LLM 进行分块），两者均取得有竞争力的结果。",
+      "报告指出常用基准如 MTEB 采用传统 IR 视角、以整篇文档相关性评估，无法把分块纳入考量，因此该报告改用 token 级 precision/recall/IoU 评估。",
+      "报告称其数据集覆盖多个领域且数据洁净度（data cleanliness）不同，用于评估多种流行分块策略。"
+    ],
+    "raw_excerpt": "We find that the choice of chunking strategy can have significant impact on retrieval accuracy and efficiency. Notably, we find that default settings for certain popular chunking strategies can lead to relatively poor performance. We also find that heuristic chunking strategies such as the popular RecursiveCharacterTextSplitter often perform well in practice when parametrized appropriately."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Unstructured Ingestion Overview (Unstructured 官方文档)",
+    "url": "https://docs.unstructured.io/ingestion/overview",
+    "published_at": null,
+    "key_points": [
+      "Unstructured 官方文档把 ingest 流水线定义为类似 ETL 的流程，逻辑步骤依次为：Index → Post-Index Filter → Download → Post-Download Filter → Uncompress → Post-Uncompress Filter → Partition → Chunk → Embed → Stage → Upload。",
+      "在该流水线中，Partition（生成结构化富化内容）位于 Chunk 与 Embed 之前，且 Chunk 与 Embed 两步在文档中被标注为“Optionally”（可选）。",
+      "文档称 Unstructured API 相比 Ingest CLI / Python 库提供完整的 partitioning、chunking、embedding 与 enrichment 选项，并使用“市场上最新且性能最高的模型”。",
+      "文档建议用户使用 Unstructured API 而非 Ingest CLI 或 Ingest Python 库，后两者不再积极更新以纳入 API 的新特性。"
+    ],
+    "raw_excerpt": "An Unstructured ingest pipeline contains the following logical steps: ... 7 Partition Generates the structured enriched content from the local files that have been downloaded, uncompressed if enabled, and filtered. ... 8 Chunk Optionally, chunks the partitioned content. ... 9 Embed Optionally, generates vector embeddings for each element in the structured output."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Reducto Documentation (Reducto 官方文档)",
+    "url": "https://docs.reducto.ai/",
+    "published_at": null,
+    "key_points": [
+      "Reducto 将自身定位为面向 AI 团队的 agentic 文档平台，覆盖从分类、抽取到编辑与工作流编排的完整文档生命周期。",
+      "Reducto 列出可构建的能力之一为“RAG-ready content pipelines with layout-aware chunking optimized for LLM consumption”。",
+      "其 Parse 能力描述为把每一页读成 LLM-ready 的文本、表格与图形，保留布局与阅读顺序，并提供 layout-aware chunking。",
+      "Reducto 称其 r-1 统一整页模型在一次处理中同时处理文本、表格、图形、布局、格式与 grounding。",
+      "Reducto 称支持 30+ 文件类型（含 PDF、图像、电子表格、演示文稿与扫描件），并称已处理 3B+ 页。"
+    ],
+    "raw_excerpt": "RAG-ready content pipelines with layout-aware chunking optimized for LLM consumption ... Parse Read every page into LLM-ready text, tables, and figures, preserving layout and reading order, with layout-aware chunking. ... Reducto’s r-1 unified full-page model handles text, tables, figures, layout, formatting, and grounding in one pass"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "Chunkr — Open Source Document Intelligence API (lumina-ai-inc/chunkr)",
+    "url": "https://github.com/lumina-ai-inc/chunkr",
+    "published_at": null,
+    "key_points": [
+      "Chunkr 的 README 将其定位为面向文档布局分析、OCR 与语义分块的生产级服务，把 PDF、PPT、Word 文档与图像转换为 RAG/LLM-ready 的 chunks。",
+      "README 列出的能力包括 Layout Analysis、OCR + Bounding Boxes、结构化 HTML 与 Markdown 输出、Vision-Language Model 处理。",
+      "README 明确区分开源 AGPL 版本与托管 Cloud API：开源版使用社区/开源模型，Cloud API 运行专有自研模型以获得更高精度、速度与企业可靠性。",
+      "README 的功能对比表显示 Excel 支持仅在 Cloud API 与 Enterprise 版提供，开源版不支持；文档类型上开源版覆盖 PDF、PPT、Word、Images。",
+      "README 称开源版适合追求透明、本地托管或试验 Chunkr 流水线的场景，生产性能建议使用 Cloud API。"
+    ],
+    "raw_excerpt": "Production-ready service for document layout analysis, OCR, and semantic chunking. Convert PDFs, PPTs, Word docs & images into RAG/LLM-ready chunks. ... The open-source release uses community/open-source models, while the Cloud API runs proprietary in-house models for higher accuracy, speed, and enterprise reliability."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "OmniDocBench (opendatalab) — GitHub README",
+    "url": "https://github.com/opendatalab/OmniDocBench",
+    "published_at": null,
+    "key_points": [
+      "OmniDocBench 数据集规模：1651 PDF 页，覆盖 10 种文档类型、5 种版面类型、5 种语言类型。",
+      "标注体系：28 类 block-level 元素与 4 类 span-level 元素的定位信息，每个元素区域含识别结果（文本、公式 LaTeX、表格同时给 LaTeX 与 HTML），并提供阅读顺序标注。",
+      "属性标签：5 个 page attribute tags、3 个 text attribute tags、6 个 table attribute tags。",
+      "当前支持的指标包括 Normalized Edit Distance、BLEU、METEOR、TEDS、COCODet (mAP/mAR 等)。",
+      "评测维度分为端到端评测、版面检测、表格识别、公式识别、文本 OCR 五类。",
+      "v1.5 起排行榜总分计算方式为：Overall = ((1 - text Edit distance) * 100 + table TEDS + formula CDM) / 3。",
+      "v1.5 起排行榜取消中文/英文分组，改为对所有页面计算平均分。",
+      "v1.6 引入 Multi-Granularity Adaptive Matching (MGAM)，在预测侧自适应调整粒度以消除匹配偏差，ground truth 保持不变。",
+      "v1.5 更新了 hybrid matching 算法，允许公式与文本互相匹配，以缓解模型把公式输出为 unicode 导致的分数误差。",
+      "README 的 Updates 记录显示已评测模型包括 PaddleOCR-VL、MinerU2.5、dots.ocr、MonkeyOCR、Dolphin、Mistral OCR、olmOCR、GPT-4o、Gemini-3 系列等大量工具与 VLM。"
+    ],
+    "raw_excerpt": "Leaderboard: (1) Removed the Chinese/English grouping, now calculating the average score across all pages; (2) The Overall metric is now calculated as ((1 - text Edit distance) * 100 + table TEDS + formula CDM) / 3;"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "OmniDocBench: Benchmarking Diverse PDF Document Parsing with Comprehensive Annotations (arXiv:2412.07626v2, CVPR2025)",
+    "url": "https://arxiv.org/html/2412.07626v2",
+    "published_at": "2025-03-25",
+    "key_points": [
+      "论文指出既有基准的两大评测缺陷之一是不一致的评测指标：依赖通用文本相似度指标（Edit Distance、BLEU），无法公平评估以 LaTeX 或 HTML 表达、存在多种合法语法形式的公式与表格。",
+      "第二个缺陷是缺乏细粒度评测：多数评测只报告一个总分，缺少元素级（文本 vs 公式）与文档类型级（杂志、笔记）的弱点分析。",
+      "OmniDocBench 支持三个层级的评测：端到端评测、任务特定评测（版面检测、OCR、表格识别、公式解析）、属性级评测（9 种文档类型、6 个页面级属性、9 个 bbox 级属性）。",
+      "数据集来自 9 种文档来源，包含学术论文、教材、手写笔记、密集排版报纸等。",
+      "论文对比表显示 Nougat 与 GOT-OCR 2.0 等既有端到端基准仅覆盖 1-2 种文档类型，而 OmniDocBench 覆盖 9 种。",
+      "论文批评既有页面级基准数据规模小、语言与文档类型受限，例如 GOT-OCR 的页面级基准仅含 90 页中英文文档，Nougat 仅用 arXiv 印刷英文文档。"
+    ],
+    "raw_excerpt": "2) Inconsistent evaluation metrics: Current benchmarks rely heavily on generic text similarity metrics (e.g., Edit Distance [21] and BLEU [33]), which fail to fairly assess the accuracy of formulas and tables in LaTeX or HTML formats that allow for diverse syntactic expressions"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "olmOCR: Unlocking Trillions of Tokens in PDFs with Vision Language Models (arXiv:2502.18443v3)",
+    "url": "https://arxiv.org/html/2502.18443v3",
+    "published_at": "2025-07-02",
+    "key_points": [
+      "olmOCR-Bench 的评分范式是「像软件单元测试一样简单、自然的二元规则」，使不同 OCR 系统之间可直接比较，而不依赖模糊的 gold reference 匹配，也不使用 LLM-as-judge。",
+      "olmOCR-Bench 覆盖 1,400 个 PDF 页面、超过 7,000 个 unit-test 用例，横跨多种文档类型。",
+      "基准针对的难点内容类型包括公式、表格、极小字号、老旧扫描件等。",
+      "olmOCR 训练数据 olmOCR-mix-0225 含 260,000 页，来自 100,000+ 份爬取 PDF，监督信号由 GPT-4o 生成。",
+      "论文将现有 PDF 抽取工具划分为 pipeline-based 系统（MinerU、Marker、Grobid、VILA、PaperMage）与端到端模型（Nougat、GOT-OCR 2.0）两类。"
+    ],
+    "raw_excerpt": "We develop olmOCR-Bench, a comprehensive benchmark for evaluating document extraction tools. Unlike existing evaluation methods, olmOCR-Bench uses simple, natural binary rules, like software unit tests, that enable direct comparisons across different OCR systems without relying on fuzzy gold reference matching or LLM-as-judge for evaluation. The benchmark covers 1,400 PDF pages with over 7,000 unit-test cases spanning diverse document types."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "olmocr (allenai) — GitHub README, olmOCR-Bench leaderboard",
+    "url": "https://github.com/allenai/olmocr",
+    "published_at": null,
+    "key_points": [
+      "olmOCR-Bench 官方描述为覆盖 1,400 份文档、7,000+ 测试用例的基准套件。",
+      "README 排行榜按类别分列分数：ArXiv、Old scans math、Tables、Old scans、Headers & footers、Multi column、Long tiny text、Base，最后一列为 Overall。",
+      "同一基准下 PaddleOCR-VL 的 Overall 为 80.0±1.0，分项为 ArXiv 85.7、Old scans math 71.0、Tables 84.1、Old scans 37.8、Headers & footers 97.0、Multi column 79.9、Long tiny text 85.7、Base 98.5。",
+      "olmOCR v0.4.0 的 Overall 为 82.4±1.1；Chandra OCR 0.1.0 为 83.1±0.9；Infinity-Parser 7B 为 82.5。",
+      "Marker 1.10.1 Overall 76.1±1.1；MinerU 2.5.4 为 75.2±1.1；DeepSeek-OCR 为 75.7±1.0；Mistral OCR API 为 72.0±1.1；Nanonets-OCR2-3B 为 69.5±1.1。",
+      "各工具在 Old scans（老旧扫描件）分项上普遍最低，PaddleOCR-VL 37.8、Marker 33.5、MinerU 33.7、Mistral OCR 29.3，显示该子类为共同瓶颈。",
+      "Overall 分数带有 ±1.0 至 ±1.1 的波动区间标注。"
+    ],
+    "raw_excerpt": "PaddleOCR-VL* 85.7 71.0 84.1 37.8 97.0 79.9 85.7 98.5 80.0±1.0 ... olmOCR v0.4.0 83.0 82.3 84.9 47.7 96.1 83.7 81.9 99.7 82.4±1.1"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "OmniDocBench (arXiv:2412.07626) — arXiv abstract 页",
+    "url": "https://arxiv.org/abs/2412.07626",
+    "published_at": "2024-12-10",
+    "key_points": [
+      "论文于 2024-12-10 提交 v1，2025-03-25 更新 v2，被 CVPR2025 接收。",
+      "摘要指出既有基准因文档类型覆盖窄、评测流程被简化且不贴近真实场景，导致对当前文档解析方法缺乏公平、全面的评测。",
+      "OmniDocBench 使用 19 个版面类别与 15 个属性标签，支持从端到端到任务特定、属性级的多层级评测。",
+      "论文同时评测 pipeline-based 方法与端到端视觉语言模型两类范式。"
+    ],
+    "raw_excerpt": "Despite recent progress, current document parsing methods have not been fairly and comprehensively evaluated due to the narrow coverage of document types and the simplified, unrealistic evaluation procedures in existing benchmarks."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "olmOCR (arXiv:2502.18443) — arXiv abstract 页",
+    "url": "https://arxiv.org/abs/2502.18443",
+    "published_at": "2025-07-02",
+    "key_points": [
+      "olmOCR-Bench 被定位为「curated set of 1,400 PDFs」，用于与既有系统做比较。",
+      "论文声称 olmOCR 在该基准上优于 GPT-4o、Gemini Flash 2 与 Qwen-2.5-VL（属作者自评主张，需注意其为基准提出方）。",
+      "olmOCR 以 7B VLM 实现，宣称每百万 PDF 页处理成本 176 美元，对比 GPT-4o 超过 6,240 美元。"
+    ],
+    "raw_excerpt": "To aid comparison with existing systems, we also introduce olmOCR-Bench, a curated set of 1,400 PDFs capturing many content types that remain challenging even for the best tools and VLMs, including formulas, tables, tiny fonts, old scans, and more."
+  }
+]

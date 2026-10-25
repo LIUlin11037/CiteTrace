@@ -1,0 +1,133 @@
+{
+  "n_questions": 6,
+  "mean_citation_existence": 0.8333333333333334,
+  "mean_alignment": 0.5069444444444445,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 2.0,
+      "citation_existence": 0.5,
+      "alignment": 0.4375,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 3.0,
+      "citation_existence": 1.0,
+      "alignment": 0.5277777777777778,
+      "coverage": 1.0
+    },
+    "rag": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.5833333333333334,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-agent-memory",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 41,
+      "citations_missing": [],
+      "alignment_rate": 0.875,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "；DMR 由 MemGPT 团队确立为其主要评测指标 [^32]。"
+      ]
+    },
+    {
+      "question_id": "gq-mcp",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": 0.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "MCP 是 Anthropic 于 2024-11-25 开源的开放协议，用于在 LLM 应用与外部数据源、工具之间实现集成",
+        "规范明确 MCP 借鉴 Language Server Protocol（LSP），以类似方式标准化如何为 AI 应用生态集成额外上下文与工具",
+        "Responses 含与请求相同的 id，result 与 error 二者 MUST 只设其一、MUST NOT 同时设置；error MUST 至少含整数 error code 与 message",
+        "版本协商规则：若 server 支持请求的版本 MUST 返回同一版本，否则 MUST 返回其支持的另一版本；若 client 不支持 server 返回的版本 SHOULD 断开连接",
+        "服务器作为独立进程运行，可处理多个客户端连接，使用 HTTP POST 与 GET 请求，并可选用 SSE 流式传输多条服务器消息",
+        "MCP 服务器 MUST 实现 RFC9728 以指示授权服务器位置；其返回的 Protected Resource Metadata 文档 MUST 包含 authorization_servers 字段，且至少含一个授权服务器",
+        "所有协议元数据在消息体内传输；Streamable HTTP 额外将选定字段镜像到 HTTP 头，但消息体为唯一事实来源",
+        "414、RFC 7591、RFC 8707、RFC 9728、RFC 9207、OAuth Client ID Metadata Documents、OpenID Connect Discovery 1.0、OpenID Connect Dynamic Client Registration 1.0",
+        "servers 仓库 ★91,248、python-sdk ★24,571、typescript-sdk ★13,580、inspector ★11,071、spec 仓库 ★9,448、registry ★7,355、go-sdk ★5,216、csharp-sdk ★4,582、rust-sdk ★4,014、java-sdk ★3,734",
+        "PulseMCP 的代表 Tadas Antanavicius 是 registry 工作组成员，表明 subregistry 与官方 registry 存在治理层关联",
+        "getagentseal/agentseal：自述为 AI agent 安全工具包，功能包括扫描本机危险 skills 与 MCP 配置、监控供应链攻击、测试提示注入抵抗力、审计在线 MCP server 的工具投毒",
+        "resources/subscribe / resources/unsubscribe 由 subscriptions/listen 取代"
+      ]
+    },
+    {
+      "question_id": "gq-deepseek-r1",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-rl-scaling",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 7,
+      "citations_missing": [],
+      "alignment_rate": 0.375,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "下游 AIME-24 评估显示 ScaleRL 存在一致的 scaling 趋势，泛化到训练数据分布之外；扩大模型规模显著提升下游与渐近 RL 性能 [^34]",
+        "该文将 DeepSeek-R1 列为被广泛认为 RLVR 能让 LLM 自主发展新推理模式的代表性工作之一 [^38]",
+        "下游已有基于 verl 构建的专用框架：Search-R1 是基于 veRL 构建的 RL 训练框架，用于训练「reasoning & search engine calling interleaved」的 LLM；该仓库获得 5512 stars、497 forks，最近推送时间为 2025-11-13 [^12]",
+        "Qwen3 的关键创新是把 thinking mode 与 non-thinking mode 整合进统一框架，无需在 chat 模型与专用推理模型之间切换，可基于用户查询或 chat template 动态切换模式；并引入 thinking budget 机制 [^19]",
+        "tokens 计入该轮次的 max_tokens 上限；budget_tokens 是目标而非硬上限；Claude 可能在预算耗尽前就停止推理；在 Claude 4.6 模型上 thinking.type: \"enabled\" 已弃用，Claude 4.7 及以后模型不再支持该模式并返回 400 错误，改为 adaptive thinking [^26]",
+        "与定价、context window、max output tokens [^27]",
+        "仅 Google Gemini 页面标注「Output price (including thinking tokens)」[^29]"
+      ]
+    },
+    {
+      "question_id": "gq-open-weights-2025",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 7,
+      "citations_missing": [],
+      "alignment_rate": 0.25,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "2025 年开源权重大模型格局由五个核心玩家家族主导：Meta 的 Llama、Mistral AI、阿里巴巴的 Qwen、DeepSeek，以及 OpenAI 的 gpt-oss；Google 的 Gemma 与微软的 Phi 作为里程碑参照点纳入",
+        "Ministral 3 系列提供 3B、8B、14B 三种规模，每种规模均发布 base、instruct、reasoning 三个变体，均具图像理解能力，均为 Apache 2.0",
+        "GLM-4.5 是开源 MoE 大语言模型，总参数 355B，激活参数 32B",
+        "Gemma 3 为多模态模型，处理文本与图像输入并生成文本输出，预训练版与指令微调版均提供开放权重",
+        "MiniMax-M2（230B/10B）",
+        "MiniMax-M2 面向编码与 agentic 工作流设计",
+        "作者指出该区别在实践中重要，因为部署模式不同：开放权重模型可在自有硬件或网络边界内运行推理，提示与输出完全留在自有环境内",
+        "支持的训练方法：reinforcement learning、LoRA、QLoRA、full fine tuning、pretraining、RL、GRPO、DPO、FP8",
+        "LLM Stats 对 GLM-4.7 给出 358.0B"
+      ]
+    },
+    {
+      "question_id": "gq-rag-chunking",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 21,
+      "citations_missing": [],
+      "alignment_rate": 0.5833333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "Adaptive Chunking 论文明确挑战「one-size-fits-all」切分范式，主张按文档自适应选择切分策略，说明不存在通用单一最优切分[^22]。",
+        "| Unstructured | 基于 document elements 的 chunking[^26]",
+        "v1.4.0 增加可选 FastAPI/MCP server，支持 read、split、read-and-split 接口；SemanticSplitter 需要 embedding 参数[^29]。",
+        "Adaptive Chunking 框架实验表明，按文档自适应选择切分策略可在不改变模型与 prompt 前提下将答案正确率提升至 72%（原为 62–64%），成功回答问题数增加超过 30%（65 vs 49）[^22]。",
+        "SplitterMR README 全文未报告任何检索质量指标或 chunking 效果评测分数，仅描述功能、版本变更与用法[^29]。"
+      ]
+    }
+  ]
+}

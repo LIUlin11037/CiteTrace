@@ -1,0 +1,789 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs (HNSW)",
+    "url": "https://arxiv.org/abs/1603.09320v4",
+    "published_at": "2016-03-30 (v1); v4 revised 2018-08-14",
+    "key_points": [
+      "HNSW 是纯图结构的 ANN 索引，不需要其他近邻图方法在粗搜索阶段常用的额外搜索结构。",
+      "索引由多层邻近图组成，每层对应存储元素的一个嵌套子集，构成层级结构。",
+      "元素出现的最高层按指数衰减的概率分布随机选取，从而把链接按特征距离尺度分离。",
+      "从上层开始搜索并结合尺度分离，相比 NSW 提升性能，并带来对数复杂度的扩展性。",
+      "采用邻近图邻居选择启发式，在高召回区间以及高度聚类数据上显著提升性能。",
+      "作者称该通用度量空间索引能显著优于此前的开源 SOTA 纯向量方法（属作者自述主张，需交叉验证）。",
+      "算法与跳表结构相似，便于实现均衡的分布式部署。"
+    ],
+    "raw_excerpt": "Hierarchical NSW incrementally builds a multi-layer structure consisting from hierarchical set of proximity graphs (layers) for nested subsets of the stored elements. The maximum layer in which an element is present is selected randomly with an exponentially decaying probability distribution. ... Starting search from the upper layer together with utilizing the scale separation boosts the performance compared to NSW and allows a logarithmic complexity scaling."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "erikbern/ann-benchmarks — README (Status of ANN-Benchmarks)",
+    "url": "https://github.com/erikbern/ann-benchmarks",
+    "published_at": "created 2015-05-28; last push 2026-07-10",
+    "key_points": [
+      "ANN-Benchmarks 是面向近似最近邻（ANN）搜索的基准测试环境，为每个算法准备 Docker 容器，并提供预生成的 HDF5 格式数据集。",
+      "README 明确声明：ann-benchmarks 已不再积极维护，建议改投其他基准，例如 VIBE（github.com/vector-index-bench/vibe）。",
+      "仓库热度：约 5743 stars、906 forks、130 open issues，语言 Python，MIT 许可。",
+      "评测按距离度量与数据集划分，指标为召回率（找到的真实近邻比例，对全部查询取平均）对每秒查询数（QPS）；交互式图还可查看近似召回、索引大小与构建时间。"
+    ],
+    "raw_excerpt": "At this point, ann-benchmarks is no longer actively maintained. Please consider submitting your work to different benchmarks, such as [VIBE](https://github.com/vector-index-bench/vibe). ... The plot shown depicts Recall (the fraction of true nearest neighbors found, on average over all queries) against Queries per second."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "ANN-Benchmarks 官方结果站首页（数据集与算法清单）",
+    "url": "https://ann-benchmarks.com/",
+    "published_at": null,
+    "key_points": [
+      "评测数据集按距离度量分组：Angular 组含 glove-100-angular、glove-25-angular、nytimes-256-angular；Euclidean 组含 fashion-mnist-784-euclidean、gist-960-euclidean、sift-128-euclidean；Hamming 组含 sift-256-hamming、word2bits-800-hamming；Jaccard 组含 kosarak-jaccard。",
+      "所列数据集均标注 k = 10，即算法需返回 10 个最近邻。",
+      "参与评测的算法清单包含 hnswlib、hnsw(faiss)、hnsw(nmslib)、hnsw(vespa)、faiss-ivf、faiss-ivfpqfs、scann、vamana(diskann)、pgvector、qdrant、Milvus(Knowhere)、weaviate、NGT 系列、annoy、pynndescent 等。",
+      "页面图表为图片/交互式形式，文本层未包含具体召回率或 QPS 数值。"
+    ],
+    "raw_excerpt": "Results are split by distance measure and dataset. ... Each dataset is annoted by (k = ...) , the number of nearest neighbors an algorithm was supposed to return. The plot shown depicts Recall (the fraction of true nearest neighbors found, on average over all queries) against Queries per second."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "pgvector/pgvector — README（官方仓库正文）",
+    "url": "https://github.com/pgvector/pgvector",
+    "published_at": null,
+    "key_points": [
+      "pgvector 是 Postgres 扩展（CREATE EXTENSION vector），向量与业务数据同库存储，README 明确主张附带 ACID 合规、point-in-time recovery、JOINs 等 Postgres 特性。",
+      "支持精确与近似最近邻搜索；支持单精度(vector)、半精度(halfvec)、二进制(bit)、稀疏(sparsevec)四种向量类型。",
+      "支持的距离函数：L2 (<->)、负内积 (<#>)、余弦 (<=>)、L1 (<+>)、Hamming (<~>，二进制)、Jaccard (<%>，二进制)。",
+      "近似索引只有两种：HNSW 与 IVFFlat；HNSW 参数 m（默认16）、ef_construction（默认64），查询参数 hnsw.ef_search（默认40）；IVFFlat 参数 lists，查询参数 ivfflat.probes（默认1）。",
+      "索引维度上限：vector 最多 2,000 维，halfvec 最多 4,000 维，bit 最多 64,000 维，sparsevec 最多 1,000 个非零元素。",
+      "量化能力以表达式索引方式实现：binary_quantize(embedding)::bit 建 Hamming 索引，并可用原始向量做二次重排（re-rank）提升召回；halfvec 可做半精度索引。",
+      "过滤（pre-filter）行为：近似索引下过滤在索引扫描之后应用，可能返回不足结果；自 0.8.0 起支持 iterative index scans 自动扩大扫描，受 hnsw.max_scan_tuples（默认20000）与 ivfflat.max_probes 限制。",
+      "多租户建议：使用 list partitioning 或独立表（PARTITION BY LIST(customer_id)）实现租户隔离，而非内置租户机制。",
+      "混合检索需与 Postgres 全文检索（tsvector/ts_rank_cd）组合，并用 Reciprocal Rank Fusion 或 cross-encoder 融合结果，非内置混合查询算子。",
+      "支持表达式索引做子向量（subvector）索引与重排。",
+      "仓库元数据：C 语言实现，23,472 stars，创建于 2021-04-20，最近 push 2026-10-24。"
+    ],
+    "raw_excerpt": "Open-source vector similarity search for Postgres ... Supports: exact and approximate nearest neighbor search; single-precision, half-precision, binary, and sparse vectors ... Plus ACID compliance, point-in-time recovery, JOINs ... Supported types are: vector - up to 2,000 dimensions; halfvec - up to 4,000 dimensions; bit - up to 64,000 dimensions; sparsevec - up to 1,000 non-zero elements ... With approximate indexes, queries with filtering can return less results since filtering is applied after the index is scanned. Starting with 0.8.0, you can enable iterative index scans ... For tenant isolation, use list partitioning or separate tables."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Qdrant Documentation — Indexing（向量索引与 payload 索引）",
+    "url": "https://qdrant.tech/documentation/concepts/indexing/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 的核心设计是向量索引与传统 payload 索引的组合：向量索引加速向量检索，payload 索引加速过滤；文档明确『仅有向量索引不足以让向量检索与过滤有效协同』。",
+      "索引在 segment 级别存在且相互独立，但索引参数按 collection 全局配置；并非所有 segment 都自动带索引，是否建索引由 optimizer 设置与存储点数决定。",
+      "payload 索引支持字段类型：keyword（Match/Substring，可选 prefix 前缀匹配）、integer（Match/Range）、float（Range）、bool（Match，v1.4.0+）、geo（Geo Bounding Box/Radius）、datetime（Range，v1.8.0+）、text（全文检索）、uuid（v1.11.0+）。",
+      "payload 索引还用于精确估算过滤基数（filter cardinality），帮助查询规划器选择检索策略——即过滤与向量检索的代价模型耦合。",
+      "Qdrant 使用 filterable HNSW：只有在 payload 索引创建之后生成的 HNSW 索引才会获得额外的 filter-aware 边；若先灌数据后建 payload 索引，需重建 HNSW 索引才能受益。",
+      "integer 索引支持参数化（lookup / range 开关，v1.8.0+）以调节内存占用与支持的过滤条件；keyword 索引支持 prefix 参数（v1.19.0+），前缀匹配按字节比较且大小写敏感。",
+      "strict mode 可将 unindexed_filtering_retrieve 设为 false，使对未索引字段的过滤查询直接报错；Qdrant Cloud 默认对所有 collection 应用该设置。",
+      "官方建议 payload 索引应在数据写入前创建，且只为实际用于过滤的字段建索引以节省内存与磁盘。"
+    ],
+    "raw_excerpt": "A key feature of Qdrant is the effective combination of vector and traditional indexes. It is essential to have this because for vector search to work effectively with filters, having a vector index only is not enough. ... Qdrant's filterable HNSW index only benefits from additional filter-aware edges when it is generated after the payload indexes have been created. If you create a payload index after data has already been ingested, you need to rebuild the HNSW index to take advantage of the new payload indexes."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Qdrant Documentation — Distributed Deployment",
+    "url": "https://qdrant.tech/documentation/scaling/distributed_deployment/",
+    "published_at": null,
+    "key_points": [
+      "分布式模式自 v0.8.0 起支持，通过 cluster.enabled=true（或环境变量 QDRANT__CLUSTER__ENABLED=true）开启；节点间 p2p 通信默认端口 6335。",
+      "集群共识使用 Raft：GET /cluster 返回 raft_info（term、commit、leader、role），consensus tick_period_ms 默认 100。",
+      "新节点通过 --bootstrap 指向已有节点加入集群，首个节点需提供 --uri。",
+      "开启分布式模式不会自动复制数据；需创建 replication_factor ≥ 2 的 collection，且 shard 数应为节点数的整数倍以均衡负载。",
+      "官方建议每节点至少 2 个 shard 以便后续扩容；若预期大幅增长建议 12 个 shard，可从 1 节点扩到 2/3/6/12 节点而无需 reshard。",
+      "Resharding 仅在 Qdrant Cloud 提供（v1.13.0+），自托管需重建 collection；自托管集群的 shard 再平衡需手动完成，Cloud 则自动持续再平衡。",
+      "支持 shard 在节点间迁移（v0.9.0+）与移除节点（DELETE /cluster/peer/{peer_id}），可实现无停机扩缩容与升级迁移。",
+      "支持 user-defined sharding（v1.7.0+，sharding_method=custom），可为每个 point 指定 shard，官方明确其多租户用途：每个租户数据隔离在独立 shard 中。"
+    ],
+    "raw_excerpt": "Qdrant supports a distributed deployment mode. In this mode, multiple Qdrant services communicate with each other to distribute the data across the peers ... Note that enabling distributed mode does not automatically replicate your data. ... Qdrant allows you to specify the shard for each point individually ... A use-case for this feature is managing a multi-tenant collection, where each tenant ... can have their data stored in separate shards."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Milvus Documentation — Architecture Overview",
+    "url": "https://milvus.io/docs/architecture_overview.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 是云原生（cloud-native）向量数据库，构建在 Faiss、HNSW、DiskANN、SCANN 等向量检索库之上。",
+      "采用数据面/控制面分离（data plane and control plane disaggregation），分四层：Access Layer、Coordinator、Worker Nodes、Storage，各层在扩展性与容灾上相互独立。",
+      "Access Layer 由无状态 Proxy 组成，负责校验请求与结果归并；因采用 MPP 架构，Proxy 聚合后处理中间结果再返回客户端。",
+      "Coordinator 是集群大脑，任一时刻全集群只有一个 active Coordinator，负责集群拓扑、任务调度与集群级一致性，并管理 DDL/DCL/TSO 与时间戳发号。",
+      "Worker Nodes 分三类：Streaming Node（分片级 mini-brain，提供分片级一致性保证与故障恢复、处理 growing data 查询）、Query Node（加载对象存储中的历史数据并提供查询）、Data Node（离线 compaction 与索引构建）。",
+      "存储层包含 meta storage（etcd，存元数据快照与消费 checkpoint，兼做服务注册与健康检查）、object storage（MinIO/S3/Azure Blob，存日志快照、标量与向量索引文件、中间结果）、WAL storage（Kafka/Pulsar/Woodpecker；Woodpecker 为零磁盘云原生设计，直接写对象存储）。",
+      "写入路径：Proxy → Streaming Node → 写 WAL 保证持久性 → 实时可查 → segment 满后转为 sealed → Data Node 做 compaction 与建索引并写入对象存储 → Query Node 加载新索引替换 growing data。",
+      "查询路径：Proxy 依据路由缓存定位节点 → 转发至 Streaming Node（本地执行 growing data 搜索并协调 Query Node 查 sealed 数据）→ 多级归并（Query Node 跨 segment、Streaming Node 汇总 Query Node、Proxy 汇总所有 Streaming Node）。",
+      "Worker 节点因存储计算分离而无状态，可在 Kubernetes 上横向扩缩容与容灾。"
+    ],
+    "raw_excerpt": "Milvus is an open-source, cloud-native vector database designed for high-performance similarity search on massive vector datasets. Built on top of popular vector search libraries including Faiss, HNSW, DiskANN, and SCANN ... Milvus follows the principle of data plane and control plane disaggregation, comprising four main layers that are mutually independent in terms of scalability and disaster recovery. ... At any moment, exactly one Coordinator is active across the entire cluster."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Weaviate Documentation — Vector Index（HNSW / Flat / Dynamic / HFresh）",
+    "url": "https://weaviate.io/developers/weaviate/concepts/vector-index",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 支持四种向量索引类型：HNSW（默认）、Flat、Dynamic、HFresh。",
+      "HNSW 是 Weaviate 默认索引类型，为其自研实现，提供完整 CRUD 支持；查询为对数时间复杂度，适合大规模数据集，但新增向量时重建索引资源开销大。",
+      "Flat 索引把所有向量存于单一列表并全量扫描，内存极省但检索时间随向量数线性增长，仅适合小数据集。",
+      "Dynamic 索引可从 Flat 起步，在对象数超过阈值后自动切换为 HNSW。",
+      "HFresh 是基于聚类的索引，用 HNSW 做质心索引，把大部分数据留在磁盘上以获得较高内存效率。",
+      "HNSW 索引内存占用与向量数及连接数成正比：节点约 4B×维度（1M 向量时 2–12GB，100M 时 200–1200GB），边约 10B×20 连接（1M 时 200MB，100M 时 20GB）。",
+      "ef 参数控制检索时动态候选列表大小，可显式设置或设为 -1 启用动态 ef，由 dynamicEfMin、dynamicEfMax、dynamicEfFactor 依据查询 limit 自动计算。",
+      "Weaviate 采用 vector-first 存储，所有存储操作围绕向量索引进行；可通过水平扩展或增加 shard 支撑大数据量而不降低性能。"
+    ],
+    "raw_excerpt": "Weaviate supports these vector index types: HNSW index ... Flat index ... Dynamic index: allows you to automatically switch from a flat index to an HNSW index as object count scales ... HFresh index: a cluster-based index that uses HNSW for the centroid index, providing strong memory efficiency by keeping most of the data on disk ... Weaviate's hnsw index is a custom implementation of the Hierarchical Navigable Small World (HNSW) algorithm that offers full CRUD-support."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "qdrant/qdrant — 仓库元数据与主题标签",
+    "url": "https://github.com/qdrant/qdrant",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 用 Rust 实现，Apache-2.0 许可，35,239 stars，创建于 2020-05-30，最近 push 2026-10-23。",
+      "仓库 topics 含 hnsw、hybrid-search、vector-search-engine、similarity-search 等，表明其定位为向量搜索引擎并宣称支持混合检索（仅元数据层面，功能细节需以文档正文为准）。"
+    ],
+    "raw_excerpt": "topics: ai-search, ai-search-engine, embeddings-similarity, hnsw, hybrid-search, ... similarity-search, vector-database, vector-search, vector-search-engine"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "milvus-io/milvus — 仓库元数据与主题标签",
+    "url": "https://github.com/milvus-io/milvus",
+    "published_at": null,
+    "key_points": [
+      "Milvus 用 Go 实现，Apache-2.0 许可，46,471 stars，创建于 2019-09-16，最近 push 2026-10-23。",
+      "仓库 topics 含 cloud-native、distributed、diskann、faiss、hnsw，与其云原生分布式定位一致（仅元数据层面）。"
+    ],
+    "raw_excerpt": "topics: anns, cloud-native, diskann, distributed, embedding-database, ... faiss, golang, hnsw, ... vector-database, vector-search"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "weaviate/weaviate — 仓库元数据与主题标签",
+    "url": "https://github.com/weaviate/weaviate",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 用 Go 实现，16,910 stars，创建于 2016-03-30，最近 push 2026-10-25；license 字段为 NOASSERTION（非标准标识，需另行确认具体许可条款）。",
+      "仓库 topics 含 hybrid-search、generative-search、grpc、hnsw，表明其定位包含混合检索与生成式检索能力（仅元数据层面）。"
+    ],
+    "raw_excerpt": "topics: approximate-nearest-neighbor-search, generative-search, grpc, hnsw, hybrid-search, ... semantic-search, vector-database, vector-search, vector-search-engine, weaviate; license: NOASSERTION"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "pgvector CHANGELOG（0.6.0–0.9.0 unreleased 版本演进）",
+    "url": "https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md",
+    "published_at": "2026-10-01",
+    "key_points": [
+      "0.6.0（2024-01-29）Added support for parallel index builds for HNSW，同时 Reduced memory usage for HNSW index builds、Reduced WAL generation for HNSW index builds、Improved performance of HNSW。",
+      "0.6.2（2024-03-18）Reduced lock contention with parallel HNSW index builds。",
+      "0.7.0（2024-04-29）一次性引入 halfvec 类型、sparsevec 类型、bit 类型索引支持、HNSW 的 L1 距离索引、binary_quantize / hamming_distance / jaccard_distance / l2_normalize / subvector 函数，以及 Linux x86-64 上的 CPU dispatching。",
+      "0.7.1（2024-06-03）Improved performance of on-disk HNSW index builds；0.7.4（2024-08-05）Fixed locking for parallel HNSW index builds。",
+      "0.8.0（2024-10-30）Added support for iterative index scans、Added casts for arrays to sparsevec、Improved cost estimation for better index selection when filtering、Improved performance of HNSW index scans、Improved performance of HNSW inserts and on-disk index builds。",
+      "0.8.1（2025-09-04）Added support for Postgres 18 rc1、Improved performance of binary_quantize function。",
+      "0.8.2（2026-02-25）Fixed buffer overflow with parallel HNSW index build；0.8.3（2026-06-17）Fixed possible index corruption with HNSW vacuuming；0.8.4（2026-06-30）Fixed hnsw graph not repaired error with HNSW vacuuming。",
+      "0.8.7（2026-10-01）为当前最新发布版，修复 IVFFlat 索引构建的 buffer overflow。",
+      "0.9.0（unreleased）Added asynchronous I/O for HNSW indexes、Added vector_dims function for sparsevec、Improved performance of HNSW inserts with sparsevec、Dropped support for Postgres 13 and 14。"
+    ],
+    "raw_excerpt": "0.7.0 (2024-04-29) — Added halfvec type / Added sparsevec type / Added support for indexing bit type / Added support for indexing L1 distance with HNSW / Added binary_quantize function ... 0.8.0 (2024-10-30) — Added support for iterative index scans ... Improved performance of HNSW index scans ... 0.9.0 (unreleased) — Added asynchronous I/O for HNSW indexes"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "pgvector README（类型维度上限、HNSW 参数默认值、并行构建配置）",
+    "url": "https://github.com/pgvector/pgvector/blob/master/README.md",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "支持的数据类型与索引维度上限：vector 最多 2,000 维、halfvec 最多 4,000 维、bit 最多 64,000 维、sparsevec 最多 1,000 个非零元素（HNSW 与 IVFFlat 均适用，IVFFlat 不支持 sparsevec）。",
+      "HNSW 索引参数默认值：m = 16（每层最大连接数）、ef_construction = 64（构图候选列表大小）；查询参数 hnsw.ef_search 默认 40。",
+      "HNSW 支持的距离算子：vector_l2_ops / vector_ip_ops / vector_cosine_ops / vector_l1_ops，以及 bit_hamming_ops / bit_jaccard_ops；halfvec 与 sparsevec 使用对应的 halfvec_*_ops / sparsevec_*_ops。",
+      "并行构建索引：max_parallel_maintenance_workers 默认 2，README 建议调高（示例设为 7 加 leader）以加速索引创建；图能放进 maintenance_work_mem 时构建显著更快，否则会提示 'hnsw graph no longer fits into maintenance_work_mem'。",
+      "IVFFlat 调参建议：lists 在 1M 行以内取 rows/1000、超过 1M 取 sqrt(rows)；probes 起始值取 sqrt(lists)，默认 probes = 1。",
+      "README 明确 HNSW 相比 IVFFlat 有更好的速度-召回权衡，但构建更慢、内存占用更高；默认（无索引）为精确最近邻搜索，召回完美。"
+    ],
+    "raw_excerpt": "Supported types are: vector - up to 2,000 dimensions; halfvec - up to 4,000 dimensions; bit - up to 64,000 dimensions; sparsevec - up to 1,000 non-zero elements ... m - the max number of connections per layer (16 by default); ef_construction - the size of the dynamic candidate list for constructing the graph (64 by default) ... You can also speed up index creation by increasing the number of parallel workers (2 by default)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "timescale/pgvectorscale README（StreamingDiskANN、SBQ、label 过滤与 50M 基准主张）",
+    "url": "https://github.com/timescale/pgvectorscale/blob/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "pgvectorscale 在 pgvector 之上引入三项创新：受微软 DiskANN 启发的 StreamingDiskANN 索引类型、Timescale 研究者提出的 Statistical Binary Quantization（SBQ，改进标准二值量化）、基于微软 Filtered DiskANN 研究的 label-based 过滤向量检索。",
+      "厂商基准主张：在 5000 万条 768 维 Cohere embeddings 数据集上，PostgreSQL + pgvector + pgvectorscale 相比 Pinecone 的 storage-optimized (s1) 索引，在 99% recall 的 ANN 查询下 p95 延迟低 28 倍、查询吞吐高 16 倍，自托管于 AWS EC2 时成本低 75%。",
+      "pgvectorscale 用 Rust + PGRX 框架开发（pgvector 为 C 语言），通过 CREATE EXTENSION vectorscale CASCADE 安装并自动带上 pgvector。",
+      "StreamingDiskANN 索引支持 cosine（vector_cosine_ops）、L2（vector_l2_ops）、inner product（vector_ip_ops）三类距离，语法与 pgvector 一致；inner product 索引与 plain storage 不兼容。",
+      "过滤检索分两类：diskann 索引上的 label-based 过滤（需在索引中显式包含 labels smallint[] 列，用 && 重叠算子，性能显著优于后过滤）与任意 WHERE 子句的后过滤（较慢但流式且结果正确）。",
+      "README 顶部注明 Timescale 正在开发新一代 pg_vectorsearch 索引（用分区+压缩替代图索引），目前为 early alpha、尚未 production-ready。"
+    ],
+    "raw_excerpt": "On a benchmark dataset of 50 million Cohere embeddings with 768 dimensions each, PostgreSQL with pgvector and pgvectorscale achieves 28x lower p95 latency and 16x higher query throughput compared to Pinecone's storage optimized (s1) index for approximate nearest neighbor queries at 99% recall, all at 75% less cost when self-hosted on AWS EC2."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "pgvector/pgvector 仓库元数据（活跃度与规模）",
+    "url": "https://github.com/pgvector/pgvector",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "pgvector 仓库 23,472 stars、1,365 forks、15 个 open issues，主语言 C，创建于 2021-04-20，最近推送 2026-10-24。",
+      "仓库 topics 标注为 approximate-nearest-neighbor-search 与 nearest-neighbor-search；README 摘要强调支持单精度/半精度/二值/稀疏向量，以及 L2、内积、cosine、L1、Hamming、Jaccard 六种距离。"
+    ],
+    "raw_excerpt": "stars: 23472 | forks: 1365 | open issues: 15 | language: C | created: 2021-04-20 | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "qdrant/qdrant — GitHub 仓库详情（stars/许可/活跃度）",
+    "url": "https://github.com/qdrant/qdrant",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "Qdrant 仓库 stars 为 35,239，forks 2,774，open issues 797，主语言 Rust。",
+      "仓库创建于 2020-05-30，最近一次 push 为 2026-10-23，说明仍在活跃维护。",
+      "许可证为 Apache-2.0。",
+      "README 自述为 \"Vector Search Engine for the next generation of AI applications\"，并指向托管服务 https://cloud.qdrant.io/。"
+    ],
+    "raw_excerpt": "stars: 35239 | forks: 2774 | open issues: 797 | language: Rust\ncreated: 2020-05-30 | last push: 2026-10-23\nlicense: Apache-2.0\nREADME: Vector Search Engine for the next generation of AI applications ... Also available in the cloud https://cloud.qdrant.io/"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索快照：主流向量库 stars 横向对比（2026-10-25 前后）",
+    "url": "https://github.com/search?q=vector+database&s=stars",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "milvus-io/milvus：stars 46,471，forks 4,311，语言 Go，last push 2026-10-23。",
+      "qdrant/qdrant：stars 35,239，forks 2,774，语言 Rust，last push 2026-10-23。",
+      "weaviate/weaviate：stars 16,910，forks 1,429，语言 Go，last push 2026-10-25。",
+      "pgvector/pgvector：stars 23,472，forks 1,365，语言 C，last push 2026-10-24。",
+      "supabase/supabase（内建 pgvector 使用场景）：stars 113,905，forks 16,723，last push 2026-10-25。",
+      "同期还出现 alibaba/zvec（16,147 stars，in-process 向量库）与 apache/doris（16,139 stars，实时分析+混合检索）等新进入者。",
+      "上述四个主流库的 last push 均在 2026-10-23 至 2026-10-25 之间，均为活跃仓库。"
+    ],
+    "raw_excerpt": "milvus-io/milvus (★46471, forks 4311) ... last push: 2026-10-23\nqdrant/qdrant (★35239, forks 2774) ... last push: 2026-10-23\nweaviate/weaviate (★16910, forks 1429) ... last push: 2026-10-25\npgvector/pgvector (★23472, forks 1365) ... last push: 2026-10-24\nsupabase/supabase (★113905, forks 16723) ... last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "pgvector/pgvector README — 能力边界与部署形态",
+    "url": "https://github.com/pgvector/pgvector",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "pgvector 定位为 Postgres 扩展，主张 \"Store your vectors with the rest of your data\"，附带 ACID、PITR、JOIN 等 Postgres 原生能力。",
+      "支持精确与近似最近邻检索，索引类型为 HNSW 与 IVFFlat；HNSW 查询性能优于 IVFFlat 但构建更慢、内存占用更高。",
+      "向量类型维度上限：vector 2,000 维、halfvec 4,000 维、bit 64,000 维、sparsevec 1,000 个非零元素。",
+      "README 明确给出扩容路径：\"Have a lot of vectors? Use quantization to scale\"。",
+      "支持 Postgres 13+；可通过 Docker、Homebrew、PGXN、APT、Yum、pkg、APK、conda-forge 安装，并 \"comes preinstalled with Postgres.app and many hosted providers\"。",
+      "索引构建速度在 graph 能装入 maintenance_work_mem 时显著更快（示例 SET maintenance_work_mem = '8GB'）。"
+    ],
+    "raw_excerpt": "Store your vectors with the rest of your data. ... Plus ACID compliance, point-in-time recovery, JOINs, and all of the other great features of Postgres\nHave a lot of vectors? Use quantization to scale\nSupported types are: vector - up to 2,000 dimensions; halfvec - up to 4,000 dimensions; bit - up to 64,000 dimensions; sparsevec - up to 1,000 non-zero elements\nit comes preinstalled with Postgres.app and many hosted providers"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "pgvector LICENSE 文件正文（许可条款）",
+    "url": "https://github.com/pgvector/pgvector/blob/master/LICENSE",
+    "published_at": null,
+    "key_points": [
+      "pgvector 的 LICENSE 文件正文为 PostgreSQL/UC Berkeley 风格许可：允许为任何目的免费使用、复制、修改和分发，前提是保留版权声明与免责条款。",
+      "文件含 \"Portions Copyright (c) 1996-2026, PostgreSQL Global Development Group\" 与 \"Portions Copyright (c) 1994, The Regents of the University of California\"。",
+      "该许可为宽松许可，不要求衍生作品开源（无 copyleft 条款）。"
+    ],
+    "raw_excerpt": "Portions Copyright (c) 1996-2026, PostgreSQL Global Development Group\nPortions Copyright (c) 1994, The Regents of the University of California\nPermission to use, copy, modify, and distribute this software and its documentation for any purpose, without fee, and without a written agreement is hereby granted, provided that the above copyright notice and this paragraph and the following two paragraphs appear in all copies."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Qdrant Cloud Pricing — 托管分层与计费模式",
+    "url": "https://qdrant.tech/pricing/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant Cloud 分四层：Free Tier（永久免费，单节点 0.5 vCPU / 1GB RAM / 4GB Disk，用于测试与原型）、Standard Tier（按用量计费，面向生产）、Premium Tier（有最低消费门槛，含 SSO、Private VPC Links、99.9% SLA）、以及 Hybrid Cloud / Private Cloud 自托管形态。",
+      "计费按实际资源用量：compute（vCPU）、memory（GB）、storage（GB）、备份存储（GB）以及付费推理模型的 token，按小时计费。",
+      "SLA 分层：Free/Community 为 99.5%，Standard 单 AZ 99.9%、多 AZ 99.95%，Premium 99.9%。",
+      "官方 FAQ 说明可从 Qdrant OSS 迁移到 Qdrant Cloud，并提供迁移工具与文档。",
+      "Free Tier 超出 1GB RAM / 4GB Disk 限制后需升级到 Standard Tier 获得专用集群。"
+    ],
+    "raw_excerpt": "Free Tier Free forever For testing, and prototypes — Single Node Cluster 0.5 vCPU / 1GB RAM/ 4 GB Disk\nStandard Tier Usage-based pricing For production workloads and scaling applications\nPremium Tier Minimum spend required For enterprises with additional security and compliance needs\nBilling is calculated based on actual resource usage ... You're charged for compute (vCPU), memory (GB), storage (GB) consumed by your clusters, storage (GB) consumed by backups, and used inference tokens of paid models.\nCan I Migrate from OSS to Qdrant Cloud? Yes ... We provide a migration tool and documentation"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Zilliz Cloud Pricing（Milvus 商业托管）— 按集群类型给出的向量容量/QPS/单价",
+    "url": "https://zilliz.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "Zilliz Cloud（Milvus 托管服务）Free 层：$0，5 GB 存储，每月含 2.5M vCU，最多 5 个 collection。",
+      "Standard 层：Serverless 从 $0/月起，Dedicated 从 $126/GB/月起；Enterprise 层 Dedicated 从 $197/月起，含 99.95% SLA、审计日志、SSO、RBAC。",
+      "Dedicated 集群按类型给出容量与性能档位（基于 768 维向量评估）：Performance-optimized 每 CU 约 200 万向量、搜索 QPS 500-1500、延迟 10ms，价格从 $63/百万向量/月；Capacity-optimized 每 CU 约 800 万向量、QPS 100-300、延迟 50-100ms，从 $16/百万向量/月；Tiered-storage 每 CU 约 4000 万向量、QPS 10-50、延迟 100-1000ms，从 $5/百万向量/月。",
+      "扩展上限：Enterprise 层手动扩展至 2,048 CU，CU × replica ≤ 204,800。",
+      "提供 BYOC（Bring Your Own Cloud）部署选项，以及从外部数据源零停机迁移（zero downtime migration）能力。"
+    ],
+    "raw_excerpt": "Performance-optimized ... Per CU Capacity 2 million vectors, Search QPS 500-1500, Search Latency 10 ms, From $63 per million vectors / month\nCapacity-optimized ... 8 million vectors, QPS 100-300, 50-100 ms, From $16 per million vectors / month\nTiered-storage ... 40 million vectors, QPS 10-50, 100-1000ms, From $5 per million vectors / month\n*This data is based on evaluations of 768-dimensional vectors.\nStandard ... From $0 /month (Serverless), From $126 /GB/month (Dedicated)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Weaviate Cloud Pricing — 免费层配额",
+    "url": "https://weaviate.io/pricing",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 提供永久免费的全托管层：$0/月，无需信用卡，每用户 1 个集群。",
+      "免费层配额：100,000 objects、1 GB 内存、10 GB 磁盘、1 个 collection（最多 3 个 tenant）。",
+      "免费层含 Embeddings 2,000 请求/天、Query Agent 1,000 次/月，以及 Basic Support。"
+    ],
+    "raw_excerpt": "Always free Free Forever $0 /mo No credit card required ... ✓ 100,000 objects · 1 GB memory · 10 GB disk. ✓ 1 collection, up to 3 tenants. ✓ Embeddings (2,000 req/day) + Query Agent (1,000 req/mo). ✓ Basic Support"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "erikbern/ann-benchmarks — Benchmarks of approximate nearest neighbor libraries in Python",
+    "url": "https://github.com/erikbern/ann-benchmarks",
+    "published_at": "2026-07-10",
+    "key_points": [
+      "ann-benchmarks 仓库已不再积极维护，README 明确建议将工作提交到其他基准，并点名 VIBE (https://github.com/vector-index-bench/vibe) 作为替代。",
+      "该仓库为 Python 实现，MIT 许可，约 5743 stars / 906 forks，最近一次 push 为 2026-07-10。",
+      "项目提供预生成的 HDF5 格式数据集，并为每个算法准备 Docker 容器，用于在选定度量下基准测试 ANN 实现。"
+    ],
+    "raw_excerpt": "At this point, ann-benchmarks is no longer actively maintained. Please consider submitting your work to different benchmarks, such as [VIBE](https://github.com/vector-index-bench/vibe). ... This project contains tools to benchmark various implementations of approximate nearest neighbor (ANN) search for selected metrics. We have pre-generated datasets (in HDF5 format) and prepared Docker containers for each algorithm"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "ANN-Benchmarks — Benchmarking Results (index page)",
+    "url": "https://ann-benchmarks.com/",
+    "published_at": null,
+    "key_points": [
+      "站点按距离度量与数据集拆分结果，明确包含 sift-128-euclidean (k=10)、glove-100-angular (k=10)、gist-960-euclidean (k=10) 三个与本子问题直接对应的数据集。",
+      "每个数据集的图以 Recall（平均意义上找到的真实最近邻比例）对 Queries per second 呈现，点击图可展开包含 approximate recall、index size、build time 的交互式细节。",
+      "算法清单中同时包含本子问题关注的 hnswlib、faiss-ivf、faiss-ivfpqfs、vamana(diskann)、pgvector、qdrant、Milvus(Knowhere)，以及 weaviate、hnsw(faiss)、scann 等。"
+    ],
+    "raw_excerpt": "Results are split by distance measure and dataset. ... Each dataset is annoted by (k = ...) , the number of nearest neighbors an algorithm was supposed to return. The plot shown depicts Recall (the fraction of true nearest neighbors found, on average over all queries) against Queries per second . Clicking on a plot reveils detailled interactive plots, including approximate recall, index size, and build time."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "ANN-Benchmarks — sift-128-euclidean (k = 10) 结果页",
+    "url": "https://ann-benchmarks.com/sift-128-euclidean_10_euclidean.html",
+    "published_at": null,
+    "key_points": [
+      "该页为 sift-128-euclidean (k=10) 的结果页，提供的图表维度包括 Recall/Queries per second (1/s)、Recall/Build time (s)、Recall/Index size (kB)、Recall/Distance computations、Recall/Candidates generated 以及 Recall/Percentile 50/95/99/99.9 (millis)。",
+      "页面正文仅列出图表标题与坐标轴含义，未内嵌任何可读的 recall-QPS 数值或 index size 数值（数据以交互式图表形式呈现）。"
+    ],
+    "raw_excerpt": "sift-128-euclidean (k = 10) \n Plots for sift-128-euclidean (k = 10) \n Recall/Queries per second (1/s) \n Recall/Build time (s) \n Recall/Index size (kB) \n Recall/Distance computations \n Relative Error/Queries per second (1/s) \n Recall/Candidates generated \n Recall/Index size (kB)/Queries per second (s)"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "ANN-Benchmarks — glove-100-angular (k = 10) 结果页",
+    "url": "https://ann-benchmarks.com/glove-100-angular_10_angular.html",
+    "published_at": null,
+    "key_points": [
+      "该页为 glove-100-angular (k=10) 的结果页，图表维度与 sift 页一致：Recall/Queries per second (1/s)、Recall/Build time (s)、Recall/Index size (kB)、Recall/Distance computations、Recall/Candidates generated、Recall/Percentile 50/95/99/99.9 (millis)。",
+      "页面正文同样只给出图表标题，未内嵌可读的 recall-QPS 或内存占用数值。"
+    ],
+    "raw_excerpt": "glove-100-angular (k = 10) \n Plots for glove-100-angular (k = 10) \n Recall/Queries per second (1/s) \n Recall/Build time (s) \n Recall/Index size (kB) \n Recall/Distance computations \n Relative Error/Queries per second (1/s) \n Recall/Candidates generated \n Recall/Index size (kB)/Queries per second (s)"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs",
+    "url": "https://arxiv.org/abs/1603.09320",
+    "published_at": "2016-03-30 (v1); latest v4 2018-08-14",
+    "key_points": [
+      "HNSW 是纯图结构方法，不需要任何额外的搜索结构（即不需要 IVF 式粗聚类/倒排桶），这与 IVF-PQ 的两级结构形成机制差异。",
+      "HNSW 通过随机指数衰减概率分布为每个元素分配最大层级，构建多层邻近图，层间按特征距离尺度分离链接。",
+      "论文主张从上层开始搜索并结合尺度分离，相比 NSW 提升性能，并带来对数复杂度（logarithmic complexity）的扩展性。",
+      "采用邻近图邻居选择启发式（heuristic for selecting proximity graph neighbors）后，在高召回区间和高度聚簇数据上性能显著提升。",
+      "作者称该通用度量空间索引能显著优于此前的开源 SOTA 纯向量方法（属作者自述主张，需交叉验证）。",
+      "论文共 13 页、15 幅图；作者为 Yu. A. Malkov 与 D. A. Yashunin。",
+      "论文指出算法与 skip list 结构相似，便于实现均衡的分布式部署。"
+    ],
+    "raw_excerpt": "The proposed solution is fully graph-based, without any need for additional search structures, which are typically used at the coarse search stage of the most proximity graph techniques. ... Starting search from the upper layer together with utilizing the scale separation boosts the performance compared to NSW and allows a logarithmic complexity scaling. Additional employment of the heuristic for selecting proximity graph neighbors significantly increases performance at high recall and in case of highly clustered data. Performance evaluation has demonstrated that the proposed general metric space search index is able to strongly outperform previous opensource state-of-the-art vector-only approaches."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Vector Search Benchmarks — Qdrant",
+    "url": "https://qdrant.tech/benchmarks/",
+    "published_at": "2024-06",
+    "key_points": [
+      "该基准页声明其设计原则为：在同一台机器上运行所有引擎以避免硬件偏差，使用可负担硬件以便复现，且基准代码全部开源。",
+      "测试硬件配置：客户端为 Azure Standard D8ls v5（8 vCPU / 16 GiB / 64 GiB 存储），服务端为 Azure Standard D8s v3（8 vCPU / 32 GiB / 64 GiB 存储）。",
+      "所有引擎以 Docker 运行并将内存限制为 25GB，以保证公平性。",
+      "测试数据集包括 dbpedia-openai-1M-angular（1M 向量 / 1536 维 / cosine）、deep-image-96-angular（10M / 96 维 / cosine）、gist-960-euclidean（1M / 960 维 / euclidean）、glove-100-angular（1.2M / 100 维 / cosine）。",
+      "该页面比较的引擎为 Qdrant、Milvus、Weaviate、Elasticsearch、Redis；正文未提及 pgvector 或 pgvectorscale。",
+      "页面强调 ANN 基准必须在相近 precision 下比较才有意义，并指出多数基准忽略了这一点。",
+      "页面提供 RPS、Latency、p95 latency、Index time 四类指标，但具体数值以交互式图表呈现，抓取文本中未包含 recall@10 与 p95 延迟的具体数字。",
+      "页面定性结论（厂商自述）：Qdrant 在几乎所有场景下取得最高 RPS 与最低延迟；Milvus 索引时间最快；Weaviate 自上次运行以来改进最小。",
+      "该基准工具受 github.com/erikbern/ann-benchmarks 启发。",
+      "页面标注更新时间为 2024 年 1 月/6 月（单节点基准）与 2023 年 2 月（过滤搜索基准）。"
+    ],
+    "raw_excerpt": "We do comparative benchmarks, which means we focus on relative numbers rather than absolute numbers. We use affordable hardware, so that you can reproduce the results easily. We run benchmarks on the same exact machines to avoid any possible hardware bias. All the benchmarks are open-sourced... Qdrant achieves highest RPS and lowest latencies in almost all the scenarios, no matter the precision threshold and the metric we choose."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "timescale/pgvectorscale (repository metadata only — README unavailable)",
+    "url": "https://github.com/timescale/pgvectorscale",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "仓库 timescale/pgvectorscale 存在，主语言为 Rust，许可证为 PostgreSQL，约 3152 stars、160 forks、19 个 open issues。",
+      "仓库创建于 2023-07-01，最近一次 push 为 2026-10-14。",
+      "工具返回的 README 内容为 unavailable，因此未能读取其正文，无法据此确认 StreamingDiskANN 的基准主张、对比引擎、数据集或 recall/延迟数值。"
+    ],
+    "raw_excerpt": "stars: 3152 | forks: 160 | open issues: 19 | language: Rust ... README excerpt: (readme unavailable)"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "jhondados/vector-database-benchmark — Vector Database Benchmark 2026 (README)",
+    "url": "https://github.com/jhondados/vector-database-benchmark",
+    "published_at": "2026-08-05",
+    "key_points": [
+      "仓库 README 声称在 100M 向量、1536 维、HNSW 索引条件下对比 7 个数据库（含 pgvector、Qdrant、Weaviate、Pinecone、Milvus、Chroma），指标为 recall@k、QPS、P99 延迟、索引构建时间与单次查询成本。",
+      "README 结果表列出 Qdrant Recall@10 0.991 / 4,200 QPS / 12ms P99 / $0.18 每百万查询；pgvector 0.987 / 1,800 QPS / 28ms P99 / $0.08 每百万查询；Weaviate 0.989 / 5,100 QPS / 9ms P99 / $0.24 每百万查询。",
+      "该仓库为 0 star、0 fork，创建于 2026-06-08，语言标注为 HTML，license 为 NOASSERTION；README 未提供可核验的作者、机构或实验环境说明。",
+      "README 内容不包含任何从 Pinecone/Weaviate/Qdrant 迁移至 Postgres+pgvector 的工程案例，也不含向量条数以外的团队规模、迁移原因或迁移结果信息。"
+    ],
+    "raw_excerpt": "> **Most comprehensive** vector database benchmark (2026). Tests 7 databases at 100M vectors: recall@k, QPS, P99 latency, index build time and cost per query. Reproducible with provided scripts.\n\n## 🏆 Benchmark Results (100M vectors, 1536-dim, HNSW)\n\n| Database | Recall@10 | QPS | P99 Latency | Cost/1M queries |\n|----------|-----------|-----|-------------|-----------------|\n| **Qdrant** | **0.991** | 4,200 | 12ms | $0.18 |\n| pgvector | 0.987 | 1,800 | 28ms | $0.08 |\n| **Weaviate** | 0.989 | **5,100** | **9ms** | $0.24 |"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "nathaniel-gordon/vectorbench — VectorBench 100M Scale Vector Database Benchmark Suite (README)",
+    "url": "https://github.com/nathaniel-gordon/vectorbench",
+    "published_at": "2026-09-01",
+    "key_points": [
+      "仓库 README 声称在 100M 向量规模、HNSW 与 IVF-PQ 索引下评测 7 个引擎，覆盖 Qdrant、Weaviate、Milvus、pgvector、Pinecone、Chroma。",
+      "该仓库为 0 star、0 fork，创建于 2026-09-01 且最后推送同日，语言标注为 HTML，license 为 NOASSERTION，作者署名为个人（Nathaniel Gordon）。",
+      "README 的徽章与描述结构（100M 向量、7 个数据库、HNSW/IVF-PQ、MIT）与另一仓库 jhondados/vector-database-benchmark 高度雷同，两者均未提供可核验的实验环境或原始结果链接。",
+      "该 README 未包含任何数据库迁移案例、迁移原因、团队规模或迁移后性能对比数据。"
+    ],
+    "raw_excerpt": "# ⚡ VectorBench — 100M Scale Vector Database Benchmark Suite\n\n[![Scale: 100M Vectors](...)]\n[![Databases: 7 Tested](...)]\n[![Index: HNSW ... IVF-PQ](...)]\n[![License: MIT](...)]\n[![Python: 3.10+](...)]\n[![Author: Nathaniel Gordon](...)]"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "weaviate/weaviate LICENSE (repository root license file)",
+    "url": "https://raw.githubusercontent.com/weaviate/weaviate/main/LICENSE",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 仓库采用双许可：源码「variously licensed under the BSD-3-Clause License, or the Weaviate License」。",
+      "许可按目录划分：\"wl\" 目录之外的源码为 BSD-3-Clause（定义见 LICENSE-BSD）。",
+      "\"wl\" 目录及其所有子目录的源码版权归 Weaviate BV，\"all rights reserved\"，仅可通过单独的企业许可（enterprise license）获得。",
+      "企业功能通过 license key 启用；BSD 许可不授予使用这些功能或绕过 license key 的权利。",
+      "因此 Weaviate 并非纯 BSD-3-Clause：核心为 BSD-3-Clause，但企业功能部分含商用限制（需付费企业许可）。"
+    ],
+    "raw_excerpt": "Source code in this repository is variously licensed under the BSD-3-Clause License, or the Weaviate License. ... Outside of the \"wl\" directory, source code in a given file is licensed under the BSD-3-Clause License, as defined in LICENSE-BSD. Within the \"wl\" directory and all its sub-directories, source code is Copyright Weaviate BV 2026-present, all rights reserved, and is only available under a separate enterprise license. ... Enterprise features are enabled via license key. The BSD license does not grant the right to use these features or circumvent any license key."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "weaviate/weaviate GitHub repository metadata",
+    "url": "https://github.com/weaviate/weaviate",
+    "published_at": null,
+    "key_points": [
+      "GitHub 仓库元数据中 license 字段显示为 \"NOASSERTION\"，而非单一标准 SPDX 许可标识，与双许可结构一致。",
+      "仓库为 Go 语言实现，约 16,910 stars、1,429 forks，最近推送时间 2026-10-25。",
+      "README 自述为开源向量数据库，同时存储对象与向量，支持向量检索与结构化过滤结合。"
+    ],
+    "raw_excerpt": "license: NOASSERTION ... Weaviate is an open-source vector database that stores both objects and vectors, allowing for the combination of vector search with structured filtering with the fault tolerance and scalability of a cloud-native database"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "qdrant/qdrant GitHub repository metadata",
+    "url": "https://github.com/qdrant/qdrant",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 仓库 license 字段为 Apache-2.0（单一宽松许可，无目录级商用限制）。",
+      "仓库为 Rust 实现，约 35,239 stars、2,774 forks，最近推送时间 2026-10-23。"
+    ],
+    "raw_excerpt": "qdrant/qdrant\nstars: 35239 | forks: 2774 | open issues: 798 | language: Rust\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "milvus-io/milvus GitHub repository metadata",
+    "url": "https://github.com/milvus-io/milvus",
+    "published_at": null,
+    "key_points": [
+      "Milvus 仓库 license 字段为 Apache-2.0（单一宽松许可）。",
+      "仓库为 Go 实现，约 46,471 stars、4,311 forks，最近推送时间 2026-10-23。",
+      "README 中链接了 Zilliz Cloud（\"fully managed Milvus\"）作为全托管服务入口。"
+    ],
+    "raw_excerpt": "milvus-io/milvus\nstars: 46471 | forks: 4311 | language: Go\nlicense: Apache-2.0 ... fully_managed-milvus"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Qdrant Cloud Pricing（官方定价页）",
+    "url": "https://qdrant.tech/pricing/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 提供三种云部署形态：Managed Cloud（完全由 Qdrant 托管）、Hybrid Cloud（在自有基础设施上运行托管集群，即 BYOC）、Private Cloud（本地/隔离部署）。",
+      "Hybrid Cloud 官方描述：\"Run managed Qdrant clusters on your own infrastructure using your compute, network and storage\"，数据留在自有网络内，通过 Qdrant Cloud 管理面运维。",
+      "Managed 分层：Free Tier（永久免费，单节点 0.5 vCPU/1GB RAM/4GB 磁盘，无 HA）、Standard Tier（按用量计费，专用资源，99.5% SLA）、Premium Tier（最低消费，SSO、Private VPC Links、99.9% SLA）。",
+      "官方 FAQ 明确区分：\"Managed Cloud is fully managed by Qdrant. Hybrid Cloud lets you bring your own infrastructure while using Qdrant's management plane. Private Cloud gives you complete control with on-premise deployment.\"",
+      "支持从 OSS 自托管迁移到 Qdrant Cloud，官方提供迁移工具与文档。",
+      "云托管支持 AWS、Azure、GCP 三家云厂商。"
+    ],
+    "raw_excerpt": "Hybrid Cloud Runs on ... Run managed Qdrant clusters on your own infrastructure using your compute, network and storage. ... Data Stays in Your Network, Fully Managed Through Qdrant Cloud ... What's the Difference Between Managed, Hybrid, and Private Cloud? Managed Cloud is fully managed by Qdrant. Hybrid Cloud lets you bring your own infrastructure while using Qdrant's management plane. Private Cloud gives you complete control with on-premise deployment."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Weaviate Cloud Pricing（官方定价页）",
+    "url": "https://weaviate.io/pricing",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 提供 \"Always free\" 永久免费的全托管层（$0/mo，无需信用卡），定位为探索 Weaviate 功能的托管 AI Database。",
+      "免费层配额：每用户 1 个集群、100,000 objects、1 GB 内存、10 GB 磁盘、1 个 collection（最多 3 个 tenants），含 Embeddings 2,000 请求/日与 Query Agent 1,000 请求/月，Basic Support。",
+      "该页面仅展示免费层细节，付费层与 BYOC/自托管选项未在抓取到的正文中体现。"
+    ],
+    "raw_excerpt": "Always free Free Forever $0 /mo No credit card required A fully managed AI Database to explore Weaviate features. Easiest way to get started, always free. ... 100,000 objects · 1 GB memory · 10 GB disk. · 1 collection, up to 3 tenants."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Zilliz Cloud Pricing（Milvus 全托管服务官方定价页）",
+    "url": "https://zilliz.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "Zilliz Cloud（Milvus 的全托管商业服务）明确提供三种部署形态：Dedicated、Serverless、BYOC（Bring Your Own Cloud）。",
+      "Serverless 层从 $0/月起，共享部署环境，系统托管自动扩缩容（无需配置），单可用区，99.95% uptime SLA。",
+      "Dedicated 层从 $126/GB/月起（Standard），提供隔离预留环境、手动/可配置自动扩缩容，Enterprise 层从 $197/月起，含 99.95% SLA、审计日志、SSO、RBAC、多副本与弹性扩缩。",
+      "BYOC 官方描述：\"Deploy on your infrastructure of choice\"，具备与 SaaS 相同的功能与体验，使用专用集群，面向对基础设施定制、数据保护与合规有要求的企业。",
+      "Dedicated 集群按 CU 容量分档：性能优化型约 200 万向量/CU（10ms 延迟）、容量优化型约 800 万向量/CU、分层存储型约 4000 万向量/CU（基于 768 维向量评估）。",
+      "免费层：5 GB 存储、每月 250 万 vCU、最多 5 个 collections。"
+    ],
+    "raw_excerpt": "Flexible Deployment Options Dedicated Serverless BYOC ... BYOC (Bring Your Own Cloud) Designed for organizations that prioritize custom infrastructure, enhanced data protection, and compliance. Deploy on your infrastructure of choice ... Same features and experience as SaaS ... From $0 /month (Serverless) From $126 /GB/month (Dedicated)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Quantization - Qdrant Documentation",
+    "url": "https://qdrant.tech/documentation/guides/quantization/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 支持四种量化方法：TurboQuant、Scalar Quantization、Binary Quantization、Product Quantization。",
+      "标量量化（Scalar Quantization）自 v1.1.0 起可用，将每个向量分量从 32-bit float 压缩为 8-bit integer（float32 -> uint8），实现 4x 压缩。",
+      "官方称标量量化引入的误差通常小于 1%，且对高维向量影响更小。",
+      "二值量化（Binary Quantization）自 v1.5.0 起可用，将每个向量分量降为 1 bit，内存占用降低 32 倍。",
+      "二值量化最高可达 40x 加速，但仅对高维向量且向量分量呈中心化分布时有效。",
+      "二值量化在特定模型上有实测 recall：OpenAI text-embedding-3-large 3072d 在 DBpedia 1M 上达 0.9966 recall（3x oversampling + rescoring）；text-embedding-ada-002 1536d 在 dbpedia 上达 0.98 recall@100（4x oversampling）。",
+      "TurboQuant 自 v1.18.0 起可用，源自 Google 的方法，压缩前对向量施加快速随机旋转；支持 bits8/bits4/bits2/bits1_5/bits1 五档编码，默认 bits4。",
+      "bits8 编码自 v1.20.0 起可用，在 bits4 一半压缩率下提供最高精度。",
+      "TurboQuant 自动使用非对称量化：仅压缩存储向量，查询以全精度打分，无需额外配置。",
+      "低比特编码默认开启 rescoring：bits2、bits1_5、bits1 默认 Yes；bits8、bits4 默认 No。",
+      "产品量化（Product Quantization）在内存优先、精度与速度非关键时提供最高 64x 压缩。",
+      "TurboQuant 完整支持 Cosine、Dot、Euclidean(L2) 距离并带 SIMD 加速；Manhattan(L1) 支持但需逐次重建完整向量，显著更慢。"
+    ],
+    "raw_excerpt": "Qdrant supports four quantization methods: TurboQuant supports 4x to 32x compression... Scalar Quantization compresses each vector component from a 32-bit float to an 8-bit integer, achieving 4x compression with minimal accuracy loss. Binary Quantization reduces each vector component to one to two bits for up to 32x compression... Product Quantization enables up to 64x compression... Scalar Quantization Available as of v1.1.0 ... Binary Quantization Available as of v1.5.0 ... TurboQuant Quantization Available as of v1.18.0 ... The default encoding is bits4. bits8, available as of v1.20.0 ... binary quantization can achieve up to a 40x speedup compared to the original vectors. However, binary quantization is only efficient for high-dimensional vectors and requires a centered distribution of vector components."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Vectors - Qdrant Documentation",
+    "url": "https://qdrant.tech/documentation/concepts/vectors/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 稠密向量维度范围为 1 到 65,536。",
+      "稀疏向量在 Qdrant 中无固定长度，长度在向量插入时动态分配。",
+      "稀疏向量的非零值数量当前受 u32 数据类型范围限制（4294967295）。",
+      "定义稀疏向量需提供非零元素的值列表与其索引列表（indexes/values）。",
+      "稀疏向量存放于特殊存储并使用独立索引，因此配置方式与稠密向量不同（通过 sparse_vectors 配置项创建）。"
+    ],
+    "raw_excerpt": "A dense vector can have between 1 and 65,536 dimensions... Sparse vectors in Qdrant don't have a fixed length, as it is dynamically allocated during vector insertion. The amount of non-zero values in sparse vectors is currently limited to u32 datatype range (4294967295)... Sparse vectors in Qdrant are kept in special storage and indexed in a separate index, so their configuration is different from dense vectors."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Indexing - Qdrant Documentation",
+    "url": "https://qdrant.tech/documentation/concepts/indexing/",
+    "published_at": null,
+    "key_points": [
+      "Qdrant 的 payload 索引支持 keyword、integer、float、bool、geo、datetime、text、uuid 等字段类型。",
+      "text 是一种特殊索引，适用于 keyword/string payload，用于支撑全文检索（Full Text search）过滤条件。",
+      "bool 索引自 v1.4.0 起可用；datetime 索引自 v1.8.0 起可用；uuid 索引自 v1.11.0 起可用。",
+      "payload 索引应在数据写入前创建；若在数据写入后创建，需重建 HNSW 索引才能利用新的 payload 索引。",
+      "Qdrant 提供 strict mode 与 unindexed_filtering_retrieve=false 选项，用于拒绝在未索引字段上过滤的查询。"
+    ],
+    "raw_excerpt": "text - a special kind of index, available for keyword / string payloads, affects Full Text search filtering conditions... bool - for bool payload, affects Match filtering conditions (available as of v1.4.0)... datetime - for datetime payload, affects Range filtering conditions (available as of v1.8.0)... uuid - a special type of index, similar to keyword, but optimized for UUID values (available as of v1.11.0)... Payload indexes should be created before ingesting data."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Hybrid Queries - Qdrant Documentation",
+    "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+    "published_at": null,
+    "key_points": [
+      "混合与多阶段查询（Hybrid and Multi-Stage Queries）自 v1.10.0 起可用。",
+      "Qdrant 支持三种检索方式：稠密向量语义检索、来自 SPLADE++ 等学习模型的稀疏向量检索、以及对带全文索引的 text payload 字段做 BM25 全文检索。",
+      "混合检索通过 Query API 实现，核心构件是 prefetch 参数，允许一个查询运行子请求。",
+      "prefetch 可嵌套（prefetch 自身可再有 prefetch）。",
+      "Qdrant 提供两种结果融合方式：rrf（Reciprocal Rank Fusion）与 dbsf。",
+      "RRF 公式中常数 k 默认设为 2，排名权重 w_r 默认设为 1；Qdrant 使用零基排名（首位结果 r_d = 0）。",
+      "可融合任意查询组合，包括稀疏向量查询与稠密向量查询的组合。",
+      "BM25 全文查询在 API 中以 {\"query\": {\"text\": \"...\"}, \"using\": \"<text索引字段>\"} 形式发起，可与稠密向量 prefetch 一起交给 rrf 融合。",
+      "offset 参数只影响主查询，因此 prefetch 的 limit 至少需为主查询 limit + offset，否则可能返回空结果。"
+    ],
+    "raw_excerpt": "Hybrid and Multi-Stage Queries Available as of v1.10.0 You can search the same data in several ways: with dense vectors for semantic search, with sparse vectors from learned models like SPLADE++, and with BM25 full-text search on text payload fields that have a full-text index... Its main building block is the prefetch parameter, which lets a query run sub-requests... prefetches can have prefetches themselves, so you can have nested prefetches... Qdrant has a few ways of fusing the results from different queries: rrf and dbsf... k is a constant (set to 2 by default)... w_r is the weight of ranking r (set to 1 by default)... Qdrant uses zero-based rank positions; the top result has r_d = 0... You can fuse any combination of queries as prefetches. For example, this query fuses a sparse vector query with a dense vector query."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "IVF_SQ8 - Milvus Documentation",
+    "url": "https://milvus.io/docs/ivf-sq8.md",
+    "published_at": null,
+    "key_points": [
+      "IVF_SQ8 是基于量化的索引算法，由 Inverted File (IVF) 聚类与 Scalar Quantization (SQ8) 两部分组成。",
+      "SQ8 使用 8-bit 整数替代常规 32-bit 浮点数存储向量的每个维度值，大幅降低内存占用。",
+      "SQ8 量化流程：先识别向量内最小/最大值确定量化边界，按 (value-min)/(max-min) 归一化到 0-1，再乘以 255 并四舍五入为 8-bit 整数。",
+      "IVF_SQ8 支持的 metric_type 包括 COSINE、L2、IP。",
+      "IVF_SQ8 建索引参数 nlist 取值范围 [1, 65536]，默认 128，推荐常用区间 [32, 4096]。",
+      "IVF_SQ8 搜索参数 nprobe 取值范围 [1, nlist]，默认 8。",
+      "IVF 部分通过 k-means 聚类将数据集划分为若干簇，搜索时先比较查询与簇质心，只在最相关的少数簇内检索。"
+    ],
+    "raw_excerpt": "The IVF_SQ8 index is a quantization-based indexing algorithm designed to tackle large-scale similarity search challenges... Scalar Quantization (SQ8): Compresses the vectors to a more compact form, drastically reducing memory usage... The SQ8 variant uses 8-bit integers instead of the typical 32-bit floating point numbers to store each dimension value of a vector... Multiply the normalized value by 255 (the maximum value for an 8-bit integer) and round the result to the nearest integer... Supported values include COSINE, L2, and IP... nlist ... Range: [1, 65536] Default value: 128 ... nprobe ... Default value: 8"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Index Vector Fields - Milvus Documentation",
+    "url": "https://milvus.io/docs/index-vector-fields.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 支持三类向量数据：浮点向量（稠密向量）、二值向量（binary embeddings）、稀疏向量（sparse embeddings）。",
+      "浮点向量索引类型包括 FLAT、IVF_FLAT、IVF_SQ8、IVF_PQ、GPU_IVF_FLAT、GPU_IVF_PQ、HNSW、DISKANN，metric 支持 L2、IP、COSINE。",
+      "二值向量（binary embeddings）索引类型为 BIN_FLAT、BIN_IVF_FLAT，metric 支持 JACCARD、HAMMING——这是二值向量数据类型，而非对浮点向量做二值量化。",
+      "稀疏向量索引类型为 SPARSE_INVERTED_INDEX，支持 IP 与 BM25 两种 metric。",
+      "自 Milvus 2.5.4 起 SPARSE_WAND 被弃用，建议改用 \"inverted_index_algo\": \"DAAT_WAND\" 以保持等价能力与兼容性。",
+      "该页面已被标记为 deprecated，官方指引参考 IVF_FLAT、HNSW 等最新页面。"
+    ],
+    "raw_excerpt": "Currently, Milvus supports various types of vector data, including floating point embeddings (often known as floating point vectors or dense vectors), binary embeddings (also known as binary vectors), and sparse embeddings (also known as sparse vectors)... Floating point embeddings ... FLAT IVF_FLAT IVF_SQ8 IVF_PQ GPU_IVF_FLAT GPU_IVF_PQ HNSW DISKANN ... Binary embeddings ... Jaccard (JACCARD) Hamming (HAMMING) ... BIN_FLAT BIN_IVF_FLAT ... Sparse embeddings ... IP ... SPARSE_INVERTED_INDEX ... BM25 ... SPARSE_INVERTED_INDEX ... From Milvus 2.5.4 onward, SPARSE_WAND is being deprecated. Instead, it is recommended to use \"inverted_index_algo\": \"DAAT_WAND\" for equivalency while maintaining compatibility."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Full Text Search - Milvus Documentation",
+    "url": "https://milvus.io/docs/full-text-search.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 全文检索使用 BM25 算法做相关性打分，接受原始文本输入，自动将文本转为稀疏向量，无需手动生成 embedding。",
+      "全文检索的 collection schema 至少需三类字段：主键字段、VARCHAR 或 TEXT 文本字段（须设 enable_analyzer=True）、SPARSE_FLOAT_VECTOR 稀疏向量字段。",
+      "通过 Function(function_type=FunctionType.BM25) 定义 BM25 函数，将输入文本字段映射到输出稀疏向量字段。",
+      "Milvus 默认使用 standard analyzer 做文本分析，可配置其他 analyzer。",
+      "全文检索工作流为：原始文本输入 → analyzer 分词 → BM25 函数转为稀疏向量 → 存入 collection → 搜索时按 BM25 打分排序。",
+      "官方建议将全文检索与基于稠密向量的语义检索结合使用以提升准确性与相关性，并指向 Hybrid Search 文档。"
+    ],
+    "raw_excerpt": "Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios... it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings... Your collection schema must include at least three required fields: Primary field ... String field (VARCHAR or TEXT) ... Sparse vector field (SPARSE_FLOAT_VECTOR)... bm25_function = Function(name=\"text_bm25_emb\", input_field_names=[\"text\"], output_field_names=[\"sparse\"], function_type=FunctionType.BM25)... By default, Milvus uses the standard analyzer for text analysis."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Multi-Vector Hybrid Search - Milvus Documentation",
+    "url": "https://milvus.io/docs/multi-vector-search.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 混合检索通过允许在多个向量字段上搜索、同时执行多路近似最近邻（ANN）搜索来实现。",
+      "混合检索覆盖两类场景：Sparse-Dense Vector Search（稠密语义 + 稀疏关键词精确匹配）与 Multimodal Vector Search（文本、图像、音频等多模态）。",
+      "稀疏向量可由内置 BM25 算法生成，也可使用 BGE-M3、SPLADE 等稀疏 embedding 模型生成。",
+      "多向量混合检索示例 schema 同时包含 text_dense（FLOAT_VECTOR, dim=768）、text_sparse（SPARSE_FLOAT_VECTOR）、image_dense（FLOAT_VECTOR, dim=512）等字段。",
+      "单个 collection 的向量字段数默认受限，可通过 proxy.maxVectorFieldNum 调整至最多 10 个向量字段。",
+      "文本字段需设 enable_analyzer=True 以支持全文检索，并配合 BM25 Function 生成稀疏向量。"
+    ],
+    "raw_excerpt": "Milvus supports this by allowing search on multiple vector fields, conducting several Approximate Nearest Neighbor (ANN) searches simultaneously... Sparse-Dense Vector Search: Dense Vector are excellent for capturing semantic relationships, while Sparse Vector are highly effective for precise keyword matching... Algorithms like BM25 or sparse embedding models such as BGE-M3 or SPLADE can be utilized for this purpose... you can adjust the proxy.maxVectorFieldNum to include up to 10 vector fields in a collection as needed."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Implement Multi-tenancy — Milvus Documentation (v3.0.x, Concepts)",
+    "url": "https://milvus.io/docs/multi_tenancy.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 在四个层级支持多租户：Database、Collection、Partition、Partition Key。",
+      "Database 级：默认最多 64 个租户（可通过 Milvus.yaml 的 maxDatabaseNum 调大），数据物理隔离，支持 RBAC，schema 灵活性最高。",
+      "Collection 级：默认集群最多 65,536 个 collection，即同等数量租户，collection 之间物理隔离，支持 RBAC。",
+      "Partition 级：每个 collection 最多 1,024 个 partition，租户数据按 partition 物理隔离，所有租户共享同一 schema，partition 需手动创建，不支持 RBAC。",
+      "Partition Key 级：所有租户共享单一 collection 与 schema，按 partition key 值自动路由到 16 个物理隔离的 partition；单个物理 partition 可容纳多个租户，租户间仅逻辑隔离。",
+      "Partition Key 级可支持数百万租户，是四种策略中扩展性最强的，但数据隔离最弱，且不支持 RBAC。",
+      "跨租户检索仅 Partition 级与 Partition Key 级支持；Database 级与 Collection 级不支持跨租户检索。",
+      "冷热数据分离（load/release）在 Database、Collection、Partition 三级支持，Partition Key 级当前不支持。",
+      "官方给出的扩展性排序为 Partition Key > Partition > Collection > Database；数据隔离强度排序为 Database = Collection > Partition > Partition Key。"
+    ],
+    "raw_excerpt": "With this strategy, all tenants share a single collection and schema, but each tenant's data is automatically routed into 16 physically isolated partitions based on the partition key value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated. ... Scalability: The partition key-level strategy offers the most scalable approach, supporting millions of tenants. ... RBAC is not supported on the partition-key level."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Bitset — Milvus Documentation (v3.0.x, Concepts)",
+    "url": "https://milvus.io/docs/bitset.md",
+    "published_at": null,
+    "key_points": [
+      "Milvus 用 bitset（0/1 位数组）承载属性过滤（attribute filtering）的结果：满足过滤条件的实体标记为 1。",
+      "bitset 同时用于记录 segment 内某行是否被删除（del_bitset），标记为 1 的实体在 search/query 时不被计算。",
+      "过滤位图与删除位图通过布尔逻辑（OR/AND）合并为 result_bitset，只有 result_bitset 中有效的实体才进入后续 search/query 计算阶段。",
+      "该机制与 Time Travel（按时间戳查询）共用同一套 bitset 合并流程，说明过滤是在检索计算之前以位图形式完成的。"
+    ],
+    "raw_excerpt": "As bitsets contain only two possible values, they are perfect for storing results of attribute filtering. Data that meet the requirement of a given attribute filter are marked with 1. ... Combine these two bitsets with the OR binary logic operator. The ultimate value of result_bitset is [0, 1, 0, 1, 1, 1, 1, 1], meaning only entities 1 and 3 will be computed in the following search or query stage."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Filtering — Weaviate Documentation (Concepts)",
+    "url": "https://weaviate.io/developers/weaviate/concepts/filtering",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 的过滤向量检索基于 pre-filtering：过滤器在向量检索执行之前构建。",
+      "Weaviate 的 pre-filtering 不要求退化为暴力（brute-force）向量检索，官方称其高效。",
+      "每个 shard 内同时存在倒排索引（inverted index）与 HNSW 索引，二者并存使高效 pre-filter 成为可能。",
+      "流程为两步：先用倒排索引生成候选 allow-list（uint64 id 列表，可增长很大而不牺牲效率），再把 allow-list 传入 HNSW 索引；HNSW 正常沿边遍历，但只把在 allow-list 上的 id 加入结果集。",
+      "Weaviate 文档明确列出 post-filtering 的两大缺点：无法预测结果集大小；若过滤条件极具限制性（只匹配数据集的很小比例），原始向量检索结果中可能一个匹配都没有。",
+      "Weaviate 对 HNSW 索引支持三种过滤策略：sweeping、acorn、pathseer；自 v1.34 起 ACORN 为默认策略。",
+      "ACORN 基于论文 ACORN: Performant and Predicate-Agnostic Search Over Vector Embeddings and Structured Data，但 Weaviate 中是受该论文启发的自研实现；其做法包括跳过不满足过滤对象的距离计算、多跳评估候选邻域、随机播种符合过滤条件的额外入口点。",
+      "PathSeer 于 v1.40 加入，源自 SIGMOD 2026 论文，按节点自适应决定是否计算邻居距离，无选择性阈值、无新增调参；官方基准中 PathSeer 在 random/topical/combined 过滤上最快或与最快相差几个百分点，而 ACORN 在稀疏且与查询负相关的过滤上仍更快。",
+      "PathSeer 不额外存储任何数据，因此无导入成本与内存开销，已有 collection 可随时切换而无需重建索引。",
+      "indexFilterable 使用 Roaring Bitmaps 加速基于 match 的过滤；indexRangeFilters 为数值范围过滤索引（int/number/date），内部实现为 roaring bitmap 切片，仅支持新属性。",
+      "Weaviate 称其自定义 HNSW 实现保持图完整性，过滤检索的 recall 通常不差于未过滤检索。"
+    ],
+    "raw_excerpt": "Filtered vector search in Weaviate is based on the concept of pre-filtering. This means that the filter is constructed before the vector search is performed. Unlike some pre-filtering implementations, Weaviate's pre-filtering does not require a brute-force vector search and is highly efficient. ... An inverted index (similar to a traditional search engine) is used to create an allow-list of eligible candidates. ... A vector search is performed where the allow-list is passed to the HNSW index."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Multi-tenancy — Weaviate Documentation (Manage collections)",
+    "url": "https://weaviate.io/developers/weaviate/manage-collections/multi-tenancy",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 的多租户以数据隔离为目的：每个 tenant 存储在独立的 shard 上，一个 tenant 的数据对另一个 tenant 不可见。",
+      "多租户默认关闭，需在 collection 定义中设置 multiTenancyConfig.enabled = true 开启。",
+      "默认情况下向不存在的 tenant 插入对象会报错；设置 autoTenantCreation = true 可让 Weaviate 自动创建 tenant（批量导入自 v1.25.0 起支持，单条插入自 v1.25.2 起支持）。",
+      "tenant 可设置活动状态：ACTIVE（可用，默认）、INACTIVE（不可用，留在磁盘）、OFFLOADED（不可用，已卸载到云端）；tenant 状态自 Weaviate 1.21 起可用。",
+      "tenant 名称只允许字母数字（a-z, A-Z, 0-9）、下划线与连字符，长度 4 到 64 字符。",
+      "v1.26 中 HOT 状态更名为 ACTIVE，COLD 状态更名为 INACTIVE。"
+    ],
+    "raw_excerpt": "Multi-tenancy provides data isolation. Each tenant is stored on a separate shard. Data stored in one tenant is not visible to another tenant. If your application serves many different users, multi-tenancy keeps their data private and makes database operations more efficient."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Cluster architecture — Weaviate Documentation (Replication architecture)",
+    "url": "https://weaviate.io/developers/weaviate/concepts/replication-architecture/cluster-architecture",
+    "published_at": null,
+    "key_points": [
+      "Weaviate 的元数据复制使用 Raft 共识算法（基于 Hashicorp raft 库），元数据包括 collection 定义与 shard/tenant 状态。",
+      "数据复制采用无主（leaderless）设计，最终一致；所有节点都可接受读写，无单点故障。",
+      "复制因子（RF）按 collection 配置，不同 collection 可有不同 RF；RF=3 常被采用，作为性能与容错的平衡。",
+      "读写一致性可调（ALL / QUORUM / ONE，自 v1.18 起），默认等待 QUORUM 个节点确认。"
+    ],
+    "raw_excerpt": "Weaviate uses the Raft consensus algorithm for metadata replication, implemented with Hashicorp's raft library. Metadata in this context includes collection definition and shard/tenant states. ... Weaviate uses a leaderless architecture for data replication."
+  }
+]

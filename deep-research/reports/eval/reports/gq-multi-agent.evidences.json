@@ -1,0 +1,822 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Large Language Model based Multi-Agents: A Survey of Progress and Challenges (arXiv:2402.01680v2)",
+    "url": "https://arxiv.org/html/2402.01680v2",
+    "published_at": "2024-04-19",
+    "key_points": [
+      "该综述把 LLM-based multi-agent (LLM-MA) 系统的研究拆为四个分析维度：agents-environment interface（智能体如何与任务环境交互）、agent profiling（如何用 LLM 刻画智能体使其按特定方式行为）、agent communication（智能体如何交换消息并协作）、agent capability acquisition（智能体如何获得解决问题的能力）。",
+      "论文明确区分单智能体与多智能体：单智能体系统的构建聚焦于内部机制与对外部环境的交互；LLM-MA 系统则强调多样化的 agent profile、智能体间交互与集体决策过程。",
+      "论文给出的多智能体相对单 LLM 智能体的两点增益为：1) 把 LLM 特化为多个能力不同的 agent；2) 使这些异构 agent 之间能够交互，从而有效模拟复杂真实环境。",
+      "论文把单智能体 LLM 系统的核心能力归纳为三项：decision-making thought（任务分解、多路径思考、从经验学习）、tool-use（调用外部工具与资源）、memory（上下文内短期记忆与外部向量库长期记忆）。",
+      "论文把 LLM-MA 的应用划分为两大主线：multi-agents for problem-solving 与 multi-agents for world simulation。",
+      "论文列举的多智能体应用场景包括软件开发、多机器人系统、社会模拟、政策模拟与游戏模拟。",
+      "该综述配套维护开源仓库 github.com/taichengguo/LLM_MultiAgents_Survey_Papers 以持续跟踪该领域研究。",
+      "论文自述动机是早期工作彼此独立、缺乏系统性综述来建立该领域的完整蓝图，因此其贡献定位于提供领域定位/区分/连接的综合 schema。"
+    ],
+    "raw_excerpt": "we present a comprehensive schema for positioning, differentiating, and connecting various aspects of LLM-MA systems ... 1) the agents-environment interface ... 2) agent profiling ... 3) agent communication ... 4) agent capability acquisition. / Compared to systems using a single LLM-powered agent, multi-agent systems offer advanced capabilities by 1) specializing LLMs into various distinct agents, each with different capabilities, and 2) enabling interactions among these diverse agents to simulate complex real-world environments effectively. / The construction of such [single-agent] systems concentrates on formulating their internal mechanisms and interactions with the external environment. Conversely, LLM-MA systems emphasize diverse agent profiles, inter-agent interactions, and collective decision-making processes."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "The Landscape of Emerging AI Agent Architectures for Reasoning, Planning, and Tool Calling: A Survey (arXiv:2404.11584v1)",
+    "url": "https://arxiv.org/html/2404.11584v1",
+    "published_at": "2024-04-17",
+    "key_points": [
+      "该综述给出 agent 的定义：由语言模型驱动、能够规划并采取行动、在多次迭代中执行目标的实体；并采用\"brain, perception, and action\"三组件作为 agent 的最低要求。",
+      "单智能体架构（single agent architectures）由单个语言模型驱动，自行完成全部推理、规划与工具执行；其关键边界特征是\"没有来自其他 AI agent 的反馈机制\"，但可以有人类反馈。",
+      "多智能体架构（multi-agent architectures）定义为涉及两个或更多 agent，各 agent 可使用相同或不同的语言模型、可访问相同或不同的工具，且通常各有自己的 persona。",
+      "论文把多智能体架构分为两大类：vertical（一个 agent 作为 leader，其他 agent 向其汇报，汇报 agent 可能只与 lead 通信，或 leader 与全体共享一段对话）与 horizontal（所有 agent 地位平等，处于同一共享讨论线程中，每个 agent 能看到其他所有消息，可自愿认领任务或调用工具，无需由 lead 指派）。",
+      "论文强调 vertical 与 horizontal 是光谱的两端，多数现有架构落在两者之间。",
+      "论文指出社区当前存在\"单智能体还是多智能体更适合复杂任务\"的争论：单智能体在问题定义清晰、不需要其他 agent persona 或用户反馈时表现更好；多智能体在需要协作与多条不同执行路径时更有优势。",
+      "论文指出单智能体模式在需要长序列步骤时常常难以完成，而多智能体模式可通过让各 agent 独立处理子问题来应对并行任务与鲁棒性问题。",
+      "论文把 planning 方法归为五类：task decomposition、multi-plan selection、external module-aided planning、reflection and refinement、memory-augmented planning。",
+      "论文指出使用多个 agent persona 的解法相比 Chain-of-Thought 提示有显著提升，并引用\"shaped personality verifiably influences LLM behavior\"的发现。"
+    ],
+    "raw_excerpt": "AI agents are language model-powered entities able to plan and take actions to execute goals over multiple iterations. AI agent architectures are either comprised of a single agent or multiple agents working together to solve a problem. / Single Agent Architectures. These architectures are powered by one language model and will perform all the reasoning, planning, and tool execution on their own ... In single agent patterns there is no feedback mechanism from other AI agents. / Multi-Agent Architectures. These architectures involve two or more agents, where each agent can utilize the same language model or a set of different language models ... Each agent typically has their own persona. / we divide them into two primary categories: vertical and horizontal ... these categories represent two ends of a spectrum. / While single agent architectures excel when problems are well-defined and feedback from other agent-personas or the user is not needed, multi-agent architectures tend to thrive more when collaboration and multiple distinct execution paths are required."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Large Language Model based Multi-Agents: A Survey of Progress and Challenges — 摘要页（arXiv:2402.01680v2 元数据与摘要）",
+    "url": "https://arxiv.org/abs/2402.01680",
+    "published_at": "2024-04-19",
+    "key_points": [
+      "该综述的定位是：在\"单个 LLM 作为单一规划/决策智能体\"的研究基础上，梳理 LLM-based multi-agent systems 在复杂问题求解与世界模拟方面的进展。",
+      "论文自述要回答的三个核心问题：LLM-based multi-agents 模拟哪些领域与环境；这些 agent 如何被 profile、如何通信；哪些机制促进 agent 能力的增长。",
+      "论文同时汇总该领域常用数据集与基准，并维护开源 GitHub 仓库跟踪最新研究。",
+      "论文标注的学科分类为 cs.CL（主）、cs.AI、cs.MA（Multiagent Systems），显示该主题横跨 NLP 与多智能体系统两个传统领域。"
+    ],
+    "raw_excerpt": "Recently, based on the development of using one LLM as a single planning or decision-making agent, LLM-based multi-agent systems have achieved considerable progress in complex problem-solving and world simulation. ... What domains and environments do LLM-based multi-agents simulate? How are these agents profiled and how do they communicate? What mechanisms contribute to the growth of agents' capacities?"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+    "url": "https://arxiv.org/html/2305.14325v1",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "拓扑范式：多智能体辩论（multi-agent debate）——多个同构 LLM 实例先各自独立作答，再在每轮读取并批评其他所有智能体的回答与推理过程，据此更新自身答案，重复若干轮后收敛到单一共同答案。",
+      "实验设置：3 个智能体 + 2 轮辩论；基线为单智能体、单智能体+反思（reflection）、多智能体多数投票（majority）；所有任务使用同一套流程与提示模板，仅需黑盒模型访问。",
+      "算术任务（六个数、两位数、含加减乘）：单智能体 67.0±4.7%，单智能体+反思 72.1±4.5%，多智能体多数投票 69.0±4.6%，多智能体辩论 81.8±2.3%。",
+      "小学数学习题（GSM8K）：单智能体 77.0±4.2%，单智能体+反思 75.0±4.3%，多智能体多数投票 81.0±3.9%，多智能体辩论 85.0±3.5%。",
+      "国际象棋走子最优性（以归一化 ΔPS 分数报告）：单智能体 91.4±10.6，单智能体+反思 102.1±11.9，多智能体多数投票 102.2±6.2，多智能体辩论 122.9±7.6。",
+      "作者报告同时使用多个模型智能体与多轮辩论对达到最佳性能是重要的；并观察到辩论过程中模型会就不确定的事实产生分歧，从而把这些事实从答案中剔除，降低幻觉。",
+      "作者指出辩论并非只是放大群体中已有的正确答案：存在所有模型初始都答错、随辩论推进而得到正确答案的案例。",
+      "提示词设计影响辩论时长：鼓励模型更“固执”地坚持自身解法的提示会带来更长的辩论和更好的最终解；作者观察到 LLM 智能体整体较为“agreeable”（可能源于指令微调/RLHF）。",
+      "论文引入一个新的基准数据集，用于评估著名计算机科学家传记的事实准确性，作者称当代语言模型在该类传记上幻觉倾向尤其高。"
+    ],
+    "raw_excerpt": "Table 1: Multiagent Debate Improves Reasoning ... Model | Arithmetic (%) | Grade School Math (%) | Chess (ΔPS): Single Agent 67.0±4.7 | 77.0±4.2 | 91.4±10.6; Single Agent (Reflection) 72.1±4.5 | 75.0±4.3 | 102.1±11.9; Multi-Agent (Majority) 69.0±4.6 | 81.0±3.9 | 102.2±6.2; Multi-Agent (Debate) 81.8±2.3 | 85.0±3.5 | 122.9±7.6. Multi-agent results in the table are run with 3 agents and two rounds of debate."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate",
+    "url": "https://arxiv.org/html/2305.19118v4",
+    "published_at": "2023-05-30",
+    "key_points": [
+      "拓扑范式：多智能体辩论（MAD）——两个立场对立的辩手（affirmative/negative，即“angel”与“devil”）以“tit for tat”（针锋相对）状态轮流发言，另设一个 judge 管理并裁决辩论过程以得到最终解。",
+      "论文提出并定义了自我反思（self-reflection）中的 Degeneration-of-Thought (DoT) 问题：一旦 LLM 智能体对自身答案建立信心，即使初始立场错误，后续自我反思也无法产生新想法。",
+      "实验设置：两个任务——常识机器翻译（Common MT，中→英，含词汇歧义与无上下文/有上下文句法歧义）与反直觉算术推理（Counter-Intuitive AR）；作者称这两个任务的共同特点是仅凭表面表述的直觉答案大多错误。",
+      "作者报告 GPT-3.5-Turbo 配合 MAD 在 Common MT 数据集上可以超过 GPT-4 的表现（论文以定性方式陈述，未在本次抓取到的正文片段中给出具体分数）。",
+      "消融结论：辩论的自适应终止（adaptive break）策略与“tit for tat”状态的适度水平是 MAD 取得性能提升的必要条件。",
+      "作者发现当辩手使用不同 LLM 时，LLM 作为 judge 可能并不公正——judge 会偏好与其自身 backbone 相同的 LLM 一方。",
+      "辩论中辩手按固定顺序依次发言，基于此前的辩论历史 H 表达论点；judge 有两种模式：判别模式（判断是否已得到正确解，是则结束辩论）与抽取模式（在迭代上限内未识别出正确解时，从完整辩论历史中抽取最终答案）。",
+      "代码开源于 https://github.com/Skytliang/Multi-Agents-Debate。"
+    ],
+    "raw_excerpt": "we propose a Multi-Agent Debate (MAD) framework, in which multiple agents express their arguments in the state of \"tit for tat\" and a judge manages the debate process to obtain a final solution. ... Experimental results demonstrate that our MAD framework outperforms the baseline methods, especially, GPT-3.5-Turbo with MAD can surpass the performance of GPT-4 on Common MT. ... Extensive analyses suggest that the adaptive break of debate and the modest level of \"tit for tat\" state are required for MAD to obtain good performance. Moreover, we find that LLMs might not be a fair judge if different LLMs are used for agents."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Why Do Multi-Agent LLM Systems Fail? (MAST, arXiv:2503.13657v3)",
+    "url": "https://arxiv.org/html/2503.13657v3",
+    "published_at": "2025-03-17 (v1); v3 2025-10-26",
+    "key_points": [
+      "论文明确指出 MAS 相对单智能体框架、以及 best-of-N 采样这类简单基线的性能增益往往很小（\"their performance gains often remain minimal compared to single-agent frameworks or simple baselines like best-of-N sampling\"）。",
+      "作者对 7 个 SOTA 开源 MAS 的实证分析给出 41% 到 86.7% 的失败率区间。",
+      "构建了首个多智能体系统失败分类法 MAST：14 种失败模式，归为 3 大类——(i) 系统设计问题、(ii) 智能体间失配（inter-agent misalignment）、(iii) 任务验证。",
+      "MAST-Data 数据集含 1642 条标注执行轨迹，覆盖 7 个 MAS 框架（ChatDev、MetaGPT、HyperAgent、AppWorld、AG2/MathChat、Magentic-One、OpenManus）与 4 个模型家族（GPT-4 系列、Claude 3/3.7、Qwen2.5-Coder-32B、CodeLlama-7b）。",
+      "分类法由 6 位专家标注员基于 150+ 条轨迹（每条平均超 15,000 行文本）用扎根理论构建，人类标注者间一致性 κ=0.88；LLM-as-a-Judge 标注流水线（基于 OpenAI o1）与人类一致性 κ=0.77，在两个未见过的 MAS/基准上验证 κ=0.79。",
+      "任务覆盖 coding（ProgramDev、SWE-Bench Lite）、math（GSM-Plus、OlympiadBench、MMLU）与 general agent（GAIA、AppWorld Test-C）。",
+      "案例研究显示失败多源于系统设计而非单纯模型能力：ChatDev 中 CPO agent 出现「Failure Mode 1.2 - Disobey Role Specification」（未经 CEO agent 共识即终止对话），仅做工作流调整让 CEO 拥有最终决定权，即带来整体任务成功率 +9.4%。",
+      "作者强调孤立修补不足以获得稳健可靠性，往往需要更复杂的方案与根本性的 MAS 重设计。",
+      "论文将自身与 Anthropic 关于「模块化组件、避免过度复杂框架」的工程建议、以及 Kapoor et al. 关于「复杂性阻碍实际落地」的结论相衔接，并把后者从单智能体语境扩展到多智能体语境。"
+    ],
+    "raw_excerpt": "Despite the increasing adoption of MAS, their performance gains often remain minimal compared to single-agent frameworks [18] or simple baselines like best-of-N sampling [19]. Our empirical analysis reveals 41% to 86.7% failure rate on 7 state-of-the-art (SOTA) open-source MAS detailed in Figure 5 (Appendix B). ... This process identifies 14 unique modes, clustered into 3 categories: (i) system design issues, (ii) inter-agent misalignment, and (iii) task verification. ... We demonstrate that a straightforward system workflow adjustment ensuring the CEO had the final say contributed to a +9.4% increase in overall task success rate."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Stop Overvaluing Multi-Agent Debate — We Must Rethink Evaluation and Embrace Model Heterogeneity (arXiv:2502.08788v3)",
+    "url": "https://arxiv.org/abs/2502.08788",
+    "published_at": "2025-02-12 (v1); v3 2025-06-21",
+    "key_points": [
+      "该文是对多智能体辩论（MAD）的系统性评测：5 种代表性 MAD 方法 × 9 个基准 × 4 个基础模型。",
+      "核心负面结论：MAD 常常无法超越简单的单智能体基线（Chain-of-Thought、Self-Consistency），即使消耗显著更多的推理时算力（inference-time computation）。",
+      "作者指出既有 MAD 研究存在三类评测缺陷：基准覆盖有限、基线对比薄弱、实验设置不一致。",
+      "模型异构性（model heterogeneity）被作者发现是对现有 MAD 框架普遍有效的改进手段（\"universal antidote\"），能一致地提升各 MAD 框架表现。",
+      "作者主张领域应停止高估当前形态的 MAD，并把模型异构性作为核心设计原则。"
+    ],
+    "raw_excerpt": "This paper presents a systematic evaluation of 5 representative MAD methods across 9 benchmarks using 4 foundational models. Surprisingly, our findings reveal that MAD often fail to outperform simple single-agent baselines such as Chain-of-Thought and Self-Consistency, even when consuming significantly more inference-time computation. ... we further explore the role of model heterogeneity and find it as a universal antidote to consistently improve current MAD frameworks."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "AI Agents That Matter (arXiv:2407.01502)",
+    "url": "https://arxiv.org/abs/2407.01502",
+    "published_at": "2024-07-01",
+    "key_points": [
+      "论文指出当前 agent 评测只关注准确率而忽略其他指标，导致 SOTA agent 不必要地复杂且昂贵，并使社区对准确率增益的来源得出错误结论。",
+      "作者主张同时优化准确率与成本两个指标，并实现了一种联合优化方案，显示可在保持准确率的同时大幅降低成本。",
+      "论文指出模型开发者与下游开发者的基准需求被混为一谈，难以判断哪个 agent 适合特定应用。",
+      "论文指出许多 agent 基准缺乏充分的留出集（holdout set），有时甚至完全没有，导致 agent 通过走捷径、过拟合基准而变得脆弱。",
+      "论文指出评测实践缺乏标准化，造成普遍的可复现性问题。"
+    ],
+    "raw_excerpt": "First, there is a narrow focus on accuracy without attention to other metrics. As a result, SOTA agents are needlessly complex and costly, and the community has reached mistaken conclusions about the sources of accuracy gains. Our focus on cost in addition to accuracy motivates the new goal of jointly optimizing the two metrics. We design and implement one such optimization, showing its potential to greatly reduce cost while maintaining accuracy."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "FoundationAgents/MetaGPT — The Multi-Agent Framework",
+    "url": "https://github.com/FoundationAgents/MetaGPT",
+    "published_at": "2026-01-21",
+    "key_points": [
+      "仓库元数据：stars 71010，forks 9042，open issues 137，语言 Python，MIT 许可，创建于 2023-06-30，最近 push 2026-01-21。",
+      "README 主张的协作模式是「角色分工」：为不同 GPT 分配不同角色（roles），组成一个协作实体来处理复杂任务。",
+      "README 自我定位为「软件公司」隐喻：First AI Software Company, Towards Natural Language Programming（仓库简介）。",
+      "最近 push 时间 2026-01-21 明显早于同批其他框架（2026-10-2x），相对活跃度偏低。"
+    ],
+    "raw_excerpt": "MetaGPT: The Multi-Agent Framework ... <b>Assign different roles to GPTs to form a collaborative entity for complex tasks.</b> ... topics: agent, gpt, llm, metagpt, multi-agent | license: MIT | created: 2023-06-30 | last push: 2026-01-21"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "openai/openai-agents-python — OpenAI Agents SDK",
+    "url": "https://github.com/openai/openai-agents-python",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "仓库元数据：stars 30269，forks 4936，open issues 22，语言 Python，MIT 许可，创建于 2025-03-11，最近 push 2026-10-22。",
+      "README 自述为「轻量但强大的多智能体工作流框架」，且 provider-agnostic，支持 OpenAI Responses / Chat Completions API 以及 100+ 其他 LLM。",
+      "README 列出的核心概念包括 Agents（配置了 instructions、tools、guardrails、handoffs 的 LLM）与 Sandbox agents。",
+      "协作模式以 handoffs（智能体间移交）为核心原语，而非群聊式对话。",
+      "存在 JS/TS 版本 openai/openai-agents-js。",
+      "open issues 仅 22，为本次取证各仓库中最低。"
+    ],
+    "raw_excerpt": "The OpenAI Agents SDK is a lightweight yet powerful framework for building multi-agent workflows. It is provider-agnostic, supporting the OpenAI Responses and Chat Completions APIs, as well as 100+ other LLMs. ... Core concepts: 1. Agents: LLMs configured with instructions, tools, guardrails, and handoffs 1. Sandbox agents"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "microsoft/autogen — AutoGen",
+    "url": "https://github.com/microsoft/autogen",
+    "published_at": "2026-10-16",
+    "key_points": [
+      "仓库元数据：stars 61554，forks 9313，open issues 1121，语言 Python，CC-BY-4.0 许可，创建于 2023-08-18，最近 push 2026-10-16。",
+      "open issues 达 1121，为本次取证各仓库中最高，远高于 OpenAI Agents SDK 的 22 与 MetaGPT 的 137。",
+      "仓库 topics 包含 agentic、agentic-agi、agents、autogen、autogen-ecosystem、llm-agent、llm-framework。",
+      "README 顶部仍链接 0.2 版本文档站点（microsoft.github.io/autogen/0.2），表明存在 0.2 与新版（0.4+）并存的文档/API 分裂。",
+      "项目通过 devblogs.microsoft.com/autogen 博客与 Discord 作为对外沟通渠道。"
+    ],
+    "raw_excerpt": "microsoft/autogen | stars: 61554 | forks: 9313 | open issues: 1121 | license: CC-BY-4.0 | created: 2023-08-18 | last push: 2026-10-16 ... <img src=\"https://microsoft.github.io/autogen/0.2/img/ag.svg\" ...> [Documentation](https://microsoft.github.io/autogen/)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — Build resilient agents（仅元数据，正文未读取）",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据（来自 GitHub 搜索接口）：stars 43859，forks 7534，语言 Python，最近 push 2026-10-25。",
+      "仓库简介为「Build resilient agents.」，未在简介中直接描述多智能体协作模式。",
+      "注意：该仓库 README 正文未能读取（get_repo_detail 返回 403 rate limit），故其协作模式主张与已知局限无证据支持。"
+    ],
+    "raw_excerpt": "langchain-ai/langgraph (★43859, forks 7534) desc: Build resilient agents. lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — role-playing autonomous agents（仅元数据，正文未读取）",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库元数据（来自 GitHub 搜索接口）：stars 60081，forks 8868，语言 Python，最近 push 2026-10-24。",
+      "仓库简介主张的协作模式为「编排角色扮演式自主智能体」，通过 collaborative intelligence 让智能体协同处理复杂任务。",
+      "注意：README 正文未能读取（403 rate limit），故其协作模式细节与已知局限无证据支持。"
+    ],
+    "raw_excerpt": "crewAIInc/crewAI (★60081, forks 8868) desc: Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks. lang: Python | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "ag2ai/ag2 — AG2 (formerly AutoGen): The Open-Source AgentOS（仅元数据，正文未读取）",
+    "url": "https://github.com/ag2ai/ag2",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库元数据（来自 GitHub 搜索接口）：stars 5019，forks 760，语言 Python，最近 push 2026-10-24。",
+      "仓库简介自述为「AG2 (formerly AutoGen): The Open-Source AgentOS」，即从 AutoGen 分叉/更名而来的独立项目。",
+      "注意：README 正文未能读取（403 rate limit），故其协作模式主张与已知局限无证据支持。"
+    ],
+    "raw_excerpt": "ag2ai/ag2 (★5019, forks 760) desc: AG2 (formerly AutoGen): The Open-Source AgentOS.Join us at: https://discord.gg/sNGSwQME3x lang: Python | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "langchain-ai/langchain — The agent engineering platform（生态参照）",
+    "url": "https://github.com/langchain-ai/langchain",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据（来自 GitHub 搜索接口）：stars 148407，forks 24906，语言 Python，最近 push 2026-10-25。",
+      "简介自述为「The agent engineering platform.」，是 LangGraph 的上游/母项目，可作为生态规模参照。"
+    ],
+    "raw_excerpt": "langchain-ai/langchain (★148407, forks 24906) desc: The agent engineering platform. lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "How we built our multi-agent research system (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 的 Research 功能采用 orchestrator-worker 架构：lead agent 分析查询、制定策略并派生并行 subagents，subagents 各自在独立上下文窗口中探索不同方面后把要点压缩回传给 lead agent。",
+      "内部评测中，以 Claude Opus 4 为 lead agent、Claude Sonnet 4 为 subagents 的多智能体系统在内部 research eval 上比单智能体 Claude Opus 4 高出 90.2%。",
+      "多智能体系统表现更好的主因是「花掉足够多的 token」：在 BrowseComp 评测中，三个因素解释了 95% 的性能方差，其中 token 使用量单独解释 80%，另两个因素是工具调用次数与模型选择。",
+      "成本代价：agents 通常比 chat 交互多用约 4 倍 token，而多智能体系统比 chat 多用约 15 倍 token；因此多智能体只适合任务价值足够高、能覆盖性能提升成本的任务。",
+      "Anthropic 明确指出不适合多智能体的场景：需要所有 agent 共享同一上下文、或 agent 之间存在大量依赖的领域；并称多数编码任务的真正可并行部分少于研究任务，且 LLM agent 目前不擅长实时协调与委派。",
+      "Anthropic 认为多智能体擅长的是：高度可并行化、信息量超出单上下文窗口、需要对接大量复杂工具的有价值任务。",
+      "Anthropic 内部评测显示多智能体研究系统在 breadth-first 类查询（同时追踪多个独立方向）上尤其出色；举例：让系统找出标普 500 信息技术板块各公司全部董事会成员时，多智能体通过分解任务成功，单智能体因缓慢的串行搜索失败。",
+      "提示工程要点：应按查询复杂度缩放投入——简单事实查找只需 1 个 agent 配 3–10 次工具调用，直接对比可能需要 2–4 个 subagents 各 10–15 次调用，复杂研究可用 10 个以上 subagents；早期版本常见失败模式是对简单查询过度投入（如为简单查询派生 50 个 subagents）。",
+      "上下文管理细节：lead agent 先把计划写入 Memory 持久化，因为上下文窗口超过 200,000 token 会被截断，保留计划很重要。",
+      "工具描述优化带来的收益：一个工具测试 agent 反复试用并重写 MCP 工具描述后，后续 agent 使用新描述的任务完成时间下降 40%。"
+    ],
+    "raw_excerpt": "In our data, agents typically use about 4× more tokens than chat interactions, and multi-agent systems use about 15× more tokens than chats. For economic viability, multi-agent systems require tasks where the value of the task is high enough to pay for the increased performance. ... We found that token usage by itself explains 80% of the variance, with the number of tool calls and the model choice as the two other explanatory factors."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Create custom subagents — Claude Code Docs (Anthropic)",
+    "url": "https://docs.anthropic.com/en/docs/claude-code/sub-agents",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 官方文档给出的 subagent 使用判据是上下文卫生：当某个附带任务会用搜索结果、日志或文件内容淹没主对话、而这些内容之后不会再被引用时，就用 subagent 在它自己的上下文里完成并只回传摘要。",
+      "每个 subagent 运行在独立上下文窗口，拥有自定义 system prompt、特定工具访问权限与独立权限；它发出的请求计入与主对话相同的用量限额。",
+      "subagent 的收益被官方列为：保留上下文（把探索与实现移出主对话）、通过限制工具来施加约束、跨项目复用配置、用聚焦 system prompt 做领域特化、以及通过把任务路由到 Haiku 等更快更便宜的模型来控制成本。",
+      "成本/上下文开销的量化提示：当所有非内置 subagent 的 description 合计超过 15,000 token 时，Claude Code 会在启动时给出警告并显示总 token 数，建议精简 description、把细节移入仅在该 subagent 运行时才加载的 system prompt。",
+      "内置 subagent 分三类：Explore（只读、面向代码库搜索分析，Write/Edit 被拒绝）、Plan（plan mode 下做代码库调研，保持主对话只读）、General-purpose（可探索也可修改，拥有全部工具）；Explore 与 Plan 启动时不加载 CLAUDE.md 与 git status 快照，以保持调研快速廉价。",
+      "官方区分了 subagent 与其它并行形态：subagents 在单一 session 内工作；要并行跑多个独立 session 并从一处监控，用 background agents；要 session 间互传消息，用 cross-session messaging；要 Claude 派生并监督的协同 session 团队，用 agent teams。",
+      "可通过 permissions.deny 拒绝 Agent 工具来完全禁止委派给任何 subagent，或用 CLAUDE_CODE_DISABLE_EXPLORE_PLAN_AGENTS=1 只移除内置 Explore/Plan。"
+    ],
+    "raw_excerpt": "Use one when a side task would flood your main conversation with search results, logs, or file contents you won't reference again: the subagent does that work in its own context and returns only the summary. ... When the combined descriptions of your subagents, except the built-in ones, exceed 15,000 tokens, Claude Code shows a warning at startup with the total token count."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Don't Build Multi-Agents / Principles of Context Engineering (Cognition)",
+    "url": "https://cognition.ai/blog/dont-build-multi-agents",
+    "published_at": null,
+    "key_points": [
+      "Cognition 明确反对多智能体架构，点名 OpenAI 的 swarm 与 Microsoft 的 autogen 所推行的多智能体概念是「错误的构建 agent 方式」。",
+      "核心失败机制：把任务拆给 subagents 时，subagent 会误读子任务（如把 Flappy Bird 背景画成 Super Mario 风格），最终 agent 被迫合并两个被误解的产物；真实任务中大量细微语境都可能被误传。",
+      "原则一：共享上下文，且要共享完整的 agent trace，而不只是单条消息。",
+      "原则二：每个动作都携带隐含决策，相互冲突的决策会带来坏结果；作者主张这两条原则极少值得违反，因此应默认排除不满足它们的 agent 架构。",
+      "Cognition 推荐的最简合规架构是单线程线性 agent（上下文连续）；对超长任务，可引入一个专门把动作与对话历史压缩成关键细节、事件与决策的 LLM（Cognition 为此微调过小模型），但最终仍会撞到上限。",
+      "对 Claude Code subagents 的观察（截至 2025 年 6 月）：它虽会派生子任务，但从不与子任务 agent 并行工作，且子任务通常只负责回答问题而非写代码；其收益在于子 agent 的调研工作不必留在主 agent 历史中，从而在耗尽上下文前支持更长的 trace。",
+      "Cognition 认为当前 agent 尚不能像人类工程师那样通过长上下文主动对话来消解分歧，可靠性不如单 agent；并指出「edit apply model」时代小模型误读大模型指令导致错误编辑的教训，如今决策与应用多由单一模型一次动作完成。"
+    ],
+    "raw_excerpt": "I would argue that Principles 1 & 2 are so critical, and so rarely worth violating, that you should by default rule out any agent architectures that don't abide by them. ... The simplest way to follow the principles is to just use a single-threaded linear agent."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Agent orchestration — OpenAI Agents SDK docs",
+    "url": "https://openai.github.io/openai-agents-python/multi_agent/",
+    "published_at": null,
+    "key_points": [
+      "OpenAI 官方 SDK 文档把编排分为两类：由 LLM 决策（自主规划、用工具取数、用 handoffs 委派给子 agent）与由代码编排（更确定、在速度/成本/性能上更可预测）。",
+      "SDK 中最常用的两种多智能体模式：Agents as tools（manager agent 通过 Agent.as_tool() 调用专家 agent，自己保留对话控制权与最终答案）与 Handoffs（triage agent 把对话路由给专家，该专家在当轮剩余部分成为活跃 agent）。",
+      "官方给出的选择判据：当专家只应协助一个有界子任务、不应接管面向用户的对话时用 agents as tools；当路由本身是工作流的一部分、且希望被选中的专家拥有当轮剩余对话时用 handoffs；两者可组合。",
+      "代码编排的常见模式包括：用结构化输出做分类再选下一个 agent、链式串联（研究→大纲→写作→批评→改进）、while 循环中 task agent 与 evaluator agent 交替直到通过标准、以及用 asyncio.gather 等原语并行跑互不依赖的任务以提速。",
+      "官方建议的 LLM 编排战术包括：投资好的 prompt、监控并迭代、让 agent 自我反思与改进、使用专精单一任务的专家 agent 而非期望一个通用 agent 样样精通、以及投资 evals。"
+    ],
+    "raw_excerpt": "Use agents as tools when a specialist should help with a bounded subtask but should not take over the user-facing conversation. Use handoffs when routing itself is part of the workflow and you want the chosen specialist to own the remainder of the current turn."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks (Microsoft Research Blog)",
+    "url": "https://www.microsoft.com/en-us/research/blog/magentic-one-a-generalist-multi-agent-system-for-solving-complex-tasks/",
+    "published_at": null,
+    "key_points": [
+      "Microsoft Research 的 Magentic-One 采用多智能体架构：一个 lead agent（Orchestrator）指挥另外四个 agent（WebSurfer、FileSurfer、Coder、ComputerTerminal）解决开放式 web 与文件任务。",
+      "Orchestrator 实现双循环：外循环维护 Task Ledger（事实、猜测、计划），内循环维护 Progress Ledger（当前进度、任务分配）；若连续多步无进展，则更新 Task Ledger 并重新规划。",
+      "Microsoft 主张模块化多智能体设计相对单体单智能体系统有多项优势：把不同技能封装在独立 agent 中简化开发与复用（类比面向对象编程），plug-and-play 设计支持增删 agent 而无需重做整个系统，而单智能体系统常受困于不灵活的工作流。",
+      "Magentic-One 在多个有挑战性的 agentic 基准上取得与当时 SOTA 统计上可比的性能，且无需修改核心能力或架构；同时官方承认它仍远未达到人类水平且会犯错。",
+      "所有 agent 默认使用 GPT-4o，但系统与模型无关，可为不同 agent 接入异构模型（LLM/SLM 或专门化版本）以满足不同能力或成本要求；Orchestrator 建议用强推理模型，作者也试验过用 o1-preview 驱动外循环。",
+      "Microsoft 同时开源了 AutoGenBench，一个带重复与隔离控制、用于严格测试 agentic 基准并减少副作用评测工具。"
+    ],
+    "raw_excerpt": "Magentic-One's modular, multi-agent design offers numerous advantages over monolithic single-agent systems. By encapsulating distinct skills in separate agents, it simplifies development and reuse, similar to object-oriented programming."
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "How to think about agent frameworks (LangChain / Harrison Chase)",
+    "url": "https://blog.langchain.com/how-to-think-about-agent-frameworks/",
+    "published_at": "2025-04-20",
+    "key_points": [
+      "LangChain 认为构建可靠 agentic 系统的难点在于确保 LLM 在每一步都拿到恰当的上下文，这既包括控制进入 LLM 的确切内容，也包括运行恰当的步骤来生成相关内容。",
+      "该文转述并认同 Anthropic 的区分：workflows 是由预定义代码路径编排 LLM 与工具的系统，agents 是 LLM 动态决定自身流程与工具使用的系统；并称生产中几乎所有的 agentic 系统都是 workflows 与 agents 的组合。",
+      "该文引用 Anthropic 的立场「推荐先找最简单的方案，只在需要时增加复杂度，这可能意味着根本不构建 agentic 系统」，并指出 OpenAI 与 Anthropic 都明确表示并非总需要 agent，很多情况下 workflows 更简单、更可靠、更便宜、更快、性能更好。",
+      "该文转述 OpenAI 的表述：在承诺构建 agent 之前，先验证用例能清晰满足其标准，否则确定性方案可能就够用（注：此为对 OpenAI 指南的二手转述，OpenAI 原文页面本次抓取返回 403 未能直接读取）。",
+      "LangChain 对 agent builders 的调查显示，阻碍把更多 agent 投入生产的最大限制因素（远超其它选项）是「performance quality」（性能质量）。",
+      "该文批评 OpenAI 的 agent 构建指南存在「误导性观点」，并称 agent 抽象虽易上手，但常会遮蔽上下文控制、使确保每步上下文恰当变得困难。"
+    ],
+    "raw_excerpt": "Both OpenAI and Anthropic explicitly call out that you do not always need agents. In many cases, workflows are simpler, more reliable, cheaper, faster, and more performant. ... The number one response by far was \"performance quality\" - it's still really hard"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework (arXiv:2308.00352v7)",
+    "url": "https://arxiv.org/abs/2308.00352v7",
+    "published_at": "2023-08-01 (v1); v7 revised 2024-11-01",
+    "key_points": [
+      "MetaGPT 采用「assembly line paradigm」（流水线范式）为不同 agent 分配不同角色，将复杂任务拆解为多个 agent 协作的子任务，并把 SOP（标准作业程序）编码进 prompt 序列。",
+      "论文自述在代码生成基准上取得 85.9% 与 87.7% 的 Pass@1（对应 HumanEval 与 MBPP），并称其为新的 state-of-the-art。",
+      "论文自述实验评估中达到 100% 的任务完成率（task completion rate），并以此论证其设计在时间与 token 开销上的效率。",
+      "论文引入 executable feedback 机制在运行时调试并执行代码，自述在 MBPP 上带来 5.4% 的绝对提升。",
+      "论文明确将 AutoGPT、LangChain、AgentVerse、ChatDev 列为对比框架，并称 MetaGPT 在处理更高软件复杂度与功能丰富度上更优。",
+      "论文指出与 ChatDev 的差异：MetaGPT 的 agent 通过文档与图表（结构化输出）而非对话进行通信。",
+      "该版本 v7 的提交历史显示 v1 为 2023-08-01，v7 为 2024-11-01，共 7 个版本。",
+      "注意：以上 85.9%/87.7%/5.4%/100% 数字均取自引言与贡献列表的自述，本次未能读取到结果表格正文进行核对。"
+    ],
+    "raw_excerpt": "Notably, in code generation benchmarks, MetaGPT achieves a new state-of-the-art (SoTA) with 85.9% and 87.7% in Pass@1. ... Remarkably, in our experimental evaluations, MetaGPT achieves a 100% task completion rate, demonstrating the robustness and efficiency (time and token costs) of our design. ... we introduce a novel executive feedback mechanism that debugs and executes code during runtime, significantly elevating code generation quality (e.g., 5.4% absolute improvement on MBPP)."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "ChatDev: Communicative Agents for Software Development (arXiv:2307.07924v5)",
+    "url": "https://arxiv.org/html/2307.07924v5",
+    "published_at": "2023-07-16 (v1); v5",
+    "key_points": [
+      "ChatDev 是一个 chat-powered 软件开发框架，用 chat chain 规定 agent「沟通什么」、用 communicative dehallucination 规定「如何沟通」，覆盖 design、coding、testing 三个阶段。",
+      "ChatDev 的拓扑是「双 agent 通信」设计（dual-agent communication），论文称该设计通过避免复杂的多智能体拓扑来简化通信、加速达成共识。",
+      "ChatDev 采用 inception prompting 机制（instructor system prompt 与 assistant system prompt）来启动、维持与结束 agent 间通信。",
+      "ChatDev 将 agent 上下文记忆按阶段切分为短期记忆（维持单阶段对话连续性）与长期记忆（跨阶段保留上下文感知）。",
+      "ChatDev 的 chat chain 只传递前一阶段的「解决方案」而非完整对话历史，以降低信息过载、提升各子任务专注度。",
+      "论文自述结果：ChatDev 显著提升软件质量，带来更好的完整性（completeness）、可执行性（executability）与需求一致性（consistency with requirements）。",
+      "论文自述自然语言沟通有助于系统设计，编程语言沟通有助于软件优化。",
+      "注意：上述质量提升为定性表述，本次未能读取到给出具体百分比的结果表格。"
+    ],
+    "raw_excerpt": "The dual-agent communication design simplifies communications by avoiding complex multi-agent topologies, effectively streamlining the consensus-reaching process ... The results indicate that ChatDev notably improves the quality of software, leading to improved completeness, executability, and better consistency with requirements. ... By sharing only the solutions of each subtask rather than the entire communication history, ChatDev minimizes the risk of being overwhelmed by too much information."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks (arXiv:2411.04468v1)",
+    "url": "https://arxiv.org/html/2411.04468v1",
+    "published_at": "2024-11-07",
+    "key_points": [
+      "Magentic-One 采用层级式架构：一个 lead agent（Orchestrator）负责规划、跟踪进度、出错后重新规划，并指挥其他专业 agent 执行任务。",
+      "团队共五个 agent：Orchestrator、Coder、Computer Terminal、File Surfer、Web Surfer，基于 AutoGen 框架实现。",
+      "在 AutoGenBench 上评测得到任务完成率：GAIA 38%、WebArena 32.8%；AssistantBench 准确率 27.7%。",
+      "作者称这些结果与针对单一基准专门优化的 SOTA 系统在统计上具有竞争力（statistically competitive），且未针对基准修改核心 agent 能力或协作方式。",
+      "论文将多智能体范式与单体单智能体（monolithic single-agent）方法对比，主张模块化封装技能便于复用与增删 agent，但正文该段落未给出量化提升数字。",
+      "论文提供消融实验与错误分析，用于说明每个 agent 对整体性能的增量贡献（正文抓取被裁剪，未读到具体消融数值）。"
+    ],
+    "raw_excerpt": "We observed task-completion rates of 38% on GAIA [29] and 32.8% on WebArena [79]; and attained an accuracy of 27.7% on AssistantBench [71]. These results place Magentic-One in a strong position, where it is statistically competitive with other state-of-the-art (SOTA) systems, including those that are specialized for a given benchmark."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "AgentOrchestra: Orchestrating Multi-Agent Intelligence with the Tool-Environment-Agent (TEA) Protocol (arXiv:2506.12508v6)",
+    "url": "https://arxiv.org/html/2506.12508v6",
+    "published_at": "2025-06-14",
+    "key_points": [
+      "AgentOrchestra 是建立在 TEA 协议之上的层级式多智能体框架：由 central planner 协调领域专用 sub-agents，并在执行中动态扩展能力。",
+      "planner 将每个子任务路由到领域专用 sub-agent 或环境，后者只暴露精选工具集与局部上下文，从而把全局协调转化为一系列局部路由决策，并支持树状扩展、限制 orchestrator 的决策范围。",
+      "论文报告在 GAIA Test set 上达到 89.04%，作者称据其所知处于领先方法之列（among the leading methods to the best of our knowledge）。",
+      "评测覆盖四个基准，涉及专家级 agent 任务与科学/数学推理，并包含隔离关键组件作用的消融实验。",
+      "论文摘要称 AgentOrchestra 在四个基准上一致优于强基线（consistently outperforms strong baselines），但摘要层面未给出相对单智能体基线的具体差值或 token 消耗倍数。"
+    ],
+    "raw_excerpt": "Building on TEA, we present AgentOrchestra, a hierarchical multi-agent framework in which a central planner coordinates specialized sub-agents and dynamically extends capabilities during execution. ... in particular, it achieves 89.04% on the GAIA Test set, placing it among the leading methods to the best of our knowledge."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems (AgentPrune)",
+    "url": "https://arxiv.org/html/2410.02506v1",
+    "published_at": "2024-10-03",
+    "key_points": [
+      "AgentPrune 将整个 LLM-MA 框架建模为时空通信图：同一轮对话内 agent 间通信为 spatial edges，跨对话通信为 temporal edges；通过训练 low-rank 原理引导的 graph mask，一次性（one-shot）剪枝得到稀疏通信拓扑并固定用于后续推理。",
+      "实验覆盖六个 benchmark；在 MMLU 上以 5.6 美元成本达到与 SOTA 通信拓扑 43.7 美元相当的结果。",
+      "集成到现有框架（含 AutoGen 与 GPTSwarm）可带来 28.1%~72.8% 的 token 消耗下降。",
+      "对两类 agent 对抗攻击有防御效果，性能提升 3.5%~10.8%。",
+      "论文首次识别并形式化定义 LLM-MA 流水线中的 communication redundancy 问题，即相当一部分消息传递对协作智能没有实质贡献。",
+      "Figure 2(Left) 在 MMLU 上对比了单个 gpt-3.5-turbo、三个 gpt-3.5-turbo 组成的 chain/tree/complete graph/GPTSwarm（intra-dialogue 结构），以及 PHP、LLM-Debate、DyLAN、AgentPrune（inter-dialogue 结构）；正文结论是即使最简单的通信框架也带来显著的准确率提升。",
+      "Figure 2(Middle) 显示各类通信方法相比简单 chain 结构带来 2~11.8 倍的 token 消耗增长。",
+      "空间通信图被约束为有向无环图（DAG），并用拓扑排序保证每个节点在其依赖处理完之后才被处理。",
+      "最终答案由 summarizer agent 或投票等聚合机制在 K 轮对话后产生。"
+    ],
+    "raw_excerpt": "Extensive experiments across six benchmarks demonstrate that AgentPrune (I) achieves comparable results as state-of-the-art topologies at merely $5.6 cost compared to their $43.7, (II) integrates seamlessly into existing multi-agent frameworks with 28.1%~72.8%↓ token reduction, and (III) successfully defend against two types of agent-based adversarial attacks with 3.5%~10.8%↑ performance boost. ... Figure 2 (Left) compares the performance of a single gpt-3.5-turbo with three agents equipped with different inter/intra-dialogue communication structures. The results demonstrate that even the simplest communication framework significantly leads to a notable accuracy improvement"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration (DyLAN)",
+    "url": "https://arxiv.org/html/2310.02170v2",
+    "published_at": "2023-10-03",
+    "key_points": [
+      "DyLAN 采用两阶段范式：(1) Team Optimization（团队优化）与 (2) Task Solving（任务求解）。",
+      "第一阶段用基于无监督指标 Agent Importance Score 的 agent selection 算法，依据候选 agent 在初步试验中的贡献挑选最优 agent 子集。",
+      "agent selection 算法是在 T-FFN（temporal feed-forward network）上做前向-后向消息传递，灵感来自反向传播算法与神经元重要性分数。",
+      "第二阶段中，被选中的 agent 依据 query 动态协作；由 LLM-powered ranker 在中间动态停用低效 agent（agent team reformation），从而扩展 T-FFN，把动态通信结构引入 DyLAN。",
+      "论文声称 DyLAN 在代码生成、决策、通用推理、算术推理任务上以中等计算成本优于强基线。",
+      "在 MMLU 的特定学科上，团队优化阶段的 agent 选择使 DyLAN 准确率最高提升 25.0%。",
+      "论文发表于 COLM 2024，代码仓库为 https://github.com/SALT-NLP/DyLAN。"
+    ],
+    "raw_excerpt": "Empirically, we demonstrate that DyLAN outperforms strong baselines in code generation, decision-making, general reasoning, and arithmetic reasoning tasks with moderate computational cost. On specific subjects in MMLU, selecting a team of agents in the team optimization stage improves accuracy by up to 25.0% in DyLAN. ... DyLAN adopts a two-stage paradigm. Agents communicate in a structure of the temporal feed-forward network (T-FFN)."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Language Agents as Optimizable Graphs (GPTSwarm)",
+    "url": "https://arxiv.org/abs/2402.16823",
+    "published_at": "2024-02-26",
+    "key_points": [
+      "GPTSwarm 把 LLM-based agent 描述为计算图：节点实现处理多模态数据或查询 LLM 的函数，边描述操作之间的信息流。",
+      "图可以递归组合成更大的复合图，表示 agent 间协作的层级结构（边连接不同 agent 的操作）。",
+      "提出自动图优化器：(1) node optimization 精炼节点级 LLM prompt；(2) edge optimization 通过改变图连通性改进 agent 编排。",
+      "论文发表于 ICML 2024。",
+      "注意：本条仅读到 arXiv 摘要页（元数据+摘要），未读到正文实验章节，因此不含任何基准分数或与单智能体的定量对比。"
+    ],
+    "raw_excerpt": "We unify these approaches by describing LLM-based agents as computational graphs. The nodes implement functions to process multimodal data or query LLMs, and the edges describe the information flow between operations. ... Our novel automatic graph optimizers (1) refine node-level LLM prompts (node optimization) and (2) improve agent orchestration by changing graph connectivity (edge optimization)."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "More Agents Is All You Need (Agent Forest), arXiv:2402.05120v2, TMLR",
+    "url": "https://arxiv.org/html/2402.05120v2",
+    "published_at": "2024-02-03 (v1); 2024-10-11 (v2)",
+    "key_points": [
+      "提出 Agent Forest：两阶段「采样 + 投票」方法，对同一 LLM 重复查询 N 次得到样本集 S={s1..sN}，再用多数投票（按与其他样本的累计相似度 V(si)=Σ sim(si,sj) 取最大者）合成最终答案。",
+      "核心发现：仅通过 sampling-and-voting，LLM 性能随实例化的 agent 数量（ensemble size）增加而提升，作者称其为对「raw agents」缩放性质的首次系统性研究。",
+      "投票相似度度量随任务类型不同：开放式生成任务（如代码生成）用 BLEU 分数衡量相似度，封闭式任务（如多选题）用出现频次衡量。",
+      "增益与任务难度相关：在更难的任务上、以及在使用更弱模型时，性能提升幅度更大；作者从内在难度、推理步数长度、正确答案先验概率三个维度分析难度影响。",
+      "小模型暴力集成可媲美更大模型：Figure 1 中 GSM8K 上 ensemble size 扩到 15 时 Llama2-13B 达到与 Llama2-70B 相当的准确率；Llama2-70B 与 GPT-3.5-Turbo 分别在 15 和 20 时达到与其更强对应模型相当的水平。",
+      "该方法与已有复杂方法正交，可作为插件叠加在 CoT 等 prompt 工程方法与多智能体协作框架（如 LLM-Debate、Reflexion）之上进一步提升；作者称单独使用本方法在多数情况下即可达到与复杂方法相当的性能。",
+      "作者指出此前工作（LLM-Debate 的 Table 10、CoT-SC）虽已报告「准确率随 agent/思维链数量上升」的初步曲线，但 agent 数量的缩放性质并非这些工作的重点，覆盖场景与实验有限，缺少专门深入研究。",
+      "实验覆盖算术推理（GSM8K、更难的 MATH）与生成任务，并使用不同规模的多个 LLM 作为骨干。"
+    ],
+    "raw_excerpt": "We find that, simply via a sampling-and-voting method, the performance of large language models (LLMs) scales with the number of agents instantiated. ... When the ensemble size scales up to 15, Llama2-13B achieves comparable accuracy with Llama2-70B. ... the experimental results indicate that there are greater performance improvements when addressing difficult tasks and when using weaker models."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "More Agents Is All You Need — arXiv 摘要页元数据 (arXiv:2402.05120)",
+    "url": "https://arxiv.org/abs/2402.05120",
+    "published_at": "2024-02-03 (v1); 2024-10-11 (v2)",
+    "key_points": [
+      "该论文发表于 Transactions on Machine Learning Research (TMLR)，并在 OpenReview 上有评审记录（forum id bgzUSZ8aeg），属于经同行评审的发表版本而非仅预印本。",
+      "作者单位为腾讯（Tencent），代码开源于 github.com/MoreAgentsIsAllYouNeed/AgentForest。",
+      "版本历史：v1 提交于 2024-02-03，v2 修订于 2024-10-11，落在子问题要求的 2024–2026 时间窗内。"
+    ],
+    "raw_excerpt": "Title: More Agents Is All You Need ... Comments: Published at Transactions on Machine Learning Research (TMLR) ... [Submitted on 3 Feb 2024 (v1), last revised 11 Oct 2024 (this version, v2)]"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Towards a Science of Scaling Agent Systems",
+    "url": "https://arxiv.org/abs/2512.08296",
+    "published_at": "2025-12-09 (v1); v2 2026-04-08",
+    "key_points": [
+      "研究规模：260 个配置，覆盖 6 个 agentic benchmark、5 种典型架构（Single-Agent 与 Independent / Centralized / Decentralized / Hybrid 四种多智能体）、3 个 LLM 家族。",
+      "实验明确「standardizing tools, prompts, and compute to isolate architectural effects」，即在标准化算力条件下隔离架构效应，属于算力受控比较。",
+      "核心发现为 capability-saturation effect：当单智能体基线表现超过一定水平后，协调带来的收益递减。",
+      "相对单智能体基线的性能变化区间为 +80.8%（可分解的金融推理）到 -70.0%（顺序规划），即架构与任务结构的匹配决定协作成败。",
+      "另两项发现：工具密集型任务会带来多智能体开销；缺少集中式验证的架构比集中式协调架构更容易传播错误。",
+      "预测模型交叉验证 R^2=0.373（使用 task-grounded capability 指标时为 0.413），可为 87% 的留出配置识别最佳架构。"
+    ],
+    "raw_excerpt": "Across 260 configurations spanning six agentic benchmarks, five canonical architectures (Single-Agent and four Multi-Agent: Independent, Centralized, Decentralized, Hybrid), and three LLM families, we perform controlled evaluations, standardizing tools, prompts, and compute to isolate architectural effects. ... We identify a robust capability-saturation effect ... Relative performance change compared to single-agent baseline ranges from +80.8% on decomposable financial reasoning to -70.0% on sequential planning"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Does Multi-Agent Collaboration Pay When Agents Serve Users? Testing Agent Scaling in Dual-Control Settings",
+    "url": "https://arxiv.org/abs/2610.27655",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "在 τ²-bench 的 airline / retail / telecom 三个域上，用同一模型构建 stock 单智能体系统（SAS）与集中式多智能体系统（MAS），覆盖 3 个模型家族的 6 个模型、约 7,950 段模拟对话。",
+      "每个 episode、每个系统都记录一份 completion-token 账本（one completion-token ledger per episode per system），用于算力匹配比较。",
+      "在固定模拟用户下，13 个有效单元格中 MAS 有 12 个更差、1 个持平，没有任何单元格显示 MAS 收益；拟合增益为负，加权均值 -28 分，95% CI [-44, -12]。",
+      "在规则预测 MAS 应获益的两个单元格上，MAS 反而分别落后 13 分和 22 分；在无预算上限时，最好也只能以 5.5 倍于 SAS 的 token 消耗打平。",
+      "MAS 未能可检测地减少错误的数据库写入，而是把其他失败转化为预算耗尽与不作为。",
+      "作者结论：对于面向用户的 agent，SAS 应作为默认选择；多智能体设计必须从该场景本身给出 compute-matched 证据。",
+      "研究为预注册并附公开变更日志，作者自陈有一项效度门槛未满足（其 planner 从未看到 tool schemas）。"
+    ],
+    "raw_excerpt": "Under a fixed simulated user no cell shows a MAS benefit: the MAS is worse in 12 of the 13 valid cells and tied in the thirteenth, and the fitted gain is negative across the observed capability range (weighted mean -28 points, 95% CI [-44, -12]). ... without a budget ceiling it at best draws level at 5.5 times the SAS's token spend. ... a multi-agent design must show compute-matched evidence from the setting itself."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "arXiv search listing: multi-agent single agent compute budget (72 results, incl. Collaborative Learning and Reasoning over Model Slices, arXiv:2610.12927)",
+    "url": "https://arxiv.org/search/?query=multi-agent+single+agent+compute+budget&searchtype=all&size=50",
+    "published_at": "2026-10",
+    "key_points": [
+      "arXiv 全字段检索「multi-agent single agent compute budget」返回 72 条结果，说明该主题在 2024–2026 有持续产出。",
+      "其中 arXiv:2610.12927（Collaborative Learning and Reasoning over Model Slices，2026-10）提出 model slicing：在给定算力预算下用多个更小的异构模型替代一个大模型，并学习跨模型协作，属于「算力匹配下多模型 vs 单模型」的另一类受控设定。",
+      "该条目的摘要指出单模型推理存在误差传播问题（后续步骤依赖模型自身早期输出），作为引入协作的动机。"
+    ],
+    "raw_excerpt": "Showing 1–50 of 72 results for all: multi-agent single agent compute budget ... model slicing replaces a large model with smaller, heterogeneous models under a [budget] ... single-model reasoning remains vulnerable to error propagation, as later steps depend on the model's earlier outputs"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph README (main branch)",
+    "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 将 LangGraph 定位为 \"Low-level orchestration framework for building stateful agents\"，强调其为底层编排框架而非高层多智能体架构方案。",
+      "README 正文未出现 supervisor、swarm、hierarchical teams 等协作模式名称，也未主张任何特定的多智能体拓扑。",
+      "README 列出的核心能力为 durable execution、human-in-the-loop、comprehensive memory、LangSmith 调试、production-ready deployment，均属编排运行时能力而非协作模式。",
+      "README 将「可规划、使用子代理（subagents）、利用文件系统」的能力指向更高层包 Deep Agents，而非 LangGraph 本身。",
+      "README 声明 LangGraph 受 Pregel 与 Apache Beam 启发，公共接口借鉴 NetworkX。",
+      "README 称 LangGraph 可独立使用，不依赖 LangChain。"
+    ],
+    "raw_excerpt": "Low-level orchestration framework for building stateful agents. ... If you're looking to quickly build agents, check out Deep Agents — a higher-level package built on LangGraph for agents that can plan, use subagents, and leverage file systems for complex tasks."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "LangGraph Overview — official docs (docs.langchain.com)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/overview",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 LangGraph 定义为 \"a low-level orchestration framework and runtime\"，并明确 \"LangGraph is very low-level, and focused entirely on agent orchestration\"。",
+      "文档称 LangGraph \"does not abstract prompts or architecture\"，即不预设/封装多智能体架构，架构由使用者自行搭建。",
+      "文档建议初学者或需要更高层抽象者改用 LangChain 的 agents（prebuilt architectures for common LLM and tool-calling loops）。",
+      "文档给出产品分层：Deep Agents 是 agent harness（planning、subagents、filesystem tools、context management，构建于 LangGraph 之上）；LangChain 是 agent framework；LangGraph 是 orchestration runtime；LangSmith 是 tracing/eval/deployment 平台。",
+      "文档强调核心优势是可在同一图中混合确定性手写步骤与 LLM 驱动的 agentic 步骤，以便在需要可靠性的环节保持可预测、可审计。"
+    ],
+    "raw_excerpt": "LangGraph is very low-level, and focused entirely on agent orchestration. ... LangGraph does not abstract prompts or architecture ... Deep Agents is an agent harness: planning, subagents, filesystem tools, and context management on top of LangGraph."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — README (main branch)",
+    "url": "https://raw.githubusercontent.com/crewAIInc/crewAI/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 自述 CrewAI 是开源 Python 框架，提供 high-level abstractions 与 low-level APIs，用于构建 production-ready 多智能体工作流。",
+      "README 将协作模式明确划分为两种互补路径：CrewAI Crews（面向自主性与协作智能，基于 role-based agents）与 CrewAI Flows（事件驱动自动化，提供精确工作流控制、单次 LLM 调用，并原生支持 Crews）。",
+      "README 对 Crews 的描述包含：agents 之间自然的自主决策、动态任务委派与协作、带既定目标与专长的专门化角色、灵活的问题解决方式。",
+      "README 对 Flows 的描述包含：对执行路径的细粒度控制、任务间安全一致的状态管理、AI agents 与生产 Python 代码的干净集成、面向复杂业务逻辑的条件分支。",
+      "README 称两者结合才能发挥真正威力：在自主性与精确控制之间取得平衡，构建复杂生产级应用。",
+      "README 的入门示例使用 \"process\": \"sequential\"，并说明 sequential 下任务按 tasks 列表顺序执行。",
+      "README 说明除 sequential 外还可使用 hierarchical process：自动为 crew 分配一个 manager 来协调任务的规划与执行，通过委派与结果验证完成。",
+      "README 列出 Key Features：Crews for autonomy（角色/目标/工具/任务）、Flows for control（状态、分支、路由、生产逻辑）、Seamless integration、Python-native customization。",
+      "README 含厂商自述的营销性主张：\"rapidly becoming the standard for production-ready agentic automation\"、\"over 100,000 developers certified\"——属未经独立验证的厂商声明。"
+    ],
+    "raw_excerpt": "It gives developers autonomous agent collaboration through Crews and precise, event-driven control through Flows. - **CrewAI Crews**: Optimize for autonomy and collaborative intelligence with role-based AI agents. - **CrewAI Flows**: Build event-driven automations that combine precise workflow control, single LLM calls, and native support for Crews. ... In addition to the sequential process, you can use the hierarchical process, which automatically assigns a manager to the defined crew to properly coordinate the planning and execution of tasks through delegation and validation of results."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "CrewAI Docs — Processes",
+    "url": "https://docs.crewai.com/en/concepts/processes",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 process 定义为编排 agents 执行任务的方式，类比人类团队中的项目管理，按预定义策略分发与执行任务。",
+      "文档只列出两种 Process 实现：Sequential（按顺序执行任务，保证有序推进）与 Hierarchical（按管理层级组织任务，依据结构化指挥链委派与执行）。",
+      "Hierarchical 模式必须在 crew 中指定 manager language model（manager_llm）或自定义 manager agent（manager_agent），否则无法启用——这是文档明示的硬性前置条件。",
+      "Sequential 模式下任务按 task 列表的预定义顺序执行，前一个任务的输出作为后一个任务的 context；可用 Task 的 context 参数自定义上下文。",
+      "Hierarchical 模式模拟企业层级：manager agent 负责规划、委派与验证；任务不是预先分配的，manager 依据 agents 的能力分配任务、审查输出并评估任务完成情况。",
+      "Process 类被实现为 Enum，将 process 取值限制为 sequential 与 hierarchical 两种，以保证类型安全。"
+    ],
+    "raw_excerpt": "Sequential : Executes tasks sequentially, ensuring tasks are completed in an orderly progression. Hierarchical : Organizes tasks in a managerial hierarchy, where tasks are delegated and executed based on a structured chain of command. A manager language model ( manager_llm ) or a custom manager agent ( manager_agent ) must be specified in the crew to enable the hierarchical process ... Tasks are not pre-assigned; the manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion. ... The Process class is implemented as an enumeration ( Enum ), ensuring type safety and restricting process values to the defined types ( sequential , hierarchical )."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "CrewAI Docs — Flows",
+    "url": "https://docs.crewai.com/en/concepts/flows",
+    "published_at": null,
+    "key_points": [
+      "Flows 被定位为构建与管理 AI 工作流的功能，用于组合与协调编码任务和 Crews，构建结构化、事件驱动的工作流。",
+      "Flows 的四项核心能力：简化工作流创建（串联多个 Crews 与任务）、状态管理（在任务间管理与共享 state）、事件驱动架构、灵活控制流（条件逻辑、循环、分支）。",
+      "Flow 通过 @start() 标记入口点，支持多个无条件 start、基于前序方法或 router 标签的门控 start、以及可调用条件；所有满足条件的 @start() 方法在 Flow 开始或恢复时执行（常常并行）。",
+      "Flow 通过 @listen() 标记监听某任务输出的方法，被监听任务发出输出时触发，监听方法可接收该输出作为参数。",
+      "每个 Flow 实例在 state 中自动获得唯一标识符（UUID），用于追踪与管理 flow 执行；state 可持久保存额外数据。",
+      "Flow 的最终输出由最后完成的方法决定，kickoff() 返回该方法的输出。",
+      "文档区分 flow.usage_metrics（聚合 Flow 执行期间所有 LLM 调用的 token 用量，含各 Crew、Agent 工具内调用与裸 LLM.call）与 flow.kickoff().token_usage（仅反映最后一个返回 CrewOutput 的 @listen 方法，忽略先前 Crews 与裸 LLM 调用）。"
+    ],
+    "raw_excerpt": "Flows allow you to create structured, event-driven workflows. They provide a seamless way to connect multiple tasks, manage state, and control the flow of execution in your AI applications. ... Simplified Workflow Creation ... State Management ... Event-Driven Architecture ... Flexible Control Flow : Implement conditional logic, loops, and branching within your workflows. ... All satisfied @start() methods will execute (often in parallel) when the Flow begins or resumes."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "CrewAI Docs — Introduction (What is CrewAI / When to Use Crews vs. Flows)",
+    "url": "https://docs.crewai.com/en/introduction",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 Flows 定位为应用的\"backbone\"（流程定义/管理者角色），负责定义步骤、逻辑与数据流动；Crews 是 Flow 内执行具体工作的\"团队\"单元。",
+      "文档给出明确选型建议：对任何 production-ready 应用，应从 Flow 开始；当某个步骤需要一队 agents 完成特定的复杂任务且需要自主性时，才在该 Flow 步骤内使用 Crew。",
+      "文档列出三类架构示例：简单自动化=单个 Flow 加 Python 任务；复杂研究=Flow 管理状态 + Crew 执行研究；应用后端=Flow 处理 API 请求 + Crew 生成内容 + Flow 存库。",
+      "文档描述运行链路：Flow 触发事件/启动流程 → Flow 管理状态并决定下一步 → Flow 将复杂任务委派给 Crew → Crew 的 agents 协作完成任务 → Crew 将结果返回 Flow → Flow 依据结果继续执行。",
+      "文档含厂商自述的营销性主张：\"the leading open-source framework\"、\"the standard for enterprise-ready AI automation\"、\"Cost-Efficient: Optimized to minimize token usage and API calls\"——均为未经独立验证的厂商声明。"
+    ],
+    "raw_excerpt": "The short answer: Use both. For any production-ready application, start with a Flow . Use a Flow to define the overall structure, state, and logic of your application. Use a Crew within a Flow step when you need a team of agents to perform a specific, complex task that requires autonomy."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "CrewAI Docs — Collaboration (含 Troubleshooting Collaboration)",
+    "url": "https://docs.crewai.com/en/concepts/collaboration",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 的协作依赖 allow_delegation=True：开启后 agents 自动获得两个工具——Delegate work to coworker(task, context, coworker) 与 Ask question to coworker(question, context, coworker)。",
+      "文档的 Troubleshooting Collaboration 章节以\"问题—症状—解决\"形式列出协作失效情形，其中一条为 \"Agents Not Collaborating\"：症状是 agents 各自孤立工作、不发生委派，解决方法是确保 allow_delegation=True。",
+      "另一条为 \"Too Much Back-and-Forth\"：症状是 agents 提出过多问题、进展缓慢，解决方法是提供更好的上下文与更具体的角色定义（该页在此处被截断，后续条目未读到）。",
+      "文档 Best Practices 指出应避免重叠或含糊的角色定义（如 \"General Assistant\"、\"Helper\"），并建议对协调者/通才开启委派、对专注型专家关闭委派。",
+      "文档建议用 Task 的 context 参数显式声明任务依赖以共享上下文，并强调任务描述需具体可执行，含糊描述不利于协作。"
+    ],
+    "raw_excerpt": "Issue: Agents Not Collaborating — Symptoms: Agents work in isolation, no delegation occurs ... Issue: Too Much Back-and-Forth — Symptoms: Agents ask excessive questions, slow progress ... ❌ Avoid: Overlapping or vague roles"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "ag2ai/ag2 README (main branch)",
+    "url": "https://raw.githubusercontent.com/ag2ai/ag2/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "AG2 自我定位为 \"Open-Source AgentOS for AI Agents\"，是构建 AI agent 并促进多 agent 协作的编程框架，README 将 \"multi-agent conversation patterns\" 列为特性之一。",
+      "截至当前 main 分支 README，ConversableAgent、GroupChat、import autogen 已不在 ag2 顶层包中；自 AG2 v1.0 起顶层包是协议驱动的 ag2，经典框架迁至独立仓库 ag2ai/ag2-classic（pip install ag2-classic）。",
+      "README 给出对照表：AG2 Classic 使用 import autogen、核心 agent 为 ConversableAgent、多 agent 用 GroupChat / swarms / nested chats；AG2（本仓库）使用 import ag2、核心 agent 为 Agent、多 agent 用 Network（hub + channels）。",
+      "README 明确声明 AG2 v1.0 不是 Classic 的 drop-in 升级，agent model、orchestration、imports 全部改变。",
+      "AG2 v1.0 的多 agent 编排由 Network 承担：一个 Hub 持有注册表、write-ahead log 与审计轨迹，agent 之间通过 typed channels 通信；README 称其取代经典 GroupChat / swarm / nested-chat 模式。",
+      "Channel 有四种形态：conversation（自由双人）、consulting（严格一问一答、自动关闭）、discussion（N agent 轮转）、workflow（声明式 TransitionGraph，README 称其为经典 GroupChat 的最接近对应物）。",
+      "AG2 全程 async：Agent.ask(...) 返回 AgentReply，文本在 reply.body；要求 Python >= 3.10。",
+      "README 将 AG2 Classic 描述为 \"the original AutoGen-derived framework\"，即 AG2 源自 AutoGen 的经典框架血统。"
+    ],
+    "raw_excerpt": "\"As of AG2 v1.0, the protocol-driven framework is the top-level package, imported as `ag2`. The classic framework has moved to its own repository — ag2ai/ag2-classic\" / \"This repository (`pip install ag2`) no longer ships the `autogen` import name or the classic agent classes.\" / \"AG2 v1.0 (`pip install ag2`) is **not** a drop-in upgrade from Classic. The agent model, orchestration, and imports all changed.\" / \"This replaces the classic `GroupChat` / swarm / nested-chat patterns.\" / \"`workflow` (a declarative `TransitionGraph` for conditional handoffs, which is the closest analogue to a classic `GroupChat`)\""
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "AG2 Docs — Network Overview",
+    "url": "https://docs.ag2.ai/docs/user-guide/network/overview/",
+    "published_at": null,
+    "key_points": [
+      "ag2.network 把若干 Agent 实例组成 hub-and-spoke 拓扑的多 agent 网络，由中心注册表协调基于 channel、协议驱动的交换；该模块完全 opt-in，不导入时裸 Agent 行为不变。",
+      "文档列举采用 Network 的动机：可强制执行的发言顺序与审计轨迹、按能力发现 agent 的注册表、可重放的 write-ahead log、治理（访问/速率/收件箱/限额）、子任务可观测性、分布式跨进程部署（LocalLink 换 WsLink）。",
+      "四个内置 channel adapter 的差异：conversation 恰好 2 方、自由发言、显式关闭或 TTL；consulting 恰好 2 方、严格 1Q1R、回复后自动关闭；discussion 2+ 方、round-robin、显式关闭或 TTL；workflow 2+ 方、声明式 TransitionGraph、由图终止（TerminateTarget / max_turns）。",
+      "文档指引从 classic GroupChat / handoff 编排迁移的用户阅读 \"Migrating from Group Chat\" 页面。",
+      "默认传输为 LocalLink（同进程双工队列），可换 WsLink 让每个 agent 运行在独立进程或独立主机，HubClient API 不变。"
+    ],
+    "raw_excerpt": "\"The `ag2.network` module turns one or more `Agent` instances into a multi-agent network — a hub-and-spoke topology where a central registry coordinates channel-based, protocol-driven exchanges between named agents. It is fully opt-in.\" / \"`workflow` | 2+ | Declarative TransitionGraph | Graph terminates (TerminateTarget / max_turns)\""
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "AG2 Docs — Migration from Group Chat",
+    "url": "https://docs.ag2.ai/docs/user-guide/network/migration_from_group_chat/",
+    "published_at": null,
+    "key_points": [
+      "概念映射：GroupChat(agents=[...]) 对应一个 workflow channel，agents 作为 participants，hub 扮演 GroupChatManager 的角色。",
+      "GroupChatManager 对应 WorkflowAdapter + Hub；轮次强制从进程内 turn manager 移入 hub，adapter 依据图校验每次 send。",
+      "Agent.handoffs 对应 TransitionGraph，且从 per-agent 改为 per-channel：handoff 在 channel 层描述一次，可 JSON 序列化。",
+      "max_round=N 对应 TransitionGraph(..., max_turns=N)，语义相同（硬上限）。",
+      "新体系是 data-first：TransitionGraph 可 JSON 序列化并能通过 Hub.hydrate() 存活，运行在 hub-and-spoke 架构上而非进程内 turn manager。",
+      "迁移指南提供 round-robin、pipeline/sequential、conditional handoff、function target 四组 side-by-side 代码对照，并称迁移 \"mostly mechanical\"。"
+    ],
+    "raw_excerpt": "\"The two systems share the same vocabulary — speakers, conditions, targets, terminations — but the new one is data-first (a TransitionGraph is JSON-serialisable and survives `Hub.hydrate()`) and runs on top of the network's hub-and-spoke architecture instead of an in-process turn manager.\" / \"`GroupChat(agents=[...])` → A workflow channel with the agents as participants | The hub plays the role of `GroupChatManager`.\" / \"`Agent.handoffs` → A `TransitionGraph` (per-channel, not per-agent)\""
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "microsoft/autogen README (main branch, archived)",
+    "url": "https://raw.githubusercontent.com/microsoft/autogen/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "microsoft/autogen 仓库已 archived（归档、不再维护）：Microsoft 不再提供 bug 修复、安全修复、新特性或支持，README 明确建议不要用于生产。",
+      "官方指定继任者为 Microsoft Agent Framework (MAF)，并提供 AutoGen → MAF 迁移指南；新用户被引导至 MAF。",
+      "AutoGen 新版（v0.4+）采用分层架构：Core API（消息传递、事件驱动 agent、本地与分布式 runtime、.NET/Python 跨语言）、AgentChat API（更简单、opinionated 的高层 API，构建于 Core 之上，支持 two-agent chat、group chats 等常见多 agent 模式）、Extensions API（LLM client、代码执行等扩展）。",
+      "安装方式为 pip install -U \"autogen-agentchat\" \"autogen-ext[openai]\"，要求 Python 3.10+；从 v0.2 升级需参考 Migration Guide。",
+      "README 的多 agent 编排示例使用 AgentTool 把子 agent 包装为工具（math_expert / chemistry_expert 挂到主 assistant 上），而非使用 GroupChat。",
+      "生态工具包括 AutoGen Studio（no-code GUI，README 明确声明非生产就绪）、AutoGen Bench（评测套件）、Magentic-One（基于 AgentChat + Extensions 构建的多 agent 团队）。",
+      "README 称 AutoGen 由 Microsoft Research 首创，开创了启发社区的多 agent 编排实验模式。"
+    ],
+    "raw_excerpt": "\"**⚠️ Project archived and no longer maintained** … Microsoft is not providing bug fixes, security fixes, new features, or support for this project.\" / \"Microsoft Agent Framework (MAF) is the enterprise‑ready successor to AutoGen.\" / \"[AgentChat API] implements a simpler but opinionated API for rapid prototyping. This API is built on top of the Core API and is closest to what users of v0.2 are familiar with and supports common multi-agent patterns such as two-agent chat or group chats.\" / \"You can use `AgentTool` to create a basic multi-agent orchestration setup.\""
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation (arXiv:2308.08155)",
+    "url": "https://arxiv.org/abs/2308.08155",
+    "published_at": "2023-08-16 (v1); revised 2023-10-03 (v2)",
+    "key_points": [
+      "论文标题为 \"AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation\"，作者含 Qingyun Wu、Gagan Bansal、Chi Wang 等共 14 人。",
+      "摘要定义 AutoGen 为开源框架，通过多个可互相对话的 agent 构建 LLM 应用。",
+      "摘要称 AutoGen agent 是 \"customizable, conversable\" 的，可在组合 LLM、人类输入与工具的各种模式下运行。",
+      "摘要称开发者可用自然语言或计算机代码为不同应用编程灵活的对话模式。",
+      "摘要称实证研究覆盖数学、编码、问答、运筹、在线决策、娱乐等领域。",
+      "该论文为 43 页（正文 10 页、参考文献 3 页、附录 30 页），v1 提交于 2023-08-16，v2 修订于 2023-10-03。"
+    ],
+    "raw_excerpt": "\"AutoGen is an open-source framework that allows developers to build LLM applications via multiple agents that can converse with each other to accomplish tasks. AutoGen agents are customizable, conversable, and can operate in various modes that employ combinations of LLMs, human inputs, and tools.\""
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "anthropics/claude-agent-sdk-python — 仓库规模与活跃度（GitHub 搜索元数据）",
+    "url": "https://github.com/anthropics/claude-agent-sdk-python",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库 anthropics/claude-agent-sdk-python，语言 Python，stars 8,346，forks 1,376。",
+      "最近一次 push 时间为 2026-10-24。",
+      "在关键词 'claude agent sdk python' 的按 stars 排序搜索结果中位列第 2，第 1 名为无关第三方项目 teng-lin/notebooklm-py（★19,891）。",
+      "仓库描述字段为空（desc: none）。"
+    ],
+    "raw_excerpt": "anthropics/claude-agent-sdk-python (★8346, forks 1376)\n  desc: (none)\n  lang: Python | last push: 2026-10-24\n  url: https://github.com/anthropics/claude-agent-sdk-python"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "claude-agent-sdk-python CHANGELOG.md — 发布节奏与多智能体相关缺陷修复",
+    "url": "https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/CHANGELOG.md",
+    "published_at": null,
+    "key_points": [
+      "最新版本为 0.2.174，该版本变更内容为将内置 Claude CLI 升级到 2.1.310。",
+      "版本发布密集：0.2.144 至 0.2.174 之间几乎每个 patch 版本都对应一次 bundled Claude CLI 升级（2.1.247 至 2.1.310），显示发布节奏快且以跟随 CLI 版本为主。",
+      "0.2.160 修复 background subagents 之后 follow-up turns 失败的问题：当子代理在本轮结果到达前刚结束时 stdin 被过早关闭，后续轮次报 'Stream closed' 且模型报告工具被拒绝。",
+      "该修复改为监听 CLI 的 session_state_changed 消息并保持 stdin 打开直到 CLI 报告 idle，与 TypeScript SDK 行为对齐；并设有可配置的等待上限 CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS，默认 10 分钟，以防无限挂起。",
+      "0.2.170 修复并行工具调用从 session messages 中丢失的问题：get_session_messages 与 get_session_messages_from_store 此前只跟随 forked transcript 的一个分支，导致部分并行调用与结果被丢弃（#1422）。",
+      "0.2.166 新增 hook 专用输出类型（typed output classes）与 SystemInitData TypedDict，使 hook 实现获得精确类型信息而非无类型 dict（#1331、#1332）。",
+      "0.2.158 新增 verbatim_prompts 选项（默认 False），为 True 时用户消息原样传给 CLI，不做 @path 文件展开与斜杠命令分发，以防止内联的不可信文本触发非预期的文件读取或命令执行（#1269）。",
+      "0.2.153 新增系统提示 snapshot 选项：snapshot 为 True 时会话保留首次请求记录的系统提示以改善恢复会话的 prompt caching，为 False 时每次请求重建提示。"
+    ],
+    "raw_excerpt": "## 0.2.174\n\n### Internal/Other Changes\n\n- Updated bundled Claude CLI to version 2.1.310\n\n...\n\n- **Fixed follow-up turns failing after background subagents**: When using `query()` with hooks, `can_use_tool`, or SDK MCP servers, stdin was closed too early if a subagent finished just before the turn's result arrived. Follow-up turns would then fail with \"Stream closed\" and the model would report the tool as refused. The SDK now listens for the CLI's `session_state_changed` messages and keeps stdin open until the CLI reports `idle`, matching the TypeScript SDK's behavior. A bounded wait ceiling (configurable via `CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS`, default 10 minutes) prevents indefinite hangs.\n\n...\n\n- **Fixed parallel tool calls missing from session messages**: `get_session_messages` and `get_session_messages_from_store` now return every tool call and result from turns that ran tools in parallel. Previously only one branch of the forked transcript was followed, dropping some calls and results (#1422)"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "claude-agent-sdk-python README — hooks、in-process MCP 与工具权限主张",
+    "url": "https://raw.githubusercontent.com/anthropics/claude-agent-sdk-python/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "SDK 是 Claude Code CLI 的 Python 封装，CLI 随包自动捆绑、无需单独安装；要求 Python 3.10+。",
+      "提供两个入口：query() 为异步函数，返回响应消息的 AsyncIterator；ClaudeSDKClient 支持与 Claude Code 的双向交互式会话。",
+      "README 明确只有 ClaudeSDKClient 额外启用 custom tools 与 hooks：'Unlike query(), ClaudeSDKClient additionally enables custom tools and hooks, both of which can be defined as Python functions.'",
+      "Custom tool 以进程内 MCP server 实现：'Custom tools are implemented in-process MCP servers that run directly within your Python application, eliminating the need for separate processes that regular MCP servers require.'",
+      "README 列出 in-process MCP 相对外部 MCP server 的五项收益：无需子进程管理、无 IPC 开销带来更好性能、单进程部署更简单、同进程内更易调试、直接 Python 函数调用带来类型安全。",
+      "支持 SDK server 与外部 stdio MCP server 混用（Mixed Server Support），mcp_servers 字典中可同时放置进程内 server 与外部子进程 server。",
+      "Hook 的定义：'A hook is a Python function that the Claude Code application (not Claude) invokes at specific points of the Claude agent loop.'，用于提供确定性处理与对 Claude 的自动反馈。",
+      "Hook 示例使用 PreToolUse 事件与 HookMatcher(matcher=\"Bash\", hooks=[...])，返回 hookSpecificOutput 中 permissionDecision 为 'deny' 以拦截匹配禁用模式的 Bash 命令。",
+      "allowed_tools 的语义被明确限定为权限允许列表：列出的工具自动批准，未列出的工具交由 permission_mode 与 can_use_tool 决定；它不会从 Claude 的工具集中移除工具，屏蔽特定工具需使用 disallowed_tools。",
+      "默认情况下 Claude 可访问完整的 Claude Code 工具集（Read、Write、Edit、Bash 等）。",
+      "从 Claude Code SDK（< 0.1.0）迁移说明中提到 0.1.0 起新增 programmatic subagents 与 session forking 特性，并有 ClaudeCodeOptions 到 ClaudeAgentOptions 的重命名。",
+      "系统提示默认在会话首次请求时构建并记录，之后每次请求复用（包括恢复会话后）；修改自定义提示或 claude_code preset 的 append 文本在会话被压缩或新建会话前不生效，除非将 snapshot 设为 False。"
+    ],
+    "raw_excerpt": "Unlike `query()`, `ClaudeSDKClient` additionally enables **custom tools** and **hooks**, both of which can be defined as Python functions.\n\n...\n\nCustom tools are implemented in-process MCP servers that run directly within your Python application, eliminating the need for separate processes that regular MCP servers require.\n\n...\n\nA **hook** is a Python function that the Claude Code _application_ (_not_ Claude) invokes at specific points of the Claude agent loop. Hooks can provide deterministic processing and automated feedback for Claude.\n\n...\n\n`allowed_tools` is a permission allowlist: listed tools are auto-approved, and unlisted tools fall through to `permission_mode` and `can_use_tool` for a decision. It does not remove tools from Claude's toolset. To block specific tools, use `disallowed_tools`."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "Claude Agent SDK 官方文档 — Subagents（协作模式、收益与 Python SDK 字段缺失）",
+    "url": "https://platform.claude.com/docs/en/agent-sdk/subagents",
+    "published_at": null,
+    "key_points": [
+      "定义：'Subagents are separate agent instances that your main agent can spawn to handle focused subtasks.'，用于隔离上下文、并行运行多个分析、施加专门指令而不增加主代理提示。",
+      "三种创建方式：编程式（query() options 中的 agents 参数，SDK 应用推荐）、文件式（.claude/agents/ 目录下的 markdown 文件）、内置 general-purpose（Claude 可随时通过 Agent 工具调用，无需用户定义）。",
+      "官方列出四项收益：context isolation（子代理独立会话，中间工具调用与结果留在子代理内，只有最终消息返回父级）、parallelization（多个子代理并发，独立子任务总耗时约等于最慢者而非累加）、specialized instructions and knowledge（各自定制 system prompt）、tool restrictions（限制可用工具以降低非预期操作风险）。",
+      "默认异步执行：'By default, a subagent your main agent spawns runs in the background.'，Agent 工具结果为 status: 'async_launched'，报告在后续轮次到达；当 Claude 下一步动作需要该报告时调用阻塞并返回 status: 'completed'。",
+      "子代理上下文默认全新开始、不继承父对话（除非该子代理是 fork）。",
+      "AgentDefinition 必填字段为 description（自然语言描述何时使用该代理）与 prompt（代理的 system prompt）；可选字段包括 tools、disallowedTools、model、skills、memory、mcpServers、initialPrompt、maxTurns、background、effort、permissionMode 等。",
+      "model 字段接受 'fable'、'opus'、'sonnet'、'haiku'、'inherit' 等别名或完整模型 ID，'inherit' 表示使用主模型；省略时由 Claude Code 按子代理模型顺序选择。",
+      "skills 字段最多预载列表中前 32 个不同名称，未列出的技能仍可通过 Skill 工具调用。",
+      "maxTurns 达到上限时 Claude Code 返回标记为 partial 的输出，可恢复该代理继续执行；partial 标记需 Claude Code v2.1.246 或更高版本。",
+      "已知局限（文档明示）：autoCompactWindow 字段需 TypeScript Agent SDK v0.3.296 或更高版本，且 'The Python SDK's AgentDefinition doesn't have this field.'",
+      "已知局限（文档明示）：omitClaudeMd 字段需 TypeScript Agent SDK v0.3.271 或更高版本，且 'The Python SDK's AgentDefinition doesn't have this field.'",
+      "Python SDK 中 disallowedTools、mcpServers 等多词字段名保留 camelCase 拼写以匹配 wire format，而非遵循 Python 的 snake_case 约定。",
+      "编程式定义的代理优先于同名文件式代理；当 Claude 调用 Agent 工具未指定 subagent_type 时得到内置 general-purpose 子代理，设置环境变量 CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS=1 可移除该默认行为，此时该调用会以 'subagent_type is required' 失败。",
+      "disallowedTools 支持 MCP server 级模式：mcp__server 或 mcp__server__* 移除该 server 的全部工具，mcp__* 移除任意 server 的所有 MCP 工具。"
+    ],
+    "raw_excerpt": "Subagents are separate agent instances that your main agent can spawn to handle focused subtasks.\nUse them to isolate context, run multiple analyses in parallel, and apply specialized instructions without adding to the main agent's prompt.\n\n...\n\nBy default, a subagent your main agent spawns runs in the background. The Agent tool result has status: \"async_launched\", and the report arrives in a later turn.\n\n...\n\nautoCompactWindow number No Lower the auto-compact window for this agent when it runs as a subagent, to a token count from 100000 to 1000000 . Requires TypeScript Agent SDK v0.3.296 or later. The Python SDK's AgentDefinition doesn't have this field\n\n...\n\nomitClaudeMd boolean No Leave the user, project, and local CLAUDE.md files out of this agent's initial context; managed policy files still load. Ignored when the agent runs as the main thread agent. Requires TypeScript Agent SDK v0.3.271 or later. The Python SDK's AgentDefinition doesn't have this field."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "Claude Agent SDK 官方文档 — Overview（SDK 定位、能力清单与使用限制）",
+    "url": "https://platform.claude.com/docs/en/agent-sdk/overview",
+    "published_at": null,
+    "key_points": [
+      "SDK 定位：'The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript.'，即运行 Claude Code 二进制、复用其内置工具、权限、会话与 hooks 的库。",
+      "与相邻工具的分工：Agent SDK 用于在自有 Python/TypeScript 应用中嵌入 Claude Code 代理；Claude Code CLI 用于终端交互式开发；Client SDK 直接调用 Claude API 并需自行编写工具循环；Managed Agents 由 Anthropic 托管运行代理循环。",
+      "SDK 中可用的 Claude Code 能力清单：Built-in tools、Hooks、Subagents、MCP、Permissions、Sessions、Skills/commands/memory、Plugins。",
+      "Subagents 在能力表中的描述为 'Spawn specialized agents for focused subtasks'；MCP 为 'Connect external tools and data sources via the Model Context Protocol'。",
+      "使用限制（授权层面）：'Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK.'，须使用 Quickstart 中的 API key 认证方式。",
+      "品牌限制：允许使用 'Claude Agent'（下拉菜单首选）、'Claude'（在已标注 Agents 的菜单内）、'{YourAgentName} Powered by Claude'；不允许使用 'Claude Code' 或 'Claude Code Agent' 命名，不允许模仿 Claude Code 的 ASCII art 或视觉元素。",
+      "许可与条款：SDK 使用受 Anthropic Commercial Terms of Service 约束，包括用于面向自有客户与终端用户的产品和服务时。",
+      "文档指向 'Agent harness design: how the Claude Code team uses dynamic workflows to orchestrate many subagents at once' 作为进一步阅读材料。"
+    ],
+    "raw_excerpt": "An agent is an application that completes a task by planning its own steps and calling tools that read files, run commands, or edit code. The Agent SDK gives you the same tools, agent loop , and context management that power Claude Code, programmable in Python and TypeScript.\n\n...\n\nSubagents Spawn specialized agents for focused subtasks\n\n...\n\nUnless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Use the API key authentication methods described in the Quickstart instead."
+  }
+]

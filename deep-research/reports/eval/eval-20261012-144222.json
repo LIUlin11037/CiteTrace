@@ -1,0 +1,44 @@
+{
+  "n_questions": 2,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9583333333333333,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9166666666666666,
+      "coverage": 1.0
+    },
+    "rag": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 1.0,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-rl-scaling",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 36,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-hybrid-search",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 53,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

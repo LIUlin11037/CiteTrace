@@ -1,0 +1,964 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "How to call functions with chat models (OpenAI Cookbook)",
+    "url": "https://raw.githubusercontent.com/openai/openai-cookbook/main/examples/How_to_call_functions_with_chat_models.ipynb",
+    "published_at": null,
+    "key_points": [
+      "`tools` 是 Chat Completions API 的可选参数，用于提供函数规格（function specifications），目的是让模型生成符合该规格的函数参数。",
+      "API 本身不会执行任何函数调用；执行函数调用是开发者的责任，由模型输出驱动。",
+      "在 `tools` 参数中提供 `functions` 时，默认由模型自行决定何时使用某个函数。",
+      "可通过 `tool_choice` 强制使用特定函数：设为 {\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}；设为 \"none\" 则强制不使用任何函数。",
+      "若模型使用了函数，响应中包含 \"finish_reason\": \"tool_calls\"，以及一个 `tool_calls` 对象，其中含有函数名与生成的函数参数。",
+      "函数规格使用 JSON Schema 风格的 `parameters` 描述：type=object、properties、required 列表，并可用 enum 约束取值（示例中 format 字段限定为 celsius/fahrenheit）。",
+      "对话状态通过 messages 数组维护，角色包括 system、user、assistant、function；带 tool_calls 的 assistant 消息与 function 角色的结果消息构成闭环。"
+    ],
+    "raw_excerpt": "`tools` is an optional parameter in the Chat Completion API which can be used to provide function specifications. The purpose of this is to enable models to generate function arguments which adhere to the provided specifications. Note that the API will not actually execute any function calls. It is up to developers to execute function calls using model outputs. ... If a function is used, the output will contain \"finish_reason\": \"tool_calls\" in the response, as well as a `tool_calls` object that has the name of the function and the generated function arguments."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Model Context Protocol Specification (2025-06-18) — Overview",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 是一个开放协议，用于在 LLM 应用与外部数据源、工具之间实现集成；该规范基于 schema.ts 中的 TypeScript schema，是权威协议要求。",
+      "协议使用 JSON-RPC 2.0 消息，在 Hosts（发起连接的 LLM 应用）、Clients（宿主应用内的连接器）、Servers（提供上下文与能力的服务）之间通信。",
+      "MCP 的规范用语遵循 BCP 14（RFC2119/RFC8174）的 MUST/SHOULD/MAY 约定。",
+      "Server 向 client 提供的特性包括 Resources（上下文与数据）、Prompts（模板化消息与工作流）、Tools（供 AI 模型执行的函数）。",
+      "Client 可向 server 提供的特性包括 Sampling（服务端发起的 agentic 行为与递归 LLM 交互）、Roots（服务端查询 uri/文件系统边界）、Elicitation（服务端向用户请求补充信息）。",
+      "协议明确将 Tools 定性为「供 AI 模型执行的函数」，并声明 MCP 受 Language Server Protocol 启发，用于标准化工具与上下文的接入。",
+      "安全原则：工具代表任意代码执行，必须谨慎对待；工具行为描述（如 annotations）除非来自可信 server，否则应视为不可信；Hosts 在调用任何工具前必须获得用户明确同意。"
+    ],
+    "raw_excerpt": "Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. ... The protocol uses JSON-RPC 2.0 messages to establish communication between: Hosts: LLM applications that initiate connections; Clients: Connectors within the host application; Servers: Services that provide context and capabilities. ... Tools: Functions for the AI model to execute ... Tools represent arbitrary code execution and must be treated with appropriate caution. ... Hosts must obtain explicit user consent before invoking any tool"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "MCP Specification (2025-06-18) — Server / Tools",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 允许 server 暴露可被语言模型调用的工具；每个工具由 name 唯一标识，并包含描述其 schema 的元数据。",
+      "MCP 中的工具被设计为 model-controlled：语言模型可基于上下文理解与用户提示自动发现并调用工具；但协议本身不强制特定的用户交互模型。",
+      "支持工具的 server 必须声明 tools capability，其中 listChanged 表示 server 是否会在可用工具列表变化时发出通知。",
+      "工具发现通过 `tools/list` 请求完成（支持分页，使用 cursor/nextCursor）。",
+      "工具调用通过 `tools/call` 请求完成，params 含 name 与 arguments 对象。",
+      "工具定义字段包括：name（唯一标识）、title（可选展示名）、description（人类可读功能描述）、inputSchema（定义期望参数的 JSON Schema）、outputSchema（可选，定义期望输出结构）、annotations（可选，描述工具行为）。",
+      "工具结果可含非结构化 content（text/image/audio/resource_link/embedded resource 多种内容类型）与结构化 structuredContent（JSON 对象）；若提供 outputSchema，server 必须返回符合该 schema 的结构化结果，client 应当校验。",
+      "错误处理分两类：协议错误使用标准 JSON-RPC 错误（如未知工具、无效参数、server 错误）；工具执行错误在结果中以 isError: true 报告（如 API 失败、输入数据无效、业务逻辑错误）。",
+      "安全要求：server 必须校验所有工具输入、实施访问控制、对工具调用限流、清洗工具输出；client 应当对敏感操作提示用户确认、调用前向用户展示工具输入、校验工具结果、实现超时、记录工具使用审计日志。",
+      "structuredContent 是 server 产生的结果数据，与 LLM 的「structured outputs」（schema 约束的模型生成）无关。"
+    ],
+    "raw_excerpt": "Tools in MCP are designed to be model-controlled, meaning that the language model can discover and invoke tools automatically based on its contextual understanding and the user's prompts. ... To invoke a tool, clients send a tools/call request ... inputSchema: JSON Schema defining expected parameters ... Tools use two error reporting mechanisms: Protocol Errors ... Tool Execution Errors: Reported in tool results with isError: true"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "Claude SDK for Python — Tools helpers (tools.md)",
+    "url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/tools.md",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 侧工具定义使用 `input_schema` 字段承载 JSON Schema（含 type=object、properties、required、additionalProperties=false），与 name、description 并列。",
+      "`@beta_tool` 装饰器通过检查函数参数与 docstring 自动提取出该 JSON Schema 表示。",
+      "工具定义通过 messages.create 的 `tools` 参数传入 API。",
+      "执行边界：SDK 提供 `client.beta.messages.tool_runner()`，返回 BetaToolRunner 迭代器，每次迭代产出一个 BetaMessage；迭代由每条消息的 `stop_reason` 驱动——为 `tool_use` 时 runner 执行所请求的工具并把结果发回，为 `pause_turn` 或 `compaction` 时原样回传该轮以便服务端恢复，其他 stop reason 则产出最终消息后停止且不运行工具。",
+      "工具调用按模型推进的顺序逐个执行；流式场景下可用 run_tools_eagerly=True 让工具在模型写完调用时立即执行，或用 defer_tool_call() 暂缓执行。",
+      "对不可安全重复执行的调用应延迟（defer），因为流式期间已执行的调用无法撤回，若回复被截断模型可能重复请求同一调用。"
+    ],
+    "raw_excerpt": "The `@beta_tool` decorator will inspect the function arguments and the docstring to extract a json schema representation of the given function ... \"input_schema\": {\"additionalProperties\": false, \"properties\": {...}, \"required\": [\"left\", \"right\"], \"type\": \"object\"} ... Iteration is driven by each message's `stop_reason`: on `tool_use` the runner executes the requested tools and sends the results back, on `pause_turn` or `compaction` it sends the turn back unchanged so the server can resume it, and on any other stop reason it stops after yielding that final message without running tools."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models (arXiv:2210.03629v3)",
+    "url": "https://arxiv.org/abs/2210.03629v3",
+    "published_at": "2022-10-06",
+    "key_points": [
+      "ReAct 让 LLM 以交错（interleaved）方式同时生成推理轨迹（reasoning traces）与任务特定动作（task-specific actions）。",
+      "在该形式化中，推理轨迹帮助模型归纳、跟踪、更新行动计划并处理异常；动作则让模型与外部来源（如知识库或环境）交互以获取额外信息。",
+      "动作被定义为与外部来源/环境交互的接口，用于收集额外信息——这与 API 规范中「工具调用」的定位一致，但 ReAct 未规定 JSON schema 式的参数约束。",
+      "在 HotpotQA 与 Fever 上，ReAct 通过与一个简单的 Wikipedia API 交互来克服 chain-of-thought 中常见的幻觉与错误传播问题。",
+      "在 ALFWorld 与 WebShop 两个交互式决策基准上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅使用一到两个 in-context 示例进行提示。",
+      "v3 为 ICLR camera-ready 版本（修正若干笔误）。"
+    ],
+    "raw_excerpt": "we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Toolformer: Language Models Can Teach Themselves to Use Tools (arXiv:2302.04761v1)",
+    "url": "https://arxiv.org/abs/2302.04761v1",
+    "published_at": "2023-02-09",
+    "key_points": [
+      "Toolformer 是一个被训练来决定「调用哪些 API、何时调用、传什么参数、以及如何最好地把结果并入后续 token 预测」的模型。",
+      "该训练以自监督方式完成，每个 API 只需少量示例（a handful of demonstrations）即可。",
+      "论文纳入的工具包括计算器、一个问答系统、两个不同的搜索引擎、一个翻译系统和一个日历。",
+      "Toolformer 在多种下游任务上取得显著提升的零样本性能，常与更大的模型相当，同时不牺牲其核心语言建模能力。",
+      "其形式化关注点是「在文本序列中插入 API 调用」并据其结果继续预测，而非由外部宿主执行并回传结构化结果。"
+    ],
+    "raw_excerpt": "We introduce Toolformer, a model trained to decide which APIs to call, when to call them, what arguments to pass, and how to best incorporate the results into future token prediction. This is done in a self-supervised way, requiring nothing more than a handful of demonstrations for each API."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+    "url": "https://arxiv.org/abs/2307.16789v2",
+    "published_at": "2023-07-31",
+    "key_points": [
+      "提出 ToolLLM 框架，涵盖数据构造、模型训练与评测三部分，定位为通用工具使用（tool-use）框架。",
+      "构建 ToolBench 指令微调数据集，全程用 ChatGPT 自动构造，分三阶段：(i) API 收集——从 RapidAPI Hub 收集 16,464 个真实 RESTful API，覆盖 49 个类别；(ii) 指令生成——提示 ChatGPT 生成涉及这些 API 的多样指令，同时覆盖单工具（single-tool）与多工具（multi-tool）场景；(iii) 解路径标注——用 ChatGPT 为每条指令搜索一条有效解路径（API 调用链）。",
+      "为增强推理能力，提出基于深度优先搜索（DFS）的决策树算法，使模型能评估多条推理轨迹并扩展搜索空间。",
+      "提出自动评测器 ToolEval 用于评估 LLM 的工具使用能力。",
+      "基于 ToolBench 微调 LLaMA 得到 ToolLLaMA，并配备神经 API 检索器（neural API retriever）为每条指令推荐合适的 API。",
+      "实验声称 ToolLLaMA 能执行复杂指令并泛化到未见过的 API，性能与 ChatGPT 可比，且在分布外工具使用数据集 APIBench 上表现出较强零样本泛化能力。"
+    ],
+    "raw_excerpt": "we present ToolBench, an instruction-tuning dataset for tool use, which is constructed automatically using ChatGPT. Specifically, the construction can be divided into three stages: (i) API collection: we collect 16,464 real-world RESTful APIs spanning 49 categories from RapidAPI Hub; (ii) instruction generation: we prompt ChatGPT to generate diverse instructions involving these APIs, covering both single-tool and multi-tool scenarios; (iii) solution path annotation: we use ChatGPT to search for a valid solution path (chain of API calls) for each instruction. To enhance the reasoning capabilities of LLMs, we develop a novel depth-first search-based decision tree algorithm."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Executable Code Actions Elicit Better LLM Agents (CodeAct)",
+    "url": "https://arxiv.org/abs/2402.01030",
+    "published_at": "2024-02-01",
+    "key_points": [
+      "指出现有 LLM agent 通常以预定义格式生成 JSON 或文本作为动作，受限于受限的动作空间（预定义工具范围）与灵活性不足（无法组合多个工具）。",
+      "提出用可执行 Python 代码把 LLM agent 的动作整合为统一动作空间（CodeAct）；配合 Python 解释器，可执行代码动作，并在多轮交互中依据新观测动态修正先前动作或发出新动作。",
+      "在 API-Bank 与一个新构建的基准上对 17 个 LLM 做了分析，CodeAct 优于广泛使用的替代方案，成功率最高提升 20%。",
+      "构建指令微调数据集 CodeActInstruct，包含 7k 条使用 CodeAct 的多轮交互（multi-turn interactions）。",
+      "CodeActInstruct 可与现有数据配合使用，在不损害模型通用能力的前提下提升 agent 类任务表现。",
+      "CodeActAgent 由 Llama2 与 Mistral 微调而来，集成 Python 解释器，可用现有库完成复杂任务（如模型训练）并自主 self-debug。",
+      "论文被 ICML 2024 接收（v4 版本，2024-06-07 修订）。"
+    ],
+    "raw_excerpt": "This work proposes to use executable Python code to consolidate LLM agents' actions into a unified action space (CodeAct). Integrated with a Python interpreter, CodeAct can execute code actions and dynamically revise prior actions or emit new actions upon new observations through multi-turn interactions. ... we collect an instruction-tuning dataset CodeActInstruct that consists of 7k multi-turn interactions using CodeAct."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents",
+    "url": "https://arxiv.org/abs/2403.02691",
+    "published_at": "2024-03-05 (v1); v3 2024-08-04",
+    "key_points": [
+      "构建了 InjecAgent 基准，用于评估工具集成 LLM agent 对间接提示注入（indirect prompt injection, IPI）攻击的脆弱性；攻击者指令被嵌入 agent 所处理的外部内容（如邮件、网页）中。",
+      "基准包含 1,054 个测试用例，覆盖 17 个用户工具（user tools）与 62 个攻击者工具（attacker tools）。",
+      "攻击意图被归为两类：对用户的直接伤害（direct harm to users）与隐私数据外泄（exfiltration of private data）。",
+      "共评估 30 个不同的 LLM agent；ReAct 提示的 GPT-4 有 24% 的概率被攻击成功。",
+      "在增强设置下（攻击者指令附加 hacking prompt 强化），攻击成功率进一步提升，对 ReAct-prompted GPT-4 近乎翻倍（nearly doubling）。",
+      "作者据此对 LLM agent 的大规模部署提出风险质疑。",
+      "论文为 ACL 2024 Findings，36 页、6 图、13 表。"
+    ],
+    "raw_excerpt": "we introduce InjecAgent, a benchmark designed to assess the vulnerability of tool-integrated LLM agents to IPI attacks. InjecAgent comprises 1,054 test cases covering 17 different user tools and 62 attacker tools. ... we evaluate 30 different LLM agents and show that agents are vulnerable to IPI attacks, with ReAct-prompted GPT-4 vulnerable to attacks 24% of the time. Further investigation into an enhanced setting, where the attacker instructions are reinforced with a hacking prompt, shows additional increases in success rates, nearly doubling the attack success rate on the ReAct-prompted GPT-4."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+    "url": "https://arxiv.org/abs/2406.12045",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "τ-bench 模拟用户（由语言模型扮演）与语言 agent 之间的动态对话，agent 被提供领域特定的 API 工具与策略准则（policy guidelines）。",
+      "评测方式为对比对话结束时的数据库状态与标注的目标状态（goal state），而非仅比对文本输出。",
+      "提出新指标 pass^k，用于评估 agent 在多次试验中的行为可靠性（reliability / 一致性）。",
+      "实验显示即使最先进的 function calling agent（如 gpt-4o）任务成功率也低于 50%。",
+      "agent 行为相当不一致：在 retail 域 pass^8 < 25%。",
+      "作者结论指向需要能提升 agent 一致行动与可靠遵循规则（follow rules reliably）的方法。"
+    ],
+    "raw_excerpt": "Our experiments show that even state-of-the-art function calling agents (like gpt-4o) succeed on <50% of the tasks, and are quite inconsistent (pass^8 <25% in retail). Our findings point to the need for methods that can improve the ability of agents to act consistently and follow rules reliably."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+    "url": "https://arxiv.org/abs/2406.12045v1",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "τ-bench 模拟（由语言模型扮演的）用户与语言 agent 之间的动态对话，agent 被提供领域特定的 API 工具与政策（policy）指南。",
+      "评测方式：将对话结束时的数据库状态与标注的目标状态（annotated goal state）进行比较，作者称其为高效且忠实的评测流程。",
+      "提出新指标 pass^k，用于评估 agent 在多次试验中行为的可靠性（reliability）。",
+      "实验结论：即使是最先进的 function calling agent（如 gpt-4o）任务成功率也 <50%，且表现相当不一致（retail 域 pass^8 <25%）。",
+      "论文动机：已有基准不测试 agent 与人类用户的交互，也不测试其遵循领域特定规则的能力。"
+    ],
+    "raw_excerpt": "We employ an efficient and faithful evaluation process that compares the database state at the end of a conversation with the annotated goal state. We also propose a new metric (pass^k) to evaluate the reliability of agent behavior over multiple trials. ... even state-of-the-art function calling agents (like gpt-4o) succeed on <50% of the tasks, and are quite inconsistent (pass^8 <25% in retail)."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "τ²-Bench: Evaluating Conversational Agents in a Dual-Control Environment",
+    "url": "https://arxiv.org/abs/2506.07982",
+    "published_at": "2025-06-09",
+    "key_points": [
+      "τ²-bench 指出已有对话 agent 基准都是「单控制」（single-control）环境：只有 AI agent 能用工具改变世界，用户只是被动的信息提供者。",
+      "τ²-bench 引入 Telecom 双控制（dual-control）领域，形式化为 Dec-POMDP：agent 与用户都拥有各自的工具，作用于共享的动态环境。",
+      "任务构造：一个组合式（compositional）任务生成器，从少量原子基础场景（由 initialization、solution、assertion 函数定义）程序化组合出大量可验证任务，保证任务正确性、领域覆盖与复杂度可控。",
+      "用户模拟器与环境紧耦合，其行为受工具与可观测状态约束，以提升模拟保真度。",
+      "实验：从 no-user 切换到 dual-control 时 agent 性能显著下降；新任务上 pass^1 为 gpt-4.1 34%、o4-mini 42%、claude-3.7-sonnet 49%。",
+      "论文提供细粒度消融，区分推理错误与沟通/协调错误。",
+      "代码与数据：https://github.com/sierra-research/tau2-bench。"
+    ],
+    "raw_excerpt": "we introduce τ²-bench, with four key contributions: 1) A novel Telecom dual-control domain modeled as a Dec-POMDP ... 2) A compositional task generator that programmatically creates diverse, verifiable tasks from atomic components ... Experiments show state-of-the-art LLMs struggle significantly in this domain (e.g., pass^1 of 34% for gpt-4.1, 42% for o4-mini, and 49% for claude-3.7-sonnet on new tasks)."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "BFCL V3: Multi-Turn & Multi-Step Function Calling (Gorilla / Berkeley)",
+    "url": "https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html",
+    "published_at": "2024-09-19",
+    "key_points": [
+      "BFCL V3 于 2024-09-19 发布（最后更新 2024-12-10），在 V1 的 Expert Curated（Non-live）与 V2 的 User Contributed（Live）数据之上，新增多轮（multi-turn）与多步（multi-step）类别。",
+      "多步（multi-step）：用户只在最开始交互一次，模型与系统来回多次调用函数完成单个请求；多轮（multi-turn）：用户与助手多轮对话，每轮可能包含多步。",
+      "V3 改变了校验方式：不再用 AST 拆解函数参数对并在候选答案列表中匹配，而是验证模型执行函数后 API 系统（如文件系统、订票系统）的实际状态。",
+      "数据构成：Base Multi-Turn 200 条；Augmented Multi-Turn 800 条（含模糊提示等额外复杂度）。",
+      "作者给出的对比表显示 BFCL-v3 在 Multi-Step、Multi-Turn、Implicit Action、Self-Correct、Irrelevancy、Long Ctx 各维度均为 ✓，而 BFCL-v2、AgentBoard、τ-bench、MMAU、ToolSandbox 各有缺失项。",
+      "作者强调 BFCL 全程依赖 AST 或状态转移（state-transition）验证，以保证确定性与最小波动。"
+    ],
+    "raw_excerpt": "Another new twist in BFCL V3 is how we check the model's answers. Instead of dissecting function parameter pairs using AST and matching them in a list of possible answers, we now verify the actual state of the API system (like file systems or booking systems) after the model runs its functions."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "BFCL V4: Web Search (BFCL V4 Agentic Part 1)",
+    "url": "https://gorilla.cs.berkeley.edu/blogs/15_bfcl_v4_web_search.html",
+    "published_at": "2025-07-17",
+    "key_points": [
+      "BFCL V4 于 2025-07-17 发布（更新 2025-07-20），定位为面向 LLM 的整体 agentic 评测，包含三部分：web search（第 1 部分）、memory（第 2 部分）、format sensitivity（第 3 部分）。",
+      "V4 总分构成（百分比加权）：Overall = Agentic × 40% + Multi-Turn × 30% + Live × 10% + Non-Live × 10% + Hallucination × 10%。",
+      "Agentic（40%）为 Web Search（200 条）与 Memory（465 条）的无加权平均；Multi-Turn（30%）含 Base 200、Missing Function 200、Missing Parameter 200、Long Context 200。",
+      "Hallucination Measurement（10%）由 Irrelevance 构成（Non-Live 240 + Live 882，共 1122 条）。",
+      "Format Sensitivity 为 26 种配置 × 每配置 200 条测试用例（共 5200 条），属于 Non-Scoring（不影响分数）。",
+      "Web Search 子类分为 Snippet（100）与 No Snippet（100）；Memory 子类分为 Vector Store（155）、Key Value Store（155）、Rec Sum（155）。",
+      "类别内计算方式：无加权平均（子类等权，如 Agentic 中 Web Search 与 Memory 等权）与加权平均（按实际用例数加权，如 Live 类别）两种。"
+    ],
+    "raw_excerpt": "Formula: Overall Score = (Agentic × 40%) + (Multi-Turn × 30%) + (Live × 10%) + (Non-Live × 10%) + (Hallucination × 10%) ... Throughout, BFCL relies on AST (Abstract Syntax Tree) based, or state-transition based verification ensuring determinism and minimal fluctuations"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs (ToolBench / ToolEval)",
+    "url": "https://arxiv.org/abs/2307.16789",
+    "published_at": "2023-07-31",
+    "key_points": [
+      "ToolBench 是用于工具使用的指令微调数据集，由 ChatGPT 自动构建，分三阶段：(i) API 收集——从 RapidAPI Hub 收集 16,464 个真实 RESTful API，覆盖 49 个类别；(ii) 指令生成——用 ChatGPT 生成涉及这些 API 的多样指令，覆盖单工具与多工具场景；(iii) 解法路径标注——用 ChatGPT 为每条指令搜索有效的解法路径（API 调用链）。",
+      "为增强推理能力，作者开发了基于深度优先搜索（DFS）的决策树算法，使 LLM 能评估多条推理轨迹并扩展搜索空间。",
+      "ToolEval 是配套的自动评测器，用于评估 LLM 的工具使用能力。",
+      "基于 ToolBench 微调 LLaMA 得到 ToolLLaMA，并配备神经 API 检索器为每条指令推荐合适的 API。",
+      "ToolLLaMA 在分布外工具使用数据集 APIBench 上表现出较强的零样本泛化能力。"
+    ],
+    "raw_excerpt": "we present ToolBench, an instruction-tuning dataset for tool use, which is constructed automatically using ChatGPT ... (i) API collection: we collect 16,464 real-world RESTful APIs spanning 49 categories from RapidAPI Hub ... (iii) solution path annotation: we use ChatGPT to search for a valid solution path (chain of API calls) for each instruction. ... we develop an automatic evaluator: ToolEval."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "API-Bank: A Comprehensive Benchmark for Tool-Augmented LLMs",
+    "url": "https://arxiv.org/abs/2304.08244",
+    "published_at": "2023-04-14",
+    "key_points": [
+      "API-Bank 构建了一个可运行的评测系统，包含 73 个 API 工具。",
+      "标注了 314 条工具使用对话（tool-use dialogues），共 753 次 API 调用，用于评估 LLM 在规划（planning）、检索（retrieving）与调用 API 方面的能力。",
+      "训练集包含 1,888 条工具使用对话，来自 1,000 个不同领域的 2,138 个 API；基于该数据从 Alpaca 初始化训练了 Lynx。",
+      "实验结果：GPT-3.5 的工具使用表现优于 GPT-3，GPT-4 在规划方面表现突出；Lynx 在工具使用上比 Alpaca 提升超过 26 分，接近 GPT-3.5。",
+      "论文发表于 EMNLP 2023（v1 2023-04-14，v2 2023-10-25）。"
+    ],
+    "raw_excerpt": "we develop a runnable evaluation system consisting of 73 API tools. We annotate 314 tool-use dialogues with 753 API calls to assess the existing LLMs' capabilities in planning, retrieving, and calling APIs. ... we construct a comprehensive training set containing 1,888 tool-use dialogues from 2,138 APIs spanning 1,000 distinct domains."
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "modelcontextprotocol/servers — Model Context Protocol Servers",
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 91,547，forks 11,864，主语言 TypeScript，last push 2026-10-25。",
+      "仓库描述为 'Model Context Protocol Servers'。",
+      "仅取得 search_repos 返回的元数据，未读取 README 正文，故其 server 清单、参考实现范围、维护状态声明均未取证。"
+    ],
+    "raw_excerpt": "modelcontextprotocol/servers (★91547, forks 11864) desc: Model Context Protocol Servers lang: TypeScript | last push: 2026-10-25 url: https://github.com/modelcontextprotocol/servers"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "modelcontextprotocol/python-sdk — official Python SDK for MCP servers and clients",
+    "url": "https://github.com/modelcontextprotocol/python-sdk",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 24,664，forks 4,074，主语言 Python，last push 2026-10-25。",
+      "仓库描述自称 'The official Python SDK for Model Context Protocol servers and clients'；该 'official' 表述来自仓库描述，未经组织页或 README 正文核验。",
+      "未读取 README，故其支持的传输方式（stdio/SSE/streamable HTTP）、工具注册 API 等具体主张未取证。"
+    ],
+    "raw_excerpt": "modelcontextprotocol/python-sdk (★24664, forks 4074) desc: The official Python SDK for Model Context Protocol servers and clients lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "modelcontextprotocol/typescript-sdk — official TypeScript SDK for MCP servers and clients",
+    "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 13,649，forks 2,337，主语言 TypeScript，last push 2026-10-23。",
+      "仓库描述自称 'The official TypeScript SDK for Model Context Protocol servers and clients'，同样未经正文核验。",
+      "未读取 README，具体能力主张未取证。"
+    ],
+    "raw_excerpt": "modelcontextprotocol/typescript-sdk (★13649, forks 2337) desc: The official TypeScript SDK for Model Context Protocol servers and clients lang: TypeScript | last push: 2026-10-23"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "hangwin/mcp-chrome — Chrome MCP Server（第三方）",
+    "url": "https://github.com/hangwin/mcp-chrome",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 12,508，forks 1,147，主语言 TypeScript，last push 2026-01-06。",
+      "描述称其为基于 Chrome 扩展的 MCP server，向 Claude 等 AI 助手暴露浏览器功能，用于浏览器自动化、内容分析与语义搜索。",
+      "属第三方 MCP server，非 modelcontextprotocol 组织下仓库；未读 README，功能实现细节未取证。"
+    ],
+    "raw_excerpt": "hangwin/mcp-chrome (★12508, forks 1147) desc: Chrome MCP Server is a Chrome extension-based Model Context Protocol (MCP) server that exposes your Chrome browser functionality to AI assistants like Claude, enabling complex browser automation, content analysis, and semantic search. lang: TypeScript | last push: 2026-01-06"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "mobile-next/mobile-mcp — MCP Server for Mobile Automation（第三方）",
+    "url": "https://github.com/mobile-next/mobile-mcp",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 9,960，forks 891，last push 2026-10-25。",
+      "描述称其为面向移动自动化与抓取的 MCP server，覆盖 iOS、Android、模拟器与真机。",
+      "属第三方 MCP server；未读 README，支持矩阵与实现细节未取证。"
+    ],
+    "raw_excerpt": "mobile-next/mobile-mcp (★9960, forks 891) desc: Model Context Protocol Server for Mobile Automation and Scraping (iOS, Android, Emulators, Simulators and Real Devices) lang: TypeScript | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "puppetm4st3r/local_function_calling — 第三方 Gorilla OpenFunctions 封装（非官方仓库）",
+    "url": "https://github.com/puppetm4st3r/local_function_calling",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 17，forks 4，主语言 Python，last push 2024-04-07。",
+      "描述称该 Python 实现使用 gorilla-llm/gorilla-openfunctions-v2 模型，按 OpenAI 协议执行 function calling，用于生成函数参数并执行函数。",
+      "该仓库为第三方封装，非 Gorilla 官方仓库；其描述间接提及 gorilla-llm/gorilla-openfunctions-v2 这一模型名，但 Gorilla 官方仓库的 stars、活跃度与 README 主张均未取得。"
+    ],
+    "raw_excerpt": "puppetm4st3r/local_function_calling (★17, forks 4) desc: This repository contains a Python implementation that allows you to use gorilla-llm/gorilla-openfunctions-v2 LLM to perform function calling using the OpenAI protocol. It provides a way to extend the capabilities of the local model by enabling it to generate function arguments and execute functions based on the provided specifications. lang: Python | last push: 2024-04-07"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "aiopsplus/BFCL-CN — BFCL 中文评测衍生项目（非官方仓库）",
+    "url": "https://github.com/aiopsplus/BFCL-CN",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 29，forks 3，主语言 Python，last push 2025-04-06。",
+      "描述为 'Berkeley Function Calling Leaderboard (BFCL) with Chinese-Language Evaluation'，即 BFCL 的中文评测衍生版本。",
+      "该仓库非 BFCL 官方仓库；BFCL 官方库（gorilla-llm/berkeley-function-calling-leaderboard）的 stars、活跃度与 README 主张未取得。"
+    ],
+    "raw_excerpt": "aiopsplus/BFCL-CN (★29, forks 3) desc: Berkeley Function Calling Leaderboard (BFCL) with Chinese-Language Evaluation lang: Python | last push: 2025-04-06 url: https://github.com/aiopsplus/BFCL-CN"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "XueyiC/Llama-Factory-BFCL — BFCL 与 LlamaFactory 集成（非官方仓库）",
+    "url": "https://github.com/XueyiC/Llama-Factory-BFCL",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 7，forks 0，主语言 Python，last push 2025-10-31。",
+      "描述为 'LlamaFactory integration with Berkeley Function Calling Leaderboard'，即把 BFCL 评测接入 LlamaFactory 训练框架。",
+      "该仓库为第三方集成项目，非 BFCL 官方仓库。"
+    ],
+    "raw_excerpt": "XueyiC/Llama-Factory-BFCL (★7, forks 0) desc: LlamaFactory integration with Berkeley Function Calling Leaderboard lang: Python | last push: 2025-10-31"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "Shawn-Guo-CN/BFCL_server — BFCL 服务化封装（非官方仓库）",
+    "url": "https://github.com/Shawn-Guo-CN/BFCL_server",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 1，forks 0，主语言 Python，last push 2025-04-03。",
+      "描述为 'Serverised Berkeley Function Calling Leaderboard'，即把 BFCL 封装为服务形式。",
+      "该仓库为第三方项目，非 BFCL 官方仓库。"
+    ],
+    "raw_excerpt": "Shawn-Guo-CN/BFCL_server (★1, forks 0) desc: Serverised Berkeley Function Calling Leaderboard lang: Python | last push: 2025-04-03"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "OpenMLRL/LLM_Collab_BFCL — BFCL v4 多模型协作实验（非官方仓库）",
+    "url": "https://github.com/OpenMLRL/LLM_Collab_BFCL",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 1，forks 0，主语言 Python，last push 2026-10-20。",
+      "描述为 'LLM Collaboration for The Berkeley Function-Calling Leaderboard v4'，其描述中出现 'BFCL v4' 这一版本标识。",
+      "该仓库为第三方实验项目，非 BFCL 官方仓库；BFCL 官方版本演进细节未从官方来源取证。"
+    ],
+    "raw_excerpt": "OpenMLRL/LLM_Collab_BFCL (★1, forks 0) desc: LLM Collaboration for The Berkeley Function-Calling Leaderboard v4 lang: Python | last push: 2026-10-20"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "BBBearo/sglang-inference-serving — 第三方 SGLang 推理服务封装（非官方仓库）",
+    "url": "https://github.com/BBBearo/sglang-inference-serving",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 0，forks 0，last push 2026-07-28。",
+      "描述称其为基于 SGLang、FastAPI、Docker 的推理服务系统，包含 RadixAttention 前缀缓存基准、Prometheus/Grafana 监控，以及 structured output / function calling 支持。",
+      "该仓库为第三方项目，非 SGLang 官方仓库；SGLang 官方仓库的 tool-call parser 实现与结构化输出文档未取得。"
+    ],
+    "raw_excerpt": "BBBearo/sglang-inference-serving (★0, forks 0) desc: Production-grade LLM inference serving system built with SGLang, FastAPI, and Docker — featuring RadixAttention prefix-caching benchmarks, Prometheus/Grafana monitoring, and structured output/function calling support. lang: Python | last push: 2026-07-28"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "aaronlyt/toolsynth — 工具调用训练数据合成框架（第三方）",
+    "url": "https://github.com/aaronlyt/toolsynth",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 6，forks 0，主语言 Python，last push 2026-08-28。",
+      "描述称其为合成 tool-use / function-calling 训练数据的统一框架，声称复现 ToolACE、ACEBench、AgentInstruct、Self-Instruct、Kimi K2 agentic 与 K3 KG-guided 等流水线。",
+      "该仓库 stars 仅 6，属小型项目；其 'faithful reproductions' 主张未读 README 核验，不得作为这些数据集/流水线存在性或质量的证据。"
+    ],
+    "raw_excerpt": "aaronlyt/toolsynth (★6, forks 0) desc: Unified framework for synthesizing tool-use / function-calling training data — faithful reproductions of ToolACE, ACEBench, AgentInstruct, Self-Instruct, Kimi K2 agentic & K3 KG-guided pipelines lang: Python | last push: 2026-08-28"
+  },
+  {
+    "sub_question_id": "q6",
+    "source_type": "github",
+    "title": "AIwithhassan/ai-agents-from-scratch — 教学型 agent 循环示例（第三方，小型）",
+    "url": "https://github.com/AIwithhassan/ai-agents-from-scratch",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：stars 6，forks 2，主语言 Python，last push 2026-02-18。",
+      "描述称其为不依赖框架、用 Python 从零构建 AI agent 的教学项目，演示 agentic loop 与 tool/function calling，使用 Groq SDK，agent 自主决定何时调用工具（如天气 API）。",
+      "该仓库为小型教学项目，不代表主流 agent 框架；检索 'function calling agent framework tool use' 时未返回 LangChain/LangGraph/LlamaIndex/AutoGen/CrewAI 等主流框架。"
+    ],
+    "raw_excerpt": "AIwithhassan/ai-agents-from-scratch (★6, forks 2) desc: 🤖 Build an AI Agent from scratch in Python — no frameworks needed. Learn how the agentic loop and tool/function calling work under the hood using the Groq SDK. The agent autonomously decides when to call tools (e.g., weather API), executes them, and generates a final response. Perfect for understanding AI agents at a fundamental level. lang: Python | last push: 2026-02-18"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "ToolRL: Reward is All Tool Learning Needs",
+    "url": "https://arxiv.org/abs/2504.13958",
+    "published_at": "2025-04-16",
+    "key_points": [
+      "论文将工具使用训练形式化为 Tool-Integrated Reasoning (TIR)：给定工具集 T={t1..tn} 与用户查询 Q，轨迹为多步 (r_i, T_i, o_i) 序列，其中 r_i 为自然语言推理、T_i 为该步调用的工具子集、o_i 为执行后的观测（含环境与用户反馈）。",
+      "作者称这是首个针对通用工具选择与应用（general-purpose tool selection and application）的 RL 训练系统性研究，区别于此前仅限搜索工具问答（Search-R1）或代码工具数学解题（ToRL）的窄范围工作。",
+      "奖励设计沿四个维度系统探索：reward type（奖励什么方面）、reward scale（奖励多少）、reward granularity（信号多细）、reward dynamics（奖励随训练如何演化）。",
+      "方法为算法无关的奖励设计，但实证在 GRPO（Group Relative Policy Optimization）与 PPO 两种 RL 算法上验证有效性。",
+      "报告的训练收益：相对 base model 提升 17%，相对 SFT model 提升 15%，跨多个工具使用与 QA 基准。",
+      "三条奖励设计经验结论：(1) 更长的推理轨迹并非天然更好，长度奖励会降低性能；(2) 动态奖励尺度有助于模型从简单到复杂行为平滑过渡；(3) 细粒度奖励分解带来更稳定有效的学习。",
+      "论文指出 SFT 在蒸馏的 deep-thinking 轨迹上训练会出现过度思考（overthinking）与泛化受限，模型会过度解读工具、无法拒绝不合适的工具，只是模仿 'but wait' 之类措辞而非真正深度思考。",
+      "代码与数据发布于 https://github.com/qiancheng0/ToolRL。",
+      "论文将 DPO、SimPO、GRPO、DAPO、VAPO 列为 LLM RL 方法演进脉络中的相关方法（仅作为背景引用，未在工具使用任务上评测 DPO/SimPO）。"
+    ],
+    "raw_excerpt": "In this work, we present the first comprehensive study on reward design for tool selection and application tasks within the RL paradigm. We systematically explore a wide range of reward strategies, analyzing their types, scales, granularity, and temporal dynamics. Building on these insights, we propose a principled reward design tailored for tool use tasks and apply it to train LLMs using Group Relative Policy Optimization (GRPO). Empirical evaluations across diverse benchmarks demonstrate that our approach yields robust, scalable, and stable training, achieving a 17% improvement over base models and a 15% gain over SFT models. ... • Longer reasoning trace is not inherently better and length rewards can degrade performance. • Dynamic reward scale helps models transition smoothly from simple to complex behaviors. • Finegrained reward decomposition leads to more stable and effective learning."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Small Language Models are the Future of Agentic AI",
+    "url": "https://arxiv.org/abs/2506.02153",
+    "published_at": "2025-06-02",
+    "key_points": [
+      "该文为 position paper（立场论文），主张小语言模型（SLM）在 agentic 系统中足够强大、更合适且更经济，是 agentic AI 的未来；并提出 LLM-to-SLM 的 agent 转换算法。",
+      "该文不涉及工具调用的偏好优化（DPO/ORPO）、过程奖励模型或可验证奖励 RL 的训练目标与数据构造，对本子问题无直接证据价值，仅作为检索排除项记录。",
+      "版本信息：v1 2025-06-02，v2 2025-09-15，v3 2026-09-22（说明该论文有 2026 年更新版本）。"
+    ],
+    "raw_excerpt": "Here we lay out the position that small language models (SLMs) are sufficiently powerful, inherently more suitable, and necessarily more economical for many invocations in agentic systems, and are therefore the future of agentic AI."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "MCP-Universe: Benchmarking Large Language Models with Real-World Model Context Protocol Servers",
+    "url": "https://arxiv.org/abs/2508.14704",
+    "published_at": "2025-08-20",
+    "key_points": [
+      "基准覆盖 6 个核心领域、11 个真实 MCP 服务器：Location Navigation、Repository Management、Financial Analysis、3D Design、Browser Automation、Web Searching。",
+      "任务总数为 231 个，任务基于连接真实数据源与环境的 MCP 服务器构造。",
+      "评分采用 execution-based evaluators，分三类：format evaluators（agent 格式合规）、static evaluators（时间无关内容匹配）、dynamic evaluators（对时间敏感任务自动获取实时 ground truth）。",
+      "作者明确拒绝 LLM-as-a-judge 路线（点名 MCPEval 与 LiveMCPBench），理由是许多任务涉及实时数据，静态 LLM 知识无法正确评判。",
+      "评测结果：GPT-5 成功率 43.72%，Grok-4 33.33%，Claude-4.0-Sonnet 29.44%。",
+      "论文指出的挑战：长上下文（输入 token 随交互步数快速增长）与 unknown-tools（agent 不熟悉 MCP 服务器的精确用法）。",
+      "企业级 agent（如 Cursor）表现未能超过标准 ReAct 框架。",
+      "论文批评 MCP-RADAR 由 HumanEval/GSM8k 等既有数据集改造而来，存在数据泄漏与真实覆盖不足；批评 MCPWorld 过度依赖 GUI、对 MCP 工作流覆盖不足。",
+      "开源可扩展评测框架并提供 UI，支持接入新 agent 与新 MCP 服务器。"
+    ],
+    "raw_excerpt": "To ensure rigorous evaluation, we carefully design execution-based evaluators rather than relying on LLM-as-a-judge [14] (e.g., MCPEval [15] and LiveMCPBench [16]), recognizing that many tasks involve real-time data that static LLM knowledge cannot properly assess. Our evaluation includes format evaluators for agent format compliance, static evaluators for time-invariant content matching, and dynamic evaluators that automatically obtain real-time ground truth for temporally sensitive tasks."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "MCP-Universe (HTML 正文) — 任务形式化与基准对比表",
+    "url": "https://arxiv.org/html/2508.14704v1",
+    "published_at": "2025-08-20",
+    "key_points": [
+      "任务形式化：S={s1..sk} 为 MCP 服务器集合，每个服务器暴露工具集 Ti；任务 τ 定义为三元组 (G, C, T_available)。",
+      "基准由三部分组成：可扩展评测框架、基于真实 MCP 场景的任务指令集、衡量任务完成度的 execution-based 评估器套件。",
+      "Table 1 对比维度为 Real-World / Integration / Temporal Dynamics / Exec.Eval.：MCPWorld 仅 Real-World+Temporal；MCP-RADAR 仅 Temporal；MCPEval 仅 Integration；LiveMCPBench 为 Real-World+Integration；MCP-Universe 三项全有。",
+      "MCP 协议被描述为基于 JSON-RPC 2.0、STDIO 与 SSE 传输，采用 host/client/server 三层架构。",
+      "作者单位为 Salesforce AI Research，代码仓库为 github.com/SalesforceAIResearch/MCP-Universe。"
+    ],
+    "raw_excerpt": "A task τ is defined as a tuple (G, C, T_available) ... MCP-Universe provides a comprehensive evaluation framework that integrates real-world integration, temporal dynamics, and execution-based evaluation."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "LiveMCP-101: Stress Testing and Diagnosing MCP-enabled Agents on Challenging Queries",
+    "url": "https://arxiv.org/abs/2508.15760",
+    "published_at": "2025-08-21",
+    "key_points": [
+      "基准含 101 条真实世界查询，要求协同使用多个 MCP 工具；覆盖 41 个 MCP 服务器、260 个工具。",
+      "任务按难度分三层：Easy 30、Medium 30、Hard 41，难度由作者共识依据推理复杂度与工具链长度判定。",
+      "查询由 GPT-4.1 采样领域、OpenAI o3 生成，再经执行—LLM 辅助编辑—人工修订的迭代循环精炼与验证；约需 120 专家工时。",
+      "每条查询配一个已验证执行计划，指定 MCP 工具序列、显式参数化与后处理代码；计划平均 5.4 次工具调用，最多 15 次。",
+      "评分采用并行评测：参考 agent 严格按计划执行产生同时刻参考输出，被评 agent 自主规划执行，再由 LLM judge 对比两者输出与轨迹打分。",
+      "18 个代表性 LLM 上，即使 GPT-5 任务成功率也低于 60%。",
+      "错误分析归纳出 7 种失败模式，分属三类：工具规划与编排错误、参数错误、输出处理错误。",
+      "观察到闭源模型 token 效率呈 log 形趋势（小 token 预算下快速提升后趋平），开源模型把 token 转化为可靠证据的效率更低。",
+      "Table 1 对比显示：LiveMCPBench 70 服务器、平均 2.8 步、有 Real Integration 与 Temporal Dynamics，但无 Verifiable Ground Truth；MCP-Bench 28 服务器；MCPEval 19 服务器；MCPWorld 10 服务器；MCP-RADAR 9 服务器。",
+      "论文批评并发工作（LiveMCPBench、MCP-Bench）缺乏客观可验证 ground truth，仅依赖主观 LLM-as-a-judge rubric，损害评分可靠性。"
+    ],
+    "raw_excerpt": "While the concurrent works (Mo et al., 2025; Wang et al., 2025) introduce live evaluation, they lack objectively verifiable ground truth and merely rely on subjective LLM-as-a-judge rubrics. This compromises scoring reliability and may not faithfully reflect relative model capabilities."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "LiveMCPBench: Can Agents Navigate an Ocean of MCP Tools?",
+    "url": "https://arxiv.org/abs/2508.01780",
+    "published_at": "2025-08-03",
+    "key_points": [
+      "基准含 95 个真实日常任务，专门设计用于压测多样化工具与多服务器规模化路由。",
+      "提供可直接部署的工具套件：70 个服务器、527 个工具，以保证可复现性、免去零散 API 配置。",
+      "评分采用 LLM-as-a-Judge 框架，直接验证任务结果，以处理动态数据源与多条有效解法路径。",
+      "评测 12 个 SOTA LLM：Claude-Sonnet-4 达 78.95% 任务成功率，多数模型仅 30–50%。",
+      "分析结论：主动的工具组合（active tool composition）与任务成功强相关；检索错误占全部失败近一半，检索是主要瓶颈。",
+      "论文指出现有评测的缺陷：通常假设单服务器设置、直接把工具注入模型上下文，绕过了大规模检索与多工具组合的挑战。",
+      "MCP 生态已扩展到 10,000+ 服务器。"
+    ],
+    "raw_excerpt": "we propose LiveMCPBench, which evaluates 95 real-world daily tasks explicitly constructed to stress diverse tools and scaled multi-server routing. The benchmark includes a ready-to-deploy tool suite of 70 servers with 527 tools ... We further introduce an LLM-as-a-Judge evaluation framework that directly verifies task outcomes, handling dynamic data sources and multiple valid solution paths."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Evaluation Report on MCP Servers (MCPBench)",
+    "url": "https://arxiv.org/abs/2504.11094",
+    "published_at": "2025-04-15",
+    "key_points": [
+      "MCPBench 是评测 MCP 服务器本身（而非 agent）的框架，指标为 accuracy、time consumption、token consumption。",
+      "只评测 data fetching 类任务（web search、database search），明确排除 world changing 类 MCP，理由是难以访问底层数据源状态。",
+      "Web search 数据集 3 个来源各 100 条：Frames（开源数据集）、中文新闻（近三个月新闻联播文稿清洗+逆向工程）、中文知识（维基/科技报道清洗）。",
+      "Database search 数据集：Car_bi 合成汽车厂商数据 355 条、SQL_EVAL 采样 256 条。",
+      "Accuracy 由 LLM-based grader 判定，使用 DeepSeek-v3 作为 grader，prompt 要求判断预测答案是否覆盖关键信息，仅返回 True/False。",
+      "因网络中断、API key 限制、程序崩溃导致样本未全部跑通，另设「有效样本准确率」指标，只统计完整走完流水线并记录日志的样本。",
+      "实验环境为新加坡单台服务器、双核 CPU、2GB RAM，除 DuckDuckGo 外所有 MCP 以 SSE 模式启动，超时 30 秒。",
+      "Table 5 部分结果：Brave Search 准确率 46.6%、耗时 13.98s；DuckDuckGo 13.62%、64.17s；Tavily 47.99%、95.52s；Exa 15.02%、231.24s；BoChaAI 20%、35.54s。",
+      "执行摘要结论：MCP 服务器之间在有效性与效率上差异显著；使用 MCP 相比 function call 并未表现出明显提升；优化需由 LLM 构造的参数可提升 MCP 服务器有效性。",
+      "代码与数据集发布于 github.com/modelscope/MCPBench。"
+    ],
+    "raw_excerpt": "There are significant differences in effectiveness and efficiency among MCP servers; using MCPs does not demonstrate a noticeable improvement compared to function call. ... The effectiveness of the MCP server can be enhanced by optimizing the parameters that need to be constructed by the LLM."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Berkeley Function Calling Leaderboard (BFCL) V4 — 官方榜单页面",
+    "url": "https://gorilla.cs.berkeley.edu/leaderboard.html",
+    "published_at": "2026-04-12",
+    "key_points": [
+      "榜单页面标题与正文均标注为 \"Berkeley Function Calling Leaderboard (BFCL) V4\"，未出现 V5 字样。",
+      "页面标注 Last Updated: 2026-04-12，即截至该日期官方榜单仍以 V4 为最新版本。",
+      "页面自述 BFCL V4 评估 LLM 准确调用函数（工具）的能力，数据为真实世界数据并会定期更新。",
+      "版本演进说明：BFCL-v1 引入 AST 作为评估指标，BFCL-v2 引入企业及开源社区贡献的函数，BFCL-v3 引入多轮交互，BFCL-v4 引入整体性 agentic 评估。",
+      "页面说明 Overall Accuracy 为所有子类别的未加权平均（unweighted average），并指向 blog 了解分数构成细节。",
+      "榜单模型结果基于 commit f7cf735 评估；复现需使用 pip install bfcl-eval==2025.12.17 或对应代码 checkpoint。",
+      "页面区分 FC（模型原生支持 function/tool calling）与 Prompt（借助模型普通文本生成能力变通实现函数调用）两种模式。",
+      "页面引用 ICML 2025 论文：Patil et al., \"The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models\", Forty-second ICML, 2025。",
+      "该页面抓取结果中不含任何具体模型的 Overall 分数或排名行（表格由前端 JS 渲染，未出现在返回正文中）。"
+    ],
+    "raw_excerpt": "The Berkeley Function Calling Leaderboard (BFCL) V4 evaluates the LLM's ability to call functions (aka tools) accurately. ... Last Updated: 2026-04-12 ... Overall Accuracy is the unweighted average of all the sub-categories. ... Models are evaluated using commit f7cf735."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "BFCL V4: Web Search（官方 blog，Part 1）",
+    "url": "https://gorilla.cs.berkeley.edu/blogs/15_bfcl_v4_web_search.html",
+    "published_at": "2025-07-17",
+    "key_points": [
+      "BFCL V4 于 2025-07-17 发布（blog 标注 Release date: 2025-07-17，Last updated: 2025-07-20），定位为面向 LLM 的整体性 agentic 评估。",
+      "BFCL V4 Agentic 包含三部分：web search（Part 1）、memory（Part 2）、format sensitivity（Part 3）。",
+      "V4 总分（Overall Score）为百分比加权平均，公式为：Overall = Agentic × 40% + Multi-Turn × 30% + Live × 10% + Non-Live × 10% + Hallucination × 10%。",
+      "各类别测试条目数：Overall 计分条目 5088 条，非计分条目 5218 条；Agentic 665 条、Multi-Turn 800 条、Live 1351 条、Non-Live 1150 条、Hallucination 1122 条、Format Sensitivity 5200 条（26 种配置 × 200 条）。",
+      "Agentic 类别内部为未加权平均，由 Web Search（200 条）与 Memory（465 条）等权合成；Memory 下分 Vector Store / Key Value Store / Rec Sum 各 155 条。",
+      "Multi-Turn 类别含 Multi Turn Base、Missing Function、Missing Parameter、Long Context 各 200 条。",
+      "Hallucination Measurement 由 Irrelevance（1122 条，含 Non-Live Irrelevance 240 条与 Live Irrelevance 882 条）与 Relevance（18 条）构成。",
+      "Web Search 子项含 100 道人工构造的多跳（multihop）问题，评估时模型配备 DuckDuckGo Search API 与网页内容抓取函数，统一搜索接口以保证模型无关性。",
+      "BFCL 全程依赖 AST（抽象语法树）或状态转移验证，以保证评估的确定性与低波动。"
+    ],
+    "raw_excerpt": "Formula: Overall Score = (Agentic × 40%) + (Multi-Turn × 30%) + (Live × 10%) + (Non-Live × 10%) + (Hallucination × 10%) ... Release date: 2025-07-17. Last updated: 2025-07-20."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "gorilla / berkeley-function-call-leaderboard — CHANGELOG.md",
+    "url": "https://raw.githubusercontent.com/ShishirPatil/gorilla/main/berkeley-function-call-leaderboard/CHANGELOG.md",
+    "published_at": null,
+    "key_points": [
+      "CHANGELOG 中最新条目为 [Oct 1, 2025]（PR #1177，修正 multi_turn_base_154 的 ground truth），文件中不存在任何 V5 发布记录。",
+      "BFCL V4 于 [Jul 17, 2025]（PR #1019）正式发布，新增 agentic 域（Web Search 与 Memory Management 两类）。",
+      "V4 修订了 overall-accuracy 公式，权重向复杂多步 agentic 任务倾斜：Live 由 33% 降至 10%，Non-Live 由 33% 降至 10%，Irrelevance 由 0% 升至 10%，Multi-Turn 由 33% 降至 30%，Agentic 由 0% 升至 40%。",
+      "V4 起 Non-Live Acc 与 Live Acc 的计算排除 Irrelevance/Relevance 类别分数（对应 issue #602）。",
+      "V4 重命名测试类别：simple → simple_python，java → simple_java，javascript → simple_javascript。",
+      "V4 重构结果目录为两级层次：result/<model>/<general_category>/<test_category>.json 与 score/...，general_category ∈ {non_live, live, multi_turn, agentic, format_sensitivity}。",
+      "V4 新增模型支持包括 claude-opus-4-1-20250805、gpt-5-2025-08-07、gpt-5-mini-2025-08-07、gpt-5-nano-2025-08-07、Qwen3-30B-A3B-Instruct-2507、Qwen3-235B-A22B-Instruct-2507、Qwen3-4B-Instruct-2507。",
+      "2025 年内陆续加入榜单的模型包括 gemini-2.5-pro/flash 系列、claude-opus-4 与 claude-sonnet-4、DeepSeek-R1-0528 与 DeepSeek-V3-0324、gpt-4.1 系列、Qwen3 全系列、Llama-3.1-Nemotron-Ultra-253B-v1、mistral-medium-2505 等。",
+      "2025-09-27 引入 --partial-eval 标志，允许对模型结果文件的子集做部分评估。"
+    ],
+    "raw_excerpt": "[Jul 17, 2025] [#1019]: BFCL V4 release: 1. New agentic domain ... 2. Revised overall-accuracy formula ... | Live | 33 | 10 | | Non-Live | 33 | 10 | | Irrelevance | 0 | 10 | | Multi-Turn | 33 | 30 | | Agentic | 0 | 40 |"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "gorilla / berkeley-function-call-leaderboard — README.md",
+    "url": "https://raw.githubusercontent.com/ShishirPatil/gorilla/main/berkeley-function-call-leaderboard/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 将 BFCL 定位为\"首个全面的、可执行的函数调用评估\"（first comprehensive and executable function call evaluation），强调其覆盖多种函数调用形式、多样场景与可执行性。",
+      "README 列出的官方 blog 版本序列止于 BFCL V4 三篇（Part 1 Web Search、Part 2 Memory Management、Part 3 Format Sensitivity），未列出 V5 相关文档。",
+      "评估流程为两步：bfcl generate 生成模型响应，bfcl evaluate 计算分数；结果分别存于 result/ 与 score/ 目录。",
+      "自托管模型支持 vllm 与 sglang 两种后端，README 称 sglang 在该项目的多轮场景下显著快于 vllm，但仅支持 SM 80+（Ampere 及更新）GPU。",
+      "README 提示 PyPI 包名为 bfcl-eval，需与无关的 bfcl 项目区分。",
+      "对未评估的测试类别，汇总列（Overall Acc、Non_Live Overall Acc、Live Overall Acc、Multi Turn Overall Acc）在计算时按 0 计入。"
+    ],
+    "raw_excerpt": "We introduce the Berkeley Function Calling Leaderboard (BFCL), the first comprehensive and executable function call evaluation dedicated to assessing Large Language Models' (LLMs) ability to invoke functions."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "anthropic-sdk-python — tools.md (Tool helpers / tool runner)",
+    "url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/tools.md",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 的 @beta_tool 装饰器会从函数签名与 docstring 自动生成 JSON Schema 形式的工具定义，字段名为 input_schema（而非 OpenAI 的 parameters）。",
+      "生成的 input_schema 样例中包含 \"additionalProperties\": false，并列出 required 字段，即默认不允许未声明的额外参数。",
+      "SDK 提供 client.beta.messages.tool_runner()，依据 stop_reason 驱动循环：tool_use 时执行工具并回传结果，pause_turn 或 compaction 时原样回传该轮由服务端续跑，其他 stop_reason 则停止。",
+      "文档提到 tool_choice 可被设为强制调用工具的 any 或 tool 取值（在 compaction 请求需剔除的参数列表中被列举）。",
+      "tool runner 支持 run_tools_eagerly=True 与 stream=True，使每个工具在模型写完该调用后立即执行；工具按模型推进顺序逐个串行执行。",
+      "存在 inline-tools-2026-09-15 beta，允许在会话中途以消息形式增删工具（add_tools/remove_tools），以避免破坏 prompt cache。",
+      "存在 compact-2026-09-04 beta，用于在会话中主动压缩上下文（compaction 块替换被摘要的消息）。"
+    ],
+    "raw_excerpt": "The `@beta_tool` decorator will inspect the function arguments and the docstring to extract a json schema representation of the given function ... \"input_schema\": { \"additionalProperties\": false, ... } ... Iteration is driven by each message's `stop_reason`: on `tool_use` the runner executes the requested tools and sends the results back, on `pause_turn` or `compaction` it sends the turn back unchanged so the server can resume it ... `context_management`, `stop_sequences`, a `tool_choice` that forces a tool (`any` or `tool`) and the output format ... are left out of the compaction request"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "openai-python — api.md (API 类型与方法索引)",
+    "url": "https://raw.githubusercontent.com/openai/openai-python/main/api.md",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Python SDK 的 chat.completions.create/parse/stream 方法签名中包含 parallel_tool_calls、tool_choice、tools 三个参数。",
+      "SDK 类型索引中存在 ChatCompletionToolChoiceOptionParam、ChatCompletionNamedToolChoiceParam、ChatCompletionAllowedToolChoiceParam、ChatCompletionAllowedToolsParam，说明 tool_choice 支持具名指定工具与允许工具集合两种形态。",
+      "SDK 类型索引中存在 ChatCompletionCustomToolParam 与 ChatCompletionMessageCustomToolCall，表明除 function 工具外还有 custom 工具类型。",
+      "共享类型中存在 ResponseFormatJSONSchema、ResponseFormatJSONObject、ResponseFormatTextGrammar、ResponseFormatTextPython，表明结构化输出支持 JSON Schema 与语法约束两种方式。",
+      "该文件仅为类型与方法索引，未包含关于并行调用语义、strict 模式行为或上下文长度的说明文字。"
+    ],
+    "raw_excerpt": "client.chat.completions. parse (*, messages, model, audio=..., response_format=..., ... parallel_tool_calls=..., ... tool_choice=..., tools=..., ...) -> ParsedChatCompletion[ResponseFormatT] ... from openai.types.chat import ( ChatCompletionAllowedToolsParam, ChatCompletionAllowedToolChoiceParam, ... ChatCompletionNamedToolChoiceParam, ... )"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "openai-python — README (Responses API 与 Chat Completions 用法)",
+    "url": "https://raw.githubusercontent.com/openai/openai-python/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "OpenAI 当前主推的交互 API 是 Responses API（client.responses.create），Chat Completions API 被描述为「previous standard (supported indefinitely)」。",
+      "README 示例中使用的模型标识为 gpt-5.5，而非课题设定的 GPT-5。",
+      "README 正文未涉及工具调用的并行、strict schema、上下文长度或 tool_choice 选项等具体能力说明。"
+    ],
+    "raw_excerpt": "The primary API for interacting with OpenAI models is the [Responses API] ... The previous standard (supported indefinitely) for generating text is the [Chat Completions API] ... response = client.responses.create( model=\"gpt-5.5\", ...)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "googleapis/python-genai — README (Google Gen AI SDK)",
+    "url": "https://raw.githubusercontent.com/googleapis/python-genai/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "Google Gen AI SDK 同时支持 Gemini Developer API 与 Gemini Enterprise Agent Platform 两套后端。",
+      "SDK 提供 Automatic Function Calling (AFC) 能力，且官方警告将在下个大版本变更：用户将不能从 Models.generate_content 及其 stream/async 变体直接调用 AFC，需改从 Chats 模块调用。",
+      "SDK 默认使用 beta API 端点以支持预览特性，可通过 http_options 指定 api_version='v1' 使用稳定端点。",
+      "README 正文未给出并行函数调用、responseSchema/strict 约束、上下文长度或 tool_choice 选项的具体说明。"
+    ],
+    "raw_excerpt": "**Updates to Automatic Function Calling (AFC) in upcoming SDK version:** We are changing AFC behavior in the next major version. Specifically, users will not be able to invoke AFC from direct calls to `Models.generate_content` or its stream and async variants. Instead, users should invoke AFC from `Chats` modules."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Anthropic 官方文档站点访问结果（docs.anthropic.com / docs.claude.com）",
+    "url": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+    "published_at": null,
+    "key_points": [
+      "访问 docs.anthropic.com 与 docs.claude.com 的 tool use overview 页面均返回区域限制提示页，未返回文档正文。",
+      "该结果说明本次运行环境无法取得 Anthropic 官方 tool use 文档内容，因此无法据此确认 Claude 4.x 的并行调用、strict schema、上下文长度与 tool_choice 选项。"
+    ],
+    "raw_excerpt": "App unavailable Unfortunately, Claude is only available in certain regions right now. Please contact support if you think you’re getting this message in error. View supported countries"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report (arXiv:2505.09388v1)",
+    "url": "https://arxiv.org/html/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列包含 6 个 dense 模型（0.6B/1.7B/4B/8B/14B/32B）与 2 个 MoE 模型（Qwen3-30B-A3B、Qwen3-235B-A22B），旗舰 Qwen3-235B-A22B 总参数 235B、激活 22B。",
+      "报告称旗舰模型 Qwen3-235B-A22B 在 BFCL v3 上取得 70.8 分。",
+      "同一段落中报告称模型在 coding、数学与 agent 相关任务上表现突出，并给出 AIME'24 85.7、AIME'25 81.5、LiveCodeBench v5 70.7、CodeForces 2056 等分数。",
+      "Qwen3 将 thinking 模式与 non-thinking 模式整合进统一框架，并引入 thinking budget 机制以按任务复杂度分配推理算力。",
+      "预训练为三阶段策略，第一阶段约 30 万亿 token、序列长度 4096；长上下文阶段使用 32768 序列长度，语料中 75% 为 16384–32768 token 文本、25% 为 4096–16384 token 文本。",
+      "MoE 模型共 128 个专家、每 token 激活 8 个，且相较 Qwen2.5-MoE 取消了 shared experts，并采用 global-batch load balancing loss。",
+      "多语言支持从 Qwen2.5 的 29 种扩展到 119 种语言和方言。",
+      "全部 Qwen3 模型以 Apache 2.0 协议公开。",
+      "报告在 base 模型对比中将 Llama-4-Maverick Base 列为对比基线之一（Llama-4-Maverick 总参数 402B、激活 17B）。"
+    ],
+    "raw_excerpt": "For example, the flagship model Qwen3-235B-A22B achieves 85.7 on AIME'24 and 81.5 on AIME'25 ( AIME, 2025 ) , 70.7 on LiveCodeBench v5 ( Jain et al., 2024 ) , 2,056 on CodeForces, and 70.8 on BFCL v3 ( Yan et al., 2024 ) .In addition, other models in the Qwen3 series also show strong performance relative to their size."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report — arXiv 摘要页（元数据）",
+    "url": "https://arxiv.org/abs/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "论文于 2025-05-14 提交（v1），学科分类 cs.CL，第一作者 An Yang，通讯作者之一 Binyuan Hui。",
+      "摘要称 Qwen3 在 code generation、mathematical reasoning、agent tasks 等基准上取得 state-of-the-art 结果，但摘要本身未给出 BFCL/τ-bench 具体数值。",
+      "摘要明确 Qwen3 参数规模覆盖 0.6B 至 235B，含 dense 与 MoE 两种架构。"
+    ],
+    "raw_excerpt": "Empirical evaluations demonstrate that Qwen3 achieves state-of-the-art results across diverse benchmarks, including tasks in code generation, mathematical reasoning, agent tasks, etc., competitive against larger MoE models and proprietary models."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "vLLM 官方文档：Tool Calling（渲染页）",
+    "url": "https://docs.vllm.ai/en/latest/features/tool_calling.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 在 chat completion API 的 tool_choice 字段上支持 named function calling，以及 auto、required（自 vllm>=0.8.3 起）、none 三种选项。",
+      "启用自动工具调用需要三个 flag：--enable-auto-tool-choice（强制开启自动 tool choice）、--tool-call-parser（选择要使用的 tool parser）、--tool-parser-plugin（可选，用于注册自定义 tool parser）。",
+      "官方 quickstart 用 Llama-3.1-8B-Instruct 演示，启动命令为 vllm serve ... --enable-auto-tool-choice --tool-call-parser llama3_json --chat-template examples/tool_chat_template_llama3.1_json.jinja，即 parser 需与配套 chat template 一起使用。",
+      "named function calling 走 structured outputs 后端，首次使用会有数秒（或更多）延迟，因为要为该 schema 首次编译 FSM，之后缓存复用。",
+      "文档对 named function calling 的保证措辞是「保证生成可被正确解析的 function call，而不是高质量的 function call」（guaranteed a validly-parsable function call - not a high-quality one）。",
+      "tool_choice='required' 同样基于 structured outputs，默认启用且对任意受支持模型可用；但 V1 引擎上替代解码后端的支持仍在 roadmap 中。",
+      "tool_choice='none' 时模型不产生任何 tool call，只回普通文本；但 vLLM 默认仍会把 tool 定义放进 prompt，需用 --exclude-tools-when-tool-choice-none 才能排除。",
+      "Constrained decoding 行为被拆成三件事分别处理：call obligation（是否必须调用）、structural-tag activation（语法是否激活）、argument-schema enforcement（参数 schema 是否强制）。",
+      "structural tag 激活规则：named function 与 required 总是激活；auto 仅当至少一个 tool 设 strict: true，或 --tool-strict-level 为 function/parameter 时激活；none 禁用。",
+      "strict 模式分两层：tool-call envelope（标记与函数名）在 structural tag 生效时总被约束；单个 tool 的参数 schema 仅在该 tool 设 strict: true（或 --tool-strict-level parameter）时才被钉死。",
+      "strict 字段在 Chat Completion、Responses、Anthropic Messages 三个 API 面上都支持。",
+      "环境变量 VLLM_ENFORCE_STRICT_TOOL_CALLING 默认 true；设为 false 时不再为 tool calling 附加 structural tags，且只影响 structural-tag 路径，不改变 named/required 所用的 schema 派生 structured outputs。",
+      "--tool-strict-level 提供服务器侧「严格度下限」，取值 auto / function / parameter；未设置时用 parser 自身默认值：glm47 为 function，其余 parser 为 auto。",
+      "文档明确说明动机：多数 OpenAI 兼容客户端和 agent 框架从不设置 strict，导致 tool_choice='auto' 下模型无语法约束地生成 tool call，畸形标记可能泄漏进响应。",
+      "推荐按 OpenAI strict-schema 风格定义参数：每个 object 设 additionalProperties: false、properties 中所有字段都列入 required、可选字段用 null 表示（如 {\"type\": [\"string\", \"null\"]}）。",
+      "文档承认在官方 Mistral 格式的较新 Mistral 模型上，named 与 required 调用并不保证成功。"
+    ],
+    "raw_excerpt": "vLLM currently supports named function calling, as well as the `auto`, `required` (as of `vllm>=0.8.3`), and `none` options for the `tool_choice` field in the chat completion API. ... `--enable-auto-tool-choice` -- mandatory Auto tool choice. ... `--tool-call-parser` -- select the tool parser to use (listed below). Additional tool parsers will continue to be added in the future. You can also register your own tool parsers in the `--tool-parser-plugin`. ... You are guaranteed a validly-parsable function call - not a high-quality one. ... Most OpenAI-compatible clients and agent frameworks never set `strict` on their tools, so with `tool_choice=\"auto\"` the model generates tool calls without any grammar and malformed markup can leak into the response."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "vLLM 仓库文档源文件 docs/features/tool_calling.md（main 分支）",
+    "url": "https://raw.githubusercontent.com/vllm-project/vllm/main/docs/features/tool_calling.md",
+    "published_at": null,
+    "key_points": [
+      "该文件是 vLLM 官方 Tool Calling 文档的 Markdown 源文件，内容与 docs.vllm.ai 渲染页一致，可作为仓库侧一手来源。",
+      "文档按模型族分节列出 parser，可确认存在的 parser 名包括 hermes（Nous Research Hermes 系列，Hermes 2 Pro 之后的所有 Hermes 模型）、mistral（mistralai/Mistral-7B-Instruct-v0.3 已确认）、llama3_json（quickstart 示例）、glm47（在 --tool-strict-level 默认值处出现）。",
+      "hermes parser 的启用方式为 --tool-call-parser hermes；文档注明 Hermes 2 Theta 系列因合并步骤导致 tool call 质量与能力下降。",
+      "Mistral parser 的已知问题被明确记录：Mistral 7B 难以正确生成并行 tool call；且仅对 Transformers tokenization 后端，Mistral 的 tokenizer_config.json chat template 要求 tool call ID 恰为 9 位数字。",
+      "文档提到 chat template 参数可设为 tool_use，以使用 tokenizer_config.json 中配置的 tool-use 专用模板（遵循 transformers 规范）。",
+      "存在一类「response template」parser：它只从已生成文本中解析调用，解析失败的调用会被丢弃；且这类 parser 只提供解析、不提供格式相关的约束解码，因此会拒绝 strict tools、required/named tool choice 或 parallel_tool_calls=false 的请求。",
+      "文档提到某个 parser（beam）使用常开语法，需要 xgrammar structured outputs 后端（默认后端），可用 VLLM_BEAM_ALWAYS_CONSTRAIN_OUTPUT=0 关闭。"
+    ],
+    "raw_excerpt": "### Hermes Models (`hermes`) All Nous Research Hermes-series models newer than Hermes 2 Pro should be supported. ... Flags: `--tool-call-parser hermes` ### Mistral Models (`mistral`) Supported models: * `mistralai/Mistral-7B-Instruct-v0.3` (confirmed) ... Known issues: 1. Mistral 7B struggles to generate parallel tool calls correctly. ... Response templates currently provide parsing, not format-specific constrained decoding. The parser therefore rejects requests for strict tools, required or named tool choice, or `parallel_tool_calls=false`."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "vLLM 官方文档：Structured Outputs",
+    "url": "https://docs.vllm.ai/en/latest/features/structured_outputs.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 的结构化输出使用 xgrammar 或 guidance 作为后端（文档原文：supports the generation of structured outputs using xgrammar or guidance as backends）。",
+      "旧的 guided_* API 字段已在 v0.12.0 移除，需迁移到统一的 structured_outputs 字段：guided_json -> structured_outputs.json、guided_regex -> .regex、guided_choice -> .choice、guided_grammar -> .grammar、guided_whitespace_pattern -> .whitespace_pattern、structural_tag -> .structural_tag；guided_decoding_backend 字段直接删除。",
+      "lm-format-enforcer 后端自 v0.33.0 起弃用（可用但告警），v0.34.0 需显式 opt-in，v0.35.0 移除。",
+      "后端选择通过 --structured-outputs-config.backend 指定，默认值为 auto，会依据请求细节自动挑选合适后端。",
+      "OpenAI 兼容服务端默认即支持结构化输出，无需额外开启。",
+      "支持的约束参数包括 choice（输出恰为给定选项之一）、regex（遵循正则）、json（遵循 JSON schema）、grammar（遵循上下文无关文法）、structural_tag（在指定标签内遵循 JSON schema）。",
+      "正则语法随后端而异：xgrammar、guidance、outlines 使用 Rust 风格正则，lm-format-enforcer 使用 Python re 模块；换后端会改变允许的 token 集合，从而改变生成结果。",
+      "grammar 参数使用上下文无关的 EBNF 文法，可定义如简化 SQL 查询这样的完整语言。",
+      "结构化输出可与 reasoning 模型共用，但 Qwen3 Coder 在开启 reasoning 时结构化输出可能被禁用（v0.11.2+），需加 --structured-outputs-config.enable_in_reasoning=True 才能同时使用。"
+    ],
+    "raw_excerpt": "vLLM supports the generation of structured outputs using xgrammar or guidance as backends. ... If you are still using the following deprecated API fields which were removed in v0.12.0, please update your code to use `structured_outputs` ... `guided_json` -> `{\"structured_outputs\": {\"json\": ...}}` ... The `lm-format-enforcer` structured outputs backend is deprecated starting in v0.33.0. It remains usable with a warning in v0.33.0, will require an explicit opt-in in v0.34.0, and will be removed in v0.35.0. ... The default backend is `auto`, which will try to choose an appropriate backend based on the details of the request."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "SGLang 官方文档：Tool Parser（Function Calling）",
+    "url": "https://docs.sglang.ai/advanced_features/tool_parser.html",
+    "published_at": null,
+    "key_points": [
+      "SGLang 文档给出「Currently supported parsers」表格，列出的 parser 名为：apertus2509、deepseekv3、deepseekv31、deepseekv32、glm、gpt-oss、kimi_k2、llama3、llama4、mistral、pythonic、qwen、qwen3_coder、step3。",
+      "各 parser 对应模型族：apertus2509 对应 Apertus 2509（swiss-ai/Apertus-{8,70}B-Instruct-2509）；deepseekv3 对应 DeepSeek-V3-0324；deepseekv31 对应 DeepSeek-V3.1 与 V3.2-Exp；deepseekv32 对应 DeepSeek-V3.2；glm 对应 GLM 系列（如 zai-org/GLM-4.6）；gpt-oss 对应 openai/gpt-oss-120b 与 20b；kimi_k2 对应 moonshotai/Kimi-K2-Instruct；llama3 对应 Llama 3.1/3.2/3.3；llama4 对应 Llama 4；mistral 对应 Mistral-7B-Instruct-v0.3、Mistral-Nemo-Instruct-2407 等；qwen 对应 Qwen 系列（如 Qwen3-Next-80B-A3B-Instruct、Qwen3-VL-30B-A3B-Thinking）但不含 Qwen3-Coder；qwen3_coder 对应 Qwen3-Coder；step3 对应 Step-3。",
+      "apertus2509 的 tool call 以单键对象的 JSON 列表形式发出：<|tools_prefix|>[{\"tool\": {...}}]<|tools_suffix|>。",
+      "pythonic parser 让模型以 Python 代码形式输出函数调用，需配合 --tool-call-parser pythonic 并建议搭配特定 chat template。",
+      "gpt-oss parser 会过滤 analysis channel 事件、只保留 normal text，可能导致 content 为空；文档建议通过返回 role=\"tool\" 的工具结果完成一轮来规避。",
+      "deepseekv3 / deepseekv31 / deepseekv32 建议分别搭配 examples/chat_template/tool_chat_template_deepseekv3.jinja、tool_chat_template_deepseekv31.jinja、tool_chat_template_deepseekv32.jinja 启动。",
+      "--tool-call-parser 的语义被明确为「定义用于解释响应的 parser」（defines the parser used to interpret responses），即它是输出侧解析器，而非输入侧模板。",
+      "SGLang 提供 /parse_function_call 原生端点，输入 text、tool_call_parser、tools，返回 normal_text 与 calls（含 name、parameters）。",
+      "离线场景可直接使用 sglang.srt.function_call.function_call_parser.FunctionCallParser(tools=..., tool_call_parser=...) 并调用 parse_non_stream(generated_text) 得到 normal_text 与 calls。",
+      "SGLang 的 tool_choice 支持 required（强制至少调用一个工具）等选项，文档称该功能用 EBNF（Extended Backus-Naur Form）文法实现以保证可靠的工具调用行为。",
+      "对 gpt-oss parser，离线使用需在 sampling_params 中加 no_stop_trim: True，以确保工具调用 token <call> 不被裁掉。"
+    ],
+    "raw_excerpt": "This guide demonstrates how to use SGLang's Function calling functionality. Currently supported parsers: apertus2509 ... deepseekv3 ... deepseekv31 ... deepseekv32 ... glm ... gpt-oss ... kimi_k2 ... llama3 ... llama4 ... mistral ... pythonic ... qwen ... qwen3_coder ... step3. ... Note that `--tool-call-parser` defines the parser used to interpret responses. ... SGLang supports OpenAI's `tool_choice` parameter to control when and which tools the model should call. This feature is implemented using EBNF (Extended Backus-Naur Form) grammar to ensure reliable tool calling behavior."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "Gorilla OpenFunctions v2 README（ShishirPatil/gorilla 仓库 openfunctions 子目录）",
+    "url": "https://raw.githubusercontent.com/ShishirPatil/gorilla/main/openfunctions/README.md",
+    "published_at": null,
+    "key_points": [
+      "OpenFunctions 的代码与文档实际位于 ShishirPatil/gorilla 主仓库的 openfunctions/ 子目录下，而非独立的 gorilla-llm/gorilla-openfunctions 仓库（后者抓取返回 404）。",
+      "README 标题为「Gorilla OpenFunctions v2」，自称「SoTA for open-source models (Apache 2.0). On-par with GPT-4.」——这是仓库方自述的营销性主张，未见第三方权威验证。",
+      "README 列出三个模型版本：gorilla-openfunctions-v2（multiple、parallel、multiple & parallel、relevance detection、Python + JAVA + JS + REST）、gorilla-openfunctions-v1（parallel functions，可在函数间选择）、gorilla-openfunctions-v0（给定函数与用户意图，返回格式正确的 JSON 及正确参数）。",
+      "v2 为 7B 参数模型，支持的能力包括：多函数选择、并行函数调用（同一函数以不同参数调用 N 次）、多函数与并行组合（单次 chat completion 一次生成）、相关性检测（闲聊时闲聊，需要函数时返回函数）。",
+      "v2 支持 Python（string/number/boolean/list/tuple/dict 及 Any）、JAVA（byte/short/int/float/double/long/boolean/char/Array/ArrayList/Set/HashMap/Hashtable/Queue/Stack/Any）、JavaScript（String/Number/Bigint/Boolean/dict(object)/Array/Date/Any）数据类型，并原生支持 REST。",
+      "三个模型均托管在 Hugging Face 的 UC Berkeley gorilla-llm 组织下：gorilla-llm/gorilla-openfunctions-v2、-v1、-v0。",
+      "OpenFunctions 与 OpenAI Functions 接口兼容；v2 输出同时提供可直接使用的函数调用字符串与 OpenAI 兼容的 JSON（含 function_call 键），因为输出包含参数名而不只是参数值，从而可解析为 JSON；无法解析时回退返回函数调用字符串。",
+      "README 给出本地运行的 prompt 格式，system prompt 声明其为 Gorilla LLM 开发的 AI programming assistant，仅回答计算机科学相关问题。",
+      "README 引导用户到 https://gorilla.cs.berkeley.edu/leaderboard 试用，并指向 OpenFunctions v2 发布博客 https://gorilla.cs.berkeley.edu/blogs/7_open_functions_v2.html。",
+      "该 README 正文未包含 stars 数量或最近提交时间等信息。"
+    ],
+    "raw_excerpt": "# Gorilla OpenFunctions v2 \n\n🎉 Gorilla OpenFunctions v2 is here!\n💡 SoTA for open-source models (Apache 2.0). On-par with GPT-4. \n\n🚀 Try it out on the [leaderboard](https://gorilla.cs.berkeley.edu/leaderboard) \n📣 Read more in our [OpenFunctions v2 release blog](https://gorilla.cs.berkeley.edu/blogs/7_open_functions_v2.html)\n\n## Introduction\nGorilla OpenFunctions extends Large Language Model(LLM) Chat Completion feature to formulate \nexecutable APIs call given natural language instructions and API context. With OpenFunctions v2 7B parameter model,\nwe now support:\n1. Multiple functions - choose between functions \n2. Parallel functions - call the same function `N` time with different parameter values\n3. Multiple & parallel - both of the above in a single chatcompletion call (one generation)\n4. Relevance detection - when chatting, chat. When asked for function, returns a function\n5. Python - supports `string, number, boolean, list, tuple, dict` parameter datatypes and `Any` for those not natively supported. \n6. JAVA - support for `byte, short, int, float, double, long, boolean, char, Array, ArrayList, Set, HashMap, Hashtable, Queue, Stack, and Any` datatypes.\n7. JavaScript - support for `String, Number, Bigint, Boolean, dict (object), Array, Date, and Any` datatypes.\n8. REST - native REST support"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — README（Low-level orchestration framework for building stateful agents）",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": null,
+    "key_points": [
+      "仓库页面渲染显示 Stars 43.9k stars、Watchers 189 watching、Forks 7.5k forks。",
+      "页面显示累计 7,211 Commits（历史总量，非近期提交频率）。",
+      "README 自我定位为 \"a low-level orchestration framework for building, managing, and deploying long-running, stateful agents\"，并称被 Klarna、Replit、Elastic 等公司使用。",
+      "README 列出的核心能力为 durable execution、human-in-the-loop、comprehensive memory、LangSmith 调试、production-ready deployment，未把 tool/function calling 列为自身特性。",
+      "README 将工具/agent 能力外推到生态组件：Deep Agents（\"agents that can plan, use subagents, and leverage file systems\"）与 LangChain（\"integrations and composable components\"）。",
+      "README 声明 LangGraph 受 Pregel 与 Apache Beam 启发，公共接口借鉴 NetworkX，由 LangChain Inc 构建但可不依赖 LangChain 使用。",
+      "仓库 Topics 含 agents、ai-agents、llm、multiagent、rag、openai、gemini 等标签。"
+    ],
+    "raw_excerpt": "Low-level orchestration framework for building stateful agents. ... LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents. ... Durable execution — Build agents that persist through failures ... Human-in-the-loop ... Comprehensive memory ... Stars 43.9k stars Watchers 189 watching Forks 7.5k forks"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "microsoft/autogen — README（A framework for creating multi-agent AI applications）",
+    "url": "https://github.com/microsoft/autogen",
+    "published_at": null,
+    "key_points": [
+      "README 顶部标注 \"Project archived and no longer maintained\"：Microsoft 不再提供 bug 修复、安全修复、新功能或支持，仓库仅作历史/参考用途保留。",
+      "README 明确建议不要用于生产环境（\"we continue to advise against production use\"），并建议新用户改用 Microsoft Agent Framework（MAF），现有用户按迁移指南迁移。",
+      "页面显示累计 3,783 Commits。",
+      "README 定义 AutoGen 为 \"a framework for creating multi-agent AI applications that can act autonomously or work alongside humans\"，要求 Python 3.10 或更高版本。",
+      "README 的 MCP Server 示例展示工具调用用法：通过 McpWorkbench + StdioServerParams 接入 Playwright MCP server，并在 AssistantAgent 上设置 max_tool_iterations = 10。",
+      "README 说明可用 AgentTool 构建基础的多智能体编排（multi-agent orchestration）setup。",
+      "README 提示安全风险：只应连接可信的 MCP server，因为它们可能在本地环境执行命令或暴露敏感信息。",
+      "README 称 Microsoft Agent Framework 1.0 提供企业级多智能体编排、多模型供应商支持，以及通过 A2A 与 MCP 的跨运行时互操作。"
+    ],
+    "raw_excerpt": "Caution ⚠️ Project archived and no longer maintained. This project has been archived and is no longer actively maintained by Microsoft. ... AutoGen is a framework for creating multi-agent AI applications that can act autonomously or work alongside humans. ... async with McpWorkbench ( server_params ) as mcp : agent = AssistantAgent ( \"web_browsing_assistant\" , model_client = model_client , workbench = mcp , model_client_stream = True , max_tool_iterations = 10 , )"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "run-llama/llama_index — README（LlamaIndex Framework）",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": null,
+    "key_points": [
+      "README 声明公司当前重心已从 OSS 框架转向 LlamaParse（agentic OCR、解析、抽取、索引的企业平台），并称 \"our primary focus has shifted towards LlamaParse\"。",
+      "README 称该 OSS 框架自 2023 年发布已 3 年，早期由 \"a broad set of orchestration tools enabling developers to build various RAG and agent applications\" 构成，现仍作为开放工具包提供。",
+      "README 将 LlamaIndex Framework 定义为 \"an open-source framework to build agentic applications\"，并称其为 \"data framework\" to help you build LLM apps。",
+      "页面显示累计 7,962 Commits。",
+      "README 说明有两种 Python 使用方式：starter 包 llama-index（含 core 与部分 integrations）与定制化的 llama-index-core 加自选 integration 包。",
+      "README 称有超过 300 个 LlamaIndex integration 包可与 core 配合，覆盖 LLM、embedding、vector store 供应商。",
+      "README 注明 \"This README is not updated as frequently as the documentation\"，即 README 时效性弱于官方文档。",
+      "抓取到的 README 正文未出现 tool calling / function calling 的专门主张段落。"
+    ],
+    "raw_excerpt": "The current focus of LlamaIndex is to build the best AI-powered engine for document parsing and extraction. ... While we still have the OSS framework available as an open toolkit that you're welcome to use, our primary focus has shifted towards LlamaParse ... LlamaIndex Framework ... is an open-source framework to build agentic applications. ... NOTE : This README is not updated as frequently as the documentation."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — README（Fast and Flexible Multi-Agent Automation Framework）",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "published_at": null,
+    "key_points": [
+      "README 定义 CrewAI 为 \"an open-source Python framework with high-level abstractions and low-level APIs for building production-ready multi-agent workflows\"。",
+      "README 区分两种抽象：CrewAI Crews（role-based AI agents，优化自主性与协作智能）与 CrewAI Flows（event-driven automations，精确工作流控制、单次 LLM 调用、原生支持 Crews）。",
+      "README 称已有超过 100,000 名开发者通过 learn.crewai.com 社区课程获得认证。",
+      "页面显示累计 3,047 Commits。",
+      "README 列出官方 CrewAI Skills 插件，其中 design-agent skill 的适用场景描述为 \"Configuring agents — role, goal, backstory, tools, LLMs, memory, guardrails\"，即 tools 是 agent 配置项之一。",
+      "README 介绍商业产品 CrewAI AMP Suite，提供托管部署、可观测性、治理、安全与企业支持，其中 Crew Control Plane 可免费试用。",
+      "README 称 CrewAI 提供 \"lightweight Python core\" 与 \"Flexible Low-Level Customization\"，可自定义 workflows、agent behaviors、internal prompts 与 execution logic。"
+    ],
+    "raw_excerpt": "CrewAI is an open-source Python framework with high-level abstractions and low-level APIs for building production-ready multi-agent workflows. It gives developers autonomous agent collaboration through Crews and precise, event-driven control through Flows. ... design-agent | Configuring agents — role, goal, backstory, tools, LLMs, memory, guardrails ... With over 100,000 developers certified through our community courses at learn.crewai.com"
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "openai-python: FunctionDefinition TypedDict (generated from OpenAI OpenAPI spec)",
+    "url": "https://raw.githubusercontent.com/openai/openai-python/main/src/openai/types/shared_params/function_definition.py",
+    "published_at": null,
+    "key_points": [
+      "OpenAI 的 function 定义包含四个字段：name（必填）、description、parameters、strict（Optional[bool]）。",
+      "name 的约束为：仅允许 a-z、A-Z、0-9、下划线、连字符，最大长度 64。",
+      "description 的作用被规范为「used by the model to choose when and how to call the function」，即供模型决定何时以及如何调用。",
+      "parameters 以 JSON Schema 对象描述函数接受的参数；省略 parameters 即定义了一个空参数列表的函数。",
+      "strict=true 时模型将严格遵循 parameters 字段中定义的 schema；但 strict 为 true 时仅支持 JSON Schema 的一个子集（Only a subset of JSON Schema is supported when strict is true）。",
+      "该文件由 OpenAI OpenAPI spec 通过 Castiron 自动生成，属官方 schema 的一手定义。"
+    ],
+    "raw_excerpt": "strict: Optional[bool]\n    \"\"\"Whether to enable strict schema adherence when generating the function call.\n\n    If set to true, the model will follow the exact schema defined in the\n    `parameters` field. Only a subset of JSON Schema is supported when `strict` is\n    `true`. Learn more about Structured Outputs in the\n    [function calling guide](https://developers.openai.com/api/docs/guides/function-calling).\n    \"\"\"\n\n    name: Required[str]\n    \"\"\"The name of the function to be called.\n\n    Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length\n    of 64.\n    \"\"\"\n\n    parameters: FunctionParameters\n    \"\"\"The parameters the functions accepts, described as a JSON Schema object.\n\n    Omitting `parameters` defines a function with an empty parameter list.\n    \"\"\""
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "openai-python: ChatCompletionToolChoiceOptionParam type alias",
+    "url": "https://raw.githubusercontent.com/openai/openai-python/main/src/openai/types/chat/chat_completion_tool_choice_option_param.py",
+    "published_at": null,
+    "key_points": [
+      "OpenAI chat completions 的 tool_choice 取值类型为 Union，包含三个字符串字面量：\"none\"、\"auto\"、\"required\"。",
+      "除字符串字面量外，tool_choice 还接受三种结构化形式：ChatCompletionAllowedToolChoiceParam（限定允许调用的工具集合）、ChatCompletionNamedToolChoiceParam（强制指定某个 function 工具）、ChatCompletionNamedToolChoiceCustomParam（强制指定某个 custom 工具）。",
+      "该类型别名由官方 OpenAPI spec 生成，说明 tool_choice 的规范取值集合包含 none/auto/required 三档强制程度加两种具名强制形式。"
+    ],
+    "raw_excerpt": "ChatCompletionToolChoiceOptionParam: TypeAlias = Union[\n    Literal[\"none\", \"auto\", \"required\"],\n    ChatCompletionAllowedToolChoiceParam,\n    ChatCompletionNamedToolChoiceParam,\n    ChatCompletionNamedToolChoiceCustomParam,\n]"
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "anthropic-sdk-python: ToolParam TypedDict (tool definition schema)",
+    "url": "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/src/anthropic/types/tool_param.py",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 的工具定义必填字段为 input_schema 与 name；input_schema 采用 JSON Schema draft 2020-12，且 type 必须为 \"object\"。",
+      "name 字段的规范说明指出：模型通过该名称调用工具，并出现在 tool_use 内容块中（\"This is how the tool will be called by the model and in `tool_use` blocks\"）。",
+      "description 被建议尽可能详细，可用自然语言强化工具输入 JSON schema 的重要方面，以提升模型表现。",
+      "Anthropic 的 ToolParam 同样提供 strict 字段，语义为「为 true 时保证对工具名称与输入进行 schema 校验」（guarantees schema validation on tool names and inputs）。",
+      "ToolParam 还包含 allowed_callers（取值含 direct 与 code_execution_* 系列）、defer_loading（为 true 时工具不进入初始 system prompt，仅在 tool search 返回 tool_reference 时加载）、cache_control、eager_input_streaming、input_examples 等字段。",
+      "type 字段为 Optional[Literal[\"custom\"]]，表明存在 custom 类型的工具。"
+    ],
+    "raw_excerpt": "class ToolParam(TypedDict, total=False):\n    input_schema: Required[InputSchema]\n    \"\"\"[JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.\n\n    This defines the shape of the `input` that your tool accepts and that the model\n    will produce.\n    \"\"\"\n\n    name: Required[str]\n    \"\"\"Name of the tool.\n\n    This is how the tool will be called by the model and in `tool_use` blocks.\n    \"\"\"\n\n    strict: bool\n    \"\"\"When true, guarantees schema validation on tool names and inputs\"\"\"\n\n    defer_loading: bool\n    \"\"\"If true, tool will not be included in initial system prompt.\n\n    Only loaded when returned via tool_reference from tool search.\n    \"\"\""
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "openai-cookbook: Function-calling with an OpenAPI specification",
+    "url": "https://raw.githubusercontent.com/openai/openai-cookbook/main/examples/Function_calling_with_an_OpenAPI_spec.ipynb",
+    "published_at": null,
+    "key_points": [
+      "OpenAI 官方 cookbook 示例中，传给 chat completions API 的函数定义结构为 {\"type\": \"function\", \"function\": {\"name\", \"description\", \"parameters\"}}，即外层 type 标记加内层 function 对象。",
+      "函数定义中的 name 对应 OpenAPI 的 operationId，parameters 为描述入参类型、是否必填的 JSON Schema。",
+      "该 notebook 明确表述模型的行为是「生成一个包含调用这些函数所需参数的 JSON 对象」（the model ... generates a JSON object containing the necessary arguments to call these functions），即模型产出参数而非执行函数。",
+      "该 notebook 演示了链式函数调用（chained function calls）与基于 OpenAPI spec 的 API 调用流程。"
+    ],
+    "raw_excerpt": "We will transform this sample spec into a set of function definitions that can be supplied to the chat completion API. The model, based on the provided user instructions, generates a JSON object containing the necessary arguments to call these functions.\n\n{'type': 'function',\n 'function': {'name': 'listEvents',\n  'description': 'List all events',\n  'parameters': {'type': 'object', 'properties': {}}}}"
+  }
+]

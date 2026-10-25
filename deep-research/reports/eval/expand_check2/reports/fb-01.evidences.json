@@ -1,0 +1,365 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD_2022_10K — Consolidated Balance Sheets（流动资产/流动负债科目列示）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p56",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "截至 2022-12-31，AMD 现金及现金等价物 $4,835M、短期投资 $1,020M、应收账款净额 $4,126M、存货 $3,771M、预付费用及其他流动资产 $1,265M。",
+      "截至 2022-12-31，AMD 流动资产合计 $15,019M，流动负债合计 $6,369M。",
+      "该报表将存货（Inventories）与预付费用（Prepaid expenses and other current assets）作为流动资产的独立科目列示，与现金、短期投资、应收账款分开。"
+    ],
+    "raw_excerpt": "Current assets: Cash and cash equivalents $ 4,835 … Short-term investments 1,020 … Accounts receivable, net 4,126 … Inventories 3,771 … Prepaid expenses and other current assets 1,265 … Total current assets 15,019 … Current liabilities: … Total current liabilities 6,369"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMERICANEXPRESS_2022_10K — Liquidity Management（公司自述流动性管理目标）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p70",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Amex 自述其流动性目标是维持对多样化表内与表外流动性来源的获取渠道。",
+      "Amex 自述其力求使流动性来源规模足以覆盖至少十二个月的预期未来财务义务与业务流动性需求。",
+      "该段落描述的是公司流动性管理政策，未提及 quick ratio 或 acid-test ratio 的定义、公式或阈值。"
+    ],
+    "raw_excerpt": "Our liquidity objective is to maintain access to a diverse set of on- and off-balance sheet liquidity sources. We seek to maintain liquidity sources in amounts sufficient to meet our expected future financial obligations and business requirements for liquidity for a period of at least twelve months in the event we are …"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMERICANEXPRESS_2022_10K — Regulatory Risk-Based Capital and Leverage Ratios（监管资本比率，非 quick ratio）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p65",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Amex 10-K 列示的比率包括 Common Equity Tier 1、Tier 1、Total（风险加权资本）与 Tier 1 Leverage，属 Basel III 监管资本比率。",
+      "有效最低要求为 CET1 7.0%、Tier 1 8.5%、Total 10.5%、Tier 1 Leverage 4.0%。",
+      "该表未包含 quick ratio 或 acid-test ratio，其分子分母为资本与风险加权资产/平均总资产，与 quick ratio 的流动资产口径不同。"
+    ],
+    "raw_excerpt": "TABLE 16: REGULATORY RISK-BASED CAPITAL AND LEVERAGE RATIOS … Common Equity Tier 1 7.0 % … Tier 1 8.5 … Total 10.5 … Tier 1 Leverage 4.0 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Advanced Micro Devices, Inc. — Consolidated Balance Sheets, FY2022 Form 10-K (fiscal year ended December 31, 2022)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p56 (printed page 53)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Cash and cash equivalents at December 31, 2022 were $4,835 million (December 25, 2021: $2,535 million).",
+      "Short-term investments at December 31, 2022 were $1,020 million (December 25, 2021: $1,073 million).",
+      "Accounts receivable, net at December 31, 2022 were $4,126 million (December 25, 2021: $2,706 million).",
+      "Inventories at December 31, 2022 were $3,771 million (December 25, 2021: $1,955 million).",
+      "Total current assets at December 31, 2022 were $15,019 million (December 25, 2021: $8,583 million).",
+      "Total current liabilities at December 31, 2022 were $6,369 million (December 25, 2021: $4,240 million).",
+      "Current liabilities components at December 31, 2022: accounts payable $2,493 million; payables to related parties $463 million; accrued liabilities $3,077 million; current portion of long-term debt $0; other current liabilities $336 million.",
+      "Other current asset components at December 31, 2022: receivables from related parties $2 million; prepaid expenses and other current assets $1,265 million.",
+      "Total assets were $67,580 million and total stockholders' equity $54,750 million at December 31, 2022."
+    ],
+    "raw_excerpt": "Advanced Micro Devices, Inc. Consolidated Balance Sheets December 31, 2022 December 25, 2021 (In millions, except par value amounts) ASSETS Current assets: Cash and cash equivalents $ 4,835 $ 2,535 / Short-term investments 1,020 1,073 / Accounts receivable, net 4,126 2,706 / Inventories 3,771 1,955 / Receivables from related parties 2 2 / Prepaid expenses and other current assets 1,265 312 / Total current assets 15,019 8,583 ... LIABILITIES AND STOCKHOLDERS' EQUITY Current liabilities: Accounts payable $ 2,493 $ 1,321 / Payables to related parties 463 85 / Accrued liabilities 3,077 2,424 / Current portion of long-term debt, net — 312 / Other current liabilities 336 98 / Total current liabilities 6,369 4,240"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A, Financial Condition / Liquidity and Capital Resources",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51 (printed page 48)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "As of December 31, 2022, cash, cash equivalents and short-term investments were $5.9 billion, versus $3.6 billion at December 25, 2021 — consistent with $4,835M + $1,020M = $5,855M.",
+      "Aggregate principal amount of total debt was $2.5 billion at December 31, 2022, versus $313 million at December 25, 2021.",
+      "A five-year $3.0 billion unsecured revolving credit facility was entered into on April 29, 2022, with no funds drawn during the year ended December 31, 2022.",
+      "A $3.0 billion commercial paper program was established November 3, 2022, with no commercial paper outstanding as of December 31, 2022.",
+      "Unconditional purchase commitments were approximately $8.6 billion as of December 31, 2022, of which $6.5 billion fall in fiscal year 2023.",
+      "Management states cash, cash equivalents, short-term investments and operating cash flows, together with the revolving facility and commercial paper program, are believed sufficient to fund operations including capex and purchase commitments over the next 12 months and beyond.",
+      "Net cash provided by operating activities was $3,565 million in 2022; investing activities provided $1,999 million; financing activities used $3,264 million."
+    ],
+    "raw_excerpt": "As of December 31, 2022, our cash, cash equivalents and short-term investments were $5.9 billion compared to $3.6 billion as of December 25, 2021. ... The Revolving Credit Agreement provides for a five-year unsecured revolving credit facility in the aggregate principal amount of $3.0 billion. There were no funds drawn from this facility during the year ended December 31, 2022. ... As of December 31, 2022, we had unconditional purchase commitments of approximately $8.6 billion, of which $6.5 billion are in fiscal year 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A scope statement confirming fiscal year end and comparative periods",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "The consolidated financial statements are presented as of December 31, 2022 and December 25, 2021 and for each of the three years in the period ended December 31, 2022, confirming FY2022 ended December 31, 2022.",
+      "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion.",
+      "Net income for 2022 was $1.3 billion compared to $3.2 billion in the prior year.",
+      "Gross margin as a percentage of net revenue was 45% in 2022 versus 48% in 2021, with the decrease primarily due to amortization of Xilinx-related intangibles."
+    ],
+    "raw_excerpt": "The following discussion should be read in conjunction with the consolidated financial statements as of December 31, 2022 and December 25, 2021 and for each of the three years in the period ended December 31, 2022 ... Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Off-balance sheet arrangements disclosure",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52 (printed page 49)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "As of December 31, 2022, AMD had no off-balance sheet arrangements.",
+      "Net cash provided by operating activities was $3.6 billion in 2022, primarily due to net income of $1.3 billion adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in operating assets and liabilities."
+    ],
+    "raw_excerpt": "Off-Balance Sheet Arrangements As of December 31, 2022, we had no off-balance sheet arrangements."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Balance Sheets (Dec 31, 2022 vs Dec 25, 2021)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p56",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 (Dec 31, 2022) total current assets were $15,019 million; FY21 (Dec 25, 2021) total current assets were $8,583 million.",
+      "FY22 inventories were $3,771 million; FY21 inventories were $1,955 million.",
+      "FY22 total current liabilities were $6,369 million; FY21 total current liabilities were $4,240 million.",
+      "FY22 current asset components: cash and cash equivalents $4,835M, short-term investments $1,020M, accounts receivable net $4,126M, receivables from related parties $2M, prepaid expenses and other current assets $1,265M.",
+      "FY22 current liability components: accounts payable $2,493M, payables to related parties $463M, accrued liabilities $3,077M, current portion of long-term debt $0M, other current liabilities $336M.",
+      "FY21 current liability components: accounts payable $1,321M, payables to related parties $85M, accrued liabilities $2,424M, current portion of long-term debt $312M, other current liabilities $98M.",
+      "Arithmetic on the reported line items (not a figure stated by AMD): FY22 quick assets = 15,019 − 3,771 = $11,248M, giving a quick ratio of ~1.77x; FY21 quick assets = 8,583 − 1,955 = $6,628M, giving ~1.56x.",
+      "Arithmetic on the reported line items: FY22 current ratio ~2.36x (15,019/6,369); FY21 current ratio ~2.02x (8,583/4,240).",
+      "The 10-K balance sheet presents only two fiscal years (FY22 and FY21); no FY2020 balance sheet column is included."
+    ],
+    "raw_excerpt": "Current assets: Cash and cash equivalents $ 4,835 $ 2,535 / Short-term investments 1,020 1,073 / Accounts receivable, net 4,126 2,706 / Inventories 3,771 1,955 / Receivables from related parties 2 2 / Prepaid expenses and other current assets 1,265 312 / Total current assets 15,019 8,583 ... Current liabilities: Accounts payable $ 2,493 $ 1,321 / Payables to related parties 463 85 / Accrued liabilities 3,077 2,424 / Current portion of long-term debt, net — 312 / Other current liabilities 336 98 / Total current liabilities 6,369 4,240"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 5 Business Combinations: Xilinx purchase consideration allocation",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p72",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The Xilinx purchase consideration was allocated to acquired current assets of: cash and cash equivalents $2,366M, short-term investments $1,582M, accounts receivable $299M, inventories $539M, prepaid expenses and other current assets $61M.",
+      "Acquired Xilinx liabilities included accounts payable $116M, accrued liabilities $634M, other current liabilities $185M, and long-term debt $1,474M.",
+      "Total Xilinx purchase consideration was $48,793M, of which acquisition-related intangibles were $27,308M and goodwill $22,784M; fair value of net assets acquired was $26,009M.",
+      "The assumed Xilinx long-term debt ($1,474M) is classified as long-term, not as a current liability, in the purchase allocation."
+    ],
+    "raw_excerpt": "The purchase consideration was allocated as follows: (In millions) Cash and cash equivalents $ 2,366 / Short-term investments 1,582 / Accounts receivable 299 / Inventories 539 / Prepaid expenses and other current assets 61 ... Total Assets 33,341 / Accounts payable 116 / Accrued liabilities 634 / Other current liabilities 185 / Long-term debt 1,474 ... Fair value of net assets acquired 26,009 / Goodwill 22,784 / Total purchase consideration $ 48,793"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 1 (Xilinx acquisition closing date) and Note 2 (fiscal year)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD completed the acquisition of Xilinx, Inc. on February 14, 2022 (the Xilinx Acquisition Date).",
+      "AMD completed the acquisition of Pensando Systems, Inc. on May 26, 2022.",
+      "Fiscal 2022 ended December 31, 2022 and consisted of 53 weeks; fiscal 2021 and fiscal 2020 each consisted of 52 weeks."
+    ],
+    "raw_excerpt": "On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. ... Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A Liquidity and Capital Resources",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Cash, cash equivalents and short-term investments were $5.9 billion at December 31, 2022 versus $3.6 billion at December 25, 2021.",
+      "The increase was primarily driven by $2.4 billion of cash and $1.6 billion of short-term investments acquired from the Xilinx acquisition, plus $1.0 billion from the 3.924% and 4.393% Notes issuance, partially offset by stock repurchases and cash paid for Pensando.",
+      "Aggregate principal debt obligations were $2.5 billion at December 31, 2022, consisting primarily of $1.5 billion of Xilinx Notes assumed in the acquisition and $1.0 billion of new notes, versus $313 million at December 25, 2021.",
+      "AMD entered a five-year $3.0 billion unsecured revolving credit facility on April 29, 2022, with no funds drawn during the year.",
+      "AMD established a $3.0 billion commercial paper program on November 3, 2022, with no commercial paper outstanding at December 31, 2022.",
+      "Unconditional purchase commitments were approximately $8.6 billion at December 31, 2022, of which $6.5 billion fall in fiscal 2023.",
+      "Net cash provided by operating activities was $3,565M in 2022 and $3,521M in 2021."
+    ],
+    "raw_excerpt": "As of December 31, 2022, our cash, cash equivalents and short-term investments were $5.9 billion compared to $3.6 billion as of December 25, 2021. The increase in cash, cash equivalents and short-term investments was primarily driven by the $2.4 billion of cash and $1.6 billion of short-term investments acquired from the Xilinx acquisition, $1.0 billion from the debt issuance of our 3.924% Notes and 4.393% Notes ... Our aggregate principal debt obligations were $2.5 billion as of December 31, 2022, which consisted primarily of $1.5 billion of the Xilinx Notes assumed as part of the Xilinx acquisition"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Statements of Cash Flows (FY22, FY21, FY20)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD issued $48,514 million of common stock and treasury stock as consideration for the acquisition of Xilinx, i.e. the deal was overwhelmingly stock-funded rather than cash-funded.",
+      "AMD recorded $275 million fair value of replacement share-based awards related to the Xilinx acquisition.",
+      "The cash flow statement covers fiscal years 2022, 2021 and 2020, but contains no balance-sheet line items for FY2020."
+    ],
+    "raw_excerpt": "Non-cash investing and financing activities: ... Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 $ — $ — / Fair value of replacement share-based awards related to acquisition of Xilinx $ 275 $ — $ —"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Statements of Operations (FY22, FY21, FY20)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Net revenue was $23,601M in FY22, $16,434M in FY21 and $9,763M in FY20.",
+      "FY22 included $1,448M of acquisition-related intangible amortization in cost of sales and $2,100M in operating expenses, both zero in FY21 and FY20.",
+      "Net income was $1,320M in FY22, $3,162M in FY21 and $2,490M in FY20.",
+      "Interest expense was $88M in FY22 versus $34M in FY21 and $47M in FY20."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 ... Amortization of acquisition-related intangibles 2,100 — — ... Interest expense (88) (34) (47) ... Net income $ 1,320 $ 3,162 $ 2,490"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Segment results: All Other (acquisition-related costs) and Embedded",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "All Other operating loss of $5.0 billion in 2022 consisted primarily of $3.5 billion of acquisition-related intangible amortization, $1.1 billion of stock-based compensation, and $452 million of acquisition-related costs.",
+      "The $452 million of acquisition-related costs primarily include transaction costs and amortization of Xilinx inventory fair value step-up.",
+      "Embedded net revenue rose to $4.6 billion in 2022 from $246 million in 2021, primarily due to inclusion of Xilinx embedded product revenue following the February 2022 acquisition.",
+      "Gross margin fell to 45% in 2022 from 48% in 2021, primarily due to amortization of intangible assets associated with the Xilinx acquisition."
+    ],
+    "raw_excerpt": "All Other operating loss of $5.0 billion in 2022 primarily consisted of $3.5 billion of amortization of acquisition-related intangibles, $1.1 billion of stock-based compensation expense, and $452 million of acquisition-related costs, which primarily include transaction costs, amortization of Xilinx inventory fair value step- ... Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021 ... primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 5: Xilinx revenue/operating income contribution and unaudited pro forma information",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p73",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx contributed net revenue of $4,612M and operating income of $2,247M to AMD's 2022 consolidated results.",
+      "Xilinx operating income excludes $4.2 billion of acquisition-related intangible amortization, stock-based compensation and acquisition-related costs recorded under All Other.",
+      "Unaudited pro forma net revenue was $24,117M for 2022 and $20,150M for 2021; pro forma net income was $2,311M for 2022 and $8M for 2021.",
+      "The pro forma disclosure is income-statement only; no pro forma balance sheet is presented."
+    ],
+    "raw_excerpt": "The Consolidated Statements of Operations include the following revenue and operating income attributable to Xilinx in 2022: 2022 (In millions) Net revenue $ 4,612 / Operating income $ 2,247 ... Supplemental Unaudited Pro Forma Information ... Net revenue $ 24,117 $ 20,150 / Net income $ 2,311 $ 8"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 6: Acquisition-related intangible assets and future amortization",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p74",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Total acquisition-related intangible assets were $27,666M gross, $3,548M accumulated amortization, $24,118M net at December 31, 2022.",
+      "Acquisition-related intangible amortization expense was $3.5 billion in fiscal 2022.",
+      "Estimated annual amortization is $2,804M in 2023, $2,286M in 2024, $2,061M in 2025, $1,951M in 2026, $1,844M in 2027 and $11,978M for 2028 and thereafter.",
+      "The pro forma results include amortization expense of acquired Xilinx inventory fair value step-up of $184 million in fiscal 2021 and no Xilinx inventory fair value step-up expense in fiscal 2022.",
+      "Acquisition-related intangible asset balance as of December 25, 2021 was not material."
+    ],
+    "raw_excerpt": "Total acquisition-related intangible assets $ 27,666 $ (3,548) $ 24,118 ... Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022. ... 2023 $ 2,804 / 2024 2,286 / 2025 2,061 / 2026 1,951 / 2027 1,844 / 2028 and thereafter 11,978"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 1 Competition (peer identification, qualitative only)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p13",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD identifies NVIDIA as the market share leader in discrete graphics and Intel as a manufacturer of embedded and integrated graphics processors and gaming-focused discrete GPUs.",
+      "This is a qualitative competitive description only; the filing contains no Intel, NVIDIA or Qualcomm financial statement data or liquidity ratios."
+    ],
+    "raw_excerpt": "In the graphics market, our principal competitor in the supply of discrete graphics is NVIDIA who is the market share leader. Intel also manufactures and sells embedded graphics processors and integrated graphics processor (IGP) chipsets. Also, Intel has developed their own gaming-focused discrete GPUs"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Balance Sheets (FY22 vs FY21)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p56",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 total current assets $15,019M, comprising cash and cash equivalents $4,835M, short-term investments $1,020M, accounts receivable net $4,126M, inventories $3,771M, receivables from related parties $2M, prepaid expenses and other current assets $1,265M.",
+      "FY22 total current liabilities $6,369M, comprising accounts payable $2,493M, payables to related parties $463M, accrued liabilities $3,077M, current portion of long-term debt $0, other current liabilities $336M.",
+      "FY22 long-term debt, net of current portion was $2,467M; FY21 long-term debt was $1M with a $312M current portion.",
+      "FY21 comparatives: total current assets $8,583M and total current liabilities $4,240M.",
+      "FY22 total stockholders' equity $54,750M versus $7,497M in FY21.",
+      "FY22 total assets $67,580M, including goodwill $24,177M and acquisition-related intangibles $24,118M arising from the Xilinx acquisition."
+    ],
+    "raw_excerpt": "Total current assets 15,019 8,583 … Total current liabilities 6,369 4,240 … Current portion of long-term debt, net — 312 … Long-term debt, net of current portion 2,467 1"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 net cash provided by operating activities was $3,565M, versus $3,521M in FY21 and $1,071M in FY20.",
+      "FY22 purchases of property and equipment were $450M, versus $301M in FY21 and $294M in FY20.",
+      "FY22 net cash provided by investing activities was $1,999M, versus $(686)M in FY21.",
+      "FY22 net cash used in financing activities was $(3,264)M, including $3,702M of common stock repurchases and $406M of shares withheld for employee taxes, partly offset by $991M net debt proceeds.",
+      "FY22 net increase in cash and cash equivalents was $2,300M, ending at $4,835M.",
+      "FY22 depreciation and amortization was $4,174M, versus $407M in FY21, reflecting acquisition-related intangible amortization."
+    ],
+    "raw_excerpt": "Net cash provided by operating activities 3,565 3,521 1,071 … Purchases of property and equipment (450) (301) (294) … Repurchases of common stock (3,702) (1,762) — … Net increase in cash and cash equivalents 2,300 940 125"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 net revenue $23,601M; operating income $1,264M, down from $3,648M in FY21.",
+      "FY22 interest expense was $88M, versus $34M in FY21 and $47M in FY20.",
+      "FY22 other income (expense), net was $8M; income tax benefit was $(122)M; net income was $1,320M versus $3,162M in FY21.",
+      "FY22 operating income was reduced by $3,548M of acquisition-related intangible amortization ($1,448M within total cost of sales and $2,100M within operating expenses).",
+      "FY22 gross profit $10,603M on a 45% gross margin, versus 48% in FY21."
+    ],
+    "raw_excerpt": "Operating income 1,264 3,648 1,369 … Interest expense (88) (34) (47) … Net income $ 1,320 $ 3,162 $ 2,490"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Supplemental cash flow disclosure (interest paid)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Cash paid for interest was $85M in FY22, $25M in FY21 and $31M in FY20.",
+      "Cash paid for income taxes, net of refunds, was $685M in FY22 versus $35M in FY21.",
+      "Purchases of property and equipment accrued but not paid were $157M at FY22-end versus $72M at FY21-end."
+    ],
+    "raw_excerpt": "Cash paid during the year for: Interest $ 85 $ 25 $ 31 … Income taxes, net of refund $ 685 $ 35 $ 8"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note: Debt, Future Payments on Total Debt (maturity profile)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p77",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Future term-debt principal payments as of December 31, 2022: 2023 $0; 2024 $750M; 2025 $0; 2026 $1M; 2027 $0; 2028 and thereafter $1,750M; total $2,501M.",
+      "No term debt principal matures within twelve months of the FY22 balance sheet date.",
+      "The 3.924% Notes and 4.393% Notes are redeemable in whole or in part before March 1, 2032 and December 1, 2051 respectively, at the greater of present value of principal and future interest or 100% of principal plus accrued interest.",
+      "Holders may require repurchase at 101% of principal plus accrued interest upon a change of control; an event of default may accelerate maturity."
+    ],
+    "raw_excerpt": "As of December 31, 2022, the Company's future debt payment obligations were as follows: Term Debt (Principal only) … 2023 $ — ; 2024 750 ; 2025 — ; 2026 1 ; 2027 — ; 2028 and thereafter 1,750 ; Total $ 2,501"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A, Liquidity and Capital Resources",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Cash, cash equivalents and short-term investments were $5.9B at December 31, 2022 versus $3.6B at December 25, 2021.",
+      "Aggregate principal debt obligations were $2.5B at FY22-end versus $313M at FY21-end, consisting primarily of $1.5B of assumed Xilinx Notes and $1.0B of newly issued 3.924%/4.393% Notes.",
+      "A five-year unsecured revolving credit facility of $3.0B aggregate principal was entered into on April 29, 2022 with Wells Fargo as administrative agent; no funds were drawn during FY22.",
+      "A commercial paper program was established on November 3, 2022 allowing up to $3.0B outstanding at any time with maturities up to 397 days.",
+      "73% of cash and cash equivalents was held domestically at FY22-end, versus 91% at FY21-end.",
+      "Cross-default thresholds are $50M under the 2.125% Convertible Senior Notes due 2026 indentures and $500M under the Revolving Credit Agreement."
+    ],
+    "raw_excerpt": "As of December 31, 2022, our cash, cash equivalents and short-term investments were $5.9 billion compared to $3.6 billion as of December 25, 2021 … The Revolving Credit Agreement provides for a five-year unsecured revolving credit facility in the aggregate principal amount of $3.0 billion. There were no funds drawn from this facility during the year ended December 31, 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A, debt issuance and repayment activity",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "In June 2022 AMD issued $1.0B aggregate principal of senior notes: $500M 3.924% Senior Notes due June 1, 2032 and $500M 4.393% Senior Notes due June 1, 2052, both senior unsecured obligations.",
+      "AMD repaid $312M of its 7.50% Senior Notes that matured in August 2022.",
+      "FY22 net revenue was $23.6B, up 44% from $16.4B in FY21, driven by a 64% increase in Data Center segment revenue.",
+      "FY22 operating income was $1.3B versus $3.6B in FY21, with the decrease primarily driven by amortization of acquisition-related intangibles from the Xilinx acquisition."
+    ],
+    "raw_excerpt": "In June 2022, we issued $1.0 billion in aggregate principal amount of senior notes, consisting of $500 million in aggregate principal amount of 3.924% Senior Notes due 2032 … and $500 million in aggregate principal amount of 4.393% Senior Notes due 2052 … We repaid $312 million of our 7.50% Senior Notes that matured in August 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A, contractual obligations and covenant compliance",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p44",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The revolving credit agreement entered in 2022 provides a five-year unsecured facility in the aggregate principal amount of $3.0B, with no funds drawn during FY22.",
+      "AMD stated it continued to be in full compliance with all covenants contained in its debt or credit facility agreements.",
+      "In Q3 2022 AMD entered a $5,800M 364-day revolving credit agreement expiring August 2023, a $3,000M three-year revolving credit agreement expiring August 2025, and amended its $3,200M five-year revolving credit agreement expiring October 2024 primarily to incorporate a LIBOR successor rate."
+    ],
+    "raw_excerpt": "The agreement provides for a five-year unsecured revolving credit facility in the aggregate principal amount of $3.0 billion. There were no funds drawn from this facility during the year ended December 31, 2022 … We continue to be in full compliance with all covenants contained in our debt or credit facility agreements."
+  }
+]

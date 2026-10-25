@@ -1,0 +1,58 @@
+{
+  "n_questions": 2,
+  "mean_citation_existence": 0.9615384615384616,
+  "mean_alignment": 0.8375,
+  "alignment_questions": 2,
+  "mean_coverage": 0.125,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.8,
+      "coverage": 0.25
+    },
+    "rag": {
+      "n": 1.0,
+      "citation_existence": 0.9230769230769231,
+      "alignment": 0.875,
+      "coverage": 0.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "hq-structured-output",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 4,
+      "citations_missing": [],
+      "alignment_rate": 0.8,
+      "coverage_rate": 0.25,
+      "missed_key_points": [
+        "提示词约束是概率性的，不能保证输出符合 schema",
+        "约束解码（语法/FSM/grammar-based decoding）在采样阶段屏蔽不合法 token，从而保证结构合法",
+        "借助 tool/function calling 的 schema 强制调用（tool_choice）可获得结构化输出，但部分模型不支持强制调用"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "hq-pdf-parsing",
+      "subdomain": "rag",
+      "citation_existence_rate": 0.9230769230769231,
+      "citations_total": 13,
+      "citations_missing": [
+        "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 4.1 未解决的参数矛盾：LlamaIndex SentenceSplitter 默认 overlap · L95-99"
+      ],
+      "alignment_rate": 0.875,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "需要版面分析（layout analysis）区分标题、正文、表格、页眉页脚，避免把噪声当正文",
+        "扫描版需 OCR，OCR 错误会直接污染后续检索与引用",
+        "表格需结构化抽取（如转 Markdown/HTML）以保留行列关系，否则语义丢失",
+        "解析质量往往比 embedding 模型选型更影响最终效果"
+      ],
+      "unsupported_claims": [
+        "GAS 的 Context Precision 定义、precision@k 均值计算方式及公式 Context Precision@K = Σ(Precision@k × v_k)/(top K 相关项总数)"
+      ]
+    }
+  ]
+}

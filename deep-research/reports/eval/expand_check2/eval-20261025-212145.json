@@ -1,0 +1,32 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9090909090909091,
+  "alignment_questions": 1,
+  "mean_coverage": 0.5,
+  "per_subdomain": {
+    "finance": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9090909090909091,
+      "coverage": 0.5
+    }
+  },
+  "scores": [
+    {
+      "question_id": "fb-01",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 18,
+      "citations_missing": [],
+      "alignment_rate": 0.9090909090909091,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "流动负债构成：应付账款 2,493、应付关联方 463、应计负债 3,077、长期债务当期部分 0、其他流动负债 336"
+      ]
+    }
+  ]
+}

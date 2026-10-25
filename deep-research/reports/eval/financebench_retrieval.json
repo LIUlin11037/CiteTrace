@@ -1,0 +1,239 @@
+{
+  "n": 21,
+  "ks": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "page_hit": {
+    "1": 0.3333333333333333,
+    "5": 0.47619047619047616,
+    "10": 0.5714285714285714,
+    "20": 0.7142857142857143
+  },
+  "doc_hit": {
+    "1": 1.0,
+    "5": 1.0,
+    "10": 1.0,
+    "20": 1.0
+  },
+  "evidence_text_hit": {
+    "1": 0.3333333333333333,
+    "5": 0.47619047619047616,
+    "10": 0.5714285714285714,
+    "20": 0.5714285714285714
+  },
+  "details": [
+    {
+      "id": "financebench_id_00222",
+      "doc": "AMD_2022_10K",
+      "type": "Logical reasoning (based on ",
+      "gold_page": 56,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "Does AMD have a reasonably healthy liquidity profile based on its quic"
+    },
+    {
+      "id": "financebench_id_00995",
+      "doc": "AMD_2022_10K",
+      "type": "Information extraction",
+      "gold_page": 4,
+      "page_rank": 14,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "What are the major products and services that AMD sells as of FY22?"
+    },
+    {
+      "id": "financebench_id_01198",
+      "doc": "AMD_2022_10K",
+      "type": "Information extraction",
+      "gold_page": 43,
+      "page_rank": 2,
+      "doc_rank": 1,
+      "text_rank": 2,
+      "question": "What drove revenue change as of the FY22 for AMD?"
+    },
+    {
+      "id": "financebench_id_00917",
+      "doc": "AMD_2022_10K",
+      "type": "Logical reasoning (based on ",
+      "gold_page": 43,
+      "page_rank": 2,
+      "doc_rank": 1,
+      "text_rank": 2,
+      "question": "What drove operating margin change as of the FY22 for AMD? If operatin"
+    },
+    {
+      "id": "financebench_id_01279",
+      "doc": "AMD_2022_10K",
+      "type": "Numerical reasoning",
+      "gold_page": 58,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "Among operations, investing, and financing activities, which brought i"
+    },
+    {
+      "id": "financebench_id_00563",
+      "doc": "AMD_2022_10K",
+      "type": "None",
+      "gold_page": 48,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "From FY21 to FY22, excluding Embedded, in which AMD reporting segment "
+    },
+    {
+      "id": "financebench_id_00757",
+      "doc": "AMD_2022_10K",
+      "type": "None",
+      "gold_page": 12,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "Did AMD report customer concentration in FY22?"
+    },
+    {
+      "id": "financebench_id_00476",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "Information extraction",
+      "gold_page": 1,
+      "page_rank": 18,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "Which debt securities are registered to trade on a national securities"
+    },
+    {
+      "id": "financebench_id_01028",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "Information extraction",
+      "gold_page": 155,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "What are the geographies that American Express primarily operates in a"
+    },
+    {
+      "id": "financebench_id_00723",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "Numerical reasoning OR infor",
+      "gold_page": 96,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "Does AMEX have an improving operating margin profile as of 2022? If op"
+    },
+    {
+      "id": "financebench_id_00720",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "Logical reasoning (based on ",
+      "gold_page": 96,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "What drove gross margin change as of the FY2022 for American Express? "
+    },
+    {
+      "id": "financebench_id_01351",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "Numerical reasoning",
+      "gold_page": 44,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "How much has the effective tax rate of American Express changed betwee"
+    },
+    {
+      "id": "financebench_id_01964",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "None",
+      "gold_page": 98,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "What was the largest liability in American Express's Balance Sheet in "
+    },
+    {
+      "id": "financebench_id_01981",
+      "doc": "AMERICANEXPRESS_2022_10K",
+      "type": "None",
+      "gold_page": 45,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "Was American Express able to retain card members during 2022?"
+    },
+    {
+      "id": "financebench_id_00517",
+      "doc": "BOEING_2022_10K",
+      "type": "Logical reasoning (based on ",
+      "gold_page": 62,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "Are there any product categories / service categories that represent m"
+    },
+    {
+      "id": "financebench_id_01091",
+      "doc": "BOEING_2022_10K",
+      "type": "Information extraction",
+      "gold_page": 113,
+      "page_rank": 1,
+      "doc_rank": 1,
+      "text_rank": 1,
+      "question": "Has Boeing reported any materially important ongoing legal battles fro"
+    },
+    {
+      "id": "financebench_id_00678",
+      "doc": "BOEING_2022_10K",
+      "type": "Numerical reasoning OR infor",
+      "gold_page": 55,
+      "page_rank": 2,
+      "doc_rank": 1,
+      "text_rank": 2,
+      "question": "Does Boeing have an improving gross margin profile as of FY2022? If gr"
+    },
+    {
+      "id": "financebench_id_01290",
+      "doc": "BOEING_2022_10K",
+      "type": "Information extraction OR Lo",
+      "gold_page": 8,
+      "page_rank": null,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "Who are the primary customers of Boeing as of FY2022?"
+    },
+    {
+      "id": "financebench_id_00464",
+      "doc": "BOEING_2022_10K",
+      "type": "None",
+      "gold_page": 8,
+      "page_rank": 12,
+      "doc_rank": 1,
+      "text_rank": null,
+      "question": "Is Boeing's business subject to cyclicality?"
+    },
+    {
+      "id": "financebench_id_00494",
+      "doc": "BOEING_2022_10K",
+      "type": "None",
+      "gold_page": 9,
+      "page_rank": 6,
+      "doc_rank": 1,
+      "text_rank": 6,
+      "question": "What production rate changes is Boeing forecasting for FY2023?"
+    },
+    {
+      "id": "financebench_id_00585",
+      "doc": "BOEING_2022_10K",
+      "type": "None",
+      "gold_page": 55,
+      "page_rank": 6,
+      "doc_rank": 1,
+      "text_rank": 6,
+      "question": "How does Boeing's effective tax rate in FY2022 compare to FY2021?"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "该报告转述 Anthropic 的观点：JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）。",
+      "该片段讨论的是工具定义消耗上下文与工具选择/参数错误问题，未涉及解码期如何对 logits 施加约束，也未涉及 FSM/CFG/自动机等实现路径。"
+    ],
+    "raw_excerpt": "Tool Use Examples 旨在提供演示工具有效用法的通用标准，因为 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）[^32]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Cite Trace — 架构文档与技术选型 — 关键取舍说明",
+    "url": "docs/架构文档与技术选型.md · ### 关键取舍说明 · L25-30",
+    "published_at": null,
+    "key_points": [
+      "该架构文档规定：所有 LLM 解析走 with_structured_output（pydantic 校验），代码库中禁止 regex 解析 JSON。",
+      "这是本项目自身的工程约定，不是关于约束解码（constrained decoding）的权威定义；文档未说明 with_structured_output 底层是否采用约束解码/语法引导解码。"
+    ],
+    "raw_excerpt": "- **结构化输出唯一入口**：所有 LLM 解析走 `with_structured_output`（pydantic 校验），代码库中禁止 regex 解析 JSON。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 指出 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）。",
+      "该表述属于 schema 表达力层面的限制，不涉及约束解码对模型推理能力的影响，不能作为「结构化输出损害推理」的证据。"
+    ],
+    "raw_excerpt": "Tool Use Examples 旨在提供演示工具有效用法的通用标准，因为 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）[^32]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Cite Trace — 架构文档与技术选型 — 3. 总体架构（五层）",
+    "url": "docs/架构文档与技术选型.md · ## 3. 总体架构（五层） · L31-41",
+    "published_at": null,
+    "key_points": [
+      "本系统约定所有 LLM 解析走 with_structured_output（pydantic 校验），代码库中禁止 regex 解析 JSON。",
+      "这是本项目的工程选型约定，不是关于约束解码学术进展的证据。"
+    ],
+    "raw_excerpt": "- **结构化输出唯一入口**：所有 LLM 解析走 `with_structured_output`（pydantic 校验），代码库中禁止 regex 解析 JSON。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 · 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 指出 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）。",
+      "该论断出自 Anthropic 2025-11-24 发布的 Tool Use Examples 特性说明语境，属工具调用上下文成本章节，不涉及约束解码机制或形式语言表达力。"
+    ],
+    "raw_excerpt": "Tool Use Examples 旨在提供演示工具有效用法的通用标准，因为 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "长上下文报告 · 三、训练配方与推理系统：1M 落地的两个必要条件",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-long-context.md · ## 三、训练配方与推理系统：1M 落地的两个必要条件 · L31-37",
+    "published_at": null,
+    "key_points": [
+      "vLLM 仓库为 95,274 stars、Apache-2.0 许可，截至 2026-10-24 仍保持每日级活跃。",
+      "SGLang 仓库为 37,685 stars，同期高频提交。",
+      "该片段仅记录推理引擎仓库热度，未涉及 guided decoding / structured output 功能、schema 表达力或首 token 开销。"
+    ],
+    "raw_excerpt": "通用推理引擎侧，vLLM（95,274 stars、Apache-2.0、截至 2026-10-24 仍每日级活跃）[^15] 与 SGLang（37,685 stars，同期高频提交）[^16] 构成主要承载层"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Cite Trace — 架构文档与技术选型 · 3. 总体架构（五层）",
+    "url": "docs/架构文档与技术选型.md · ## 3. 总体架构（五层） · L31-41",
+    "published_at": null,
+    "key_points": [
+      "本系统（Cite Trace）自身约定：所有 LLM 解析走 `with_structured_output`（pydantic 校验），代码库中禁止用 regex 解析 JSON。",
+      "该条为本项目内部工程约定，不是外部生态来源，不能用于回答 Outlines/XGrammar 等仓库的 stars、活跃度或 schema 表达力问题。"
+    ],
+    "raw_excerpt": "**结构化输出唯一入口**：所有 LLM 解析走 `with_structured_output`（pydantic 校验），代码库中禁止 regex 解析 JSON。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 推出 Tool Use Examples 的理由是：JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）。",
+      "该表述直接支持「schema 合规不等于语义/用法正确」这一局限方向，且为 Anthropic 官方表述。",
+      "该段语境是工具定义与工具调用，不是通用 JSON 输出模式，不能外推为约束解码的实测结论。"
+    ],
+    "raw_excerpt": "Tool Use Examples 旨在提供演示工具有效用法的通用标准，因为 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）[^32]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 明确表示最常见的失败是「选错工具」与「参数不正确」，在工具名称相似时尤其严重。",
+      "给出的例子为 notification-send-user 与 notification-send-channel 这类名称相近的工具。",
+      "该来源只给出定性失败模式，未提供任何合规率或错误率数字。"
+    ],
+    "raw_excerpt": "Anthropic 明确表示最常见的失败是「选错工具」与「参数不正确」，在工具名称相似时尤其严重（如 `notification-send-user` 与 `notification-send-channel`）[^32]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 8.2 上下文成本：工具定义的隐性开销",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": null,
+    "key_points": [
+      "五 server 示例中工具定义 token 开销：GitHub 35 个工具约 26K tokens、Slack 11 个约 21K tokens、Sentry 5 个约 3K tokens、Grafana 5 个约 3K tokens、Splunk 2 个约 2K tokens，合计 58 个工具约 55K tokens。",
+      "Anthropic 内部曾见到工具定义消耗 134K tokens。",
+      "传统方式下 50+ MCP 工具定义约 72K tokens，加上对话历史与系统提示后约 77K tokens 在任何工作开始前即被占用。",
+      "这是「把 schema 描述写进 prompt」这一路线在成本侧唯一可量化的证据（token 开销），但属工具定义场景，不是 JSON mode 输出约束的直接成本对比。"
+    ],
+    "raw_excerpt": "五 server 示例中 GitHub 35 个工具约 26K tokens、Slack 11 个约 21K tokens、Sentry 5 个约 3K tokens、Grafana 5 个约 3K tokens、Splunk 2 个约 2K tokens，合计 58 个工具约 55K tokens；Anthropic 内部曾见到工具定义消耗 134K tokens[^32]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 — 7.1 ToolFailBench：分解「工具使用失败」",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-tool-use.md · ### 7.1 ToolFailBench：分解「工具使用失败」 · L153-156",
+    "published_at": null,
+    "key_points": [
+      "ToolFailBench 覆盖金融、医学、法律、网络安全、房地产五个领域的 1,000 个任务，用于测量 LLM agent 的工具使用失败。",
+      "该基准用规则分类器加两个 LLM 评判器多数投票，为每条轨迹打四类标签：Tool-Skip、Result-Ignore、Output-Fabrication、Unnecessary-Tool-Use。",
+      "在 19 个头部模型上，最佳模型达到 86.33% 的 Clean Tool-Use Rate，论文据此认为忠实的工具使用尚未饱和。",
+      "该 86.33% 是工具使用清洁率，不是 JSON schema 合规率，不可替代本子问题所需的合规率数据。"
+    ],
+    "raw_excerpt": "论文用规则分类器加两个 LLM 评判器多数投票，为每条轨迹打上四类标签：Tool-Skip、Result-Ignore、Output-Fabrication、Unnecessary-Tool-Use[^33]。在 19 个头部模型上，最佳模型达到 86.33% 的 Clean Tool-Use Rate，论文据此认为忠实的工具使用尚未饱和[^33]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状 — 3.5 差异五：失败模式的位置发生迁移",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-agentic-rag.md · ### 3.5 差异五：失败模式的位置发生迁移 · L93-100",
+    "published_at": null,
+    "key_points": [
+      "第三方分析列出生产环境中反复出现的三类失败模式：Retrieval Thrash（检索反复但不收敛）、Tool storms（工具调用过度、级联并重试直至预算耗尽）、Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）。",
+      "该文指出这些失败通常表现为「模型变差了」，但根因并非基础模型，而是缺乏预算控制（budgets）、弱停止规则（weak stopping rules）以及对 agent 决策循环零可观测性。",
+      "可作为「重试/校验修复循环」已知风险的定性证据（重试放大成本、上下文膨胀导致指令遵循退化），但属 agentic RAG 语境，非 JSON 输出场景实测。"
+    ],
+    "raw_excerpt": "第三方分析列出三类在生产中反复出现的失败模式：**Retrieval Thrash（检索反复但不收敛）、Tool storms（工具调用过度、级联并重试直至预算耗尽）、Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）**[^32]。该文指出这些失败通常表现为\"模型变差了\"，但根因并非基础模型，而是缺乏预算控制（budgets）、弱停止规则（weak stopping rules）以及对 agent 决策循环零可观测性[^32]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状 — 3.5 差异五：失败模式的位置发生迁移（Context bloat 与指令遵循退化）",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-agentic-rag.md · ### 3.5 差异五：失败模式的位置发生迁移 · L93-100",
+    "published_at": null,
+    "key_points": [
+      "Context bloat 的具体表现被描述为「上下文窗口被低信号内容填满，直到模型不再遵循自身指令」。",
+      "该表述与子问题中「模型能力下降」这一已知局限方向一致，但语境是 agentic RAG 的上下文管理，不能直接当作「约束解码导致模型推理能力下降」的证据。"
+    ],
+    "raw_excerpt": "Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）[^32]"
+  }
+]

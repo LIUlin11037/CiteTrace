@@ -1,0 +1,529 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization (arXiv:2404.16130v2)",
+    "url": "https://arxiv.org/abs/2404.16130v2",
+    "published_at": "2024-04-24 (v1); v2 revised 2025-02-19",
+    "key_points": [
+      "论文将 RAG 的动机界定为：从外部知识源检索相关信息，使 LLM 能回答关于私有和/或此前未见文档集合的问题。",
+      "论文指出 RAG 的失败模式：RAG 在针对整个文本语料的全局性问题上失败，例如“What are the main themes in the dataset?”，因为这本质上是一个 query-focused summarization (QFS) 任务，而非显式检索任务。",
+      "论文指出既有 QFS 方法的另一侧缺陷：先前的 QFS 方法无法扩展到典型 RAG 系统所索引的文本量级。",
+      "GraphRAG 被定义为一种基于图的、面向私有文本语料问答的方法，其可扩展性同时覆盖用户问题的泛化程度与源文本的数量。",
+      "GraphRAG 用 LLM 分两阶段构建图索引：先从源文档导出实体知识图谱，再为所有紧密相关实体的分组预生成社区摘要（community summaries）。",
+      "查询时，每个社区摘要用于生成一个部分回答（partial response），随后所有部分回答再被汇总为给用户的最终回答。",
+      "论文报告：对于 100 万 token 量级数据集上的一类 global sensemaking 问题，GraphRAG 相比传统 RAG 基线在生成答案的 comprehensiveness 与 diversity 两方面均有显著提升。",
+      "论文作者来自 Microsoft（Office of the CTO、Strategic Missions and Technologies、Microsoft Research），v1 提交于 2024-04-24。",
+      "论文声明 GraphRAG 以开源软件形式发布于 https://github.com/microsoft/graphrag，并有 LangChain、LlamaIndex、NebulaGraph、Neo4J 等库的扩展版本。"
+    ],
+    "raw_excerpt": "However, RAG fails on global questions directed at an entire text corpus, such as \"What are the main themes in the dataset?\", since this is inherently a query-focused summarization (QFS) task, rather than an explicit retrieval task. Prior QFS methods, meanwhile, do not scale to the quantities of text indexed by typical RAG systems. ... Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries for all groups of closely related entities. ... For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization — Introduction & Background (Section 1–2)",
+    "url": "https://arxiv.org/html/2404.16130v2",
+    "published_at": "2024-04-24 (v1); v2 revised 2025-02-19",
+    "key_points": [
+      "论文给出 canonical RAG 设定：系统可访问大型外部文本记录语料，检索出与查询各自相关、且总体小到能放入 LLM 上下文窗口的记录子集，LLM 基于查询与检索记录生成回答。",
+      "论文对 vector RAG 的定义：常规 RAG 的常见做法是使用文本嵌入，在向量空间中检索与查询最接近的记录，接近度对应语义相似性；论文将这类常规方法统称为 vector RAG。",
+      "论文明确 vector RAG 的适用边界：对答案信息局限于少量记录内的查询表现良好，但不支持 sensemaking 查询，即需要对整个数据集做全局理解的查询。",
+      "论文引用 Klein et al. 2006 界定 sensemaking 任务：需要对“人、地点、事件之间的连接”进行推理，以预判其走向并有效行动。",
+      "论文指出核心挑战：当数据量必须借助 RAG 时，vector RAG 无法支持对整个语料的 sensemaking。",
+      "GraphRAG 的图索引构成：节点对应语料中的关键实体，边表示实体间关系；随后将图划分为紧密相关实体的社区层级，再用 LLM 生成社区级摘要。",
+      "社区摘要按层级自下而上生成，高层摘要递归地纳入低层摘要；这些社区摘要合起来提供对语料的全局描述与洞察。",
+      "GraphRAG 通过 map-reduce 处理社区摘要来回答查询：map 阶段各摘要独立并行地给出部分答案，reduce 阶段合并部分答案生成最终全局答案。",
+      "论文指出既有开放域 QA 基准（HotPotQA、MultiHop-RAG、MT-Bench）面向 vector RAG 性能，即评估显式事实检索，而非全局 sensemaking。",
+      "论文将 GraphRAG 与使用知识图谱的其他 RAG 方法区分开：其关注图的固有模块性（modularity）与将图划分为嵌套模块化社区的能力（Louvain、Leiden）。"
+    ],
+    "raw_excerpt": "A common approach to conventional RAG is to use text embeddings, retrieving records closest to the query in vector space where closeness corresponds to semantic similarity (Gao et al., 2023). While some RAG approaches may use alternative retrieval mechanisms, we collectively refer to the family of conventional approaches as vector RAG. GraphRAG contrasts with vector RAG in its ability to answer queries that require global sensemaking over the entire data corpus. ... This conventional approach, which we collectively call vector RAG, works well for queries that can be answered with information localized within a small set of records. However, vector RAG approaches do not support sensemaking queries, meaning queries that require global understanding of the entire dataset"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Welcome to GraphRAG — Microsoft GraphRAG 官方文档",
+    "url": "https://microsoft.github.io/graphrag/",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 GraphRAG 定义为一种结构化、层次化的 Retrieval Augmented Generation (RAG) 方法，相对于使用纯文本片段的朴素语义搜索（naive semantic-search）方法。",
+      "官方文档将 Baseline RAG 界定为：多数 RAG 方法使用向量相似度作为检索技术，官方称之为 Baseline RAG。",
+      "官方文档列出 baseline RAG 表现很差的两类情形之一：baseline RAG 难以“把点连起来”（struggles to connect the dots），即当回答问题需要经由共享属性遍历分散的信息片段、以产生新的综合洞察时。",
+      "官方文档列出第二类情形：当被要求对大型数据集合、甚至单个大型文档做整体性的摘要语义概念理解时，baseline RAG 表现不佳。",
+      "官方文档描述 GraphRAG 流程的索引步骤：将输入语料切分为 TextUnits；从 TextUnits 中抽取所有实体、关系与关键主张（key claims）；使用 Leiden 技术对图做层次聚类；自下而上为每个社区及其成员生成摘要。",
+      "官方文档列出四种查询模式：Global Search（利用社区摘要推理关于语料的整体性问题）、Local Search（通过扇出到邻居与关联概念推理特定实体）、DRIFT Search（在 Local 基础上加入社区信息上下文）、Basic Search（适用于最适合用 baseline RAG 即标准 top-k 向量检索回答的查询）。",
+      "官方文档说明 GraphRAG 用知识图谱在推理复杂信息时带来问答性能的实质提升，并称其创建的图连同社区摘要与图机器学习输出一起在查询时用于增强 prompt。",
+      "官方文档建议开箱即用未必得到最佳结果，强烈建议按 Prompt Tuning Guide 微调 prompt。"
+    ],
+    "raw_excerpt": "GraphRAG is a structured, hierarchical approach to Retrieval Augmented Generation (RAG), as opposed to naive semantic-search approaches using plain text snippets. ... the majority of RAG approaches use vector similarity as the search technique, which we call Baseline RAG. ... Baseline RAG struggles to connect the dots. This happens when answering a question requires traversing disparate pieces of information through their shared attributes in order to provide new synthesized insights. Baseline RAG performs poorly when being asked to holistically understand summarized semantic concepts over large data collections or even singular large documents. ... Slice up an input corpus into a series of TextUnits ... Extract all entities, relationships, and key claims from the TextUnits. ... Perform a hierarchical clustering of the graph using the Leiden technique."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Indexing Dataflow — Microsoft GraphRAG 官方文档",
+    "url": "https://microsoft.github.io/graphrag/index/default_dataflow/",
+    "published_at": null,
+    "key_points": [
+      "官方默认配置工作流分为六个阶段：Phase 1 Compose TextUnits（切块）、Phase 2 Document Processing（文档与 TextUnit 链接）、Phase 3 Graph Extraction（实体/关系抽取+摘要+可选 claim 抽取）、Phase 4 Graph Augmentation（Leiden 层次化社区检测）、Phase 5 Community Summarization（生成并摘要社区报告）、Phase 6 Text Embedding（向量化）。",
+      "TextUnit 的 chunk size 以 token 计，用户可配置，默认值为 1200 tokens；文档明确指出更大的 chunk 会导致更低的输出保真度与更无意义的引用文本，但处理速度显著更快。",
+      "实体与关系在同一个 extract_graph 工作流中一次性抽取，输出为每个 TextUnit 一个子图，实体含 title、type、description，关系含 source、target、description。",
+      "子图合并规则：title 与 type 相同的实体被合并（其描述组成数组），source 与 target 相同的关系被合并（其描述组成数组）。",
+      "合并后由 LLM 对每个实体/关系的描述列表做一次简短摘要，得到单一简洁描述（Entity & Relationship Summarization 步骤）。",
+      "Claim 抽取（输出 Covariates）是独立工作流且默认关闭，官方理由是 claim 抽取通常需要提示词调优才有用。",
+      "社区检测使用 Hierarchical Leiden 算法，对图递归执行社区聚类直到达到某个社区规模阈值（community-size threshold），从而支持在不同粒度层级上导航与摘要图。",
+      "社区摘要阶段先生成每个社区的 report（含 executive overview 并引用社区子结构中的关键实体、关系与 claims），随后再对每份社区报告做一次 LLM 摘要以供简写使用。",
+      "默认嵌入三类文本：实体描述、TextUnit 文本、社区报告文本；默认向量库为 lancedb，默认 vector_size 为 3072。",
+      "若使用 FastGraphRAG 选项，实体与关系抽取改用 NLP 而非 LLM 以节省 LLM 资源，且 claim 抽取总是被跳过。",
+      "知识模型包含 Document、TextUnit、Entity、Relationship、Covariate、Community、Community Report 七类实体。",
+      "Phase 2 的 Documents 表本身不被 GraphRAG 直接使用，仅用于把文档与其组成 text units 链接以提供溯源。"
+    ],
+    "raw_excerpt": "The chunk size (counted in tokens) is user-configurable. By default, it is set to 1200 tokens. Larger chunks result in lower-fidelity output and less meaningful reference texts; however, they can result in much faster processing. ... In this step, we generate a hierarchy of entity communities using the Hierarchical Leiden Algorithm. This method will apply a recursive community-clustering to our graph until we reach a community-size threshold. ... Note: claim extraction is optional and turned off by default. This is because claim extraction generally requires prompt tuning to be useful."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Default Configuration Mode (YAML/JSON) — Microsoft GraphRAG 配置文档",
+    "url": "https://microsoft.github.io/graphrag/config/yaml/",
+    "published_at": null,
+    "key_points": [
+      "chunking 配置段包含四个字段：type（tokens|sentence）、encoding_model、size（max chunk size in tokens）、overlap（chunk overlap in tokens）、prepend_metadata（可把 title 等文档字段前置到每个 chunk）。",
+      "官方文档明确声明许多配置值有默认值但不在文档中复述，要求读者直接参考代码中的常量（constants in the code directly）。",
+      "存在 update_output_storage 配置段，用于运行增量索引（incremental indexing）时保留原始输出到二级存储位置。",
+      "cache 配置段用于缓存 LLM 调用结果，以便重跑索引流程时更快，默认 type 为 json。",
+      "模型调用默认重试策略：exponential_backoff，max_retries 默认 7，base_delay 默认 2.0，jitter 默认 True；rate_limit 默认无限制（None）。",
+      "embed_text 默认只导出查询方法所需的嵌入；支持的嵌入名称为 text_unit_text、entity_description、community_full_content。",
+      "输入支持 .csv/.txt/.json/.jsonl/.parquet 及 MarkItDown 支持的文件；默认输入 type 为 text，编码 utf-8。",
+      "GraphRAG 通过 LiteLLM 调用语言模型，支持 100+ 模型提供商；示例默认模型为 gpt-4.1 与 text-embedding-3-large。",
+      "NLP 抽取器 extractor_type 默认 regex_english，max_word_length 默认 15，include_named_entities 默认 True。"
+    ],
+    "raw_excerpt": "Many of these config values have defaults. Rather than replicate them here, please refer to the constants in the code directly. ... chunking: type tokens|sentence ... size int - The max chunk size in tokens. overlap int - The chunk overlap in tokens. ... The update_output_storage section defines a secondary storage location for running incremental indexing, to preserve your original outputs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization (arXiv:2404.16130v2)",
+    "url": "https://arxiv.org/abs/2404.16130",
+    "published_at": "2024-04-24",
+    "key_points": [
+      "论文提出 GraphRAG 用 LLM 分两阶段构建图索引：先从源文档导出实体知识图谱，再为紧密相关实体的所有分组预生成社区摘要。",
+      "查询时采用 map-reduce：每个社区摘要独立并行生成部分回答（map），随后所有部分回答再被汇总生成最终全局回答（reduce）。",
+      "chunk 大小是根本性设计决策：更长的文本块使抽取所需的 LLM 调用更少（降低成本），但会降低对块内前部信息的召回（受 lost-in-the-middle 影响）。",
+      "论文明确把 LLM 抽取实体、关系、claims 定性为一种抽象式摘要（abstractive summarization），即关系与 claim 可能在原文中并未被显式陈述。",
+      "关系被聚合为图边，某条关系的重复次数成为该边的权重；claims 以类似方式聚合。",
+      "该论文的分析使用精确字符串匹配（exact string matching）做实体匹配/消解，但指出可用更软的匹配方法配合少量提示词或代码调整；GraphRAG 对重复实体总体有韧性，因为重复项通常在后续步骤中被聚到一起摘要。",
+      "社区检测可选用多种算法（如 Louvain、Leiden）把图划分为强连通节点社区；GraphRAG 通过 LLM 沿社区层级递归生成越来越全局的摘要。",
+      "论文在约 100 万 token 量级数据集上的全局 sensemaking 问题上，GraphRAG 相比传统向量 RAG 基线在答案全面性（comprehensiveness）与多样性（diversity）上有显著提升（使用 GPT-4 时）。",
+      "评估采用 LLM-as-a-judge 的自适应基准方法：一个 LLM 基于语料生成多样化全局 sensemaking 问题，第二个 LLM 按预定义标准评判两个 RAG 系统的答案。",
+      "GraphRAG 开源实现位于 https://github.com/microsoft/graphrag，并有 LangChain、LlamaIndex、NebulaGraph、Neo4J 等库的扩展版本。",
+      "论文 v1 提交于 2024-04-24，v2 修订于 2025-02-19。"
+    ],
+    "raw_excerpt": "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries for all groups of closely related entities. ... Selecting the size of the chunk is a fundamental design decision; longer text chunks require fewer LLM calls for such extraction (which reduces cost) but suffer from degraded recall of information that appears early in the chunk. ... In this manuscript, our analysis uses exact string matching for entity matching ... Relationships are aggregated into graph edges, where the number of duplicates for a given relationship becomes edge weights."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation (arXiv:2410.05779, v3)",
+    "url": "https://arxiv.org/abs/2410.05779",
+    "published_at": "2024-10-08 (v1); v3 2025-04-28",
+    "key_points": [
+      "LightRAG 将图结构引入文本索引与检索流程，采用双层检索（low-level 面向具体实体及其关系，high-level 面向更宽泛的主题），并把图结构与向量表示结合。",
+      "论文自述的动机是现有 RAG 依赖扁平数据表示（flat data representations）、缺乏上下文感知，导致回答碎片化、无法捕捉复杂相互依赖关系。",
+      "索引构建流程为：文档切分为 chunk → 用 LLM 抽取实体与关系（Recog）→ 去重与画像（Dedupe ∘ Prof）得到知识图 𝒟̂=(𝒱̂,ℰ̂)。",
+      "论文提出增量更新算法：新文档 𝒟′ 走同一套图索引步骤得到 𝒟̂′，无需重建整个索引图，从而降低计算开销。",
+      "论文声称图索引的两点优势：可从多跳子图抽取全局信息以处理跨多个 chunk 的复杂查询；由图表导出的键值结构比 embedding 匹配和 chunk 遍历更高效。",
+      "该版本（v3, 2025-04-28）摘要仅作定性表述（\"considerable improvements in retrieval accuracy and efficiency\"），未在摘要中给出任何量化增益数字。"
+    ],
+    "raw_excerpt": "we propose LightRAG, which incorporates graph structures into text indexing and retrieval processes. This innovative framework employs a dual-level retrieval system that enhances comprehensive information retrieval from both low-level and high-level knowledge discovery. ... This capability is further enhanced by an incremental update algorithm that ensures the timely integration of new data"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "LightRAG 全文 HTML（§3 架构与图索引）",
+    "url": "https://arxiv.org/html/2410.05779v3",
+    "published_at": "2025-04-28",
+    "key_points": [
+      "图索引形式化定义：𝒟̂=(𝒱̂,ℰ̂)=Dedupe∘Prof(𝒱,ℰ)，其中 𝒱,ℰ=∪_{𝒟_i∈𝒟} Recog(𝒟_i)，即对每个文档 chunk 做实体/关系识别后再去重与画像。",
+      "LightRAG 明确把自身定位为对两类既有做法的替代：较不准确的 embedding 匹配方法（引 Gao et al., 2023）与低效的 chunk 遍历方法（引 Edge et al., 2024，即 GraphRAG）。",
+      "论文将\"从多跳子图抽取全局信息\"列为图结构带来的首要优势，用于处理跨多个文档 chunk 的复杂查询。",
+      "增量更新：对新文档 𝒟′ 复用同一索引函数 φ 得到 𝒟̂′=(𝒱̂′,ℰ̂′)，避免重建整个索引图以节省算力。"
+    ],
+    "raw_excerpt": "the key-value data structures derived from the graph are optimized for rapid and precise retrieval. This provides a superior alternative to less accurate embedding matching methods (Gao et al., 2023) and inefficient chunk traversal techniques (Edge et al., 2024) commonly used in existing approaches."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "microsoft/graphrag — A modular graph-based Retrieval-Augmented Generation (RAG) system",
+    "url": "https://github.com/microsoft/graphrag",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "仓库元数据：36,439 stars、3,866 forks，最近 push 日期 2026-10-20，主语言 Python，MIT 许可。",
+      "README 顶部警告声明：自 2024 年 7 月首次发布以来前沿模型能力已发生巨大变化，该研究项目组合已多元化，本项目「largely in maintenance mode」，不再接受新 PR 或实现新功能，仅按需做 bug 修复与依赖更新（尤其针对 CVE）。",
+      "README 将项目定位为「a data pipeline and transformation suite」，用 LLM 从非结构化文本中抽取结构化数据。",
+      "README 明确免责：所提供代码作为演示用途，并非微软官方支持的产品（not an officially supported Microsoft offering）。",
+      "README 警告 GraphRAG 索引是昂贵操作，建议阅读全部文档理解流程与成本，并从小规模开始。",
+      "README 强烈建议对 prompt 做微调（Prompt Tuning Guide），否则开箱即用效果可能不是最佳。",
+      "仓库结构包含 packages/、docs/、unified-search-app/、tests/、scripts/ 等目录，共 498 次提交。"
+    ],
+    "raw_excerpt": "Warning GraphRAG is a research project that explores the functional use of graphs to form a targeted context for question answering. Since our first release in July 2024 the capabilities of frontier models have changed dramatically, and our portfolio of research projects has diversified to match. This project is largely in maintenance mode, and won't be accepting new PRs or implementing new features. We'll perform bug fixes and dependency updates as appropriate, particularly to address CVEs as they arise."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "HKUDS/LightRAG — Simple and Fast Retrieval-Augmented Generation",
+    "url": "https://github.com/HKUDS/LightRAG",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "仓库元数据：40,318 stars、5,725 forks，最近 push 日期 2026-10-22，主语言 Python；仓库描述标注 [EMNLP2025]。",
+      "仓库提交历史达 10,873 次提交，明显高于 microsoft/graphrag 的 498 次。",
+      "README News 显示持续高频迭代：2026.07 新增 Word 文档 Smart Heading 识别；2026.05 合并 RagAnything 支持 MinerU/Docling 多模态解析、引入四种文本分块策略（Fix/Recursive/Vector/Paragraph）、支持 EXTRACT/QUERY/KEYWORDS/VLM 四种角色的独立 LLM 配置。",
+      "2026.03 集成 OpenSearch 作为统一存储后端，覆盖全部四类 LightRAG 存储；同月引入 setup wizard，支持通过 Docker 本地部署 embedding、reranking 与存储后端。",
+      "2025.11 集成 RAGAS 做评估、Langfuse 做 tracing，API 返回检索上下文以支持 context precision 指标。",
+      "2025.10 声明消除处理瓶颈以高效支持大规模数据集。",
+      "存储后端演进：2024.11 支持 Neo4J 作为图存储；2025.01 支持 PostgreSQL 作为一体化存储；2025.02 支持 MongoDB 作为一体化存储。",
+      "2025.08 支持 Reranker 并设为默认查询模式；同月加入文档删除并自动重建知识图谱。",
+      "提供 lightrag-server（PyPI 包 lightrag-hku[api]）与 WebUI，含 Dockerfile、docker-compose-full.yml、k8s-deploy 目录，具备生产部署形态。"
+    ],
+    "raw_excerpt": "[2026.03]🎯[New Feature]: Integrated OpenSearch as a unified storage backend, providing comprehensive support for all four LightRAG storage. [2025.10]🎯[Scalability Enhancement]: Eliminated processing bottlenecks to support Large-Scale Datasets Efficiently. [2024.11]🎯[New Feature]: You can now use Neo4J for Storage -enabling graph database support."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "gusye1234/nano-graphrag — A simple, easy-to-hack GraphRAG implementation",
+    "url": "https://github.com/gusye1234/nano-graphrag",
+    "published_at": "2026-01-27",
+    "key_points": [
+      "仓库元数据：4,004 stars、428 forks，最近 push 日期 2026-01-27，主语言 Python，共 155 次提交。",
+      "差异化定位：官方 GraphRAG 实现「difficult/painful to read or hack」，本项目提供更小、更快、更干净的 GraphRAG，同时保留核心功能。",
+      "代码规模：排除测试与 prompt，nano-graphrag 约 1100 行代码。",
+      "设计目标：small yet portable（faiss、neo4j、ollama 等）、异步、完全类型标注。",
+      "内置组件：LLM 支持 OpenAI 与 Amazon Bedrock；Embedding 支持 OpenAI 与 Amazon Bedrock；向量库内置 nano-vectordb 与 hnswlib，examples 中提供 milvus-lite、faiss；图存储内置 networkx 与 neo4j。",
+      "支持增量插入（incremental insert），以内容 md5 哈希为 key 避免重复 chunk；但每次插入都会重算社区并重新生成社区报告。",
+      "支持 naive RAG 模式（enable_naive_rag=True）与 global/local/naive 三种查询模式。",
+      "支持 Azure OpenAI（using_azure_openai=True）与 Amazon Bedrock（using_amazon_bedrock=True，可分别指定 best_model_id 与 cheap_model_id）。"
+    ],
+    "raw_excerpt": "😭 GraphRAG is good and powerful, but the official implementation is difficult/painful to read or hack. 😊 This project provides a smaller, faster, cleaner GraphRAG, while remaining the core functionality(see benchmark and issues). 🎁 Excluding tests and prompts, nano-graphrag is about 1100 lines of code. 👌 Small yet portable (faiss, neo4j, ollama...), asynchronous and fully typed."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "severian42/GraphRAG-Local-UI — GraphRAG using Local LLMs with Indexing/Prompt Tuning/Query/Chat/Visualization apps",
+    "url": "https://github.com/severian42/GraphRAG-Local-UI",
+    "published_at": "2024-11-09",
+    "key_points": [
+      "仓库元数据：2,319 stars、291 forks，最近 push 日期 2024-11-09，主语言 Python，共 138 次提交——在四个实现中活跃度最低，已约两年无提交。",
+      "定位：微软 GraphRAG 的适配版，面向本地模型，并提供完整的交互式 UI 生态（索引/提示调优/查询/聊天/可视化）。",
+      "README 自述更新缓慢：因本职工作与时间不足，更新一直很慢，但会在能力范围内后台处理 issue。",
+      "README 声明项目正处于重大转型期，主应用仍可用，但正在围绕中心 API 开发独立的索引/提示调优与查询/聊天应用，用户应预期变动与潜在不稳定。",
+      "README 声明目前仅在 Mac Studio M2 上做过主要测试。",
+      "架构：FastAPI 后端（api.py）+ Gradio 索引与提示调优 UI（index_app.py）+ 主交互 UI（app.py），另有 embedding_proxy.py 用于 Ollama embedding。",
+      "功能包括 Plotly 2D/3D 知识图谱实时可视化、文件管理、设置管理、索引产物浏览、实时日志、global/local/direct chat 查询。",
+      "成本主张：通过使用自有本地模型消除对昂贵云端模型的依赖（cost-effective）。",
+      "安装需先 pip install -e ./graphrag（仓库内自带一份与微软仓库不同的 GraphRAG 分支）。"
+    ],
+    "raw_excerpt": "This project is an adaptation of Microsoft's GraphRAG, tailored to support local models and featuring a comprehensive interactive user interface ecosystem. ... Important Note: Updates have been slow due to the day job and lack of immediate time ... While it is currently functional, it has only been primarily tested on a Mac Studio M2."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：graphrag 主题下 stars 排序（含 FalkorDB、neo4j-labs/llm-graph-builder 等图数据库侧项目）",
+    "url": "https://github.com/search?q=graphrag&s=stars",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "按 stars 排序的 graphrag 检索结果中，HKUDS/LightRAG（40,318）与 microsoft/graphrag（36,439）位列前二，是仅有的两个 3 万星以上 GraphRAG 实现。",
+      "FalkorDB/FalkorDB：10,492 stars、595 forks，最近 push 2026-10-25，Rust 实现，README 简介自述目标是为 LLM（GraphRAG）提供最好的知识图谱，底层用 GraphBLAS 稀疏邻接矩阵表示。",
+      "neo4j-labs/llm-graph-builder：5,283 stars、883 forks，最近 push 2026-10-23，用 LLM 从非结构化数据构建 Neo4j 图谱——说明 Neo4j 官方实验室在维护 GraphRAG 相关的图谱构建工具。",
+      "vesoft-inc/nebula：12,451 stars，最近 push 2026-09-08，分布式图数据库。",
+      "raphaelmansuy/edgequake：2,285 stars，最近 push 2026-10-25，Rust 编写的高性能 GraphRAG，README 自述受 LightRAG 启发。",
+      "1517005260/graph-rag-agent：2,347 stars，最近 push 2025-11-05，融合 GraphRAG、LightRAG、Neo4j-llm-graph-builder 并自带 GraphRAG 评估框架。"
+    ],
+    "raw_excerpt": "- FalkorDB/FalkorDB (★10492, forks 595) desc: A super fast Graph Database uses GraphBLAS under the hood for its sparse adjacency matrix graph representation. Our goal is to provide the best Knowledge Graph for LLM (GraphRAG). lang: Rust | last push: 2026-10-25\n- neo4j-labs/llm-graph-builder (★5283, forks 883) desc: Neo4j graph construction from unstructured data using LLMs lang: Jupyter Notebook | last push: 2026-10-23"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "When to use Graphs in RAG: A Comprehensive Analysis for Graph Retrieval-Augmented Generation (GraphRAG-Bench)",
+    "url": "https://arxiv.org/abs/2506.05690",
+    "published_at": "2025-06-05 (v1); v2 2026-02-21",
+    "key_points": [
+      "该论文提出 GraphRAG-Bench，定位为评估 GraphRAG 模型在「层次化知识检索」与「深层上下文推理」两方面的综合基准。",
+      "GraphRAG-Bench 的数据集按难度递增设置任务，覆盖四类：fact retrieval（事实检索）、complex reasoning（复杂推理）、contextual summarization（上下文摘要）、creative generation（创造性生成）。",
+      "该基准的评估覆盖整条流水线：从 graph construction（图构建）、knowledge retrieval（知识检索）到 final generation（最终生成）。",
+      "论文摘要明确陈述其研究动机是：尽管 GraphRAG 概念上有前景，但近期研究报告 GraphRAG 在许多真实任务上经常不如 vanilla RAG（原文：'recent studies report that GraphRAG frequently underperforms vanilla RAG on many real-world tasks'）。",
+      "论文声称目标是系统考察 GraphRAG 在何种条件下超越传统 RAG 及其成功原因，并给出实践应用指南。",
+      "论文标注为 ICLR'26（据官方 GitHub 仓库描述），全部资源与分析汇总于 https://github.com/GraphRAG-Bench/GraphRAG-Benchmark。"
+    ],
+    "raw_excerpt": "Despite its conceptual promise, recent studies report that GraphRAG frequently underperforms vanilla RAG on many real-world tasks. This raises a critical question: Is GraphRAG really effective, and in which scenarios do graph structures provide measurable benefits for RAG systems? ... GraphRAG-Bench features a comprehensive dataset with tasks of increasing difficulty, covering fact retrieval, complex reasoning, contextual summarization, and creative generation, and a systematic evaluation across the entire pipeline, from graph construction and knowledge retrieval to final generation."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "GraphRAG-Bench/GraphRAG-Benchmark — official repo of GraphRAG-Bench",
+    "url": "https://github.com/GraphRAG-Bench/GraphRAG-Benchmark",
+    "published_at": "last push 2026-06-07",
+    "key_points": [
+      "仓库 GraphRAG-Bench/GraphRAG-Benchmark 是 GraphRAG-Bench 的官方仓库，用于评估 GraphRAG 模型，对应论文《When to use Graphs in RAG: A Comprehensive Analysis for Graph Retrieval-Augmented Generation》。",
+      "仓库描述标注该工作为 ICLR'26。",
+      "仓库热度：514 stars、58 forks；语言 Python；最近一次 push 为 2026-06-07。",
+      "（仅获得仓库元数据与描述，未读到 README 正文，故不能据此得出任何基准分数结论。）"
+    ],
+    "raw_excerpt": "The official repo of GraphRAG-Bench for evaluating GraphRAG models. \"When to use Graphs in RAG: A Comprehensive Analysis for Graph Retrieval-Augmented Generation\". (ICLR'26) — Python | last push: 2026-06-07 | ★514, forks 58"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Use Graph When It Needs: Efficiently and Adaptively Integrating Retrieval-Augmented Generation with Graphs (EA-GraphRAG)",
+    "url": "https://arxiv.org/abs/2602.03578",
+    "published_at": "2026-02-03",
+    "key_points": [
+      "该论文陈述：GraphRAG 在真实场景中反而可能不如 vanilla RAG，表现为显著的准确率下降与难以承受的延迟，尽管在复杂查询上有增益（原文：'paradoxically underperforms vanilla RAG in real-world scenarios, exhibiting significant accuracy drops and prohibitive latency despite gains on complex queries'）。",
+      "论文将上述问题归因于「对所有查询一律套用 GraphRAG」而不区分查询复杂度。",
+      "其提出的 EA-GraphRAG 通过语法感知的复杂度分析在 dense RAG 与 graph-based retrieval 之间路由：低复杂度查询走 dense RAG，高复杂度查询走图检索，边界情况用 complexity-aware reciprocal rank fusion。",
+      "实验设置：一个综合基准，由两个 single-hop 与两个 multi-hop QA 基准组成。",
+      "（摘要未给出具体数值分数，仅作定性陈述，不能作为量化指标证据。）"
+    ],
+    "raw_excerpt": "Graph-augmented RAG (GraphRAG) emerged to enhance contextual reasoning through structured knowledge graphs, yet paradoxically underperforms vanilla RAG in real-world scenarios, exhibiting significant accuracy drops and prohibitive latency despite gains on complex queries. ... Extensive experiments on a comprehensive benchmark, consisting of two single-hop and two multi-hop QA benchmarks, demonstrate that our EA-GraphRAG significantly improves accuracy, reduces latency"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Is GraphRAG Needed? From Basic RAG to Graph-/Agentic Solutions with Context Optimization",
+    "url": "https://arxiv.org/abs/2606.25656",
+    "published_at": "2026-06-24",
+    "key_points": [
+      "该论文提出一个针对半结构化知识库的 RAG 场景评估对比框架，覆盖 regular RAG、GraphRAG、Modular RAG 与 Agentic RAG 四类方案，并实现 9 个标准化 RAG 场景。",
+      "其 GraphRAG / Agentic RAG 的上下文工程方法报告 token 使用量降低 19%–53%。",
+      "论文报告存在「检索—生成鸿沟」（retrieval-generation gap）：扩展检索并不能按比例提升生成质量，说明面向检索的指标会高估高级检索带来的收益。",
+      "该文被 ACL 2026 GEM Workshop 接收。",
+      "（摘要未给出 GraphRAG vs dense RAG 在 multi-hop QA / 全局摘要上的具体 accuracy 或 win-rate 数值。）"
+    ],
+    "raw_excerpt": "we present a novel context engineering method for GraphRAG and Agentic RAG, addressing the context/memory overflow issues ... leading to 19%-53% reduction on token usage. Moreover, further analysis identifies a retrieval-generation gap where expanded retrieval does not proportionally improve generation quality, suggesting retrieval-oriented metrics overstate advanced retrieval benefits."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models (arXiv:2405.14831v3)",
+    "url": "https://arxiv.org/abs/2405.14831v3",
+    "published_at": "2024-05-23",
+    "key_points": [
+      "HippoRAG 将 LLM、知识图谱与 Personalized PageRank 结合，用于多跳问答中的知识整合。",
+      "作者报告在多跳 QA 上比现有 SOTA 方法最高提升 20%。",
+      "单步检索的 HippoRAG 性能与迭代式检索 IRCoT 相当或更好，同时成本低 10-30 倍、速度快 6-13 倍。",
+      "该成本/速度对比的对象是 IRCoT（迭代检索基线），不是 Microsoft GraphRAG；且以倍数形式给出，未给出绝对 LLM 调用次数、token 数或秒数。"
+    ],
+    "raw_excerpt": "Single-step retrieval with HippoRAG achieves comparable or better performance than iterative retrieval like IRCoT while being 10-30 times cheaper and 6-13 times faster, and integrating HippoRAG into IRCoT brings further substantial gains."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation (arXiv:2410.05779v3)",
+    "url": "https://arxiv.org/abs/2410.05779",
+    "published_at": "2025-04-28",
+    "key_points": [
+      "LightRAG 将图结构引入文本索引与检索，采用低层（具体实体与关系）与高层（主题/概念）的双层检索范式。",
+      "索引流程为：文档切块 → LLM 抽取实体与关系（Recog）→ 生成实体/关系 profile（Prof）→ 去重（Dedupe）得到知识图谱，即 D̂=(V̂,Ê)=Dedupe∘Prof(V,E)。",
+      "LightRAG 声称其 key-value 结构比 embedding 匹配和 chunk 遍历（引用 Edge et al., 2024，即 Microsoft GraphRAG）更高效，但该主张在摘要/方法章节层面未附具体成本数字。",
+      "论文包含增量更新算法，新增文档无需重建整个索引图，从而降低计算开销。",
+      "本次抓取仅覆盖到第 3.3 节，未读到第 4 节实验中的效率/成本对比表，因此该论文的 LLM 调用次数、token 消耗、索引时间与查询延迟具体数字未取得。"
+    ],
+    "raw_excerpt": "the key-value data structures derived from the graph are optimized for rapid and precise retrieval. This provides a superior alternative to less accurate embedding matching methods (Gao et al., 2023) and inefficient chunk traversal techniques (Edge et al., 2024) commonly used in existing approaches."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval (arXiv:2401.18059)",
+    "url": "https://arxiv.org/abs/2401.18059",
+    "published_at": "2024-01-31",
+    "key_points": [
+      "RAPTOR 通过递归地嵌入、聚类、摘要文本块，自底向上构建多层级摘要树，推理时从该树检索。",
+      "在需要复杂多步推理的问答任务上，RAPTOR 检索配合 GPT-4 使 QuALITY 基准的最好成绩绝对提升 20%。",
+      "摘要中未给出索引阶段的 LLM 调用次数、token 消耗、索引时间或查询延迟数字。"
+    ],
+    "raw_excerpt": "we introduce the novel approach of recursively embedding, clustering, and summarizing chunks of text, constructing a tree with differing levels of summarization from the bottom up... by coupling RAPTOR retrieval with the use of GPT-4, we can improve the best performance on the QuALITY benchmark by 20% in absolute accuracy."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "GraphRAG Indexing Methods (Standard vs FastGraphRAG) — Microsoft GraphRAG 官方文档",
+    "url": "https://microsoft.github.io/graphrag/index/methods/",
+    "published_at": null,
+    "key_points": [
+      "官方文档明确给出成本结构估计：graph extraction（图抽取）约占索引总成本的 75%。",
+      "Standard GraphRAG 对全部推理任务使用 LLM：实体抽取、关系抽取、实体摘要、关系摘要、可选的 claim 抽取、社区报告生成，共 6 类 LLM 调用环节。",
+      "FastGraphRAG 用传统 NLP（NLTK/spaCy 名词短语抽取、text unit 共现）替代部分 LLM 推理，官方定位为「更快更便宜的索引替代方案」，不做实体/关系摘要，也不做 claim 抽取。",
+      "官方对 Standard 与 Fast 的成本比较仅为定性表述（Standard「more expensive than FastGraphRAG」），未给出 token 数或美元金额。",
+      "FastGraphRAG 通常配置更小的文本分块（50–100 tokens）以获得更好的共现图。"
+    ],
+    "raw_excerpt": "Standard GraphRAG provides a rich description of real-world entities and relationships, but is more expensive than FastGraphRAG. We estimate graph extraction to constitute roughly 75% of indexing cost. FastGraphRAG is therefore much cheaper, but the tradeoff is that the extracted graph is less directly relevant for use outside of GraphRAG, and the graph tends to be quite a bit noisier."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Welcome to GraphRAG — Microsoft GraphRAG 官方文档首页",
+    "url": "https://microsoft.github.io/graphrag/",
+    "published_at": null,
+    "key_points": [
+      "官方文档描述索引流程为：将语料切分为 TextUnits → 抽取实体/关系/关键 claim → 用 Leiden 做层次聚类 → 自底向上生成各社区摘要。",
+      "官方文档列出四种查询模式：Global Search、Local Search、DRIFT Search、Basic Search。",
+      "文档首页未包含任何索引成本、token 消耗或美元金额的量化数据。"
+    ],
+    "raw_excerpt": "Index: Slice up an input corpus into a series of TextUnits... Extract all entities, relationships, and key claims from the TextUnits. Perform a hierarchical clustering of the graph using the Leiden technique... Generate summaries of each community and its constituents from the bottom-up."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "GraphRAG Indexing Overview — Microsoft GraphRAG 官方文档",
+    "url": "https://microsoft.github.io/graphrag/index/overview/",
+    "published_at": null,
+    "key_points": [
+      "官方将索引包描述为「使用 LLM 从非结构化文本中抽取结构化数据」的数据管道与转换套件。",
+      "标准管道包含四个环节：抽取实体/关系/claim、实体社区检测、多粒度社区摘要与报告生成、文本向量化嵌入。",
+      "管道输出默认以 Parquet 表存储，嵌入写入配置的向量库。",
+      "该页面未提供任何索引成本量化数据。"
+    ],
+    "raw_excerpt": "The GraphRAG indexing package is a data pipeline and transformation suite that is designed to extract meaningful, structured data from unstructured text using LLMs."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization (arXiv:2404.16130v2)",
+    "url": "https://arxiv.org/abs/2404.16130v2",
+    "published_at": "2024-04-24",
+    "key_points": [
+      "论文明确将实验语料规模界定在「1 million token 量级」（datasets in the 1 million token range），与子问题的 1M token 场景一致。",
+      "论文描述索引为两阶段 LLM 构建：先从源文档导出实体知识图谱，再为紧密关联实体组预生成社区摘要。",
+      "论文摘要层面未给出索引的 LLM 调用次数、token 消耗或美元成本数字（仅取到摘要，未读到正文成本章节）。"
+    ],
+    "raw_excerpt": "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries for all groups of closely related entities. For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline..."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation (arXiv:2410.05779v3)",
+    "url": "https://arxiv.org/html/2410.05779v3",
+    "published_at": "2024-10-08 (v1); v3 2025-04-28",
+    "key_points": [
+      "LightRAG 的图索引构建由 LLM 完成实体与关系抽取：文档被切分为较小片段后，用 LLM 识别并抽取实体（人名、日期、地点、事件）及实体间关系，构建覆盖整个文档集合的知识图谱。",
+      "论文将图索引形式化为三步流水线：Recog（对每个文档片段做 LLM 识别抽取）→ Prof（生成实体/关系画像）→ Dedupe（去重合并），即 D̂=(V̂,Ê)=Dedupe∘Prof(V,E)，V,E=∪_{Di∈D} Recog(Di)。",
+      "论文明确把「对新数据的快速适应」列为三大关键挑战之一（Rapid Adaptation to New Data），即需在不重建全量索引的前提下纳入新信息。",
+      "论文声称其增量更新算法通过「消除重建整个索引的需要」来降低计算成本并加速适应，同时保证新数据的及时整合。",
+      "论文将「高效低成本检索」与「全面信息检索」列为索引函数 φ(·) 需满足的目标，说明索引阶段成本与检索阶段成本被分开考量。"
+    ],
+    "raw_excerpt": "we leverage LLMs to identify and extract various entities (e.g., names, dates, locations, and events) along with the relationships between them... D̂=(V̂,Ê)=Dedupe∘Prof(V,E), V,E=∪_{Di∈D} Recog(Di) ... By eliminating the need to rebuild the entire index, LightRAG reduces computational costs and accelerates adaptation, while its incremental update algorithm ensures timely integration of new data."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization (arXiv:2404.16130v2)",
+    "url": "https://arxiv.org/html/2404.16130v2",
+    "published_at": "2024-04-24 (v1); v2 2025-02-19",
+    "key_points": [
+      "GraphRAG 的索引由 LLM 分两阶段构建：先从源文档派生实体知识图谱，再为紧密关联实体构成的各个社区预生成社区摘要（community summaries）。",
+      "社区摘要按社区层级自底向上生成，高层摘要递归地纳入低层摘要，因此索引阶段包含大量 LLM 调用（实体抽取 + 逐社区摘要生成）。",
+      "查询阶段采用 map-reduce：每个社区摘要独立并行生成部分答案，再在 reduce 步合并为最终全局答案——这意味着索引产物的粒度（社区划分与摘要）直接决定查询成本。",
+      "论文将索引构建定位为「用 LLM 构建图索引」，其两阶段流程（实体图 → 社区摘要）是后续增量更新必须维护的两类产物。",
+      "论文报告 GraphRAG 在约 100 万 token 量级数据集上的全局 sensemaking 问题上优于传统 vector RAG（comprehensiveness 与 diversity 两个维度），但该结论限于该数据规模与 GPT-4 作为 LLM 的设定。"
+    ],
+    "raw_excerpt": "Our approach uses an LLM to build a graph index in two stages: first, to derive an entity knowledge graph from the source documents, then to pregenerate community summaries for all groups of closely related entities... These summaries are generated in a bottom-up manner following the hierarchical structure of extracted communities, with summaries at higher levels of the hierarchy recursively incorporating lower-level summaries."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "LightRAG: Simple and Fast Retrieval-Augmented Generation (arXiv:2410.05779v3) — 摘要页元数据",
+    "url": "https://arxiv.org/abs/2410.05779",
+    "published_at": "2024-10-08 (v1); v3 2025-04-28",
+    "key_points": [
+      "LightRAG 将图结构引入文本索引与检索，采用双层检索（low-level 具体实体与关系 / high-level 主题概念）。",
+      "论文摘要明确将「incremental update algorithm」列为使系统能及时整合新数据的能力，但摘要层面未给出该算法的具体机制或成本数字。",
+      "该论文为 cs.IR 类，v1 至 v3 共三个版本，最新版 2025-04-28。"
+    ],
+    "raw_excerpt": "This capability is further enhanced by an incremental update algorithm that ensures the timely integration of new data, allowing the system to remain effective and responsive in rapidly changing data environments."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization (arXiv:2404.16130v2) — 摘要页元数据",
+    "url": "https://arxiv.org/abs/2404.16130",
+    "published_at": "2024-04-24 (v1); v2 2025-02-19",
+    "key_points": [
+      "GraphRAG 由 Microsoft（Office of the CTO、Strategic Missions and Technologies、Microsoft Research）作者团队发表，开源实现位于 github.com/microsoft/graphrag。",
+      "论文将传统方法统称为 vector RAG，并指出 vector RAG 无法支持需要全局理解整个语料库的 sensemaking 查询。",
+      "论文的实验范围限定在约 100 万 token 量级的数据集与一类全局 sensemaking 问题，未在摘要中给出索引构建的 token 消耗或成本数据。"
+    ],
+    "raw_excerpt": "GraphRAG is available as open-source software at https://github.com/microsoft/graphrag ... For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Build a knowledge base with Amazon Neptune Analytics graphs - Amazon Bedrock User Guide",
+    "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-graphs.html",
+    "published_at": null,
+    "key_points": [
+      "Amazon Bedrock Knowledge Bases 提供全托管的 GraphRAG 特性，底层图存储为 Amazon Neptune（Neptune Analytics）。",
+      "该特性将向量检索与对 Neptune 中大量图数据的快速分析结合，自动识别并使用摄入文档中实体之间及结构元素（如章节标题）之间的关系。",
+      "官方给出的收益：跨多文档源自动利用实体关系提升回答相关性；支持跨多个逻辑步骤连接内容的穷尽式检索，优于传统 RAG；增强跨文档推理以减少幻觉。",
+      "检索流程：先做初始向量检索找到相关节点，再取回与已检索文档块关联的图节点或 chunk 标识，然后沿图遍历扩展取回这些相关块的细节，最后用增强后的上下文生成回答。",
+      "区域可用性：Europe (Frankfurt)、Europe (London)、Europe (Ireland)、US West (Oregon)、US East (N. Virginia)、Asia Pacific (Tokyo)、Asia Pacific (Singapore)。",
+      "限制：不支持自定义图构建的配置项；Neptune Analytics 图不支持自动扩缩容；GraphRAG 仅支持 Amazon S3 作为数据源。",
+      "创建知识库或配置数据源时需选择一个基础模型用于图构建，选定图构建模型会自动启用 contextual enrichment。",
+      "每个数据源最多 1000 个文件，可申请提升至最多 10000 个文件，或将 S3 桶拆分为多个文件夹（每文件夹最多 1000 文件）。",
+      "若使用层级分块（hierarchical chunking），GraphRAG 在检索时只取回子块，不会用父块替换子块，因此结果包含子块的细节内容而非父块的更广上下文。",
+      "删除使用 Neptune Analytics 的知识库时须先删知识库再删图；删除知识库不会自动删除底层图，可能持续产生费用；可将数据源删除策略设为 RETAIN。"
+    ],
+    "raw_excerpt": "Amazon Bedrock Knowledge Bases offers a fully managed GraphRAG feature with Amazon Neptune. GraphRAG is a capability provided with Amazon Bedrock Knowledge Bases that combines graph modeling with generative AI to enhance retrieval-augmented generation (RAG). ... GraphRAG automatically identifies and uses relationships between entities and structural elements within documents ingested into Knowledge Bases. ... Configuration options to customize the graph build are not supported. ... GraphRAG only supports Amazon S3 as the data source."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "What is Azure AI Search? - Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search",
+    "published_at": null,
+    "key_points": [
+      "Azure AI Search 被描述为全托管云搜索服务，其能力清单为：classic search 与 agentic retrieval 两个引擎；全文、向量、混合、多模态查询；AI enrichment（分块、向量化）；相关性调优；Azure 规模/安全/合规。该能力清单中未出现 GraphRAG 或知识图谱索引。",
+      "索引机制：入站文本被分词并存入倒排索引，入站向量存入向量索引；Azure AI Search 只能索引 JSON 文档，可通过 push 或 pull（indexer / logic app workflow）方式写入。",
+      "agentic retrieval 的流程为：查询规划 → 分解为聚焦子查询 → 从知识源并行检索 → 语义重排 → 结果合并，返回面向 agent 消费的结构化响应；其底层仍建立在 classic search 架构之上，增加了一个 knowledge base 上下文层。",
+      "knowledge source 可为 indexed（复用 classic search 的索引与查询引擎）或 remote（跳过索引、实时查询）。",
+      "agentic retrieval 存在区域限制（Region restrictions: Yes），部分能力处于预览状态。"
+    ],
+    "raw_excerpt": "When you create a search service, the following capabilities are included: Two engines: classic search for single requests and agentic retrieval for parallel, iterative, LLM-assisted search. Full-text, vector, hybrid, and multimodal queries over local (indexed) and remote content. AI enrichment to chunk, vectorize, and otherwise make raw content searchable. ... Under the hood, agentic retrieval builds on the classic search architecture by adding a context layer (knowledge base) that orchestrates multi-source retrieval."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Retrieval-augmented generation (RAG) in Azure AI Search - Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview",
+    "published_at": null,
+    "key_points": [
+      "该官方 RAG 概览页把 Azure AI Search 的 RAG 方案归纳为两条路径：agentic retrieval（基于 LLM 的查询规划，预览）与 classic RAG pattern（混合检索 + 语义排序，GA）。两条路径均未提及 GraphRAG 或图遍历式检索。",
+      "官方列出的 RAG 五大挑战为：查询理解、多源数据访问、token 约束、响应时间预期、安全与治理；对应解法是查询分解、knowledge source 统一、结构化响应与引用追踪、并行子查询执行、知识源级访问控制。",
+      "classic RAG 的解法为：混合查询结合关键词与向量检索提升召回，语义排序按语义而非关键词重排，索引器可拉取 10 个以上 Azure 数据源，技能管道负责分块、向量化、图像文字化与分析。",
+      "agentic retrieval 需要新对象：一个或多个 knowledge source、一个 knowledge base（统一这些源的可查询对象）、以及应用代码调用的 retrieve 动作。",
+      "官方建议新 RAG 实现从 agentic retrieval 起步，已有方案考虑迁移。"
+    ],
+    "raw_excerpt": "Azure AI Search provides two approaches designed specifically for these RAG challenges: Agentic retrieval: A complete RAG pipeline with LLM-based query planning (preview), multi-source access, and structured responses optimized for agent consumption. Classic RAG pattern: The proven approach using hybrid search and semantic ranking, ideal for simpler requirements or when generally available (GA) features are required."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "MRafiqAsim/tacitgraph-azure — From PST to a knowledge graph you can chat with, on Azure",
+    "url": "https://github.com/MRafiqAsim/tacitgraph-azure",
+    "published_at": "2026-10-08",
+    "key_points": [
+      "该社区仓库在 Azure 上实现端到端 RAG 管道时，把图存储放在 Azure AI Search 之外：使用 Synapse + ADLS Gen2 + Cosmos DB Gremlin 承载知识图谱，Azure AI Search 仅承担 HNSW 向量检索与 BM25 关键词检索，Azure OpenAI 负责生成。",
+      "该仓库的架构说明表明：在 Azure 上做 GraphRAG 需要自行组合外部图数据库（Cosmos DB Gremlin）与 Azure AI Search 的向量/关键词索引，而非由 Azure AI Search 单一服务提供图能力。",
+      "注意：该仓库 stars 为 0，属个人项目，仅可作为工程实践形态的旁证，不能作为生产落地案例或官方能力依据。"
+    ],
+    "raw_excerpt": "From PST to a knowledge graph you can chat with, on Azure: an end-to-end RAG pipeline with Synapse, ADLS Gen2, Cosmos DB Gremlin, Azure AI Search (HNSW + BM25) and Azure OpenAI."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "iLoveAgents/agent-framework-graphrag-neo4j — Neo4j GraphRAG adapted for Microsoft Agent Framework / Azure AI Foundry",
+    "url": "https://github.com/iLoveAgents/agent-framework-graphrag-neo4j",
+    "published_at": "2025-11-07",
+    "key_points": [
+      "该仓库把 Neo4j GraphRAG 适配到 Microsoft Agent Framework、Azure AI Foundry 与 Neo4j，组合语义检索、知识图谱增强与 agentic 工作流。",
+      "该集成形态说明：在微软技术栈中实现 GraphRAG 时，知识图谱层由第三方图数据库（Neo4j）提供，Azure 侧提供的是 Foundry/Agent Framework 与语义检索，而非 Azure AI Search 内建的图索引。",
+      "注意：该仓库 stars 为 4，属小型社区项目，仅可作为集成形态旁证，不构成官方支持声明或生产案例。"
+    ],
+    "raw_excerpt": "Advanced Retrieval-Augmented Generation (RAG) Contract Review Demo—adapting Neo4j GraphRAG for the Microsoft Agent Framework, Azure AI Foundry, and Neo4j. Integrates semantic search, knowledge graph enrichment, and agentic workflows for enterprise-scale intelligent Q&A using the latest Azure and Neo4j innovations."
+  }
+]

@@ -1,0 +1,218 @@
+{
+  "n_reports": 26,
+  "citations": 880,
+  "exists": 571,
+  "missing": 0,
+  "unverifiable": 309,
+  "existence_rate": 1.0,
+  "per_report": {
+    "gq-agent-framework-compare": {
+      "total": 43,
+      "exists": 31,
+      "missing": 0,
+      "unverifiable": 12,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-agent-memory": {
+      "total": 38,
+      "exists": 20,
+      "missing": 0,
+      "unverifiable": 18,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-agentic-rag": {
+      "total": 36,
+      "exists": 30,
+      "missing": 0,
+      "unverifiable": 6,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-context-eng": {
+      "total": 37,
+      "exists": 26,
+      "missing": 0,
+      "unverifiable": 11,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-deepseek-r1": {
+      "total": 29,
+      "exists": 20,
+      "missing": 0,
+      "unverifiable": 9,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-distillation": {
+      "total": 21,
+      "exists": 17,
+      "missing": 0,
+      "unverifiable": 4,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-eval": {
+      "total": 39,
+      "exists": 27,
+      "missing": 0,
+      "unverifiable": 12,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-graph-rag": {
+      "total": 26,
+      "exists": 19,
+      "missing": 0,
+      "unverifiable": 7,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-hallucination": {
+      "total": 46,
+      "exists": 29,
+      "missing": 0,
+      "unverifiable": 17,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-human-in-loop": {
+      "total": 18,
+      "exists": 16,
+      "missing": 0,
+      "unverifiable": 2,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-hybrid-search": {
+      "total": 23,
+      "exists": 17,
+      "missing": 0,
+      "unverifiable": 6,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-long-context": {
+      "total": 38,
+      "exists": 27,
+      "missing": 0,
+      "unverifiable": 11,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-mcp": {
+      "total": 43,
+      "exists": 35,
+      "missing": 0,
+      "unverifiable": 8,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-moe": {
+      "total": 25,
+      "exists": 17,
+      "missing": 0,
+      "unverifiable": 8,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-multi-agent": {
+      "total": 42,
+      "exists": 33,
+      "missing": 0,
+      "unverifiable": 9,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-multimodal": {
+      "total": 35,
+      "exists": 12,
+      "missing": 0,
+      "unverifiable": 23,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-open-weights-2025": {
+      "total": 34,
+      "exists": 22,
+      "missing": 0,
+      "unverifiable": 12,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-rag-chunking": {
+      "total": 24,
+      "exists": 15,
+      "missing": 0,
+      "unverifiable": 9,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-rag-eval": {
+      "total": 45,
+      "exists": 30,
+      "missing": 0,
+      "unverifiable": 15,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-react": {
+      "total": 22,
+      "exists": 15,
+      "missing": 0,
+      "unverifiable": 7,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-reranker": {
+      "total": 36,
+      "exists": 16,
+      "missing": 0,
+      "unverifiable": 20,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-rl-scaling": {
+      "total": 27,
+      "exists": 17,
+      "missing": 0,
+      "unverifiable": 10,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-swe-agent": {
+      "total": 27,
+      "exists": 15,
+      "missing": 0,
+      "unverifiable": 12,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-tokenizer": {
+      "total": 31,
+      "exists": 13,
+      "missing": 0,
+      "unverifiable": 18,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-tool-use": {
+      "total": 56,
+      "exists": 33,
+      "missing": 0,
+      "unverifiable": 23,
+      "rate": 1.0,
+      "missing_list": 0
+    },
+    "gq-vector-db": {
+      "total": 39,
+      "exists": 19,
+      "missing": 0,
+      "unverifiable": 20,
+      "rate": 1.0,
+      "missing_list": 0
+    }
+  }
+}

@@ -1,0 +1,968 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation (arXiv:2309.15217v2)",
+    "url": "https://arxiv.org/abs/2309.15217v2",
+    "published_at": "2023-09-26",
+    "key_points": [
+      "RAGAS 是一个面向 RAG 流水线的无参考（reference-free）评测框架。",
+      "论文将 RAG 系统拆为检索模块与基于 LLM 的生成模块两部分，并指出评测需考虑多个维度。",
+      "论文列出的评测维度包括：检索系统识别相关且聚焦的上下文段落的能力、LLM 忠实利用这些段落的能力、以及生成本身的质量。",
+      "RAGAS 提出一套无需依赖人工标注 ground truth 的指标集合来评测上述维度。",
+      "论文主张该框架可加速 RAG 架构的评测迭代周期。"
+    ],
+    "raw_excerpt": "We introduce Ragas (Retrieval Augmented Generation Assessment), a framework for reference-free evaluation of Retrieval Augmented Generation (RAG) pipelines. ... there are several dimensions to consider: the ability of the retrieval system to identify relevant and focused context passages, the ability of the LLM to exploit such passages in a faithful way, or the quality of the generation itself. With Ragas, we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Ragas 文档：List of available metrics",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/",
+    "published_at": null,
+    "key_points": [
+      "Ragas 文档将 RAG 相关指标单列一组，包含：Context Precision、Context Recall、Context Entities Recall、Noise Sensitivity、Response Relevancy、Faithfulness、Multimodal Faithfulness、Multimodal Relevance。",
+      "文档另设 Nvidia Metrics 组，包含 Answer Accuracy、Context Relevance、Response Groundedness。",
+      "文档将 Factual Correctness、Semantic Similarity、BLEU、CHRF、ROUGE、Exact Match 等归入「Natural Language Comparison」组，与 RAG 专用指标区分。",
+      "文档说明每个指标用于评测应用的某一特定方面，基于 LLM 的指标可能通过一次或多次 LLM 调用得出分数。"
+    ],
+    "raw_excerpt": "Ragas provides a set of evaluation metrics that can be used to measure the performance of your LLM application. ... Retrieval Augmented Generation: Context Precision, Context Recall, Context Entities Recall, Noise Sensitivity, Response Relevancy, Faithfulness, Multimodal Faithfulness, Multimodal Relevance ... Each metric are essentially paradigms that are designed to evaluate a particular aspect of the application. LLM Based metrics might use one or more LLM calls to arrive at the score or result."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Ragas 文档：Faithfulness",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/",
+    "published_at": null,
+    "key_points": [
+      "Faithfulness 衡量回答与检索到的上下文之间的事实一致性，取值 0 到 1，越高表示一致性越好。",
+      "定义：若回答中的所有 claim 都能被检索上下文支持，则该回答被视为 faithful。",
+      "计算三步：(1) 识别回答中的所有 claim；(2) 逐条检查该 claim 能否由检索上下文推断；(3) 用公式计算。",
+      "公式：Faithfulness = 被检索上下文支持的回答 claim 数 / 回答 claim 总数。",
+      "文档示例：回答拆为两条 statement，其中一条无法由上下文推断，故 Faithfulness = 1/2 = 0.5。",
+      "文档提供基于 Vectara HHEM-2.1-Open（T5 分类器，用于检测幻觉）的变体 FaithfulnesswithHHEM，用于第二步的 claim 与上下文交叉核验。"
+    ],
+    "raw_excerpt": "The Faithfulness metric measures how factually consistent a response is with the retrieved context. It ranges from 0 to 1, with higher scores indicating better consistency. A response is considered faithful if all its claims can be supported by the retrieved context. ... Faithfulness Score = Number of claims in the response supported by the retrieved context / Total number of claims in the response"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Ragas 文档：Context Recall",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/",
+    "published_at": null,
+    "key_points": [
+      "Context Recall 衡量有多少相关文档（或信息片段）被成功检索到，关注「不漏掉重要结果」，召回越高表示遗漏的相关文档越少。",
+      "计算 context recall 始终需要参考（reference）作为对比基准。",
+      "LLM 版 Context Recall 用 reference 作为 reference_contexts 的代理，因为标注参考上下文成本很高。",
+      "LLM 版做法：把 reference 拆成 claim，逐条判断能否归因于检索上下文；理想情况下 reference 中所有 claim 都应可归因于检索上下文。",
+      "LLM 版公式：Context Recall = 被检索上下文支持的 reference claim 数 / reference claim 总数。",
+      "非 LLM 版（NonLLMContextRecall）用字符串比较度量，公式为：检索到的相关上下文数 / 参考上下文总数，取值 0 到 1。",
+      "ID 版（IDBasedContextRecall）直接比较 retrieved_context_ids 与 reference_context_ids，公式为：在检索 ID 中找到的参考上下文 ID 数 / 参考上下文 ID 总数，支持字符串与整数 ID。"
+    ],
+    "raw_excerpt": "Context Recall measures how many of the relevant documents (or pieces of information) were successfully retrieved. It focuses on not missing important results. Higher recall means fewer relevant documents were left out. ... Context Recall = Number of claims in the reference supported by the retrieved context / Total number of claims in the reference ... context recall = |Number of relevant contexts retrieved| / |Total number of reference contexts|"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Ragas 文档：Context Precision",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/",
+    "published_at": null,
+    "key_points": [
+      "Context Precision 评测检索器在给定 query 下把相关 chunk 排在无关 chunk 之前的能力，即相关 chunk 在检索结果排序中靠前的程度。",
+      "它被定义为上下文中每个 chunk 的 precision@k 的均值。",
+      "Precision@k 定义为：排名前 k 中相关 chunk 数 / 排名前 k 的 chunk 总数，即 true positives@k / (true positives@k + false positives@k)。",
+      "Context Precision@K 公式：sum_{k=1..K}(Precision@k × v_k) / 前 K 个结果中相关条目总数，其中 K 为 retrieved_contexts 的 chunk 总数，v_k ∈ {0,1} 为第 k 位的相关性指示。",
+      "文档示例说明该指标对位置敏感：无关 chunk 位于第二位时 context precision 不变，但若移到第一位则分数下降（由约 1.0 降至约 0.5）。",
+      "文档提供无参考版本 LLMContextPrecisionWithoutReference，用 LLM 将每个检索 chunk 与生成的 response 比对来判断相关性。"
+    ],
+    "raw_excerpt": "Context Precision is a metric that evaluates the retriever's ability to rank relevant chunks higher than irrelevant ones for a given query in the retrieved context. ... It is calculated as the mean of the precision@k for each chunk in the context. Precision@k is the ratio of the number of relevant chunks at rank k to the total number of chunks at rank k. ... Precision@k = true positives@k / (true positives@k + false positives@k)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Ragas 文档：Response Relevancy (Answer Relevancy)",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/",
+    "published_at": null,
+    "key_points": [
+      "Answer Relevancy 衡量回答与用户输入的相关程度，取值 0 到 1，越高表示与用户输入对齐越好。",
+      "若回答直接且恰当地回应了原始问题，则视为相关；该指标关注回答是否契合问题意图，而不评估事实准确性。",
+      "该指标会惩罚不完整的回答以及包含不必要细节的回答。",
+      "计算方式：先用 LLM 基于 response 反向生成一组人工问题（默认 3 个），再计算用户输入嵌入 E_o 与每个生成问题嵌入 E_gi 的余弦相似度，取平均。",
+      "公式：Answer Relevancy = (1/N) Σ cosine_similarity(E_gi, E_o)，N 为生成问题数（默认 3，可通过 strictness 参数配置）。",
+      "文档注明：由于余弦相似度数学范围为 -1 到 1，该分数通常落在 0 到 1 之间但并不保证。",
+      "其背后思路是：若回答正确回应了问题，则仅凭回答就很可能重建出原始问题。"
+    ],
+    "raw_excerpt": "The Answer Relevancy metric measures how relevant a response is to the user input. It ranges from 0 to 1 ... This metric focuses on how well the answer matches the intent of the question, without evaluating factual accuracy. It penalizes answers that are incomplete or include unnecessary details. ... Answer Relevancy = 1/N * Σ cosine similarity(E_gi, E_o) ... While the score usually falls between 0 and 1, it is not guaranteed due to cosine similarity's mathematical range of -1 to 1."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "RAGChecker: A Fine-grained Framework for Diagnosing Retrieval-Augmented Generation",
+    "url": "https://arxiv.org/html/2408.08067v2",
+    "published_at": "2024-08-15",
+    "key_points": [
+      "RAGChecker 基于 claim-level entailment checking：从模型回答与标准答案中抽取 claim，再与其他文本做蕴含校验，从而实现细粒度而非回答级（response-level）的评估。",
+      "框架输出三类指标：(1) Overall Metrics 整体质量；(2) Diagnostic Retriever Metrics 检索器诊断指标；(3) Diagnostic Generator Metrics 生成器诊断指标（衡量生成器利用上下文、处理噪声信息、生成准确忠实回答的能力）。",
+      "作者指出传统检索指标 recall@k、MRR 依赖人工标注的 chunk 与刚性切分方式，会漏掉知识库的完整语义范围；生成侧 BLEU/ROUGE/BERTScore/LLM-based 方法在长回答上无法区分细微差异。",
+      "论文构建了覆盖 10 个领域、由公开数据集改造而来的评测基准，并评测了 8 个 RAG 系统。",
+      "作者人工标注了一个人类判断数据集做元评测（meta evaluation），声称 RAGChecker 与人类判断的相关性显著优于其他评测指标（RAGAS、TruLens、ARES、CRUD-RAG 被纳入对比）。",
+      "论文报告的关键发现包括：检索改进与噪声引入之间存在权衡（trade-off between retrieval improvement and noise introduction）；忠实的开源模型倾向于盲目信任上下文（blind trust on context）。",
+      "论文将 RGB（噪声鲁棒性、负样本拒答、信息整合、反事实鲁棒性四项能力）、RECALL、NoMIRACL 归类为“仅评测生成器能力”的工作，并批评这类人工构造数据集无法揭示生成结果与不同检索行为之间的纠缠关系。",
+      "论文将 TruLens 的 RAG Triad（context relevance、groundedness、answer relevance）视为端到端打分路线的起点，RAGAS 与 ARES 沿用该三元组概念并改进分数预测方式。",
+      "论文区分两类使用者：只关心整体排名、需要单一数值指标的用户，与需要定位错误来源（检索错误 vs 生成错误）的开发者。",
+      "代码开源于 https://github.com/amazon-science/RAGChecker 。"
+    ],
+    "raw_excerpt": "RagChecker is based on claim-level entailment checking which involves operations of extracting claims from the response and ground truth answer and checking them against other texts. This approach enables fine-grained evaluation instead of response-level assessment. ... traditional metrics like recall@k and MRR for retrievers depend on annotated chunks and a rigid chunking approach, missing out on the full semantic scope of the knowledge base. ... we evaluate 8 RAG systems on our curated benchmark across 10 domains, and uncover valuable insights, such as the trade-off between retrieval improvement and noise introduction, and the tendency of faithful open-source models to blind trust on context."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+    "url": "https://arxiv.org/abs/2309.15217v2",
+    "published_at": "2023-09-26",
+    "key_points": [
+      "Ragas 提出一套无需人工标注标准答案（reference-free）的 RAG 评测指标，用于自动评估 RAG 流水线。",
+      "论文把 RAG 评测拆成多个维度：检索系统识别相关且聚焦的上下文段落的能力、LLM 忠实利用这些段落的能力、以及生成内容本身的质量。",
+      "作者主张该框架可加速 RAG 架构的评测迭代周期。",
+      "注意：该文 v1 发布于 2023-09-26，早于 2024–2026 窗口，此处作为被后续基准反复对比的基线框架记录。"
+    ],
+    "raw_excerpt": "We introduce Ragas (Retrieval Augmented Generation Assessment), a framework for reference-free evaluation of Retrieval Augmented Generation (RAG) pipelines. ... there are several dimensions to consider: the ability of the retrieval system to identify relevant and focused context passages, the ability of the LLM to exploit such passages in a faithful way, or the quality of the generation itself. With Ragas, we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "CRUD-RAG: A Comprehensive Chinese Benchmark for Retrieval-Augmented Generation of Large Language Models",
+    "url": "https://arxiv.org/html/2401.17043v3",
+    "published_at": "2024-01-30",
+    "key_points": [
+      "CRUD-RAG 借用数据库 CRUD 动作把 RAG 应用场景分为四类：Create（生成原创多样内容，如诗歌、故事、代码）、Read（知识密集型复杂问答）、Update（修正既有文本中的错误或不一致）、Delete（长文本摘要/简化）。",
+      "对应四类场景构建了四个评测任务：文本续写（text continuation）、问答（含单文档与多文档问答）、幻觉修正（hallucination modification）、开放域多文档摘要。",
+      "数据构造方式：爬取中国主要新闻网站的最新高质量新闻数据以降低 LLM 训练时已见过这些数据的可能性，再用 GPT-4 基于这些新闻自动生成数据集。",
+      "论文批评现有基准（如 RGB、NQ）的局限：几乎只测问答任务，且实验中通常只评测 RAG 流水线中的 LLM 部分或知识密集型场景下的检索器，忽略了非知识密集型场景的检索方法与外部知识库构建的影响。",
+      "论文批评 RAGAS、ARES 这类 reference-free 框架只评估生成文本与检索上下文的一致性，若检索到的外部信息质量低则评测可能不可靠。",
+      "论文分析了检索器、上下文长度、知识库构建、LLM 等多个组件对 RAG 系统的影响，并给出针对不同场景的优化建议。",
+      "该基准为中文基准，代码开源于 https://github.com/IAAR-Shanghai/CRUD_RAG 。"
+    ],
+    "raw_excerpt": "we refer to the CRUD actions that describe interactions between users and knowledge bases, and also categorize the range of RAG applications into four distinct types—Create, Read, Update, and Delete (CRUD). ... CRUD-RAG consists of four evaluation tasks: text continuation, question answering (with single-document and multi-document questions), hallucination modification, and open-domain multi-document summarization ... We construct CRUD-RAG by crawling the latest high-quality news data from major news websites in China, which aims to minimize the likelihood of LLMs encountering these data during training. Then, we automatically create datasets using GPT-4 based on these news data. ... Reference-free evaluation frameworks, such as RAGAS and ARES, use LLM-generated data to evaluate RAG systems on contextual relevance, faithfulness, and informativeness. These frameworks do not depend on ground truth references, but only assess the coherence of the generated text with the retrieved context. This approach may be unreliable if the retrieved external information is low-quality."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "explodinggradients/ragas — Supercharge Your LLM Application Evaluations (README)",
+    "url": "https://github.com/explodinggradients/ragas",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示 Stars 16.1k、Forks 1.8k、Watchers 61，主分支累计 1,147 commits，采用 Apache-2.0 许可证。",
+      "README 自我定位为「Objective metrics, intelligent test generation, and data-driven insights for LLM apps」，即指标 + 测试集生成 + 反馈闭环三件套。",
+      "README 列出的 Key Features 为：Objective Metrics（LLM-based 与传统指标并用）、Test Data Generation（自动生成覆盖多场景的测试集）、Seamless Integrations（LangChain 与主流可观测性工具）、Build feedback loops（用生产数据持续改进）。",
+      "README 的 Quickstart 示例用 llm_factory(\"gpt-4o\", client=AsyncOpenAI()) 配置 judge 模型，并需设置 OPENAI_API_KEY 环境变量；示例指标为 DiscreteMetric（自定义 Aspect Critique 式离散打分）。",
+      "README 提供 `ragas quickstart` CLI，当前可用模板为 rag_eval（Evaluate RAG systems），agent_evals / benchmark_llm / prompt_evals / workflow_eval 标注为 Coming Soon。",
+      "README 声明会收集最小化匿名使用数据，可通过 RAGAS_DO_NOT_TRACK=true 关闭。",
+      "注意：搜索工具返回的仓库名为 vibrantlabsai/ragas（★16142，last push 2026-02-24），而 explodinggradients/ragas 页面内 pip 安装说明写的是 `pip install git+https://github.com/vibrantlabsai/ragas`，citation 作者为 VibrantLabs，说明项目已迁移/改名至 vibrantlabsai 组织。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "Ragas 官方文档 — List of available metrics",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/",
+    "published_at": null,
+    "key_points": [
+      "RAG 类指标清单：Context Precision、Context Recall、Context Entities Recall、Noise Sensitivity、Response Relevancy、Faithfulness、Multimodal Faithfulness、Multimodal Relevance。",
+      "Nvidia 指标组：Answer Accuracy、Context Relevance、Response Groundedness。",
+      "Agent/工具调用类指标：Topic adherence、Tool call Accuracy、Tool Call F1、Agent Goal Accuracy。",
+      "自然语言比较类指标：Factual Correctness、Semantic Similarity、Non LLM String Similarity、BLEU Score、CHRF Score、ROUGE Score、String Presence、Exact Match。",
+      "SQL 类指标：Execution based Datacompy Score、SQL query Equivalence；通用类：Aspect critic、Simple Criteria Scoring、Rubrics based scoring、Instance specific rubrics scoring；另有 Summarization。",
+      "文档明确说明「LLM Based metrics might use one or more LLM calls to arrive at the score or result」，即 LLM-based 指标依赖一次或多次 LLM 调用（judge 模型）打分。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "confident-ai/deepeval — The LLM Evaluation Framework (README)",
+    "url": "https://github.com/confident-ai/deepeval",
+    "published_at": null,
+    "key_points": [
+      "搜索工具返回该仓库 ★19088、forks 2131、last push 2026-10-23；仓库页面显示主分支累计 10,444 commits。",
+      "README 定位：类似 Pytest 但专为 LLM 应用单元测试设计的开源评测框架，可评测黑盒端到端应用、完整 agent 轨迹、以及单步（LLM 调用、工具使用、检索、子 agent 交接）。",
+      "judge 配置主张：指标「powered by ANY LLM of your choice, statistical methods, or NLP models that run locally on your machine」，即 judge 模型可任选，也可用本地 NLP 模型。",
+      "RAG 指标集合：Answer Relevancy、Faithfulness、Contextual Recall、Contextual Precision、Contextual Relevancy，以及名为 RAGAS 的指标（answer relevancy、faithfulness、contextual precision、contextual recall 四者平均）。",
+      "通用/自定义指标：JevEval（由 System One 模型 Jev 以校准概率打分）、G-Eval（research-backed LLM-as-a-judge）、DAG（图结构确定性 LLM-as-a-judge 指标构建器）。",
+      "Agent 指标：Task Completion、Tool Correctness、Goal Accuracy、Step Efficiency、Plan Adherence、Plan Quality、Tool Use、Argument Correctness。",
+      "多轮指标：Knowledge Retention、Conversation Completeness、Turn Relevancy、Turn Faithfulness、Role Adherence；另有语音 agent 指标、MCP 指标、多模态指标。",
+      "其他指标：Hallucination、Summarization、Bias、Toxicity、JSON Correctness、Prompt Alignment；并支持合成数据集生成、CI/CD 集成、prompt 自动优化、以及 10 行代码内跑 MMLU/HellaSwag 等通用基准。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "truera/trulens — Evaluation and Tracking for LLM Experiments and AI Agents (README)",
+    "url": "https://github.com/truera/trulens",
+    "published_at": null,
+    "key_points": [
+      "搜索工具返回该仓库 ★3609、forks 375、last push 2026-10-24；仓库页面显示主分支累计 1,964 commits。",
+      "README 定位：开源、OpenTelemetry-native，用 decorator 给任意应用埋点，用「会自我解释的 LLM judges」逐步打分，再比较版本。",
+      "追踪基于 OpenTelemetry，每个函数调用/LLM 生成/检索/工具调用都记为结构化 OTEL span，可导出到 Jaeger、Grafana Tempo、Datadog、New Relic 或任意 OTLP 后端。",
+      "核心概念链接指向 Metrics、RAG Triad（检索三元组）以及 Honest/Harmless/Helpful Evals。",
+      "README 自报评测成绩（营销性主张，需交叉验证）：Agent GPA 在 TRAIL/GAIA 上捕获 95% agent 错误（281 个人工标注错误中的 267 个，基线 trace judge 为 55%，引用 arXiv:2510.08847）；Groundedness 在 LLM-AggreFact 上 F1 0.81；Context relevance NDCG@5 0.93，称在四项排序指标中的三项位列第一，领先 WandB Weave、RAGAS、DeepEval、UpTrain（引用 AIMultiple, 23 March 2026）；context relevance 对抗胜率 4.2:1。",
+      "judge 模型配置：按 provider 分包装安装，包括 trulens-providers-openai（OpenAI/Azure OpenAI）、-orcarouter、-litellm（Anthropic/Cohere/Mistral 等）、-google（Gemini）、-bedrock、-cortex（Snowflake）、-huggingface、-langchain；应用侧集成包有 trulens-apps-langchain（LangChain/LangGraph）与 trulens-apps-llamaindex。",
+      "Agentic 评测提供七个专用 evaluator：LogicalConsistency、ExecutionEfficiency、PlanAdherence、PlanQuality、ToolSelection、ToolCalling、ToolQuality。",
+      "支持 inline（tru_recorder 随应用运行打分）与 batch（RunConfig + add_run + compute_metrics）两种评测模式，并有 MCP span 类型与 Selector API 用于指定被评测的 span 属性。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Arize-ai/phoenix — Arize's open-source AI observability platform (README)",
+    "url": "https://github.com/Arize-ai/phoenix",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示主分支累计 10,408 commits；README 定位为 Arize 的开源 AI 可观测性平台，用于实验、评测与排障，托管版为 Arize AX。",
+      "功能清单：Tracing（基于 OpenTelemetry 埋点追踪运行时）、Evaluation（用 LLM 对 response 与 retrieval 做基准评测）、Datasets（版本化数据集）、Experiments（追踪 prompt/LLM/检索变更）、Playground、Prompt Management、PXI（内置 AI 工程 agent）、Remote MCP Server。",
+      "README 明确评测能力覆盖「response and retrieval evals」，即生成侧与检索侧都有对应 eval。",
+      "厂商与语言无关，开箱支持 OpenAI Agents SDK、Claude Agent SDK、LangGraph、Vercel AI SDK、Mastra、CrewAI、LlamaIndex、DSPy 等框架，以及 OpenAI、Anthropic、Google GenAI、Google ADK、AWS Bedrock、OpenRouter、LiteLLM 等 provider；自动埋点由 OpenInference 项目提供。",
+      "部署方式：pip install arize-phoenix 后 `phoenix serve`，或 uvx arize-phoenix serve；也提供 Docker 镜像与 Kubernetes Helm chart，可本地、容器或云端自托管。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "beir-cellar/beir — A Heterogeneous Benchmark for Information Retrieval (README)",
+    "url": "https://github.com/beir-cellar/beir",
+    "published_at": null,
+    "key_points": [
+      "搜索工具返回该仓库 ★2315、forks 256、last push 2025-10-16；仓库页面显示主分支累计 491 commits。",
+      "BEIR 是异构 IR 基准，提供在基准内评测 NLP 检索模型的通用框架；论文为 NeurIPS 2021 Datasets and Benchmarks Track 的《BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models》，另有 SIGIR 2024 Resource Track 的《Resources for Brewing BEIR》官方 leaderboard 论文。",
+      "README 称提供 17 个已预处理基准数据集（搜索工具描述写 15+），覆盖 lexical、dense、sparse 与 reranking-based 检索架构。",
+      "检索侧指标：NDCG@k、MAP@K、Recall@K、Precision@K，k = [1,3,5,10,100,1000]，另有 evaluate_custom 支持 MRR。",
+      "使用方式：pip install beir；示例用 GenericDataLoader 加载 corpus/queries/qrels，DenseRetrievalExactSearch + SentenceBERT（示例模型 Alibaba-NLP/gte-modernbert-base）检索，EvaluateRetrieval 计算指标，并可保存 TREC runfile 供重排序复用。",
+      "支持 LoRA + vLLM 的稠密检索评测示例（Qwen2.5-7B + LoRA 权重，pooling=eos）。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "embeddings-benchmark/mteb — Multimodal toolbox for evaluating embeddings and retrieval systems (README)",
+    "url": "https://github.com/embeddings-benchmark/mteb",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示主分支累计 4,852 commits；README 自我描述为「Multimodal toolbox for evaluating embeddings and retrieval systems」。",
+      "使用方式：pip install mteb 或 uv add mteb；Python API 为 mteb.get_model(model_name) + mteb.get_tasks(tasks=[...]) + mteb.evaluate(model, tasks=tasks)，也提供 CLI：mteb run -m <model> -t <task> --output-folder results。",
+      "若模型未在 MTEB 中实现，get_model 等价于 SentenceTransformer(model_name)，即对任意 sentence-transformers 模型可直接评测。",
+      "提供交互式 leaderboard，以及任务（tasks）、基准（benchmarks）、模型（models）三类可扩展注册机制，并支持提交模型/数据集/基准到 leaderboard。",
+      "引用两篇论文：MTEB（arXiv:2210.07316, Muennighoff et al. 2022）与 MMTEB: Massive Multilingual Text Embedding Benchmark（Enevoldsen et al. 2025），README 建议同时引用。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "run-llama/llama_index — LlamaIndex Framework (README)",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示主分支累计 7,962 commits；README 说明公司重心已转向 LlamaParse（agentic OCR/解析/抽取/索引），OSS 框架仍作为开放工具包提供。",
+      "README 提到 LlamaIndex 的开放基准工作为 ParseBench 与 ExtractBench，定位是文档解析与抽取的基准，而非 RAG 端到端评测指标集。",
+      "框架提供 llama-index（starter，含核心与部分集成）与 llama-index-core（核心，另加 300+ 集成包）两种安装路径。",
+      "README 明确声明「This README is not updated as frequently as the documentation」，最新信息以文档为准。",
+      "注意：本次抓取的 README 正文未包含 LlamaIndex Evaluation 模块（如 faithfulness/relevancy/correctness evaluators）的指标清单与 judge 配置说明，该部分需查其 evaluation 文档页。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Ragas Docs — Overview of Metrics（指标类型与 LLM-based vs Non-LLM-based）",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/overview/",
+    "published_at": null,
+    "key_points": [
+      "Ragas 文档将 AI 应用指标分为三类：端到端指标（把系统当黑盒，只看最终输出，如 answer correctness、citation accuracy）、组件级指标（独立评估各部件，如 retrieval accuracy）、业务指标（滞后指标，部署后数天/数周/数月计算，如 ticket deflection rate）。",
+      "文档明确组件级指标「可立即行动、便于定向改进，但不一定与最终用户满意度直接相关」，并举例 retrieval accuracy 低至 50% 说明改进该组件可提升整体，但「单独改进一个组件并不保证更好的端到端结果」。",
+      "按底层机制分两类：LLM-based 指标（一次或多次 LLM 调用，可能非确定性，同一输入不总返回相同结果，但文档称其「更准确、更接近人类评估」）；Non-LLM-based 指标（确定性，依赖字符串相似度、BLEU 等传统方法，文档称其「与人类评估相关性较低」）。",
+      "文档把指标用途列为三项：组件选型（比较 LLM、Retriever、Agent 配置）、错误诊断与调试（定位应用中出错或表现不佳的部分）、持续监控与维护（发现数据漂移、模型退化、需求变化）。",
+      "文档给出「无法度量就无法改进」的立场：指标是迭代的反馈回路，用于区分成功实验（新旧分数正 delta）与失败实验。"
+    ],
+    "raw_excerpt": "Component-level metrics assess the individual parts of an AI system independently. These metrics are immediately actionable and facilitate targeted improvements but do not necessarily correlate directly with end-user satisfaction. ... However, improving a component alone doesn't guarantee better end-to-end outcomes. ... LLM-based metrics: ... These metrics can be somewhat non-deterministic as the LLM might not always return the same result for the same input. On the other hand, these metrics has shown to be more accurate and closer to human evaluation. ... Non-LLM-based metrics: ... Due to the same, these metrics are known to have a lower correlation with human evaluation."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Ragas Docs — List of available metrics（RAG 与通用指标清单）",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/",
+    "published_at": null,
+    "key_points": [
+      "Ragas 在 Retrieval Augmented Generation 类别下提供的指标为：Context Precision、Context Recall、Context Entities Recall、Noise Sensitivity、Response Relevancy、Faithfulness、Multimodal Faithfulness、Multimodal Relevance。",
+      "Ragas 另设 Nvidia Metrics 分组：Answer Accuracy、Context Relevance、Response Groundedness。",
+      "自然语言比较类指标包括 Factual Correctness、Semantic Similarity、Non LLM String Similarity、BLEU Score、CHRF Score、ROUGE Score、String Presence、Exact Match。",
+      "通用类指标包括 Aspect critic、Simple Criteria Scoring、Rubrics based scoring、Instance specific rubrics scoring，即基于评分量规（rubrics）的判分方式。",
+      "文档说明每个指标本质上是评估应用某一特定方面的范式，LLM-based 指标可能使用一次或多次 LLM 调用得出分数，用户也可自定义或编写自己的指标。"
+    ],
+    "raw_excerpt": "Ragas provides a set of evaluation metrics that can be used to measure the performance of your LLM application. ... Each metric are essentially paradigms that are designed to evaluate a particular aspect of the application. LLM Based metrics might use one or more LLM calls to arrive at the score or result. ... Retrieval Augmented Generation: Context Precision, Context Recall, Context Entities Recall, Noise Sensitivity, Response Relevancy, Faithfulness ... General purpose: Aspect critic, Simple Criteria Scoring, Rubrics based scoring, Instance specific rubrics scoring"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Ragas Docs — Faithfulness 指标定义与计算方式（含 HHEM-2.1-Open 替代方案）",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/",
+    "published_at": null,
+    "key_points": [
+      "Faithfulness 衡量回答与检索到的上下文之间的事实一致性，取值 0 到 1；若回答中所有 claim 都能被检索上下文支持，则视为忠实。",
+      "计算分三步：先识别回答中的所有 claim，再逐条检查能否由检索上下文推断，最后用「被上下文支持的 claim 数 / 回答中 claim 总数」计算得分。",
+      "文档给出低忠实度示例：回答把出生日期写成 20th March 1879（上下文为 14 March 1879），两条 statement 中一条不被支持，Faithfulness = 1/2 = 0.5。",
+      "Ragas 支持用 Vectara 的 HHEM-2.1-Open（一个训练用于检测 LLM 生成文本幻觉的 T5 分类器）替代第二步的 claim 与上下文交叉核验；文档称该模型免费、体积小、开源，在生产场景中高效。"
+    ],
+    "raw_excerpt": "The Faithfulness metric measures how factually consistent a response is with the retrieved context. It ranges from 0 to 1 ... A response is considered faithful if all its claims can be supported by the retrieved context. ... Faithfulness Score = Number of claims in the response supported by the retrieved context / Total number of claims in the response ... Vectara's HHEM-2.1-Open is a classifier model (T5) that is trained to detect hallucinations from LLM generated text. This model can be used in the second step of calculating faithfulness ... The model is free, small, and open-source, making it very efficient in production use cases."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "TruLens Docs — The RAG Triad（context relevance / groundedness / answer relevance）",
+    "url": "https://www.trulens.org/getting_started/core_concepts/rag_triad/",
+    "published_at": null,
+    "key_points": [
+      "TruLens（TruEra）提出 RAG triad，沿 RAG 架构的三条边分别评估幻觉：context relevance、groundedness、answer relevance；三项均达标才可对应用正确性作出判断。",
+      "Context Relevance 用于验证检索质量：确保每个 context chunk 与输入 query 相关；文档指出上下文中任何不相关信息都可能被编织进幻觉。",
+      "Groundedness 用于验证生成是否忠于上下文：把回答拆成独立 claim，逐条在检索上下文中寻找支持证据；文档称 LLM 常偏离给定事实、夸大或扩展成「听起来正确」的答案。",
+      "Answer Relevance 用于验证最终回答是否有助于回答原始问题（回答对用户输入的相关性）。",
+      "文档给出该方法的结论边界：三项达标只能说明「应用在其知识库范围内被验证为无幻觉」——即若向量库只含准确信息，则 RAG 给出的答案也准确。"
+    ],
+    "raw_excerpt": "TruEra has innovated the RAG triad to evaluate for hallucinations along each edge of the RAG architecture ... The RAG triad is made up of 3 evaluations: context relevance, groundedness and answer relevance. ... To verify the groundedness of our application, we can separate the response into individual claims and independently search for evidence that supports each within the retrieved context. ... our application is verified to be hallucination free up to the limit of its knowledge base."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangSmith Docs — Evaluation 概念：离线评估与在线评估双轨流程",
+    "url": "https://docs.smith.langchain.com/evaluation/concepts",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 按运行时机与位置区分两类评估：Offline Evaluation（上线前，在策划好的数据集上跑，用于比较版本、基准测试、捕获回归）与 Online Evaluation（生产环境实时评估真实用户交互，检测问题并度量线上流量质量）。",
+      "离线流程为四步：创建数据集（人工策划测试用例、历史生产 trace 或合成数据）→ 定义 evaluator（human review、code rules、LLM-as-judge、pairwise comparison）→ 运行 experiment（可配置重复次数、并发、缓存）→ 分析结果（benchmarking、unit tests、regression tests、backtesting）。",
+      "在线流程为四步：部署应用（每次交互产生无参考输出的 run）→ 配置 online evaluator（安全检查、格式校验、质量启发式、reference-free LLM-as-judge，并通过过滤器与采样率控制成本）→ 实时监控（在 run 或 thread 上自动运行，提供实时监控、异常检测与告警）→ 建立反馈闭环。",
+      "反馈闭环的具体做法：把失败的生产 trace 加入数据集，创建针对性 evaluator，用离线实验验证修复，然后重新部署。",
+      "文档强调把真实 trace 加入数据集的价值：「把只见过一次的失败变成每次都会跑的测试」。"
+    ],
+    "raw_excerpt": "LangSmith supports two types of evaluation based on when and where they run: Offline Evaluation — Test before you ship ... Online Evaluation — Monitor in production ... 4 Establish a feedback loop: Add failing production traces to your dataset, create targeted evaluators, validate fixes with offline experiments, and redeploy. ... Add real traces to a dataset so a failure you saw once becomes a test you run every time."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangSmith Observability Docs — trace、在线评估与用户反馈采集",
+    "url": "https://docs.smith.langchain.com/evaluation/how_to_guides/rag_evaluation",
+    "published_at": null,
+    "key_points": [
+      "LangSmith Observability 定位为对 LLM 应用提供全链路可见性：从单条 trace 到生产范围的整体性能指标；trace 是 agent 在生产中行为的记录，用于调试失败、监控质量，并构建评估所用数据集。",
+      "文档列出生产侧能力：查看 traces（Messages、Turns、Details 视图）、监控性能（构建看板与告警以跟踪质量并尽早发现问题）、配置 automations（用规则、webhook、在线评估自动化工作流）、收集反馈（通过队列或行内标注对输出打标并收集用户反馈）。",
+      "文档提到 Engine 能力：自动检测 trace 中反复出现的问题、诊断其根因并加以解决。",
+      "文档提供「Trace a RAG application」端到端教程，用于从零为 RAG 应用接入追踪。"
+    ],
+    "raw_excerpt": "LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics. Traces are the record of what your agents did in production. Use them to debug failures, monitor quality, and build the datasets you evaluate against. ... Collect feedback: Annotate outputs and gather user feedback using queues or inline annotation. Find and fix failures with Engine: Automatically detect recurring issues in your traces, diagnose their root cause, and resolve them with LangSmith Engine."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "ARES: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems (arXiv:2311.09476v2, NAACL 2024)",
+    "url": "https://arxiv.org/abs/2311.09476",
+    "published_at": "2023-11-16 (v1); v2 2024-03-31",
+    "key_points": [
+      "ARES 沿三个维度评测 RAG：context relevance（检索到的信息是否与测试问题相关）、answer faithfulness（生成答案是否恰当扎根于检索上下文）、answer relevance（答案是否也与问题相关）。",
+      "ARES 自己生成合成训练数据，微调轻量 LM judge 来评估 RAG 各组件质量；随后用一小部分人工标注数据做 prediction-powered inference (PPI)，以缓解 judge 的预测误差。",
+      "在 KILT、SuperGLUE、AIS 的八个知识密集型任务上，ARES 在评测中仅使用几百条（a few hundred）人工标注即可准确评测 RAG 系统。",
+      "论文声称 ARES judge 在域迁移下仍然有效：即使更换被评测 RAG 系统所用的查询类型和/或文档类型，评测仍保持准确。",
+      "论文为 NAACL 2024 收录，代码与数据集在 GitHub 公开。"
+    ],
+    "raw_excerpt": "We introduce ARES, an Automated RAG Evaluation System, for evaluating RAG systems along the dimensions of context relevance, answer faithfulness, and answer relevance. By creating its own synthetic training data, ARES finetunes lightweight LM judges to assess the quality of individual RAG components. To mitigate potential prediction errors, ARES utilizes a small set of human-annotated datapoints for prediction-powered inference (PPI). Across eight different knowledge-intensive tasks in KILT, SuperGLUE, and AIS, ARES accurately evaluates RAG systems while using only a few hundred human annotations during evaluation."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "ARES 全文（arXiv HTML v2）§1–§4.2：三阶段流程、judge 训练、PPI 打分与实验设置",
+    "url": "https://arxiv.org/html/2311.09476v2",
+    "published_at": "2024-03-31",
+    "key_points": [
+      "ARES 分三阶段：(1) 用 LLM 生成合成查询/答案并过滤低质查询；(2) 用合成数据以对比学习方式微调 LLM judge，对 query–passage–answer 三元组按三个准则分类；(3) 用 judge 给 RAG 系统打分，并用 PPI + 人工偏好验证集给出排序的置信区间。",
+      "合成数据主要由 FLAN-T5 XXL 生成；低质查询的过滤方式是检验该查询能否用其检索器把原始段落检索为 top-1 结果。",
+      "负样本用两种策略生成：weak negative generation（context relevance 负例为随机采样的域内无关段落）与让 FLAN-T5 XXL 用 few-shot 提示生成矛盾答案（用于 answer faithfulness / answer relevance 负例）；负例数量与正例相等。",
+      "judge 本体是微调的 DeBERTa-v3-Large，三个独立 judge 分别对应 context relevance、answer faithfulness、answer relevance。",
+      "人工偏好验证集（human preference validation set）约 150 条或更多标注数据，需同时包含三个维度的正例与负例；PPI 用它计算置信区间。",
+      "PPI 的 rectifier 函数用于估计 judge 的误差，并给出 RAG 系统成功率/失败率的置信界；实验采用 95% 置信水平，取各置信区间中点来对 RAG 系统排序。",
+      "论文明确对比了两种极端做法：直接报告 judge 在无标注数据上的平均分（可能不完全准确），或只用小规模人工验证集评测（需为每个 RAG 系统分别标注大量生成输出，成本高）；PPI 用于结合两者优势。",
+      "实验数据集：KILT 的 Natural Questions、HotpotQA、FEVER、Wizards of Wikipedia，以及 SuperGLUE 的 MultiRC、ReCoRD。",
+      "基线设置：in-context learning 基线用 gpt-3.5-turbo-16k（10/23 版）zero/few-shot；RAGAS 使用 0.0.18 版；检索过滤用 FAISS IndexFlatL2 + text-embedding-ada-002。",
+      "论文称微调后的 judge 无需依赖外部 API，仅用 few-shot 提示与可在商用 GPU 上部署的模型即可对 RAG 系统排序。"
+    ],
+    "raw_excerpt": "PPI utilizes a small set of human annotated datapoints for computing its confidence intervals; we designate this annotated set as our human preference validation set, which is composed of approximately 150 annotated datapoints or more that designate both positive and negative examples for context relevance, answer faithfulness, and answer relevance. ... The PPI rectifier function allows us to estimate the errors of the LLM judge and generate confidence bounds for the success and failure rates of the RAG system"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "ARES 全文（ar5iv 镜像）§1 引言：与 RAGAS 的对比及报告的一致性/效率数字",
+    "url": "https://ar5iv.labs.arxiv.org/html/2311.09476",
+    "published_at": "2024-03-31",
+    "key_points": [
+      "在 KILT 与 SuperGLUE 的六个知识密集型数据集上，ARES 在 context relevance 与 answer relevance 的评测准确率上平均分别比 RAGAS 高 59.3 与 14.4 个百分点。",
+      "在 AIS attribution 数据集上，ARES 对答案幻觉发生率的预测与真实平均值相差在 2.5 个百分点以内。",
+      "相比基于标注的评测方法，ARES 所需标注量少 78%。",
+      "论文称 ARES 能稳定区分在真实指标上仅相差几个点的竞争性 RAG 系统，从而可用于指导开发与配置比较。",
+      "论文对 RAGAS 的批评：基于少量启发式手写提示，对新 RAG 评测场景（如新语料）适应性差，且在其评测中显著逊于 ARES；对 AutoCalibrate 的批评是不提供预测准确性的统计保证。",
+      "论文对 EXAM 的批评：需要每个查询附带若干子问题，带来 ARES 所没有的额外负担。"
+    ],
+    "raw_excerpt": "demonstrating that ARES accurately scores RAG systems across the six knowledge-intensive datasets in KILT and SuperGLUE, beating existing automated evaluation approaches like RAGAS by 59.3 and 14.4 percentage points on average across context relevance and answer relevance evaluation accuracy, respectively. Additionally, ARES accurately calculates answer hallucination occurrences in the AIS attribution dataset, predicting within 2.5 percentage points of the ground truth average for answer hallucinations. Compared to annotation-based evaluation methods, ARES is substantially more accurate and efficient, requiring 78% less annotations than the baseline approach."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Benchmarking Large Language Models in Retrieval-Augmented Generation (arXiv:2309.01431v2)",
+    "url": "https://arxiv.org/abs/2309.01431v2",
+    "published_at": "2023-09-04",
+    "key_points": [
+      "论文提出 Retrieval-Augmented Generation Benchmark (RGB)，一个中英双语语料库，按 RAG 所需的 4 项基本能力划分为 4 个独立 testbed：noise robustness、negative rejection、information integration、counterfactual robustness。",
+      "作者为 Jiawei Chen, Hongyu Lin, Xianpei Han, Le Sun（中科院软件所），v1 提交于 2023-09-04，v2 修订于 2023-12-20，被 AAAI 2024 接收。",
+      "论文在 RGB 上评测了 6 个代表性 LLM，结论是：模型表现出一定程度的噪声鲁棒性，但在负样本拒答、信息整合以及处理虚假信息方面仍显著吃力。"
+    ],
+    "raw_excerpt": "We analyze the performance of different large language models in 4 fundamental abilities required for RAG, including noise robustness, negative rejection, information integration, and counterfactual robustness. To this end, we establish Retrieval-Augmented Generation Benchmark (RGB), a new corpus for RAG evaluation in both English and Chinese. ... Evaluation reveals that while LLMs exhibit a certain degree of noise robustness, they still struggle significantly in terms of negative rejection, information integration, and dealing with false information."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Benchmarking Large Language Models in Retrieval-Augmented Generation — 正文（Benchmark 构造章节，HTML 版）",
+    "url": "https://arxiv.org/html/2309.01431v2",
+    "published_at": "2023-12-20",
+    "key_points": [
+      "语料选择动机：为保证 LLM 内部知识不引入评测偏差，RGB 选择聚合最新新闻信息并基于新闻构造查询。",
+      "噪声鲁棒性定义：noisy documents 指与问题相关但不含任何答案信息的文档（例：问 2022 年诺贝尔文学奖得主，噪声文档是 2021 年诺贝尔文学奖的报道）；该 testbed 按设定的 noise ratio 在外部文档中掺入一定数量的噪声文档。",
+      "反事实鲁棒性定义：评估模型在被指令提示「检索信息可能存在风险」的情况下，能否识别检索文档中已知的事实错误；该 testbed 的实例是模型本身能直接回答、但外部文档含事实错误的问题。",
+      "反事实鲁棒性数据与前三种能力不同，仅基于模型内部知识构造：用 ChatGPT 通过 prompt 自动生成模型已知的问题与答案（例：由「2022 年诺贝尔生理学或医学奖得主」生成已知问题「2021 年诺贝尔文学奖得主」）。",
+      "信息整合能力的数据构造方式：对问题做扩展/改写，使答案涵盖多个方面（例：把「谁获得 2023 年超级碗 MVP」改写为「谁获得 2022 和 2023 年超级碗 MVP」），从而必须利用多篇文档的信息才能作答。",
+      "检索与外部文档构造流程：对每个 query 用 Google API 抓取 10 个相关网页并抽取 snippet；同时把网页正文切成最长 300 token 的文本块，用稠密检索模型（中文 m3e-base，英文 all-mpnet-base-v2）选出与 query 最匹配的 top-30 文本块；这些文本块连同搜索 API 的 snippet 共同作为外部文档，并按是否含答案划分为 positive / negative 文档。",
+      "噪声鲁棒性结果（英文，noise ratio 0/0.2/0.4/0.6/0.8）：ChatGPT 96.33/94.67/94.00/90.00/76.00；ChatGLM-6B 93.67/90.67/89.33/84.67/70.67；ChatGLM2-6B 91.33/89.67/83.00/77.33/57.33；Vicuna-7B-v1.3 87.67/83.33/86.00/82.33/60.33。",
+      "噪声鲁棒性结果（中文，noise ratio 0/0.2/0.4/0.6/0.8）：ChatGPT 95.67/94.67/91.00/87.67/70.67；ChatGLM-6B 94.33/90.67/89.00/82.33/69.00；ChatGLM2-6B 86.67/82.33/76.67/72.33/54.00。",
+      "关键发现：模型虽有一定噪声鲁棒性，但容易混淆相似信息——当外部文档中存在关于 2021 年诺贝尔文学奖的噪声文档时，面对 2022 年诺贝尔文学奖的问题会给出不准确答案。",
+      "关键发现：当所有外部文档都不含相关信息时，LLM 常常无法拒绝作答，而是生成错误答案。",
+      "关键发现：LLM 缺乏跨多文档总结的能力，当回答一个问题需要多篇文档时往往无法给出准确答案。"
+    ],
+    "raw_excerpt": "In this paper, we define noisy documents as those that are relevant to the question but do not contain any information of the answer. ... the testbed for noise robustness contains instances whose external documents contain a certain number of noisy documents based on the desired noise ratio. ... The testbed for counterfactual robustness includes instances that can be answered directly by the LLMs, but the external documents contain factual errors. ... This involves expanding or rewriting these questions so that their answers encompass multiple aspects. ... we use Google's API to fetch 10 relevant web pages ... convert their textual content into text chunks with a maximum length of 300 tokens ... we select the top-30 text chunks that match the query most effectively."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "chen700564/RGB — 官方代码与数据仓库 README",
+    "url": "https://github.com/chen700564/RGB",
+    "published_at": "2024-05-17",
+    "key_points": [
+      "仓库为论文官方实现，数据放在 data/ 目录，按能力与语言拆分为 en.json / en_refine.json / en_int.json / en_fact.json 及对应 zh_* 文件：en/zh 用于噪声鲁棒性与负样本拒答，*_int 用于信息整合，*_fact 用于反事实鲁棒性。",
+      "README 明确：评测 Information Integration 需使用 zh_int 或 en_int；评测 Counterfactual Robustness 需使用 zh_fact 或 en_fact。",
+      "2024/03 发布 refine 版数据（en_refine.json / zh_refine.json），修订内容为：移除错误的 positive 与 negative 文档、补充部分 positive 文档、修正部分不准确的答案。",
+      "评测脚本 evalue.py 的关键参数包括 noise_rate（输入中噪声文档比例）与 passage_num（提供给 LLM 的文档数，默认 5）；负样本拒答通过先以 noise_rate=1 生成、再运行 reject_evalue.py 得到 reject_rate (Rej*)。",
+      "输出指标命名：all_rate 为准确率（noise_rate<1 时）或拒答率（noise_rate=1 时）；fact_check_rate 为错误检测率 (ED)；反事实鲁棒性评测（fact_evalue.py）输出 reject_rate 即错误检测率 (ED*)、correct_rate 即错误纠正率 (CR)。",
+      "仓库热度与维护状态：378 stars、39 forks、17 open issues，创建于 2023-09-04，最后 push 于 2024-05-17，语言 Python。",
+      "代码与数据采用 CC BY-NC-SA 4.0 许可，仅限非商业用途。"
+    ],
+    "raw_excerpt": "To evalute the Information Integration, you should use zh_int or en_int for Chinese questions or English questions. To evalute the Counterfactual Robustness, you should use zh_fact or en_fact ... The outputs are: all_rate: The accuracy (noise_rate<1) or rejection rate (noise_rate=1); fact_check_rate: the error detection rates (ED) ... The \"reject_rate\" in the outputs are the reject rate (Rej*). ... The \"reject_rate\" in the outputs are the error detection rates (ED*). The correct_rate in the outputs are the error correction rate (CR)"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "MultiHop-RAG: Benchmarking Retrieval-Augmented Generation for Multi-Hop Queries (arXiv:2401.15391, abs page)",
+    "url": "https://arxiv.org/abs/2401.15391",
+    "published_at": "2024-01-27",
+    "key_points": [
+      "论文提出 MultiHop-RAG 数据集，由四部分组成：一个知识库、大量 multi-hop 查询、其 ground-truth 答案、以及关联的 supporting evidence。",
+      "知识库以英文新闻文章数据集为基础构建。",
+      "论文指出既有 RAG benchmark（如 RGB、RECALL）主要评测答案可由单条证据检索并解决的简单情形，没有 benchmark 评估复杂 multi-hop 查询的检索与推理能力。",
+      "论文做两组实验：第一组比较不同 embedding 模型为 multi-hop 查询检索证据的效果；第二组考察 GPT-4、PaLM、Llama2-70B 等 SOTA LLM 在给定证据下推理并回答 multi-hop 查询的能力。",
+      "两组实验均显示现有 RAG 方法在检索与回答 multi-hop 查询上表现不理想（unsatisfactorily）。",
+      "作者为 Yixuan Tang、Yi Yang，单位为香港科技大学（HKUST）。",
+      "论文提交日期 2024-01-27，仅 v1 版本。"
+    ],
+    "raw_excerpt": "In this paper, we develop a novel dataset, MultiHop-RAG, which consists of a knowledge base, a large collection of multi-hop queries, their ground-truth answers, and the associated supporting evidence. ... Both experiments reveal that existing RAG methods perform unsatisfactorily in retrieving and answering multi-hop queries."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "MultiHop-RAG 正文（HTML v1）：multi-hop 查询定义、四类查询与评测维度",
+    "url": "https://arxiv.org/html/2401.15391v1",
+    "published_at": "2024-01-27",
+    "key_points": [
+      "论文将 multi-hop 查询定义为需要检索并推理多份 supporting evidence 才能给出答案的查询；检索集 R_q 中的 chunks 共同构成答案，区别于答案可直接由单条证据得出的 single-hop 查询。",
+      "论文基于真实 RAG 系统常见查询，划分四类 multi-hop 查询：Inference（由检索集推理演绎出答案）、Comparison（需比较检索集内证据）、Temporal（需分析检索 chunk 的时间信息）、Null（答案无法从检索集得出）。",
+      "Null 查询被专门纳入以评估生成质量，尤其是幻觉问题：即使提供了检索集，LLM 也应输出空响应而非编造答案。",
+      "论文明确从两个维度评估处理 multi-hop 查询的 RAG 系统：retrieval evaluation（将检索集与每个查询的 ground-truth evidence 比较，null 查询除外，因其无证据可推导）与 response evaluation（将 LLM 响应与 ground-truth 答案比较，以评估推理能力）。",
+      "数据构造 Step 1：通过 mediastack API 下载英文新闻数据，覆盖娱乐、商业、体育、科技、健康、科学等类别。",
+      "为模拟真实 RAG 场景（知识库数据可能不同于 LLM 训练数据），选取 2023-09-26 至 2023-12-26 发布的新闻，该时间窗超出 ChatGPT、LLaMA 等常用 LLM 的知识截止时间，以降低 LLM 已见过这些文章的可能；仅保留 token 长度 ≥1024 的文章，每篇配标题、发布日期、作者、类别、URL、新闻来源等元数据。",
+      "Step 2：用训练好的语言模型（fact-or-opinion-xlmr-el）从每篇文章抽取事实性/观点性句子作为证据，并只保留与其他文章存在关键词重叠证据的文章，以便后续构造跨来源 multi-hop 查询。",
+      "Step 3：用 GPT-4 将证据改写成 claim（消解代词、补全实体），并用 UniEval 框架做事实核查以验证 claim 与证据的一致性；同时用 GPT-4 识别 bridge-entity 与 bridge-topic，作为连接不同证据、构造 multi-hop 查询的桥梁。",
+      "实验使用基于 LlamaIndex 实现的 RAG 系统；第二组实验覆盖 GPT-4、GPT-3.5、PaLM、Claude-2、Llama2-70B、Mixtral-8x7B 等模型。"
+    ],
+    "raw_excerpt": "We define a multi-hop query as one that requires retrieving and reasoning over multiple pieces of supporting evidence to provide an answer. ... An RAG system handling multi-hop queries can be assessed from two key aspects: retrieval evaluation and generation evaluation."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "yixuantt/MultiHop-RAG 官方仓库 README",
+    "url": "https://github.com/yixuantt/MultiHop-RAG",
+    "published_at": "2024-01-23",
+    "key_points": [
+      "README 称 MultiHop-RAG 是用于评测 RAG pipeline 中跨文档检索与推理的 QA 数据集，含 2556 条查询。",
+      "每条查询的证据分布在 2 到 4 篇文档中。",
+      "查询还涉及文档元数据（document metadata），以反映真实 RAG 应用中的复杂场景。",
+      "README 标注论文已被 COLM 2024 接收。",
+      "仓库提供 Hugging Face dataloader（yixuantt/MultiHopRAG）与 simple_retrieval 等示例用法。",
+      "仓库热度：476 stars、46 forks、12 open issues，语言 Python，创建于 2024-01-23，最近 push 2026-09-16。"
+    ],
+    "raw_excerpt": "MultiHop-RAG: a QA dataset to evaluate retrieval and reasoning across documents with metadata in the RAG pipelines. It contains 2556 queries, with evidence for each query distributed across 2 to 4 documents. The queries also involve document metadata, reflecting complex scenarios commonly found in real-world RAG applications."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "RAGBench: Explainable Benchmark for Retrieval-Augmented Generation Systems (arXiv:2407.11005, abs page)",
+    "url": "https://arxiv.org/abs/2407.11005",
+    "published_at": "2024-06-25",
+    "key_points": [
+      "RAGBench 被定位为首个全面、大规模 RAG benchmark 数据集，含 100k 条样本。",
+      "数据集覆盖五个行业特定领域（five unique industry-specific domains）与多种 RAG 任务类型，样本取自用户手册等行业语料。",
+      "论文形式化提出 TRACe 评测框架：一组可解释（explainable）、可行动（actionable）的 RAG 评测指标，声称适用于所有 RAG 领域。",
+      "论文的核心发现：在大规模基准测试中，基于 LLM 的 RAG 评测方法在 RAG 评测任务上难以与一个微调过的 RoBERTa 模型竞争。",
+      "数据集发布于 https://huggingface.co/datasets/rungalileo/ragbench。",
+      "作者为 Robert Friel、Masha Belyi、Atindriyo Sanyal，单位为 Galileo Technologies Inc.。",
+      "提交历史：v1 为 2024-06-25，v2 修订于 2025-01-16。"
+    ],
+    "raw_excerpt": "we introduce RAGBench: the first comprehensive, large-scale RAG benchmark dataset of 100k examples. It covers five unique industry-specific domains and various RAG task types. ... we find that LLM-based RAG evaluation methods struggle to compete with a finetuned RoBERTa model on the RAG evaluation task."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "RAGBench 正文（HTML v2）：TRACe 指标定义与数据构造",
+    "url": "https://arxiv.org/html/2407.11005v2",
+    "published_at": "2025-01-16",
+    "key_points": [
+      "论文采用已有的 context relevance、answer faithfulness 指标定义，并新引入两个指标：context utilization 与 answer completeness；作者主张这套指标能更好描述 RAG 系统整体表现并提供细粒度、可行动的洞察。",
+      "TRACe 指标基于 token 集合定义：对检索到的上下文文档 d_i，R_i 为其中对回答查询有用的 relevant tokens 集合，U_i 为生成模型实际使用（utilized）的 tokens 集合。",
+      "document relevance = Len(R_i)/Len(d_i)；example relevance 为所有上下文文档的 relevant token 长度之和除以文档总长度。",
+      "document utilization = Len(U_i)/Len(d_i)；example utilization 为所有文档 utilized token 长度之和除以文档总长度。",
+      "计算 ground-truth 指标时采用 sentence-length 作为长度度量，因其最契合标注方案；token 或字符长度在其他场景也可适用。",
+      "RAGBench 由 12 个组件数据集统一转换为标准化 RAG 格式并配一致标注：CovidQA、PubmedQA、HotpotQA、MS Marco、CUAD、EManual、TechQA、FinQA、TAT-QA、ExpertQA、HAGRID，以及专为 RAG 适配的 DelucionQA。",
+      "构造时变化的参数包括：来源领域、上下文文档数量、上下文 token 长度、响应生成模型。",
+      "上下文 token 长度范围为 100 至 11k tokens；CUAD 文档上下文最长可达 11k tokens，PubMedQA 上下文相对较短。",
+      "数据划分总计：train 78k、dev 12k、test 11k，合计约 100k 样本；划分时确保同一数据源的查询在 train/val/test 间不重叠。",
+      "响应生成使用 GPT-3.5（gpt-3.5-0125）与 Claude 3 Haiku 两个模型，每个输入生成两条响应以增加多样性；HAGRID 与 ExpertQA 沿用原始数据中的 LLM 生成响应；CUAD 因上下文超出 GPT-3.5 的 16k token 限制仅用 Claude 3 Haiku 生成。",
+      "为让标签分布更多样，生成时使用不强制模型严格依据所给上下文的 basic prompt，temperature 设为 1.0。",
+      "论文将 RAGBench 与含 ground-truth 响应的数据集（ChatRAGBench、CRAG、DomainRAG、ALCE）区分开：后者用于端到端评测（exact match、ROUGE 等响应级指标），而 RAGBench 旨在支撑对 RAG 系统不同部件、多维度（retriever relevance、响应的 adherence 与 completeness）的评测。",
+      "论文批评既有 RAG 评测研究各自设计新数据集、常用 LLM 作生成器与标注器，导致不可复现；且多数研究只在小型领域内数据集上评测，跨域泛化仍是开放问题。",
+      "论文报告一个 400M 参数的 DeBERTa-large 模型在 RAGBench 上微调后，在多个领域与任务类型上优于 few-shot LLM judges。"
+    ],
+    "raw_excerpt": "we adopt existing metric definitions for context relevance, answer faithfulness [9, 32] and introduce two new metrics: context utilization and answer completeness. ... document relevance = Len(R_i)/Len(d_i) ... document utilization = Len(U_i)/Len(d_i)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Evaluating — LlamaIndex 官方文档（evaluation 模块总览）",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/evaluating/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 将评测分为两类：Response Evaluation（生成结果质量）与 Retrieval Evaluation（检索质量）。",
+      "Response Evaluation 采用 LLM-based 评测模块，使用一个 \"gold\" LLM（文档举例 GPT-4）来判断预测答案是否正确。",
+      "文档列出的 response 评测指标共 6 个：Correctness（需标签，与参考答案比对）、Semantic Similarity（需标签，与参考答案语义相似）、Faithfulness（答案是否忠于检索到的上下文，即是否幻觉）、Context Relevancy（检索到的上下文是否与 query 相关）、Answer Relevancy（生成的答案是否与 query 相关）、Guideline Adherence（答案是否遵守特定准则）。",
+      "文档明确指出许多评测模块不需要 ground-truth 标签，可仅用 query、context、response 的组合配合 LLM 调用完成评测。",
+      "检索侧评测使用 MRR（mean reciprocal rank）、hit-rate、precision 等排序指标，流程为：先在无结构语料上合成生成 (question, context) 对，再用排序指标评测 retriever。",
+      "LlamaIndex 还提供 Question Generation 能力，可用自有数据自动生成问题以构建自动化评测流程。",
+      "官方集成第三方评测工具：UpTrain、Tonic Validate、DeepEval、Ragas、RAGChecker、Cleanlab。"
+    ],
+    "raw_excerpt": "LlamaIndex offers LLM-based evaluation modules to measure the quality of results. This uses a \"gold\" LLM (e.g. GPT-4) to decide whether the predicted answer is correct in a variety of ways. ... Correctness: Whether the generated answer matches that of the reference answer given the query (requires labels). Semantic Similarity Whether the predicted answer is semantically similar to the reference answer (requires labels). Faithfulness: Evaluates if the answer is faithful to the retrieved contexts (in other words, whether if there's hallucination). Context Relevancy: Whether retrieved context is relevant to the query. Answer Relevancy: Whether the generated answer is relevant to the query. Guideline Adherence: Whether the predicted answer adheres to specific guidelines."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Usage Pattern (Response Evaluation) — LlamaIndex 官方文档",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/evaluating/usage_pattern/",
+    "published_at": null,
+    "key_points": [
+      "所有评测模块都实现 BaseEvaluator 类，提供两个方法：evaluate(query, contexts, response, **kwargs) 与 evaluate_response(query, response, **kwargs)（后者接受 llamaindex Response 对象，自动带出 source nodes）。",
+      "每个 evaluator 返回 EvaluationResult，含三个字段：passing（二元通过/失败）、score（数值分数）、feedback（字符串反馈）；不同 evaluator 可能只填充其中一部分。",
+      "judge 模型通过构造函数的 llm= 参数注入：示例为 FaithfulnessEvaluator(llm=llm)、RelevancyEvaluator(llm=llm)，其中 llm = OpenAI(model=\"gpt-4\", temperature=0.0)。",
+      "FaithfulnessEvaluator 既可对整条 response 评测（evaluate_response），也可对每个 source node 单独评测（遍历 response.source_nodes 逐个 evaluate）。",
+      "RelevancyEvaluator 评测检索上下文与答案对给定 query 是否相关且一致，且必须额外传入 query。",
+      "提供 BatchEvalRunner 批量评测器，可对多个 evaluator 与大量问题并发执行（workers 参数控制并发），如 BatchEvalRunner({\"faithfulness\": ..., \"relevancy\": ...}, workers=8)。",
+      "RagDatasetGenerator.from_documents(..., num_questions_per_chunk=10) 可从文档自动生成评测问题集。",
+      "DeepEval 集成提供 6 个 evaluator，其中 3 个为 RAG evaluator（DeepEvalAnswerRelevancyEvaluator、DeepEvalFaithfulnessEvaluator、DeepEvalContextualRelevancyEvaluator）。"
+    ],
+    "raw_excerpt": "All of the evaluation modules in LlamaIndex implement the BaseEvaluator class ... Each evaluator outputs a EvaluationResult when executed: eval_result.passing # binary pass/fail; eval_result.score # numerical score; eval_result.feedback # string feedback ... llm = OpenAI(model=\"gpt-4\", temperature=0.0); evaluator = FaithfulnessEvaluator(llm=llm) ... runner = BatchEvalRunner({\"faithfulness\": faithfulness_evaluator, \"relevancy\": relevancy_evaluator}, workers=8)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Faithfulness Evaluator — LlamaIndex 官方示例 notebook",
+    "url": "https://docs.llamaindex.ai/en/stable/examples/evaluation/faithfulness_eval/",
+    "published_at": null,
+    "key_points": [
+      "FaithfulnessEvaluator 用于衡量 query engine 的 response 是否与任一 source node 相符，即用于检测回答是否被幻觉化。",
+      "示例中 judge 模型为 OpenAI GPT-4：gpt4 = OpenAI(temperature=0, model=\"gpt-4\")，并注释 \"Using GPT-4 here for evaluation\"。",
+      "评测结果以 Pass/Fail 呈现，并附 Reasoning（即 eval_result.feedback）说明判定理由。",
+      "示例在 5 个自动生成问题上得到 score: 5/5（该数字为 notebook 演示数据，非基准结论）。",
+      "示例中 DatasetGenerator 已被标记为 deprecated，官方建议改用 RagDatasetGenerator / LabelledRagDataset。"
+    ],
+    "raw_excerpt": "This notebook uses the FaithfulnessEvaluator module to measure if the response from a query engine matches any source nodes. This is useful for measuring if the response was hallucinated. ... # Using GPT-4 here for evaluation; gpt4 = OpenAI(temperature=0, model=\"gpt-4\"); evaluator_gpt4 = FaithfulnessEvaluator(llm=gpt4)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Answer Relevancy and Context Relevancy Evaluations — LlamaIndex 官方示例 notebook",
+    "url": "https://docs.llamaindex.ai/en/stable/examples/evaluation/answer_and_context_relevancy/",
+    "published_at": null,
+    "key_points": [
+      "AnswerRelevancyEvaluator 与 ContextRelevancyEvaluator 分别衡量生成答案、检索上下文与用户 query 的相关性。",
+      "两者都返回 0 到 1 之间的分数以及解释该分数的 feedback，分数越高相关性越高。",
+      "评测采用分步打分法：judge LLM 需回答两个子问题（response 是否匹配 query 的主题；response 是否尝试回应用户 query 所关注的焦点/视角），每题 1 分，满分 2/2。",
+      "judge 模型可分别配置：示例中 answer_relevancy 用 OpenAI(temperature=0, model=\"gpt-3.5-turbo\")，context_relevancy 用 OpenAI(temperature=0, model=\"gpt-4\")。",
+      "示例在 EvaluatingLlmSurveyPaperDataset（LabelledRagDataset）上得到 mean_answer_relevancy_score 0.914855、mean_context_relevancy_score 0.572273（该数据集上的演示结果，非通用基准）。",
+      "评测支持异步批量执行（aevaluate + asyncio.gather），并可传 sleep_time_in_seconds 控制速率。"
+    ],
+    "raw_excerpt": "we demonstrate how to utilize the AnswerRelevancyEvaluator and ContextRelevancyEvaluator classes to get a measure on the relevancy of a generated answer and retrieved contexts, respectively, to a given user query. Both of these evaluators return a score that is between 0 and 1 as well as a generated feedback explaining the score. ... Each question is worth 1 point and so a perfect evaluation would yield a score of 2/2. ... judges[\"answer_relevancy\"] = AnswerRelevancyEvaluator(llm=OpenAI(temperature=0, model=\"gpt-3.5-turbo\"))"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Correctness Evaluator — LlamaIndex 官方示例 notebook",
+    "url": "https://docs.llamaindex.ai/en/stable/examples/evaluation/correctness_eval/",
+    "published_at": null,
+    "key_points": [
+      "CorrectnessEvaluator 用于对照参考答案（reference）评测生成答案的相关性与正确性，即需要 ground-truth 标签。",
+      "judge 模型配置为 OpenAI(\"gpt-4\")，通过 CorrectnessEvaluator(llm=llm) 注入。",
+      "Correctness 输出数值 score（示例中为 2.5，即分档打分而非 0/1）以及 feedback 文本说明扣分原因。"
+    ],
+    "raw_excerpt": "This notebook uses the CorrectnessEvaluator to evaluate the relevance and correctness of a generated answer against a reference answer. ... llm = OpenAI(\"gpt-4\"); evaluator = CorrectnessEvaluator(llm=llm) ... result.score 2.5"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Embedding Similarity Evaluator (SemanticSimilarityEvaluator) — LlamaIndex 官方示例 notebook",
+    "url": "https://docs.llamaindex.ai/en/stable/examples/evaluation/semantic_similarity_eval/",
+    "published_at": null,
+    "key_points": [
+      "SemanticSimilarityEvaluator 通过计算生成答案与参考答案的 embedding 相似度来评测问答系统质量，不使用 LLM judge。",
+      "该 evaluator 只使用 response 与 reference，传入 query 不影响评测结果。",
+      "默认相似度阈值为 0.8，超过阈值 passing 为 True（示例：0.8749 通过，0.7222 不通过）。",
+      "embedding 模型可替换：示例用 resolve_embed_model(\"local\") 配置本地 embedding，并支持 similarity_mode 与 similarity_threshold 自定义（示例阈值 0.6）。",
+      "文档明确警告：高相似度分数不代表答案正确——embedding 相似度主要捕捉\"相关性\"，示例中 \"The sky is yellow.\" 与 \"The sky is blue.\" 得到 0.9179 的高分。"
+    ],
+    "raw_excerpt": "This notebook shows the SemanticSimilarityEvaluator, which evaluates the quality of a question answering system via semantic similarity. Concretely, it calculates the similarity score between embeddings of the generated answer and the reference answer. ... embed_model = resolve_embed_model(\"local\"); evaluator = SemanticSimilarityEvaluator(embed_model=embed_model, similarity_mode=SimilarityMode.DEFAULT, similarity_threshold=0.6) ... We note here that a high score does not imply the answer is always correct."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "langchain-ai/langsmith-sdk（已归档的 LangSmith 客户端 SDK 仓库）",
+    "url": "https://github.com/langchain-ai/langsmith-sdk",
+    "published_at": "2023-05-30",
+    "key_points": [
+      "仓库 stars 为 1,082，forks 314，open issues 227，主语言 Python，license 为 MIT。",
+      "仓库创建于 2023-05-30，最后一次 push 为 2026-10-16。",
+      "README 声明该仓库已归档（archived），LangSmith SDK 已迁出至独立仓库。",
+      "Python SDK 迁至 langchain-ai/langsmith-python（PyPI 包名 langsmith），JavaScript/TypeScript SDK 迁至 langchain-ai/langsmith-javascript（npm 包名 langsmith）。",
+      "README 说明包名与安装方式未变，新 issue 与 PR 应提交到新仓库。",
+      "仓库 topics 为 evaluation、language-model、observability，定位是客户端 SDK 而非平台服务端。"
+    ],
+    "raw_excerpt": "> [!IMPORTANT]\n> ## This repository has moved\n>\n> The LangSmith SDKs now live in their own repositories and this one is now archived.\n>\n> | SDK | New repository | Package |\n> |---|---|---|\n> | Python | **[langchain-ai/langsmith-python](https://github.com/langchain-ai/langsmith-python)** | [`langsmith` on PyPI](https://pypi.org/project/langsmith/) |\n> | JavaScript / TypeScript | **[langchain-ai/langsmith-javascript](https://github.com/langchain-ai/langsmith-javascript)** | [`langsmith` on npm](https://www.npmjs.com/package/langsmith) |\n>\n> Packages are unchanged, nothing to do for installs. Open new issues and pull requests in the new repositories."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "langchain-ai/langsmith-python（迁移后的 Python 客户端 SDK 仓库）",
+    "url": "https://github.com/langchain-ai/langsmith-python",
+    "published_at": "2026-02-20",
+    "key_points": [
+      "仓库 stars 为 17，forks 14，open issues 42，license 为 MIT。",
+      "仓库创建于 2026-02-20，最后一次 push 为 2026-10-24。",
+      "README 自述该包是用于与 LangSmith 平台交互的 Python 客户端（client），而非平台本体。",
+      "使用方式为 pip install -U langsmith 并设置 LANGSMITH_API_KEY=ls_... 环境变量，即依赖托管平台账号与 API key。",
+      "SDK 提供 wrap_openai 与 @traceable 装饰器用于自动追踪 LLM 调用。"
+    ],
+    "raw_excerpt": "# LangSmith Client SDK\n\nThis package contains the Python client for interacting with the [LangSmith platform](https://smith.langchain.com/).\n\nTo install:\n\n```bash\npip install -U langsmith\nexport LANGSMITH_TRACING=true\nexport LANGSMITH_API_KEY=ls_...\n```"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Self-hosted LangSmith — LangChain 官方文档",
+    "url": "https://docs.langchain.com/langsmith/self-hosted",
+    "published_at": null,
+    "key_points": [
+      "自托管 LangSmith 是 Enterprise 套餐的附加项（add-on），面向 LangChain 最大、安全要求最高的客户。",
+      "试用自托管需联系销售团队获取 license key，说明自托管为授权式商业交付而非公开源码分发。",
+      "自托管将 LangSmith 平台运行在客户自有基础设施中，使 trace 与运营数据留在客户环境内。",
+      "基础安装包含 observability、evaluation、prompt engineering、Insights 与 Chat；Sandboxes、Engine、Fleet、LLM Gateway、LangSmith Deployment 为可选附加。",
+      "自托管实例由一组应用服务构成：LangSmith frontend（Nginx，唯一需对外暴露的组件）、backend、queue、platform backend、Playground、ACE backend。",
+      "存储层依赖 ClickHouse（trace 与 feedback 主存储）、PostgreSQL（事务与运营数据）、Redis/Valkey（队列与缓存）、Blob storage，并支持替换为外部实例。",
+      "文档全文未提供任何平台源码仓库地址或开源许可说明，仅描述容器化/Helm 部署方式。"
+    ],
+    "raw_excerpt": "Self-hosted LangSmith is an add-on to the Enterprise plan designed for LangChain's largest, most security-conscious customers. For more details, refer to Pricing . Contact our sales team if you want a license key to trial LangSmith in your environment. Self-hosted LangSmith runs the LangSmith platform in your own infrastructure so that trace and operational data stay in your environment.\n\nA self-hosted LangSmith instance runs a set of application services backed by several storage services."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Pricing Plans — LangChain 官方定价页",
+    "url": "https://www.langchain.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "提供三档套餐：Developer $0/seat/月（含 5k base traces/月，最多 1 个 seat）、Plus $39/seat/月（含 10k base traces/月，无限席位）、Enterprise 定制价格。",
+      "超出包含额度后按用量计费，计量单位为 LSU（LangChain Standard Units），单价 $1.00/LSU。",
+      "Deployment、Fleet、Engine、Sandboxes 等能力均以 LSU 计量（如 Runtime Compute 0.0675 LSU/vCPU-hr、Database Compute 0.177 LSU/vCPU-hr）。",
+      "托管选项分 Cloud（全托管）、Hybrid、Self-Hosted；仅 Enterprise 档提供 Hybrid 与 Self-Hosted。",
+      "Enterprise 档包含自托管与混合部署选项、自定义 SSO/ABAC/RBAC、支持 SLA 与自定义席位与工作区。",
+      "Tuned Evaluators 按每次 Evaluation Run 0.015 LSU 计费，属按用量计价的评估能力。"
+    ],
+    "raw_excerpt": "Developer For solo users getting started. $0 / seat per month then pay as you go … Plus For teams building and deploying agents. $39 / seat per month then pay as you go … Enterprise For teams with advanced hosting, security, and support needs. Custom pricing then pay as you go … Self-hosted and hybrid deployment options\n\nPay-as-you-go. LSU LangChain Standard Units. $1.00 / LSU"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "pypistats.org — langsmith 包下载统计",
+    "url": "https://pypistats.org/packages/langsmith",
+    "published_at": null,
+    "key_points": [
+      "langsmith 包最近一日下载量为 1,863,782 次。",
+      "最近一周下载量为 21,608,267 次。",
+      "最近一月下载量为 77,233,437 次。",
+      "包最新版本为 0.14.12，license 为 MIT，作者为 LangChain。",
+      "包摘要自述为连接 LangSmith Observability and Evaluation Platform 的客户端库。",
+      "可选依赖中包含 openai、openai-agents、claude-agent-sdk、google-genai、google-adk、opentelemetry 系列、strands-agents 等，反映其对接多家模型与框架。"
+    ],
+    "raw_excerpt": "Author: LangChain\nLicense: MIT\nSummary: Client library to connect to the LangSmith Observability and Evaluation Platform.\nLatest version: 0.14.12\n\nDownloads last day: 1,863,782\nDownloads last week: 21,608,267\nDownloads last month: 77,233,437"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "LangSmith Observability — LangChain 官方文档首页",
+    "url": "https://docs.langchain.com/langsmith/home",
+    "published_at": null,
+    "key_points": [
+      "LangSmith Observability 提供从单条 trace 到生产级性能指标的全链路可见性。",
+      "官方称 LangSmith 可与多种框架和提供商集成，列举 OpenAI、Anthropic、CrewAI、Vercel AI SDK、Pydantic AI 等。",
+      "平台部署形态包括 cloud、hybrid、self-hosted 三种，均包含 observability、evaluation、prompt engineering 与 deployment。",
+      "使用需在 smith.langchain.com 注册账号并创建 API key，属托管 SaaS 的账号制使用方式。",
+      "文档提供专门针对 RAG 应用的端到端追踪教程（Trace a RAG application）。",
+      "平台能力包括 traces 查看、监控仪表盘与告警、automations（规则/Webhook/在线评估）、人工反馈标注队列、以及 Engine 自动定位失败根因。"
+    ],
+    "raw_excerpt": "LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics. … LangSmith works with many frameworks and providers. Browse available integrations to connect your stack including OpenAI, Anthropic, CrewAI, Vercel AI SDK, Pydantic AI, and more. … To set up a LangSmith instance, visit the Platform setup section to choose between cloud, hybrid, or self-hosted."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "GitHub 仓库搜索结果（关键词 langsmith，按 stars 排序）",
+    "url": "https://github.com/search?q=langsmith&s=stars",
+    "published_at": null,
+    "key_points": [
+      "搜索结果中 langsmith-sdk 的描述为：该仓库于 2026-10-16 归档，Python SDK 迁至 langchain-ai/langsmith-python，JS SDK 迁至 langchain-ai/langsmith-javascript。",
+      "langsmith-sdk 以 1,082 stars 位列 langsmith 关键词搜索结果第 4 位，前三位均为第三方教程/示例仓库而非官方平台代码。",
+      "搜索结果中不存在 LangSmith 平台服务端的官方源码仓库；排名靠前的相关仓库为 langsmith-cookbook（1,036 stars，示例代码）与 langchain-ai/docs（439 stars，文档）。",
+      "存在第三方项目 aegra/aegra（1,278 stars），自述为 LangGraph Platform（现称 LangSmith Deployments）的开源替代品，侧面反映 LangSmith 部署产品本身非开源。"
+    ],
+    "raw_excerpt": "- langchain-ai/langsmith-sdk (★1082, forks 314)\n  desc: This repo was archived on Oct 16, 2026. Python SDK moved to langchain-ai/langsmith-python and JS SDK to langchain-ai/langsmith-javascript.\n- aegra/aegra (★1278, forks 268)\n  desc: Open source alternative to LangGraph Platform (now LangSmith Deployments) - Self-hosted AI agent backend with FastAPI and PostgreSQL. Zero vendor lock-in, full control over your agent infrastructure."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena (arXiv:2306.05685v4, NeurIPS 2023 D&B)",
+    "url": "https://arxiv.org/html/2306.05685v4",
+    "published_at": "2023-06-09 (v1); v4 2023-12-24",
+    "key_points": [
+      "论文系统列出 LLM-as-a-judge 的局限：position bias、verbosity bias、self-enhancement bias，以及 limited reasoning ability，并提出缓解部分偏差的方案。",
+      "位置偏差实验设计：对 MT-bench 每个首轮问题用 GPT-3.5 以 temperature 0.7 调用两次构造两个相似答案，再用三种 judge（Claude-v1、GPT-3.5、GPT-4）× 两种 prompt（default / rename）测试交换顺序后判断是否一致。",
+      "位置偏差幅度很大：default prompt 下交换顺序后判断一致率 Claude-v1 仅 23.8%、GPT-3.5 46.2%、GPT-4 65.0%；即只有 GPT-4 在超过 60% 的案例中给出一致结果。",
+      "多数 judge 偏向第一个位置：default prompt 下偏向第一位的比例 Claude-v1 75.0%、GPT-3.5 50.0%、GPT-4 30.0%。",
+      "存在 name bias：Claude-v1 在 rename prompt 下偏向名为 \"Assistant A\" 的一方（偏向第一位降至 11.2%，偏向第二位升至 28.7%），说明偏差部分来自名字而非位置。",
+      "judge 模型能力与偏差程度相关：同一实验设置下 Claude-v1 一致率 23.8%、GPT-3.5 46.2%、GPT-4 65.0%（default prompt），即更强的 judge 位置偏差更小。",
+      "论文报告 GPT-4 judge 与人类偏好的一致率超过 80%，与人类之间的一致率处于同一水平（基于 3K 专家投票与 3K 众包投票）。",
+      "论文指出单答案打分（single answer grading）结果可能不稳定，绝对分数在 judge 模型变化时比相对成对比较波动更大；成对比较则随模型数量增加组合数呈平方增长而缺乏可扩展性。",
+      "论文提出 reference-guided grading（在适用时提供参考答案）作为缓解手段之一，并给出数学题评分的示例 prompt。",
+      "论文主张 LLM-as-a-judge 的两大优势是 scalability 与 explainability（不仅给分数还给解释）。"
+    ],
+    "raw_excerpt": "We identify certain biases and limitations of LLM judges. ... Position bias is when an LLM exhibits a propensity to favor certain positions over others. ... we found all of them exhibit strong position bias. Most LLM judges favor the first position. Claude-v1 also shows a name bias which makes it favors \"Assistant A\" ... The position bias can be very significant. Only GPT-4 outputs consistent results in more than 60% of cases. [Table 2] Claude-v1 default: Consistency 23.8%, Biased toward first 75.0%; GPT-3.5 default: 46.2%, 50.0%; GPT-4 default: 65.0%, 30.0%. ... our results from 3K controlled expert votes and 3K crowdsourced human votes in the wild verify that GPT-4 judge match human evaluations at an agreement rate exceeding 80%, achieving the same level of human-human agreement (§4.2, Table 4)."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Ragas Docs — Context Precision（含 Context Utilization）",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/",
+    "published_at": "2025-12-09",
+    "key_points": [
+      "Context Precision 评估检索器把相关 chunk 排在无关 chunk 之前的能力，即相关 chunk 在检索上下文中被置于排名顶部的程度。",
+      "计算方式为上下文中每个 chunk 的 precision@k 的均值；Precision@k = 排名前 k 中相关 chunk 数 / 排名前 k 的 chunk 总数。",
+      "公式：Context Precision@K = Σ_{k=1..K} (Precision@k × v_k) / 前 K 个结果中相关项总数，其中 v_k ∈ {0,1} 是第 k 位的相关性指示。",
+      "该指标对相关 chunk 的排名位置敏感：无关 chunk 出现在第二位时 context precision 不变，但若移到第一位则分数下降（文档示例中由约 1.0 降至约 0.5）。",
+      "ContextPrecision 需要 reference answer，通过将每个检索上下文与 reference 比对来判断相关性；LLMContextPrecisionWithoutReference 则在无 reference 时用 LLM 将每个 chunk 与生成的 response 比对。",
+      "ContextUtilization 指标在无 reference answer 但有生成 response 时使用，通过将每个检索上下文与生成的 response 比对来评估上下文是否有用。",
+      "另有 NonLLMContextPrecisionWithReference，使用 Levenshtein 等非 LLM 相似度度量（需安装 rapidfuzz）将检索上下文与 reference contexts 比对。",
+      "文档标注 Legacy Metrics API 将在 0.4 版本弃用、1.0 版本移除，建议迁移到 collections-based API。"
+    ],
+    "raw_excerpt": "Context Precision is a metric that evaluates the retriever's ability to rank relevant chunks higher than irrelevant ones for a given query in the retrieved context. Specifically, it assesses the degree to which relevant chunks in the retrieved context are placed at the top of the ranking. ... Note that even if an irrelevant chunk is present at the second position in the array, context precision remains the same. However, if this irrelevant chunk is placed at the first position, context precision reduces"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Ragas Docs — Faithfulness",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/",
+    "published_at": "2025-12-09",
+    "key_points": [
+      "Faithfulness 衡量 response 与检索到的 context 之间的事实一致性，取值 0 到 1，越高表示一致性越好。",
+      "只有当 response 中的所有 claim 都能被检索到的 context 支持时，该 response 才被视为 faithful。",
+      "计算三步：(1) 识别 response 中的所有 claim；(2) 逐条检查该 claim 是否能从检索 context 推断出来；(3) 用公式计算。",
+      "公式：Faithfulness = 被检索 context 支持的 claim 数 / response 中 claim 总数。",
+      "文档示例：context 给出爱因斯坦生于 1879 年 3 月 14 日，低 faithfulness 回答写成 1879 年 3 月 20 日，拆成两条 statement 后仅 1 条可被 context 推断，故 Faithfulness = 1/2 = 0.5。",
+      "Faithfulness 的判定基准是「检索到的 context」而非外部事实真值：claim 只要能从 context 推断即计入支持。",
+      "FaithfulnesswithHHEM 变体使用 Vectara 的 HHEM-2.1-Open（T5 分类器，训练用于检测 LLM 生成文本中的幻觉）替代第二步的 claim 与 context 交叉核验，模型免费、小型、开源，适合生产环境；默认加载到 CPU、batch size 为 10，可通过 device 与 batch_size 参数调整。"
+    ],
+    "raw_excerpt": "The Faithfulness metric measures how factually consistent a response is with the retrieved context. It ranges from 0 to 1, with higher scores indicating better consistency. A response is considered faithful if all its claims can be supported by the retrieved context. ... Faithfulness Score = Number of claims in the response supported by the retrieved context / Total number of claims in the response"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Ragas Docs — Evaluate a simple RAG system（RAG 评测工作流指南）",
+    "url": "https://docs.ragas.io/en/stable/getstarted/rag_eval/",
+    "published_at": "2025-12-09",
+    "key_points": [
+      "Ragas 官方 RAG 评测工作流要求为每个 query 采集 response、retrieved_contexts，并可选准备 golden answers（reference）。",
+      "官方示例中组合使用的指标集为 LLMContextRecall、Faithfulness、FactualCorrectness 三项，即同时覆盖检索侧与生成侧。",
+      "示例评测输出为 {'context_recall': 1.0000, 'faithfulness': 0.8571, 'factual_correctness': 0.7280}，展示了检索侧满分而生成侧未满分的分数组合形态。",
+      "该指南本身只演示「采集数据 → 选指标 → evaluate」流程，未给出低分组合到失败类型的归因规则或决策树。"
+    ],
+    "raw_excerpt": "result = evaluate(dataset=evaluation_dataset, metrics=[LLMContextRecall(), Faithfulness(), FactualCorrectness()], llm=evaluator_llm) ... {'context_recall': 1.0000, 'faithfulness': 0.8571, 'factual_correctness': 0.7280}"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "TruLens Docs — The RAG Triad",
+    "url": "https://www.trulens.org/getting_started/core_concepts/rag_triad/",
+    "published_at": null,
+    "key_points": [
+      "TruEra 提出 RAG triad，主张沿 RAG 架构的每条边分别评测幻觉，由 context relevance、groundedness、answer relevance 三项评估组成。",
+      "文档明确指出 RAG 也会出现幻觉，常见情形是检索未能取到足够上下文，或检索到不相关上下文后被编织进 LLM 的回答。",
+      "Context Relevance：验证检索质量，确保每个 context chunk 与输入 query 相关；理由是 context 会被 LLM 用来组织答案，其中的无关信息可能被编织成幻觉。",
+      "Groundedness：验证应用是否忠于所给事实，做法是把 response 拆成独立 claim，并逐条在检索到的 context 中独立搜索支持证据。",
+      "Answer Relevance：验证最终 response 是否有助于回答原始问题，通过评估 response 对 user input 的相关性实现。",
+      "三项评估均达到满意水平，才能得出「应用在其知识库范围内无幻觉」的结论；即若向量库只含准确信息，则 RAG 给出的答案也准确。",
+      "该页面给出的是三元组框架与各边的评测目标，未提供低分组合到具体失败类型的映射表或决策树。"
+    ],
+    "raw_excerpt": "TruEra has innovated the RAG triad to evaluate for hallucinations along each edge of the RAG architecture ... The RAG triad is made up of 3 evaluations: context relevance, groundedness and answer relevance. Satisfactory evaluations on each provides us confidence that our LLM app is free from hallucination. ... even RAGs can suffer from hallucination, as is often the case when the retrieval fails to retrieve sufficient context or even retrieves irrelevant context that is then weaved into the LLM's response."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "What Is Your Agent's GPA? A Framework for Evaluating Agent Goal-Plan-Action Alignment (arXiv:2510.08847v2)",
+    "url": "https://arxiv.org/abs/2510.08847",
+    "published_at": "2025-10-09 (v1); v2 revised 2026-03-27",
+    "key_points": [
+      "论文提出 Agent GPA（Goal-Plan-Action）框架，用一组因子化（factorized）的 LLM judges 分别度量 Goal Fulfillment、Plan Quality、Tool Selection、Plan Adherence、Tool Calling、Logical Consistency、Execution Efficiency 七项指标。",
+      "95% 错误捕获率的具体口径：在 TRAIL/GAIA 测试集上，GPA judges 识别出 95.0%（267/281）的人工标注错误，并正确定位其中 85.8%（241/281）。",
+      "对照基线：单一 monolithic baseline judge 最好仅达 54.8%（154/281）识别率与 49.1%（138/281）定位率，即使已提供被评 agent 系统的架构上下文。",
+      "与人类判断的一致性：TRAIL/GAIA 上平均 73.1% LLM-human accuracy agreement，Snowflake Intelligence 私有数据集上 82.3%。",
+      "跨数据集泛化：GEPA 自动 prompt 优化后，GPA judges 相对 manual prompting 取得最高 error coverage，区间为 76%–86%（注意此区间与 95% 不是同一口径）。",
+      "一致性：TRAIL/GAIA 上重复评测的平均 Krippendorff's α 为 0.77；用 OpenEvolve 进化优化后，Plan Quality judge 的 α 从 0.628 提升至 0.814。",
+      "验证覆盖三个基准：TRAIL/GAIA（多 agent 研究）、TRAIL/SWE-bench（单 coding agent）、Snowflake Intelligence（私有企业数据 agent）。",
+      "作者 8 人全部隶属 Snowflake（Menlo Park, USA），含 Allison Sihan Jia、Daniel Huang、Nikhil Vytla、Seung Won Wilson Yoo、Nirvika Choudhury、Shayak Sen、John C. Mitchell、Anupam Datta——属厂商自研自评，非独立第三方。"
+    ],
+    "raw_excerpt": "Extensive evaluation on TRAIL/GAIA demonstrates the core validity of the framework, which identifies a broad range of agent failures (95% of human-annotated errors), localizes errors to enable targeted debugging (86% of human-annotated errors)... On the TRAIL/GAIA test set, our GPA judges successfully identified 95.0% (267/281) of human-labeled errors and correctly localized 85.8% (241/281) of them. In contrast, a standard monolithic baseline judge achieved at best 54.8% (154/281) identification and 49.1% (138/281) localization"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "RAG Evaluation Tools: W&B Weave vs Ragas vs TruLens (AIMultiple, Cem Dilmegani with Ekrem Sarı)",
+    "url": "https://research.aimultiple.com/rag-evaluation-tools/",
+    "published_at": "页面标注 updated on Mar 17, 2026（与子问题所称 2026-03-23 不一致）",
+    "key_points": [
+      "方法与规模：在 1,010 个对抗性问题（HaluEval 480 题 + HotPotQA 530 题）上评测五个 RAG 评测工具，每题配 5 个 passage，共 5,050 个 question-context 对；W&B Weave、TruLens、Ragas、UpTrain 各 1,010 条完整结果，DeepEval 因 5 个样本失败剩 1,005 条。",
+      "跨模型协议：Claude Sonnet 4.5 生成对抗性上下文，GPT-4o 通过 OpenRouter 做相关性评判，temperature=0，各工具均使用默认评测 prompt、无自定义指令、无参考答案。",
+      "核心结论：W&B Weave 的 Top-1 准确率最高（94.5%），TruLens 在排序类指标上领先——NDCG@5 为 0.932、Spearman ρ 0.750、MRR 0.594。",
+      "NDCG@5 具体数值：TruLens 0.932，DeepEval 0.923，W&B Weave 0.910——三者差距很小，且 W&B Weave 的 NDCG@5 最低却 Top-1 最高，说明指标间存在张力。",
+      "TruLens 的评分机制：以 0–3 四点 Likert 量表让 LLM 充当 RELEVANCE grader（0 不相关 / 1 部分相关 / 2 大部分相关 / 3 完全相关），原始分除以 3 得到 0.0、0.33、0.67、1.0 四个值。",
+      "DeepEval 的评分机制：G-Eval 式陈述分解，将 passage 拆成 statement 逐条判 yes/no，以相关陈述数除以总数得到分数；额外无关陈述会拉低分数，即使该 passage 含正确答案。",
+      "Ragas 的评分机制：双 judge prompt 平均，各给 0/1/2 分，归一化后得到 0.0、0.25、0.5、0.75、1.0 五个值。",
+      "TruLens 在 golden vs hard-negative 对比中记录 35.5% wins 与 8.4% losses（4.2:1）；其四点量表比 W&B Weave 的二元量表能区分更多配对，但反转也更多。",
+      "共性缺陷：五个工具全部给 hard negatives 的平均分高于 partial contexts，说明相关性打分需另配事实准确性检查。",
+      "作者自陈局限：所有结果来自单次 GPT-4o 运行（single GPT-4o run）。"
+    ],
+    "raw_excerpt": "We benchmarked five retrieval-augmented generation (RAG) evaluation tools on 1,000+ adversarial questions, each paired with five passages. The comparison measures context relevance using GPT-4o and the tools' default evaluation prompts. ... W&B Weave had the highest Top-1 accuracy at 94.5%. TruLens led the ranking metrics, including NDCG@5 at 0.932. ... DeepEval gives golden contexts a mean score of 0.46, compared with 0.82–0.91 for the other tools. Its NDCG@5 is 0.923, while its Top-1 accuracy is 78.1%."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "vibrantlabsai/ragas — repository metadata (stars, forks, created, last push)",
+    "url": "https://github.com/vibrantlabsai/ragas",
+    "published_at": "2026-02-24",
+    "key_points": [
+      "vibrantlabsai/ragas 当前 stars 为 16142，forks 为 1775，open issues 为 635，语言 Python，license Apache-2.0。",
+      "仓库 created 日期为 2023-05-08，last push 日期为 2026-02-24。",
+      "topics 包含 evaluation、llm、llmops。",
+      "README 标题为「Supercharge Your LLM Application Evaluations」，定位为 LLM 应用评测与优化工具包，提供 LLM-based 与传统指标、测试集生成、与 LangChain 及可观测性工具集成。"
+    ],
+    "raw_excerpt": "vibrantlabsai/ragas\nstars: 16142 | forks: 1775 | open issues: 635 | language: Python\ncreated: 2023-05-08 | last push: 2026-02-24\ntopics: evaluation, llm, llmops\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "explodinggradients/ragas — GitHub API 301 redirect to repository 637924634",
+    "url": "https://api.github.com/repos/explodinggradients/ragas",
+    "published_at": null,
+    "key_points": [
+      "访问 api.github.com/repos/explodinggradients/ragas 返回 HTTP 301 Moved Permanently。",
+      "重定向目标为 https://api.github.com/repositories/637924634，即同一仓库数字 ID 的新路径，表明是仓库改名/转移而非新建仓库。"
+    ],
+    "raw_excerpt": "Error executing tool get_repo_detail: Redirect response '301 Moved Permanently' for url 'https://api.github.com/repos/explodinggradients/ragas'\nRedirect location: 'https://api.github.com/repositories/637924634'"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "explodinggradients/ragas — README 正文（旧路径仍可渲染，内容已指向 vibrantlabsai）",
+    "url": "https://github.com/explodinggradients/ragas",
+    "published_at": null,
+    "key_points": [
+      "旧路径 explodinggradients/ragas 的 README 中，从源码安装指令已写为 pip install git+https://github.com/vibrantlabsai/ragas。",
+      "README 中的联系邮箱为 founders@vibrantlabs.com，即项目维护方已归属 Vibrant Labs。",
+      "README 列出 ragas quickstart 模板，其中 rag_eval 用于「Evaluate RAG systems」，另有 agent_evals、benchmark_llm、prompt_evals、workflow_eval 标注为 Coming Soon。",
+      "README 展示 DiscreteMetric 自定义指标用法（name、allowed_values、prompt 三要素）。"
+    ],
+    "raw_excerpt": "Alternatively, from source:\npip install git+https://github.com/vibrantlabsai/ragas\n...\n🔗 Book a slot or drop us a line: founders@vibrantlabs.com .\n...\nrag_eval - Evaluate RAG systems"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "github.com/explodinggradients — organization page",
+    "url": "https://github.com/explodinggradients",
+    "published_at": null,
+    "key_points": [
+      "explodinggradients 组织页面显示「This organization has no public repositories」，即该组织当前不再持有任何公开仓库（含 ragas）。",
+      "该组织页面显示无公开成员。"
+    ],
+    "raw_excerpt": "This organization has no public repositories.\nPeople\nThis organization has no public members."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "PyPI — ragas 0.4.3 project page",
+    "url": "https://pypi.org/project/ragas/",
+    "published_at": null,
+    "key_points": [
+      "PyPI 上 ragas 最新版本为 0.4.3，描述为「Evaluation framework for RAG and LLM applications」。",
+      "PyPI 页面安装说明同样指向 pip install git+https://github.com/vibrantlabsai/ragas，与 GitHub README 一致。",
+      "PyPI 页面示例使用 ragas.metrics.collections 中的 AspectCritic 与 ragas.llms.llm_factory 构造指标并调用 ascore。"
+    ],
+    "raw_excerpt": "ragas 0.4.3\nEvaluation framework for RAG and LLM applications\npip install ragas\n...\nAlternatively, from source:\npip install git+https://github.com/vibrantlabsai/ragas"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "vibrantlabsai/ragas — Releases 页面（最新版本与发布者）",
+    "url": "https://github.com/vibrantlabsai/ragas/releases",
+    "published_at": null,
+    "key_points": [
+      "vibrantlabsai/ragas 的 Releases 列表最新为 v0.4.3，标记为 Latest，由 anistark 于 1 月 13 日发布（页面未显示年份）。",
+      "v0.4.3 变更包含新增 DSPyOptimizer（MIPROv2 提示优化）、llms.txt 生成、InstructorLLM/LiteLLMStructuredLLM 的 system prompt 支持、quickstart 模板补全、FactualCorrectness 语言适配修复等。",
+      "上一版本 v0.4.2 由 anistark 于 12 月 23 日发布，变更中包含 SQLSemanticEquivalence 迁移。",
+      "发布历史连续覆盖 v0.3.5 至 v0.4.3，说明仓库版本线在迁移后保持延续。"
+    ],
+    "raw_excerpt": "v0.4.3\nLatest\nanistark released this\n13 Jan 17:47\n...\nfeat: add DSPyOptimizer with MIPROv2 for advanced prompt optimization by @anistark in #2537\n...\nv0.4.2\nanistark released this\n23 Dec 17:13"
+  }
+]

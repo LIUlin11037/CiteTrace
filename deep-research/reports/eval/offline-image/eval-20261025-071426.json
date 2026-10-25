@@ -1,0 +1,41 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 0.0,
+  "mean_alignment": 0.0,
+  "alignment_questions": 1,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 0.0,
+      "alignment": 0.0,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-react",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": 0.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "ReAct 的核心思想是把 LLM 此前被分开研究的两种能力——以 chain-of-thought 为代表的 reasoning 与以 action plan generation 为代表的 acting——合并到同一条生成轨迹里，让模型以交错（interleaved）方式同时产出 reasoning traces 与 task-specific actions[^1][^6]。",
+        "ReAct 的做法是让 LLM 以交错（interleaved）方式同时生成 reasoning traces 与 task-specific actions[^1][^6]。",
+        "关键在于推理的密度不是均匀强制的：针对决策类任务，作者设计的是带稀疏 reasoning traces 的人类轨迹，让 LM 自行决定何时 think、何时 act[^2]。",
+        "CoT 被定义为生成一条思维链，即「一系列中间推理步骤」（a series of intermediate reasoning steps）[^7]。",
+        "该论文把 CoT 所针对的任务描述为不遵循标准 scaling law 的困难 System-2 任务[^8]。",
+        "LlamaIndex 对 agent 的描述同构：给定任务与一组工具，选择最佳可用工具完成每一步；每步完成后 agent 判断任务是否完成——完成则返回结果，未完成则循环回到起点[^26]。",
+        "ReAct 侧的失败模式方向不同：项目页承认其并非完美，并给出一个 ALFWorld 失败示例[^16]。",
+        "| reasoning trace 与 action 交错，环境返回 observation[^16]",
+        "| 接地于外部环境，轨迹被主张为事实性[^16]",
+        "- OpenAI Agents SDK 文档描述的 agent loop 以 LLM 原生 tool calling 与 handoff 为核心控制流，文档未将其命名为 ReAct[^28]。",
+        "** 「相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升」来自论文摘要，但缺少具体成功率数值与基线名称，且未说明是 PaLM-540B 还是 GPT-3 设定[^5]。",
+        "、Anthropic tool_use 的并行执行语义[^31]"
+      ]
+    }
+  ]
+}

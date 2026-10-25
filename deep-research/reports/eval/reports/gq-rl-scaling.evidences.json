@@ -1,0 +1,501 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Scaling Laws for Neural Language Models (Kaplan et al., 2020)",
+    "url": "https://arxiv.org/html/2001.08361v1",
+    "published_at": "2020-01-23",
+    "key_points": [
+      "规模由三个因子构成：模型参数量 N（不含 embedding）、数据集大小 D、训练算力 C；在合理范围内性能对深度/宽度等架构超参依赖很弱。",
+      "在未被其他两个因子瓶颈时，损失对 N、D、C 各自呈幂律关系，趋势跨越六个以上数量级，且在上端未观察到偏离迹象。",
+      "参数受限、训练至收敛时的幂律：L(N) = (N_c/N)^α_N，α_N ≈ 0.076，N_c ≈ 8.8×10^13（非 embedding 参数）。",
+      "数据受限（大模型 + 早停）时的幂律：L(D) = (D_c/D)^α_D，α_D ≈ 0.095，D_c ≈ 5.4×10^13 tokens。",
+      "算力受限且模型规模最优、batch 足够小时的幂律：L(C_min) = (C_c^min/C_min)^α_C^min，α_C^min ≈ 0.050，C_c^min ≈ 3.1×10^8 PF-days。",
+      "参数翻倍使损失乘以 2^(-α_N) = 0.95，即损失下降约 5%。",
+      "联合依赖与过拟合的单一方程：L(N,D) = [(N_c/N)^(α_N/α_D) + D_c/D]^α_D。",
+      "由式(1.1)(1.2)推出数据量应随模型规模次线性增长：D ∝ N^(α_N/α_D) ~ N^0.74；模型规模每增 8 倍，数据只需增约 5 倍即可避免过拟合惩罚。",
+      "固定算力预算下的最优分配经验结果：N ∝ C_min^0.73，B ∝ C_min^0.24，S ∝ C_min^0.03；且 D ~ C^0.27。",
+      "算力最优训练意味着训练非常大的模型、并在显著早于收敛处停止，而非把小模型训到收敛。",
+      "临界 batch size 服从损失的幂律：B_crit(L) = B_*/L^(1/α_B)，B_* ≈ 2×10^8 tokens，α_B ≈ 0.21。",
+      "有限步数下的学习曲线拟合：L(N,S) = (N_c/N)^α_N + (S_c/S_min(S))^α_S，其中 S_c ≈ 2.1×10^3，α_S ≈ 0.76。",
+      "上述数值依赖词表与分词方式（Webtext2 训练集），N_c、D_c、C_c^min 的具体数值不具根本意义。"
+    ],
+    "raw_excerpt": "L(N)=(N_c/N)^{α_N}; α_N∼0.076, N_c∼8.8×10^13 (non-embedding parameters) ... L(D)=(D_c/D)^{α_D}; α_D∼0.095, D_c∼5.4×10^13 (tokens) ... L(C_min)=(C_c^min/C_min)^{α_C^min}; α_C^min∼0.050, C_c^min∼3.1×10^8 (PF-days) ... L(N,D)=[(N_c/N)^{α_N/α_D}+D_c/D]^{α_D} ... which closely matches the empirically optimal results N∝C_min^0.73, B∝C_min^0.24, and S∝C_min^0.03. As the computational budget C increases, it should be spent primarily on larger models, without dramatic increases in training time or dataset size."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Training Compute-Optimal Large Language Models (Chinchilla, Hoffmann et al., 2022)",
+    "url": "https://arxiv.org/abs/2203.15556v1",
+    "published_at": "2022-03-29",
+    "key_points": [
+      "研究给定算力预算下 transformer 语言模型的最优模型规模与训练 token 数。",
+      "结论：当前大模型显著训练不足（undertrained），原因是业界在扩大模型规模的同时保持训练数据量不变。",
+      "实验规模：训练超过 400 个语言模型，参数量从 70M 到 160B 以上，token 数从 5B 到 500B。",
+      "算力最优训练下，模型规模与训练 token 数应等比例缩放：模型规模每翻倍，训练 token 数也应翻倍。",
+      "验证方式：训练预测的算力最优模型 Chinchilla，使用与 Gopher 相同的算力预算，但为 70B 参数、4 倍数据。",
+      "Chinchilla 在大量下游评测任务上一致且显著优于 Gopher(280B)、GPT-3(175B)、Jurassic-1(178B)、Megatron-Turing NLG(530B)。",
+      "Chinchilla 在 MMLU 上达到 67.5% 的平均准确率，比 Gopher 提升超过 7%。",
+      "由于参数更少，Chinchilla 在微调与推理阶段使用显著更少的算力。"
+    ],
+    "raw_excerpt": "By training over 400 language models ranging from 70 million to over 16 billion parameters on 5 to 500 billion tokens, we find that for compute-optimal training, the model size and the number of training tokens should be scaled equally: for every doubling of model size the number of training tokens should also be doubled. ... Chinchilla reaches a state-of-the-art average accuracy of 67.5% on the MMLU benchmark, greater than a 7% improvement over Gopher."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters (Snell et al., 2024)",
+    "url": "https://arxiv.org/abs/2408.03314v1",
+    "published_at": "2024-08-06",
+    "key_points": [
+      "研究问题：若允许 LLM 使用固定但非平凡的推理时算力，其在困难 prompt 上的性能能提升多少。",
+      "该问题不仅关系 LLM 可达性能，也关系预训练的未来以及推理时算力与预训练算力应如何权衡（tradeoff）。",
+      "论文指出此前少有研究理解各类 test-time 推理方法的 scaling 行为，且现有工作对多种策略多给出负面结果。",
+      "分析两类扩展 test-time 算力的主要机制：(1) 针对稠密、基于过程的 verifier 奖励模型做搜索；(2) 在测试时依据 prompt 自适应地更新模型对响应的分布。",
+      "关键发现：两类机制下，扩展 test-time 算力的不同方法其有效性都强烈依赖于 prompt 的难度。",
+      "由此提出「compute-optimal」扩展策略：按每个 prompt 自适应地最有效分配 test-time 算力。",
+      "采用该 compute-optimal 策略，相比 best-of-N 基线可将 test-time 算力扩展的效率提升 4 倍以上。",
+      "在 FLOPs 匹配（FLOPs-matched）的评估中，在较小基座模型已能达到一定非平凡成功率的问题上，test-time 算力可使小模型超越大 14 倍的模型。"
+    ],
+    "raw_excerpt": "we analyze two primary mechanisms to scale test-time computation: (1) searching against dense, process-based verifier reward models; and (2) updating the model's distribution over a response adaptively, given the prompt at test time. We find that in both cases, the effectiveness of different approaches to scaling test-time compute critically varies depending on the difficulty of the prompt. This observation motivates applying a \"compute-optimal\" scaling strategy ... we can improve the efficiency of test-time compute scaling by more than 4x compared to a best-of-N baseline. Additionally, in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey of Test-Time Compute: From Intuitive Inference to Deliberate Reasoning (Ji et al., 2025)",
+    "url": "https://arxiv.org/abs/2501.02497",
+    "published_at": "2025-01-05",
+    "key_points": [
+      "该综述指出 o1 模型在复杂推理上的表现表明 test-time compute scaling 可进一步释放模型潜力，实现 System-2 思维。",
+      "作者称此前仍缺乏针对 test-time compute scaling 的综合性综述（即该文自述填补综述空白）。",
+      "将 test-time compute 概念回溯到 System-1 模型：在 System-1 中，test-time compute 通过参数更新、输入修改、表征编辑、输出校准来应对分布偏移，提升鲁棒性与泛化。",
+      "在 System-2 模型中，test-time compute 通过重复采样（repeated sampling）、自纠正（self-correction）、树搜索（tree search）增强模型解决复杂问题的推理能力。",
+      "综述按 System-1 到 System-2 思维的演进组织，强调 test-time compute 在 System-1 → 弱 System-2 → 强 System-2 转变中的关键作用。",
+      "版本信息：v1 2025-01-05，v3 2025-06-29；作者标注为 work in progress。"
+    ],
+    "raw_excerpt": "The remarkable performance of the o1 model in complex reasoning demonstrates that test-time compute scaling can further unlock the model's potential, enabling powerful System-2 thinking. However, there is still a lack of comprehensive surveys for test-time compute scaling. We trace the concept of test-time compute back to System-1 models. ... In System-2 models, it enhances the model's reasoning ability to solve complex problems through repeated sampling, self-correction, and tree search."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (v2)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "基座模型为 DeepSeek-V3-Base，RL 框架为 GRPO（Group Relative Policy Optimization），奖励仅基于最终预测与标准答案的正确性，不对推理过程本身施加约束。",
+      "DeepSeek-R1-Zero 完全跳过 SFT 阶段直接做 RL，作者假设人工定义的推理模式会限制模型探索。",
+      "R1-Zero 的 RL 超参：学习率 3e-6，KL 系数 0.001，rollout 采样温度 1；每题采样 16 个输出。",
+      "生成长度上限在训练中途提升：8.2k step 之前最大长度 32,768 tokens，之后为 65,536 tokens；性能与响应长度在 8.2k step 处同时出现显著跃升。",
+      "R1-Zero 的 RL 训练共 10,400 步，对应 1.6 个训练 epoch；每步 32 个不同问题，训练 batch size 为 512。",
+      "每 400 步用最新策略模型替换 reference model；每次 rollout 生成 8,192 个输出，随机切成 16 个 mini-batch，仅训练 1 个 inner epoch。",
+      "奖励为规则奖励：accuracy reward + format reward，两者等权；明确不使用神经奖励模型（outcome-based 或 process-based），原因是大规模 RL 中易被 reward hacking。",
+      "AIME 2024 上 R1-Zero 的平均 pass@1 从初始 15.6% 升至 77.9%；配合 self-consistency 解码进一步提升到 86.7%，超过人类参赛者平均分。",
+      "论文明确指出 R1-Zero 在解题时倾向生成更长响应，在单条响应内包含验证、反思与替代路径探索，即“自然学会用更多思考时间解推理题”。",
+      "R1-Zero 存在可读性差与语言混杂（中英文混在同一条 CoT 内）的问题，且纯规则 RL 阶段只聚焦推理任务，在写作与开放域问答上表现有限；R1 因此改为 rejection sampling + RL + SFT 的多阶段框架。",
+      "论文蒸馏了若干小模型并公开，称其推理能力超过对应的原始 instruction-tuned 版本。"
+    ],
+    "raw_excerpt": "For each question, we sample 16 outputs with a maximum length of 32,768 tokens before the 8.2k step and 65,536 tokens afterward. As a result, both the performance and response length of DeepSeek-R1-Zero exhibit a significant jump at the 8.2k step, with training continuing for a total of 10,400 steps, corresponding to 1.6 training epochs. ... the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning — abstract/metadata page",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "arXiv:2501.12948v2，cs.CL；v1 提交于 2025-01-22，v2 最后修订于 2026-01-04（说明该报告在 2026 年初仍有版本更新）。",
+      "摘要主张：推理能力可通过纯 RL 激发，无需人工标注的推理轨迹；RL 框架促使自我反思、验证与动态策略调整等推理模式涌现。",
+      "摘要主张：该模型在数学、编程竞赛与 STEM 等可验证任务上超过用人工示范做常规监督学习的对照模型；且大模型涌现的推理模式可系统性用于指导更小的模型。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. ... [Submitted on 22 Jan 2025 (v1), last revised 4 Jan 2026 (this version, v2)]"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文主张 LLM 的推理能力可通过纯强化学习（pure RL）被激励出来，无需人工标注的推理轨迹（human-labeled reasoning trajectories）。",
+      "该 RL 框架使自我反思（self-reflection）、验证（verification）、动态策略调整（dynamic strategy adaptation）等高级推理模式涌现。",
+      "经 RL 训练的模型在数学、编程竞赛、STEM 等可验证任务上，表现超过用传统监督学习（人类示范）训练的对照模型。",
+      "论文称大规模模型涌现的推理模式可被系统性地用于引导和增强更小模型的推理能力。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?",
+    "url": "https://arxiv.org/abs/2504.13837",
+    "published_at": "2025-04-18 (v1), v5 2025-11-24",
+    "key_points": [
+      "论文用大 k 值的 pass@k 作为评估指标，跨多个模型家族、RL 算法以及数学/代码/视觉推理基准，系统探测 RLVR 训练模型的推理能力边界。",
+      "核心发现：RLVR 模型在小 k（如 k=1）时优于基座模型，但当 k 增大时，基座模型在所有基准和所有 LLM 家族上都稳定超过 RLVR 模型。",
+      "作者结论是当前 RLVR 训练并未引出根本性的新推理模式，观察到的推理能力「originate from and are bounded by the base model」（源自并受限于基座模型）。",
+      "覆盖率与困惑度分析显示 RLVR 模型产出的推理路径已存在于基座模型的输出分布中；RLVR 主要提升采样效率（sampling efficiency），而非解决新问题。",
+      "以基座模型为上界定义 sampling efficiency gap（Δ_SE），六种流行 RLVR 算法（如 PPO、GRPO、Reinforce++）表现相近，且都远未充分利用基座模型的潜力。",
+      "蒸馏（distillation）与 RLVR 本质不同：蒸馏可从更强教师引入新推理模式并真正扩展推理范围，而 RLVR 不能。",
+      "论文发表于 NeurIPS 2025 Oral，并获 ICML 2025 AI4MATH workshop best paper。"
+    ],
+    "raw_excerpt": "While RLVR-trained models outperform their base models at small k (e.g., k = 1), the base models achieve a higher pass@k score when k is large. Coverage and perplexity analyses show that the observed reasoning abilities originate from and are bounded by the base model. ... As RLVR training progresses, the average performance (i.e., pass@1) improves, but the coverage of solvable problems (i.e., pass@256) decreases, indicating a reduction in LLM's reasoning boundary."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "The Art of Scaling Reinforcement Learning Compute for LLMs (ScaleRL)",
+    "url": "https://arxiv.org/abs/2510.13786",
+    "published_at": "2025-10-15",
+    "key_points": [
+      "该研究是迄今规模最大的 RL scaling 系统性研究之一，总计超过 400,000 GPU-hours（Nvidia GB200），提出用 sigmoid 型 compute-performance 曲线刻画 RL 训练。",
+      "拟合公式：Reward Gain = (A − R0) × 1/(1 + (C_mid/C)^B)，其中 A 为渐近通过率（asymptotic pass rate）、B 为决定算力效率的 scaling 指数、C_mid 为曲线中点。",
+      "关键结论之一：并非所有 RL 配方有相同的渐近性能上限（RL Performance Ceilings are Not Universal），loss 类型与 batch size 等选择可以移动该上限。",
+      "关键结论之二（Bitter Lesson）：在小算力预算下看起来更优的方法，外推到大算力区间可能更差；可通过早期训练动态估计 (A, B) 来识别可扩展方法。",
+      "关键结论之三：loss aggregation、数据课程、长度惩罚、advantage normalization 等常见干预主要调节算力效率（B），而不显著改变性能上限。",
+      "实验在 8B 稠密模型规模上做设计消融（单次运行最高 16,000 GPU-hours），最终在 8B 稠密模型上跑 100k GPU-hours、在 17Bx16 MoE（Scout）上跑 50k GPU-hours，分别训练 7400 与 7100 步，是 ProRL 训练步数的 3.5 倍。",
+      "关于模型规模与 RL 增益的直接表述：Figure 1(b) 指出「scaling model size substantially improves the downstream and asymptotic RL performance」，即增大模型规模显著提升下游与渐近 RL 性能。",
+      "ScaleRL 配方达到渐近奖励 A = 0.61，优于 DeepSeek(GRPO)、Qwen-2.5(DAPO)、Magistral、MiniMax-M1 等配方的拟合曲线。",
+      "论文将 RL 算力与预训练算力做对比：DeepSeek-R1-Zero 的 RL 训练用 100,000 H800 GPU-hours，约为其预训练算力的 3.75%。"
+    ],
+    "raw_excerpt": "(b) Downstream evaluation on AIME-24 shows a consistent scaling trend for ScaleRL, thus generalizing beyond the training data distribution. Moreover, scaling model size substantially improves the downstream and asymptotic RL performance. ... Methods that appear superior at small compute budgets can be worse when extrapolated to large-compute regimes."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models",
+    "url": "https://arxiv.org/abs/2505.24864",
+    "published_at": "2025-05-30",
+    "key_points": [
+      "ProRL 直接挑战「RL 只是放大基座模型中已存在的高奖励输出」这一观点，主张长时程（prolonged）RL 训练能发现基座模型在大量采样下也无法触及的新推理策略。",
+      "方法包含三要素：KL 散度控制、reference policy resetting、以及多样化任务套件。",
+      "实证结果：RL 训练模型在广泛的 pass@k 评估上持续优于基座模型，包括基座模型无论尝试多少次都完全失败（fail entirely）的场景。",
+      "论文报告推理边界（reasoning boundary）的提升与基座模型的任务胜任度（task competence）和训练时长强相关，作者据此认为 RL 能随时间探索并填充解空间的新区域。",
+      "论文开源了模型权重以支持后续研究。"
+    ],
+    "raw_excerpt": "we challenge prevailing assumptions by demonstrating that prolonged RL (ProRL) training can uncover novel reasoning strategies that are inaccessible to base models, even under extensive sampling. ... We further show that reasoning boundary improvements correlates strongly with task competence of base model and training duration, suggesting that RL can explore and populate new regions of solution space over time."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?",
+    "url": "https://arxiv.org/abs/2504.13837",
+    "published_at": "2025-04-18 (v1); v5 2025-11-24",
+    "key_points": [
+      "论文用大 k 值的 pass@k 作为评估指标，系统探测 RLVR 训练后 LLM 的推理能力边界，覆盖多种模型家族、RL 算法与数学/代码/视觉推理基准。",
+      "核心发现：当前训练设置并未引出根本性的新推理模式；RLVR 模型在小 k（如 k=1）时优于基座模型，但 k 增大时基座模型的 pass@k 更高。",
+      "覆盖度与困惑度分析显示，观察到的推理能力源自基座模型并受其约束（bounded by the base model）。",
+      "以基座模型为上界做定量分析，六种主流 RLVR 算法表现相近，且都远未充分利用基座模型的潜力。",
+      "蒸馏（distillation）可以从教师模型引入新的推理模式，真正扩展模型的推理能力，与 RLVR 有本质区别。",
+      "作者结论：当前 RLVR 方法尚未实现 RL 引出真正新颖推理能力的潜力，需要改进的 RL 范式（如持续 scaling、多轮智能体-环境交互）。",
+      "论文发表于 NeurIPS 2025 Oral，并获 ICML 2025 AI4MATH workshop best paper。"
+    ],
+    "raw_excerpt": "Surprisingly, we find that the current training setup does not elicit fundamentally new reasoning patterns. While RLVR-trained models outperform their base models at small k (e.g., k = 1), the base models achieve a higher pass@k score when k is large. Coverage and perplexity analyses show that the observed reasoning abilities originate from and are bounded by the base model."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? (HTML 全文 v5)",
+    "url": "https://arxiv.org/html/2504.13837v5",
+    "published_at": "2025-11-24 (v5)",
+    "key_points": [
+      "Figure 1 说明：RLVR 模型产生的所有推理路径都已存在于基座模型中；对某些问题 RLVR 使分布偏向被奖励路径、提升采样效率，但代价是推理能力范围缩小。",
+      "Figure 1（右）：随 RLVR 训练推进，平均性能（pass@1）提升，但可解问题覆盖率（pass@256）下降，表明 LLM 的推理边界收缩。",
+      "作者采用 pass@k 而非贪心/核采样的平均分，理由是平均分只反映平均情况、可能低估模型真实潜力；pass@k 反映模型在 k 次尝试内「有可能」解决的问题比例，即推理边界。",
+      "在 pass@k 曲线上，RLVR 模型在小 k 占优，但随 k 增大，基座模型在所有基准和所有 LLM 家族上一致反超 RLVR 模型。",
+      "人工检查显示：对大多数问题，基座模型至少能产出一条正确 CoT，包括此前被认为只有 RLVR 模型才能解决的问题。",
+      "准确率分布分析：RLVR 通过在基座模型已可解的问题上更高效采样来提升平均性能（pass@1），但并未使模型解决新问题。",
+      "作者定义「采样效率差距」Δ_SE 为 RL 模型 pass@1 与基座模型 pass@k（k=256 作为上界代理）之差；PPO、GRPO、Reinforce++ 等算法间 Δ_SE 差异很小但始终很大。"
+    ],
+    "raw_excerpt": "As RLVR training progresses, the average performance (i.e., pass@1) improves, but the coverage of solvable problems (i.e., pass@256) decreases, indicating a reduction in LLM's reasoning boundary. ... although RLVR models outperform their base models at small k, it is surprising that base models consistently surpass RLVR models across all benchmarks and LLM families as k increases."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948, v2)",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "该论文由 DeepSeek-AI 提交，v1 于 2025-01-22 提交，v2 于 2026-01-04 修订；期刊引用为 Nature volume 645, pages 633-638 (2025)。",
+      "论文主张：LLM 的推理能力可通过纯强化学习激发，无需人工标注的推理轨迹。",
+      "论文主张：该 RL 框架使自我反思、验证、动态策略调整等高级推理模式涌现。",
+      "论文主张：在数学、编程竞赛、STEM 等可验证任务上，该模型优于用传统人类演示监督学习训练的对照模型。",
+      "注意：该来源为 DeepSeek 而非 OpenAI，且仅读取到摘要与引言，未读取结果表格，不能用于回答 OpenAI 系统卡披露了哪些数字。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 论文 HTML 全文（引言部分，arXiv:2501.12948v2）",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "引言指出：在预训练中让 LLM 获得推理等涌现能力通常需要大量计算资源（引 Kaplan et al., 2020; Wei et al., 2022a）。",
+      "引言指出：CoT 提示（few-shot 示例或 \"Let's think step by step\" 之类极简提示）能让模型产出中间推理步骤，从而显著提升复杂任务表现。",
+      "引言指出：依赖人工标注推理轨迹的做法限制可扩展性并引入认知偏差，且模型表现被人为先验上限所约束。",
+      "注意：以上均为 DeepSeek-R1 论文的论述，不是 OpenAI o1/o3 系统卡披露的事实；本次运行未取得任何 OpenAI 一手材料。"
+    ],
+    "raw_excerpt": "However, achieving such capabilities in pre-training typically demands substantial computational resources. ... Their dependence on human-annotated reasoning traces hinders scalability and introduces cognitive biases."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Kimi k1.5: Scaling Reinforcement Learning with LLMs (arXiv:2501.12599, v4)",
+    "url": "https://arxiv.org/html/2501.12599v4",
+    "published_at": "2025-01-22 (v1); last revised 2025-06-03 (v4)",
+    "key_points": [
+      "Kimi k1.5 的开发分为四个阶段：pretraining、vanilla SFT、long-CoT SFT、reinforcement learning；报告本身聚焦 RL 阶段，预训练与 vanilla SFT 细节放在 §2.5。",
+      "RL 阶段把上下文窗口扩展到 128k，并观察到随上下文长度增加性能持续提升；作者据此把 context length 认定为 LLM RL 持续 scaling 的关键维度。",
+      "为提升训练效率采用 partial rollouts：复用前序轨迹的大块内容来采样新轨迹，避免从头重新生成。",
+      "由于上下文可扩展，学到的 CoT 表现出 planning、reflection、correction 特性；上下文变长等价于增加搜索步数，因此无需 MCTS、value function、process reward model 等复杂技术即可取得强性能。",
+      "RL prompt set 的构建方式：用 SFT 模型以较高采样温度对每个 prompt 生成 10 次答案，以模型自身能力自适应评估难度；并设置 N=8 以剔除大部分易被 hack 的 prompt。",
+      "long-CoT 版本基准成绩：AIME 77.5、MATH 500 96.2、Codeforces 第 94 百分位、MathVista 74.9，作者称与 OpenAI o1 相当。",
+      "long2short 方法（length penalty + model merging）产出的 short-CoT 版本成绩：AIME 60.8、MATH500 94.6、LiveCodeBench 47.3，作者称比 GPT-4o、Claude Sonnet 3.5 高出最多 +550%。",
+      "论文摘要明确把预训练的局限表述为受可用训练数据量限制，把 RL scaling 定位为“新的 scaling 轴”，因为 RL 可通过奖励探索而不再受限于既有静态数据集。"
+    ],
+    "raw_excerpt": "Long context scaling. We scale the context window of RL to 128k and observe continued improvement of performance with an increased context length. A key idea behind our approach is to use partial rollouts to improve training efficiency—i.e., sampling new trajectories by reusing a large chunk of previous trajectories... Our observation identifies the context length as a key dimension of the continued scaling of RL with LLMs. / The development of Kimi k1.5 consists of several stages: pretraining, vanilla supervised fine-tuning (SFT), long-CoT supervised fine-turning, and reinforcement learning (RL). This report focuses on RL... Additional details on pretraining and vanilla supervised fine-tuning can be found in Section 2.5."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report (arXiv:2505.09388, v1)",
+    "url": "https://arxiv.org/html/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 全系列（0.6B–235B，含 6 个 dense 与 2 个 MoE）在 119 种语言与方言的数据上预训练，预训练语料总计 36 trillion tokens。",
+      "预训练分三阶段：S1 通用阶段用超过 30 trillion tokens、序列长度 4,096；S2 推理阶段再训练约 5T 更高质量 token（提高 STEM、代码、推理与合成数据占比）并加速学习率衰减；第三阶段长上下文阶段用数千亿 token、序列长度 32,768，把最大上下文从 4,096 扩到 32,768。",
+      "长上下文语料构成为 75% 长度在 16,384–32,768 token 的文本、25% 长度在 4,096–16,384 token 的文本；采用 ABF 把 RoPE base frequency 从 10,000 提到 1,000,000，并引入 YARN 与 Dual Chunk Attention 使推理时序列长度能力再扩四倍。",
+      "相对 Qwen2.5，预训练 token 量翻倍、语言覆盖增至三倍（29→119 种语言）。",
+      "数据构建上使用 Qwen2.5-VL 对大量 PDF 类文档做文字识别、再用 Qwen2.5 精炼，额外获得数万亿高质量文本 token；并用 Qwen2.5、Qwen2.5-Math、Qwen2.5-Coder 合成数万亿 token。",
+      "多语言数据标注系统对超过 30 trillion tokens 按教育价值、领域、学科、安全性等维度打标，并在小代理模型上做实例级（而非数据源/领域级）数据配比消融优化。",
+      "Qwen3 把 thinking 模式与非 thinking 模式统一在同一框架内，并引入 thinking budget 机制，允许用户在推理时自适应分配算力以平衡延迟与性能。",
+      "报告称增大 thinking token 的 thinking budget 会在多项任务上带来一致的性能提升。",
+      "报告称从先进教师模型蒸馏在性能与训练效率上显著优于强化学习（该结论出现在正文摘要式段落中，具体对比数据位于后训练章节）。",
+      "旗舰 Qwen3-235B-A22B 为 MoE，总参数 235B、每 token 激活 22B；成绩包括 AIME'24 85.7、AIME'25 81.5、LiveCodeBench v5 70.7、CodeForces 2,056、BFCL v3 70.8。"
+    ],
+    "raw_excerpt": "All Qwen3 models are trained on a large and diverse dataset consisting of 119 languages and dialects, with a total of 36 trillion tokens. / General Stage (S1): At the first pre-training stage, all Qwen3 models are trained on over 30 trillion tokens using a sequence length of 4,096 tokens. / Reasoning Stage (S2): ... The models are further pre-trained with about 5T higher-quality tokens at a sequence length of 4,096 tokens. / Long Context Stage: ... All models are pre-trained on hundreds of billions of tokens with a sequence length of 32,768 tokens. / Qwen3 introduces a thinking budget mechanism, allowing users to allocate computational resources adaptively during inference... increasing the thinking budget for thinking tokens leads to a consistent improvement in the model's performance across various tasks. / Distillation from advanced teacher models significantly outperforms reinforcement learning in performance and training efficiency."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Kimi k1.5: Scaling Reinforcement Learning with LLMs — arXiv abstract page (metadata + abstract)",
+    "url": "https://arxiv.org/abs/2501.12599",
+    "published_at": "2025-01-22 (v1); v4 2025-06-03",
+    "key_points": [
+      "论文提交时间 2025-01-22，最新版本 v4 为 2025-06-03，共 25 页，cs.AI / cs.LG。",
+      "摘要明确表述：next-token 预训练在 scaling compute 上有效，但受可用训练数据量限制；scaling RL 则开辟了新的改进轴，因为模型可通过带奖励的探索来扩展训练数据。",
+      "摘要称此前已发表的工作未产出有竞争力的结果，本报告披露 Kimi k1.5 的 RL 训练技术、多模态数据配方与基础设施优化。"
+    ],
+    "raw_excerpt": "Language model pretraining with next token prediction has proved effective for scaling compute but is limited to the amount of available training data. Scaling reinforcement learning (RL) unlocks a new axis for the continued improvement of artificial intelligence, with the promise that large language models (LLMs) can scale their training data by learning to explore with rewards."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report — arXiv abstract page (metadata + abstract)",
+    "url": "https://arxiv.org/abs/2505.09388",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列包含 dense 与 MoE 两类架构，参数规模 0.6B 至 235B，全部以 Apache 2.0 公开。",
+      "核心创新是把 thinking 模式（复杂多步推理）与 non-thinking 模式（快速上下文驱动响应）整合进统一框架，无需在 chat 模型与专用推理模型之间切换，可按用户 query 或 chat template 动态切换模式。",
+      "摘要提到通过利用旗舰模型的知识显著降低构建小规模模型所需算力，同时保持有竞争力的性能。",
+      "摘要将 Qwen3 与 Qwen2.5 对比：多语言支持从 29 种扩展到 119 种语言与方言。"
+    ],
+    "raw_excerpt": "A key innovation in Qwen3 is the integration of thinking mode (for complex, multi-step reasoning) and non-thinking mode (for rapid, context-driven responses) into a unified framework... Meanwhile, Qwen3 introduces a thinking budget mechanism, allowing users to allocate computational resources adaptively during inference, thereby balancing latency and performance based on task complexity."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "verl-project/verl — verl/HybridFlow: A Flexible and Efficient RL Post-Training Framework",
+    "url": "https://github.com/verl-project/verl",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库元数据：★24,008，forks 4,808，语言 Python，最近 push 时间 2026-10-23。",
+      "README 自述定位：\"verl is a flexible, efficient and production-ready RL training library for large language models (LLMs)\"，由 ByteDance Seed 团队发起、verl 社区维护。",
+      "README 称 verl 是 HybridFlow 框架（arXiv 2409.19256）的开源实现。",
+      "README 主张的灵活性：hybrid-controller 编程模型可用几行代码构建 GRPO、PPO 等 RL dataflow；与 FSDP、Megatron-LM、vLLM、SGLang 集成；支持 flexible device mapping。",
+      "README 主张的性能：\"State-of-the-art throughput\"、\"SOTA LLM training and inference engine integrations and SOTA RL throughput\"；3D-HybridEngine 做 actor 重分片以减少训练/生成切换时的通信开销（属营销性 SOTA 表述，出处为项目自身 README）。",
+      "README News 记录：2025/03 DAPO 基于 Qwen2.5-32B 在 AIME 2024 达到 50 分，训练完全由 verl 驱动，并称超过 DeepSeek-R1-Zero-Qwen-32B 的此前 SOTA。",
+      "README News 记录：2025/12 Mind Lab 使用 verl + Megatron-bridge 在 64 张 H800 上为万亿参数模型训练 GRPO LoRA（附 techblog 链接）。",
+      "README News 记录：2025/06 verl 配合 Megatron 后端支持 DeepSeek-671B、Qwen3-235B 等大 MoE 模型。",
+      "README News 记录：2026/01 仓库迁移至 verl-project 组织；recipe 目录迁至独立仓库 verl-recipe 并作为 submodule。"
+    ],
+    "raw_excerpt": "verl is a flexible, efficient and production-ready RL training library for large language models (LLMs). ... verl is the open-source version of HybridFlow: A Flexible and Efficient RLHF Framework paper. ... [2025/12] Mind Lab successfully used verl and Megatron-bridge to train GRPO Lora for Trillion-parameter model on 64 H800"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "huggingface/trl — TRL - Transformers Reinforcement Learning",
+    "url": "https://github.com/huggingface/trl",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示 3,911 commits；stars 数未在本轮工具返回中取得（GitHub API 403 rate limit）。",
+      "README 自述定位：\"A comprehensive library to post-train foundation models\"，支持 SFT、GRPO、DPO 等后训练方法，构建于 🤗 Transformers 生态之上。",
+      "README 列出的 trainers：SFTTrainer、GRPOTrainer、DPOTrainer、KTOTrainer、RewardTrainer 等。",
+      "README 称 GRPOTrainer 实现的 GRPO \"more memory-efficient than PPO and was used to train Deepseek AI's R1\"。",
+      "README 称 DPOTrainer 实现的 DPO \"was used to post-train Llama 3 and many other models\"。",
+      "README 的可扩展性主张：借助 🤗 Accelerate 从单 GPU 扩展到多节点（DDP、DeepSpeed ZeRO、FSDP）；集成 PEFT（LoRA/QLoRA）与 Unsloth 优化 kernel。",
+      "README What's New 记录硬件平台扩展：通过 PyTorch ROCm 支持 AMD Instinct GPU；通过 TorchNeuron 支持 AWS Trainium；Beam 可在单节点 8×B300 上用 SFTTrainer 微调。",
+      "README 提供 CLI 入口（trl sft / trl dpo / trl kto）以无代码方式启动后训练。"
+    ],
+    "raw_excerpt": "TRL - Transformers Reinforcement Learning. A comprehensive library to post-train foundation models. ... GRPOTrainer implements the Group Relative Policy Optimization (GRPO) algorithm that is more memory-efficient than PPO and was used to train Deepseek AI's R1."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "simplescaling/s1 — s1: Simple test-time scaling",
+    "url": "https://github.com/simplescaling/s1",
+    "published_at": "2025-06-25",
+    "key_points": [
+      "仓库元数据：★6,673，forks 755，语言 Python，最近 push 时间 2025-06-25；页面显示 83 commits。",
+      "README 一句话主张：\"Minimal recipe for test-time scaling and strong reasoning performance matching o1-preview with just 1,000 examples & budget forcing\"。",
+      "README 说明该仓库是论文 \"s1: Simple test-time scaling\"（arXiv 2501.19393）的资源汇总（数据、评测、训练脚本、可视化）。",
+      "README 记录 2025-02 发布 s1.1：复用同一批 s1K 问题，但推理轨迹改由 r1 生成（数据集 s1K-1.1），称效果优于 s1。",
+      "README 的 budget forcing 实现细节：设置 MAX_TOKENS_THINKING=32000、NUM_IGNORE=1，在思考阶段强制忽略一次结束思考 token（追加 \"Wait\"）以延长推理，再生成最终答案。",
+      "README 说明 s1 原始模型在该示例 prompt 上答错，但配合 budget forcing 可修正答案。",
+      "README 列出的公开产物：模型 simplescaling/s1.1-32B（旧 s1-32B）、数据集 s1K-1.1（旧 s1K）、s1-prob、s1-teasers、data_ablation_full59K（59K 全量消融数据）。",
+      "README 给出 vLLM 与 transformers 两种推理路径，vLLM 示例使用 tensor_parallel_size=2、max_tokens=32768。"
+    ],
+    "raw_excerpt": "s1: Simple test-time scaling. Minimal recipe for test-time scaling and strong reasoning performance matching o1-preview with just 1,000 examples & budget forcing. ... 2025-02: We released s1.1 a better model than s1 by reusing the same s1K questions but with reasoning traces generated by r1 instead of Gemini"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "OpenRLHF/OpenRLHF",
+    "url": "https://github.com/OpenRLHF/OpenRLHF",
+    "published_at": "2026-10-05",
+    "key_points": [
+      "仓库元数据：★10,118，forks 1,053，语言 Python，最近 push 时间 2026-10-05。",
+      "仓库描述（description 字段，非 README 正文）：\"An Easy-to-use, Scalable and High-performance Agentic RL Framework based on Ray (PPO & DAPO & REINFORCE++ & VLM & TIS & vLLM & Ray & Async RL)\"。",
+      "注：本轮未能读取 OpenRLHF 的 README 正文（GitHub API 403 rate limit、raw.githubusercontent 连接失败），以上仅为元数据与描述级信息，不构成 README 主张取证。"
+    ],
+    "raw_excerpt": "OpenRLHF/OpenRLHF (★10118, forks 1053) desc: An Easy-to-use, Scalable and High-performance Agentic RL Framework based on Ray (PPO & DAPO & REINFORCE++ & VLM & TIS & vLLM & Ray & Async RL) | lang: Python | last push: 2026-10-05"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "LeapLabTHU/limit-of-RLVR",
+    "url": "https://github.com/LeapLabTHU/limit-of-RLVR",
+    "published_at": "2026-07-27",
+    "key_points": [
+      "仓库元数据：★354，forks 21，语言 Python，最近 push 时间 2026-07-27。",
+      "仓库描述（description 字段，非 README 正文）：\"repo for paper https://arxiv.org/abs/2504.13837\"，即该仓库为论文《Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?》（arXiv 2504.13837）的配套代码库。",
+      "注：本轮未能读取该仓库 README 正文，README 主张（如 pass@k 评测设置、模型清单）未取证。"
+    ],
+    "raw_excerpt": "LeapLabTHU/limit-of-RLVR (★354, forks 21) desc: repo for paper https://arxiv.org/abs/2504.13837 | lang: Python | last push: 2026-07-27"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Models & Pricing — DeepSeek API Docs",
+    "url": "https://api-docs.deepseek.com/quick_start/pricing",
+    "published_at": null,
+    "key_points": [
+      "DeepSeek API 按输入与输出 token 总数计费，价格以每 1M tokens 为单位：\"We bill model usage based on the total number of input and output tokens by the model.\"",
+      "页面列出的在售模型为 deepseek-flash（版本 DeepSeek-V4.1-Flash-1017）与 deepseek-v4-pro（版本 DeepSeek-V4-Pro-0813），两者均\"Supports both non-thinking and thinking (default) modes\"，即 thinking 模式为默认模式。",
+      "两个模型上下文长度为 1M，最大输出为 384K tokens（\"MAX OUTPUT MAXIMUM: 384K\"）。",
+      "deepseek-flash 定价：输入（cache hit）off-peak $0.003 / peak $0.006 每 1M tokens；输入（cache miss）off-peak $0.15 / peak $0.3；输出 off-peak $0.6 / peak $1.2 每 1M tokens。",
+      "deepseek-v4-pro 定价：输入（cache hit）off-peak $0.022 / peak $0.044；输入（cache miss）off-peak $0.66 / peak $1.32；输出 off-peak $1.98 / peak $3.96 每 1M tokens。",
+      "存在峰谷分时定价：off-peak 费率为 peak 费率的一半，peak 时段为 UTC 周一至周五 01:00-04:00 与 06:00-10:00（不含中国法定节假日），其余时段均为 off-peak。",
+      "输出 token 单价显著高于输入：以 deepseek-flash off-peak 为例，输出 $0.6 对 cache miss 输入 $0.15（约 4 倍），对 cache hit 输入 $0.003（约 200 倍）。",
+      "Search 与 Fetch 为独立按请求计费的 API，每 1,000 次成功请求 $0.75；通过 DeepSeek Harness / Claude Code / Codex 触发的服务端工具调用目前免费，自 2026 年 11 月 1 日北京时间 00:00 起开始按请求计费。",
+      "页面声明\"Product prices may vary and DeepSeek reserves the right to adjust them\"，即厂商保留调价权。"
+    ],
+    "raw_excerpt": "We bill model usage based on the total number of input and output tokens by the model. ... THINKING MODE Supports both non-thinking and thinking (default) modes ... CONTEXT LENGTH 1M MAX OUTPUT MAXIMUM: 384K ... 1M OUTPUT TOKENS OFF-PEAK $0.6 PEAK $1.2 ... (2) Off-peak rates are half of the peak rates. Peak hours are 01:00 - 04:00 and 06:00 - 10:00 UTC, Monday through Friday, excluding Chinese public holidays."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "AgentOps-AI/tokencost — Easy token price estimates for 400+ LLMs（仅取得仓库元数据，未读 README 正文）",
+    "url": "https://github.com/AgentOps-AI/tokencost",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：AgentOps-AI/tokencost，约 2004 stars、108 forks，语言 Python，最近 push 时间 2025-09-05。",
+      "仓库描述为 \"Easy token price estimates for 400+ LLMs. TokenOps.\"，表明其维护了 400+ 模型的 token 价格表。",
+      "本次仅通过 search_repos 获得 stars/描述/最近提交时间等元数据，未读取 README 或价格表正文，故不能据此得出任何关于 reasoning token 计费口径或价格趋势的结论。"
+    ],
+    "raw_excerpt": "AgentOps-AI/tokencost (★2004, forks 108) desc: Easy token price estimates for 400+ LLMs. TokenOps. lang: Python | last push: 2025-09-05"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "pydantic/genai-prices — Calculate prices for calling LLM inference APIs（仅取得仓库元数据，未读 README 正文）",
+    "url": "https://github.com/pydantic/genai-prices",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：pydantic/genai-prices，约 401 stars、144 forks，语言 Python，最近 push 时间 2026-10-25。",
+      "仓库描述为 \"Calculate prices for calling LLM inference APIs.\"，属跨厂商推理 API 价格计算/聚合工具。",
+      "尝试读取 README 正文失败（GitHub API 403 rate limit、raw.githubusercontent.com 连接失败），仅有元数据，不足以支撑任何定价趋势结论。"
+    ],
+    "raw_excerpt": "pydantic/genai-prices (★401, forks 144) desc: Calculate prices for calling LLM inference APIs. lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "hanzohanzhe/Grandet — Find the cheapest API for any model（仅取得仓库元数据，未读 README 正文）",
+    "url": "https://github.com/hanzohanzhe/Grandet",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：hanzohanzhe/Grandet，约 751 stars、69 forks，语言 JavaScript，最近 push 时间 2026-10-19。",
+      "仓库描述称其由 grandet.ai 上 1,800+ 官方、推理与中转供应商的挂牌价格支撑（\"backed by listed prices from 1,800+ official, inference and relay providers on grandet.ai\"）。",
+      "该描述为仓库自述的营销性主张，本次未读 README 正文、未核验其价格数据来源，不能作为定价事实依据。"
+    ],
+    "raw_excerpt": "hanzohanzhe/Grandet (★751, forks 69) desc: Find the cheapest API for any model and connect it from your AI agent: Grandet Skill and an anonymous MCP server, backed by listed prices from 1,800+ official, inference and relay providers on grandet.ai."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Anthropic Claude API Pricing 文档（访问受阻，仅返回区域限制提示）",
+    "url": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+    "published_at": null,
+    "key_points": [
+      "抓取 https://docs.anthropic.com/en/docs/about-claude/pricing 时未返回定价正文，仅返回区域限制提示：\"App unavailable Unfortunately, Claude is only available in certain regions right now.\"",
+      "因此本次未获得 Anthropic 任何模型（含 extended thinking / reasoning 模型）的输入输出单价、thinking token 计费口径或输出长度上限数据。"
+    ],
+    "raw_excerpt": "App unavailable Unfortunately, Claude is only available in certain regions right now. Please contact support if you think you're getting this message in error. View supported countries"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Scaling Laws for Neural Language Models (Kaplan et al., 2020)",
+    "url": "https://arxiv.org/abs/2001.08361v1",
+    "published_at": "2020-01-23",
+    "key_points": [
+      "论文研究语言模型交叉熵损失的经验缩放律，损失随模型规模、数据集大小与训练算力呈幂律关系，趋势跨越七个数量级以上。",
+      "摘要明确给出算力最优分配的定性结论：更大的模型显著更具样本效率，因此算力最优训练应使用非常大的模型、相对适中的数据量，并显著早于收敛就停止训练（'stopping significantly before convergence'）。",
+      "网络宽度、深度等架构细节在较宽范围内影响很小。"
+    ],
+    "raw_excerpt": "These relationships allow us to determine the optimal allocation of a fixed compute budget. Larger models are significantly more sample-efficient, such that optimally compute-efficient training involves training very large models on a relatively modest amount of data and stopping significantly before convergence."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Training Compute-Optimal Large Language Models (Hoffmann et al., 2022 / Chinchilla)",
+    "url": "https://arxiv.org/abs/2203.15556v1",
+    "published_at": "2022-03-29",
+    "key_points": [
+      "基于 70M 到 16B+ 参数、5B 到 500B token 的 400 多次训练实验，得出算力最优训练下模型规模与训练 token 数应等比例缩放：模型规模每翻一倍，训练 token 数也应翻一倍。",
+      "论文指出当时的大模型显著训练不足（undertrained），原因是业界在扩大模型规模的同时保持训练数据量不变。",
+      "按此结论训练的 Chinchilla（70B 参数、4 倍数据，与 Gopher 同等算力）在广泛下游任务上一致且显著优于 Gopher 280B、GPT-3 175B、Jurassic-1 178B、Megatron-Turing NLG 530B。",
+      "Chinchilla 在 MMLU 上达到 67.5% 的平均准确率，比 Gopher 提升超过 7 个百分点。"
+    ],
+    "raw_excerpt": "we find that for compute-optimal training, the model size and the number of training tokens should be scaled equally: for every doubling of model size the number of training tokens should also be doubled."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Chinchilla Scaling: A replication attempt (Besiroglu, Erdil, Barnett, You — Epoch AI)",
+    "url": "https://arxiv.org/html/2404.10102v2",
+    "published_at": "2024-04-15",
+    "key_points": [
+      "论文复现的是 Hoffmann et al. 三种估计方法中的第三种（A3：对 loss 关于模型规模 N 与训练 token 数 D 的参数化函数 L(N,D)=E+A/N^α+B/D^β 做拟合），数据来自对其 Figure 4 散点图的像素级重建（240 个数据点）。",
+      "复现发现 Hoffmann et al. 报告的 A3 参数估计与其前两种方法（A1 固定规模变 token、A2 IsoFLOP 剖面）不一致，且无法拟合所提取的数据，并给出了不合常理地窄的置信区间——如此窄的区间需要超过 600,000 次实验，而他们实际很可能只跑了不到 500 次。",
+      "作者给出两点解释：(1) Hoffmann et al. 使用的优化器因 loss scale 选择不当而在收敛前提前终止；(2) 论文正文（而非 TeX 源码）中报告的参数估计被四舍五入，导致缩放律预测出现显著偏差。",
+      "作者重新推导得到的参数为 A=482.01、B=2085.43、E=1.8172、α=0.3478、β=0.3658，由此得 a=β/(α+β)=0.5126；Hoffmann et al. 正文值为 A=406.4、B=410.7、E=1.6934、α=0.3392、β=0.2849，a=0.454。",
+      "作者指出 β 的精度影响很大：若用正文四舍五入的 0.28 而非 TeX 源码中的 0.2849，在典型 D=10^11 token 下会给可约损失的有限数据项引入约 13% 的正偏差。",
+      "统计检验显示两套参数差异极显著（χ² 检验 p<10^-51 排除五个离群点、p<10^-35 包含离群点）；单参数看 E 与 β 差异显著（p 分别为 2.6×10^-6 与 1.1×10^-4），而 A、B、α 与原文报告值无统计显著差异。",
+      "作者称 Hoffmann et al. 的作者已确认：其拟合较差是因为在最小化损失时对不同数据点的 Huber loss 取了平均而非求和，且优化器的高 loss scale 导致优化提前终止，从而得到次优参数值。",
+      "作者重做 A3 后得到的缩放律与 Hoffmann et al. 前两种估计方法（A1、A2）的结论相容。",
+      "论文指出「训练 token 应与参数量大致同速增长」这一结论已被他人复现，如 Anil et al. (2023)；Bi et al. (2024) 也发现二者大致成比例，但该比例对数据质量敏感——数据质量更高时最优 token/参数比更低。"
+    ],
+    "raw_excerpt": "Two factors explain these findings: firstly, the optimizer used by Hoffmann et al. stopped before convergence due to a poor choice of loss scale, and secondly, the parameter estimates reported in the body of the paper (as opposed to the TeX source) are rounded in a way that results in substantial bias in the predictions of the scaling law."
+  }
+]

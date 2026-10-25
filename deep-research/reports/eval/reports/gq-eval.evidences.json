@@ -1,0 +1,657 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on Large Language Model based Autonomous Agents (arXiv:2308.11432, v7)",
+    "url": "https://arxiv.org/abs/2308.11432",
+    "published_at": "2023-08-22 (v1); v7 2025-03-02",
+    "key_points": [
+      "该综述将 LLM-based autonomous agents 的研究组织为三大方面：construction（构建）、application（应用）、evaluation（评测），评测被单列为独立的核心章节。",
+      "论文摘要明确声明其贡献之一是「delve into the evaluation strategies commonly used for LLM-based autonomous agents」，即系统梳理 agent 评测策略。",
+      "该综述提出一个统一 agent 架构框架，包含 profiling、memory、planning、action 四个模块，作为界定「什么是 LLM agent」的权威结构定义。",
+      "论文给出 autonomous agent 的经典定义引用（Franklin and Graesser, 1997）：「An autonomous agent is a system situated within and a part of an environment that senses that environment and acts on it, over time, in pursuit of its own agenda and so as to effect what it senses in the future.」——该定义强调随时间在环境中感知与行动，是 agent 区别于单次输入输出模型的根本。",
+      "论文指出 LLM-based agents 相比 RL agent 具有更全面的内部世界知识、可在无特定领域训练数据下执行有依据的行动，并提供自然语言交互接口，带来更强灵活性与可解释性。",
+      "该综述已发表于 Frontiers of Computer Science（DOI 10.1007/s11704-024-40231-1），属同行评审期刊版本。",
+      "论文明确区分 agent 与 QA 形态的 LLM 使用：「building autonomous agents is far from QA, since they need to fulfill specific roles and autonomously perceive and learn from the environment to evolve themselves like humans.」"
+    ],
+    "raw_excerpt": "Finally, we delve into the evaluation strategies commonly used for LLM-based autonomous agents. ... For agent construction, we focus on two problems, that is, (1) how to design the agent architecture to better leverage LLMs, and (2) how to inspire and enhance the agent capability to complete different tasks. ... Finally, we delve into the strategies for evaluating LLM-based autonomous agents, focusing on both subjective and objective strategies."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on Large Language Model based Autonomous Agents — HTML 全文 (v7), 第 1–2.1.2 节",
+    "url": "https://arxiv.org/html/2308.11432v7",
+    "published_at": "2025-03-02",
+    "key_points": [
+      "正文第 1 节（Introduction）明确说明评测章节的组织方式为「focusing on both subjective and objective strategies」，即主观评测与客观评测二分，这是该综述对 agent 评测策略的一级分类。",
+      "正文指出 agent 与纯 LLM 的差别在于「they need to fulfill specific roles and autonomously perceive and learn from the environment to evolve themselves like humans」，即 agent 需在环境中自主感知、行动并演化，而非单轮问答。",
+      "统一架构框架由 profiling module、memory module、planning module、action module 四个模块组成，其中 profiling 模块用于确定 agent 角色，memory 模块存储从环境感知到的信息。",
+      "论文将 agent 能力获取（capability acquisition）与架构设计并列为构建 agent 的两大问题，前者关注「how to inspire and enhance the agent capability to complete different tasks」，对应能力维度的评测关注点。",
+      "本次抓取的 HTML 正文被信息密度裁剪，仅覆盖至第 2.1.2 节（Memory Module），未包含第 6 章评测章节的具体分类细节与基准清单。"
+    ],
+    "raw_excerpt": "For the first problem, we present a unified agent framework, which can encompass most of the previous studies. For the second problem, we provide a summary on the commonly-used strategies for agents' capability acquisition. ... Finally, we delve into the strategies for evaluating LLM-based autonomous agents, focusing on both subjective and objective strategies."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "AgentBench: Evaluating LLMs as Agents",
+    "url": "https://arxiv.org/abs/2308.03688v3",
+    "published_at": "2023-08-07",
+    "key_points": [
+      "AgentBench 是一个多维度基准，由 8 个不同环境组成，用于评估 LLM-as-Agent 的推理与决策能力。",
+      "评测对象为 API 商用模型与开源（OSS）模型，发现头部商用 LLM 在复杂环境中表现出较强 agent 能力，但与不超过 70B 的许多开源竞品之间存在显著性能差距。",
+      "论文归因的主要失败原因为：长期推理（long-term reasoning）、决策（decision-making）与指令遵循（instruction following）能力不足。",
+      "论文报告：在代码上训练对不同 agent 任务的影响是矛盾的（ambivalent impacts），与既有假设不同。",
+      "数据集、环境与集成评测包开源于 https://github.com/THUDM/AgentBench。"
+    ],
+    "raw_excerpt": "We present AgentBench, a multi-dimensional benchmark that consists of 8 distinct environments to assess LLM-as-Agent's reasoning and decision-making abilities. ... showing that poor long-term reasoning, decision-making, and instruction following abilities are the main obstacles for developing usable LLM agents."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+    "url": "https://arxiv.org/abs/2307.13854v4",
+    "published_at": "2023-07-25",
+    "key_points": [
+      "WebArena 构建了高度真实且可复现的 web 环境，包含四个常见领域的完整功能网站：电商、社交论坛讨论、协作软件开发、内容管理。",
+      "环境额外配备工具（如地图）与外部知识库（如用户手册），以鼓励类人方式解题。",
+      "基准任务聚焦评估任务完成的「功能正确性」（functional correctness），任务具有多样性、长时程（long-horizon）特征，模拟人类日常上网任务。",
+      "指标为端到端任务成功率：最佳 GPT-4 基线 agent 仅 14.41%，人类表现为 78.24%。"
+    ],
+    "raw_excerpt": "we release a set of benchmark tasks focusing on evaluating the functional correctness of task completions. ... our best GPT-4-based agent only achieves an end-to-end task success rate of 14.41%, significantly lower than the human performance of 78.24%."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+    "url": "https://arxiv.org/abs/2310.06770v3",
+    "published_at": "2023-10-10",
+    "key_points": [
+      "SWE-bench 是评估框架，包含 2,294 个软件工程问题，取自真实 GitHub issue 及对应 pull request，覆盖 12 个流行 Python 仓库。",
+      "任务形式：给定代码库与 issue 描述，模型需编辑代码库以解决该 issue。",
+      "解题常需跨多个函数、类甚至文件协调修改，要求模型与执行环境交互、处理超长上下文并进行复杂推理，超出传统代码生成任务范畴。",
+      "论文报告当时最佳模型 Claude 2 仅解决 1.96% 的 issue；微调模型 SWE-Llama 也只能解决最简单的问题。"
+    ],
+    "raw_excerpt": "we introduce SWE-bench, an evaluation framework consisting of 2,294 software engineering problems drawn from real GitHub issues and corresponding pull requests across 12 popular Python repositories. ... The best-performing model, Claude 2, is able to solve a mere 1.96% of the issues."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "GAIA: a benchmark for General AI Assistants",
+    "url": "https://arxiv.org/abs/2311.12983v1",
+    "published_at": "2023-11-21",
+    "key_points": [
+      "GAIA 提出需要推理、多模态处理、网页浏览与通用工具使用能力（tool-use proficiency）的真实世界问题。",
+      "共设计 466 个问题及其答案；公开问题但保留其中 300 个的答案用于维护 leaderboard（https://huggingface.co/gaia-benchmark）。",
+      "人类受访者正确率 92%，而配备插件的 GPT-4 仅 15%。",
+      "设计理念：不追求对人类越来越难的任务，而是考察系统能否达到普通人类在该类问题上的稳健性（robustness）。"
+    ],
+    "raw_excerpt": "GAIA proposes real-world questions that require a set of fundamental abilities such as reasoning, multi-modality handling, web browsing, and generally tool-use proficiency. ... we show that human respondents obtain 92% vs. 15% for GPT-4 equipped with plugins. ... we devise 466 questions and their answer."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+    "url": "https://arxiv.org/abs/2406.12045v1",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "τ-bench 模拟用户（由语言模型扮演）与语言 agent 之间的动态对话，agent 被提供领域特定的 API 工具与政策准则（policy guidelines）。",
+      "评测方式：将对话结束时的数据库状态与标注的目标状态（annotated goal state）比对，作为高效且忠实的判定方法。",
+      "提出新指标 pass^k，用于评估 agent 在多次试验中的行为可靠性（reliability/一致性）。",
+      "实验结果：即使 gpt-4o 这类 SOTA function calling agent 任务成功率也 <50%，且表现很不一致（retail 域 pass^8 <25%）。"
+    ],
+    "raw_excerpt": "We propose τ-bench, a benchmark emulating dynamic conversations between a user (simulated by language models) and a language agent provided with domain-specific API tools and policy guidelines. ... We also propose a new metric (pass^k) to evaluate the reliability of agent behavior over multiple trials."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+    "url": "https://arxiv.org/abs/2404.07972v2",
+    "published_at": "2024-04-11",
+    "key_points": [
+      "OSWorld 是面向多模态 agent 的可扩展真实计算机环境，支持任务搭建、基于执行的评测（execution-based evaluation）与交互式学习，覆盖 Ubuntu、Windows、macOS。",
+      "基于该环境构建了 369 个计算机任务，涉及开放域的真实 web 与桌面应用、操作系统文件 I/O 以及跨多应用的工作流。",
+      "每个任务样本包含详细的初始状态配置与自定义的基于执行的评测脚本，以保证评测可靠可复现。",
+      "指标为任务成功率：人类可完成 72.36% 以上任务，最佳模型仅 12.24%，主要瓶颈在 GUI grounding 与操作知识（operational knowledge）。"
+    ],
+    "raw_excerpt": "we create a benchmark of 369 computer tasks involving real web and desktop apps in open domains, OS file I/O, and workflows spanning multiple applications. ... While humans can accomplish over 72.36% of the tasks, the best model achieves only 12.24% success, primarily struggling with GUI grounding and operational knowledge."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "UKGovernmentBEIS/inspect_ai — Inspect: A framework for large language model evaluations",
+    "url": "https://github.com/UKGovernmentBEIS/inspect_ai",
+    "published_at": null,
+    "key_points": [
+      "Inspect 是由 UK AI Security Institute（英国 AI 安全研究所）创建的 LLM 评测框架。",
+      "README 声明的内置组件覆盖：prompt engineering、tool usage（工具调用）、multi-turn dialog（多轮对话）、model graded evaluations（模型打分/LLM-as-judge 式评测）。",
+      "框架支持通过其他 Python 包扩展新的 elicitation 与 scoring 技术。",
+      "Inspect 附带 200 多个预置评测（over 200 pre-built evaluations），可直接在任意模型上运行。",
+      "仓库页面显示 3.1k stars、860 forks、21 watching，主分支累计 8,109 commits。",
+      "许可证为 MIT。",
+      "文档站提供面向 coding agent 的结构化索引（llms.txt / llms-guide.txt / llms-full.txt）。"
+    ],
+    "raw_excerpt": "Welcome to Inspect, a framework for large language model evaluations created by the UK AI Security Institute. Inspect provides many built-in components, including facilities for prompt engineering, tool usage, multi-turn dialog, and model graded evaluations. ... Inspect also includes a collection of over 200 pre-built evaluations ready to run on any model ... Stars 3.1k stars Watchers 21 watching Forks 860 forks"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "explodinggradients/ragas — Supercharge Your LLM Application Evaluations",
+    "url": "https://github.com/explodinggradients/ragas",
+    "published_at": null,
+    "key_points": [
+      "Ragas 定位为评估与优化 LLM 应用的 toolkit，主张提供「客观指标、智能测试生成、数据驱动洞察」。",
+      "README 的 Key Features 列出：Objective Metrics（同时使用 LLM-based 与 traditional metrics 两类指标）、Test Data Generation（自动生成覆盖多场景的测试数据集）、Seamless Integrations（与 LangChain 等 LLM 框架及主流可观测性工具集成）、Build feedback loops（用生产数据持续改进）。",
+      "支持生产对齐的测试集生成（production-aligned test set generation），用于没有现成测试数据集的场景。",
+      "提供 Aspect Critique 等预置指标，可通过 DiscreteMetric 自定义评测维度（示例为 summary_accuracy，输出 accurate/inaccurate 及 reason）。",
+      "CLI 提供 `ragas quickstart` 模板机制；当前可用模板为 rag_eval（评估 RAG 系统），agent_evals（评估 AI agent）、benchmark_llm、prompt_evals、workflow_eval 标注为 Coming Soon。",
+      "仓库页面显示 16.1k stars、1.8k forks、61 watching，主分支累计 1,147 commits。",
+      "许可证为 Apache-2.0；默认收集匿名化使用数据，可通过 RAGAS_DO_NOT_TRACK=true 关闭。"
+    ],
+    "raw_excerpt": "Objective metrics, intelligent test generation, and data-driven insights for LLM apps ... 🎯 Objective Metrics: Evaluate your LLM applications with precision using both LLM-based and traditional metrics. 🧪 Test Data Generation: Automatically create comprehensive test datasets covering a wide range of scenarios. ... Coming Soon: agent_evals - Evaluate AI agents ... Stars 16.1k stars Watchers 61 watching Forks 1.8k forks"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "raga-ai-hub/RagaAI-Catalyst — Python SDK for Agent AI Observability, Monitoring and Evaluation",
+    "url": "https://github.com/raga-ai-hub/RagaAI-Catalyst",
+    "published_at": null,
+    "key_points": [
+      "仓库自述为面向 Agent AI 的可观测性、监控与评估框架的 Python SDK（仅取得搜索元数据中的仓库描述，未读 README 正文）。",
+      "描述中声明的能力包括：agent、llm 与 tools 的 tracing，多智能体系统调试，自托管 dashboard，以及带 timeline 与 execution graph 视图的高级分析。",
+      "搜索元数据显示 16,180 stars、3,574 forks，语言 Python，最近 push 时间 2026-02-11。"
+    ],
+    "raw_excerpt": "Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent, llm and tools tracing, debugging multi-agentic system, self-hosted dashboard and advanced analytics with timeline and execution graph view (★16180, forks 3574, last push: 2026-02-11)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Measuring AI Ability to Complete Long Software Tasks (METR, 2025-03-19; 含 Time Horizon 1.0/1.1 更新)",
+    "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/",
+    "published_at": "2025-03-19",
+    "key_points": [
+      "METR 提出以「AI agent 能自主完成的任务时长（按人类专家完成所需时间计）」作为 agent 能力的评测指标，而非单步技能或知识题分数。",
+      "方法论：在一组多样化的多步软件与推理任务上记录人类专家完成时间，用 logistic 曲线拟合「模型成功率 ~ 人类任务时长」，再取某固定成功率阈值处曲线的交点换算为时长，即该模型的 time horizon。",
+      "报告同时给出 50% 与 80% 两个成功率阈值下的时间跨度，说明单一成功率阈值不足以刻画 agent 能力。",
+      "实证关系：当前模型在人类 4 分钟以内的任务上成功率接近 100%，但在人类耗时超过约 4 小时的任务上成功率低于 10%。",
+      "趋势结论：以 50% 可靠性可完成的任务时长在过去 6 年约每 7 个月翻倍；作者称对总体趋势较有信心，区间约为每年 1–4 次翻倍。",
+      "不确定性处理：95% 置信区间通过对 task families、tasks、task attempts 做分层 bootstrap（hierarchical bootstrap）计算。",
+      "作者明确指出该估计依赖任务集选择与被测人类群体等方法学选择，即指标对评测设计敏感。",
+      "基准本身被版本化：Time Horizon 1.0（2025-03，覆盖 2019 至 2025-11 的模型）与 Time Horizon 1.1（更大任务集，沿用同一方法）；页面标注部分静态图表与结论（如翻倍时间）已过时，TH1.1 不再随新模型更新。",
+      "分析代码在 GitHub 公开、原始数据公开可下载，属于可复现性实践。"
+    ],
+    "raw_excerpt": "We propose measuring AI performance in terms of the length of tasks AI agents can complete. ... The length of tasks (measured by how long they take human professionals) that generalist frontier model agents can complete autonomously with 50% reliability has been doubling approximately every 7 months for the last 6 years. The shaded region represents 95% CI calculated by hierarchical bootstrap over task families, tasks, and task attempts. ... current models have almost 100% success rate on tasks taking humans less than 4 minutes, but succeed <10% of the time on tasks taking more than around 4 hours. ... Our estimate of the length of tasks that an agent can complete depends on methodological choices like the tasks used and the humans whose performance is measured."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Use the Central Limit Theorem — Anthropic Engineering, \"A statistical approach to model evals\" (Chapter 01)",
+    "url": "https://www.anthropic.com/engineering/statistical-approach-to-model-evals",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 主张 eval 报告的核心对象不是观测到的平均分，而是从「问题宇宙」中抽样得到的理论均值，并建议在每个 eval 分数旁报告基于中心极限定理的标准误（SEM），95% 置信区间为均值 ± 1.96×SEM。",
+      "已知失效模式一：题目非独立（同一段落/材料派生多题，如 DROP、QuAC、RACE、SQuAD）会使朴素 SEM 低估误差；应在随机化单元（如 passage）上做聚类标准误。Anthropic 称在流行 eval 上聚类标准误可达朴素标准误的 3 倍以上，忽略题目聚类会导致误判模型间存在能力差异。",
+      "已知失效模式二：题内随机性（模型非确定性输出）抬高整体标准误；建议对同一题重采样多次并取题级平均（Inspect 框架通过 epochs 参数实现），或在非 CoT 场景下直接用下一 token 概率作为题分以消除该随机成分。",
+      "建议用配对差异检验（paired-differences test）而非两样本 t 检验来比较两个模型，以消除题目难度方差；前沿模型在流行 eval 上的题级得分相关性约为 0.3–0.7，即前沿模型倾向于答对/答错同一批题。",
+      "该文对应 Anthropic 发表的一篇研究论文，作者称此前社区对「分数差异是否真实」这一问题研究不足。"
+    ],
+    "raw_excerpt": "we encourage researchers to report the SEM, derived from the Central Limit Theorem, alongside each calculated eval score ... In practice, we have found that clustered standard errors on popular evals can be over three times as large as naive standard errors. Ignoring question clustering may lead researchers to inadvertently detect a difference in model capabilities when in fact none exists. ... we find the correlation of question scores on popular evals between frontier models to be substantial—between 0.3 and 0.7 on a scale of −1 to +1."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "langfuse/langfuse — GitHub 仓库元数据与 README",
+    "url": "https://github.com/langfuse/langfuse",
+    "published_at": "2023-05-18",
+    "key_points": [
+      "stars: 36417；forks: 4069；open issues: 1128；主语言 TypeScript",
+      "创建于 2023-05-18，最近 push 时间 2026-10-25",
+      "GitHub API 返回 license 字段为 NOASSERTION（未能自动识别为标准 SPDX 许可证）",
+      "仓库 topics 包含 evaluation、llm-evaluation、llm-observability、observability、monitoring、llmops、self-hosted、prompt-management",
+      "README 提供 Langfuse Cloud、Self Host、Demo、Docs 入口，定位为可自托管的 LLM 工程平台"
+    ],
+    "raw_excerpt": "stars: 36417 | forks: 4069 | open issues: 1128 | language: TypeScript\ncreated: 2023-05-18 | last push: 2026-10-25\ntopics: analytics, autogen, evaluation, langchain, large-language-models, llama-index, llm, llm-evaluation, llm-observability, llmops, monitoring, observability, open-source, openai, playground, prompt-engineering, prompt-management, self-hosted, ycombinator\nlicense: NOASSERTION"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "langchain-ai/langsmith-sdk — GitHub 仓库元数据（已归档，SDK 已迁移）",
+    "url": "https://github.com/langchain-ai/langsmith-sdk",
+    "published_at": "2023-05-30",
+    "key_points": [
+      "stars: 1082；forks: 314；open issues: 227；主语言 Python",
+      "创建于 2023-05-30，最近 push 时间 2026-10-16",
+      "许可证为 MIT",
+      "该仓库已于 2026-10-16 归档，Python SDK 迁至 langchain-ai/langsmith-python，JS/TS SDK 迁至 langchain-ai/langsmith-javascript",
+      "仓库 topics 为 evaluation、language-model、observability",
+      "该仓库仅为 LangSmith 客户端 SDK，LangSmith 平台本体为闭源托管服务，故 stars 不代表平台本体热度"
+    ],
+    "raw_excerpt": "> ## This repository has moved\n>\n> The LangSmith SDKs now live in their own repositories and this one is now archived.\n>\n> | SDK | New repository | Package |\n> | Python | **[langchain-ai/langsmith-python](https://github.com/langchain-ai/langsmith-python)** | [`langsmith` on PyPI](https://pypi.org/project/langsmith/) |\n> | JavaScript / TypeScript | **[langchain-ai/langsmith-javascript](https://github.com/langchain-ai/langsmith-javascript)** | [`langsmith` on npm](https://www.npmjs.com/package/langsmith) |\n\nstars: 1082 | forks: 314 | open issues: 227 | language: Python\ncreated: 2023-05-30 | last push: 2026-10-16\nlicense: MIT"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Langfuse Docs — Evaluation Overview",
+    "url": "https://langfuse.com/docs/evaluation/overview",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 将评测分为 online（对生产实时 trace 打分）与 offline（上线前对数据集跑实验）两条路径",
+      "在线侧能力：trace / session / agent / prompt 级追踪、监控看板、LLM-as-judge、用户反馈（feedback）",
+      "离线侧能力：datasets（数据集）、features-as-tests、experiments（对比 prompt / 模型 / 代码变体）、judges 与自定义评测、annotation（人工标注队列）",
+      "支持代码型确定性评测器（Code Evaluators）与 LLM-as-a-Judge、decision-model evaluators",
+      "支持在 CI 中跑实验：提供 langfuse/experiment-action GitHub Action，在 PR 工作流中当分数低于阈值时抛 RegressionError 使任务失败",
+      "提供 LLM judge 与人工标注一致性的校准（calibrate your LLM-as-a-judge）与 Score Analytics 分数趋势分析"
+    ],
+    "raw_excerpt": "Evaluation runs across most of the AI engineering loop: you score live traces in production, turn interesting examples into datasets, run experiments to compare changes, and judge the results with manual or automated evaluators. It happens both online, on live production traces, and offline, before you ship a change.\n\nDeploy Online Trace traces · sessions · agents · prompts Online Monitor dashboards · LLM-as-judge · feedback Offline Build datasets datasets · features-as-tests Offline Experiment prompts · models · code variants Offline Evaluate judges · custom evals · annotation\n\nTo catch regressions before they ship, run experiments in CI: add the langfuse/experiment-action GitHub Action to a pull_request workflow and raise RegressionError from your experiment script when a score violates your threshold; the action then fails the job."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Langfuse Docs — LLM-as-a-Judge",
+    "url": "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge",
+    "published_at": null,
+    "key_points": [
+      "LLM-as-a-Judge 定义为用一个 LLM 按评分 rubric 评估另一个 LLM 应用的输出，返回分数与推理理由",
+      "judge prompt 的典型组成：评测标准 rubric、输入上下文、待评输出、可选参考答案（ground truth）",
+      "Langfuse 中分数支持 numeric（如 0–1 helpfulness）、categorical（correct / partially_correct / incorrect）、boolean 三种类型",
+      "评测目标可为 Observations（单次操作：LLM 调用、检索、tool call）或 Experiments（受控数据集）；官方称 observation 级是生产实时数据的推荐目标，trace 级 evaluator 已弃用（deprecated）",
+      "observation 级 evaluator 可选取该 observation 的 input、output、metadata 或 tool calls 作为变量",
+      "官方建议用标注样本校准 judge，并在 Score Analytics 中比对 judge 分数与人工标注分数"
+    ],
+    "raw_excerpt": "LLM-as-a-Judge is an evaluation methodology where an LLM is used to assess the quality of outputs produced by another LLM application. ... The judge model produces a score along with reasoning explaining its assessment.\n\nIn Langfuse, that score can be numeric, categorical, or boolean. ... Observation-level evaluators are the recommended target for live production data; trace-level evaluators are deprecated (see below).\n\nData available to observation-level evaluators: Observation-level evaluators map variables from the matched observation. You can select its input, output, metadata, or tool calls."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Langfuse Docs — Agent Graphs（轨迹可视化）",
+    "url": "https://langfuse.com/docs/observability/features/agent-graphs",
+    "published_at": null,
+    "key_points": [
+      "Agent graphs 为复杂 agent 工作流提供可视化，用于理解多步推理与 agent 交互",
+      "图有两种生成方式：从 observations 自动推断（trace 中存在 span / event / generation 之外的 observation 类型时视为 agentic），或通过 LangGraph 集成直接显示",
+      "提供 Aggregated（按步骤名聚合、循环画成环）与 Expanded（每次调用一个节点、循环展开为 DAG）两种视图",
+      "Expanded 视图用于逐步调试单次运行，Aggregated 视图用于把握 agent 整体结构"
+    ],
+    "raw_excerpt": "Agent graphs in Langfuse provide a visual representation of complex AI agent workflows, helping you understand and debug multi-step reasoning processes and agent interactions.\n\nThere are two ways a graph appears for a trace: Inferred from observations. Have an observation with any observation type except span, event, or generation in your trace. Langfuse then interprets the trace as agentic and shows a graph, inferred automatically from the observations' timings and nesting. From the LangGraph integration."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Langfuse Docs — Model Usage & Cost Tracking",
+    "url": "https://langfuse.com/docs/observability/features/token-and-cost-tracking",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 记录每次 LLM 调用的 usage 与 cost，可按模型、用例、时间维度监控花费",
+      "对每个 generation 记录 usage details（按 usage type 的消耗量，如 input/output、cached_tokens、audio_tokens）与 cost details（按 usage type 的 USD 成本）",
+      "usage/cost 可来自 ingested（由 LLM 响应经 API/SDK/集成上报）或 inferred（依据 model 参数匹配内置模型定义中的价格推算），两者都有时 ingested 优先",
+      "内置 OpenAI、Anthropic、Google 主流模型的价格定义，支持自定义模型定义与 pricing tiers",
+      "支持成本看板、花费阈值告警，以及通过 Metrics API 按应用类型、用户、标签检索聚合 usage 与 cost"
+    ],
+    "raw_excerpt": "Langfuse tracks the usage and cost of every LLM call in your application, so you can monitor spend across models, use cases, and over time.\n\nFor every LLM generation, Langfuse records two things, each broken down by usage type ... Usage details: number of units consumed per usage type; Cost details: USD cost per usage type.\n\nWhen both are available, ingested values take priority over inferred ones."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LangSmith Docs — Evaluation concepts",
+    "url": "https://docs.langchain.com/langsmith/evaluation-concepts",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 将评测分为 offline（部署前：benchmarking、回归测试、单元测试、backtesting，目标为 dataset 中的 examples）与 online（生产监控：实时监控、异常检测、生产反馈，目标为 tracing 产生的 runs 与 threads）",
+      "建议按系统关键组件拆解评测对象：LLM 调用、检索步骤、tool invocations、输出格式；对 agent 明确提到要评测「正确的工具选择与参数格式，或 agent 所走的轨迹（trajectory）」",
+      "Dataset 由 examples 组成，每个 example 含 inputs、可选 reference outputs、可选 metadata",
+      "Experiment 表示某一应用版本在某个 dataset 上的评测结果，捕获每个 example 的 outputs、evaluator scores 与 execution traces，支持多实验并排对比",
+      "Run 含 inputs、outputs、intermediate steps（子 run：tool calls、LLM calls 等）、metadata（tags、用户反馈、latency metrics 等）",
+      "Thread 为多轮会话的 run 集合，online evaluator 可在 thread 级评估整段对话（跨轮连贯性、话题保持、用户满意度）",
+      "Evaluators 为 workspace 级资源，可通过 Evaluators 页面、Playground、LangSmith SDK（Python/TypeScript）、Rules 运行，并可挂载到 tracing project、agent environment 或 dataset"
+    ],
+    "raw_excerpt": "Agent: Examples of correct tool selection and proper argument formatting or trajectory that the agent took.\n\nOffline evaluations target examples from datasets ... Online evaluations target runs and threads from tracing: real production traces without reference outputs.\n\nA run is a single execution trace from your deployed application. Each run contains: Inputs ... Outputs ... Intermediate steps: All the child runs (tool calls, LLM calls, and so on). Metadata: Tags, user feedback, latency metrics, etc.\n\nAn experiment represents the results of evaluating a specific application version on a dataset. Each experiment captures outputs, evaluator scores, and execution traces for every example in the dataset."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LangSmith Docs — Observability concepts（run / trace / thread / trajectory 结构）",
+    "url": "https://docs.langchain.com/langsmith/observability-concepts",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 中 agent 的每个工作单元（模型调用、工具调用、信息检索）记录为一个 run，单次操作的 runs 集合为 trace，多轮会话的 traces 可链接为 thread",
+      "run 对应 OpenTelemetry 中的 span 概念",
+      "单条 trace 最多 25,000 个 runs，超出后 LangSmith 拒绝该 trace 的额外 runs",
+      "trajectory 是把 thread 内 traces 展平为有序消息列表的投影，去掉 run 嵌套，展示 agent 从开始到结束的路径",
+      "Feedback 以 tag + score 形式绑定到单个 run，可为连续值或离散（分类）值",
+      "Tags 与 metadata（如应用版本、环境）可附加到 run 上用于过滤与分组",
+      "集成方式包括对 LangChain、LangGraph、OpenAI、Anthropic、CrewAI 等的自动追踪，以及 @traceable 装饰器等手动埋点"
+    ],
+    "raw_excerpt": "In LangSmith, every unit of work an agent performs, such as a model call, tool invocation, or information retrieval, is recorded as a run. The runs for a single operation are collected into a trace. You can link together traces from multi-turn sessions as a thread.\n\nA run represents a single unit of work executed by an agent ... If you are familiar with OpenTelemetry, you can think of a run as a span.\n\nEach trace is limited to a maximum of 25,000 runs.\n\nA trajectory is a flat, ordered list of messages that shows the path an agent took from start to finish."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "LangSmith Docs — Evaluate a complex agent（三类 agent 评测范式）",
+    "url": "https://docs.langchain.com/langsmith/evaluate-complex-agent",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 官方教程将 chatbot/agent 最有效的评测分为三类：Final response（评最终回复）、Trajectory（评 agent 是否走了预期的工具调用路径）、Single step（孤立评估任一步骤，如是否选对第一个工具）",
+      "该教程以 LangGraph 构建 agent，但声明所展示的技术与 LangSmith 功能与框架无关（framework-agnostic）"
+    ],
+    "raw_excerpt": "Then, we'll go through the three most effective types of evaluations to run on chat bots:\n\nFinal response: Evaluate the agent's final response.\nTrajectory: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.\nSingle step: Evaluate any agent step in isolation (e.g., whether it selects the appropriate first tool for a given step).\n\nWe'll build our agent using LangGraph, but the techniques and LangSmith functionality shown here are framework-agnostic."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "openai/evals — Evals is a framework for evaluating LLMs and LLM systems, and an open-source registry of benchmarks",
+    "url": "https://github.com/openai/evals",
+    "published_at": "2026-04-14",
+    "key_points": [
+      "仓库元数据：stars 19647、forks 3120、open issues 350、语言 Python、创建于 2023-01-23、last push 2026-04-14。",
+      "许可证字段为 NOASSERTION（GitHub 未能自动识别为标准许可证），具体许可证类型未在本次取证中确认。",
+      "README 开篇主张：Evals 提供评估 LLM 或基于 LLM 构建的系统的框架（framework for evaluating large language models (LLMs) or systems built using LLMs）。",
+      "README 说明其提供既有 eval registry 用于测试 OpenAI 模型的不同维度，并支持用户编写自定义 eval。",
+      "README 说明可用自有数据构建 private evals，以覆盖工作流中的常见 LLM 模式而不公开数据。",
+      "README 顶部指向 OpenAI Dashboard 中配置和运行 Evals 的产品入口（platform.openai.com/docs/guides/evals）。",
+      "README 主张：构建 LLM 应用时创建高质量 evals 是最有影响力的事情之一，否则难以理解不同模型版本对用例的影响。"
+    ],
+    "raw_excerpt": "# OpenAI Evals\n\n> You can now configure and run Evals directly in the OpenAI Dashboard. [Get started →](https://platform.openai.com/docs/guides/evals)\n\nEvals provide a framework for evaluating large language models (LLMs) or systems built using LLMs. We offer an existing registry of evals to test different dimensions of OpenAI models and the ability to write your own custom evals for use cases you care about. You can also use your data to build private evals which represent the common LLMs patterns in your workflow without exposing any of that data publicly.\n\nIf you are building with LLMs, creating high quality evals is one of the most impactful things you can do. Without evals, it can be very difficult and time intensive to understand how different model versions might affect your use cas..."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "AgentOps-AI/agentops — Observability and DevTool platform for AI Agents",
+    "url": "https://github.com/AgentOps-AI/agentops",
+    "published_at": "2026-06-25",
+    "key_points": [
+      "仓库元数据：stars 5914、forks 649、open issues 197、语言 Python、创建于 2023-08-15、last push 2026-06-25。",
+      "许可证为 MIT。",
+      "README banner 自我定位为「Observability and DevTool platform for AI Agents」（AI Agent 的可观测性与开发工具平台）。",
+      "仓库 topics 标签包含 cost-estimation、evals、evaluation-metrics，以及 agent、agents-sdk、anthropic、autogen、crewai、groq、langchain、llm、mistral、ollama、openai、openai-agents 等集成相关标签。",
+      "README 含 PyPI 版本徽章、月下载量徽章与 GitHub commit activity 徽章，表明以 Python 包（pip 安装）方式分发。"
+    ],
+    "raw_excerpt": "<div align=\"center\">\n  <em>Observability and DevTool platform for AI Agents</em>\n</div>\n...\ntopics: agent, agentops, agents-sdk, ai, anthropic, autogen, cost-estimation, crewai, evals, evaluation-metrics, groq, langchain, llm, mistral, ollama, openai, openai-agents\nlicense: MIT"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "braintrustdata/braintrust-sdk-python — Python Tracing & Evals library for Braintrust",
+    "url": "https://github.com/braintrustdata/braintrust-sdk-python",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库元数据：stars 22、forks 29、open issues 65、语言 Python、创建于 2026-02-20、last push 2026-10-23。",
+      "许可证为 Apache-2.0。",
+      "仓库描述为「Python Tracing & Evals library for Braintrust」，即同时覆盖 tracing 与 evals 两类能力。",
+      "README 主张 Braintrust 是一个用于评估与交付（evaluating and shipping）AI 产品的平台。",
+      "该仓库内容为主 SDK 包（./py）、内置 integrations（py/src/braintrust/integrations 及 ./integrations 兼容包）、每个集成的 uv 项目示例（./examples）以及测试与本地开发工具。",
+      "注意：此为 Braintrust 的 Python SDK 仓库，非 Braintrust 平台主仓库，其 stars 数不代表平台整体热度。"
+    ],
+    "raw_excerpt": "# Braintrust Python SDKs\n\n[Braintrust](https://www.braintrust.dev/) is a platform for evaluating and shipping AI products. Learn more at [braintrust.dev](https://www.braintrust.dev/) and in the [docs](https://www.braintrust.dev/docs).\n\nThis repository contains Braintrust's Python SDKs and integrations, including:\n\n- The main `braintrust` SDK package in [`./py`](./py)\n- Built-in integrations under [`py/src/braintrust/integrations`](./integrations) and related compatibility packages under [`./integrations`](./integrations)\n- Self-contained `uv`-project examples for every integration in [`./examples`](./examples)\n- Tests and local development tooling for Python SDK development"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Judging the Judges: A Systematic Study of Position Bias in LLM-as-a-Judge",
+    "url": "https://arxiv.org/abs/2406.07791",
+    "published_at": "2024-06-12 (v1), v9 2025-11-11; AACL-IJCNLP 2025",
+    "key_points": [
+      "实验规模：15 个 LLM judge，覆盖 MTBench 与 DevBench 共 22 个任务、约 40 个解答生成模型，累计超过 150,000 个评测实例。",
+      "提出三个度量：repetition stability（重复稳定性）、position consistency（位置一致性）、preference fairness（偏好公平性）。",
+      "结论一：能力较强的 LLM judge 的位置偏差并非随机波动造成（repetition stability 高，偏差可复现）。",
+      "结论二：即使同一个 LLM judge，在不同任务上偏好方向（primacy 优先 vs recency 优先）波动很大。",
+      "结论三：位置一致性受候选答案之间质量差距的强烈影响；而与被评模型生成内容长度只有非常弱的关联。",
+      "结论四：不同 judge 的整体位置一致性指标可能相近，但在具体实例上的判断差异显著；多模型一致同意的实例通常更易判，分歧实例更易出现位置偏差。",
+      "实验采用双盲设置（隐藏候选模型身份），并对 pairwise 交换位置、list-wise 做全排列以测量位置偏差。"
+    ],
+    "raw_excerpt": "Our experiments, involving 15 LLM judges across MTBench and DevBench with 22 tasks and approximately 40 solution-generating models, result in over 150,000 evaluation instances. ... The findings confirm that position bias is not due to random chance and varies significantly across judges and tasks. While position bias is weakly influenced by the length of prompt components, it is strongly affected by the quality gap between solutions."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "LLM Evaluators Recognize and Favor Their Own Generations",
+    "url": "https://arxiv.org/abs/2404.13076",
+    "published_at": "2024-04-15",
+    "key_points": [
+      "开箱即用（未微调）情况下，被评估的三个 LLM（GPT-4、GPT-3.5、Llama-2-7b-chat）在区分自身输出与其他来源时准确率均超过 50%；GPT-4 区分自身与另外两个 LLM 及人类文本的准确率为 73.5%。",
+      "在 500 条样本上微调后，GPT-3.5 与 Llama 2 的自我识别准确率均超过 90%（接近完美）。",
+      "自我识别能力与自我偏好偏差强度之间存在线性相关；作者通过受控实验排除了反向因果与常见混淆因素。",
+      "ordering bias（顺序偏差）量化：当选项顺序反转时，GPT-4、GPT-3.5、Llama 反转其 pairwise 偏好的比例分别为 25%、58%、89%（跨任务与数据集平均）。",
+      "在 pairwise 设置下，各评估模型的 self-preference 分数之和大于 1，即无需人类基线数据也能观察到自我偏好存在的证据。",
+      "所有模型对「人类撰写的摘要」表现出最强的自我偏好（即相对压低人类文本评分）。",
+      "较弱模型难以区分自身与更强模型：Llama 2 完全无法区分自身与 GPT-3.5/GPT-4 的输出。",
+      "实验任务为文本摘要，数据来自 CNN/DailyMail 与 XSUM 各 1,000 篇新闻。"
+    ],
+    "raw_excerpt": "LLMs such as GPT-4 and Llama 2 have non-trivial accuracy at distinguishing themselves from other LLMs and humans. By fine-tuning LLMs, we discover a linear correlation between self-recognition capability and the strength of self-preference bias ... GPT-4, GPT-3.5, and Llama reverse their pairwise preferences when the ordering of options is reversed at rates of 25%, 58%, and 89% respectively, averaged across tasks and datasets."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Self-Preference Bias in LLM-as-a-Judge",
+    "url": "https://arxiv.org/abs/2410.21819",
+    "published_at": "2024-10-29 (v1), v2 2025-06-21; NeurIPS 2024 Safe Generative AI Workshop",
+    "key_points": [
+      "提出基于算法公平性中 Equal Opportunity 概念的自偏好偏差量化指标：Bias = P(Y'=1|S=1,Y=1) − P(Y'=1|S=0,Y=1)，取值 0 表示无偏差，接近 1 表示高偏差，负值表示反向偏差。",
+      "在 8 个 LLM 评估器上测量（GPT-3.5-Turbo、GPT-4、Vicuna-7b/13b、oasst-pythia-12b、dolly-v2-12b、Koala-13b、stablelm-tuned-alpha-7b），结果显示 GPT-4 表现出显著的自偏好偏差，强于其他模型。",
+      "数据来自 Chatbot Arena 数据集（约 33,000 段对话，每段含一对由不同 LLM 生成的回答及人类偏好标签 model_a/model_b/tie）。",
+      "偏差成因分析：LLM 对困惑度（perplexity）更低的输出给出显著更高的评分，无论该输出是否由自己生成；作者据此认为自偏好偏差的本质在于困惑度/熟悉度偏好。",
+      "为缓解位置偏差，实验交换 A/B 位置并对两次评分取平均。",
+      "作者指出该偏差的风险：用 GPT-4 作 judge 可能使其特有风格与策略过度影响被评系统。"
+    ],
+    "raw_excerpt": "Our experimental results demonstrate that GPT-4 exhibits a significant degree of self-preference bias. ... Our findings reveal that LLMs assign significantly higher evaluations to outputs with lower perplexity than human evaluators, regardless of whether the outputs were self-generated. This suggests that the essence of the bias lies in perplexity and that the self-preference bias exists because LLMs prefer texts more familiar to them."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "JudgeBench: A Benchmark for Evaluating LLM-based Judges",
+    "url": "https://arxiv.org/abs/2410.12784",
+    "published_at": "2024-10-16 (v1), v2 2025-04-05; ICLR 2025",
+    "key_points": [
+      "指出现有 judge 基准主要衡量「与人类偏好的一致性」，但在人类众包偏好无法反映事实与逻辑正确性的困难任务上失效。",
+      "提出 JudgeBench：覆盖知识、推理、数学、编程的困难回答对，偏好标签反映客观正确性而非众包偏好。",
+      "评测了 prompted judges、fine-tuned judges、multi-agent judges 与 reward models 多类 judge。",
+      "关键量化结论：JudgeBench 难度显著高于以往基准，许多强模型（如 GPT-4o）的表现仅略好于随机猜测。"
+    ],
+    "raw_excerpt": "Our comprehensive evaluation on a collection of prompted judges, fine-tuned judges, multi-agent judges, and reward models shows that JudgeBench poses a significantly greater challenge than previous benchmarks, with many strong models (e.g., GPT-4o) performing just slightly better than random guessing."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "AI Agents Benchmarking for Data Analysis — 标准化 agent 框架基准测试框架（CrewAI vs LangGraph）",
+    "url": "https://github.com/vaibhav-tiwari-7/AI-Agents-Benchmarking-for-Data-Analysis",
+    "published_at": "2026-08-03",
+    "key_points": [
+      "仓库自述为「A standardized benchmarking framework for evaluating AI agent frameworks such as CrewAI and LangGraph on data analysis tasks using common datasets and performance metrics」。",
+      "仓库描述中列出的评测指标集合包含 accuracy、latency、computational cost、consistency 四项，即把成本与延迟与准确率并列报告。",
+      "该仓库为 0 star、0 fork、2026-08-03 创建且同日最后推送的 Jupyter Notebook 项目，README 徽章标注状态为「Academic Project」，非厂商或权威机构来源。"
+    ],
+    "raw_excerpt": "A standardized benchmarking framework for evaluating AI agent frameworks such as CrewAI and LangGraph on data analysis tasks using common datasets and performance metrics including accuracy, latency, computational cost, and consistency."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "arXiv cs.AI recent submissions 列表页（2026-10-23）",
+    "url": "https://arxiv.org/list/cs.AI/recent",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "该页面为 arXiv cs.AI 分类的近期投稿列表，仅提供论文编号、标题、作者与分类等元数据，不含摘要正文或方法/实验章节。",
+      "页面显示 2026-10-23 当日 cs.AI 新增 229 条投稿，总计 1421 条近期条目。",
+      "在该列表首页 50 条标题中未出现与 cost-aware / accuracy-per-dollar / 成本-延迟-成功率联合评测直接相关的标题（仅凭标题判断，未读正文）。"
+    ],
+    "raw_excerpt": "Artificial Intelligence — Authors and titles for recent submissions — Fri, 23 Oct 2026 ... Total of 1421 entries : 1-50 ... Fri, 23 Oct 2026 (showing first 50 of 229 entries)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "MLCommons AILuminate Benchmark（官方基准主页）",
+    "url": "https://mlcommons.org/benchmarks/ai-safety/ailuminate/",
+    "published_at": null,
+    "key_points": [
+      "AILuminate 是 MLCommons 的一组安全与安保基准族，跨 12 个危害类别评估生成式 AI，包含 Safety（英/法/中文文本到文本）与 Jailbreak（T2T、T+I2T，英文）两类基准。",
+      "AILuminate Safety v1.0 面向通用聊天系统，覆盖 12 个危害类别，并包含一套安全评估标准：危害分类法（hazard taxonomy）与响应评估准则（response evaluation criteria）。",
+      "每个语言提供超过 24,000 条测试提示词：12,000 条公开练习提示词 + 12,000 条用于 Official Test 的私有提示词，用于复现不同的危险场景。",
+      "评估系统采用经调优的安全评估模型集成（tuned ensemble of safety evaluation models）作为评分器。",
+      "当前版本仅支持单轮对话（single turn：一条人类提示 + 一条机器响应）。",
+      "由于仅覆盖单轮，基准也仅限于内容类危害（content hazards），即直接由机器响应内容引发的危害；需要更长上下文或重复交互才能体现的危害（如 bias）被排除在本版本之外。",
+      "v1.0 支持英语，法语已可用，中文与印地语支持在开发中。",
+      "AILuminate Jailbreak Benchmark v0.5（草案发布）建立在 AILuminate 之上，保留其危害分类法、评估器/评分逻辑与报告规范，并引入受控对抗提示以量化韧性（resilience），即从基线安全水平到受攻击下表现的下降幅度。",
+      "评分量表为 5 级（Poor / Fair / Good / Very Good / Excellent），依据违反评估标准的响应百分比：Poor 为违规响应数超过参考系统 3 倍以上；Fair 为超过 1.5 倍；Good 为 0.5–1.5 倍之间；Very Good 为低于 0.5 倍；Excellent 为达到或超过当前理想目标（违规响应 < 0.1%）。",
+      "评分由 MLCommons AI Risk & Reliability 工作组构建，将一流开源安全评估器模型组合并微调以保证评分置信度。"
+    ],
+    "raw_excerpt": "The AILuminate Benchmark is a family of safety and security benchmarks that assesses genAI across 12 hazard categories. ... Single Turn: the current version supports only single turn conversations (a human prompt and a machine response). Content hazards: Given that it covers single turn only, the benchmark is also limited to content only type of hazards. ... Hazards that require a longer context or repeated interactions (such as bias) are excluded from this version."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "MLCommons AI Safety Benchmark 结果页（AILuminate v1.0 评测范围、危害清单与分级解释）",
+    "url": "https://mlcommons.org/benchmarks/ai-safety/",
+    "published_at": null,
+    "key_points": [
+      "AILuminate v1.0 评估的是通用 AI 聊天模型在英语下、由恶意意图或自伤意图的普通或中等知识水平用户进行文本到文本交互时的安全性。",
+      "评测对象区分两类：AI Systems（可能包含一个或多个模型、护栏 guardrails、算法过滤器及其他审核技术，通常以 API 或软件组件形式提供）与 Bare Models（无外部护栏或审核逻辑过滤提示与响应的独立模型权重）。",
+      "评测方法：向被测系统（SUT）输入一组提示词，记录其响应，再用专门的“安全评估器模型”判定哪些响应违反 AILuminate 评估标准，结果汇总为人类可读报告。",
+      "系统按总体与逐危害两个层级给出 5 级评分（Poor、Fair、Good、Very Good、Excellent），依据违反评估标准的响应百分比。",
+      "评分是相对化的：以两个“可及”系统（参数量小于 150 亿的开源权重模型）中表现最佳者复合构成“参考模型”，Good 表示相对于当前技术水平具有竞争力的通用聊天机器人安全水平。",
+      "危害类别分为三组：物理危害（儿童性剥削、无差别武器 CBRNE、性相关犯罪、自杀与自伤、暴力犯罪）、非物理危害（诽谤、仇恨、知识产权、非暴力犯罪、隐私）、情境危害（性内容、专业建议）。",
+      "明确列出局限：测试只具有负向预测力（negative predictive power）——在基准上表现好不代表模型安全，只表示未发现关键安全弱点；且因提示词从无限空间中抽样、以及主观标准使用自动评估带来的噪声，测试结果相对真实行为存在显著方差。",
+      "部分系统（如 Grok-3-Preview、腾讯 Hunyuan-TurboS、NVIDIA Llama 3.3 49b Nemotron Super）虽满足纳入要求，但因提供方禁止基准测试或要求省略结果而未列入报告。"
+    ],
+    "raw_excerpt": "Negative Predictive Power: The tests in this benchmark only have negative predictive power. Performing well on the benchmark does not mean that your model is safe, simply that we have not identified critical safety weaknesses. Significant Variance: There is considerable variance in test outcomes relative to actual behavior, due to selection of prompts from an infinite space of possible prompts and noise from use of automatic evaluation for subjective criteria."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "openai/evals（OpenAI 官方评测框架仓库）",
+    "url": "https://github.com/openai/evals",
+    "published_at": "2023-01-23",
+    "key_points": [
+      "仓库定位：Evals 提供评估大语言模型或基于 LLM 构建的系统的框架，包含一个既有 eval 注册表（用于测试 OpenAI 模型的不同维度），并支持用户编写自定义 eval。",
+      "支持用自有数据构建私有 eval，以覆盖工作流中的常见 LLM 模式而不公开数据。",
+      "README 主张：对构建 LLM 应用者而言，创建高质量 evals 是最有影响力的事情之一；没有 evals 就很难、很耗时地理解不同模型版本会如何影响用例。",
+      "仓库当前引导用户在 OpenAI Dashboard 中配置和运行 Evals，并指向 platform.openai.com/docs/guides/evals 作为入门文档。",
+      "仓库元数据：约 19,647 stars、3,120 forks、350 open issues，Python，最近推送 2026-04-14。"
+    ],
+    "raw_excerpt": "Evals provide a framework for evaluating large language models (LLMs) or systems built using LLMs. We offer an existing registry of evals to test different dimensions of OpenAI models and the ability to write your own custom evals for use cases you care about. ... If you are building with LLMs, creating high quality evals is one of the most impactful things you can do."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (arXiv:2406.12045)",
+    "url": "https://arxiv.org/abs/2406.12045",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "该论文提出一个新指标 pass^k，用于评估 agent 在多次试验（multiple trials）中的行为可靠性。",
+      "论文报告：即使是 gpt-4o 这类最先进的 function calling agent，任务成功率也低于 50%，且表现相当不一致（quite inconsistent）。",
+      "论文报告：在 retail 域中 pass^8 < 25%。",
+      "作者据此指出需要能提升 agent 一致性与规则遵循可靠性的方法。",
+      "评测方式为比较对话结束时的数据库状态与标注的目标状态（goal state）。"
+    ],
+    "raw_excerpt": "We also propose a new metric (pass^k) to evaluate the reliability of agent behavior over multiple trials. Our experiments show that even state-of-the-art function calling agents (like gpt-4o) succeed on <50% of the tasks, and are quite inconsistent (pass^8 <25% in retail)."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "arXiv cs.AI recent submissions listing (Fri, 23 Oct 2026)",
+    "url": "https://arxiv.org/list/cs.AI/recent",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "该列表页中出现一篇标题为 \"Direct Pass@$k$ Optimization for Thought Pruning: Balancing Quality and Diversity in Test-Time Reasoning\" 的论文（arXiv:2610.31667，作者 Mahdi Salmani, Adel Javanmard, Devansh Gupta, Meisam Razaviyayn），标题表明 pass@k 被用作推理阶段质量与多样性权衡的优化目标。",
+      "该页面仅为标题列表，未包含摘要或正文，因此不能据此判断该文是否辨析 pass@k 与 pass^k 的差异。"
+    ],
+    "raw_excerpt": "[1] arXiv:2610.31667 Title: Direct Pass@$k$ Optimization for Thought Pruning: Balancing Quality and Diversity in Test-Time Reasoning — Mahdi Salmani, Adel Javanmard, Devansh Gupta, Meisam Razaviyayn"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Task-Completion Time Horizons of Frontier AI Models（METR 官方时间跨度页面）",
+    "url": "https://metr.org/time-horizons/",
+    "published_at": "2026-09-08",
+    "key_points": [
+      "该页面标注 LAST UPDATED 为 September 8, 2026，并明确声明「This page is no longer actively updated.」（页面已不再积极更新）",
+      "截至该页面最后更新，图表中当前版本仍为「Time Horizon 1.1 (Current)」，即 TH1.1 仍是官方最新口径，页面上未出现 TH1.2 或更高版本",
+      "页面提供两个可选版本：Time Horizon 1.1（Current，沿用原始论文方法但任务集更大）与 Time Horizon 1.0（Mar 2025，原始计算，覆盖 2019 年至 2025 年 11 月的模型）",
+      "50%-time horizon 定义为：agent 被预测以 50% 概率成功完成的任务时长（以人类专家完成时间衡量）；80%-time horizon 同理",
+      "方法：先估计人类专家完成每个任务的时长，再对每个 agent 拟合 logistic 曲线预测其成功率随人类任务时长的变化，取曲线与 50%（或 80%）成功率相交处的任务时长",
+      "任务来源为 RE-Bench、HCAST 以及一组更短的新颖软件任务，主要覆盖软件工程、机器学习与网络安全，任务被设计为自包含、规格明确、可自动判定成功",
+      "人类时长估计方法：多数任务通过雇佣人类专家实际尝试并取成功完成时间的几何均值；人类为软件工程/ML/网络安全领域的熟练专业人士，多数毕业于世界前 100 大学，平均约 5 年相关经验",
+      "页面明确警告：「Measurements above 16 hrs are unreliable with our current task suite」（超过 16 小时的测量在当前任务集下不可靠）",
+      "页面澄清口径：time horizon 不是 AI 自主运行时长，而是任务难度（人类完成时长）的度量；且任务分布主要限于软件工程/ML/网络安全，不能外推到所有职业",
+      "页面指出后续工作发现其他领域也呈指数趋势但绝对时间跨度不同，AI 能力相对人类是「jagged」（参差不齐）的"
+    ],
+    "raw_excerpt": "These are our measurements of the task-completion time horizons for public frontier language models. This page is no longer actively updated. LAST UPDATED September 8, 2026 ... Time Horizon 1.1 (Current) ... Measurements above 16 hrs are unreliable with our current task suite"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Measuring AI Ability to Complete Long Software Tasks（METR 原始时间跨度论文博客，含 TH1.1 更新说明）",
+    "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/",
+    "published_at": "2025-03-19",
+    "key_points": [
+      "该博客顶部有显式过期警告：文中部分文字与图表已过时，静态图表与部分论断（例如翻倍时间）反映的是原始发表时的数据状态",
+      "博客内嵌的交互图表展示的是「later TH1.1 estimates」，且 METR 表示不再用新模型更新该图表；最新方法与结果应参见专门的 time horizons 页面与 Time Horizon 1.1",
+      "原始论文核心结论：过去 6 年，通用前沿模型 agent 能以 50% 可靠性自主完成的任务长度（按人类专业人士耗时衡量）大约每 7 个月翻一倍",
+      "趋势区间表述：METR 表示对整体趋势「fairly confident」，约为每年 1–4 次翻倍（1-4 doublings per year）",
+      "置信区间方法：图中阴影区域为 95% CI，通过对任务族、任务与任务尝试做 hierarchical bootstrap 计算",
+      "经验规律：当前模型在人类耗时少于 4 分钟的任务上成功率接近 100%，而在人类耗时超过约 4 小时的任务上成功率低于 10%",
+      "稳健性：在 SWE-Bench Verified（独立收集的人类时间数据）等不同任务子集上观察到类似趋势（噪声更大）",
+      "敏感性：即使绝对测量偏差达 10 倍，也只会让能力到达时间的预测改变约 2 年"
+    ],
+    "raw_excerpt": "Some of the text and figures in this post are out of date. The static figures and some claims in the text (e.g. the doubling time) reflect the state of the data at the time of original publication. The interactive chart below shows our later TH1.1 estimates, which we are no longer updating with new models. ... The shaded region represents 95% CI calculated by hierarchical bootstrap over task families, tasks, and task attempts."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "METR Research 索引页（含 Time Horizon 1.1 发布条目）",
+    "url": "https://metr.org/research/",
+    "published_at": null,
+    "key_points": [
+      "METR 研究索引中列有「Time Horizon 1.1」条目，日期为 January 29, 2026，摘要为：发布新版本的时间跨度估计（TH1.1），使用更多任务与新的评测基础设施",
+      "索引中 TH1.1 之后（2026 年 1 月 29 日之后）的研究条目包括 MirrorCode（2026-04-10）、Task Substitution and Uplift（2026-05-08）、Measuring the Self-Reported Impact of Early-2026 AI on Technical Worker Productivity（2026-05-11）、Frontier Risk Report（2026-05-19）、Expenditure Horizon（2026-07-21）等，但其中没有新的 time horizon 版本发布条目",
+      "索引中另有一条相关后续工作「How Does Time Horizon Vary Across Domains?」（2025-07-14），分析 9 个科学推理、数学、机器人、computer use、自动驾驶基准的时间跨度趋势，观察到与原始工作 7 个月翻倍时间大致相似的改进速率",
+      "索引中「Expenditure Horizon: Measuring Optimization Ability」（2026-07-21）提出以「expenditure horizon」衡量 agent 优化能力，是不同于 time horizon 的新指标",
+      "索引中「MirrorCode」（2026-04-10）报告 AI agent 可完成数周长的编码任务，包括重实现一个 16,000 行代码库"
+    ],
+    "raw_excerpt": "Time Horizon 1.1 — January 29, 2026 — We're releasing a new version of our time horizon estimates (TH1.1), using more tasks and a new eval infrastructure."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "METR/task-standard（METR 任务标准仓库）",
+    "url": "https://github.com/METR/task-standard",
+    "published_at": "2026-10-07",
+    "key_points": [
+      "仓库 README 顶部声明：METR 已不再维护 Task Standard，转而使用 Inspect（inspect.aisi.org.uk）来定义任务",
+      "仓库 stars 198、forks 40、open issues 11，语言 TypeScript，创建于 2024-01-31，最后 push 于 2026-10-07",
+      "仓库提供任务环境生成方式（Dockerfile 与 drivers/）、任务定义模板（template/template.py）以及 Python 包，并包含对 GAIA、AgentBench 等既有评测套件的 adaptor 示例"
+    ],
+    "raw_excerpt": "METR is no longer maintaining the Task Standard. Instead, we use Inspect to define tasks."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "Evaluation and Benchmarking of LLM Agents: A Survey (KDD '25)",
+    "url": "https://arxiv.org/html/2507.21504v1",
+    "published_at": "2025-07-29",
+    "key_points": [
+      "该综述提出一个二维分类体系，两个轴分别是 Evaluation Objectives（评什么：agent behavior、capabilities、reliability、safety）与 Evaluation Process（怎么评：interaction modes、datasets/benchmarks、metric computation methods、evaluation tooling、evaluation environments）。",
+      "在 Evaluation Objectives 维度内，Agent Behavior 被明确定义为 outcome-oriented 方面（任务完成、输出质量、延迟、成本），而 Agent Capabilities 被定义为 process-oriented 能力（工具使用、规划与推理、记忆与上下文保持、多智能体协作）——即该综述在目标轴上给出了「结果 vs 过程」的区分。",
+      "在 Evaluation Process 维度内，Interaction Mode 区分 static evaluation（agent 对固定输入作答）与 interactive assessment（agent 与用户交互）；Evaluation Contexts 区分从 controlled simulations 到 open-world settings（如 web 浏览器、API）——即该综述在过程轴上给出了「静态/离线 vs 交互/在线」的区分。",
+      "该综述指出 agent 评测比单独评测 LLM 更复杂，因为 agent 在动态交互环境中推理、规划、执行工具、使用记忆并与人类或其他 agent 协作，标准 LLM 评测方法不足。",
+      "该综述指出 agent 评测不同于传统软件测试：软件测试关注确定性与静态行为，而 LLM agent 本质上是概率性的、动态行为的，因此需要新的评估方法。",
+      "该综述的贡献被明确表述为两点：提出按 evaluation objectives 与 evaluation process 组织的分类体系；强调企业场景特有挑战（基于角色的数据访问控制、可靠性保证、长程交互、合规）。",
+      "该综述发表于 KDD '25（第 31 届 ACM SIGKDD，2025 年 8 月 3–7 日，多伦多），DOI 10.1145/3711896.3736570，作者来自 SAP Labs。"
+    ],
+    "raw_excerpt": "The first category, Agent Behavior, in this dimension focuses on outcome-oriented aspects such as task completion and output quality, capturing how well an agent meets end-users' expectations. Next, Agent Capabilities emphasize process-oriented competencies, including tool use, planning and reasoning, memory and context retention, and multi-agent collaboration. ... Interaction Mode distinguishes between static evaluation, where agents respond to fixed inputs, and interactive assessment, where agents engage with users. ... Lastly, Evaluation Contexts define the environment in which evaluations are conducted, from controlled simulations to open-world settings such as web browsers or APIs."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "Survey on Evaluation of LLM-based Agents (ACL Findings)",
+    "url": "https://arxiv.org/html/2503.16416v2",
+    "published_at": "2025-03-20",
+    "key_points": [
+      "该综述自称是 LLM-based agent 评测方法的「首个全面综述」（first comprehensive survey），从五个视角分析 agent 评测领域：核心 LLM 能力、应用特定基准、通用 agent 评测、agent 基准核心维度分析、面向开发者的评测框架与工具。",
+      "五个视角中的第 4 项专门分析 agent benchmark 的核心维度（core dimensions），包括数据构建（data curation）、环境类型（environment type）与指标（metrics）。",
+      "在 web agent 部分，该综述明确对照两类环境：Mind2Web 是 offline environment（跨域真实网站，支持通过对比预测操作与 gold-standard actions 进行 intermediate goal evaluation），WebArena 是 sandboxed online environment（动态、功能完整的网站，配长程人类任务与功能正确性测试）。",
+      "该综述指出领域趋势是转向更真实、更具挑战性的评测，以及持续更新的基准；并指出关键空白在于成本效率、安全性与鲁棒性的评估，以及细粒度、可扩展评测方法的发展。",
+      "该综述指出 agent 由 backbone LLM 与 agent harness 组成，核心能力既可被孤立评测，也可作为完整 agent workflow 的一部分被评测。",
+      "该综述指出自反思（self-reflection）仍缺乏标准化基准或评测方法论，是一个关键空白。",
+      "该综述发表于 ACL Findings；arXiv v1 为 2025-03-20，v2 修订于 2026-04-23；作者来自希伯来大学、IBM Research、耶鲁大学等。"
+    ],
+    "raw_excerpt": "The two most widely used offline and sandboxed online environments are Mind2Web (Deng et al., 2023) and WebArena (Zhou et al., 2023), respectively. ... Mind2Web provides an offline environment with real websites across diverse domains ... enabling intermediate goal evaluation by comparing predicted operations with gold-standard actions. In contrast, WebArena introduces a dynamic environment featuring fully functional websites across multiple domains ... It also defines diverse, long-horizon human tasks, with corresponding functional correctness tests."
+  }
+]

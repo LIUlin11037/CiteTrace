@@ -1,0 +1,855 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "LangGraph Graph API（官方文档：Graphs / StateGraph / State / Nodes / Edges / Compiling）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/graph-api",
+    "published_at": null,
+    "key_points": [
+      "官方表述：LangGraph 在核心上把 agent 工作流建模为图（\"At its core, LangGraph models agent workflows as graphs\"），由三个关键组件定义行为：State、Nodes、Edges。",
+      "State 定义：共享数据结构，表示应用当前快照，通常用共享 state schema 定义；State 由 schema 加 reducer 函数组成，reducer 规定更新如何应用到 state。",
+      "Nodes 定义：编码 agent 逻辑的函数，接收当前 state 作为输入，执行计算或副作用，返回更新后的 state。",
+      "Edges 定义：根据当前 state 决定下一个执行哪个 Node 的函数，可以是条件分支或固定转移。",
+      "官方口号式表述：\"nodes do the work, edges tell what to do next\"；并强调 Nodes 和 Edges 本质上只是函数，可以包含 LLM 也可以只是普通代码。",
+      "StateGraph 是主要使用的图类（\"The StateGraph class is the main graph class to use\"），由用户定义的 State 对象参数化。",
+      "构建流程为：先定义 state，再 add_node/add_edge，最后必须 compile；compile 会做结构检查（如无孤立节点），并在此处指定 checkpointers、breakpoints 等运行时参数。",
+      "执行模型：底层图算法用 message passing，受 Google Pregel 启发，以离散的 \"super-steps\" 推进；同一 super-step 内并行运行的节点属于同一步，顺序运行的属于不同步；所有节点 inactive 且无消息在途时图执行终止。",
+      "支持多 schema：可定义 private schema 供内部节点通信，也可显式指定 input_schema/output_schema 约束图的输入输出。"
+    ],
+    "raw_excerpt": "At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components: State: A shared data structure that represents the current snapshot of your application... Nodes: Functions that encode the logic of your agents... Edges: Functions that determine which Node to execute next based on the current state... In short: nodes do the work, edges tell what to do next. ... Inspired by Google's Pregel system, the program proceeds in discrete \"super-steps.\" ... The StateGraph class is the main graph class to use."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "LangGraph Persistence（官方文档：Checkpointer vs Store）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "published_at": null,
+    "key_points": [
+      "官方把持久化分为两套互补系统：Checkpointers 与 Stores。",
+      "Checkpointer 定义：把某个 thread 的图状态持久化为 checkpoints；用于短期、thread 作用域的记忆，包括对话连续性、human-in-the-loop 工作流、time travel 与容错。",
+      "Store 定义：在图状态之外持久化应用自定义数据；用于长期、跨 thread 的记忆，包括用户偏好、事实与共享知识。",
+      "Checkpointer 的作用域是单个 thread，访问方式是在 graph config 中传 thread_id；Store 的作用域是跨 thread，由节点或应用代码读写。",
+      "使用方式：在 compile 时传入 checkpointer/store，例如 builder.compile(checkpointer=checkpointer, store=store)。",
+      "官方建议多数应用两者并用：checkpointer 跟踪当前 thread，store 跟踪跨 thread 的持久信息。",
+      "实现示例包括 InMemorySaver/MemorySaver（进程重启即丢失）、PostgresSaver、SqliteSaver；使用 Agent Server 时由服务端自动处理持久化，无需手工配置。"
+    ],
+    "raw_excerpt": "Checkpointers persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance. Stores persist application-defined data outside the graph state. Use them for long-term, cross-thread memory... Checkpointer: Persists Graph state snapshots; Scope: A single thread; Access pattern: Pass a thread_id in graph config."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "AutoGen AgentChat 概览（官方文档：AgentChat 与 autogen-core 的分层）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/index.html",
+    "published_at": null,
+    "key_points": [
+      "官方分层表述：AgentChat 是构建多 agent 应用的高层 API，构建在 autogen-core 包之上（\"AgentChat is a high-level API for building multi-agent applications. It is built on top of the autogen-core package.\"）。",
+      "面向初学者推荐从 AgentChat 起步；高级用户可用 autogen-core 的事件驱动编程模型获得更强灵活性与对底层组件的控制。",
+      "AgentChat 提供\"直观的默认值\"：带预设行为的 Agents 与带预定义多 agent 设计模式的 Teams。",
+      "AgentChat 文档列出的多 agent 协调模式包括：Selector Group Chat（共享上下文 + 集中式可定制选择器）、Swarm（共享上下文 + 本地化、基于工具的 selector）、Magentic-One、GraphFlow（通过 agent 的有向图构建多 agent 工作流）。",
+      "文档包含从 AutoGen 0.2.x 迁移到 0.4.x 的 Migration Guide，说明 0.4 是相对 0.2 的重构版本。"
+    ],
+    "raw_excerpt": "AgentChat is a high-level API for building multi-agent applications. It is built on top of the autogen-core package. For beginner users, AgentChat is the recommended starting point. For advanced users, autogen-core's event-driven programming model provides more flexibility and control over the underlying components. AgentChat provides intuitive defaults, such as Agents with preset behaviors and Teams with predefined multi-agent design patterns."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "AutoGen Core 概念：Agent Runtime Environments（官方文档）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/core-concepts/architecture.html",
+    "published_at": null,
+    "key_points": [
+      "Core 层的基础是 runtime 环境：负责 agent 之间的通信、管理其身份与生命周期、并实施安全与隐私边界。",
+      "支持两种 runtime：standalone（单进程，所有 agent 同语言同进程，如 Python 的 SingleThreadedAgentRuntime）与 distributed（多进程，agent 可跨语言跨机器）。",
+      "两种 runtime 提供同一套 API，因此可在不改变 agent 实现的前提下切换。",
+      "distributed runtime 由 host servicer 与多个 worker 组成：host servicer 负责跨 worker 的 agent 通信并维护连接状态；worker 运行 agent，通过 gateway 与 host 通信，并向 host 注册其运行的 agent、管理 agent 生命周期。",
+      "agent 通过 runtime 以消息方式通信，runtime 管理 agent 生命周期；开发者可用框架提供的组件（routed agent、AI model clients、tools、code execution sandboxes、model context stores 等）快速构建 agent，也可自行从零实现。"
+    ],
+    "raw_excerpt": "At the foundation level, the framework provides a runtime environment, which facilitates communication between agents, manages their identities and lifecycles, and enforce security and privacy boundaries. ... In the Python API, an example of standalone runtime is the SingleThreadedAgentRuntime. ... A distributed runtime ... consists of a host servicer and multiple workers."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "AutoGen AgentChat Agents 教程（官方文档：Agent 基类属性与 AssistantAgent）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/agents.html",
+    "published_at": null,
+    "key_points": [
+      "AgentChat 提供一组预设 Agents，区别在于 agent 如何响应消息；所有 agent 共享以下属性与方法：name（唯一名称）、description（文本描述）、run（给定字符串任务或消息列表运行并返回 TaskResult）、run_stream（同上但返回消息迭代器，最后一项为 TaskResult）。",
+      "官方明确 agent 被期望是有状态的（stateful），run 应以新消息调用，而不是传入完整历史。",
+      "AssistantAgent 是内置 agent，使用语言模型并具备使用工具的能力；官方警告它是用于原型与教学目的的 \"kitchen sink\" agent，非常通用，建议理解设计后自行实现 agent。",
+      "与 v0.2 AgentChat 不同，工具由同一个 agent 在同一次 run() 调用内直接执行；默认情况下 agent 会把工具调用结果作为最终响应返回。",
+      "run() 会更新 agent 内部状态（把消息加入 agent 的消息历史）；也可以不带 task 调用 run()，让 agent 基于当前状态生成响应。",
+      "Workbench 被定义为共享状态与资源的工具集合（\"a Workbench is a collection of tools that share state and resources\"）。"
+    ],
+    "raw_excerpt": "AutoGen AgentChat provides a set of preset Agents, each with variations in how an agent might respond to messages. All agents share the following attributes and methods: name... description... run: The method that runs the agent given a task as a string or a list of messages, and returns a TaskResult. Agents are expected to be stateful and this method is expected to be called with new messages, not complete history. ... AssistantAgent is a \"kitchen sink\" agent for prototyping and educational purpose... Unlike in v0.2 AgentChat, the tools are executed by the same agent directly within the same call to run()."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "AutoGen AgentChat Teams 教程（官方文档：Team 定义与 GroupChat 预设）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/teams.html",
+    "published_at": null,
+    "key_points": [
+      "Team 定义：\"a team is a group of agents that work together to achieve a common goal\"。",
+      "AgentChat 支持多种 team 预设：RoundRobinGroupChat（参与者轮流发言的 group chat）、SelectorGroupChat（每条消息后由 ChatCompletion 模型选择下一个发言者）、MagenticOneGroupChat（面向开放式 web 与文件任务的通用多 agent 系统）、Swarm（用 HandoffMessage 表示 agent 间切换）。",
+      "RoundRobinGroupChat 中所有 agent 共享同一上下文，轮流响应；每个 agent 在自己回合把响应广播给其他所有 agent，从而保持团队上下文一致。",
+      "官方使用建议：Team 适用于需要协作与多元专长的复杂任务，但比单 agent 需要更多脚手架来引导；简单任务应先从单 agent 开始，待单 agent 不足时再转向多 agent team。",
+      "Team 通过 termination_condition 控制停止，例如 TextMentionTermination(\"APPROVE\")；停止后返回包含全部消息的 TaskResult，并带 stop_reason。",
+      "文档提到可用 Core API 实现 reflection 等多 agent 设计模式。"
+    ],
+    "raw_excerpt": "A team is a group of agents that work together to achieve a common goal. AgentChat supports several team presets: RoundRobinGroupChat: A team that runs a group chat with participants taking turns in a round-robin fashion... SelectorGroupChat: A team that selects the next speaker using a ChatCompletion model after each message... Swarm: A team that uses HandoffMessage to signal transitions between agents. ... RoundRobinGroupChat is a simple yet effective team configuration where all agents share the same context and take turns responding in a round-robin fashion."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "CrewAI Agents 概念（官方文档）",
+    "url": "https://docs.crewai.com/en/concepts/agents",
+    "published_at": null,
+    "key_points": [
+      "Agent 定义：CrewAI 框架中 Agent 是一个自主单元，能执行特定任务、基于其 role 与 goal 做决策、使用工具达成目标、与其他 agent 沟通协作、保持交互记忆、并在允许时委派任务。",
+      "官方类比：把 agent 视为具备特定技能、专长与职责的专门团队成员（如 Researcher agent 擅长收集分析信息，Writer agent 擅长创作内容）。",
+      "Agent 的核心属性为 role（在 crew 中的职能与专长）、goal（引导决策的个体目标）、backstory（提供上下文与人格设定）。",
+      "其他关键属性包括 llm、tools、allow_delegation（默认 False）、max_iter（默认 20）、max_rpm、reasoning（执行任务前是否反思并制定计划，默认 False）、respect_context_window（默认 True，通过摘要把消息控制在上下文窗口内）、code_execution_mode（safe 用 Docker / unsafe 直接执行，默认 safe）。",
+      "创建 agent 有两种方式：JSONC 项目配置（推荐，每个 agent 一个 agents/<name>.jsonc 文件）或直接在代码中定义。"
+    ],
+    "raw_excerpt": "In the CrewAI framework, an Agent is an autonomous unit that can: Perform specific tasks; Make decisions based on its role and goal; Use tools to accomplish objectives; Communicate and collaborate with other agents; Maintain memory of interactions; Delegate tasks when allowed. Think of an agent as a specialized team member with specific skills, expertise, and responsibilities."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "CrewAI Crews 概念（官方文档）",
+    "url": "https://docs.crewai.com/en/concepts/crews",
+    "published_at": null,
+    "key_points": [
+      "Crew 定义：\"A crew in crewAI represents a collaborative group of agents working together to achieve a set of tasks. Each crew defines the strategy for task execution, agent collaboration, and the overall workflow.\"",
+      "Crew 的核心属性为 tasks（分配给 crew 的任务列表）、agents（属于 crew 的 agent 列表）、process（crew 遵循的流程，如 sequential、hierarchical，默认 sequential）。",
+      "hierarchical 流程需要提供 manager_llm 或 manager_agent；manager_agent 可引用不在顶层 agents 列表中的 agent 文件。",
+      "Task 在 Crew 中以 description、expected_output、agent、context、output_file 等字段定义；当 process 为 sequential 时，任务按 tasks 列表中的出现顺序执行。",
+      "Crew 还支持 memory（短期/长期/实体记忆）、cache、planning（每次 Crew 迭代前由 AgentPlanner 规划并把计划加入各任务描述）、knowledge_sources、checkpoint、stream 等属性。",
+      "创建 crew 有两种常见方式：JSONC 项目配置（推荐）或直接在代码中定义（from crewai import Agent, Crew, Task, Process）。"
+    ],
+    "raw_excerpt": "A crew in crewAI represents a collaborative group of agents working together to achieve a set of tasks. Each crew defines the strategy for task execution, agent collaboration, and the overall workflow. ... Process (optional) process: The process flow (e.g., sequential, hierarchical) the crew follows. Default is sequential."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "CrewAI Processes 概念（官方文档：Sequential / Hierarchical）",
+    "url": "https://docs.crewai.com/en/concepts/processes",
+    "published_at": null,
+    "key_points": [
+      "Process 定义：Processes 编排 agent 执行任务的过程，\"akin to project management in human teams\"，按预定义策略确保任务被高效分配与执行。",
+      "官方只列出两种 Process 实现：Sequential（按顺序执行任务，保证有序推进）与 Hierarchical（按管理等级组织任务，基于结构化指挥链委派与执行）。",
+      "Sequential 流程中，任务按任务列表的预定义顺序执行，前一个任务的输出作为下一个任务的上下文；可用 Task 的 context 参数自定义上下文。",
+      "Hierarchical 流程模拟企业层级：可指定自定义 manager agent 或自动创建一个，需要指定 manager_llm；该 manager 负责监督任务执行，包括规划、委派与验证；任务不是预先分配的，manager 根据 agent 能力分配任务、审查输出并评估完成情况。",
+      "Process 类实现为 Enum，把 process 取值限定为 sequential 与 hierarchical 以保证类型安全。"
+    ],
+    "raw_excerpt": "Processes orchestrate the execution of tasks by agents, akin to project management in human teams. ... Sequential: Executes tasks sequentially, ensuring tasks are completed in an orderly progression. Hierarchical: Organizes tasks in a managerial hierarchy, where tasks are delegated and executed based on a structured chain of command. ... Tasks are not pre-assigned; the manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion. ... The Process class is implemented as an enumeration (Enum)."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "CrewAI Flows 概念（官方文档：事件驱动工作流）",
+    "url": "https://docs.crewai.com/en/concepts/flows",
+    "published_at": null,
+    "key_points": [
+      "Flow 定义：CrewAI Flows 用于简化 AI 工作流的创建与管理，让开发者高效地组合与协调编码任务与 Crews；官方称其允许创建\"结构化、事件驱动的工作流\"（structured, event-driven workflows）。",
+      "Flow 的四个官方特性：简化工作流创建（串联多个 Crew 与任务）、状态管理（在任务间共享 state）、事件驱动架构、灵活控制流（支持条件逻辑、循环与分支）。",
+      "Flow 用装饰器声明编排：@start() 标记入口点（可多个、常并行执行），@listen() 标记监听另一任务输出的方法，被监听任务产出时触发。",
+      "每个 Flow 实例在 state 中自动获得唯一 UUID 标识，state 可在整个 Flow 执行期间持久保存数据；kickoff() 返回最后完成方法的输出作为最终输出。",
+      "Flow 与 Crew 是互补关系：Flow 负责跨 Crew/任务的结构化编排，Crew 负责一组 agent 围绕任务集合的协作。"
+    ],
+    "raw_excerpt": "CrewAI Flows is a powerful feature designed to streamline the creation and management of AI workflows. Flows allow developers to combine and coordinate coding tasks and Crews efficiently... Flows allow you to create structured, event-driven workflows. They provide a seamless way to connect multiple tasks, manage state, and control the flow of execution in your AI applications. ... Event-Driven Architecture: Built on an event-driven model, allowing for dynamic and responsive workflows. Flexible Control Flow: Implement conditional logic, loops, and branching within your workflows."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph (GitHub repository metadata)",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": null,
+    "key_points": [
+      "仓库 langchain-ai/langgraph 的 star 数为 43,859，fork 数为 7,534。",
+      "主语言为 Python。",
+      "最近一次 push 时间为 2026-10-25。",
+      "仓库简介为 \"Build resilient agents.\"。"
+    ],
+    "raw_excerpt": "langchain-ai/langgraph (★43859, forks 7534)\n  desc: Build resilient agents.\n  lang: Python | last push: 2026-10-25\n  url: https://github.com/langchain-ai/langgraph"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "microsoft/autogen (GitHub repository metadata)",
+    "url": "https://github.com/microsoft/autogen",
+    "published_at": null,
+    "key_points": [
+      "仓库 microsoft/autogen 的 star 数为 61,554，fork 数为 9,313。",
+      "主语言为 Python。",
+      "最近一次 push 时间为 2026-10-16。",
+      "仓库简介为 \"A programming framework for agentic AI\"。"
+    ],
+    "raw_excerpt": "microsoft/autogen (★61554, forks 9313)\n  desc: A programming framework for agentic AI\n  lang: Python | last push: 2026-10-16\n  url: https://github.com/microsoft/autogen"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI (GitHub repository metadata)",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "published_at": null,
+    "key_points": [
+      "仓库 crewAIInc/crewAI 的 star 数为 60,081，fork 数为 8,869。",
+      "主语言为 Python。",
+      "最近一次 push 时间为 2026-10-24。",
+      "仓库简介为 \"Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.\"。"
+    ],
+    "raw_excerpt": "crewAIInc/crewAI (★60081, forks 8869)\n  desc: Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.\n  lang: Python | last push: 2026-10-24\n  url: https://github.com/crewAIInc/crewAI"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "langchain-ai/langchain (GitHub repository metadata, 作为 LangGraph 母仓库参照)",
+    "url": "https://github.com/langchain-ai/langchain",
+    "published_at": null,
+    "key_points": [
+      "仓库 langchain-ai/langchain 的 star 数为 148,407，fork 数为 24,906。",
+      "主语言为 Python，最近一次 push 时间为 2026-10-25。",
+      "仓库简介为 \"The agent engineering platform.\"。"
+    ],
+    "raw_excerpt": "langchain-ai/langchain (★148407, forks 24906)\n  desc: The agent engineering platform.\n  lang: Python | last push: 2026-10-25\n  url: https://github.com/langchain-ai/langchain"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "Azure/agent-landing-zone (Microsoft 官方仓库，引用 Microsoft Agent Framework)",
+    "url": "https://github.com/Azure/agent-landing-zone",
+    "published_at": null,
+    "key_points": [
+      "Azure/agent-landing-zone 仓库简介称其为 Azure 上 AI agent 应用的企业级 landing zone，构建于 Microsoft Foundry 与 Microsoft Agent Framework 之上。",
+      "该仓库 star 数 1,187，fork 数 322，最近 push 时间 2026-10-22。"
+    ],
+    "raw_excerpt": "Enterprise-grade landing zone for AI agent applications on Azure. Deploy the secure infrastructure, the agent app, or both — built on Microsoft Foundry and Microsoft Agent Framework, with Zero-Trust networking, observability and IaC."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator (Microsoft 官方仓库，引用 Microsoft Agent Framework)",
+    "url": "https://github.com/microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator",
+    "published_at": null,
+    "key_points": [
+      "该 Microsoft 官方 solution accelerator 仓库简介称其由 Microsoft Agent Framework、Azure Foundry、Azure Cosmos DB 等驱动。",
+      "该仓库 star 数 892，fork 数 853，最近 push 时间 2026-10-21。"
+    ],
+    "raw_excerpt": "The Multi-Agent Custom Automation Engine Solution Accelerator is an AI-driven system that manages a group of AI agents to accomplish tasks based on user input. Powered by Microsoft Agent Framework, Azure Foundry, Azure Cosmos DB, and infrastructure services, it provides a reference application, allowing you to hit the ground running."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "Azure-Samples/azure-ai-travel-agents (Microsoft 官方示例，引用 Microsoft Agent Framework)",
+    "url": "https://github.com/Azure-Samples/azure-ai-travel-agents",
+    "published_at": null,
+    "key_points": [
+      "该 Azure 官方示例仓库简介称其使用 MCP 与多个 AI agent，由 Langchain.js、Llamaindex.TS 和 Microsoft Agent Framework 编排。",
+      "该仓库 star 数 481，fork 数 180，最近 push 时间 2026-10-24。"
+    ],
+    "raw_excerpt": "A robust enterprise application sample (deployed on ACA) that leverages MCP and multiple AI agents orchestrated by Langchain.js, Llamaindex.TS and Microsoft Agent Framework."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "rwjdk/agent-framework-samples (第三方 Microsoft Agent Framework 示例仓库)",
+    "url": "https://github.com/rwjdk/agent-framework-samples",
+    "published_at": null,
+    "key_points": [
+      "存在第三方仓库提供 Microsoft Agent Framework 的 C# 示例，star 数 334，fork 数 116，最近 push 时间 2026-10-23。",
+      "该仓库主语言为 C#，表明 Microsoft Agent Framework 提供 .NET/C# 支持。"
+    ],
+    "raw_excerpt": "Samples demonstrating the Microsoft Agent Framework in C#\n  lang: C# | last push: 2026-10-23"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangGraph Docs — Persistence (checkpointers vs. stores)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 提供两套互补的持久化系统：Checkpointer（把某个 thread 的图状态持久化为 checkpoint）与 Store（在图状态之外持久化应用自定义数据）。",
+      "Checkpointer 的作用域是单个 thread，属于短期、thread 级记忆，官方列出的用途为：对话连续性、human-in-the-loop 工作流、time travel、容错（fault tolerance）。",
+      "Store 的作用域跨 thread，属于长期、跨 thread 记忆，用于用户偏好、事实、共享知识。",
+      "接入方式为在编译图时传入：builder.compile(checkpointer=checkpointer, store=store)；运行时通过 config 传入 thread_id 指定 thread，例如 {\"configurable\": {\"thread_id\": \"thread-1\"}}。",
+      "官方明确 MemorySaver / InMemorySaver 把 checkpoint 存在 RAM 中，进程重启后全部丢失；生产环境应改用持久化 checkpointer：PostgresSaver（PostgreSQL，支持 async）或 SqliteSaver（本地文件存储，用于开发）。",
+      "使用 PostgresSaver 时 thread_id 存在长度受限的列中，官方建议 thread_id 保持在 255 字符以内，可用 UUID 或 hash 生成确定性 ID。",
+      "PostgresSaver 需调用 checkpointer.setup() 建表并创建索引；官方建议定期清理旧 checkpoint 或设置保留策略，因为长对话中 checkpoint 会不断累积，增加延迟与存储成本。",
+      "使用 Agent Server 时无需手动实现或配置 checkpointer / store，服务端会自动处理持久化基础设施。",
+      "子图各自管理自己的 checkpoint namespace，子图更新状态时父图可能不会立即看到；官方建议用 Store 共享跨图边界的数据，或配置子图写入父 checkpoint。",
+      "官方给出的 checkpointer 与 store 对照表维度为：持久化内容（图状态快照 vs 应用自定义键值数据）、作用域（单 thread vs 跨 thread）、记忆类型（短期 thread 级 vs 长期跨 thread）、访问方式（config 传 thread_id vs 在节点或应用代码中读写）。"
+    ],
+    "raw_excerpt": "Checkpointers persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance. ... MemorySaver and InMemorySaver store checkpoints in RAM. When the process restarts, all checkpoints are lost. Fix: Use a persistent checkpointer for production: PostgresSaver: PostgreSQL with async support; SqliteSaver: Local file-based storage for development."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangGraph Docs — Interrupts (human-in-the-loop)",
+    "url": "https://docs.langchain.com/oss/python/langgraph/interrupts",
+    "published_at": null,
+    "key_points": [
+      "interrupt() 函数可在图节点的任意位置调用，暂停图执行并等待外部输入；触发时 LangGraph 通过持久化层保存图状态，并无限期等待直到恢复执行。",
+      "使用 interrupt 的三个前提：一个用于持久化图状态的 checkpointer（生产环境须用持久化 checkpointer，如数据库后端）、config 中的 thread ID、以及在需要暂停处调用 interrupt() 且 payload 必须 JSON 可序列化。",
+      "恢复方式：用 Command(resume=...) 重新调用图，该值成为节点内 interrupt() 调用的返回值。",
+      "恢复时必须使用与中断发生时相同的 thread ID；thread_id 相当于持久化游标，复用它会恢复同一 checkpoint，使用新值则开启一个全新空状态的 thread。",
+      "节点恢复时会从调用 interrupt 的那个节点的开头重新执行，因此 interrupt 之前的代码会再次运行。",
+      "interrupt 是动态的：可放在代码任意位置并依据应用逻辑条件触发，区别于在特定节点前后暂停的静态 breakpoints。",
+      "中断 payload 的暴露方式：使用事件流 graph.stream_events(..., version=\"v3\") 时出现在 stream.interrupts，且 stream.interrupted 为 True 表示运行因等待输入而暂停；默认 graph.invoke(...) API 则在 result[\"__interrupt__\"] 下暴露。",
+      "interrupt 支持 response_schema 参数（Pydantic 模型、typing_extensions 的 TypedDict 或 dataclass）来校验恢复值，LangGraph 会转换为 JSON Schema 放入 Interrupt.response_schema；该功能要求 langgraph>=1.2.12。",
+      "官方说明 Command(resume=...) 是唯一设计为 invoke()/stream()/stream_events() 输入的 Command 模式；update、goto、graph 等参数用于从节点函数返回，不应把 Command(update=...) 作为输入来继续多轮对话，而应传普通 input dict。"
+    ],
+    "raw_excerpt": "Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. ... When an interrupt is triggered, LangGraph saves the graph state using its persistence layer and waits indefinitely until you resume execution. ... You must use the same thread ID when resuming that was used when the interrupt occurred ... The node restarts from the beginning of the node where the interrupt was called when resumed, so any code before the interrupt runs again."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "AutoGen Docs — AgentChat Termination",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/termination.html",
+    "published_at": null,
+    "key_points": [
+      "AgentChat 提供基类 TerminationCondition 及多个实现；终止条件是一个 callable，接收自上次调用以来的 BaseAgentEvent 或 BaseChatMessage 序列，若应终止则返回 StopMessage，否则返回 None。",
+      "终止条件是有状态的，但在每次 run() 或 run_stream() 结束后会自动重置；一旦达到终止条件，必须调用 reset() 才能再次使用。",
+      "终止条件可用 AND 与 OR 运算符组合。",
+      "内置终止条件清单：MaxMessageTermination（达到指定消息数后停止，含 agent 与 task 消息）、TextMentionTermination（消息中出现指定文本如 \"TERMINATE\" 时停止）、TokenUsageTermination（达到指定 prompt 或 completion token 数后停止，要求 agent 在消息中报告 token 用量）、TimeoutTermination（达到指定秒数后停止）、HandoffTermination（请求移交给特定目标时停止，用于暂停运行让应用或用户提供输入）、SourceMatchTermination（指定 agent 回复后停止）、ExternalTermination（支持从运行外部以编程方式控制终止，用于 UI 的 \"Stop\" 按钮等）、StopMessageTermination、TextMessageTermination、FunctionCallTermination、FunctionalTermination（对最后一段消息序列求值为 True 时停止）。",
+      "对于群聊团队（RoundRobinGroupChat、SelectorGroupChat、Swarm），终止条件在每个 agent 响应后被调用；一次响应可能包含多条内部消息，但团队对单次响应的所有消息只调用一次终止条件，传入的是自上次调用以来的「增量序列」。",
+      "示例中 MaxMessageTermination(max_messages=3) 与 RoundRobinGroupChat 组合，运行结束的 stop_reason 为 'Maximum number of messages 3 reached, current message count: 3'，TaskResult 中返回完整消息历史。",
+      "文档说明终止条件在每次 run/run_stream 后自动重置，使团队可以从上次中断处继续对话。"
+    ],
+    "raw_excerpt": "A termination condition is a callable that takes a sequence of BaseAgentEvent or BaseChatMessage objects since the last time the condition was called, and returns a StopMessage if the conversation should be terminated, or None otherwise. ... They are stateful but reset automatically after each run (run() or run_stream()) is finished. They can be combined using the AND and OR operators. ... For group chat teams (i.e., RoundRobinGroupChat, SelectorGroupChat, and Swarm), the termination condition is called after each agent responds."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "AutoGen Docs — Command Line Code Executors (Docker / Local)",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/components/command-line-code-executors.html",
+    "published_at": null,
+    "key_points": [
+      "命令行代码执行是最简单的代码执行形式：一般把每个代码块保存为文件再执行该文件，因此每个代码块都在新进程中执行。",
+      "提供两种执行器：DockerCommandLineCodeExecutor（所有命令在 Docker 容器内执行）与 LocalCommandLineCodeExecutor（所有命令在宿主机上执行）。",
+      "使用 DockerCommandLineCodeExecutor 需安装 autogen-ext[docker] 包。",
+      "Docker 执行器默认镜像为 python:3-slim，可通过构造函数的 image 参数自定义；镜像本地不存在时会尝试拉取；镜像只需具备 sh 与 python 即可兼容。",
+      "可用上下文管理器（async with）使用执行器以确保容器用后清理；否则由 atexit 模块在程序退出时停止容器。",
+      "若需在执行结束后保留容器以便检查，可设置 auto_remove=False；设置 stop_container=False 可阻止执行结束时停止容器。",
+      "容器化应用需要执行代码时，官方推荐「Docker out of Docker」：把 Docker socket 挂载到主 AutoGen 容器（-v /var/run/docker.sock:/var/run/docker.sock），从而在宿主机上创建并控制「兄弟」容器；官方称这优于「Docker in Docker」（主容器内运行 Docker daemon 并在自身内部创建容器）。",
+      "若需把宿主机工作目录绑定到应用容器，使用 bind_dir 参数；未指定 bind_dir 时回退到 work_dir。",
+      "LocalCommandLineCodeExecutor 会在本地系统上运行代码，官方以 Attention 标注需谨慎使用；可通过 virtual_env_context 参数让代码在应用创建的虚拟环境中运行，实现依赖隔离。"
+    ],
+    "raw_excerpt": "Generally speaking, it will save each code block to a file and then execute that file. This means that each code block is executed in a new process. There are two forms of this executor: Docker (DockerCommandLineCodeExecutor) - this is where all commands are executed in a Docker container; Local (LocalCommandLineCodeExecutor) - this is where all commands are executed on the host machine. ... The default image that is used is python:3-slim ... The recommended approach to this is called \"Docker out of Docker\", where the Docker socket is mounted to the main AutoGen container, so that it can spawn and control \"sibling\" containers on the host."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "AutoGen Docs — Managing State (save_state / load_state)",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/state.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 通过 save_state() 与 load_state() 保存和加载 agent、team 及终止条件的状态，官方给出的典型场景是无状态端点需要从持久化存储加载应用状态的 Web 应用。",
+      "对 AssistantAgent 调用 save_state() 得到形如 {'type': 'AssistantAgentState', 'version': '1.0.0', 'llm_messages': [...]} 的状态字典。",
+      "对 team 调用 save_state() 会保存团队中所有 agent 的状态；可通过 load_state() 恢复。",
+      "对 AssistantAgent 而言，其状态由 model_context 构成；自定义 agent 可覆写 save_state() 与 load_state()，默认实现保存和加载空状态。",
+      "示例中团队被 reset() 后无法回忆上一轮内容（模型回答无法访问先前交互），说明状态需显式保存与加载才能跨运行延续。"
+    ],
+    "raw_excerpt": "In many cases, it is useful to save the state of these components to disk and load them back later. This is particularly useful in a web application where stateless endpoints respond to requests and need to load the state of the application from persistent storage. ... When we call save_state on a team, it saves the state of all the agents in the team. ... For AssistantAgent, its state consists of the model_context."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "AutoGen Docs — Selector Group Chat",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/selector-group-chat.html",
+    "published_at": null,
+    "key_points": [
+      "SelectorGroupChat 实现参与者轮流向其他所有成员广播消息的团队，由生成式模型（如 LLM）基于共享上下文选择下一位发言者。",
+      "关键特性包括：基于模型的发言者选择、可配置的参与者角色与描述、可选地阻止同一发言者连续发言、可自定义选择提示词、可自定义选择函数以覆盖默认的模型选择、可自定义候选函数以缩小供模型选择的 agent 集合。",
+      "默认情况下团队不会连续选择同一发言者，除非它是唯一可用的 agent；可通过 allow_repeated_speaker=True 改变该行为。",
+      "运行流程：团队分析当前对话上下文（含历史与参与者的 name、description 属性）用模型确定下一位发言者 → 提示被选中的 agent 给出响应并广播给其他参与者 → 检查终止条件决定是否结束，否则重复。",
+      "任务结束后对话上下文保留在团队及所有参与者中，下一个任务可从先前上下文继续；可调用 reset() 重置对话上下文。",
+      "官方指出 agent 的 name 与 description 属性会被模型用于决定下一位发言者，因此建议提供有意义的名称与描述。",
+      "官方说明 SelectorGroupChat 是高层 API，若需更多控制与定制，可参考 Core API 文档中的 Group Chat Pattern 自行实现群聊逻辑。"
+    ],
+    "raw_excerpt": "SelectorGroupChat implements a team where participants take turns broadcasting messages to all other members. A generative model (e.g., an LLM) selects the next speaker based on the shared context, enabling dynamic, context-aware collaboration. ... By default, the team will not select the same speak consecutively unless it is the only agent available. This can be changed by setting allow_repeated_speaker=True. ... SelectorGroupChat is a high-level API. For more control and customization, refer to the Group Chat Pattern in the Core API documentation."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "CrewAI Docs — Processes (Sequential / Hierarchical)",
+    "url": "https://docs.crewai.com/concepts/processes",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 的 Process 有两种实现：Sequential（按顺序执行任务，保证有序推进）与 Hierarchical（按管理层级组织任务，依据结构化指挥链委派与执行）。",
+      "使用 Hierarchical 流程必须在 crew 中指定 manager 语言模型（manager_llm）或自定义 manager agent（manager_agent）。",
+      "创建 crew 时通过 process 参数指定流程类型，例如 Crew(agents=..., tasks=..., process=Process.sequential)；层级流程需额外传 manager_llm=\"gpt-4o\" 或 manager_agent=my_manager_agent。",
+      "Sequential 流程中任务按任务列表的预定义顺序执行，前一个任务的输出作为下一个任务的上下文；可用 Task 类的 context 参数指定哪些输出作为后续任务的上下文。",
+      "Hierarchical 流程模拟企业层级：任务不预先分配，manager 依据 agent 能力分配任务、审查输出并评估任务完成情况；manager 负责规划、委派与验证。",
+      "Process 类以 Enum 实现，保证类型安全并把 process 取值限制为 sequential 与 hierarchical。"
+    ],
+    "raw_excerpt": "Sequential: Executes tasks sequentially, ensuring tasks are completed in an orderly progression. Hierarchical: Organizes tasks in a managerial hierarchy, where tasks are delegated and executed based on a structured chain of command. A manager language model (manager_llm) or a custom manager agent (manager_agent) must be specified in the crew to enable the hierarchical process ... Tasks are not pre-assigned; the manager allocates tasks to agents based on their capabilities, reviews outputs, and assesses task completion."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "CrewAI Docs — Agents (参数清单：max_iter / max_rpm / code_execution_mode 等)",
+    "url": "https://docs.crewai.com/concepts/agents",
+    "published_at": null,
+    "key_points": [
+      "Agent 的 Max Iterations 参数 max_iter：agent 在必须给出最佳答案前的最大迭代次数，默认 20。",
+      "Max RPM 参数 max_rpm：每分钟最大请求数，用于避免触发速率限制。",
+      "Max Execution Time 参数 max_execution_time：任务执行的最长秒数。",
+      "Allow Delegation 参数 allow_delegation：是否允许 agent 把任务委派给其他 agent，默认 False。",
+      "Allow Code Execution 参数 allow_code_execution：是否为 agent 启用代码执行，默认 False。",
+      "Code Execution Mode 参数 code_execution_mode：取值 \"safe\"（使用 Docker）或 \"unsafe\"（直接执行），默认 'safe'。",
+      "Max Retry Limit 参数 max_retry_limit：发生错误时的最大重试次数，默认 2。",
+      "Respect Context Window 参数 respect_context_window：通过摘要把消息保持在上下文窗口大小以内，默认 True。",
+      "Cache 参数 cache：启用工具使用缓存，默认 True；Verbose 默认 False；Multimodal 默认 False；Reasoning 默认 False（agent 在执行任务前反思并制定计划）；Max Reasoning Attempts 参数 max_reasoning_attempts 控制执行任务前的最大推理尝试次数，为 None 时一直尝试到就绪。",
+      "LLM 参数默认使用 OPENAI_MODEL_NAME 指定的模型或 \"gpt-4\"；Tools 默认为空列表；Function Calling LLM 参数 function_calling_llm 可覆盖 crew 的 LLM。",
+      "新项目推荐使用 JSONC 配置（agents/<agent_name>.jsonc 与 crew.jsonc），行为选项如 verbose、allow_delegation、max_iter、max_rpm、memory、cache、planning_config、use_system_prompt 可放在顶层或 settings 下，settings 中的值优先；JSONC 支持注释与尾随逗号，若同名 .jsonc 与 .json 同时存在则使用 .jsonc。"
+    ],
+    "raw_excerpt": "Max Iterations (optional) max_iter int Maximum iterations before the agent must provide its best answer. Default is 20. ... Max RPM (optional) max_rpm Optional[int] Maximum requests per minute to avoid rate limits. ... Allow Delegation (optional) allow_delegation bool Allow the agent to delegate tasks to other agents. Default is False. ... Allow Code Execution (optional) allow_code_execution Optional[bool] Enable code execution for the agent. Default is False. ... Code Execution Mode (optional) code_execution_mode Literal[\"safe\", \"unsafe\"] Mode for code execution: 'safe' (using Docker) or 'unsafe' (direct). Default is 'safe'."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "CrewAI Docs — Tasks (human_input / async_execution / guardrail 等)",
+    "url": "https://docs.crewai.com/concepts/tasks",
+    "published_at": null,
+    "key_points": [
+      "Task 的 Human Input 参数 human_input：是否让人类审查 agent 的最终答案，默认 False。",
+      "Async Execution 参数 async_execution：任务是否异步执行，默认 False。",
+      "Guardrail 参数 guardrail（单个可调用对象）与 guardrails（列表）：在进入下一个任务前校验任务输出。",
+      "Guardrail Max Retries 参数 guardrail_max_retries：guardrail 校验失败时的最大重试次数，默认 3；文档说明任务属性 max_retries 已废弃并将在 v1.0.0 移除，应改用 guardrail_max_retries。",
+      "Context 参数 context：指定哪些其他任务的输出作为本任务的上下文。",
+      "Output File 参数 output_file 指定任务输出的存储路径，create_directory 控制目录不存在时是否创建（默认 True）；output_json / output_pydantic 用 Pydantic 模型结构化输出；callback 在任务完成后执行。",
+      "任务执行方式有两种：Sequential（按定义顺序执行）与 Hierarchical（依据角色与专长把任务分配给 agent），在创建 crew 时通过 process 参数定义。"
+    ],
+    "raw_excerpt": "Human Input (optional) human_input Optional[bool] Whether the task should have a human review the final answer of the agent. Defaults to False. ... Async Execution (optional) async_execution Optional[bool] Whether the task should be executed asynchronously. Defaults to False. ... Guardrail Max Retries (optional) guardrail_max_retries Optional[int] Maximum number of retries when guardrail validation fails. Defaults to 3. ... The task attribute max_retries is deprecated and will be removed in v1.0.0."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Scaling Large Language Model-based Multi-Agent Collaboration (MacNet)",
+    "url": "https://arxiv.org/abs/2406.07155",
+    "published_at": "2024-06-11 (v1); v3 2025-03-17; accepted to ICLR-2025",
+    "key_points": [
+      "论文用有向无环图（DAG）组织 agent 构成多 agent 协作网络 MacNet，把 agent 交互按拓扑序（topological ordering）编排，即「图编排」范式的形式化实现。",
+      "论文明确把拓扑分为三大类——chain（链式，类比 waterfall 模型）、tree（树式，含更宽的 star 与更深的 tree 两个子类）、graph（图式，含全连接 mesh、MLP 分层、不规则随机三种子类），共 6 个代表性拓扑变体，构成拓扑消融的实验设计基础。",
+      "作者在摘要与引言中给出的核心结论：不规则拓扑（irregular topologies）优于规则拓扑（regular ones），即 mesh/random 类图结构优于链式与规则树式。",
+      "MacNet 支持超过一千个 agent 的协作，并提出「协作缩放律」：随 agent 数量增加整体性能呈 logistic 增长，且协作涌现（collaborative emergence）早于传统神经涌现。",
+      "机制上，每轮只有被精炼后的 artifact 沿边传播、而非整段对话，作者称此举「prevents global broadcasting and suppresses context explosion」，即通过限制信息广播来控制上下文/成本膨胀——这是对「群聊式全局广播」成本的间接批评。",
+      "论文称 MacNet 在平均意义上超过所有基线（surpasses all baselines on average），但抓取到的正文片段未包含具体基准分数与 token 成本数字。",
+      "代码开源于 https://github.com/OpenBMB/ChatDev/tree/macnet 。"
+    ],
+    "raw_excerpt": "Given the impracticality of enumerating all possible topologies, we focus on three prevalent types—chain, tree, and graph—further divided into six representative sub-topologies... Extensive evaluations reveal that it effectively supports collaboration among over a thousand agents, with irregular topologies outperforming regular ones. ... each round involves two adjacent agents refining a previous artifact, and only the refined artifact, rather than the entire dialogue, is propagated to the next rounds. This prevents global broadcasting and suppresses context explosion, thereby enhancing collaboration scalability for much larger networks."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "microsoft/autogen README — 项目已归档公告（Project archived and no longer maintained）",
+    "url": "https://github.com/microsoft/autogen",
+    "published_at": null,
+    "key_points": [
+      "README 正文顶部有 Caution 横幅，标题为「Project archived and no longer maintained」，明确声明该项目已被归档，不再由 Microsoft 积极维护。",
+      "Microsoft 声明不再为该项目的 bug 修复、安全修复、新功能或支持提供服务，仓库仅作为历史/参考用途保留。",
+      "README 警告：由于缺乏持续维护与安全修复，项目及其依赖中的漏洞可能长期未被处理，继续使用会增加安全风险，尤其在处理敏感数据时。",
+      "README 明确表示 AutoGen 是为研究与实验而开发的，在其转入归档状态之际，继续建议不要用于生产环境。",
+      "README 指引新用户从 Microsoft Agent Framework 开始，并鼓励现有用户使用「AutoGen → Microsoft Agent Framework migration guide」进行迁移。",
+      "README 称 Microsoft Agent Framework 是 AutoGen 的 enterprise-ready successor，并称 MAF 1.0 已作为 production-ready release 提供，具备稳定 API 与长期支持承诺。",
+      "README 的「Why AutoGen?」章节说明 AutoGen 最初在 Microsoft Research 开创，其多智能体编排模式启发了社区，架构描述保留仅供历史/参考。",
+      "仓库仍保留完整目录结构（python、dotnet、protos、docs 等）与 3,783 次提交历史，说明归档后代码可读但不再演进。"
+    ],
+    "raw_excerpt": "Caution ⚠️ Project archived and no longer maintained — This project has been archived and is no longer actively maintained by Microsoft. Microsoft is not providing bug fixes, security fixes, new features, or support for this project. The repository remains available for historical/reference purposes. ... AutoGen was developed for research and experimentation and as it transitions to archived, we continue to advise against production use. ... New users should start with Microsoft Agent Framework. Existing users are encouraged to migrate using the AutoGen → Microsoft Agent Framework migration guide."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Introducing Microsoft Agent Framework: The Open-Source Engine for Agentic AI Apps（Microsoft Foundry 官方博客）",
+    "url": "https://devblogs.microsoft.com/foundry/introducing-microsoft-agent-framework-the-open-source-engine-for-agentic-ai-apps/",
+    "published_at": "2025-10-01",
+    "key_points": [
+      "该博文为 Microsoft 官方（Microsoft Foundry 博客）发布的 Microsoft Agent Framework 发布公告，作者署名 Takuto、Shawn、Elijah。",
+      "博文明确说明 Microsoft Agent Framework 将 Semantic Kernel 的企业级基础与 AutoGen 的创新编排能力统一起来，使团队不必在实验性与生产就绪之间二选一。",
+      "博文给出三方对比表：Semantic Kernel 定位为带企业连接器、工作流与可观测性的稳定 SDK；AutoGen 定位为源自研究的实验性多智能体编排；Microsoft Agent Framework 定位为结合创新与企业就绪度的统一 SDK。",
+      "博文原文表述「Microsoft Agent Framework doesn't replace Semantic Kernel and AutoGen — it builds on them」，即官方措辞是在二者基础上构建/整合，而非简单替代。",
+      "博文指出 AutoGen 在企业就绪度上「Minimal」，而 MAF 提供可观测性、审批、CI/CD、长时运行持久化与 hydration。",
+      "博文说明 MAF 同时支持 Agent Orchestration（LLM 驱动的创造性推理与决策）与 Workflow Orchestration（业务逻辑驱动的确定性多智能体工作流）。",
+      "博文披露后续整合方向：与 Microsoft 365 Agents SDK 融合，并与 Azure AI Foundry Agent Service 共享运行时。",
+      "博文将 MAF 定位为开源 SDK 与运行时，强调 MCP、A2A、OpenAPI 等开放标准与互操作性。"
+    ],
+    "raw_excerpt": "Microsoft Agent Framework is an open-source SDK and runtime designed to let developers build, deploy, and manage sophisticated multi-agent systems with ease. It unifies the enterprise-ready foundations of Semantic Kernel with the innovative orchestration of AutoGen, so teams no longer have to choose between experimentation and production. ... Microsoft Agent Framework doesn't replace Semantic Kernel and AutoGen — it builds on them."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Microsoft Foundry 博客 2025 年 10 月归档页（用于确认公告发布日期）",
+    "url": "https://devblogs.microsoft.com/foundry/2025/10/01/",
+    "published_at": "2025-10-01",
+    "key_points": [
+      "该归档页显示日期为 October 1, 2025，并列出署名 Takuto、Shawn、Elijah 的博文，其开头段落与 Microsoft Agent Framework 发布公告正文一致（「Why agents need a new foundation...」）。",
+      "由此可确认 Microsoft Agent Framework 发布公告的发布日期为 2025 年 10 月 1 日。",
+      "该博客的归档导航显示其内容覆盖至 2026 年 10 月，说明该博客持续更新。"
+    ],
+    "raw_excerpt": "Showing archive results for October 1, 2025 — Takuto, Shawn, Elijah — Why agents need a new foundation Over the last year, developers have been experimenting with AI agents in every imaginable form..."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "AutoGen to Microsoft Agent Framework Migration Guide（Microsoft Learn 官方迁移指南）",
+    "url": "https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/",
+    "published_at": null,
+    "key_points": [
+      "该指南为从 AutoGen 迁移到 Microsoft Agent Framework Python SDK 的官方综合指南，章节覆盖 Background、Key Similarities and Differences、模型客户端、单 Agent 特性映射、多 Agent 特性映射、可观测性等。",
+      "指南说明 Microsoft Agent Framework 由 Microsoft 内部 AutoGen 与 Semantic Kernel 两个核心团队共同开发，定位为面向未来的新基础。",
+      "指南称 MAF 是 AutoGen 所开创理念的一次重要演进，并吸收了真实使用中积累的经验教训。",
+      "编排风格差异：AutoGen 采用事件驱动核心加高层 Team 抽象；Agent Framework 以类型化的、基于图的 Workflow 为中心，沿边路由数据并在输入就绪时激活 executor。",
+      "工具定义差异：AutoGen 用 FunctionTool 包装函数；Agent Framework 使用 @tool 装饰器自动推断 schema，并新增代码解释器、网页搜索等 hosted tools。",
+      "Agent 行为差异：AutoGen 的 AssistantAgent 默认单轮，除非调高 max_tool_iterations；Agent Framework 的 Agent 默认多轮，会持续调用工具直至能返回最终答案。",
+      "运行时差异：AutoGen 提供嵌入式与实验性分布式运行时；Agent Framework 当前聚焦单进程组合，分布式执行尚在规划中。",
+      "模型客户端映射表显示：OpenAI Responses 与 Azure OpenAI Responses 在 AutoGen 中不可用，在 MAF 中由 OpenAIChatClient 支持；Anthropic、Ollama 与缓存能力在 MAF 中标注为 Planned（规划中）。",
+      "指南包含 GroupChat 模式（RoundRobinGroupChat、MagenticOneGroupChat）到 MAF Workflow 的代码级对照，以及 human-in-the-loop、checkpointing 与可观测性的迁移说明。"
+    ],
+    "raw_excerpt": "Microsoft Agent Framework is a new multi-language SDK for building AI agents and workflows using LLMs. It represents a significant evolution of the ideas pioneered in AutoGen and incorporates lessons learned from real-world usage. It's developed by the core AutoGen and Semantic Kernel teams at Microsoft, and is designed to be a new foundation for building AI applications going forward. ... Orchestration style: AutoGen pairs an event-driven core with a high-level Team. Agent Framework centers on a typed, graph-based Workflow that routes data along edges and activates executors when inputs are ready."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "microsoft/agent-framework README — 官方仓库与迁移入口",
+    "url": "https://github.com/microsoft/agent-framework",
+    "published_at": null,
+    "key_points": [
+      "microsoft/agent-framework 仓库存在且活跃，README 显示 3,676 次提交，目录包含 python、dotnet、go、declarative-agents、docs、skills 等。",
+      "README 将 MAF 定义为面向 .NET 与 Python 构建生产级 AI agent 与多智能体工作流的开放、多语言框架，并另有 Go SDK 位于 microsoft/agent-framework-go。",
+      "README 的 Learning Resources 同时列出「Migration from Semantic Kernel」与「Migration from AutoGen」两份迁移指南，构成从两个前身框架迁移的官方路径。",
+      "README 列出核心能力：Python 与 C#/.NET 一致 API、多模型供应商支持、中间件、基于图的编排模式（sequential、concurrent、handoff、group collaboration）、checkpointing、streaming、human-in-the-loop、time-travel。",
+      "README 列出 Foundry Hosted Agents、OpenTelemetry 可观测性、YAML 声明式 Agent、Agent Skills、AF Labs 实验包与 DevUI 等特性。",
+      "README 说明 MAF 支持 Microsoft Foundry、Azure OpenAI、OpenAI 与 GitHub Copilot SDK 等生态，并提供本地开发与云端部署的示例与托管模式。",
+      "安装方式：Python 为 pip install agent-framework，.NET 为 dotnet add package Microsoft.Agents.AI。"
+    ],
+    "raw_excerpt": "Microsoft Agent Framework (MAF) is an open, multi-language framework for building production-grade AI agents and multi-agent workflows in .NET and Python. ... Migration from Semantic Kernel - Guide to migrate from Semantic Kernel / Migration from AutoGen - Guide to migrate from AutoGen"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "GitHub 仓库搜索结果 — Microsoft Agent Framework 生态落地情况",
+    "url": "https://github.com/search?q=microsoft+agent-framework",
+    "published_at": null,
+    "key_points": [
+      "搜索结果显示多个 Microsoft 官方与 Azure 官方仓库已基于 Microsoft Agent Framework 构建，包括 Azure/agent-landing-zone（★1187，描述称 built on Microsoft Foundry and Microsoft Agent Framework）。",
+      "microsoft/Multi-Agent-Custom-Automation-Engine-Solution-Accelerator（★892）描述称 Powered by Microsoft Agent Framework、Azure Foundry、Azure Cosmos DB。",
+      "Azure-Samples/azure-ai-travel-agents（★481）描述称由 Langchain.js、Llamaindex.TS 与 Microsoft Agent Framework 共同编排，说明 MAF 可与第三方框架共存。",
+      "第三方仓库 rwjdk/agent-framework-samples（★334）提供 C# 版 Microsoft Agent Framework 示例，显示社区侧已有采纳。",
+      "上述仓库最近推送时间集中在 2026 年 10 月，表明 MAF 生态仓库处于持续更新状态。"
+    ],
+    "raw_excerpt": "Azure/agent-landing-zone (★1187) — Enterprise-grade landing zone for AI agent applications on Azure. ... built on Microsoft Foundry and Microsoft Agent Framework, with Zero-Trust networking, observability and IaC. ... Azure-Samples/azure-ai-travel-agents (★481) — ... multiple AI agents orchestrated by Langchain.js, Llamaindex.TS and Microsoft Agent Framework."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — LICENSE (MIT License)",
+    "url": "https://github.com/langchain-ai/langgraph/blob/main/LICENSE",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 仓库根目录 LICENSE 文件标题为 \"MIT License\"，版权行为 \"Copyright (c) 2024 LangChain, Inc.\"",
+      "许可证正文为标准 MIT 条款：授予免费使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，条件是保留版权声明与许可声明。",
+      "文件规模 21 行 / 1.05 KB，与标准 MIT 文本一致（非 Apache-2.0、非 CC 协议）。"
+    ],
+    "raw_excerpt": "MIT License\n\nCopyright (c) 2024 LangChain, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction..."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "PyPI — langgraph 项目页（版本、许可证表达式、发布日）",
+    "url": "https://pypi.org/project/langgraph/",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "PyPI 上 langgraph 最新版本为 1.2.17，Released 日期为 Oct 24, 2026。",
+      "PyPI 元数据中 License expression 字段为 \"MIT\"，Classifier 含 \"OSI Approved :: MIT License\" 语义（License expression: MIT）。",
+      "langgraph 要求 Python >=3.10，Development Status 分类为 \"5 - Production/Stable\"。",
+      "项目自述定位为 \"a low-level orchestration framework for building, managing, and deploying long-running, stateful agents\"，提供 durable execution、streaming、human-in-the-loop、persistence、memory 等基础设施。",
+      "PyPI 页面显示该包由 1 名 maintainer 维护，归属 langchain。"
+    ],
+    "raw_excerpt": "langgraph 1.2.17\nBuilding stateful, multi-actor applications with LLMs\n...\nLicense expression \n MIT\n...\nReleased: \n Oct 24, 2026"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — Releases 页面（2026 年 10 月发布序列）",
+    "url": "https://github.com/langchain-ai/langgraph/releases",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "最新 release 为 langgraph==1.2.17，标记 Latest，由 github-actions 于 24 Oct 01:08 发布。",
+      "同一仓库采用 monorepo 多包独立发版：除 langgraph 主包外，还并行发布 langgraph-sdk（0.4.9、0.4.8）、langgraph-cli（0.4.38、0.4.37、0.4.36、0.4.35）、langgraph-prebuilt（1.1.1）、langgraph-checkpoint-postgres（3.2.0）、langgraph-checkpoint-sqlite（3.1.2）。",
+      "2026 年 10 月内的发布日期密集：langgraph-cli 0.4.37 于 19 Oct 14:06、langgraph 1.2.16 于 16 Oct 22:11、langgraph-sdk 0.4.9 与 langgraph-cli 0.4.38 于 23 Oct、langgraph 1.2.17 于 24 Oct。",
+      "1.2.17 相对 1.2.16 的变更以 bug fix 与依赖维护为主（如 fix(langgraph): apply an explicit recursion_limit equal to the default、chore(deps): remove precautionary third-party upper bounds）。",
+      "发布由 CI 机器人（github-actions）自动执行，提交带 GitHub 验证签名。"
+    ],
+    "raw_excerpt": "langgraph==1.2.17 \n Latest \n ... github-actions \n released this \n 24 Oct 01:08 \n ... Changes since 1.2.16 \n release(langgraph): 1.2.17 ( #9418 ) \n fix(langgraph): apply an explicit recursion_limit equal to the default ( #9417 )"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "microsoft/autogen — LICENSE (Creative Commons Attribution 4.0 International)",
+    "url": "https://github.com/microsoft/autogen/blob/main/LICENSE",
+    "published_at": null,
+    "key_points": [
+      "AutoGen 仓库根目录 LICENSE 文件正文为 \"Attribution 4.0 International\"，即 Creative Commons Attribution 4.0（CC BY 4.0）通用许可文本。",
+      "该 LICENSE 文件为 395 行 / 18.2 KB，包含 Creative Commons Corporation 的标准免责声明段落（\"Creative Commons Corporation (\"Creative Commons\") is not a law firm...\"）。",
+      "注意：仓库根 LICENSE 为 CC BY 4.0，而 PyPI 上 autogen-agentchat 包元数据声明为 MIT License —— 两者不一致，需在报告中区分「仓库根许可证」与「具体 Python 发行包许可证」。"
+    ],
+    "raw_excerpt": "Attribution 4.0 International \n ======================================================================= \n Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "PyPI — autogen-agentchat 项目页（版本、许可证、发布日）",
+    "url": "https://pypi.org/project/autogen-agentchat/",
+    "published_at": "2025-09-30",
+    "key_points": [
+      "PyPI 上 autogen-agentchat 最新版本为 0.7.5，Released 日期为 Sep 30, 2025。",
+      "PyPI 元数据 License 字段为 \"MIT License (MIT License)\"，Classifier 含 \"OSI Approved :: MIT License\"。",
+      "autogen-agentchat 要求 Python >=3.10，由 2 名 maintainer（AutoGenDevs、microsoft）维护。",
+      "包自述：AgentChat 是构建多智能体应用的高层 API，构建在 autogen-core 之上；初学者推荐从 AgentChat 入手，高级用户可用 autogen-core 的事件驱动模型获得更强控制。",
+      "0.7.5 的发布通过 GitHub Actions Trusted Publishing 完成，provenance 指向 github.com/microsoft/autogen 仓库的 commit a2bf5394。"
+    ],
+    "raw_excerpt": "autogen-agentchat 0.7.5 \n AutoGen agents and teams library\n...\nLicense \n MIT License (MIT License)\n...\nReleased: \n Sep 30, 2025"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "microsoft/autogen — Releases 页面（python-v0.7.x 发布序列）",
+    "url": "https://github.com/microsoft/autogen/releases",
+    "published_at": "2025-09-30",
+    "key_points": [
+      "最新 release 为 python-v0.7.5，标记 Latest，由 ekzhu 于 30 Sep 06:18 发布。",
+      "release 列表显示 python 包版本序列为：0.7.5、0.7.4、0.7.3、0.7.2、0.7.1、0.6.4、0.6.2、0.6.1、0.6.0、0.5.7（按时间倒序）。",
+      "2025 年 8 月发布密集：python-v0.7.3 于 19 Aug 08:07、python-v0.7.4 于 19 Aug 18:50（同日两次发布），python-v0.7.5 于 30 Sep 06:18。",
+      "0.7.5 的变更内容以修复与兼容性为主，包括：为 anthropic client 增加 thinking mode 支持、为 OpenAI GPT-5 模型补充 reasoning_effort 参数、修复 GraphFlow 循环检测的递归状态清理、为 RedisMemory 增加 linear memory 支持、新增 DockerCommandLineCodeExecutor 安全警告并设为默认。",
+      "发布由人工维护者（ekzhu）打 tag，而非纯 CI 自动发版。"
+    ],
+    "raw_excerpt": "python-v0.7.5 \n Latest \n ... ekzhu \n released this \n 30 Sep 06:18 \n ... Add thinking mode support for anthropic client ... Add missing reasoning_effort parameter support for OpenAI GPT-5 models ... Update version to 0.7.5"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — LICENSE (MIT License)",
+    "url": "https://raw.githubusercontent.com/crewAIInc/crewAI/main/LICENSE",
+    "published_at": null,
+    "key_points": [
+      "CrewAI 仓库 LICENSE 文件为 MIT 许可证，版权行为 \"Copyright (c) 2025 crewAI, Inc.\"。",
+      "许可证正文为标准 MIT 条款，授予无限制使用、复制、修改、合并、发布、分发、再许可和销售的权利，条件是保留版权与许可声明。"
+    ],
+    "raw_excerpt": "Copyright (c) 2025 crewAI, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction..."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "PyPI — crewai 项目页（版本与框架自述）",
+    "url": "https://pypi.org/project/crewai/",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "PyPI 上 crewai 最新版本为 1.15.30。",
+      "CrewAI 自述为 \"a lean, lightning-fast Python framework built entirely from scratch—completely independent of LangChain or other agent frameworks\"。",
+      "框架提供两种编排范式：Crews（面向自主性与协作智能的 agent 团队）与 Flows（细粒度、事件驱动的控制，支持单次 LLM 调用与条件分支）。",
+      "项目声称拥有超过 100,000 名通过 learn.crewai.com 课程认证的开发者（属厂商自述的营销性主张，未经第三方验证）。",
+      "README 目录中包含 \"CrewAI vs LangGraph\" 对比章节，说明其将 LangGraph 视为主要对照对象。"
+    ],
+    "raw_excerpt": "crewai 1.15.30 \n Cutting-edge framework for orchestrating role-playing, autonomous AI agents.\n...\nCrewAI is a lean, lightning-fast Python framework built entirely from scratch—completely independent of LangChain or other agent frameworks."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — Releases 页面（1.15.x 发布序列）",
+    "url": "https://github.com/crewAIInc/crewAI/releases",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "最新 release 为 1.15.30，标记 Latest，由 joaomdmoura（项目创始人）于 24 Oct 01:56 发布。",
+      "release 列表显示连续版本序列为：1.15.30、1.15.29、1.15.28、1.15.27、1.15.26、1.15.25、1.15.24、1.15.23、1.15.22、1.15.21（按时间倒序），版本号呈高频 patch 递增。",
+      "2026 年 10 月发布节奏：1.15.28 于 14 Oct 04:47、1.15.29 于 23 Oct 17:35、1.15.30 于 24 Oct 01:56。",
+      "1.15.29 为功能密集版本，包含多项 Features（如 LiteLLM-compatible kwargs 支持、CLI 平台应用搜索、Azure DocumentDB 向量搜索集成、AgentExecutor 从 experimental 转为正式）与多项 Bug Fixes。",
+      "1.15.30 为极小版本，仅含一项 AGENTS.md 登录流程修复与 changelog 更新，由单一贡献者提交。",
+      "release 被标记为 Immutable（发布后仅可修改标题与说明）。"
+    ],
+    "raw_excerpt": "1.15.30 \n Latest \n ... joaomdmoura \n released this \n 24 Oct 01:56 \n Immutable\n...\n1.15.29 ... released this 23 Oct 17:35 ... 1.15.28 ... released this 14 Oct 04:47"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "LangSmith Observability — 官方文档首页",
+    "url": "https://docs.smith.langchain.com/",
+    "published_at": null,
+    "key_points": [
+      "官方定位：LangSmith Observability 提供对 LLM 应用的全链路可见性，从单条 trace 到生产级性能指标（\"from individual traces to production-wide performance metrics\"）。",
+      "能力范围不止可观测性：官方明确所有部署选项均包含 observability、evaluation、prompt engineering、deployment 四项能力。",
+      "部署形态三选一：cloud、hybrid、self-hosted。",
+      "框架无关，官方集成清单中明确列出 CrewAI，另有 OpenAI、Anthropic、Vercel AI SDK、Pydantic AI 等。",
+      "文档列出核心功能模块：traces 查看、性能监控与告警、automations（rules/webhooks/online evaluations）、人工反馈标注队列、LangSmith Engine（自动检测并诊断 trace 中的复发问题）。",
+      "注册入口为 smith.langchain.com，官方注明无需信用卡。"
+    ],
+    "raw_excerpt": "LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics. ... To set up a LangSmith instance, visit the Platform setup section to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Pricing Plans for teams of any size — LangSmith 官方定价页",
+    "url": "https://www.langchain.com/pricing-langsmith",
+    "published_at": null,
+    "key_points": [
+      "三档订阅：Developer（$0/seat/月，含 5k base traces/月，限 1 seat）、Plus（$39/seat/月，含 10k base traces/月，可加无限席位）、Enterprise（Custom pricing）。",
+      "Enterprise 档明确提供自托管与混合部署选项、自定义 SSO/ABAC/RBAC、Support SLA、自定义席位与工作区。",
+      "托管形态按档区分：Developer 与 Plus 仅 Cloud；Enterprise 可选 Cloud、Hybrid 或 Self-Hosted。Hybrid 定义为 SaaS control plane + self-hosted data plane。",
+      "计费单位为 LSU（LangChain Standard Units），$1.00 / LSU，按秒计费。",
+      "产品线已扩展为多个子产品：LangSmith Observability & Evaluation、LangSmith Deployment、LangSmith Fleet、LangSmith Engine、LangSmith Sandboxes、LangSmith LLM Gateway。",
+      "LangSmith Deployment 提供 LangSmith Studio、将 agent 暴露为 MCP server、1-Click Deploy、scale-to-zero、Assistants API（30+ endpoints）、Cron 调度等。",
+      "仅 \"Agent Authorization (beta)\" 一项功能显式标注 beta，其余核心能力未见 beta 标注。",
+      "Plus 档起包含 1 个免费 Serverless (Small) deployment，额外部署按 Small/Medium/Large 规格与资源消耗计费。"
+    ],
+    "raw_excerpt": "Enterprise For teams with advanced hosting, security, and support needs. Custom pricing then pay as you go ... Self-hosted and hybrid deployment options Custom SSO, ABAC, and RBAC Support SLA Custom seats and workspaces ... Hybrid: SaaS control plane, Self-hosted data plane"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "AutoGen Studio — AutoGen 官方文档（user guide）",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/autogenstudio-user-guide/index.html",
+    "published_at": null,
+    "key_points": [
+      "官方定位：AutoGen Studio 是低代码界面，用于快速原型化 AI agent、为其添加工具、组合成团队并交互完成任务，构建于 AutoGen AgentChat 之上。",
+      "官方明确声明非生产可用：\"It is not meant to be a production-ready app\"，建议开发者改用 AutoGen 框架自行实现认证、安全等部署所需特性。",
+      "安全章节再次定性为研究原型：\"AutoGen Studio is a research prototype and is not meant to be used in a production environment\"，且未实现越狱相关严格测试、按用户权限限制 LLM 数据访问等安全特性。",
+      "提供四大界面：Team Builder（JSON 声明式或拖拽可视化组队，兼容 AgentChat 组件定义）、Playground（实时消息流、控制转移图可视化、UserProxyAgent 交互、暂停/停止控制）、Gallery（社区组件发现与导入）、Deployment（导出 Python 代码、基于团队配置测试 endpoint、Docker 容器运行）。",
+      "学术出处为 EMNLP 2024 System Demonstrations 论文《AutoGen Studio: A No-Code Developer Tool for Building and Debugging Multi-Agent Systems》，pp. 72–79。",
+      "原型源自 2023 年 10 月，原始贡献者含 Victor Dibia、Gagan Bansal、Adam Fourney、Chi Wang 等。",
+      "文档引用 \"AutoGen Studio v0.4 (02/25)\" 视频教程，表明 2025 年 2 月存在 v0.4 版本。",
+      "文档未提及任何商业版、企业版、SLA 或托管服务形态。"
+    ],
+    "raw_excerpt": "AutoGen Studio is meant to help you rapidly prototype multi-agent workflows and demonstrate an example of end user interfaces built with AutoGen. It is not meant to be a production-ready app. ... AutoGen Studio is a research prototype and is not meant to be used in a production environment."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "microsoft/autogen — python/packages/autogen-studio/README.md",
+    "url": "https://github.com/microsoft/autogen/tree/main/python/packages/autogen-studio",
+    "published_at": null,
+    "key_points": [
+      "README 显式警告处于活跃开发中且预期破坏性变更：\"AutoGen Studio is under active development. Expect breaking changes in upcoming releases.\"",
+      "2024-11-14 更新：AutoGen Studio 正在被重写以使用更新后的 AutoGen 0.4.0 AgentChat API。",
+      "README 重复官方文档的非生产声明：\"It is not meant to be a production-ready app\"，并称其为 research prototype。",
+      "技术栈：后端为 FastAPI（autogenstudio/ 目录），前端为 Gatsby + TailwindCSS（frontend/ 目录）。",
+      "安装方式：PyPI 推荐 `pip install -U autogenstudio`，要求 Python 3.10 或更新版本；亦支持源码安装（需 React 界面构建经验，涉及 Git LFS）。",
+      "2024-04-17 更新：数据库层改用 SQLModel（Pydantic + SQLAlchemy），支持 SQLite、PostgreSQL、MySQL、Oracle、Microsoft SQL Server，可通过 --database-uri 参数指定。",
+      "2024-03-12 更新：默认目录改为 /home/<USER>/.autogenstudio，可用 --appdir 指定。"
+    ],
+    "raw_excerpt": "AutoGen Studio is under active development. Expect breaking changes in upcoming releases. ... 2024-11-14: AutoGen Studio is being rewritten to use the updated AutoGen 0.4.0 api AgentChat api."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "CrewAI Flows — 官方文档 concepts/flows",
+    "url": "https://docs.crewai.com/en/concepts/flows",
+    "published_at": null,
+    "key_points": [
+      "官方定位：CrewAI Flows 是用于简化 AI 工作流创建与管理的特性，允许开发者高效地组合与协调编码任务和 Crews。",
+      "Flows 提供结构化、事件驱动的工作流，用于连接多个任务、管理状态并控制执行流。",
+      "官方列举四项设计要点：Simplified Workflow Creation（串联多个 Crews 与 tasks）、State Management（任务间共享状态）、Event-Driven Architecture、Flexible Control Flow（条件逻辑、循环、分支）。",
+      "编程模型：从 crewai.flow.flow 导入 Flow、listen、start；@start() 标记入口点，支持多个无条件 start、基于前序方法或 router 标签的 gated start、以及可调用条件；所有满足条件的 @start() 在 Flow 开始或恢复时执行（常并行）。",
+      "@listen() 标记某方法监听另一任务的输出，可传方法名字符串或方法对象本身；被监听任务完成时触发监听方法。",
+      "flow.kickoff() 返回最后完成方法的输出作为 Flow 最终输出；每个 Flow 实例在 state 中自动获得唯一 UUID，用于追踪执行。",
+      "支持 flow.plot() 生成流程图可视化。"
+    ],
+    "raw_excerpt": "CrewAI Flows is a powerful feature designed to streamline the creation and management of AI workflows. Flows allow developers to combine and coordinate coding tasks and Crews efficiently ... Flows allow you to create structured, event-driven workflows. They provide a seamless way to connect multiple tasks, manage state, and control the flow of execution in your AI applications."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "crewAIInc/crewAI — 仓库 README",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "published_at": null,
+    "key_points": [
+      "框架定位：CrewAI 是开源 Python 框架，提供高层抽象与低层 API，用于构建生产就绪的多 agent 工作流。",
+      "Crews 与 Flows 的分工表述：Crews 通过基于角色的 agent 优化自主性与协作智能；Flows 构建事件驱动自动化，结合精确工作流控制、单次 LLM 调用与对 Crews 的原生支持。",
+      "商业层定位：CrewAI AMP Suite 为需要商业控制平面的组织提供托管部署、可观测性、治理、安全与企业支持。",
+      "AMP Suite 中的 Crew Control Plane 可免费试用。",
+      "Crew Control Plane 关键特性：Tracing & Observability（实时指标、日志、trace）、Unified Control Plane（集中管理监控扩展）、Seamless Integrations、Advanced Security（合规与安全措施）、Actionable Insights（实时分析与报告）、24/7 Support、On-premise 与 Cloud 部署选项。",
+      "仓库规模：3,047 commits。",
+      "厂商自述社区规模：超过 100,000 名开发者通过 learn.crewai.com 社区课程获得认证（营销性主张，仅此来源，未第三方核验）。",
+      "厂商自述 \"rapidly becoming the standard for production-ready agentic automation\"（营销性主张，未采信为独立事实）。"
+    ],
+    "raw_excerpt": "CrewAI is an open-source Python framework with high-level abstractions and low-level APIs for building production-ready multi-agent workflows. It gives developers autonomous agent collaboration through Crews and precise, event-driven control through Flows. ... For organizations that need a commercial control plane around CrewAI, CrewAI AMP Suite adds managed deployment, observability, governance, security, and enterprise support."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "CrewAI AMP — 官方文档 enterprise/guides/getting-started",
+    "url": "https://docs.crewai.com/en/enterprise/guides/getting-started",
+    "published_at": null,
+    "key_points": [
+      "官方全称与定位：CrewAI AMP（Agent Management Platform）提供在生产环境中部署、监控和扩展 crews 与 agents 的平台。",
+      "与开源框架的关系：AMP 以面向生产部署、协作与可扩展性的特性扩展开源框架的能力。",
+      "关键特性清单：Crew Deployments（托管基础设施一键部署）、API Access（通过 REST API 集成既有系统）、Observability（详细执行 trace 与日志）、Tool Repository（发布与安装工具）、Webhook Streaming（实时事件推送）、Crew Studio（no-code/low-code 界面创建与定制 crews）。",
+      "部署方式三选：GitHub Integration（直连仓库部署代码）、Crew Studio（部署 no-code 界面创建的 crew）、CLI Deployment（面向更高级部署流程）。",
+      "上手流程四步：在 app.crewai.com 注册账号 → 用代码或 Crew Studio 构建 crew → 部署到 Enterprise 平台 → 通过生成的 API endpoint 集成。"
+    ],
+    "raw_excerpt": "CrewAI AMP(Agent Management Platform) provides a platform for deploying, monitoring, and scaling your crews and agents in a production environment. ... CrewAI AMP extends the power of the open-source framework with features designed for production deployments, collaboration, and scalability."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "CrewAI 官方定价页",
+    "url": "https://www.crewai.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "两档订阅：Basic（Free，含可视化编辑器与 AI copilot、GitHub 集成、50 workflow executions/月）与 Enterprise（Custom pricing）。",
+      "Enterprise 档增量能力：SSO、RBAC、workload identity、PII redaction 与 policies；可部署在 CrewAI cloud、自有 VPC 或自有基础设施；含 45 天 onboarding。",
+      "部署基础设施按档区分：Basic 为 CrewAI cloud；Enterprise 为 CrewAI 或客户 Dedicated VPC / NAT。",
+      "执行额度：Basic 上限 50 次/月；Enterprise 为 Custom、按工作流规模定制、支持灵活 overage。",
+      "仅 Enterprise 提供的功能：Enterprise connectors、Workflow chat（Slack/Teams）、SSO（MS Entra、Okta）、RBAC、Dedicated support、Slack/Teams 支持渠道、On-site、Training、Deployment 支持、Onboarding、Development 支持。",
+      "两档共有功能：Studio 可视化编辑器、标准工具与触发器、私有 agent 仓库、私有工具仓库、工作流模板、GitHub 集成、导出为 MCP server、导出为 UI 组件、Tracing、OpenTelemetry、AI agent training、LLM testing、Guardrails、Human-in-the-loop、Cron 调度、使用仪表盘、token 计数、性能指标、部署历史、LLM 管理、自动扩缩容。",
+      "厂商自述市场覆盖：\"Used by 65% of the Fortune 500\"（营销性主张，仅此页面出处，无第三方核验，未采信为独立事实）。",
+      "厂商自述定位：\"CrewAI unblocks the enterprise agent backlog by giving both business teams and engineers a unified build and runtime platform thats centrally governed\"（营销性表述）。"
+    ],
+    "raw_excerpt": "Enterprise Custom Scale agentic AI across the organization, with the governance to keep it in production. ... Governance from the start: SSO, RBAC, workload identity, PII redaction, and policies Deploy on CrewAI cloud, your own VPC, or your own infrastructure 45-day onboarding ... Used by 65% of the Fortune 500."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "AutoGen AgentChat User Guide — Managing State (Tutorial)",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/state.html",
+    "published_at": null,
+    "key_points": [
+      "官方文档将状态管理定位为：把组件状态保存到磁盘并在之后加载回来，特别适用于「无状态端点响应请求、需要从持久存储加载应用状态」的 Web 应用场景。",
+      "Agent 级：对 AssistantAgent 调用 save_state() 得到形如 {'type': 'AssistantAgentState', 'version': '1.0.0', 'llm_messages': [...]} 的字典；新建 agent 后调用 load_state(agent_state) 即可恢复上下文。",
+      "AssistantAgent 的状态内容就是 model_context；自定义 agent 应重写 save_state()/load_state()，因为默认实现保存和加载的是空状态。",
+      "Team 级：对 team 调用 save_state() 会保存团队中所有 agent 的状态，返回 TeamState（含 agent_states、team_id 等）；load_state(team_state) 可整体恢复。",
+      "文档演示了 reset() 后团队丢失上下文、load_state() 后能正确回忆上一轮内容的对照实验，用以说明状态持久化的必要性。",
+      "持久化方式：文档明确「State is a dictionary that can be serialized to a file or written to a database」，示例用 json.dump 写入 team_state.json、json.load 读回后交给新 team 的 load_state()。"
+    ],
+    "raw_excerpt": "In many cases, it is useful to save the state of these components to disk and load them back later. This is particularly useful in a web application where stateless endpoints respond to requests and need to load the state of the application from persistent storage. ... Persisting State (File or Database) # In many cases, we may want to persist the state of the team to disk (or a database) and load it back later. State is a dictionary that can be serialized to a file or written to a database."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "AutoGen Core User Guide — Agent and Agent Runtime",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/framework/agent-and-agent-runtime.html",
+    "published_at": null,
+    "key_points": [
+      "AutoGen Core 中 agent runtime 是 agent 的执行环境，负责 agent 间通信、agent 生命周期管理、安全边界以及监控与调试支持。",
+      "本地开发可使用 SingleThreadedAgentRuntime，它可嵌入 Python 应用；agent 不是由应用代码直接实例化和管理，而是由 runtime 在需要时创建并管理。",
+      "AgentChat 的 agent（如 AssistantAgent）由应用创建、不由 runtime 直接管理；要在 Core 中使用需写一个 RoutedAgent 包装器委托消息给 AgentChat agent，交由 runtime 管理。",
+      "runtime 提供 start()/stop() 控制后台消息处理任务，stop() 立即返回但不取消正在进行的消息处理；可用 start() 再次恢复后台任务。",
+      "批处理/评测场景可用 stop_when_idle()，在无未处理消息且无 agent 正在处理消息时自动停止。"
+    ],
+    "raw_excerpt": "An agent runtime is the execution environment for agents in AutoGen. ... an agent runtime provides the necessary infrastructure to facilitate communication between agents, manage agent lifecycles, enforce security boundaries, and support monitoring and debugging. For local development, developers can use SingleThreadedAgentRuntime, which can be embedded in a Python application. ... Agents are not directly instantiated and managed by application code. Instead, they are created by the runtime when needed and managed by the runtime."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "AutoGen Core User Guide — Distributed Agent Runtime",
+    "url": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/framework/distributed-agent-runtime.html",
+    "published_at": null,
+    "key_points": [
+      "官方明确标注分布式 agent runtime 为实验性特性（experimental），并提示 API 会有破坏性变更。",
+      "分布式 runtime 由 host service 与至少一个 worker runtime 组成：host service 维护与所有活跃 worker 的连接、负责消息投递，并为所有直接消息（RPC）保留 session。",
+      "worker runtime 运行应用代码（agents）并向 host service 注册其支持的 agent 类型，使 host 能把消息投递到正确的 worker。",
+      "使用分布式 runtime 需额外安装依赖：pip install \"autogen-ext[grpc]\"；host 通过 GrpcWorkerAgentRuntimeHost(address=...) 启动，worker 通过 GrpcWorkerAgentRuntime(host_address=...) 连接。",
+      "worker 与 host 均提供 stop_when_signal()，用于「保持运行直到收到终止信号（如 SIGTERM）」的常驻部署形态。",
+      "跨语言 runtime 场景下，所有跨 agent 消息类型必须使用共享的 protobuf schema。"
+    ],
+    "raw_excerpt": "Attention The distributed agent runtime is an experimental feature. Expect breaking changes to the API. A distributed agent runtime facilitates communication and agent lifecycle management across process boundaries. It consists of a host service and at least one worker runtime. The host service maintains connections to all active worker runtimes, facilitates message delivery, and keeps sessions for all direct messages (i.e., RPCs). ... # To keep the worker running until a termination signal is received (e.g., SIGTERM). # await worker1.stop_when_signal()"
+  }
+]

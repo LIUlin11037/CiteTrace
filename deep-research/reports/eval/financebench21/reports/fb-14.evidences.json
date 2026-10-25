@@ -1,0 +1,456 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 5: Selected Card-Related Statistical Information (全公司 cards-in-force)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (Table 5)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "截至 2022-12-31，全公司 cards-in-force（含第三方发行）为 1.333 亿张，2021 年为 1.217 亿张，2020 年为 1.120 亿张，2022 同比 +10%。",
+      "截至 2022-12-31，proprietary cards-in-force 为 7,670 万张，2021 年为 7,140 万张，2020 年为 6,890 万张，2022 同比 +7%。",
+      "截至 2022-12-31，basic cards-in-force 为 1.115 亿张（2021: 1.007 亿，+11%）；proprietary basic cards-in-force 为 5,910 万张（2021: 5,470 万，+8%）。",
+      "Table 5 为年度口径（Years Ended December 31），不含季度拆分。",
+      "Table 5 未列示 Card Member retention rate 或 attrition rate 指标。"
+    ],
+    "raw_excerpt": "TABLE 5: SELECTED CARD-RELATED STATISTICAL INFORMATION ... Cards-in-force (millions) 133.3 121.7 112.0 10 9 / Proprietary cards-in-force 76.7 71.4 68.9 7 4 / Basic cards-in-force (millions) 111.5 100.7 91.3 11 10 / Proprietary basic cards-in-force 59.1 54.7 52.7 8 4"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 10: USCS Selected Statistical Information (美国消费者服务分部 proprietary cards-in-force)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p56 (Table 10)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "U.S. Consumer Services (USCS) 分部 proprietary cards-in-force：2022 年 4,170 万张，2021 年 3,900 万张，2020 年 3,770 万张，2022 同比 +7%。",
+      "USCS proprietary basic cards-in-force：2022 年 2,920 万张，2021 年 2,730 万张，2020 年 2,660 万张，2022 同比 +7%。",
+      "USCS 2022 年 billed business 5,530 亿美元，同比 +24%。"
+    ],
+    "raw_excerpt": "TABLE 10: USCS SELECTED STATISTICAL INFORMATION ... Billed business (billions) $ 553.0 $ 444.2 $ 337.6 24 % 32 % / Proprietary cards-in-force 41.7 39.0 37.7 7 3 / Proprietary basic cards-in-force 29.2 27.3 26.6 7 3"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 12: CS Selected Statistical Information (商业服务分部 proprietary cards-in-force)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p59 (Table 12)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Commercial Services (CS) 分部 proprietary cards-in-force：2022 年 1,490 万张，2021 年 1,340 万张，2020 年 1,250 万张，2022 同比 +11%。",
+      "CS 分部 2022 年 billed business 4,995 亿美元，同比 +21%。",
+      "CS 分部 2022 年平均 Card Member spending 为 35,202 美元（2021: 32,042 美元，+10%）。"
+    ],
+    "raw_excerpt": "TABLE 12: CS SELECTED STATISTICAL INFORMATION ... Billed business (billions) $ 499.5 $ 411.6 $ 340.0 21 % 21 % / Proprietary cards-in-force 14.9 13.4 12.5 11 7 / Average Card Member spending (dollars) $ 35,202 $ 32,042 $ 27,045 10 18"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 14: ICS Selected Statistical Information (国际卡服务分部 proprietary cards-in-force)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p62 (Table 14)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "International Card Services (ICS) 分部 proprietary cards-in-force：2022 年 2,010 万张，2021 年 1,900 万张，2020 年 1,870 万张，2022 同比 +6%。",
+      "ICS proprietary basic cards-in-force：2022 年 1,490 万张，2021 年 1,390 万张，2020 年 1,360 万张，2022 同比 +7%。",
+      "ICS 分部 2022 年 billed business 2,816 亿美元，同比 +23%。"
+    ],
+    "raw_excerpt": "TABLE 14: ICS SELECTED STATISTICAL INFORMATION ... Billed business (billions) $ 281.6 $ 228.2 $ 187.5 23 % 22 % / Proprietary cards-in-force 20.1 19.0 18.7 6 2 / Proprietary basic cards-in-force 14.9 13.9 13.6 7 2"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Card Network Business 概述（第三方发行 cards-in-force）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p6",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "截至 2022-12-31，由第三方银行及其他机构发行的 cards-in-force 为 5,650 万张。",
+      "2022 年 worldwide billed business（公司发行卡上的消费额）为 1,338 亿美元口径中的 1,338 billion 美元；截至 2022-12-31 公司有 7,670 万张 proprietary cards-in-force（p5 同段表述）。"
+    ],
+    "raw_excerpt": "at December 31, 2022, we had 56.5 million cards-in-force issued by third parties worldwide."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Business Environment / MD&A 概述（新卡获取与留存定性表述）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "公司称 2022 年新卡获取量（new card acquisitions）达到创纪录水平。",
+      "公司自述其投资带来与 Millennial 和 Gen Z 客户相关性的提升、更深的客户关系（deeper relationships with customers）以及商户受理范围扩大。",
+      "公司称其持续具备 acquire、engage and retain high-spending 客户的能力（定性表述，未给出留存率数值）。",
+      "2022 年净收入 75 亿美元（每股 9.85 美元），2021 年为 81 亿美元（每股 10.02 美元）。",
+      "2022 年 worldwide network volumes 同比 +21%（FX 调整后 +24%）；billed business 同比 +23%（FX 调整后 +25%）。"
+    ],
+    "raw_excerpt": "Our investments in product innovation, technology, people and our brand has led to increased generational relevance with Millennial and Gen Z customers, record new card acquisitions, deeper relationships with customers and expanded merchant acceptance. ... demonstrating our continued ability to acquire, engage and retain high-spending, ..."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Glossary of Selected Terminology（术语表未收录 retention rate / average tenure）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p85–p86（Glossary of Selected Terminology）",
+    "published_at": null,
+    "key_points": [
+      "该 10-K 设有专门的 \"Glossary of Selected Terminology\" 章节，逐条定义 Adjusted net interest income、Airline-related volume、Asset securitizations、Cobrand cards、Credit cards、Discount revenue、Goods and Services (G&S)-related volume、Interest expense、Net write-off rate 等指标。",
+      "检索到的术语表内容中没有 \"Card Member retention rate\" 的定义条目。",
+      "检索到的术语表内容中没有 \"average tenure of Card Members\" 的定义条目。",
+      "术语表对 Net write-off rate 的定义方式为：核销金额（扣除回收）占期间平均贷款或应收余额的百分比。"
+    ],
+    "raw_excerpt": "GLOSSARY OF SELECTED TERMINOLOGY / Adjusted net interest income — A non-GAAP measure that represents net interest income attributable to our Card Member loans (which includes, on a GAAP basis, interest that is deemed uncollectible), excluding the impact of interest expense and interest income not attributable to our Card Member loans. / Cobrand cards — Cards issued under cobrand agreements with selected commercial partners. / Net write-off rate — principal only — Represents the amount of proprietary consumer or small business Card Member loans or receivables written off, consisting of principal (resulting from authorized transactions), less recoveries, as a percentage of the average loan or receivable balance during the period."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Selected Card-Related Statistical Information（Table 5 / 8 / 10 / 12 / 14 无 retention rate 或 tenure 行）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50（Table 5）、p52（Table 8）、p56（Table 10）、p59（Table 12）、p62（Table 14）",
+    "published_at": null,
+    "key_points": [
+      "Table 5（Selected Card-Related Statistical Information）按 2022、2021、2020 三年列示：Network volumes、Billed business、Processed volumes、Cards-in-force、Proprietary cards-in-force、Basic cards-in-force、Proprietary basic cards-in-force、Average proprietary basic Card Member spending、Average discount rate、Average fee per card。",
+      "Table 5 中 2022/2021/2020 的 Cards-in-force 分别为 133.3 / 121.7 / 112.0（百万），Proprietary cards-in-force 分别为 76.7 / 71.4 / 68.9（百万）。",
+      "Table 5 中 2022/2021/2020 的 Average fee per card 分别为 82 / 74 / 67 美元。",
+      "Table 8、Table 10、Table 12、Table 14 列示的是 Card Member loans/receivables 的 write-off rate、delinquency、net interest yield 等指标，均不含 retention rate 或 average tenure 行。",
+      "上述统计表只覆盖 2022、2021、2020 三个年度，不含 2019 年列。",
+      "上述统计表中没有任何一行报告 card member retention rate 或 average tenure of card members 的数值。"
+    ],
+    "raw_excerpt": "TABLE 5: SELECTED CARD-RELATED STATISTICAL INFORMATION / Change Change / Years Ended December 31, 2022 2021 2020 2022 vs. 2021 2021 vs. 2020 / Network volumes (billions) $ 1,552.8 $ 1,284.2 $ 1,037.8 21 % 24 % / Billed business $ 1,338.3 $ 1,089.8 $ 870.7 23 25 / Cards-in-force (millions) 133.3 121.7 112.0 10 9 / Proprietary cards-in-force 76.7 71.4 68.9 7 4 / Average proprietary basic Card Member spending (dollars) $ 23,496 $ 20,392 $ 16,352 15 25 / Average discount rate 2.34 % 2.30 % 2.28 % / Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Business Environment / MD&A（仅定性提及 Card Member retention remained high）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45（Business Environment, MD&A）",
+    "published_at": null,
+    "key_points": [
+      "在解释 2022 年 Net card fees 同比增长 17% 时，公司将 \"Card Member retention remained high\" 与 \"new card acquisitions reached record levels\" 并列为归因。",
+      "该处表述为纯定性描述，未给出 retention rate 的百分比数值。",
+      "该处未说明 retention rate 的计算口径或统计范围。",
+      "同一段落报告 2022 年 Worldwide network volumes 同比增长 21%（FX-adjusted 24%），Billed business 增长 23%（FX-adjusted 25%）。"
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact we have made in our premium value propositions."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — 其他出现 \"retention\" 的段落（与 Card Member 留存指标无关）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p29（Risk Factors）、p86（Glossary: Cobrand cards）",
+    "published_at": null,
+    "key_points": [
+      "p29 风险因素中的 \"colleague retention\" 指员工留任与招聘成本，与 Card Member 留存指标无关。",
+      "p86 术语表 Cobrand cards 条目中的 \"the number of accounts acquired and retained\" 指与联名伙伴协议下按获客与留存账户数向伙伴付款的条款，并非 Card Member retention rate 指标。",
+      "这两处均未提供 retention rate 或 average tenure 的定义或数值。"
+    ],
+    "raw_excerpt": "increased costs as a result of inflation, colleague retention and recruitment, supply chain issues and shortages of materials such as chips for our cards may require that we reduce investments in other areas. / Cobrand cards — … we make payments to our cobrand partners, which can be significant, based primarily on the amount of Card Member spending and corresponding rewards earned on such spending and, under certain arrangements, on the number of accounts acquired and retained."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Business Environment (management attribution of net card fee growth to record acquisitions, high retention, premium value propositions)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": null,
+    "key_points": [
+      "Net card fees increased 17% year over year in 2022.",
+      "Management attributes the net card fee increase to new card acquisitions reaching record levels in 2022 and to Card Member retention remaining high.",
+      "Management attributes the high retention to investments made in the company's premium value propositions."
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Business Environment (Millennial/Gen-Z generational relevance)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": null,
+    "key_points": [
+      "Management states its investments in product innovation, technology, people and brand led to increased generational relevance with Millennial and Gen Z customers.",
+      "The same sentence attributes record new card acquisitions, deeper customer relationships and expanded merchant acceptance to those investments.",
+      "The claim is qualitative; no percentage of new accounts or spend share from Millennial/Gen-Z customers is given in this passage."
+    ],
+    "raw_excerpt": "Our investments in product innovation, technology, people and our brand has led to increased generational relevance with Millennial and Gen Z customers, record new card acquisitions, deeper relationships with customers and expanded merchant acceptance."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Business Environment (retention claim scoped to high-spending premium cohort)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": null,
+    "key_points": [
+      "Billed business increased 23% year over year (25% on an FX-adjusted basis) in 2022.",
+      "Management frames this as demonstrating ability to acquire, engage and retain 'high-spending, premium Card Members' specifically, not the card base as a whole."
+    ],
+    "raw_excerpt": "Billed business, which represented 86 percent of our total network volumes and is the most significant driver of our financial results, increased 23 percent year-over-year (25 percent on an FX-adjusted basis), demonstrating our continued ability to acquire, engage and retain high-spending, premium Card Members."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Business Environment (T&E momentum vs G&S deceleration; inflation contribution)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": null,
+    "key_points": [
+      "T&E spending momentum remained strong throughout 2022.",
+      "Year-over-year Goods & Services spending growth slowed toward the end of 2022 after large pandemic-recovery growth rates earlier in the year.",
+      "Management describes inflation as a modest contributor to billed business growth.",
+      "Strengthening of the U.S. dollar had a negative impact on international billings."
+    ],
+    "raw_excerpt": "T&E spending momentum remained strong throughout the year, while year-over-year Goods & Services spending growth slowed towards the end of the year following the large pandemic recovery growth rates experienced earlier in the year. Inflation was a modest contributor to our strong billed business growth, while the continuing strengthening of the U.S. dollar, relative to the prior year, against most major currencies in which we operate, had a negative impact on our international billings."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 6: Network Volumes-Related Statistical Information (T&E mix shift)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (Table 6)",
+    "published_at": null,
+    "key_points": [
+      "T&E-related billed business was 25% of billed business in 2022 versus 19% in 2021.",
+      "T&E-related billed business grew 64% year over year in 2022 (67% on an FX-adjusted basis).",
+      "G&S-related billed business was 75% of billed business in 2022 versus 81% in 2021, growing 13% year over year.",
+      "Airline-related billed business was 6% of billed business in 2022 versus 3% in 2021, growing 119% year over year."
+    ],
+    "raw_excerpt": "G&S-related (75% and 81% of billed business for 2022 and 2021, respectively) 13 16 19 18 / T&E-related (25% and 19% of billed business for 2022 and 2021, respectively) 64 67 59 58 / Airline-related (6% and 3% of billed business for 2022 and 2021, respectively) 119 % 125 % 63 % 61 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 2 and Table 5: net card fees and average fee per card",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47 (Table 2) and p50 (Table 5)",
+    "published_at": null,
+    "key_points": [
+      "Net card fees were $6,070 million in 2022, up $875 million or 17% from $5,195 million in 2021.",
+      "Management attributes the net card fee increase primarily to growth in its premium card portfolios.",
+      "Average fee per card was $82 in 2022 versus $74 in 2021, an 11% increase (computed on an annualized basis from proprietary net card fees divided by average proprietary total cards-in-force)."
+    ],
+    "raw_excerpt": "Net card fees 6,070 5,195 4,664 875 17 531 11 ... Net card fees increased, primarily driven by growth in our premium card portfolios. ... Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 5: Selected Card-Related Statistical Information (cards-in-force growth)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (Table 5)",
+    "published_at": null,
+    "key_points": [
+      "Total cards-in-force were 133.3 million at year-end 2022 versus 121.7 million at year-end 2021, up 10%.",
+      "Proprietary cards-in-force were 76.7 million versus 71.4 million, up 7%.",
+      "Proprietary basic cards-in-force were 59.1 million versus 54.7 million, up 8%.",
+      "These are net figures; the 10-K does not disclose a gross attrition or retention rate in this table."
+    ],
+    "raw_excerpt": "Cards-in-force (millions) 133.3 121.7 112.0 10 9 / Proprietary cards-in-force 76.7 71.4 68.9 7 4 / Basic cards-in-force (millions) 111.5 100.7 91.3 11 10 / Proprietary basic cards-in-force 59.1 54.7 52.7 8 4"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Business Environment (management concession on rising delinquency and write-offs)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 (Business Environment)",
+    "published_at": null,
+    "key_points": [
+      "Management states that delinquency and net write-off rates continued to increase throughout 2022.",
+      "Management asserts these metrics remain strong, attributing that to the premium nature of the customer base, risk management capabilities and risk actions taken during the year.",
+      "Provisions for credit losses reflected a reserve build of $617 million in 2022 versus a reserve release of $2.5 billion in 2021, and are expected to increase in 2023."
+    ],
+    "raw_excerpt": "While delinquency and net write-off rates continued to increase throughout the year, these metrics remain strong, supported by the premium nature of our customer base, our risk management capabilities and risk actions we took throughout the year."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Tables 7/10/12/14: 30+ days past due by segment",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p51 (Table 7), p56 (Table 10), p59 (Table 12), p62 (Table 14)",
+    "published_at": null,
+    "key_points": [
+      "Total Card Member loans 30+ days past due as a % of total rose to 1.0% in 2022 from 0.7% in 2021.",
+      "U.S. Consumer Services Card Member loans 30+ days past due rose to 1.0% from 0.7%.",
+      "Commercial Services Card Member loans 30+ days past due rose to 0.9% from 0.5%.",
+      "International Card Services Card Member loans 30+ days past due rose to 1.2% from 0.8%.",
+      "U.S. Consumer Services Card Member receivables 30+ days past due rose to 0.9% from 0.4%; Commercial Services small business receivables to 1.6% from 0.8%; ICS consumer and small business receivables to 1.3% from 0.7%."
+    ],
+    "raw_excerpt": "Card Member loans: 30+ days past due as a % of total 1.0 % 0.7 % 1.0 % (Table 7) ... USCS: 30+ days past due as a % of total 1.0 % 0.7 % 1.0 % (Table 10) ... CS: 30+ days past due as a % of total 0.9 % 0.5 % 0.7 % (Table 12) ... ICS: 30+ days past due as a % of total 1.2 % 0.8 % 1.7 % (Table 14)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 7 and Credit Quality Indicators: receivables write-off rates and reserve build",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p51 (Table 7), p117, p174",
+    "published_at": null,
+    "key_points": [
+      "Card Member receivables net write-off rate (principal and fees) rose to 0.8% in 2022 from 0.3% in 2021.",
+      "Consumer receivables principal-only net write-offs / average consumer receivables rose to 0.8% from 0.3%; small business receivables to 1.1% from 0.3%.",
+      "The Card Member receivables reserve for credit losses increased from $64 million to $229 million, described as primarily driven by higher delinquencies and growth in receivables.",
+      "Card Member loans provisions for credit losses were $1,514 million in 2022 versus $(1,155) million in 2021."
+    ],
+    "raw_excerpt": "Net write-off rate — principal and fees 0.8 % 0.3 % 2.0 % ... Principal only net write-offs / average consumer receivables outstanding 0.8 % 0.3 % ... Principal only net write-offs / average small business receivables outstanding 1.1 % 0.3 % ... Card Member receivables reserve for credit losses increased for the year ended December 31, 2022, primarily driven by higher delinquencies and growth in"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Note 18: Service fees and other revenue detail (delinquency fees, travel commissions)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p145 (Note 18)",
+    "published_at": null,
+    "key_points": [
+      "Delinquency fees increased to $809 million in 2022 from $637 million in 2021, a 27% increase.",
+      "Travel commissions and fees increased to $507 million in 2022 from $244 million in 2021, a 108% increase.",
+      "Total service fees and other revenue rose to $4,521 million from $3,316 million; management attributes part of the 36% increase to higher travel-related revenues."
+    ],
+    "raw_excerpt": "Service fees $ 1,444 $ 1,385 $ 1,280 / Foreign currency-related revenue 1,202 624 517 / Delinquency fees 809 637 772 / Travel commissions and fees 507 244 102 / Other fees and revenues 559 426 31 / Total Service fees and other revenue $ 4,521 $ 3,316 $ 2,702"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Risk factors referencing card product refresh strategy",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p88 (risk factors)",
+    "published_at": null,
+    "key_points": [
+      "The 10-K references 'our strategy of refreshing card products and enhancing benefits and services' as part of a risk factor about competitive pressures and value propositions.",
+      "The document does not name the Platinum or Gold cards, does not state annual fee levels, and does not describe refreshed benefit economics anywhere in the retrieved passages."
+    ],
+    "raw_excerpt": "our inability to address competitive pressures, develop attractive value propositions and implement our strategy of refreshing card products and enhancing benefits and services"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Our Business Strategies (premium consumer leadership imperative)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p8 (Our Business Strategies)",
+    "published_at": null,
+    "key_points": [
+      "The first of four strategic imperatives is to expand leadership in the premium consumer space by delivering membership benefits spanning everyday spending, borrowing, travel and lifestyle needs.",
+      "The strategy section is framed in general terms and does not attribute 2022 results to specific refreshed card economics."
+    ],
+    "raw_excerpt": "First, we aim to expand our leadership in the premium consumer space by continuing to deliver membership benefits that span our customers' everyday spending, borrowing, travel and lifestyle needs, expanding our roster of business partners around the globe and developing a range of experiences that attract"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 4: Expenses Summary (marketing expense growth)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p49 (Table 4)",
+    "published_at": null,
+    "key_points": [
+      "Marketing expense was $5,458 million in 2022 versus $5,291 million in 2021, an increase of $167 million or 3%.",
+      "Card Member services expense rose 48% to $2,959 million and Card Member rewards expense rose 27% to $14,002 million, both faster than marketing expense."
+    ],
+    "raw_excerpt": "Card Member rewards $ 14,002 $ 11,007 $ 8,041 $ 2,995 27 % $ 2,966 37 % / Business development 4,943 3,762 3,051 1,181 31 711 23 / Card Member services 2,959 1,993 1,230 966 48 763 62 / Marketing 5,458 5,291 3,696 167 3 1,595 43"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Business Environment (MD&A)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Net card fees increased 17 percent year-over-year in 2022, attributed to new card acquisitions reaching record levels and Card Member retention remaining high.",
+      "The company attributes high retention to investments in its premium value propositions.",
+      "Worldwide network volumes increased 21 percent year-over-year (24 percent FX-adjusted); billed business increased 23 percent (25 percent FX-adjusted).",
+      "U.S. Consumer billed business grew 24 percent year-over-year; Commercial Services billed business grew 21 percent; International billed business grew 23 percent (36 percent FX-adjusted).",
+      "Total revenues net of interest expense increased 25 percent year-over-year (27 percent FX-adjusted).",
+      "Net interest income increased 28 percent versus prior year, primarily driven by growth in Card Member loans.",
+      "The rising interest rate environment had a fairly neutral impact on full-year results, but rising rates had a modest negative impact on net interest income toward the end of the year.",
+      "Card Member loans increased 22 percent year-over-year, with the majority of growth coming from existing Card Members.",
+      "Provisions for credit losses reflected a reserve build of $617 million in 2022 versus a reserve release of $2.5 billion in 2021.",
+      "Credit metrics remain below pre-pandemic levels.",
+      "Net income was $7.5 billion ($9.85 per share) in 2022 versus $8.1 billion ($10.02 per share) in 2021.",
+      "The company states its investments led to increased generational relevance with Millennial and Gen Z customers, record new card acquisitions, and deeper customer relationships."
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions. ... While the rising interest rate environment had a fairly neutral impact on our results for the full year, rising rates did have a modest negative impact on net interest income towards the end of the year. ... Spending on our network reached record levels, and credit metrics remain below pre-pandemic levels."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 5: Selected Card-Related Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (Table 5)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total cards-in-force were 133.3 million at year-end 2022 versus 121.7 million in 2021 (up 10 percent) and 112.0 million in 2020.",
+      "Proprietary cards-in-force were 76.7 million in 2022 versus 71.4 million in 2021 (up 7 percent).",
+      "Basic cards-in-force were 111.5 million in 2022 versus 100.7 million in 2021 (up 11 percent); proprietary basic cards-in-force were 59.1 million versus 54.7 million (up 8 percent).",
+      "Billed business was $1,338.3 billion in 2022 versus $1,089.8 billion in 2021 (up 23 percent) and $870.7 billion in 2020.",
+      "Network volumes were $1,552.8 billion in 2022 versus $1,284.2 billion in 2021 (up 21 percent).",
+      "Average fee per card was $82 in 2022 versus $74 in 2021 (up 11 percent) and $67 in 2020.",
+      "Average proprietary basic Card Member spending was $23,496 in 2022 versus $20,392 in 2021 (up 15 percent).",
+      "Average discount rate was 2.34 percent in 2022 versus 2.30 percent in 2021."
+    ],
+    "raw_excerpt": "Cards-in-force (millions) 133.3 121.7 112.0 10 9 / Proprietary cards-in-force 76.7 71.4 68.9 7 4 / Basic cards-in-force (millions) 111.5 100.7 91.3 11 10 / Proprietary basic cards-in-force 59.1 54.7 52.7 8 4 ... Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 2: Total Revenues Net of Interest Expense Summary",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47 (Table 2)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Net card fees were $6,070 million in 2022, $5,195 million in 2021, and $4,664 million in 2020 (up 17 percent in 2022, up 11 percent in 2021).",
+      "Discount revenue was $30,739 million in 2022 versus $24,563 million in 2021 (up 25 percent).",
+      "Service fees and other revenue were $4,521 million in 2022 versus $3,316 million in 2021 (up 36 percent).",
+      "Total interest income was $12,658 million in 2022 versus $9,033 million in 2021 (up 40 percent), driven primarily by higher average Card Member loan balances and interest rates.",
+      "Total interest expense was $2,763 million in 2022 versus $1,283 million in 2021, driven primarily by higher interest rates paid on deposits and debt outstanding.",
+      "Total revenues net of interest expense were $52,862 million in 2022 versus $42,380 million in 2021 (up 25 percent)."
+    ],
+    "raw_excerpt": "Net card fees 6,070 5,195 4,664 875 17 531 11 ... Interest income increased, primarily driven by higher average Card Member loan balances and interest rates. Interest expense increased, primarily driven by higher interest rates paid on deposits and debt outstanding."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Commercial Services and International Card Services segment results (premium portfolio fee growth)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p57 (CS) and p60 (ICS)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Commercial Services net card fees increased 22 percent, primarily driven by growth in premium card portfolios.",
+      "International Card Services net card fees increased 3 percent (14 percent FX-adjusted), primarily driven by growth in premium card portfolios, partially offset by changes in foreign exchange rates.",
+      "ICS pretax segment income was $578 million in 2022 versus $929 million in 2021, significantly impacted by strengthening of the U.S. dollar.",
+      "CS pretax segment income was $2,880 million in 2022 versus $2,936 million in 2021.",
+      "CS proprietary cards-in-force were 14.9 million in 2022 versus 13.4 million in 2021 (up 11 percent); ICS proprietary cards-in-force were 20.1 million versus 19.0 million (up 6 percent)."
+    ],
+    "raw_excerpt": "Net card fees increased 22 percent, primarily driven by growth in our premium card portfolios. ... Net card fees increased 3 percent (14 percent on an FX-adjusted basis), primarily driven by growth in our premium card portfolios, partially offset by changes in foreign exchange rates."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Risk Factors: inflation and cost pressure on the premium value proposition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p29",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "The company states that increased costs as a result of inflation, colleague retention and recruitment, supply chain issues and shortages of materials such as chips for cards may require it to reduce investments in other areas.",
+      "The company states that if marketing, promotion, rewards and Card Member services expenses increase beyond expectations, it would need to offset the impact by increasing fee-based revenues, decreasing operating expenses, or both.",
+      "The company notes that many credit card issuers have instituted rewards and cobrand programs that may be similar to or more attractive than its own.",
+      "The company identifies Amazon and Delta as its two largest Membership Rewards redemption partners."
+    ],
+    "raw_excerpt": "In addition, increased costs as a result of inflation, colleague retention and recruitment, supply chain issues and shortages of materials such as chips for our cards may require that we reduce investments in other areas. ... many credit card issuers have instituted rewards and cobrand programs and may introduce programs or services that are similar to or more attractive than ours. Our inability to differentiate our products and services could materially adversely affect us."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 7: Selected Credit-Related Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p51 (Table 7)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Card Member loans were $108.0 billion at year-end 2022 versus $88.6 billion in 2021 (up 22 percent) and $73.4 billion in 2020.",
+      "Net write-off rate (principal, interest and fees) on Card Member loans was 1.1 percent in 2022, 1.2 percent in 2021, and 2.9 percent in 2020.",
+      "Net write-off rate (principal only) on Card Member loans was 0.9 percent in 2022 and 0.9 percent in 2021.",
+      "30+ days past due as a percentage of total Card Member loans was 1.0 percent in 2022 versus 0.7 percent in 2021 and 1.0 percent in 2020.",
+      "Credit loss reserves as a percentage of Card Member loans were 3.5 percent in 2022 versus 3.7 percent in 2021 and 7.3 percent in 2020.",
+      "Card Member receivables were $57.6 billion in 2022 versus $53.6 billion in 2021 (up 7 percent).",
+      "Card Member receivables net write-off rate (principal and fees) was 0.8 percent in 2022 versus 0.3 percent in 2021."
+    ],
+    "raw_excerpt": "Card Member loans (billions) $ 108.0 $ 88.6 $ 73.4 22 % 21 % ... Net write-off rate — principal, interest and fees 1.1 % 1.2 % 2.9 % / Net write-off rate — principal only 0.9 % 0.9 % 2.4 % / 30+ days past due as a % of total 1.0 % 0.7 % 1.0 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Competition section and cobrand concentration",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p12 (Competition) and p27",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "The company states it competes in the global payments industry with card networks, issuers and acquirers, paper-based transactions, bank transfer models, and alternative payment mechanisms.",
+      "The company states it believes Visa and Mastercard are larger than it is in most countries.",
+      "All cobrand portfolios in aggregate accounted for approximately 18 percent of worldwide network volumes for the year ended December 31, 2022.",
+      "Card Member loans related to cobrand portfolios accounted for approximately 36 percent of worldwide Card Member loans as of December 31, 2022.",
+      "The company states that cobrand partnerships are highly competitive among card issuers and networks because they typically appeal to high-spending loyal customers.",
+      "No named peer issuer (JPMorgan Chase, Capital One, Discover, Citigroup) is quantitatively compared anywhere in the filing."
+    ],
+    "raw_excerpt": "We compete in the global payments industry with card networks, issuers and acquirers, paper-based transactions (e.g., cash and checks), bank transfer models ... All of our cobrand portfolios in the aggregate accounted for approximately 18 percent of our worldwide network volumes for the year ended December 31, 2022. Card Member loans related to our cobrand portfolios accounted for approximately 36 percent of our worldwide Card Member loans as of December 31, 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Macroeconomic scenario assumptions used for credit reserves",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p116",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Reserve calculations used a U.S. unemployment rate scenario range of 4 percent for Q4 2022, 3-6 percent for Q1 2023, 3-8 percent for Q4 2023, and 3-7 percent for Q4 2024.",
+      "Reserve calculations used U.S. GDP growth (contraction) scenarios of (0.1) percent for Q4 2022, 5 to (1) percent for Q1 2023, 6 to 0.2 percent for Q4 2023, and 3 to 2 percent for Q4 2024.",
+      "The Card Member loans reserve for credit losses increased in 2022 primarily driven by an increase in loans outstanding, higher delinquencies and changes in macroeconomic forecasts, partially offset by release of COVID-19 pandemic-driven reserves.",
+      "The Card Member loans reserve for credit losses decreased in 2021 primarily due to improved portfolio quality and macroeconomic forecasts, largely driven by improvement in unemployment rate projections."
+    ],
+    "raw_excerpt": "The following table reflects the range of macroeconomic scenario key variables used, in conjunction with other inputs, to calculate reserves for credit losses: U.S. Unemployment Rate ... Fourth quarter of 2022 4% 4% - 9% (0.1)% 2% -1% ... Card Member loans reserve for credit losses increased for the year ended December 31, 2022, primarily driven by an increase in loans outstanding, higher delinquencies and changes in macroeconomic forecasts, partially offset by the release of COVID-19 pandemic-driven reserves."
+  }
+]

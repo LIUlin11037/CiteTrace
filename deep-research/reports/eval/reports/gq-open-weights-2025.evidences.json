@@ -1,0 +1,752 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "The Open Source AI Definition – version 1.0 (Open Source Initiative)",
+    "url": "https://opensource.org/ai/open-source-ai-definition",
+    "published_at": "2024-10",
+    "key_points": [
+      "OSAID 1.0 规定：Open Source AI 是「以授予以下自由的方式提供的 AI 系统」——(1) 为任何目的使用系统且无需请求许可；(2) 研究系统如何工作并检查其组件；(3) 为任何目的修改系统，包括改变其输出；(4) 为任何目的共享系统供他人使用，无论是否修改。",
+      "这四项自由同时适用于「完整可运行的系统」和「系统的离散组成元素」（system、model、weights and parameters 等），判定标准相同。",
+      "行使这些自由的前提是能够获得「进行修改的首选形式」（preferred form to make modifications）。",
+      "对机器学习系统而言，preferred form 必须包含三类要素：Data Information（足够详细的训练数据信息，使有技能者能构建实质等同的系统，且须以 OSI 认可的条款提供）、Code（训练与运行系统的完整源代码，含数据处理/过滤、训练参数与设置、验证测试、tokenizer 等支撑库、推理代码、模型架构，须以 OSI 认可的许可证提供）、Parameters（模型参数如权重或其他配置，须以 OSI 认可的条款提供）。",
+      "Data Information 具体要求包括：完整描述所有训练数据（含不可共享数据）并披露来源、范围与特征、获取与选择方式、标注流程、数据处理与过滤方法；列出所有公开可得的训练数据及获取位置；列出所有可从第三方（含付费）获得的训练数据及获取位置。",
+      "OSAID 明确区分组件定义：「AI model」由模型架构、模型参数（含权重）和运行模型的推理代码组成；「AI weights」是叠加在模型架构上、由给定输入产生输出的那组学习到的参数。",
+      "关键界定句：『\"Open Source models\" and \"Open Source weights\" must include the data information and code used to derive those parameters.』——即仅开放权重不足以称为 Open Source weights，还必须包含推导这些参数所用的数据信息与代码。",
+      "OSAID 不要求特定的法律机制来保证模型参数对所有人自由可得：参数可以「本身自由」，也可以通过许可证或其他法律工具确保其自由；OSI 表示随着法律体系对开源 AI 系统的进一步回应，这一点会随时间更清晰。",
+      "OSAID 允许许可证或条款包含「要求修改版本以与原版相同的条款发布」这类条件（即允许 copyleft 式条款）。",
+      "OSAID 的四项自由声明源自 Free Software Definition；AI system 定义引用 OECD/LEGAL/0449 (2024)。"
+    ],
+    "raw_excerpt": "An Open Source AI is an AI system made available under terms and in a way that grant the freedoms to: Use the system for any purpose and without having to ask for permission. Study how the system works and inspect its components. Modify the system for any purpose, including to change its output. Share the system for others to use with or without modifications, for any purpose. ... \"Open Source models\" and \"Open Source weights\" must include the data information and code used to derive those parameters. ... The Open Source AI Definition does not require a specific legal mechanism for assuring that the model parameters are freely available to all."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "LLAMA 4 COMMUNITY LICENSE AGREEMENT (meta-llama/llama-models, models/llama4/LICENSE)",
+    "url": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE",
+    "published_at": "2025-04-05",
+    "key_points": [
+      "Llama 4 Community License Agreement 生效日为 2025 年 4 月 5 日（\"Llama 4 Version Effective Date: April 5, 2025\"）。",
+      "授权性质：非独占、全球、不可转让、免版税的有限许可，允许使用、复制、分发、拷贝、创作衍生作品及修改 Llama Materials（基于 Meta 在 Llama Materials 中拥有的知识产权）。",
+      "再分发义务（命名/署名限制）：若分发 Llama Materials 或其衍生作品，或包含它们的任何产品或服务（含另一个 AI 模型），须 (A) 随附本协议副本；(B) 在相关网站、用户界面、博客文章、about 页面或产品文档中显著展示 \"Built with Llama\"。",
+      "蒸馏/衍生模型的命名限制：若使用 Llama Materials 或其输出/结果来创建、训练、微调或以其他方式改进一个被分发或提供的 AI 模型，须在该 AI 模型名称的**开头**加上 \"Llama\"。",
+      "分发时须在随附的 \"Notice\" 文本文件中保留归属声明：\"Llama 4 is licensed under the Llama 4 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.\"",
+      "商用门槛条款（第 2 条 Additional Commercial Terms）：若在 Llama 4 版本发布日，被许可方或其关联方提供的产品或服务的月活跃用户数在前一个自然月超过 7 亿（700 million MAU），则必须向 Meta 申请许可，由 Meta 自行决定是否授予；在 Meta 明确授予前不得行使本协议下任何权利。",
+      "使用须遵守可接受使用政策（Acceptable Use Policy，https://www.llama.com/llama4/use-policy），该政策通过引用并入协议；并须遵守适用法律与贸易合规法规。",
+      "商标：本协议不授予商标许可；除为描述和再分发 Llama Materials 的合理惯常用途或第 5(a) 条另有规定外，双方不得使用对方及其关联方的名称或标记；Meta 仅授予为遵守第 1.b.i 条最后一句所必需的 \"Llama\" 标记使用许可，并须遵守 Meta 品牌指南。",
+      "衍生作品归属：被许可方对其自行创作的衍生作品与修改拥有所有权（在与其和 Meta 之间）。",
+      "专利/诉讼终止条款：若被许可方对 Meta 提起诉讼主张 Llama Materials 或其输出侵犯其知识产权，则授予该被许可方的所有许可自起诉之日起终止；被许可方须就第三方索赔对 Meta 进行赔偿。",
+      "Meta 可在被许可方违反条款时终止协议，终止后被许可方须删除并停止使用 Llama Materials；第 3、4、7 条在终止后继续有效。",
+      "管辖法律为美国加利福尼亚州法律，加州法院拥有专属管辖；不适用《联合国国际货物销售合同公约》。"
+    ],
+    "raw_excerpt": "You are granted a non-exclusive, worldwide, non-transferable and royalty-free limited license ... If you distribute or make available the Llama Materials (or any derivative works thereof), or a product or service (including another AI model) that contains any of them, you shall (A) provide a copy of this Agreement ... and (B) prominently display \"Built with Llama\" ... If you use the Llama Materials or any outputs or results of the Llama Materials to create, train, fine tune, or otherwise improve an AI model, which is distributed or made available, you shall also include \"Llama\" at the beginning of any such AI model name. ... If, on the Llama 4 version release date, the monthly active users of the products or services made available by or for Licensee, or Licensee's affiliates, is greater than 700 million monthly active users in the preceding calendar month, you must request a license from Meta, which Meta may grant to you in its sole discretion"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report",
+    "url": "https://arxiv.org/abs/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 MoE 语言模型，总参数 671B，每个 token 激活 37B。",
+      "采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE 架构。",
+      "预训练语料为 14.8 万亿（14.8T）tokens。",
+      "全量训练仅需 2.788M H800 GPU 小时。",
+      "模型 checkpoint 发布于 https://github.com/deepseek-ai/DeepSeek-V3。"
+    ],
+    "raw_excerpt": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token. ... We pre-train DeepSeek-V3 on 14.8 trillion diverse and high-quality tokens"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Kimi K2: Open Agentic Intelligence",
+    "url": "https://arxiv.org/abs/2507.20534v2",
+    "published_at": "2025-07-28",
+    "key_points": [
+      "Kimi K2 是 MoE 模型，总参数 1 万亿（1T），激活参数 32B。",
+      "提出 MuonClip 优化器（Muon + QK-clip）以解决训练不稳定。",
+      "预训练 15.5 万亿（15.5T）tokens，全程零 loss spike。",
+      "基准成绩：Tau2-Bench 66.1、ACEBench (En) 76.5、SWE-Bench Verified 65.8、SWE-Bench Multilingual 47.3、LiveCodeBench v6 53.7、AIME 2025 49.5、GPQA-Diamond 75.1、OJBench 27.1（均为非思考模式）。",
+      "作者自述其在开源非思考模型中达到 SOTA（属作者主张，需交叉验证）。",
+      "发布 base 与 post-trained 两类 checkpoint。"
+    ],
+    "raw_excerpt": "We introduce Kimi K2, a Mixture-of-Experts (MoE) large language model with 32 billion activated parameters and 1 trillion total parameters. ... K2 was pre-trained on 15.5 trillion tokens with zero loss spike."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report",
+    "url": "https://arxiv.org/abs/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列同时包含 dense 与 MoE 架构，参数规模覆盖 0.6B 至 235B。",
+      "Qwen3 将 thinking 模式与非 thinking 模式统一到同一框架，并引入 thinking budget 机制。",
+      "多语言支持从 Qwen2.5 的 29 种扩展到 119 种语言和方言。",
+      "全部 Qwen3 模型以 Apache 2.0 许可公开。"
+    ],
+    "raw_excerpt": "The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. ... all Qwen3 models are publicly accessible under Apache 2.0."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models",
+    "url": "https://arxiv.org/abs/2508.06471v1",
+    "published_at": "2025-08-08",
+    "key_points": [
+      "GLM-4.5 是开源 MoE 模型，总参数 355B，激活参数 32B。",
+      "采用混合推理方法，同时支持 thinking 与直接回复两种模式。",
+      "多阶段训练共使用 23T tokens。",
+      "基准成绩：TAU-Bench 70.1%、AIME 24 91.0%、SWE-bench Verified 64.2%。",
+      "同时发布 GLM-4.5（355B）与紧凑版 GLM-4.5-Air（106B）。",
+      "代码与模型发布于 https://github.com/zai-org/GLM-4.5。"
+    ],
+    "raw_excerpt": "We present GLM-4.5, an open-source Mixture-of-Experts (MoE) large language model with 355B total parameters and 32B activated parameters ... Through multi-stage training on 23T tokens"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "gpt-oss-120b & gpt-oss-20b Model Card",
+    "url": "https://arxiv.org/abs/2508.10925v1",
+    "published_at": "2025-08-08",
+    "key_points": [
+      "OpenAI 发布 gpt-oss-120b 与 gpt-oss-20b 两个开放权重推理模型。",
+      "采用高效 MoE transformer 架构，训练使用大规模蒸馏与强化学习。",
+      "针对 agentic 能力优化：深度研究浏览、python 工具调用、支持开发者自定义函数。",
+      "模型权重、推理实现、工具环境与 tokenizer 均以 Apache 2.0 许可发布。"
+    ],
+    "raw_excerpt": "We present gpt-oss-120b and gpt-oss-20b, two open-weight reasoning models ... The models use an efficient mixture-of-expert transformer architecture ... We release the model weights, inference implementations, tool environments, and tokenizers under an Apache 2.0 license"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "提出纯强化学习（pure RL）即可激励 LLM 的推理能力，无需人工标注的推理轨迹（human-labeled reasoning trajectories）。",
+      "该 RL 框架使自我反思（self-reflection）、验证（verification）、动态策略调整（dynamic strategy adaptation）等高级推理模式自发涌现。",
+      "在数学、编程竞赛、STEM 等可验证任务上，纯 RL 训练的模型超过用人类示范做常规监督学习的对照模型。",
+      "大规模模型涌现的推理模式可被系统性地用于指导并提升小模型的推理能力（即蒸馏到小模型）。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report",
+    "url": "https://arxiv.org/abs/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "MoE 架构：671B 总参数，每 token 激活 37B。",
+      "采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE 架构，二者在 DeepSeek-V2 中已被充分验证。",
+      "首创无辅助损失的负载均衡策略（auxiliary-loss-free strategy for load balancing）。",
+      "引入多 token 预测（multi-token prediction, MTP）训练目标以提升性能。",
+      "预训练语料为 14.8 万亿（14.8T）token，之后经 SFT 与 RL 阶段。",
+      "完整训练仅需 2.788M H800 GPU 小时；整个训练过程未出现不可恢复的 loss spike，也未做任何回滚（rollback）。"
+    ],
+    "raw_excerpt": "DeepSeek-V3 adopts Multi-head Latent Attention (MLA) and DeepSeekMoE architectures... Furthermore, DeepSeek-V3 pioneers an auxiliary-loss-free strategy for load balancing and sets a multi-token prediction training objective for stronger performance. We pre-train DeepSeek-V3 on 14.8 trillion diverse and high-quality tokens... only 2.788M H800 GPU hours for its full training."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report",
+    "url": "https://arxiv.org/abs/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列同时包含 dense 与 Mixture-of-Expert (MoE) 两种架构，参数规模覆盖 0.6B 至 235B。",
+      "核心创新是把 thinking mode（复杂多步推理）与 non-thinking mode（快速上下文响应）整合进统一框架，可按用户查询或 chat template 动态切换模式。",
+      "引入 thinking budget 机制，允许在推理阶段自适应分配算力，以在延迟与性能间权衡。",
+      "利用旗舰模型的知识显著降低构建小规模模型所需的算力，同时保持有竞争力的性能。",
+      "相比前代 Qwen2.5，多语言支持从 29 种扩展到 119 种语言与方言。",
+      "全部 Qwen3 模型以 Apache 2.0 协议公开。"
+    ],
+    "raw_excerpt": "The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. A key innovation in Qwen3 is the integration of thinking mode... and non-thinking mode... into a unified framework... Qwen3 introduces a thinking budget mechanism... all Qwen3 models are publicly accessible under Apache 2.0."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Kimi K2: Open Agentic Intelligence",
+    "url": "https://arxiv.org/abs/2507.20534v2",
+    "published_at": "2025-07-28",
+    "key_points": [
+      "MoE 架构：32B 激活参数、1T（1 万亿）总参数。",
+      "提出 MuonClip 优化器，在 Muon 基础上加入新的 QK-clip 技术以解决训练不稳定，同时保留 Muon 的 token 效率优势。",
+      "基于 MuonClip 预训练 15.5 万亿（15.5T）token，全程零 loss spike。",
+      "后训练为多阶段流程，核心是大规模 agentic 数据合成流水线，以及联合强化学习（joint RL）阶段——模型通过真实与合成环境交互提升能力。",
+      "在非思考（non-thinking）设置下取得开源模型 SOTA：Tau2-Bench 66.1、ACEBench (En) 76.5、SWE-Bench Verified 65.8、SWE-Bench Multilingual 47.3、LiveCodeBench v6 53.7、AIME 2025 49.5、GPQA-Diamond 75.1、OJBench 27.1。",
+      "开源发布 base 与 post-trained 模型 checkpoint。"
+    ],
+    "raw_excerpt": "We propose the MuonClip optimizer, which improves upon Muon with a novel QK-clip technique to address training instability while enjoying the advanced token efficiency of Muon. Based on MuonClip, K2 was pre-trained on 15.5 trillion tokens with zero loss spike... highlighted by a large-scale agentic data synthesis pipeline and a joint reinforcement learning (RL) stage."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models",
+    "url": "https://arxiv.org/abs/2508.06471v1",
+    "published_at": "2025-08-08",
+    "key_points": [
+      "开源 MoE 大模型：355B 总参数、32B 激活参数。",
+      "采用混合推理方法（hybrid reasoning），同时支持 thinking 模式与直接响应模式。",
+      "多阶段训练共 23T token，后训练包含专家模型迭代（expert model iteration）与强化学习。",
+      "基准成绩：TAU-Bench 70.1%、AIME 24 91.0%、SWE-bench Verified 64.2%。",
+      "在全部受评模型中综合排名第 3，在 agentic 基准上排名第 2。",
+      "同时发布 GLM-4.5（355B）与紧凑版 GLM-4.5-Air（106B）。"
+    ],
+    "raw_excerpt": "We present GLM-4.5, an open-source Mixture-of-Experts (MoE) large language model with 355B total parameters and 32B activated parameters, featuring a hybrid reasoning method that supports both thinking and direct response modes. Through multi-stage training on 23T tokens and comprehensive post-training with expert model iteration and reinforcement learning... scoring 70.1% on TAU-Bench, 91.0% on AIME 24, and 64.2% on SWE-bench Verified."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention",
+    "url": "https://arxiv.org/abs/2506.13585v1",
+    "published_at": "2025-06-16",
+    "key_points": [
+      "自称首个开源权重的、大规模 hybrid-attention 推理模型；架构为混合 MoE 加 lightning attention。",
+      "基于 MiniMax-Text-01，总参数 456B，每 token 激活 45.9B。",
+      "原生支持 100 万（1M）token 上下文，为 DeepSeek R1 上下文长度的 8 倍。",
+      "lightning attention 使 test-time compute 可高效扩展。",
+      "提出 CISPO 这一新 RL 算法：裁剪重要性采样权重（importance sampling weights）而非 token 更新，优于其他竞争性 RL 变体。",
+      "结合 hybrid-attention 与 CISPO，完整 RL 训练在 512 张 H800 上仅需三周，租用成本 534,700 美元。",
+      "发布 40K 与 80K thinking budget 两个版本，其中 40K 版本是 80K 训练的中间阶段。"
+    ],
+    "raw_excerpt": "MiniMax-M1, the world's first open-weight, large-scale hybrid-attention reasoning model... natively supports a context length of 1 million tokens, 8x the context size of DeepSeek R1... we propose CISPO, a novel RL algorithm... clips importance sampling weights rather than token updates... full RL training on 512 H800 GPUs to complete in only three weeks, with a rental cost of just $534,700."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "gpt-oss-120b & gpt-oss-20b Model Card",
+    "url": "https://arxiv.org/abs/2508.10925v1",
+    "published_at": "2025-08-08",
+    "key_points": [
+      "发布 gpt-oss-120b 与 gpt-oss-20b 两个开源权重推理模型。",
+      "采用高效的 mixture-of-expert transformer 架构。",
+      "训练方法为大规模蒸馏（large-scale distillation）加强化学习（reinforcement learning）。",
+      "针对 agentic 能力优化：深度研究式浏览、Python 工具调用、支持开发者自定义函数。",
+      "使用渲染式 chat format 以实现清晰的指令遵循与角色区分。",
+      "以 Apache 2.0 协议发布模型权重、推理实现、工具环境与 tokenizer。"
+    ],
+    "raw_excerpt": "We present gpt-oss-120b and gpt-oss-20b, two open-weight reasoning models... The models use an efficient mixture-of-expert transformer architecture and are trained using large-scale distillation and reinforcement learning... We release the model weights, inference implementations, tool environments, and tokenizers under an Apache 2.0 license."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "GLM-4.5V and GLM-4.1V-Thinking: Towards Versatile Multimodal Reasoning with Scalable Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2507.01006v6",
+    "published_at": "2025-07-01",
+    "key_points": [
+      "提出以推理为中心的训练框架：先通过大规模预训练构建能力强的视觉基座模型，作者认为这一步基本决定了最终性能上限。",
+      "提出 Reinforcement Learning with Curriculum Sampling (RLCS)，用于释放模型潜力，在 STEM 解题、视频理解、内容识别、编程、grounding、GUI agent、长文档解读等任务上全面提升。",
+      "在 42 个公开基准上评测，GLM-4.5V 在同规模开源模型中近乎全部任务达到 SOTA，在 Coding 与 GUI Agent 等困难任务上可与 Gemini-2.5-Flash 竞争甚至更优。",
+      "更小的 GLM-4.1V-9B-Thinking 在 29 个基准上优于更大的 Qwen2.5-VL-72B。",
+      "开源 GLM-4.1V-9B-Thinking 与 GLM-4.5V；并介绍 GLM-4.6V 系列，具备原生工具调用与 128K 上下文窗口。"
+    ],
+    "raw_excerpt": "We then propose Reinforcement Learning with Curriculum Sampling (RLCS) to unlock the full potential of the model... In a comprehensive evaluation across 42 public benchmarks, GLM-4.5V achieves state-of-the-art performance on nearly all tasks among open-source models of similar size... the smaller GLM-4.1V-9B-Thinking remains highly competitive-achieving superior results to the much larger Qwen2.5-VL-72B on 29 benchmarks."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "ollama/ollama — Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models",
+    "url": "https://github.com/ollama/ollama",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据快照：184,694 stars、18,558 forks，主语言 Go，工具报告的 last push 为 2026-10-24（该日期与课题的 2025 年背景不符，疑为环境时钟偏差）",
+      "README 自述定位为在本地或云端运行开源模型的运行时，强调隐私（\"Access the latest releases locally or in the cloud with complete privacy\"）",
+      "README 提供 macOS / Windows / Linux / Docker 四种安装方式，并列出 ollama-python 与 ollama-js 两个官方客户端库",
+      "README 说明提供 REST API（默认端口 11434，/api/chat 端点）",
+      "仓库根目录包含 llama、mlx、mlxrunner、openai、harmony、thinking、tools 等子目录，以及 LLAMA_CPP_VERSION、MLX_VERSION、MLX_C_VERSION 版本文件，表明其同时内嵌 llama.cpp 与 Apple MLX 两套推理后端",
+      "README 称可将 Ollama 接入 Claude Code、OpenClaw、OpenCode、Codex、Copilot 等编码 agent 与外部应用",
+      "仓库提交历史显示 5,946 commits"
+    ],
+    "raw_excerpt": "Start building with open models. Access the latest releases locally or in the cloud with complete privacy. ... You'll be prompted to run a model or connect Ollama to your existing agents or applications such as Claude Code, OpenClaw, OpenCode, Codex, Copilot, and more. ... Ollama has a REST API for running and managing models."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "vllm-project/vllm — A high-throughput and memory-efficient inference and serving engine for LLMs",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据快照：95,412 stars、23,918 forks，主语言 Python，工具报告的 last push 为 2026-10-25（日期与 2025 年背景不符，疑为环境时钟偏差）",
+      "README 称 vLLM 最初由 UC Berkeley 的 Sky Computing Lab 开发",
+      "README 自述项目由来自数十个学术机构与公司的社区维护，贡献者超过 2000 人（属项目自述，非第三方认证）",
+      "核心技术包括 PagedAttention 的 KV cache 管理、连续批处理（continuous batching）、chunked prefill、前缀缓存（prefix caching）",
+      "支持 FP8、MXFP8/MXFP4、NVFP4、INT8、INT4、GPTQ/AWQ、GGUF、compressed-tensors、ModelOpt、TorchAO 等多种量化格式",
+      "支持分离式 prefill、decode 与 encode（disaggregated prefill, decode, and encode）",
+      "集成 FlashAttention、FlashInfer、TRTLLM-GEN、FlashMLA、Triton 等注意力内核，以及 EAGLE、DFlash、n-gram、suffix 等投机解码方案",
+      "仓库提交历史显示 23,762 commits，根目录含 rust、csrc、benchmarks、recipes、tests 等目录"
+    ],
+    "raw_excerpt": "Originally developed in the Sky Computing Lab at UC Berkeley, vLLM has grown into one of the most active open-source AI projects built and maintained by a diverse community of many dozens of academic institutions and companies from over 2000 contributors. ... Efficient management of attention key and value memory with PagedAttention ... Quantization: FP8, MXFP8/MXFP4, NVFP4, INT8, INT4, GPTQ/AWQ, GGUF, compressed-tensors, ModelOpt, TorchAO, and more ... Disaggregated prefill, decode, and encode"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "ggml-org/llama.cpp — LLM inference in C/C++ (仓库检索元数据)",
+    "url": "https://github.com/ggml-org/llama.cpp",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据快照：132,288 stars、24,785 forks，主语言 C++，工具报告的 last push 为 2026-10-25（日期与 2025 年背景不符，疑为环境时钟偏差）",
+      "仓库描述为 \"LLM inference in C/C++\"",
+      "注：仅取得检索结果中的元数据，未读取 README 正文，故不作为工程细节结论依据"
+    ],
+    "raw_excerpt": "ggml-org/llama.cpp (★132288, forks 24785) desc: LLM inference in C/C++ lang: C++ | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "open-webui/open-webui — User-friendly AI Interface (Supports Ollama, OpenAI API, ...) (仓库检索元数据)",
+    "url": "https://github.com/open-webui/open-webui",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据快照：156,681 stars、22,810 forks，主语言 Python，工具报告的 last push 为 2026-10-25（日期与 2025 年背景不符，疑为环境时钟偏差）",
+      "仓库描述为面向 Ollama 与 OpenAI API 的用户友好 AI 界面",
+      "注：仅取得检索结果中的元数据，未读取 README 正文"
+    ],
+    "raw_excerpt": "open-webui/open-webui (★156681, forks 22810) desc: User-friendly AI Interface (Supports Ollama, OpenAI API, ...) lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "BerriAI/litellm — AI Gateway, 100+ LLM APIs (仓库检索元数据)",
+    "url": "https://github.com/BerriAI/litellm",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据快照：61,997 stars、12,647 forks，主语言 Python，工具报告的 last push 为 2026-10-25（日期与 2025 年背景不符，疑为环境时钟偏差）",
+      "仓库描述为统一调用 100+ LLM API 的网关，支持 Bedrock、Azure、OpenAI、Anthropic、VertexAI、vLLM、NVIDIA NIM 等后端",
+      "注：仅取得检索结果中的元数据，未读取 README 正文"
+    ],
+    "raw_excerpt": "BerriAI/litellm (★61997, forks 12647) desc: The fastest, litest AI Gateway. Rust core with Python SDK. Call 100+ LLM APIs in OpenAI (or native) format with cost tracking, guardrails, load balancing, and logging [Bedrock, Azure, OpenAI, Anthropic, OpenAI, VertexAI, vLLM, Nvidia NIM] lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Apache License, Version 2.0 (official text, apache.org)",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0",
+    "published_at": "2004-01",
+    "key_points": [
+      "§2 Grant of Copyright License：每位贡献者授予永久的、全球的、非独占的、免费的、免版税的、不可撤销的版权许可，允许 reproduce、prepare Derivative Works of、publicly display、publicly perform、sublicense 以及 distribute 该 Work 及其 Derivative Works（源或目标形式）。",
+      "§3 Grant of Patent License：授予永久、全球、非独占、免费、免版税、不可撤销（除本条另有规定）的专利许可，可 make/have made/use/offer to sell/sell/import 及以其他方式转让该 Work；但若被许可人对任何实体提起专利诉讼（含反诉）主张该 Work 构成直接或共同专利侵权，则其在该 Work 下获得的专利许可自起诉之日起终止。",
+      "§4(a) 再分发条件：必须向 Work 或 Derivative Works 的任何其他接收者提供本许可证副本。",
+      "§4(b) 再分发条件：必须使任何被修改的文件带有显著声明，说明你修改了这些文件。",
+      "§4(c) 再分发条件：以源形式分发 Derivative Works 时，必须保留 Work 源形式中所有版权、专利、商标与归属声明（与 Derivative Works 无关的声明除外）。",
+      "§4(d) 若 Work 含 NOTICE 文本文件，则分发的 Derivative Works 必须在至少一处包含该 NOTICE 中可读的归属声明副本（NOTICE 内容仅为告知性，不修改许可证）。",
+      "§4 允许你为自己的修改添加自有版权声明，并可为修改或整个 Derivative Works 提供附加或不同的许可条款，前提是对 Work 的使用、复制与分发仍符合本许可证条件。",
+      "§6 Trademarks：本许可证不授予使用许可方的商号、商标、服务标记或产品名称的权限，除非是为描述 Work 来源和复制 NOTICE 内容所必需的习惯性合理使用。",
+      "§7 免责声明：Work 按 \"AS IS\" 基础提供，不提供任何明示或默示担保，包括所有权、非侵权、适销性、特定用途适用性。",
+      "§8 责任限制：在任何法律理论下，贡献者均不对任何损害承担责任（含直接、间接、特殊、附带、后果性损害、商誉损失、停工等）。",
+      "§9 允许在再分发时提供支持、担保、赔偿等附加义务并就此收费，但只能以自己名义并自行承担责任，且须使贡献者免责。",
+      "许可证正文未出现 \"model\"、\"weights\"、\"distillation\" 等词，也未设任何用户规模（MAU）门槛或使用场景限制。"
+    ],
+    "raw_excerpt": "6. Trademarks. This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file. ... 2. Grant of Copyright License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "The MIT License (official text, opensource.org)",
+    "url": "https://opensource.org/license/mit",
+    "published_at": null,
+    "key_points": [
+      "授权范围：免费授予任何获得本软件及相关文档文件副本的人不受限制地处理本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可（sublicense）和/或销售本软件副本的权利，并允许向其提供软件的人这样做。",
+      "唯一实质条件：上述版权声明与本许可声明须包含在本软件的所有副本或主要部分中。",
+      "免责声明：软件按 \"AS IS\" 提供，不附带任何明示或默示担保，包括适销性、特定用途适用性和非侵权担保。",
+      "责任限制：作者或版权持有人在任何情况下均不对因本软件或本软件的使用或其他交易所产生的任何索赔、损害或其他责任负责。",
+      "MIT 许可证正文未包含商标条款（无 Apache 2.0 §6 的对应条款），未提及专利授权，未提及模型权重或蒸馏，也未设任何用户规模门槛或使用场景限制。"
+    ],
+    "raw_excerpt": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "google-deepmind/gemma — README (Gemma 官方 JAX 实现仓库)",
+    "url": "https://raw.githubusercontent.com/google-deepmind/gemma/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "Gemma 是 Google DeepMind 的开放权重（open-weights）大语言模型家族，基于 Gemini 的研究与技术。",
+      "该仓库是 PyPI 包 gemma 的实现，是一个用于使用与微调 Gemma 的 JAX 库。",
+      "README 列出 Gemma 1、Gemma 2、Gemma 3、Gemma 3n、Gemma 4 各版本的技术报告/模型卡链接，表明该家族已迭代至 Gemma 4。",
+      "README 说明 Gemma 可运行在 CPU、GPU 和 TPU 上；GPU 场景下 2B checkpoint 建议 8GB+ 显存，7B checkpoint 使用 24GB+ 显存。",
+      "README 声明 \"This is not an official Google product.\"，且全文未包含任何许可条款、使用限制、命名限制或 MAU 门槛信息。"
+    ],
+    "raw_excerpt": "[Gemma](https://ai.google.dev/gemma) is a family of open-weights Large Language Model (LLM) by [Google DeepMind](https://deepmind.google/), based on Gemini research and technology. ... The same `ChatSampler` API works with all Gemma versions (2, 3, 3n, 4). ... *This is not an official Google product.*"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "QwenLM/Qwen3 — 官方 GitHub 仓库 README",
+    "url": "https://raw.githubusercontent.com/QwenLM/Qwen3/main/README.md",
+    "published_at": "2025-08-08",
+    "key_points": [
+      "Qwen3 系列包含 dense 与 MoE 两类模型，尺寸为 0.6B、1.7B、4B、8B、14B、32B 以及 MoE 的 30B-A3B、235B-A22B。",
+      "Qwen3 首发于 2025.04.29；2025.07-08 陆续发布更新版 Qwen3-2507（Instruct / Thinking 两个变体，尺寸 235B-A22B、30B-A3B、4B）。",
+      "该 README 正文未包含任何许可证（license）章节或条款说明，因此不能据此判断 Qwen3 的发布许可证。",
+      "README 中「state-of-the-art results among open-weight thinking models」为 Qwen 团队自述的营销性主张，无第三方基准出处。"
+    ],
+    "raw_excerpt": "We are making the weights of Qwen3 available to the public, including both dense and Mixture-of-Expert (MoE) models. ... Dense and Mixture-of-Experts (MoE) models of various sizes, available in 0.6B, 1.7B, 4B, 8B, 14B, 32B and 30B-A3B, 235B-A22B."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "QwenLM/Qwen2.5 仓库 README（实际返回内容为 Qwen3 README）",
+    "url": "https://raw.githubusercontent.com/QwenLM/Qwen2.5/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "访问 QwenLM/Qwen2.5 的 README 时，返回正文与 QwenLM/Qwen3 的 README 完全一致（标题为「# Qwen3」），说明该仓库 README 已被 Qwen3 内容覆盖。",
+      "因此该来源无法提供 Qwen2.5 时期许可证（Qwen License）的任何条款信息。",
+      "该 README 中列出的 Qwen 系列发布时间线：Qwen1.5（2024.02.05）、Qwen1.5-MoE-A2.7B（2024.03.28）、Qwen2（2024.06.06）、Qwen2.5（2024.09.19）、Qwen3（2025.04.29）。"
+    ],
+    "raw_excerpt": "# Qwen3 ... 2024.09.19: We released the Qwen2.5 series. This time there are 3 extra model sizes: 3B, 14B, and 32B for more possibilities."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "The Open Source AI Definition v1.0 (OSI)",
+    "url": "https://opensource.org/ai/open-source-ai-definition",
+    "published_at": "2024-10-28",
+    "key_points": [
+      "OSAID 1.0 规定：要被视为 Open Source，无论应用于 system、model、weights and parameters 还是其他结构元素，要求相同。",
+      "OSAID 授予四项自由：为任何目的使用而无需请求许可；研究系统如何运作并检查其组件；为任何目的修改系统（包括改变其输出）；为任何目的与他人共享系统（含修改版）。",
+      "行使这些自由的前提是获得「修改系统的首选形式」（preferred form to make modifications），该首选形式必须包含三类要素：Data Information、Code、Parameters。",
+      "Data Information 要求：关于训练所用数据的足够详细信息，使有技能的人能构建实质等同的系统，且须以 OSI 认可的条款提供；包括全部训练数据的完整描述（含不可共享数据的来源、范围、特征、获取与筛选方式、标注流程、处理与过滤方法）、所有公开可用训练数据清单及获取位置、所有可向第三方获取的训练数据清单及获取位置（含付费）。",
+      "Code 要求：训练与运行系统的完整源代码，须以 OSI 认可的许可证提供，涵盖数据处理与过滤代码、训练代码（含参数与设置）、验证与测试、tokenizer 与超参搜索等支撑库、推理代码与模型架构。",
+      "Parameters 要求：模型参数（如权重或其他配置设置）须以 OSI 认可的条款提供，例如可包括训练关键中间阶段的 checkpoint 以及最终优化器状态。",
+      "OSAID 明确区分概念：「AI model」由模型架构、模型参数（含权重）与推理代码组成；「AI weights」是叠加在架构上以从给定输入产生输出的已学习参数集合。",
+      "OSAID 原文规定：「Open Source models」与「Open Source weights」必须包含用于导出这些参数的数据信息与代码。",
+      "OSAID 表示不要求特定的法律机制来保证模型参数对所有人自由可用——参数可能本身自由，也可能需要许可证或其他法律工具来确保其自由。",
+      "OSAID 允许对元素及其组合施加条件，要求修改版本以与原版相同的条款发布（即允许 copyleft 式条款）。"
+    ],
+    "raw_excerpt": "An Open Source AI is an AI system made available under terms and in a way that grant the freedoms to: Use the system for any purpose and without having to ask for permission. Study how the system works and inspect its components. Modify the system for any purpose, including to change its output. Share the system for others to use with or without modifications, for any purpose. ... \"Open Source models\" and \"Open Source weights\" must include the data information and code used to derive those parameters."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Open Source AI Definition – Frequently Asked Questions (OSI)",
+    "url": "https://opensource.org/ai/faq",
+    "published_at": null,
+    "key_points": [
+      "OSI 对 Open Source AI 的概括定义：一个 AI 系统，连同全部必要的代码、数据和参数，在 OSI 认可的 legal terms 下自由提供。",
+      "OSI 说明 OSAID 的写作动因：Open Source Definition 第 2 条要求提供源代码且须为程序员修改程序的「首选形式」，但此前无人能回答「修改 AI 系统的首选形式是什么」。",
+      "OSI 论证 AI 系统不等于软件程序：机器学习系统与数据、配置选项、文档以及权重与偏置等新产物交织在一起，因此需要独立于 OSD 的定义。",
+      "OSI 明确否认「训练数据等于源代码」的类比，称其为常见误解；理由是 AI 系统并非以传统方式被编程，其能力在训练过程中自主获得。",
+      "OSI 指出训练过程即便对系统创造者而言也难以可靠复现，这是 LLM 与 Linux 内核等可复现软件的关键差异。",
+      "OSI 解释允许排除部分训练数据的原因：医疗 AI 等领域的法律限制数据再共享、隐私规则、原住民知识保护机制，以及「公开数据」定义在不同司法辖区不一致导致的法律不确定性。",
+      "OSI 称在 co-design 的 System analysis 阶段，志愿者小组认为训练与数据处理代码比访问训练与测试数据对修改 AI 系统更重要，该结论在 Validation phase 得到验证。",
+      "OSI 承认其 Data Information 要求不强制完全可复现与完全透明，而是「使其成为可能」（enables reproducible builds），并称若强制完全开放训练数据会把 Open Source AI 限制在极小的细分领域。",
+      "OSI 表示设定 Data Information 基线不排除他人提出更高要求，例如 Digital Public Goods Standard 或 Free Systems Distribution Guidelines。"
+    ],
+    "raw_excerpt": "An Open Source AI is an AI system made freely available with all necessary code, data and parameters under legal terms approved by the Open Source Initiative. ... Training data does not equate to a software source code. ... The requirements of Data Information keep the same approach present in the Open Source Definition; it doesn't mandate full reproducibility and transparency but enables them (i.e., reproducible builds)."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "OSI Frequently Asked Questions (general open source FAQ)",
+    "url": "https://opensource.org/faq",
+    "published_at": null,
+    "key_points": [
+      "OSI 强调「open source」不只是可检视（inspectable）或可见、可获得，而是向接收者传递永久的分叉（fork）权利且无需额外费用。",
+      "OSI 指出 1990 年代「open」一词有时仅被用来暗示源代码可检视、可见或可获得，这与 OSI 定义的 open source 不同。",
+      "OSI 规定只有以 OSI 认可的 Open Source 许可证发布的软件才应被标称为 Open Source 软件。",
+      "OSI 规定开源许可证不得歧视使用领域（fields of endeavor），也不得歧视个人或群体。"
+    ],
+    "raw_excerpt": "OSI's term \"open source\", as defined in the Open Source Definition, makes clear that open source specifically entails not mere inspection access but also conveying to recipients the perpetual right to fork covered code and use it without additional fees."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "GitHub 仓库搜索 \"mistralai\"（按 updated 排序）返回的第三方仓库列表",
+    "url": "https://github.com/aldertzomer/metalyzer",
+    "published_at": null,
+    "key_points": [
+      "该仓库描述中出现模型标识字符串 \"mistralai/Ministral-3-8B-Instruct-2512\"，提示可能存在名为 Ministral 3 8B Instruct、版本标记 2512 的 Mistral 权重模型。",
+      "该字符串出自无关第三方项目（metalyzer，★1）的仓库描述，非 Mistral 官方来源，未提供参数量、上下文长度或许可证信息。"
+    ],
+    "raw_excerpt": "Manually interpret the source, year and location from a big metadata table from e.g. ENA or AllTheBacteria using Natural Language Processing with MoritzLaurer/deberta-v3-large-zeroshot-v2.0 or local generative classification with mistralai/Ministral-3-8B-Instruct-2512 or through API access to a frontier model"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Gemma 3 Technical Report (arXiv:2503.19786v1)",
+    "url": "https://arxiv.org/abs/2503.19786v1",
+    "published_at": "2025-03-25",
+    "key_points": [
+      "Gemma 3 是 Gemma 轻量级开放模型家族的多模态新增成员，参数规模覆盖 1B 到 27B。",
+      "该版本引入视觉理解能力、更广的语言覆盖，以及至少 128K tokens 的更长上下文。",
+      "架构上通过提高局部注意力层相对全局注意力层的比例、并保持局部注意力跨度较短，来降低长上下文下易膨胀的 KV-cache 内存。",
+      "Gemma 3 使用蒸馏方式训练，预训练版与指令微调版性能均优于 Gemma 2。",
+      "报告称 Gemma3-4B-IT 可与 Gemma2-27B-IT 竞争，Gemma3-27B-IT 在多项基准上可与 Gemini-1.5-Pro 相比（属作者自述主张，需交叉验证）。",
+      "模型全部向社区发布。"
+    ],
+    "raw_excerpt": "We introduce Gemma 3, a multimodal addition to the Gemma family of lightweight open models, ranging in scale from 1 to 27 billion parameters. This version introduces vision understanding abilities, a wider coverage of languages and longer context - at least 128K tokens. ... The Gemma 3 models are trained with distillation and achieve superior performance to Gemma 2 for both pre-trained and instruction finetuned versions."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Phi-4 Technical Report (arXiv:2412.08905v1)",
+    "url": "https://arxiv.org/abs/2412.08905v1",
+    "published_at": "2024-12-12",
+    "key_points": [
+      "phi-4 是一个 140 亿参数（14B）的语言模型，训练配方以数据质量为核心。",
+      "与多数以网页内容或代码等有机数据为主的预训练不同，phi-4 在整个训练过程中策略性地引入合成数据。",
+      "Phi 家族此前模型主要蒸馏教师模型（具体为 GPT-4）的能力；phi-4 在 STEM 类问答能力上大幅超越其教师模型。",
+      "phi-4 对 phi-3 架构改动极小，性能提升主要来自改进的数据、训练课程与后训练方案创新。",
+      "该来源未在摘要中给出上下文长度、训练 token 总量或许可证信息。"
+    ],
+    "raw_excerpt": "We present phi-4, a 14-billion parameter language model developed with a training recipe that is centrally focused on data quality. ... phi-4 strategically incorporates synthetic data throughout the training process. ... Despite minimal changes to the phi-3 architecture, phi-4 achieves strong performance relative to its size -- especially on reasoning-focused benchmarks -- due to improved data, training curriculum, and innovations in the post-training scheme."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "2 OLMo 2 Furious (arXiv:2501.00656v3)",
+    "url": "https://arxiv.org/abs/2501.00656v3",
+    "published_at": "2024-12-31",
+    "key_points": [
+      "OLMo 2 是 AllenAI 的下一代完全开放语言模型，包含 7B、13B、32B 三个规模的稠密自回归模型。",
+      "发布物完全开放：模型权重、完整训练数据、训练代码与配方、训练日志，以及数千个中间检查点。",
+      "预训练数据混合引入新的专用数据配方 Dolmino Mix 1124，通过晚期课程训练（预训练退火阶段使用专用数据）显著提升下游基准表现。",
+      "OLMo 2-Instruct 借鉴 Tülu 3 最佳实践，侧重宽松许可（permissive）数据，并将最终阶段强化学习扩展为可验证奖励的 RLVR。",
+      "作者称 OLMo 2 base 模型位于性能-训练算力的帕累托前沿，常匹配或超过 Llama 3.1、Qwen 2.5、Gemma 2 等仅开放权重的模型，且使用更少 FLOPs（属作者自述主张）。",
+      "该来源未在摘要中给出上下文长度、训练 token 总量或许可证名称。"
+    ],
+    "raw_excerpt": "We present OLMo 2, the next generation of our fully open language models. OLMo 2 includes a family of dense autoregressive language models at 7B, 13B and 32B scales with fully released artifacts -- model weights, full training data, training code and recipes, training logs and thousands of intermediate checkpoints. ... Our updated pretraining data mixture introduces a new, specialized data mix called Dolmino Mix 1124"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report",
+    "url": "https://arxiv.org/abs/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 MoE 语言模型，总参数 671B，每 token 激活 37B。",
+      "架构上采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE，二者在 DeepSeek-V2 中已被验证。",
+      "DeepSeek-V3 提出 auxiliary-loss-free（无辅助损失）的负载均衡策略，作为其相对前作的核心创新之一。",
+      "训练目标中引入 multi-token prediction (MTP)，用于提升性能。",
+      "预训练语料为 14.8 万亿 token，之后经 SFT 与 RL 阶段。",
+      "全量训练仅需 2.788M H800 GPU 小时；训练过程稳定，全程未出现不可恢复的 loss spike，也未执行回滚。",
+      "模型权重以开源形式发布（github.com/deepseek-ai/DeepSeek-V3）。"
+    ],
+    "raw_excerpt": "DeepSeek-V3 adopts Multi-head Latent Attention (MLA) and DeepSeekMoE architectures, which were thoroughly validated in DeepSeek-V2. Furthermore, DeepSeek-V3 pioneers an auxiliary-loss-free strategy for load balancing and sets a multi-token prediction training objective for stronger performance. ... Despite its excellent performance, DeepSeek-V3 requires only 2.788M H800 GPU hours for its full training. In addition, its training process is remarkably stable. Throughout the entire training process, we did not experience any irrecoverable loss spikes or perform any rollbacks."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Kimi K2: Open Agentic Intelligence",
+    "url": "https://arxiv.org/abs/2507.20534v2",
+    "published_at": "2025-07-28",
+    "key_points": [
+      "Kimi K2 是 MoE 大语言模型，总参数 1 万亿（1T），每 token 激活 32B。",
+      "提出 MuonClip 优化器，在 Muon 基础上加入 QK-clip 技术以解决训练不稳定问题，同时保留 Muon 的 token 效率优势。",
+      "基于 MuonClip，K2 在 15.5 万亿 token 上预训练，全程零 loss spike。",
+      "后训练为多阶段流程，包含大规模 agentic 数据合成管线与联合强化学习阶段。",
+      "基准成绩（非思考模式）：Tau2-Bench 66.1、ACEBench (En) 76.5、SWE-Bench Verified 65.8、SWE-Bench Multilingual 47.3、LiveCodeBench v6 53.7、AIME 2025 49.5、GPQA-Diamond 75.1、OJBench 27.1。",
+      "作者自述其在开源非思考模型中达到 state-of-the-art（属论文自述主张，需交叉验证）。",
+      "开源发布 base 与 post-trained 模型 checkpoint。"
+    ],
+    "raw_excerpt": "We introduce Kimi K2, a Mixture-of-Experts (MoE) large language model with 32 billion activated parameters and 1 trillion total parameters. We propose the MuonClip optimizer, which improves upon Muon with a novel QK-clip technique to address training instability while enjoying the advanced token efficiency of Muon. Based on MuonClip, K2 was pre-trained on 15.5 trillion tokens with zero loss spike. ... Kimi K2 achieves state-of-the-art performance among open-source non-thinking models, with strengths in agentic capabilities."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "该论文主题为纯强化学习激励 LLM 推理能力，不涉及 MoE 稀疏架构、负载均衡或专家并行，与本子问题相关性低。",
+      "论文报告纯 RL 训练可涌现自我反思、验证、动态策略调整等推理模式。",
+      "在数学、编程竞赛、STEM 等可验证任务上，纯 RL 训练的模型超过依赖人工标注推理轨迹的监督学习对照模型。",
+      "大规模模型涌现的推理模式可被用于指导并提升小模型能力。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. ... Consequently, the trained model achieves superior performance on verifiable tasks such as mathematics, coding competitions, and STEM fields, surpassing its counterparts trained via conventional supervised learning on human demonstrations."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "YaRN: Efficient Context Window Extension of Large Language Models",
+    "url": "https://arxiv.org/abs/2309.00071v3",
+    "published_at": "2023-08-31",
+    "key_points": [
+      "YaRN（Yet another RoPE extensioN method）是一种计算高效的 RoPE 上下文窗口扩展方法，针对 RoPE 模型无法泛化到超过训练序列长度的问题。",
+      "作者自述 YaRN 相比此前方法只需 1/10 的 token 量和 1/2.5 的训练步数（10x less tokens, 2.5x less training steps）。",
+      "论文报告 LLaMA 模型经 YaRN 后可有效利用并外推到远超原始预训练长度的上下文，且在该任务上超过此前的 SOTA。",
+      "论文称 YaRN 具备外推到微调数据集上下文长度之外的能力。",
+      "代码开源于 https://github.com/jquesnelle/yarn。"
+    ],
+    "raw_excerpt": "We present YaRN (Yet another RoPE extensioN method), a compute-efficient method to extend the context window of such models, requiring 10x less tokens and 2.5x less training steps than previous methods. Using YaRN, we show that LLaMA models can effectively utilize and extrapolate to context lengths much longer than their original pre-training would allow, while also surpassing previous the state-of-the-art at context window extension."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-1M Technical Report",
+    "url": "https://arxiv.org/abs/2501.15383v1",
+    "published_at": "2025-01-26",
+    "key_points": [
+      "Qwen2.5-1M 系列将上下文长度扩展到 100 万（1M）token，相比此前 128K 版本通过长上下文预训练与后训练显著增强长上下文能力。",
+      "采用的关键技术包括长数据合成（long data synthesis）、渐进式预训练（progressive pre-training）与多阶段监督微调，以在降低训练成本的同时提升长上下文表现。",
+      "开源了配套推理框架，其中包含一种长度外推方法，可在无需额外训练的情况下把模型上下文长度扩展至少 4 倍甚至更多。",
+      "为降低推理成本，实现了稀疏注意力方法（sparse attention）配合 chunked prefill 优化，以及提升精度的 sparsity refinement 方法。",
+      "借助该推理框架，Qwen2.5-1M 在 100 万 token 上下文场景下实现 3x 到 7x 的 prefill 加速。",
+      "该系列开源模型为 Qwen2.5-7B-Instruct-1M 与 Qwen2.5-14B-Instruct-1M，另有 API 访问的 Qwen2.5-Turbo。",
+      "论文称 Qwen2.5-14B-Instruct-1M 在长上下文任务上显著优于 GPT-4o-mini，且支持长 8 倍的上下文。"
+    ],
+    "raw_excerpt": "We introduce Qwen2.5-1M, a series of models that extend the context length to 1 million tokens. ... Key techniques such as long data synthesis, progressive pre-training, and multi-stage supervised fine-tuning are employed ... This framework includes a length extrapolation method that can expand the model context lengths by at least four times, or even more, without additional training. To reduce inference costs, we implement a sparse attention method along with chunked prefill optimization ... the Qwen2.5-1M models achieve a remarkable 3x to 7x prefill speedup in scenarios with 1 million tokens of context."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention",
+    "url": "https://arxiv.org/abs/2502.11089v2",
+    "published_at": "2025-02-16",
+    "key_points": [
+      "NSA 是一种可原生训练（natively trainable）的稀疏注意力机制，将算法创新与硬件对齐优化结合，用于高效长上下文建模。",
+      "NSA 采用动态分层稀疏策略，结合粗粒度 token 压缩与细粒度 token 选择，以同时保留全局上下文感知与局部精度。",
+      "两项关键设计：算术强度均衡（arithmetic intensity-balanced）的算法设计配合现代硬件实现优化带来显著加速；支持端到端训练，在不牺牲模型性能的前提下降低预训练计算量。",
+      "实验显示用 NSA 预训练的模型在通用基准、长上下文任务与指令推理上保持或超过 Full Attention 模型。",
+      "在 64k 长度序列上，NSA 在 decoding、前向传播与反向传播三个环节相对 Full Attention 均有显著加速。"
+    ],
+    "raw_excerpt": "We present NSA, a Natively trainable Sparse Attention mechanism that integrates algorithmic innovations with hardware-aligned optimizations to achieve efficient long-context modeling. ... experiments show the model pretrained with NSA maintains or exceeds Full Attention models across general benchmarks, long-context tasks, and instruction-based reasoning. Meanwhile, NSA achieves substantial speedups over Full Attention on 64k-length sequences across decoding, forward propagation, and backward propagation."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report",
+    "url": "https://arxiv.org/abs/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 MoE 语言模型，总参数 671B，每 token 激活 37B。",
+      "采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE 架构，并引入无辅助损失的负载均衡策略（auxiliary-loss-free）与多 token 预测（multi-token prediction）训练目标。",
+      "预训练语料为 14.8 万亿（14.8T）diverse and high-quality tokens，之后经 SFT 与 RL 阶段。",
+      "完整训练仅需 2.788M H800 GPU 小时。",
+      "训练过程稳定：全程未出现不可恢复的 loss spike，也未执行任何回滚（rollback）。",
+      "模型 checkpoint 开源于 https://github.com/deepseek-ai/DeepSeek-V3。"
+    ],
+    "raw_excerpt": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token. ... We pre-train DeepSeek-V3 on 14.8 trillion diverse and high-quality tokens ... Despite its excellent performance, DeepSeek-V3 requires only 2.788M H800 GPU hours for its full training. In addition, its training process is remarkably stable. Throughout the entire training process, we did not experience any irrecoverable loss spikes or perform any rollbacks."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文提出通过纯强化学习（pure RL）激励 LLM 的推理能力，无需人工标注的推理轨迹（human-labeled reasoning trajectories）。",
+      "该 RL 框架促成自反思（self-reflection）、验证（verification）与动态策略调整等高级推理模式的涌现。",
+      "在数学、编程竞赛与 STEM 等可验证任务上，该模型优于用传统监督学习（基于人类示范）训练的对照模型。",
+      "论文称大模型涌现的推理模式可被系统性地用于指导并增强小模型的推理能力。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report",
+    "url": "https://arxiv.org/abs/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列包含 dense 与 MoE 两种架构，参数规模从 0.6B 到 235B。",
+      "核心创新是把 thinking 模式（复杂多步推理）与 non-thinking 模式（快速上下文驱动响应）整合进统一框架，可按用户查询或 chat template 动态切换。",
+      "引入 thinking budget 机制，允许在推理时自适应分配计算资源，以按任务复杂度平衡延迟与性能。",
+      "借助旗舰模型的知识显著降低构建小规模模型所需的计算资源。",
+      "相比前代 Qwen2.5，多语言支持从 29 种扩展到 119 种语言和方言。",
+      "全部 Qwen3 模型以 Apache 2.0 许可公开。"
+    ],
+    "raw_excerpt": "The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. ... Qwen3 introduces a thinking budget mechanism, allowing users to allocate computational resources adaptively during inference ... by leveraging the knowledge of the flagship models, we significantly reduce the computational resources required to build smaller-scale models ... all Qwen3 models are publicly accessible under Apache 2.0."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-VL Technical Report",
+    "url": "https://arxiv.org/abs/2502.13923v1",
+    "published_at": "2025-02-19",
+    "key_points": [
+      "Qwen2.5-VL 引入动态分辨率处理（dynamic resolution processing）与绝对时间编码（absolute time encoding），可处理不同尺寸图像与长达数小时的视频，并支持秒级事件定位。",
+      "从零训练原生动态分辨率 Vision Transformer (ViT)，并引入 Window Attention 以降低计算开销同时保持原生分辨率。",
+      "Qwen2.5-VL 提供三种规模；旗舰 Qwen2.5-VL-72B 在文档与图表理解上表现突出，论文称其与 GPT-4o、Claude 3.5 Sonnet 等 SOTA 模型相当。",
+      "模型保持 Qwen2.5 LLM 的核心语言能力。"
+    ],
+    "raw_excerpt": "To handle complex inputs, Qwen2.5-VL introduces dynamic resolution processing and absolute time encoding, enabling it to process images of varying sizes and videos of extended durations (up to hours) with second-level event localization. ... By training a native dynamic-resolution Vision Transformer (ViT) from scratch and incorporating Window Attention, we reduce computational overhead while maintaining native resolution."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文由 DeepSeek-AI 于 2025-01-22 提交 v1，最新版本 v2 修订于 2026-01-04；期刊版本见 Nature volume 645, pages 633-638 (2025)。",
+      "摘要明确声明大模型的涌现推理模式可被系统性地用于指导与增强更小模型的推理能力（即蒸馏路线），原文为 'the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models'。",
+      "DeepSeek-R1-Zero 完全基于强化学习（GRPO）训练、不含监督微调，奖励仅由规则化的准确性奖励与格式奖励构成，未使用神经奖励模型。",
+      "DeepSeek-R1-Zero 在 AIME 2024 上 pass@1 从初始 15.6% 提升至 77.9%，配合自一致性解码可达 86.7%。",
+      "DeepSeek-R1 采用多阶段训练流程，整合拒绝采样、强化学习与监督微调，以解决 R1-Zero 可读性差与中英语言混杂的问题。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. ... Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (HTML 全文，第 1–3 节)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "R1-Zero 以 DeepSeek-V3-Base 为基座，采用 GRPO 作为 RL 框架，学习率 3e-6、KL 系数 0.001、采样温度 1，共训练 10,400 步（约 1.6 个 epoch）。",
+      "训练中每个问题采样 16 个输出，8.2k 步之前最大长度 32,768 tokens、之后为 65,536 tokens；每 400 步用最新策略模型替换参考模型。",
+      "R1-Zero 训练中出现 'aha moment'：模型自发学会重新审视并修正解题步骤，反思词 'wait' 的使用频率突增。",
+      "R1-Zero 的思考长度随训练稳定增长，说明模型自发学会用更多思考时间解决推理任务。",
+      "DeepSeek-R1 的基于模型的奖励使用 66,000 条偏好数据对训练奖励模型，并采用长度可比的数据构造以降低长度偏置。"
+    ],
+    "raw_excerpt": "To train DeepSeek-R1-Zero, we set the learning rate to 3e-6, the KL coefficient to 0.001, and the sampling temperature to 1 for rollout. For each question, we sample 16 outputs with a maximum length of 32,768 tokens before the 8.2k step and 65,536 tokens afterward. ... the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%."
+  },
+  {
+    "sub_question_id": "f12",
+    "source_type": "github",
+    "title": "ollama/ollama 仓库主页（README 与仓库元数据）",
+    "url": "https://github.com/ollama/ollama",
+    "published_at": null,
+    "key_points": [
+      "仓库主页显示累计提交数为 5,946 Commits（抓取时点的当前值，非 2025 年 1–10 月区间数据）",
+      "README 正文说明 Ollama 用于在本地或云端运行开放权重模型，提供 macOS/Windows/Linux 安装脚本与官方 Docker 镜像 ollama/ollama",
+      "README 明确其支持的推理后端为 llama.cpp 项目（由 Georgi Gerganov 创立）",
+      "README 提供 REST API（默认端口 11434）以及 ollama-python、ollama-js 官方客户端库"
+    ],
+    "raw_excerpt": "Ollama — Start building with open models. Access the latest releases locally or in the cloud with complete privacy. ... 5,946 Commits ... Supported backends: llama.cpp project founded by Georgi Gerganov."
+  },
+  {
+    "sub_question_id": "f12",
+    "source_type": "github",
+    "title": "ggml-org/llama.cpp 仓库主页（README 与仓库元数据）",
+    "url": "https://github.com/ggml-org/llama.cpp",
+    "published_at": null,
+    "key_points": [
+      "仓库主页显示累计提交数为 11,881 Commits（抓取时点的当前值，非 2025 年 1–10 月区间数据）",
+      "README 自述目标是在广泛硬件上以最小配置实现 LLM/VLM 推理，纯 C/C++ 实现且无外部依赖",
+      "README 列出支持的量化位宽为 1.5-bit、2-bit、3-bit、4-bit、5-bit、6-bit、8-bit 整数量化",
+      "README 列出后端包括 CUDA、HIP、MUSA、Metal、Vulkan、SYCL、OpenCL、CANN、Hexagon、RPC、WebGPU、BLAS、OpenVINO（进行中）等",
+      "README 说明项目构建在 ggml 库之上，并提供 llama cli 与 llama serve（OpenAI 兼容 API）等工具"
+    ],
+    "raw_excerpt": "The main goal of llama.cpp is to enable LLM (and VLM) inference with minimal setup and state-of-the-art performance on a wide range of hardware - locally and in the cloud. Plain C/C++ implementation without any dependencies ... 11,881 Commits"
+  },
+  {
+    "sub_question_id": "f12",
+    "source_type": "github",
+    "title": "vllm-project/vllm Releases 页面（抓取到的版本列表与最新 release 说明）",
+    "url": "https://github.com/vllm-project/vllm/releases",
+    "published_at": null,
+    "key_points": [
+      "抓取时页面列出的最新 release 为 v0.32.0，标注发布日期为 18 Oct，其说明称该版本包含来自 363 名贡献者（其中 121 名新贡献者）的 814 个 commits",
+      "该 release 说明中列出的模型支持包括 EmbeddingGemma 2、MiniCPM-V 4.7、Nemotron 3.5 ASR 等",
+      "该 release 说明中列出的破坏性变更包括放弃 Python 3.10、默认限制 CORS origins、要求 transformers>=5.16.1,<5.20.0 与 tokenizers>=0.23.2",
+      "注意：该页面的版本号与日期序列无法与 2025 年 1–10 月的 vLLM 发布节奏对齐，故不能作为 2025 年窗口内的时间点证据使用"
+    ],
+    "raw_excerpt": "v0.32.0 ... released this 18 Oct ... This release features 814 commits from 363 contributors (121 new)! ... Breaking changes: Python 3.10 dropped (#60402); default CORS origins restricted (#61009); transformers>=5.16.1,<5.20.0 and tokenizers>=0.23.2 (#57387, #59796)"
+  },
+  {
+    "sub_question_id": "f12",
+    "source_type": "github",
+    "title": "huggingface/transformers Releases 页面（抓取到的版本列表与最新 release 说明）",
+    "url": "https://github.com/huggingface/transformers/releases",
+    "published_at": null,
+    "key_points": [
+      "抓取时页面列出的最新 release 为 Patch release v5.20.2，标注发布日期为 19 Oct，其说明称修复了 generate 中 prepare_inputs_for_generation 内输入类型丢失导致多模态模型出错的问题",
+      "页面列出的相邻版本为 v5.20.1（16 Oct）、v5.20.0（15 Oct）、v5.19.0、v5.18.0、v5.17.0、v5.16.1、v5.16.0、v5.15.1、v5.15.0",
+      "v5.20.0 说明中列出的新增模型包括 Muse Spark Open（自述为 Meta 的多模态 MoE 模型，816B 总参数、42B 激活参数、上下文 1,048,576 tokens）与 Ling 3.0 Flash",
+      "注意：该页面的版本号（v5.1x–v5.2x）与日期序列无法与 2025 年 1–10 月的 transformers 发布节奏对齐，故不能作为 2025 年窗口内的时间点证据使用"
+    ],
+    "raw_excerpt": "Patch release v5.20.2 ... released this 19 Oct ... This patch notably solves an issue where some inputs could loose their original type inside prepare_inputs_for_generation in generate, leading to problems with multimodal models. ... v5.20.0 ... Muse Spark Open ... 816B total parameters (42B active per token) and a context window of up to 1,048,576 tokens"
+  }
+]

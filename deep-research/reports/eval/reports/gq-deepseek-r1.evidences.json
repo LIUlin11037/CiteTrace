@@ -1,0 +1,676 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2)",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文 v1 提交于 2025-01-22，v2 最后修订于 2026-01-04（arXiv 摘要页元数据）。",
+      "作者署名为 DeepSeek-AI 集体署名（含 Daya Guo, Dejian Yang, Haowei Zhang 等）。",
+      "摘要核心主张：LLM 的推理能力可以通过纯强化学习（pure RL）激发，无需人工标注的推理轨迹。",
+      "摘要称该 RL 框架促成自我反思（self-reflection）、验证（verification）、动态策略适应等高级推理模式的涌现。",
+      "摘要称在数学、编程竞赛、STEM 等可验证任务上，RL 训练模型超过用人类示范做常规监督学习的对照模型。",
+      "摘要称大模型涌现的推理模式可被系统性地用于指导与增强小模型。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (arXiv:2501.12948v2) — §1 Introduction / §2.1 Group Relative Policy Optimization",
+    "url": "https://www.arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "基座模型为 DeepSeek-V3-Base；RL 框架采用 Group Relative Policy Optimization (GRPO)（引 Shao et al., 2024）。",
+      "奖励信号仅基于最终预测与标准答案的正确性，不对推理过程本身施加约束。",
+      "GRPO 的提出动机是简化训练流程并降低 PPO（Schulman et al., 2017）的资源消耗。",
+      "GRPO 对每个问题 q 从旧策略 π_θold 采样一组输出 {o_1,…,o_G}，再最大化目标 J_GRPO(θ)（式2）。",
+      "式2 结构：对组内 G 个样本取平均，每项为 min(比率×A_i, clip(比率,1-ε,1+ε)×A_i) 减去 β·D_KL(π_θ‖π_ref)；π_ref 为参考策略，ε、β 为超参。",
+      "优势 A_i 用组内奖励的标准化计算：A_i = (r_i - mean({r_1..r_G})) / std({r_1..r_G})（式3）。",
+      "R1-Zero 训练超参：学习率 3e-6，KL 系数 0.001，rollout 采样温度 1。",
+      "每个问题采样 16 个输出；8.2k step 之前最大长度 32,768 tokens，之后 65,536 tokens。",
+      "总训练 10,400 步，约 1.6 个 epoch；每步 32 个不同问题，训练 batch size 为 512。",
+      "每 400 步用最新策略模型替换参考模型。",
+      "每次 rollout 生成 8,192 个输出，随机切成 16 个 mini-batch，仅训练 1 个 inner epoch。"
+    ],
+    "raw_excerpt": "GRPO (Shao et al., 2024) is the reinforcement learning algorithm that we adopt to train DeepSeek-R1-Zero and DeepSeek-R1. It was originally proposed to simplify the training process and reduce the resource consumption of Proximal Policy Optimization (PPO) ... A_i = (r_i - mean({r_1, r_2, ..., r_G})) / std({r_1, r_2, ..., r_G})."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (arXiv:2501.12948v2) — §2.2 Reward Design（规则化可验证奖励）",
+    "url": "https://www.arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "R1-Zero 采用 rule-based rewards，为数学、代码、逻辑推理领域的数据提供精确反馈。",
+      "规则化奖励系统主要由两类构成：accuracy rewards（准确性奖励）与 format rewards（格式奖励）。",
+      "准确性奖励评估回答是否正确：数学等确定性结果的问题要求模型按规定格式（如放在 box 内）给出最终答案，从而可用规则可靠校验。",
+      "代码竞赛题用编译器在预定义测试用例集上评估模型回答，产生客观的正确性反馈。",
+      "R1-Zero 在 AIME 2024 上的平均 pass@1 从初始 15.6% 提升到 77.9%（v2 正文 Figure 1 描述）。",
+      "配合自一致性解码（self-consistency decoding）可进一步提升至 86.7%。",
+      "训练中出现「aha moment」：反思中「wait」一词使用突然增加，标志推理模式的明显变化。"
+    ],
+    "raw_excerpt": "For DeepSeek-R1-Zero, we employ rule-based rewards to deliver precise feedback for data in mathematical, coding, and logical reasoning domains. Our rule-based reward system mainly consists of two types of rewards: accuracy rewards and format rewards."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (arXiv:2501.12948v2) — §3 DeepSeek-R1 多阶段流水线（冷启动/拒绝采样/蒸馏的官方概述）",
+    "url": "https://www.arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "R1-Zero 存在可读性差与语言混杂（language mixing）问题，因 DeepSeek-V3-Base 在多语言（尤其英文与中文）上训练。",
+      "R1 的流水线为多阶段（Figure 2），中间检查点记为 DeepSeek-R1 Dev1、Dev2、Dev3。",
+      "§3.1 引入 RL 阶段使用的 reward model（model-based rewards），用于通用数据上捕捉复杂细微的人类偏好。",
+      "奖励模型训练数据：对偏好分数取四次独立判断的平均，仅保留分差 Δ 超过 1 的样本对；并控制 chosen/rejected 长度可比以减少长度偏差；共整理 66,000 个数据对。"
+    ],
+    "raw_excerpt": "Although DeepSeek-R1-Zero exhibits strong reasoning capabilities, it faces several issues. DeepSeek-R1-Zero struggles with challenges like poor readability, and language mixing ... In total, we curated 66,000 data pairs for training the reward model."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (arXiv:2501.12948, ar5iv 渲染版 v1) — §1 Introduction 对四阶段流程与蒸馏的表述",
+    "url": "https://ar5iv.labs.arxiv.org/html/2501.12948",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "R1-Zero 是「大规模 RL、且不以 SFT 作为前置步骤」训练的模型。",
+      "R1 在 RL 之前引入少量冷启动数据（cold-start data）与多阶段训练。",
+      "流程第一步：收集数千条（thousands of）冷启动数据，微调 DeepSeek-V3-Base。",
+      "第二步：执行与 R1-Zero 相同的 reasoning-oriented RL。",
+      "第三步：在 RL 接近收敛时，对 RL checkpoint 做拒绝采样（rejection sampling）生成新的 SFT 数据，并混入 DeepSeek-V3 在写作、事实问答、自我认知等领域的监督数据，然后重新训练 DeepSeek-V3-Base。",
+      "第四步：用新数据微调后的 checkpoint 再进行一次 RL，此次纳入所有场景的 prompt，得到 DeepSeek-R1。",
+      "蒸馏实验：以 Qwen2.5-32B 为基座，直接从 DeepSeek-R1 蒸馏优于在其上直接做 RL，说明大基座模型发现的推理模式对提升推理能力至关重要。",
+      "开源蒸馏模型覆盖 Qwen 与 Llama 系列，规模为 1.5B、7B、8B、14B、32B、70B。",
+      "蒸馏 7B 模型在 AIME 2024 上达 55.5%，超过 QwQ-32B-Preview；蒸馏 32B 在 AIME 2024 得 72.6%、MATH-500 得 94.3%、LiveCodeBench 得 57.2%。",
+      "R1-Zero 在 AIME 2024 上 pass@1 从 15.6% 升至 71.0%，多数投票后达 86.7%（v1 表述）。"
+    ],
+    "raw_excerpt": "we begin by collecting thousands of cold-start data to fine-tune the DeepSeek-V3-Base model. Following this, we perform reasoning-oriented RL like DeepSeek-R1-Zero. Upon nearing convergence in the RL process, we create new SFT data through rejection sampling on the RL checkpoint, combined with supervised data from DeepSeek-V3 in domains such as writing, factual QA, and self-cognition, and then retrain the DeepSeek-V3-Base model."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22 (v1); v2 revised 2026-01-04",
+    "key_points": [
+      "基座模型为 DeepSeek-V3-Base，RL 框架为 Group Relative Policy Optimization (GRPO)；奖励信号仅基于最终预测与标准答案的正确性，不约束推理过程本身。",
+      "DeepSeek-R1-Zero 完全依赖 RL，不做 SFT 冷启动。",
+      "R1-Zero 的 RL 超参：学习率 3e-6，KL 系数 0.001，rollout 采样温度 1。",
+      "R1-Zero 每题采样 16 条输出；8.2k 步之前单条最大长度 32,768 tokens，之后为 65,536 tokens。",
+      "R1-Zero 共训练 10,400 步，对应 1.6 个 training epoch；每步含 32 道不同题目，训练 batch size 为 512。",
+      "每 400 步用最新策略模型替换 reference model。",
+      "每次 rollout 生成 8,192 条输出，随机切分为 16 个 mini-batch，仅训练 1 个 inner epoch。",
+      "R1-Zero 在 AIME 2024 上平均 pass@1 从初始 15.6% 提升到 77.9%；配合自一致性解码（cons@16）可达 86.7%。",
+      "性能与响应长度在 8.2k 步处同时出现显著跃升。",
+      "R1-Zero 使用基于规则的奖励，含两类：accuracy rewards（答案正确性，数学要求把最终答案写在 box 内，代码用编译器跑预定义测试用例）与 format rewards。",
+      "训练中出现“aha moment”：模型在反思时突然增多使用 “wait” 一词，标志推理模式转变。",
+      "R1 的奖励模型训练集共 66,000 个偏好对；最终偏好分为四个独立判断的平均，仅保留分差 Δ>1 的样本对，并控制 chosen/rejected 长度可比以减少长度偏差。",
+      "论文发表于 Nature volume 645, pages 633-638 (2025)，DOI 10.1038/s41586-025-09422-z。"
+    ],
+    "raw_excerpt": "To train DeepSeek-R1-Zero, we set the learning rate to 3e-6, the KL coefficient to 0.001, and the sampling temperature to 1 for rollout. For each question, we sample 16 outputs with a maximum length of 32,768 tokens before the 8.2k step and 65,536 tokens afterward. ... with training continuing for a total of 10,400 steps, corresponding to 1.6 training epochs. Each training step consists of 32 unique questions, resulting in a training batch size of 512. Every 400 steps, we replace the reference model with the latest policy model. ... the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%. In addition, by leveraging the self-consistency decoding, the model's performance can be further improved, achieving an accuracy of 86.7%."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "deepseek-ai/DeepSeek-R1 — 官方仓库 README（模型清单、上下文长度、评测结果表）",
+    "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+    "published_at": "last push 2025-06-27",
+    "key_points": [
+      "DeepSeek-R1-Zero 与 DeepSeek-R1 均为 671B 总参数、37B 激活参数、128K 上下文长度，且均基于 DeepSeek-V3-Base 训练。",
+      "开源了 6 个蒸馏 dense 模型：DeepSeek-R1-Distill-Qwen-1.5B（基座 Qwen2.5-Math-1.5B）、Qwen-7B（Qwen2.5-Math-7B）、Llama-8B（Llama-3.1-8B）、Qwen-14B（Qwen2.5-14B）、Qwen-32B（Qwen2.5-32B）、Llama-70B（Llama-3.3-70B-Instruct）。",
+      "蒸馏模型是用 DeepSeek-R1 生成的样本对开源模型微调得到，并对其 config 与 tokenizer 做了小幅修改。",
+      "评测设置：所有模型最大生成长度 32,768 tokens；需采样的基准用 temperature 0.6、top-p 0.95，每 query 生成 64 条响应估计 pass@1。",
+      "DeepSeek-R1 基准分数：MMLU 90.8、MMLU-Redux 92.9、MMLU-Pro 84.0、DROP 92.2、IF-Eval 83.3、GPQA-Diamond 71.5、SimpleQA 30.1、FRAMES 82.5、AlpacaEval2.0 87.6、ArenaHard 92.3。",
+      "DeepSeek-R1 代码类分数：LiveCodeBench (Pass@1-COT) 65.9、Codeforces percentile 96.3、Codeforces rating 2029、SWE Verified 49.2、Aider-Polyglot 53.3。",
+      "DeepSeek-R1 数学类分数：AIME 2024 pass@1 79.8、MATH-500 pass@1 97.3、CNMO 2024 pass@1 78.8。",
+      "DeepSeek-R1 中文分数：CLUEWSC 92.8、C-Eval 91.8、C-SimpleQA 63.7。",
+      "对照：OpenAI o1-1217 为 AIME 2024 79.2、MATH-500 96.4、GPQA-Diamond 75.7、LiveCodeBench 63.4、Codeforces rating 2061；DeepSeek V3 为 AIME 2024 39.2、MATH-500 90.2、GPQA-Diamond 59.1、Codeforces rating 1134。",
+      "蒸馏模型分数（AIME2024 pass@1 / cons@64 / MATH-500 / GPQA-Diamond / LiveCodeBench / CodeForces rating）：Qwen-1.5B 28.9/52.7/83.9/33.8/16.9/954；Qwen-7B 55.5/83.3/92.8/49.1/37.6/1189；Qwen-14B 69.7/80.0/93.9/59.1/53.1/1481；Qwen-32B 72.6/83.3/94.3/62.1/57.2/1691；Llama-8B 50.4/80.0/89.1/49.0/39.6/1205；Llama-70B 70.0/86.7/94.5/65.2/57.5/1633。",
+      "对照：o1-mini 为 63.6/80.0/90.0/60.0/53.8/1820；QwQ-32B-Preview 为 44.0/60.0/90.6/54.5/41.9/1316。",
+      "README 主张 DeepSeek-R1 在数学、代码、推理任务上性能与 OpenAI-o1 相当；并称 DeepSeek-R1-Distill-Qwen-32B 在多项基准上超过 OpenAI-o1-mini，取得 dense 模型的新 SOTA（属官方自我主张，需交叉验证）。",
+      "使用建议：temperature 建议 0.5–0.7（推荐 0.6）以避免无限重复或不连贯输出；不要加 system prompt，所有指令放在 user prompt 内；数学题建议加 “Please reason step by step, and put your final answer within \\boxed{}.”；建议多次测试取平均。",
+      "官方观察到 R1 系列对某些 query 会跳过思考模式（输出 \"<think>\\n\\n</think>\"），建议强制模型以 \"<think>\\n\" 开头以保证充分推理。",
+      "官方 web/app 不使用 system prompt，temperature 为 0.6；提供 OpenAI 兼容 API（platform.deepseek.com）与 chat.deepseek.com 的 DeepThink 按钮。",
+      "本地部署示例：vLLM 启动 Distill-Qwen-32B 用 --tensor-parallel-size 2 --max-model-len 32768；Hugging Face Transformers 尚未直接支持 R1 主模型。"
+    ],
+    "raw_excerpt": "DeepSeek-R1-Zero | 671B | 37B | 128K ... DeepSeek-R1 | 671B | 37B | 128K ... DeepSeek-R1-Zero & DeepSeek-R1 are trained based on DeepSeek-V3-Base. ... For all our models, the maximum generation length is set to 32,768 tokens. For benchmarks requiring sampling, we use a temperature of 0.6, a top-p value of 0.95, and generate 64 responses per query to estimate pass@1. ... We open-source distilled 1.5B, 7B, 8B, 14B, 32B, and 70B checkpoints based on Qwen2.5 and Llama3 series to the community."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "arXiv:2501.12948 摘要页（版本与发表信息元数据）",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22 (v1); v2 2026-01-04",
+    "key_points": [
+      "论文首次提交于 2025-01-22，v2 修订于 2026-01-04。",
+      "作者署名为 DeepSeek-AI 团队（含 Daya Guo、Dejian Yang、Haowei Zhang 等，共 200 位作者）。",
+      "摘要称：推理能力可通过纯强化学习激发，无需人工标注的推理轨迹；RL 框架促使自我反思、验证、动态策略调整等高级推理模式涌现。",
+      "摘要称：所训练模型在数学、编程竞赛、STEM 等可验证任务上优于用传统人类示范监督学习训练的对照模型；大模型涌现的推理模式可系统性用于指导提升小模型。",
+      "期刊信息：Nature volume 645, pages 633-638 (2025)。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. ... Journal reference: Nature volume 645, pages 633-638 (2025)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Open-Reasoner-Zero/Open-Reasoner-Zero (GitHub README)",
+    "url": "https://github.com/Open-Reasoner-Zero/Open-Reasoner-Zero",
+    "published_at": "2025-06-03",
+    "key_points": [
+      "仓库自述为「the first open source implementation of large-scale reasoning-oriented RL training」，定位在 scalability、simplicity、accessibility 三点。",
+      "使用与 DeepSeek-R1-Zero-Qwen-32B 相同的 base model（Qwen2.5-32B base），在 AIME2024、MATH500、GPQA Diamond 上取得更优表现，且只需 DeepSeek-R1-Zero pipeline 约 1/10 的训练步数。",
+      "规模门槛的工程侧证据：ORZ-0.5B 可在单张 A800/H800 GPU 上跑通（python -m playground.orz_0p5b_ppo_1gpu），单节点可跑 0.5B；1.5B 需 2 节点、7B 需 4 节点、32B 需 16 节点（Ray 多机）。",
+      "训练框架基于 OpenRLHF + vLLM + DeepSpeed + Ray；base model 覆盖 Qwen2.5-0.5B/1.5B/7B/32B 四档。",
+      "数据全部开源：129k 条（原始 57k + 扩展 72k），另有从 32B 训练第一阶段挖出的 13k hard 数据用于 annealing，使 AIME2024 从约 41% 提升到约 48%。",
+      "同时发布 Open-Reasoner-Zero-Critic-{0.5B,1.5B,7B,32B} 全套 critic 模型，供研究 advantage estimation。",
+      "2025/06/03 将 ORZ recipe 迁移到 DeepSeek-R1-Distill-Qwen-14B，得到 ORZ-R1-Distill-Qwen-14B：AIME2024 75.2、AIME2025 60.0、MATH500 95.6、GPQA 60.4，超过更大的 DeepSeek-R1-Distill-Qwen-32B（72.6/60.0/94.3/62.1）。",
+      "仓库活跃度偏低：31 commits，last push 2025-06-02，stars 2.1k、forks 120、watchers 10。",
+      "代码设计特征：single controller trainer、训练与生成 colocate 在同一批 GPU 上以提高利用率。"
+    ],
+    "raw_excerpt": "We introduce Open-Reasoner-Zero, the first open source implementation of large-scale reasoning-oriented RL training focusing on scalability, simplicity and accessibility. Using the same base model as DeepSeek-R1-Zero-Qwen-32B, our implementation achieves superior performance on AIME2024, MATH500, and the GPQA Diamond benchmark while demonstrating remarkable efficiency—requiring only a tenth of the training steps... Minimal resource training scripts: ORZ-0.5B can be run on a single A800/H800 gpu!"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Open-Reasoner-Zero: An Open Source Approach to Scaling Up Reinforcement Learning on the Base Model (arXiv:2503.24290v2)",
+    "url": "https://arxiv.org/html/2503.24290v2",
+    "published_at": "2025-07-05",
+    "key_points": [
+      "核心结论：vanilla PPO + GAE（λ=1, γ=1）+ 简单 rule-based reward、完全不用 KL 正则，就足以同时放大 benchmark 表现与 response length，复现 DeepSeek-R1-Zero 观察到的 scaling 现象。",
+      "明确选择 PPO 而非 GRPO：理由是 learned critic 提供 token 级 value estimation，能识别并压低重复等有害模式（credit assignment），advantage 估计比 GRPO 更稳健。",
+      "论文直接指出 GRPO 的失效机制：缺少独立 value network 时，GRPO 难以区分「真正正确的回答」与「出现在负面模式（如重复循环）中的回答」，会误导强化信号，导致训练不稳定乃至 collapse，并引用 OpenR1 社区关于 vanilla GRPO 复现的讨论作为佐证。",
+      "规模证据：在 0.5B、1.5B、7B、32B 四个规模上 train reward 与 response length 均稳定上升，呈现跨规模一致的 scalability；ORZ-32B 的 response length 有波动但不影响训练稳定性。",
+      "Table 1 结果：Open-Reasoner-Zero-32B 为 AIME2024 48.1 / AIME2025 36.0 / MATH500 92.2 / GPQA Diamond 55.5；对比 DeepSeek-R1-Zero-Qwen-32B 为 47.0 / - / 91.6 / 55.0；DAPO-Qwen-32B 为 50.0（原文报告值），作者用统一评测口径复测得 DAPO-Qwen-32B* 为 48.3 / 37.9 / 71.8 / 16.0。",
+      "GAE 取 λ=1、γ=1 的理由：大规模训练数据量本身已抑制方差，因此采用无偏配置以完整捕捉推理任务的长程依赖；此时 advantage 简化为 Â_t = R − V_φ(s_t)。",
+      "去掉 KL 正则的理由：KL 约束会把策略拉回 base model 分布，限制 policy optimization 的探索；去掉后也免去了 KL 系数这一难调的设计空间。",
+      "论文做了三组关键消融：不同 GAE λ 值、KL 相关正则、data scale（数据规模）。",
+      "作者自述目标是把先进 RL 训练技术「democratize」给更广的研究社区，并开源 code、data、model weights。"
+    ],
+    "raw_excerpt": "a minimalist approach, vanilla PPO with GAE (λ=1, γ=1) and straightforward rule-based rewards, without any KL regularization, is sufficient to scale up both benchmark performance and response length, replicating the scaling phenomenon observed in DeepSeek-R1-Zero... Lacking a dedicated value network, GRPO struggles to distinguish genuinely correct responses from those occurring within negative patterns (e.g., repetitive loops). This deficiency can misdirect reinforcement, leading to training instability and eventual collapse"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "volcengine/verl — Volcano Engine Reinforcement Learning for LLMs (GitHub README)",
+    "url": "https://github.com/volcengine/verl",
+    "published_at": "2026-08-01",
+    "key_points": [
+      "verl 由 ByteDance Seed 发起、由 verl 社区维护，是论文 HybridFlow: A Flexible and Efficient RLHF Framework 的开源实现。",
+      "README 明确主张可用几行代码构建 GRPO、PPO 等 RL dataflow；hybrid-controller 编程模型支持灵活表达与高效执行复杂 post-training 数据流。",
+      "与 FSDP、Megatron-LM、vLLM、SGLang 等 LLM 框架集成，支持灵活 device mapping 与 3D-HybridEngine actor resharding。",
+      "README 声称 DAPO 是基于 Qwen2.5-32B base 达到 AIME 2024 50 分的开源 SOTA RL 算法，超过此前 DeepSeek GRPO（DeepSeek-R1-Zero-Qwen-32B）的 SOTA，复现代码在 recipe/dapo（此为 verl 方主张，属营销性表述，需交叉验证）。",
+      "VAPO（value-based augmented PPO）从 Qwen-32B-base 训练，AIME 2024 得 60.4，README 称优于 DAPO-32B。",
+      "Seed-Thinking-v1.5 用 verl 训练，AIME 2024 86.7、Codeforces 55.0、GPQA 77.3。",
+      "工程扩展活跃：2026/08 发布 verl-vla v0.1.0、VeRL-Tinker、VeRL-Omni v0.2.0；2026/07 RL-Insight；2026/06 verl-SpeCo；2026/05 uni-agent 与 VeRL-Omni 预发布；2026/05 vexact（zero-mismatch HuggingFace rollout）。",
+      "2026/01 verl 迁移到 verl-project 组织，recipe 目录迁至独立仓库 verl-recipe 并作为 submodule。",
+      "2025/06 verl 配合 Megatron backend 支持 DeepSeek-671B、Qwen3-235B 等大 MoE 模型训练。",
+      "2025/12 Mind Lab 用 verl + Megatron-bridge 在 64 张 H800 上为万亿参数模型训练 GRPO LoRA。",
+      "仓库规模：3,145 commits；2025/03 在 EuroSys 2025 报告，2025/10 亮相 PyTorch Conference 2025，2026/03 在 NVIDIA GTC26 有 session。"
+    ],
+    "raw_excerpt": "verl is a RL training library initiated by ByteDance Seed team and maintained by the verl community... The hybrid-controller programming model enables flexible representation and efficient execution of complex post-training dataflows. Build RL dataflows such as GRPO, PPO in a few lines of code... [2025/03] DAPO is the open-sourced SOTA RL algorithm that achieves 50 points on AIME 2024 based on the Qwen2.5-32B pre-trained model, surpassing the previous SOTA achieved by DeepSeek's GRPO (DeepSeek-R1-Zero-Qwen-32B)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "huggingface/trl — TRL: Transformers Reinforcement Learning (GitHub README)",
+    "url": "https://github.com/huggingface/trl",
+    "published_at": null,
+    "key_points": [
+      "TRL 定位为 post-train foundation models 的综合库，覆盖 SFT、GRPO、DPO 等方法，构建在 🤗 Transformers 生态之上。",
+      "README 直接写明 GRPOTrainer 实现 Group Relative Policy Optimization，「more memory-efficient than PPO and was used to train Deepseek AI's R1」——即把 GRPO 与 R1 的关联写进了官方文档。",
+      "提供开箱即用的可验证奖励函数：trl.rewards 中的 accuracy_reward，并建议推理模型使用 reasoning_accuracy_reward() 以获得更好效果；示例数据集为 trl-lib/DeepMath-103K。",
+      "Trainer 体系：SFTTrainer、GRPOTrainer、DPOTrainer、KTOTrainer 等，均为 Transformers Trainer 的轻量封装，原生支持 DDP、DeepSpeed ZeRO、FSDP。",
+      "可扩展性：借助 🤗 Accelerate 从单 GPU 扩到多节点集群；与 PEFT 全集成，支持量化与 LoRA/QLoRA 在有限硬件上训练大模型。",
+      "与 Unsloth 集成以加速训练（使用优化 kernel）。",
+      "硬件后端扩展：支持 AMD Instinct（ROCm）、AWS Trainium（TorchNeuron）；示例包括在 8×B300 单节点上做 Beam 的 LoRA 微调。",
+      "提供 CLI，无需写代码即可微调。",
+      "仓库规模：3,911 commits。"
+    ],
+    "raw_excerpt": "GRPOTrainer implements the Group Relative Policy Optimization (GRPO) algorithm that is more memory-efficient than PPO and was used to train Deepseek AI's R1... Note For reasoning models, use the reasoning_accuracy_reward() function for better results."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "OpenRLHF/OpenRLHF (GitHub README)",
+    "url": "https://github.com/OpenRLHF/OpenRLHF",
+    "published_at": null,
+    "key_points": [
+      "OpenRLHF 自述为第一个高性能、production-ready 的开源 RLHF 框架，采用 Ray + vLLM 分布式架构与统一 agent-based 设计范式。",
+      "支持的 RL 算法：PPO、REINFORCE++、GRPO、RLOO。",
+      "架构上把 Actor、Reward、Reference、Critic 模型分离到不同 GPU，可扩展到 70B+ 参数模型。",
+      "复现生态证据：2025/1 HKUST 用 OpenRLHF 在小模型上复现了 DeepSeek-R1-Zero 与 DeepSeek-R1 的训练；2025/2 LMM-R1 作为 OpenRLHF 的 fork 用于多模态任务上复现 DeepSeek-R1。",
+      "2025/2 README 称 Logic-RL 与 PRIME 表明 REINFORCE++ 相比 GRPO 训练更稳定、比 PPO 更快（第三方主张，需交叉验证）。",
+      "2025/10 ScaleRL 验证了 REINFORCE++-baseline 在大规模训练场景下的有效性；2025/6 Magistral 使用了与 REINFORCE++-baseline 相近的方法训练推理模型。",
+      "2026/2 ProRL V2 用 REINFORCE++-baseline 通过延长 RL 训练得到 SOTA 的 1.5B 推理模型。",
+      "2026/9 支持 FlashREINFORCE：critic-free、单 rollout 异步 RL，用于 agentic 语言模型。",
+      "2026/4 的 0.10 版本加入多轮 VLM RL 与 VLM RLHF 支持。",
+      "2025/5 起支持 async RLHF（--train.async_enable）与 async agent RLHF；2025/4 基于 Single Controller 与 Unified Packing Samples 重构。",
+      "新后端 Molt（Automodel 驱动）声称可把 RL 训练扩展到数千亿参数。",
+      "仓库规模：1,585 commits；2023/8 开源。"
+    ],
+    "raw_excerpt": "OpenRLHF is the first high-performance, production-ready open-source RLHF framework that combines Ray + vLLM distributed architecture with a unified agent-based design paradigm... [2025/1] HKUST reproduced the DeepSeek-R1-Zero and DeepSeek-R1 training on small models using OpenRLHF... [2025/2] Logic-RL and PRIME demonstrate that REINFORCE++ is more stable in training compared to GRPO and faster than PPO."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "unslothai/unsloth (GitHub README)",
+    "url": "https://github.com/unslothai/unsloth",
+    "published_at": null,
+    "key_points": [
+      "Unsloth 自述为「the first desktop app to run and train models」，已从微调库扩展为桌面应用 + Web UI（Unsloth Studio）+ 代码版（Unsloth Core）三种形态。",
+      "README 明确列出完整支持 reinforcement learning，与 LoRA、QLoRA、full fine-tuning、pretraining、RL、GRPO、DPO、FP8 并列。",
+      "性能主张：微调 LLM、diffusion、decision、TTS、embedding 模型「2× faster with 70% less VRAM with no accuracy loss」（厂商自述，属营销性主张，需独立验证）。",
+      "硬件与平台覆盖广：Windows、Linux、WSL、macOS；支持 Multi GPU、NVIDIA、AMD、Intel GPU、CPU 以及 Vulkan 后端。",
+      "支持模型族包括 Qwen3.8、GLM-5.3-Flash、Kimi K3、Qwen-Image-2.1、MiniMax-H3、DeepSeek-V4、Gemma 4，以及 MLX、GGUF、diffusion、decision、embedding、audio 模型。",
+      "提供 OpenAI 兼容 API 服务、GGUF/NVFP4/FP8 导出，以及 unsloth start 一键把本地模型接入 Claude Code、Codex、OpenCode 等 agent 工具。",
+      "仓库规模：12,171 commits。"
+    ],
+    "raw_excerpt": "Complete support: Supports reinforcement learning, LoRA, QLoRA, full fine tuning, pretraining, RL, GRPO, DPO, and FP8... Fine-tuning: Train LLMs, diffusion, decision, TTS, and embedding models 2× faster with 70% less VRAM with no accuracy loss"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：基于 veRL 的社区扩展项目（Search-R1 / EasyR1 / verl-agent）",
+    "url": "https://github.com/hiyouga/EasyR1",
+    "published_at": null,
+    "key_points": [
+      "EasyR1（hiyouga/EasyR1）：基于 veRL 的高效、可扩展多模态 RL 训练框架，★5209、forks 397，last push 2026-09-19。",
+      "Search-R1（PeterGriffinJin/Search-R1）：基于 veRL 的高效可扩展 RL 训练框架，用于 reasoning 与 search engine calling 交错的 LLM，★5536、forks 501，last push 2025-11-13。",
+      "verl-agent（langfengQ/verl-agent）：veRL 的扩展，用于通过 RL 训练 LLM/VLM agent，同时是论文 Group-in-Group Policy Optimization for LLM Agent Training 的官方代码，★2399、forks 238，last push 2026-06-09。",
+      "DeepGym（DeepGym/deepgym）：提供带可验证奖励的 RL 环境，沙箱化 coding 与 computer-use 任务，verifier 与答案隔离、含防 reward hacking 的 QA gate，README 声明可与 verl、TRL、OpenRLHF、Axolotl 配合使用，★38，last push 2026-10-23。",
+      "上述项目说明 veRL 已成为社区二次开发的基础设施层，衍生出多模态、搜索 agent、agent RL 等方向。"
+    ],
+    "raw_excerpt": "EasyR1: An Efficient, Scalable, Multi-Modality RL Training Framework based on veRL (★5209, last push 2026-09-19)... Search-R1: An Efficient, Scalable RL Training Framework for Reasoning & Search Engine Calling interleaved LLM based on veRL (★5536)... verl-agent is an extension of veRL, designed for training LLM/VLM agents via RL."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?",
+    "url": "https://arxiv.org/abs/2504.13837",
+    "published_at": "2025-04-18",
+    "key_points": [
+      "论文系统探测 RLVR 训练后 LLM 的推理能力边界，覆盖多种模型家族、多种 RL 算法，以及数学、代码、视觉推理基准，评价指标为大 k 值的 pass@k。",
+      "核心发现：RLVR 模型在小 k（如 k=1）上优于其 base model，但当 k 很大时 base model 取得更高的 pass@k 分数。",
+      "作者结论：当前训练设置并未引出根本性的新推理模式；覆盖度（coverage）与困惑度（perplexity）分析显示所观察到的推理能力源自 base model 并受其边界约束。",
+      "以 base model 为上限做定量分析，六种主流 RLVR 算法表现相近，且都远未充分利用 base model 的潜力。",
+      "论文明确指出蒸馏（distillation）可以从教师模型引入新的推理模式，真正扩展模型的推理能力——这是对「纯 RL vs 蒸馏」争论的直接表态。",
+      "作者呼吁改进 RL 范式，如持续扩展（continual scaling）与多轮智能体-环境交互，以释放 RL 潜力。",
+      "该文发表于 NeurIPS 2025（Oral），并获 ICML 2025 AI4MATH workshop best paper；v1 于 2025-04-18 提交，v5 修订于 2025-11-24。"
+    ],
+    "raw_excerpt": "Surprisingly, we find that the current training setup does not elicit fundamentally new reasoning patterns. While RLVR-trained models outperform their base models at small k (e.g., k = 1), the base models achieve a higher pass@k score when k is large. Coverage and perplexity analyses show that the observed reasoning abilities originate from and are bounded by the base model. ... By contrast, we find that distillation can introduce new reasoning patterns from the teacher and genuinely expand the model's reasoning capabilities."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "ProRL: Prolonged Reinforcement Learning Expands Reasoning Boundaries in Large Language Models",
+    "url": "https://arxiv.org/abs/2505.24864",
+    "published_at": "2025-05-30",
+    "key_points": [
+      "论文直接针对争议问题：RL 究竟是真正扩展了模型的推理能力，还是仅仅放大了 base model 分布中已潜在的高奖励输出；以及持续扩大 RL 算力是否可靠地带来推理性能提升。",
+      "提出 ProRL 训练方法，包含 KL 散度控制、参考策略重置（reference policy resetting）与多样化任务套件三项要素。",
+      "实证结果：RL 训练后的模型在广泛的 pass@k 评估中一致优于 base model，包括 base model 无论尝试多少次都完全失败（pass@k=0）的场景。",
+      "推理边界提升与 base model 的任务胜任度及训练时长强相关，说明 RL 可以随时间探索并填充解空间的新区域。",
+      "作者据此主张延长 RL 训练（prolonged RL）能发现 base model 在大量采样下也无法获得的新的推理策略，与「RL 仅放大已有能力」的观点相对立。",
+      "论文发布模型权重以支持后续研究，全文 26 页、17 图。"
+    ],
+    "raw_excerpt": "In this work, we challenge prevailing assumptions by demonstrating that prolonged RL (ProRL) training can uncover novel reasoning strategies that are inaccessible to base models, even under extensive sampling. ... RL-trained models consistently outperform base models across a wide range of pass@k evaluations, including scenarios where base models fail entirely regardless of the number of attempts."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "Awesome RLVR Reasoning Boundary (rdi-berkeley/awesome-RLVR-boundary)",
+    "url": "https://github.com/rdi-berkeley/awesome-RLVR-boundary",
+    "published_at": "2025-12-12",
+    "key_points": [
+      "该仓库 README 正文把当前研究的中心争论概括为：RL 能否赋予模型超出其 base model 的推理能力。",
+      "怀疑派立场：Limit of RLVR（NeurIPS 2025）认为 RLVR 模型仅在小 k 上优于 base model，大 k 时 base model 的 pass@k 持平或更优；覆盖度与困惑度分析表明推理能力最终受 base model 支撑集（support）约束。",
+      "README 给出怀疑派背后的机制直觉：多数 RL-for-reasoning 流程（GRPO/PPO 变体）通过比较同一 prompt 多次 rollout 的奖励来更新模型；若所有 rollout 都未解出任务（pass@K=0），则每个样本同样差，梯度消失。",
+      "README 引 arXiv:2507.14843 提供理论论证：RLVR 无法超越 base model 的表征极限。",
+      "乐观派立场：ProRL（arXiv:2505.24864 / arXiv:2507.12507）证明 RL 可在 base model 表现很差的任务（如 Reasoning Gym 的字母型 2D 谜题）上扩展推理边界。",
+      "README 引 arXiv:2509.21016：在两阶段奖励调度下，经过长时间近零奖励平台期后出现类 grokking 的相变，进一步支持 RL 可能「挣脱牵引绳」（breaking the leash）。",
+      "README 提出应专门研究「hard frontier」（pass@K=0 的问题族），因为许多数学与代码基准在异质题目池上取平均，真正困难实例被简单题稀释，而类 grokking 相变恰恰需要每题数百到数千次 RL 更新。",
+      "README 的收录标准规定：仅聚焦 pass@1 的方法学改进不再被视为与该主题相关，投稿需提供 pass@k 改进或 pass@k 从 0 到 1 的直接证据（pass@K 通常指 K≥128）。"
+    ],
+    "raw_excerpt": "A central debate in recent research concerns whether reinforcement learning (RL) can endow models with reasoning abilities beyond those of their base model. ... If none of the rollouts solve the task (pass@K = 0), every sample is equally bad, so the gradients vanish. ... it is precisely on this \"hard frontier\" that the distinctive learning dynamics appear—most notably the grokking-like phase transitions that can require hundreds or thousands of RL updates per problem."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v1)",
+    "url": "https://arxiv.org/abs/2501.12948v1",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "v1 提交时间戳为 Wed, 22 Jan 2025 15:19:35 UTC，PDF 体积 928 KB；页面标注 latest version 为 4 Jan 2026 (v2)。",
+      "v1 摘要为工程公告式表述：\"We introduce our first-generation reasoning models, DeepSeek-R1-Zero and DeepSeek-R1\"，并声明开源 R1-Zero、R1 以及基于 Qwen 与 Llama 的六个 dense 蒸馏模型（1.5B、7B、8B、14B、32B、70B）。",
+      "v1 摘要称 DeepSeek-R1 \"achieves performance comparable to OpenAI-o1-1217 on reasoning tasks\"。",
+      "v1 引言原文：\"the pass@1 score on AIME 2024 increases from 15.6% to 71.0%, and with majority voting, the score further improves to 86.7%, matching the performance of OpenAI-o1-0912.\"",
+      "v1 引言对 R1-Zero 训练时长的表述为模糊的 \"After thousands of RL steps, DeepSeek-R1-Zero exhibits super performance on reasoning benchmarks\"，未在该段给出具体步数。",
+      "v1 引言描述 R1 流程为：先用数千条 cold-start 数据微调 V3-Base → 推理导向 RL → 在接近收敛的 RL checkpoint 上做 rejection sampling 生成新 SFT 数据（并混入 V3 的写作、事实 QA、自我认知数据）→ 重训 V3-Base → 再进行一次覆盖全场景 prompt 的 RL。",
+      "v1 引言称以 Qwen2.5-32B 为基座时，直接从 DeepSeek-R1 蒸馏优于在其上做 RL；蒸馏 14B 模型大幅超过 QwQ-32B-Preview，蒸馏 32B/70B 在 dense 模型中创推理基准新纪录。",
+      "arXiv abs 页面的 Submission history 仅列出两个版本的时间与文件大小，未提供任何文字性 change log 或修订说明。",
+      "v1 的 HTML 全文标题区含 \"Figure 1: Benchmark performance of DeepSeek-R1.\"，正文结构为 Introduction / DeepSeek-R1-Zero / DeepSeek-R1 / Distillation / 等章节。"
+    ],
+    "raw_excerpt": "For instance, the pass@1 score on AIME 2024 increases from 15.6% to 71.0%, and with majority voting, the score further improves to 86.7%, matching the performance of OpenAI-o1-0912. ... After thousands of RL steps, DeepSeek-R1-Zero exhibits super performance on reasoning benchmarks. [Submission history] [v1] Wed, 22 Jan 2025 15:19:35 UTC (928 KB) [v2] Sun, 4 Jan 2026 03:57:36 UTC (1,562 KB)"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "v2 摘要被整体改写为期刊体例：以 \"General reasoning represents a long-standing and formidable challenge in artificial intelligence\" 开篇，用 \"Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories\" 陈述主张，并新增 keywords 行 \"Large Language Model, Reasoning, Reinforcement Learning\"。",
+      "v2 摘要不再包含 v1 中的 \"first-generation reasoning models\"、\"comparable to OpenAI-o1-1217\" 与六个蒸馏模型清单等工程公告内容，改为强调 \"the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models\"。",
+      "v2 第 2.3 节原文：\"the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%\"，并称借助 self-consistency decoding 可进一步提升至 86.7%。",
+      "v2 第 2.1 节给出 R1-Zero 完整 RL 超参：learning rate 3e-6、KL coefficient 0.001、rollout sampling temperature 1；每题采样 16 个输出，8.2k step 之前最大长度 32,768 tokens、之后 65,536 tokens。",
+      "v2 第 2.1 节原文：\"both the performance and response length of DeepSeek-R1-Zero exhibit a significant jump at the 8.2k step, with training continuing for a total of 10,400 steps, corresponding to 1.6 training epochs.\"",
+      "v2 第 2.1 节给出 batch 配置：每个 training step 含 32 个 unique questions，training batch size 为 512；每 400 步用最新 policy model 替换 reference model；每次 rollout 生成 8,192 个 outputs，随机切成 16 个 mini-batch，仅训练 1 个 inner epoch。",
+      "v2 第 2.1 节脚注说明 \"a training step refers to a single policy update operation\"（Figure 1 图注），即步数口径为策略更新次数而非样本数。",
+      "v2 第 2.2 节明确不使用 neural reward model：\"we abstain from applying neural reward models—whether outcome-based or process-based—to reasoning tasks\"，理由是易发生 reward hacking 且重训成本高；奖励为 rule-based 的 accuracy reward 与 format reward 等权相加。",
+      "v2 引言新增一段对 CoT prompting 与 SFT 路线局限性的论述，指出依赖人工标注推理轨迹 \"hinders scalability and introduces cognitive biases\"，且 \"their performance is inherently capped by the human-provided exemplars, which prevents the exploration of superior, non-human-like reasoning pathways\"。",
+      "v2 引言明确 R1-Zero 的两项缺陷（poor readability、language mixing，即单条 CoT 中英混杂）以及 rule-based RL 阶段只聚焦推理任务导致写作与开放域 QA 表现受限，并据此引出 R1 的多阶段框架（rejection sampling + RL + SFT）。",
+      "v2 引言称蒸馏小模型 \"surpassing the performance of their original instruction-tuned counterparts\"，并给出模型发布地址 https://huggingface.co/deepseek-ai 。"
+    ],
+    "raw_excerpt": "Figure 1 (a) depicts the performance trajectory of DeepSeek-R1-Zero on the AIME 2024 benchmark throughout the RL training process, where the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%. In addition, by leveraging the self-consistency decoding (Wang et al., 2023c), the model's performance can be further improved, achieving an accuracy of 86.7%. ... For each question, we sample 16 outputs with a maximum length of 32,768 tokens before the 8.2k step and 65,536 tokens afterward. As a result, both the performance and response length of DeepSeek-R1-Zero exhibit a significant jump at the 8.2k step, with training continuing for a total of 10,400 steps, corresponding to 1.6 training epochs."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "arXiv:2501.12948v2 abstract page — submission history and version metadata",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "v2 页面标注 \"[Submitted on 22 Jan 2025 (v1), last revised 4 Jan 2026 (this version, v2)]\"，确认两版间隔约 11.5 个月。",
+      "v2 摘要已替换为期刊体例版本，与 v1 摘要无共同首句；两版标题完全相同（\"DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\"）。",
+      "v2 作者列表首位为 DeepSeek-AI，其后为 Daya Guo、Dejian Yang、Haowei Zhang、Junxiao Song、Peiyi Wang、Qihao Zhu、Runxin Xu、Ruoyu Zhang、Shirong Ma、Xiao Bi 等（v1 中 Peiyi Wang 与 Qihao Zhu 的次序相反），页面显示共 199 位作者。",
+      "v2 页面未提供任何文字性 change log、revision note 或 comment 字段来解释修订内容。"
+    ],
+    "raw_excerpt": "[Submitted on 22 Jan 2025 (v1), last revised 4 Jan 2026 (this version, v2)] ... Abstract: General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) and chain-of-thought (CoT) prompting, have achieved considerable success on foundational reasoning tasks."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning (Nature 645, 633–638)",
+    "url": "https://www.nature.com/articles/s41586-025-09422-z",
+    "published_at": null,
+    "key_points": [
+      "Nature 版摘要与 arXiv v2 摘要措辞高度一致，同样以 \"Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories\" 陈述核心主张（英式拼写 human-labelled）。",
+      "Nature 版正文同样以 DeepSeek-V3 Base 为基座、GRPO 为 RL 框架，奖励仅基于最终答案正确性，并明确 \"we bypass the conventional supervised fine-tuning (SFT) phase before RL training\"。",
+      "Nature 版正文对 R1-Zero 缺陷的表述与 v2 一致：poor readability、language mixing（单条 CoT 中英混杂），以及 rule-based RL 阶段只覆盖推理任务导致写作与开放域 QA 受限。",
+      "Nature 版正文给出与 arXiv v2 相同的 R1-Zero prompt 模板（<think>...</think> 与 <answer>...</answer> 标签），并说明 \"We intentionally limit our constraints to this structural format, avoiding any content-specific biases\"。",
+      "Nature 版在数据与模型发布声明上比 arXiv 版多出 data samples：\"We release DeepSeek-R1-Zero, DeepSeek-R1, data samples and distilled models to the public as described in the 'Code availability' section.\"",
+      "Nature 版正文将 GRPO 公式、reward design 与 RL 基础设施分别下放到 Methods 章节与 Supplementary Information section 2.1，而非 arXiv 版的正文第 2 章结构。",
+      "抓取到的 Nature 正文在 \"jumping from an initial value of\" 处被截断，未能读到该版本 AIME 2024 的具体数值与训练步数原文。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. ... We release DeepSeek-R1-Zero, DeepSeek-R1, data samples and distilled models to the public as described in the 'Code availability' section. ... Figure 1a shows the performance trajectory of DeepSeek-R1-Zero on the American Invitational Mathematics Examination (AIME) 2024 benchmark throughout the RL training process, in which the average pass@1 score on AIME 2024 shows a marked increase, jumping from an initial value of [truncated]"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report (arXiv:2505.09388, v1, 14 May 2025)",
+    "url": "https://arxiv.org/abs/2505.09388",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列含 6 个 dense 模型（0.6B/1.7B/4B/8B/14B/32B）与 2 个 MoE 模型（Qwen3-30B-A3B、Qwen3-235B-A22B），参数规模 0.6B–235B，全部以 Apache 2.0 开源。",
+      "旗舰模型 Qwen3-235B-A22B 为 MoE，总参数 235B、每 token 激活 22B。",
+      "Qwen3 将 thinking mode（复杂多步推理）与 non-thinking mode（快速上下文驱动回答）整合进单一模型，无需在 chat 模型（如 GPT-4o）与专用推理模型（如 QwQ-32B）之间切换，可按用户 query 或 chat template 动态切换模式。",
+      "Qwen3 引入 thinking budget 机制，允许用户在推理阶段自适应分配计算资源，以按任务复杂度平衡延迟与性能。",
+      "预训练语料约 36 万亿 token，覆盖 119 种语言与方言（较 Qwen2.5 的 29 种大幅扩展）。",
+      "报告称 Qwen3 在代码生成、数学推理、agent 任务等基准上取得 SOTA，可与更大规模 MoE 模型及闭源模型竞争（此为作者自述主张）。",
+      "Qwen3-235B-A22B 报告分数：AIME'24 85.7、AIME'25 81.5、LiveCodeBench v5 70.7、CodeForces 2056、BFCL v3 70.8。"
+    ],
+    "raw_excerpt": "A key innovation in Qwen3 is the integration of thinking mode (for complex, multi-step reasoning) and non-thinking mode (for rapid, context-driven responses) into a unified framework. ... Qwen3 introduces a thinking budget mechanism, allowing users to allocate computational resources adaptively during inference"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report — 后训练流程与蒸馏 vs RL（arXiv HTML 全文）",
+    "url": "https://arxiv.org/html/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 采用多阶段后训练，同时赋能 thinking（推理）与 non-thinking 两种模式。",
+      "前两个后训练阶段聚焦推理能力：先用长链式思维（long CoT）冷启动微调（cold-start finetuning），再做聚焦数学与代码任务的强化学习。",
+      "后两个阶段将带推理路径与不带推理路径的数据合并为统一数据集继续微调，使模型能处理两类输入，随后施加通用领域强化学习以提升广泛下游任务表现。",
+      "对小模型采用 strong-to-weak 蒸馏（strong-to-weak distillation），同时利用 off-policy 与 on-policy 知识迁移。",
+      "报告明确表述：来自先进教师模型的蒸馏在性能与训练效率上显著优于强化学习（该结论针对小模型构建路径）。",
+      "报告将 o3、DeepSeek-R1 归为「通过强化学习优化的推理模型」，并称此类模型凸显了基础模型增强 inference-time scaling 的潜力。",
+      "报告观察到：增加 thinking token 的 thinking budget 会在多种任务上带来一致的性能提升。"
+    ],
+    "raw_excerpt": "In the first two stages, we focus on developing strong reasoning abilities through long chain-of-thought (CoT) cold-start finetuning and reinforcement learning focusing on mathematics and coding tasks. ... For smaller models, we use strong-to-weak distillation, leveraging both off-policy and on-policy knowledge tran[sfer]. ... Distillation from advanced teacher models significantly outperforms reinforcement learning in performance and training efficiency."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters",
+    "url": "https://arxiv.org/abs/2408.03314v1",
+    "published_at": "2024-08-06",
+    "key_points": [
+      "论文研究推理时计算（inference-time computation）的 scaling，核心问题是：若允许 LLM 使用固定但非平凡的推理时算力，其在困难 prompt 上的性能能提升多少。",
+      "论文分析两类扩展 test-time compute 的主要机制：(1) 针对稠密、基于过程的 verifier 奖励模型进行搜索（searching against dense, process-based verifier reward models）；(2) 在测试时根据 prompt 自适应地更新模型对回答的分布。",
+      "关键发现：不同 test-time compute 扩展方法的有效性强烈依赖于 prompt 的难度（critically varies depending on the difficulty of the prompt）。",
+      "该观察引出「compute-optimal」scaling 策略，即按每个 prompt 自适应地最有效分配 test-time compute。",
+      "采用 compute-optimal 策略后，相比 best-of-N 基线可将 test-time compute scaling 的效率提升 4 倍以上（more than 4x）。",
+      "在 FLOPs 匹配（FLOPs-matched）的评估中，对于较小基座模型能达到一定非平凡成功率的题目，test-time compute 可使性能超过大 14 倍的模型（outperform a 14x larger model）。",
+      "论文指出该问题不仅关乎 LLM 可达性能，也关乎预训练的未来以及推理时算力与预训练算力应如何权衡。"
+    ],
+    "raw_excerpt": "We find that in both cases, the effectiveness of different approaches to scaling test-time compute critically varies depending on the difficulty of the prompt. This observation motivates applying a \"compute-optimal\" scaling strategy... Using this compute-optimal strategy, we can improve the efficiency of test-time compute scaling by more than 4x compared to a best-of-N baseline. Additionally, in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "s1: Simple test-time scaling",
+    "url": "https://arxiv.org/abs/2501.19393",
+    "published_at": "2025-01-31",
+    "key_points": [
+      "论文目标是寻找实现 test-time scaling 与强推理性能的最简方法，动机是 OpenAI o1 展示了该能力但未公开方法，导致大量复现尝试。",
+      "构建了小型数据集 s1K，包含 1,000 个问题及其推理轨迹，依据三条经消融验证的标准筛选：难度（difficulty）、多样性（diversity）、质量（quality）。",
+      "提出 budget forcing 来控制 test-time compute：强制终止模型的思考过程，或在模型试图结束时多次追加 \"Wait\" 以延长思考，从而促使模型复核答案、常能修正错误的推理步骤。",
+      "在 Qwen2.5-32B-Instruct 上用 s1K 做监督微调并配合 budget forcing，得到 s1-32B，在竞赛数学题（MATH 与 AIME24）上超过 o1-preview 最多 27%。",
+      "用 budget forcing 扩展 s1-32B 可外推超出其无测试时干预时的性能：AIME24 上从 50% 提升到 57%。",
+      "模型、数据与代码均已开源；论文为 46 页（正文 9 页）、10 图、15 表；v1 提交于 2025-01-31，v3 修订于 2025-03-01。"
+    ],
+    "raw_excerpt": "Second, we develop budget forcing to control test-time compute by forcefully terminating the model's thinking process or lengthening it by appending \"Wait\" multiple times to the model's generation when it tries to end... our model s1-32B exceeds o1-preview on competition math questions by up to 27% (MATH and AIME24). Further, scaling s1-32B with budget forcing allows extrapolating beyond its performance without test-time intervention: from 50% to 57% on AIME24."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "The Art of Scaling Reinforcement Learning Compute for LLMs",
+    "url": "https://arxiv.org/abs/2510.13786",
+    "published_at": "2025-10-15",
+    "key_points": [
+      "论文指出 RL 已成为训练 LLM 的核心环节，但该领域缺乏可与预训练相比拟的、可预测的 scaling 方法论；在算力预算快速上升的背景下，缺乏评估算法改进如何随 RL 算力扩展的原则性理解。",
+      "该研究自称是首个大规模系统性研究，累计超过 400,000 GPU-hours，提出用于分析和预测 LLM 中 RL scaling 的原则性框架。",
+      "方法上为 RL 训练拟合 sigmoidal（S 型）compute-performance 曲线，并消融多种常见设计选择，分析其对渐近性能（asymptotic performance）与算力效率（compute efficiency）的影响。",
+      "发现一：并非所有 recipe 都能达到相似的渐近性能。",
+      "发现二：loss aggregation、normalization、curriculum、off-policy algorithm 等细节主要调节算力效率，而不实质性地移动渐近线（without materially shifting the asymptote）。",
+      "发现三：稳定、可扩展的 recipe 遵循可预测的 scaling 轨迹，从而支持从较小规模实验进行外推。",
+      "基于上述洞察提出最佳实践 recipe「ScaleRL」，并在单次扩展到 100,000 GPU-hours 的 RL 运行上成功预测验证集性能。",
+      "作者列表包含 Rishabh Agarwal 等（AI2/Google 背景研究者），论文为 28 页、20 图。"
+    ],
+    "raw_excerpt": "We present the first large-scale systematic study, amounting to more than 400,000 GPU-hours, that defines a principled framework for analyzing and predicting RL scaling in LLMs. We fit sigmoidal compute-performance curves for RL training and ablate a wide range of common design choices... (2) Details such as loss aggregation, normalization, curriculum, and off-policy algorithm primarily modulate compute efficiency without materially shifting the asymptote... we propose a best-practice recipe, ScaleRL, and demonstrate its effectiveness by successfully scaling and predicting validation performance on a single RL run scaled up to 100,000 GPU-hours."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Let's Verify Step by Step",
+    "url": "https://arxiv.org/abs/2305.20050v1",
+    "published_at": "2023-05-31",
+    "key_points": [
+      "论文对比了 outcome supervision（对最终结果给反馈）与 process supervision（对每个中间推理步骤给反馈）两种训练可靠模型的方式。",
+      "作者结论：在训练模型求解具有挑战性的 MATH 数据集问题上，process supervision 显著优于 outcome supervision（\"process supervision significantly outperforms outcome supervision\"）。",
+      "其过程监督模型解决了 MATH 测试集一个有代表性子集中 78% 的问题。",
+      "主动学习（active learning）能显著提升过程监督的效果。",
+      "论文发布了 PRM800K，即用于训练其最佳奖励模型的 80 万条步级人工反馈标注完整数据集。"
+    ],
+    "raw_excerpt": "We conduct our own investigation, finding that process supervision significantly outperforms outcome supervision for training models to solve problems from the challenging MATH dataset. Our process-supervised model solves 78% of problems from a representative subset of the MATH test set. ... we also release PRM800K, the complete dataset of 800,000 step-level human feedback labels used to train our best reward model."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations",
+    "url": "https://arxiv.org/abs/2312.08935",
+    "published_at": "2023-12-14",
+    "key_points": [
+      "提出面向数学解题过程的奖励模型 Math-Shepherd，为数学题解的每一步分配奖励分数。",
+      "其训练使用自动构造的过程级监督数据，突破了既有工作对人工标注的重度依赖这一瓶颈。",
+      "论文考察两种使用场景：Verification（对 LLM 生成的多个输出做重排序）与 Reinforcement Learning（用逐步 PPO 强化 LLM）。",
+      "在 Mistral-7B 上，配合 Math-Shepherd 的 step-by-step PPO 将准确率从 77.9% 提升到 84.1%（GSM8K），从 28.6% 提升到 33.0%（MATH）。",
+      "进一步用 Math-Shepherd 做验证（verification）可将准确率提升到 GSM8K 89.1%、MATH 43.5%。",
+      "作者主张自动过程监督对未来 LLM 演进具有显著潜力。"
+    ],
+    "raw_excerpt": "we present an innovative process-oriented math process reward model called Math-Shepherd, which assigns a reward score to each step of math problem solutions. The training of Math-Shepherd is achieved using automatically constructed process-wise supervision data, breaking the bottleneck of heavy reliance on manual annotation in existing work. ... the step-by-step PPO with Math-Shepherd significantly improves the accuracy of Mistral-7B (77.9%→84.1% on GSM8K and 28.6%→33.0% on MATH). The accuracy can be further enhanced to 89.1% and 43.5% on GSM8K and MATH with the verification of Math-Shepherd"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Process Reinforcement through Implicit Rewards (PRIME)",
+    "url": "https://arxiv.org/abs/2502.01456v2",
+    "published_at": "2025-02-03",
+    "key_points": [
+      "PRIME 指出在线训练 PRM 的核心困难：收集高质量过程标签代价过高，使 PRM 特别容易受到 reward hacking 影响。",
+      "PRIME 通过 implicit process rewards，仅用 policy rollouts 与 outcome labels 即可在线更新 PRM，无需专门奖励模型训练阶段。",
+      "PRIME 指出：对静态奖励模型做优化最终会因分布偏移导致 overoptimization 或 reward hacking（引 Gao et al., 2022），理想解法是在线改进奖励模型。",
+      "PRIME 指出既有过程标签获取方式不可扩展：要么需要复杂的人工标注流水线（Lightman et al., 2023），要么依赖估计方法、每步需要约 10 倍于仅采样响应级轨迹的 rollouts（Wang et al., 2023）。",
+      "PRIME 引言称当前业界领先模型主要依赖可验证的结果奖励，尚未在稠密奖励上展示出有意义的进展（引 DeepSeek-AI et al., 2025；Team et al., 2025）。",
+      "从 Qwen2.5-Math-7B-Base 出发，PRIME 相比仅用结果奖励的 RL 取得 2.5 倍样本效率提升与 6.9% 的性能提升（难题数学）。",
+      "PRIME 相比 SFT 模型在关键数学推理基准上平均提升 16.7%（摘要另处表述为 15.1% 平均提升），AMC&AIME 竞赛类提升超过 20%。",
+      "最终模型 Eurus-2-7B-PRIME 在五个关键数学基准上超过 Qwen2.5-Math-7B-Instruct，且仅使用 Qwen-Math 10% 的数据。",
+      "PRIME 分析表明在线更新 PRM 是其成功的关键，且该方法可普遍增强 RLOO、REINFORCE、PPO、GRPO 等多种 RL 算法。"
+    ],
+    "raw_excerpt": "This can be primarily attributed to the challenges of training process reward models (PRMs) online, where collecting high-quality process labels is prohibitively expensive, making them particularly vulnerable to reward hacking. ... successful applications of dense rewards in RL for LLMs are limited (Setlur et al., 2024), as current industry-leading models primarily depend on verifiable outcome rewards and have not yet demonstrated meaningful progress with dense rewards (DeepSeek-AI et al., 2025; Team et al., 2025). ... Compared to RL using outcome rewards only, PRIME achieves a 2.5× sample efficiency gain and a 6.9% performance improvements on challenging math problems."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (Section 2.2 Reward Design)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "DeepSeek-R1-Zero 采用基于规则的奖励（rule-based rewards），由两类构成：accuracy rewards（准确性奖励）与 format rewards（格式奖励）。",
+      "准确性奖励通过规则校验最终答案是否正确（如数学题要求把最终答案写在 box 内以便规则验证；代码竞赛用编译器跑预定义测试用例）。",
+      "格式奖励要求模型把推理过程放在 <think> 与 </think> 标签内。",
+      "R1 论文明确声明：在推理任务上不使用神经奖励模型——无论是 outcome-based 还是 process-based（\"we abstain from applying neural reward models—whether outcome-based or process-based—to reasoning tasks\"）。",
+      "官方给出的第一条理由是：观察到神经奖励模型在大规模强化学习过程中容易遭受 reward hacking。",
+      "官方给出的第二条理由是：重新训练这类模型需要大量计算资源，并给训练流水线引入额外复杂性，从而使整体优化过程复杂化。",
+      "R1 的奖励信号仅基于最终预测与标准答案的正确性对比，不对推理过程本身施加约束。"
+    ],
+    "raw_excerpt": "Notably, we abstain from applying neural reward models—whether outcome-based or process-based—to reasoning tasks. This decision is predicated on our observation that neural reward models are susceptible to reward hacking during large-scale reinforcement learning. Moreover, retraining such models necessitates substantial computational resources and introduces additional complexity into the training pipeline, thereby complicating the overall optimization process."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-Math Technical Report: Toward Mathematical Expert Model via Self-Improvement",
+    "url": "https://arxiv.org/abs/2409.12122v1",
+    "published_at": "2024-09-18",
+    "key_points": [
+      "Qwen2.5-Math 系列包含 Qwen2.5-Math 与 Qwen2.5-Math-Instruct-1.5B/7B/72B。",
+      "其奖励模型（RM）通过从 Qwen2-Math-Instruct 大规模采样构建，并用于 SFT 数据的迭代演化；更强的 SFT 模型可迭代训练更新 RM，再指导下一轮 SFT 数据迭代。",
+      "在最终 SFT 模型上，使用最终 RM 进行强化学习，得到 Qwen2.5-Math-Instruct。",
+      "推理阶段该 RM 也被用于引导采样（guiding sampling）。",
+      "评测覆盖 10 个中英文数学数据集，包括 GSM8K、MATH、GaoKao、AMC23、AIME24。"
+    ],
+    "raw_excerpt": "In the post-training phase, we develop a reward model (RM) by conducting massive sampling from Qwen2-Math-Instruct. This RM is then applied to the iterative evolution of data in supervised fine-tuning (SFT). With a stronger SFT model, it's possible to iteratively train and update the RM, which in turn guides the next round of SFT data iteration. On the final SFT model, we employ the ultimate RM for reinforcement learning, resulting in the Qwen2.5-Math-Instruct."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "DAPO: An Open-Source LLM Reinforcement Learning System at Scale (arXiv:2503.14476v2)",
+    "url": "https://arxiv.org/abs/2503.14476v2",
+    "published_at": "2025-03-18",
+    "key_points": [
+      "论文报告使用 Qwen2.5-32B base 模型在 AIME 2024 上达到 50 分（摘要级主张）。",
+      "作者列表含 ByteDance Seed、清华 AIR、港大、SIA-Lab；v1 提交 2025-03-18，v2 修订 2025-05-20。",
+      "论文称其开源了基于 verl 框架的训练代码与经过整理的数据集，以提升可复现性。"
+    ],
+    "raw_excerpt": "we ... fully open-source a state-of-the-art large-scale RL system that achieves 50 points on AIME 2024 using Qwen2.5-32B base model."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "DAPO 论文正文（HTML 版，Section 1-3）",
+    "url": "https://arxiv.org/html/2503.14476v2",
+    "published_at": "2025-05-20",
+    "key_points": [
+      "基线对比：作者最初的朴素 GRPO 训练在 AIME 上只得到 30 分，低于 DeepSeek 的 RL 结果（47 分）。",
+      "DAPO 在 Qwen2.5-32B 上达到 AIME 2024 50 分，超过 DeepSeek-R1-Zero-Qwen-32B 的 47 分，且只用了 50% 的训练步数。",
+      "四项关键技术：Clip-Higher（解耦 ε_low/ε_high 以缓解熵坍缩）、Dynamic Sampling（过滤准确率为 1 和 0 的 prompt 组）、Token-Level Policy Gradient Loss、Overlong Reward Shaping。",
+      "DAPO 去掉了 KL 惩罚项（Section 2.3：长 CoT 推理训练中模型分布可显著偏离初始模型，该限制不必要）。",
+      "奖励为基于规则的 0/1 式结果奖励：答案等价给 +1，否则 -1（式 7），不使用 reward model 以避免 reward hacking。",
+      "作者指出社区在复现 DeepSeek 结果时遇到类似困难，暗示 R1 论文可能省略了关键训练细节。"
+    ],
+    "raw_excerpt": "In our initial GRPO run, we achieved only 30 points on AIME — a performance significantly below DeepSeek's RL (47 points). ... The broader community has encountered similar challenges in reproducing DeepSeek's results [13,14,15,16,17,18,19] suggesting that critical training details may have been omitted in the R1 paper"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "DAPO 项目主页（dapo-sia.github.io）",
+    "url": "https://dapo-sia.github.io/",
+    "published_at": null,
+    "key_points": [
+      "项目主页称 DAPO 在 Qwen2.5-32B base 上于 AIME 2024 达到 50% 准确率，且训练步数少 50%，超过 DeepSeek-R1-Zero-Qwen-32B。",
+      "训练数据为 DAPO-Math-17k（约 17k 条数学题），验证集为 AIME 2024 数据集。",
+      "验证器为基于字符串归一化与匹配的规则式 verifier。",
+      "训练从 Qwen-32B-Base 从零开始，使用 128 张 H20 GPU，在火山引擎机器学习平台上完成。"
+    ],
+    "raw_excerpt": "We utilize verl to perform DAPO training using the Qwen-32B-Base model from scratch with 128 H20 GPUs. ... Training: DAPO-Math-17k, an elaborately curated math dataset. Validation: AIME 2024 dataset."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "huggingface/trl — GitHub 仓库元数据",
+    "url": "https://github.com/huggingface/trl",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "huggingface/trl 当前 GitHub stars 为 19,600。",
+      "huggingface/trl 当前 forks 为 3,098。",
+      "该仓库最近一次 push 日期为 2026-10-25。",
+      "仓库主语言为 Python，描述为 'Train transformer language models with reinforcement learning.'"
+    ],
+    "raw_excerpt": "huggingface/trl (★19600, forks 3098)\ndesc: Train transformer language models with reinforcement learning.\nlang: Python | last push: 2026-10-25\nurl: https://github.com/huggingface/trl"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "OpenRLHF/OpenRLHF — GitHub 仓库元数据",
+    "url": "https://github.com/OpenRLHF/OpenRLHF",
+    "published_at": "2026-10-05",
+    "key_points": [
+      "OpenRLHF/OpenRLHF 当前 GitHub stars 为 10,118。",
+      "OpenRLHF/OpenRLHF 当前 forks 为 1,053。",
+      "该仓库最近一次 push 日期为 2026-10-05。",
+      "仓库主语言为 Python，描述为基于 Ray 的 Agentic RL 框架，支持 PPO、DAPO、REINFORCE++、VLM、TIS、vLLM、Async RL。"
+    ],
+    "raw_excerpt": "OpenRLHF/OpenRLHF (★10118, forks 1053)\ndesc: An Easy-to-use, Scalable and High-performance Agentic RL Framework based on Ray (PPO & DAPO & REINFORCE++ &  VLM & TIS & vLLM & Ray & Async  RL)\nlang: Python | last push: 2026-10-05"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "unslothai/unsloth — GitHub 仓库元数据",
+    "url": "https://github.com/unslothai/unsloth",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "unslothai/unsloth 当前 GitHub stars 为 78,531。",
+      "unslothai/unsloth 当前 forks 为 7,284。",
+      "该仓库最近一次 push 日期为 2026-10-25。",
+      "仓库主语言为 Python，描述为本地运行与训练 LLM/扩散模型的 UI，支持 GGUF、MLX 等格式。"
+    ],
+    "raw_excerpt": "unslothai/unsloth (★78531, forks 7284)\ndesc: Local UI to run and train LLMs and diffusion models. Supports GGUF, MLX, Qwen3.8, DeepSeek-V4.1, MiniMax-H3, Gemma 4, FLUX and more.\nlang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "verl-project/verl（原 volcengine/verl）— GitHub 仓库元数据",
+    "url": "https://github.com/verl-project/verl",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "以 'volcengine/verl' 精确检索未返回该主仓库，仅返回第三方 fork（Mriris/verl，0 stars）与两个下游工作流仓库。",
+      "改用上位词 'verl' 按 stars 排序检索，命中主仓库现位于 verl-project/verl。",
+      "verl-project/verl 当前 GitHub stars 为 24,008。",
+      "verl-project/verl 当前 forks 为 4,808。",
+      "该仓库最近一次 push 日期为 2026-10-23。",
+      "仓库主语言为 Python，描述为 'verl/HybridFlow: A Flexible and Efficient RL Post-Training Framework'。"
+    ],
+    "raw_excerpt": "verl-project/verl (★24008, forks 4808)\ndesc: verl/HybridFlow: A Flexible and Efficient RL Post-Training Framework\nlang: Python | last push: 2026-10-23\nurl: https://github.com/verl-project/verl"
+  }
+]

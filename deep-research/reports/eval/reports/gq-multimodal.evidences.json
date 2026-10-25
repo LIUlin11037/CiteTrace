@@ -1,0 +1,610 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on Multimodal Large Language Models (Yin, Fu, Zhao et al.; arXiv:2306.13549v4; accepted by National Science Review)",
+    "url": "https://arxiv.org/abs/2306.13549",
+    "published_at": "2023-06-23 (v1); last revised 2024-11-29 (v4)",
+    "key_points": [
+      "该综述将 MLLM 形式化定义为「基于 LLM、能够接收、推理并输出多模态信息的模型」（LLM-based model with the ability to receive, reason, and output with multimodal information）。",
+      "典型 MLLM 架构被抽象为三个模块：预训练模态编码器（modality encoder）、预训练 LLM、以及连接二者的模态接口（modality interface / connector）；部分 MLLM 还附带生成器（generator）以输出文本之外的模态。",
+      "连接器（connector）被明确分为三类：projection-based、query-based、fusion-based；前两类采用 token 级融合（token-level fusion），把特征处理成 token 与文本一同送入 LLM。",
+      "该综述把 MLLM 归入「生成式」范式（以 OFA 的 sequence-to-sequence 统一多模态任务为代表），区别于 CLIP 为代表的「判别式」范式；并指出 MLLM 相对传统多模态模型的两大特征：十亿级参数 LLM 基座、以及多模态指令微调等新训练范式。",
+      "编码器选择上存在「有编码器」与「无编码器（encoder-free）」两条路线：Fuyu-8B 直接将图像 patch 投影后送入 LLM，从而天然支持灵活分辨率。",
+      "提升输入分辨率的方法被归为两类：direct scaling（直接放大输入/换更高分辨率预训练编码器，如 CogAgent 的双编码器机制）与 patch-division（切块复用低分辨率编码器，如 Monkey、SPHINX）。",
+      "该综述自述为「据其所知第一篇 MLLM 综述」（To the best of our knowledge, this is the first survey on MLLM），并已被 National Science Review 接收（DOI: 10.1093/nsr/nwae403）。",
+      "多模态输出扩展方面，该综述以 NExT-GPT 为例说明除输入外还可支持不同模态的输出。"
+    ],
+    "raw_excerpt": "A typical MLLM can be abstracted into three modules, i.e. a pre-trained modality encoder, a pre-trained LLM, and a modality interface to connect them. ... There are broadly three types of connectors: projection-based, query-based, and fusion-based connectors. The former two types adopt token-level fusion, processing features into tokens to be sent along with text ... Some works also explore encoder-free architecture. For instance, the image patches of Fuyu-8b are directly projected before sending to LLMs. Thus, the model naturally supports flexible image resolution input."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "An Introduction to Vision-Language Modeling (Bordes, Pang, Ajay et al.; arXiv:2405.17247)",
+    "url": "https://arxiv.org/abs/2405.17247",
+    "published_at": "2024-05-27",
+    "key_points": [
+      "该文定位为面向入门者的 VLM 导论（introduction/tutorial），系统介绍 VLM 是什么、如何工作、如何训练，并讨论 VLM 的评测方法。",
+      "该文指出视觉-语言映射的核心困难在于模态表征差异：语言是离散的，而视觉存在于维度高得多的连续空间中，概念并不总能被轻易离散化（language is discrete, vision evolves in a much higher dimensional space in which concepts cannot always be easily discretized）。",
+      "该文主要聚焦「图像到语言」的映射，并额外讨论了将 VLM 扩展到视频的方向。",
+      "该文由 Meta/FAIR 等机构共 41 位作者合著，属机构级系统性导论，可作为 VLM 基础概念（编码器-对齐-LLM 训练范式）的教科书级参考。"
+    ],
+    "raw_excerpt": "While language is discrete, vision evolves in a much higher dimensional space in which concepts cannot always be easily discretized. To better understand the mechanics behind mapping vision to language, we present this introduction to VLMs ... First, we introduce what VLMs are, how they work, and how to train them. Then, we present and discuss approaches to evaluate VLMs. Although this work primarily focuses on mapping images to language, we also discuss extending VLMs to videos."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "NExT-GPT: Any-to-Any Multimodal LLM (Wu, Fei, Qu, Ji, Chua; arXiv:2309.05519; ICML 2024 Oral)",
+    "url": "https://arxiv.org/abs/2309.05519",
+    "published_at": "2023-09-11 (v1); v3 2024-06-25",
+    "key_points": [
+      "该文指出当时多数 MM-LLM 的局限是「仅具备输入侧的多模态理解能力，无法以多模态产出内容」（only input-side multimodal understanding, without the ability to produce content in multiple modalities）。",
+      "NExT-GPT 采用「LLM + 多模态适配器（multimodal adaptors）+ 多个扩散解码器（diffusion decoders）」的端到端系统结构，可接受并生成文本、图像、视频、音频的任意组合输入输出（any-to-any）。",
+      "该系统复用已有的高性能编码器与解码器，仅微调约 1% 的参数（certain projection layers），从而降低训练成本并便于扩展到更多模态——这是「模块化拼接」路线的典型工程特征。",
+      "该文提出 modality-switching instruction tuning (MosIT) 并人工构建高质量数据集，以赋予模型复杂跨模态语义理解与内容生成能力。",
+      "该工作发表于 ICML 2024（Oral）。"
+    ],
+    "raw_excerpt": "While recently Multimodal Large Language Models (MM-LLMs) have made exciting strides, they mostly fall prey to the limitation of only input-side multimodal understanding, without the ability to produce content in multiple modalities. ... We connect an LLM with multimodal adaptors and different diffusion decoders, enabling NExT-GPT to perceive inputs and generate outputs in arbitrary combinations of text, images, videos, and audio. By leveraging the existing well-trained highly-performing encoders and decoders, NExT-GPT is tuned with only a small amount of parameter (1%) of certain projection layers ..."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Chameleon: Mixed-Modal Early-Fusion Foundation Models",
+    "url": "https://arxiv.org/abs/2405.09818v2",
+    "published_at": "2024-05-16",
+    "key_points": [
+      "提出 Chameleon，一个 early-fusion、token-based 的 mixed-modal 模型家族，能在任意交错序列中理解并生成图像与文本。",
+      "论文声称给出了从训练初期即稳定的训练方法、对齐配方（alignment recipe），以及专为 early-fusion token-based mixed-modal 设定设计的架构参数化（architectural parameterization）。",
+      "评估覆盖 VQA、图像描述、文本生成、图像生成与长形式混合模态生成；作者称在图像描述任务上达到 SOTA，文本任务上超过 Llama-2、与 Mixtral 8x7B 和 Gemini-Pro 相当。",
+      "作者称在自建的长形式混合模态生成评测上，按人类判断匹配或超过 Gemini Pro 与 GPT-4V。",
+      "论文将自身定位为「统一建模完整多模态文档（unified modeling of full multimodal documents）」的一步。",
+      "注意：上述 SOTA/超越 GPT-4V 等表述均为论文作者自述主张，本次未能通过独立来源交叉验证。"
+    ],
+    "raw_excerpt": "We present Chameleon, a family of early-fusion token-based mixed-modal models capable of understanding and generating images and text in any arbitrary sequence. We outline a stable training approach from inception, an alignment recipe, and an architectural parameterization tailored for the early-fusion, token-based, mixed-modal setting."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Transfusion: Predict the Next Token and Diffuse Images with One Multi-Modal Model",
+    "url": "https://arxiv.org/abs/2408.11039v1",
+    "published_at": "2024-08-20",
+    "key_points": [
+      "Transfusion 是一种在离散与连续数据上训练多模态模型的配方：把语言建模损失（next token prediction）与扩散（diffusion）结合，用单个 transformer 训练混合模态序列。",
+      "从零预训练了多个最高 7B 参数的 Transfusion 模型，数据为文本与图像混合，并给出了在单模态与跨模态基准上的 scaling law。",
+      "实验显示 Transfusion 的扩展性显著优于「把图像量化后用离散图像 token 训练语言模型」的做法。",
+      "引入模态专属的编码与解码层（modality-specific encoding and decoding layers）可进一步提升性能，并能把每张图像压缩到仅 16 个 patch。",
+      "将配方扩展到 7B 参数、2T 多模态 token 后，模型生成图像与文本的能力与同规模扩散模型和语言模型相当。",
+      "该工作代表「理解+生成统一」中与纯离散 token 路线（Chameleon/Emu3）相对的另一支：连续图像表示 + 扩散目标。"
+    ],
+    "raw_excerpt": "Transfusion combines the language modeling loss function (next token prediction) with diffusion to train a single transformer over mixed-modality sequences. ... Our experiments show that Transfusion scales significantly better than quantizing images and training a language model over discrete image tokens."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Emu3: Next-Token Prediction is All You Need",
+    "url": "https://arxiv.org/abs/2409.18869v1",
+    "published_at": "2024-09-27",
+    "key_points": [
+      "Emu3 是一组仅用 next-token prediction 训练的多模态模型：把图像、文本、视频 tokenize 到离散空间，从零训练单个 transformer 于混合多模态序列上。",
+      "作者称 Emu3 在生成与感知任务上均超过若干任务专用模型，超过 SDXL 与 LLaVA-1.6，且不需要扩散或组合式（compositional）架构。",
+      "Emu3 能通过在视频序列上预测下一个 token 生成高保真视频。",
+      "论文明确把自身路线表述为「收敛到 token 这一单一焦点」，以简化复杂多模态模型设计，并称 next-token prediction 是通向语言之外通用多模态智能的路径。",
+      "论文称开源了关键技术（open-source key techniques and models）。",
+      "注意：超过 SDXL / LLaVA-1.6 为作者自述主张，本次未取得结果表格与独立验证。"
+    ],
+    "raw_excerpt": "By tokenizing images, text, and videos into a discrete space, we train a single transformer from scratch on a mixture of multimodal sequences. Emu3 outperforms several well-established task-specific models in both generation and perception tasks, surpassing flagship models such as SDXL and LLaVA-1.6, while eliminating the need for diffusion or compositional architectures."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "LLaVA-OneVision: Easy Visual Task Transfer",
+    "url": "https://arxiv.org/abs/2408.03326v3",
+    "published_at": "2024-08-06",
+    "key_points": [
+      "LLaVA-OneVision 是开放大模型（open LMMs）家族，整合了 LLaVA-NeXT 系列博客中关于数据、模型与视觉表征的经验。",
+      "作者称它是首个能在单图、多图、视频三类场景同时推进开放 LMM 性能边界的单一模型。",
+      "其设计支持跨模态/跨场景的强迁移学习，并由此产生新的涌现能力；图像到视频的任务迁移带来强视频理解与跨场景能力。",
+      "该论文属于「视觉编码器-投影器-LLM」组合式（compositional）路线的代表，与 Chameleon/Emu3 的 early-fusion 路线形成对照。"
+    ],
+    "raw_excerpt": "We present LLaVA-OneVision, a family of open large multimodal models (LMMs) developed by consolidating our insights into data, models, and visual representations in the LLaVA-NeXT blog series. ... LLaVA-OneVision is the first single model that can simultaneously push the performance boundaries of open LMMs in three important computer vision scenarios: single-image, multi-image, and video scenarios."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+    "url": "https://arxiv.org/abs/2409.17146v2",
+    "published_at": "2024-09-25",
+    "key_points": [
+      "Molmo 是一个强调开放性的 VLM 家族，配套发布 PixMo 数据集集合：用于预训练的高细节图像描述数据、用于微调的自由形式图像问答数据，以及一个 2D 指向（pointing）数据集。",
+      "PixMo 全部数据在采集过程中未使用外部 VLM，作者以此区别于依赖专有 VLM 合成数据蒸馏的开放权重模型。",
+      "作者指出当时最强的开放权重模型严重依赖专有 VLM 的合成数据，实质上是对闭源 VLM 的蒸馏，导致社区缺乏「从零构建高性能 VLM」的基础知识。",
+      "作者称最佳 72B 模型在开放权重与开放数据类别中领先，并超过 Claude 3.5 Sonnet、Gemini 1.5 Pro/Flash，在学术基准与大规模人类评测上仅次于 GPT-4o。",
+      "该工作代表组合式路线中「数据与训练配方」而非架构创新的改进方向。",
+      "注意：排名主张为作者自述，未获独立验证。"
+    ],
+    "raw_excerpt": "Our key contribution is a collection of new datasets called PixMo, including a dataset of highly detailed image captions for pre-training, a free-form image Q&A dataset for fine-tuning, and an innovative 2D pointing dataset, all collected without the use of external VLMs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Imagen 3",
+    "url": "https://arxiv.org/abs/2408.07009v3",
+    "published_at": "2024-08-13",
+    "key_points": [
+      "Imagen 3 是一个 latent diffusion 模型，从文本提示生成高质量图像。",
+      "论文内容聚焦质量评估与责任（安全、表征）评估，作者称 Imagen 3 在评估时点优于其他 SOTA 模型。",
+      "该论文是纯生成式扩散路线的代表，不含统一理解+生成的单一 transformer 架构，可作为「生成侧仍以扩散为主」这一背景的对照证据。",
+      "注意：SOTA 主张为作者自述，且该论文摘要未给出具体基准分数。"
+    ],
+    "raw_excerpt": "We introduce Imagen 3, a latent diffusion model that generates high quality images from text prompts. We describe our quality and responsibility evaluations. Imagen 3 is preferred over other state-of-the-art (SOTA) models at the time of evaluation."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Qwen2.5-VL Technical Report (arXiv:2502.13923v1)",
+    "url": "https://arxiv.org/html/2502.13923v1",
+    "published_at": "2025-02-19",
+    "key_points": [
+      "Qwen2.5-VL 采用三模块架构：视觉编码器 + 视觉-语言 Merger（投影器）+ LLM 解码器。",
+      "视觉编码器为从零训练的原生动态分辨率 ViT：hidden size 1280、32 层、16 个注意力头、intermediate size 3456、patch size 14、window size 112；三个尺寸（3B/7B/72B）共用同一 ViT 配置。",
+      "ViT 仅在 4 层使用全自注意力（full attention block indexes {7,15,23,31}），其余层使用最大 112×112（8×8 patch）窗口注意力；采用 2D-RoPE、RMSNorm、SwiGLU。",
+      "Vision-Language Merger 的输入通道 1280，输出通道分别为 2048（3B）/3584（7B）/8192（72B），与对应 LLM hidden size 对齐。",
+      "LLM 骨干由 Qwen2.5 LLM 预训练权重初始化，并把 1D RoPE 改为对齐绝对时间的 MRoPE。",
+      "LLM 配置：3B 为 hidden 2048/36 层/2 KV heads/intermediate 4864/embedding tying 开启；7B 为 hidden 3584/28 层/4 KV heads/intermediate 18944；72B 为 hidden 8192/80 层/8 KV heads/intermediate 29568；head size 均为 128，词表 151646。",
+      "三个尺寸的训练 token 量均为 4.1T，预训练语料从 1.2 万亿 token 扩展到 4.1 万亿 token。",
+      "图像输入的高宽在训练与推理时都 resize 到 28 的倍数，ViT 以 stride 14 切 patch；视频按 3D patch 划分，连续两帧成组以减少送入 LLM 的 token 数。",
+      "ViT 训练分多个阶段：CLIP 预训练、视觉-语言对齐、端到端微调。",
+      "模型提供 3B/7B/72B 三个尺寸；论文称旗舰 Qwen2.5-VL-72B 与 GPT-4o、Claude 3.5 Sonnet 相当（属作者自述主张）。"
+    ],
+    "raw_excerpt": "The overall model architecture of Qwen2.5-VL consists of three components: Large Language Model ... Vision Encoder ... In Table 1, the architecture and configuration of Qwen2.5-VL are detailed. [Table 1] Vision Transformer (ViT) Hidden Size 1280 / # Layers 32 / # Num Heads 16 / Intermediate Size 3456 / Patch Size 14 / Window Size 112 / Full Attention Block Indexes {7, 15, 23, 31}; Vision-Language Merger In Channel 1280, Out Channel 2048 / 3584 / 8192 ... In our architecture, only four layers employ full self-attention, while the remaining layers utilize windowed attention with a maximum window size of 112×112 (corresponding to 8×8 patches). ... we train the redesigned ViT from scratch. The training process consists of several stages, including CLIP pre-training, vision-language alignment, and end-to-end fine-tuning."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Qwen3-VL Technical Report (arXiv:2511.21631v2)",
+    "url": "https://arxiv.org/html/2511.21631v2",
+    "published_at": "2025-11-26",
+    "key_points": [
+      "Qwen3-VL 沿用 Qwen2.5-VL 的三模块架构：视觉编码器 + 基于 MLP 的视觉-语言 merger + LLM。",
+      "视觉编码器改用 SigLIP-2 架构（不再是 Qwen2.5-VL 的自研 ViT），从官方预训练 checkpoint 初始化后以动态分辨率继续训练；默认使用 SigLIP2-SO-400M，2B/4B 小模型使用 SigLIP2-Large（300M）。",
+      "为支持动态分辨率，视觉编码器采用 2D-RoPE 并按输入尺寸插值绝对位置嵌入（沿用 CoMP 方法）。",
+      "投影器为两层 MLP，把 2×2 视觉特征压缩为单个视觉 token 并对齐 LLM hidden 维度；另有专用 merger 支持 DeepStack。",
+      "模型族包含 dense 2B/4B/8B/32B 与 MoE 30B-A3B/235B-A22B，全部基于 Qwen3 骨干；旗舰 Qwen3-VL-235B-A22B 总参 235B、每 token 激活 22B。",
+      "原生支持最长 256K token 的交错多模态上下文（文本、图像、视频），预训练上下文长度扩展到 256K。",
+      "架构三项升级：interleaved-MRoPE（把 t/h/w 分量交错分布到高低频段）、DeepStack（从 ViT 三个不同层级抽取视觉 token，经专用 merger 注入 LLM 前三个层的 hidden states）、文本时间戳 token 替代 Qwen2.5-VL 的绝对时间位置编码。",
+      "训练流程：预训练四阶段——先只更新 merger（视觉-语言投影）层的 warm-up 对齐阶段，其余参数冻结，随后全参数训练，上下文长度依次为 8K、32K、256K；后训练三阶段——长链式思维 SFT、从更强教师模型蒸馏、强化学习。",
+      "后训练分叉为 non-thinking 与 thinking 两个变体；训练目标从 per-sample loss 改为 square-root 归一化的 per-token loss 以平衡文本与多模态数据。"
+    ],
+    "raw_excerpt": "Following Qwen2.5-VL, Qwen3-VL adopts a three-module architecture comprising a vision encoder, an MLP-based vision–language merger, and a large language model (LLM). ... We utilize the SigLIP-2 architecture as our vision encoder and continue training it with dynamic input resolutions, initialized from official pretrained checkpoints. ... we default to the SigLIP2-SO-400M variant and use SigLIP2-Large (300M) for small-scale LLMs (2B and 4B). ... we use a two-layer MLP to compress 2×2 visual features from the vision encoder into a single visual token ... Pretraining proceeds in four phases: a warm-up alignment phase that updates only the merger (vision–language projection) layers while keeping the rest of the model frozen, followed by full-parameter training with progressively larger context windows at 8K, 32K, and 256K sequence lengths."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "InternVL3: Exploring Advanced Training and Test-Time Recipes for Open-Source Multimodal Models (arXiv:2504.10479v3)",
+    "url": "https://arxiv.org/html/2504.10479v3",
+    "published_at": "2025-04-14",
+    "key_points": [
+      "InternVL3 沿用「ViT-MLP-LLM」范式，视觉编码器提供 InternViT-300M 与 InternViT-6B 两种配置。",
+      "LLM 骨干使用 Qwen2.5 系列与 InternLM3-8B 的预训练 base 模型（不使用指令微调版本）初始化。",
+      "MLP 投影器为两层网络、随机初始化；沿用 InternVL2.5 的 pixel unshuffle 操作，把视觉 token 数压缩到四分之一，每个 448×448 图像 tile 表示为 256 个视觉 token。",
+      "InternVL3 采用原生多模态预训练（native multimodal pre-training）：在单一预训练阶段同时用多模态数据与纯文本语料联合学习多模态与语言能力，而非把纯文本 LLM 事后改造为 MLLM。",
+      "引入 variable visual position encoding (V2PE) 以支持更长的多模态上下文。",
+      "后训练采用 SFT + mixed preference optimization (MPO)，并配合测试时扩展策略。",
+      "InternVL3-78B 在 MMMU 上得 72.2 分（论文称其为当时开源 MLLM 的 SOTA，属作者自述主张）。",
+      "论文称将公开训练数据与模型权重。"
+    ],
+    "raw_excerpt": "The architecture of InternVL3 follows the same general framework as its predecessors, adhering to the \"ViT-MLP-LLM\" paradigm ... The vision encoder is available in two configurations: InternViT-300M and InternViT-6B. For the language model, we leverage pre-trained large language models (LLMs), specifically the Qwen2.5 series and InternLM3-8B. ... The multilayer perceptron (MLP) utilized in the model is a two-layer network with random initialization. ... This operation reduces the visual token count to one-quarter of its original value, representing each 448×448 image tile with 256 visual tokens. ... InternVL3 learns multimodal capabilities from the pre-training stage by jointly exposed to both text-only corpora and diverse multimodal datasets."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency (arXiv:2508.18265v2)",
+    "url": "https://arxiv.org/html/2508.18265v2",
+    "published_at": "2025-08-25",
+    "key_points": [
+      "InternVL3.5 沿用「ViT–MLP–LLM」范式，视觉编码器用 InternViT-300M 或 InternViT-6B，语言模型用 Qwen3 系列与 GPT-OSS 初始化，并保留 InternVL1.5 的 Dynamic High Resolution 策略。",
+      "各尺寸配置（视觉/语言/总参数）：1B = InternViT-300M + Qwen3-0.6B（0.3B/0.8B/1.1B）；2B = InternViT-300M + Qwen3-1.7B（0.3B/2.0B/2.3B）；4B = InternViT-300M + Qwen3-4B（0.3B/4.4B/4.7B）；8B = InternViT-300M + Qwen3-8B（0.3B/8.2B/8.5B）；14B = InternViT-300M + Qwen3-14B（0.3B/14.8B/15.1B）；38B = InternViT-6B + Qwen3-32B（5.5B/32.8B/38.4B）。",
+      "MoE 配置：20B-A4B = InternViT-300M + GPT-OSS-20B（0.3B/20.9B/21.2B，激活 4B）；30B-A3B = InternViT-300M + Qwen3-30B-A3B（0.3B/30.5B/30.8B，激活 3B）；241B-A28B = InternViT-6B + Qwen3-235B-A22B（5.5B/235.1B/240.7B，激活 28B）。",
+      "视觉 token 压缩：每个图像 patch 先由视觉编码器表示为 1024 个视觉 token，再经 pixel shuffle 模块压缩为 256 个 token 送入 LLM。",
+      "InternVL3.5-Flash 额外加入 Visual Resolution Router (ViR)：为每个 patch 增加一个更高压缩率的 pixel shuffle 模块，可把视觉 token 压缩到 64 个；patch router 依据语义丰富度选择压缩率（如 1/4 或 1/16），可减少 50% 视觉 token 而保持接近 100% 的性能。",
+      "预训练阶段联合更新全部模型参数，使用大规模文本与多模态语料，采用 next token prediction 损失，并用 square averaging 对 NTP 损失重加权。",
+      "后训练提出 Cascade RL：离线 RL 阶段保证稳定收敛，在线 RL 阶段精调对齐。",
+      "提出 Decoupled Vision-Language Deployment (DvD)，把视觉编码器与语言模型分置不同 GPU 以平衡计算负载。",
+      "论文称相比 InternVL3 推理最高加速 4.05×、整体推理性能最高提升 +16.0%；InternVL3.5-8B 与 241B-A28B 在 MMMU 上分别为 73.4 与 77.7 分（作者自述主张）。"
+    ],
+    "raw_excerpt": "InternVL3.5 adopts the \"ViT–MLP–LLM\" paradigm as in previous versions. ... we initialize the language model using the Qwen3 series and GPT-OSS, and the vision encoder using InternViT-300M and InternViT-6B. ... InternVL3.5-241B-A28B | InternViT-6B | Qwen3-235B-A22B | 5.5B | 235.1B | 240.7B (A28B) ... in InternVL3.5, each image patch is initially represented as 1024 visual tokens for the vision encoder, which are then compressed into 256 tokens via a pixel shuffle module before being passed to the Large Language Model (LLM). In InternVL3.5-Flash ... enabling compression of visual tokens down to 64 tokens."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "sgl-project/sglang — high-performance serving framework for LLMs and multimodal models",
+    "url": "https://github.com/sgl-project/sglang",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 sgl-project/sglang 有 38108 stars、9881 forks，语言为 Python，last push 时间为 2026-10-25。",
+      "仓库简介自述为「a high-performance serving framework for large language models and multimodal models」，即定位为同时服务纯文本 LLM 与多模态模型的推理框架。"
+    ],
+    "raw_excerpt": "sgl-project/sglang (★38108, forks 9881) desc: SGLang is a high-performance serving framework for large language models and multimodal models. lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "QwenLM/Qwen3-VL — multimodal large language model series by Qwen team, Alibaba Cloud",
+    "url": "https://github.com/QwenLM/Qwen3-VL",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 QwenLM/Qwen3-VL 有 20116 stars、1873 forks，语言标注为 Jupyter Notebook，last push 时间为 2026-01-30。",
+      "仓库简介自述为「Qwen3-VL is the multimodal large language model series developed by Qwen team, Alibaba Cloud」，表明 Qwen3-VL 以系列化多模态模型形式在 GitHub 开源发布。"
+    ],
+    "raw_excerpt": "QwenLM/Qwen3-VL (★20116, forks 1873) desc: Qwen3-VL is the multimodal large language model series developed by Qwen team, Alibaba Cloud. lang: Jupyter Notebook | last push: 2026-01-30"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "BradyFU/Awesome-Multimodal-Large-Language-Models — latest advances tracking list",
+    "url": "https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 BradyFU/Awesome-Multimodal-Large-Language-Models 有 18066 stars、1136 forks，无主语言标注，last push 时间为 2026-10-01。",
+      "该仓库定位为持续追踪多模态大模型最新进展的汇总清单（Latest Advances on Multimodal Large Language Models）。"
+    ],
+    "raw_excerpt": "BradyFU/Awesome-Multimodal-Large-Language-Models (★18066, forks 1136) desc: :sparkles::sparkles:Latest Advances on Multimodal Large Language Models lang: n/a | last push: 2026-10-01"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "NExT-GPT/NExT-GPT — any-to-any multimodal LLM (ICML 2024)",
+    "url": "https://github.com/NExT-GPT/NExT-GPT",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 NExT-GPT/NExT-GPT 有 3634 stars、359 forks，语言为 Python，last push 时间为 2025-05-13。",
+      "仓库简介标明其为 ICML 2024 论文 NExT-GPT: Any-to-Any Multimodal Large Language Model 的代码与模型发布。"
+    ],
+    "raw_excerpt": "NExT-GPT/NExT-GPT (★3634, forks 359) desc: Code and models for ICML 2024 paper, NExT-GPT: Any-to-Any Multimodal Large Language Model. lang: Python | last push: 2025-05-13"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "gpt-omni/mini-omni — open-source omni multimodal LLM with real-time speech input/output",
+    "url": "https://github.com/gpt-omni/mini-omni",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 gpt-omni/mini-omni 有 3585 stars、311 forks，语言为 Python，last push 时间为 2024-11-05。",
+      "仓库简介自述为「open-source multimodal large language model that can hear, talk while thinking」，具备实时端到端语音输入与流式音频输出对话能力。"
+    ],
+    "raw_excerpt": "gpt-omni/mini-omni (★3585, forks 311) desc: open-source multimodal large language model that can hear, talk while thinking. Featuring real-time end-to-end speech input and streaming audio output conversational capabilities. lang: Python | last push: 2024-11-05"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "NVIDIA-NeMo/Speech — scalable generative AI framework for LLM, multimodal and speech",
+    "url": "https://github.com/NVIDIA-NeMo/Speech",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 NVIDIA-NeMo/Speech 有 18613 stars、3656 forks，语言为 Python，last push 时间为 2026-10-25。",
+      "仓库简介自述为面向 LLM、多模态与语音 AI（ASR/TTS）研究的可扩展生成式 AI 框架。"
+    ],
+    "raw_excerpt": "NVIDIA-NeMo/Speech (★18613, forks 3656) desc: A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition/Text-to-Speech) lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "stanford-crfm/helm — holistic evaluation framework incl. multimodal models",
+    "url": "https://github.com/stanford-crfm/helm",
+    "published_at": null,
+    "key_points": [
+      "仓库列表元数据显示 stanford-crfm/helm 有 2958 stars、427 forks，语言为 Python，last push 时间为 2026-09-01。",
+      "仓库简介自述为对基础模型（含 LLM 与多模态模型）进行整体、可复现、透明评测的开源 Python 框架。"
+    ],
+    "raw_excerpt": "stanford-crfm/helm (★2958, forks 427) desc: Holistic Evaluation of Language Models (HELM) is an open source Python framework created by the Center for Research on Foundation Models (CRFM) at Stanford for holistic, reproducible and transparent evaluation of foundation models, including large language models (LLMs) and multimodal models. lang: Python | last push: 2026-09-01"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Gemini 2.5: Our most intelligent AI model (Google 官方博客, Koray Kavukcuoglu)",
+    "url": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
+    "published_at": "2025-03-25",
+    "key_points": [
+      "博客明确以「native multimodality」描述 Gemini 2.5 所继承的模型特性，原文表述为「Gemini 2.5 builds on what makes Gemini models great — native multimodality and a long context window」。",
+      "Gemini 2.5 Pro 发布时提供 100 万 token 上下文窗口，并称 200 万 token「coming soon」。",
+      "模型可处理的输入模态包括 text、audio、images、video 以及 entire code repositories。",
+      "Gemini 2.5 被定位为 thinking model，通过「significantly enhanced base model + improved post-training」实现性能提升，并将 thinking 能力内建到后续所有模型。",
+      "该博客未出现 vision encoder、early fusion 或 Mixture-of-Experts / MoE 的任何表述。"
+    ],
+    "raw_excerpt": "Gemini 2.5 builds on what makes Gemini models great — native multimodality and a long context window. 2.5 Pro ships today with a 1 million token context window (2 million coming soon), with strong performance that improves over previous generations. It can comprehend vast datasets and handle complex problems from different information sources, including text, audio, images, video and even entire code repositories."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Gemini 2.0 is now available to everyone (Google 官方博客, Koray Kavukcuoglu)",
+    "url": "https://blog.google/technology/google-deepmind/gemini-model-updates-february-2025/",
+    "published_at": "2025-02-05",
+    "key_points": [
+      "Gemini 2.0 Flash 被描述为具备「multimodal reasoning across vast amounts of information with a context window of 1 million tokens」。",
+      "Gemini 2.0 系列发布时「All of these models will feature multimodal input with text output on release, with more modalities ready for general availability in the coming months」——即发布时为多模态输入、文本输出。",
+      "Gemini 2.0 Pro Experimental 提供该系列最大上下文窗口，为 200 万 token；2.0 Flash 与 2.0 Flash-Lite 均为 100 万 token 上下文窗口。",
+      "Gemini 2.0 Flash-Lite 同样具备 100 万 token 上下文窗口与 multimodal input，示例为约 40,000 张照片生成单行 caption。",
+      "该博客未出现 vision encoder、early fusion、native multimodal 或 MoE 的表述。"
+    ],
+    "raw_excerpt": "First introduced at I/O 2024, the Flash series of models is popular with developers as a powerful workhorse model, optimal for high-volume, high-frequency tasks at scale and highly capable of multimodal reasoning across vast amounts of information with a context window of 1 million tokens. ... All of these models will feature multimodal input with text output on release, with more modalities ready for general availability in the coming months."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Emu3.5: Native Multimodal Models are World Learners",
+    "url": "https://arxiv.org/abs/2510.26583",
+    "published_at": "2025-10-30",
+    "key_points": [
+      "Emu3.5 是大规模多模态 world model，以统一的 next-token prediction 目标端到端预训练，原生预测视觉与语言的下一个状态（next state）。",
+      "预训练语料为视觉-语言交错数据，超过 10 trillion tokens，主要来自互联网视频的连续帧与转录文本。",
+      "模型接受交错视觉-语言输入，并生成交错视觉-语言输出。",
+      "后训练阶段使用大规模强化学习（RL）增强多模态推理与生成能力。",
+      "提出 Discrete Diffusion Adaptation (DiDA)，把逐 token 解码转为双向并行预测，据作者称单图推理加速约 20x 且不损失性能——该加速比与「与 Gemini 2.5 Flash Image (Nano Banana) 在图像生成/编辑上相当」均为摘要中的作者自述主张，未在结果表格中核对。",
+      "能力覆盖 long-horizon 视觉-语言生成、any-to-image (X2I) 生成、复杂富文本图像生成，以及时空一致的世界探索与开放世界具身操作。",
+      "Emu3.5 已开源（论文注明 open-source 以支持社区研究）。"
+    ],
+    "raw_excerpt": "Emu3.5 is pre-trained end-to-end with a unified next-token prediction objective on a corpus of vision-language interleaved data containing over 10 trillion tokens, primarily derived from sequential frames and transcripts of internet videos. ... we propose Discrete Diffusion Adaptation (DiDA), which converts token-by-token decoding into bidirectional parallel prediction, accelerating per-image inference by about 20x without sacrificing performance."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Emerging Properties in Unified Multimodal Pretraining (BAGEL)",
+    "url": "https://arxiv.org/abs/2505.14683v3",
+    "published_at": "2025-05-20",
+    "key_points": [
+      "BAGEL 是开源基础模型，原生支持多模态理解与生成，为统一 decoder-only 架构。",
+      "预训练数据为万亿级（trillions of tokens）交错的文本、图像、视频与网页数据。",
+      "采用 Mixture-of-Transformer-Experts (MoT) 架构，对模态专属参数做选择性激活。",
+      "与在生成/理解模块之间引入 bottleneck connector 的先前方法不同，BAGEL 通过共享 self-attention 实现理解与生成之间的长上下文交互（bottleneck-free 设计）。",
+      "模型规模为 7B 激活参数 / 14B 总参数。",
+      "作者称其在标准多模态理解榜单上超过当时顶级开源 VLM，文生图质量与 SD3、FLUX.1-dev 等公开生成器相当；并展示自由形式图像编辑、多视角合成、世界导航等 world-modeling 能力。"
+    ],
+    "raw_excerpt": "we adopt a Mixture-of-Transformer-Experts (MoT) architecture that employs selective activation of modality-specific parameters. Unlike some prior approaches that introduce bottleneck connectors between generation and understanding modules, our design enables long-context interaction between multimodal understanding and generation through shared self-attention operations."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "BLIP3-o: A Family of Fully Open Unified Multimodal Models-Architecture, Training and Dataset",
+    "url": "https://arxiv.org/abs/2505.09568v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "BLIP3-o 采用 diffusion transformer 生成语义丰富的 CLIP 图像特征，而非传统的 VAE 表示——即生成端走连续语义特征 + 扩散目标，而非离散视觉 token。",
+      "作者称该设计同时带来更高的训练效率和更好的生成质量。",
+      "提出顺序式预训练策略：先在图像理解上训练，再训练图像生成，从而在获得强生成能力的同时保留理解能力。",
+      "构建了高质量图像生成指令微调数据集 BLIP3o-60k，通过用多样化 caption 提示 GPT-4o 生成。",
+      "作者称 BLIP3-o 在多数主流理解与生成基准上取得 superior 表现（自述主张）。",
+      "完全开源：代码、模型权重、训练脚本、预训练与指令微调数据集。"
+    ],
+    "raw_excerpt": "we introduce a novel approach that employs a diffusion transformer to generate semantically rich CLIP image features, in contrast to conventional VAE-based representations. This design yields both higher training efficiency and improved generative quality."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "JanusFlow: Harmonizing Autoregression and Rectified Flow for Unified Multimodal Understanding and Generation",
+    "url": "https://arxiv.org/abs/2411.07975v2",
+    "published_at": "2024-11-12",
+    "key_points": [
+      "JanusFlow 在单一模型中整合自回归语言模型与 rectified flow（生成建模方法）。",
+      "关键发现：rectified flow 可以直接在 LLM 框架内训练，无需复杂的架构改动。",
+      "采用两项策略：(i) 解耦理解编码器与生成编码器；(ii) 在统一训练中对二者表示做对齐。",
+      "作者称其在各自领域达到与专用模型相当或更优的表现，并在标准基准上显著优于已有统一方法。"
+    ],
+    "raw_excerpt": "JanusFlow introduces a minimalist architecture that integrates autoregressive language models with rectified flow ... Our key finding demonstrates that rectified flow can be straightforwardly trained within the large language model framework, eliminating the need for complex architectural modifications. ... (i) decoupling the understanding and generation encoders, and (ii) aligning their representations during unified training."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling",
+    "url": "https://arxiv.org/abs/2501.17811",
+    "published_at": "2025-01-29",
+    "key_points": [
+      "Janus-Pro 是前作 Janus 的进阶版本，三项改进为：优化的训练策略、扩展的训练数据、扩展到更大模型规模。",
+      "作者称这些改进同时提升了多模态理解与文生图指令跟随能力，并增强了文生图生成的稳定性。",
+      "代码与模型公开可用。",
+      "注：该 abs 页摘要未直接陈述视觉 tokenizer 与生成目标细节；arXiv 管理员标注其与 arXiv:2410.13848 (Janus) 存在文本重叠，架构细节需回溯前作。"
+    ],
+    "raw_excerpt": "Janus-Pro incorporates (1) an optimized training strategy, (2) expanded training data, and (3) scaling to larger model size. With these improvements, Janus-Pro achieves significant advancements in both multimodal understanding and text-to-image instruction-following capabilities, while also enhancing the stability of text-to-image generation."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Show-o: One Single Transformer to Unify Multimodal Understanding and Generation",
+    "url": "https://arxiv.org/abs/2408.12528",
+    "published_at": "2024-08-22",
+    "key_points": [
+      "Show-o 是单一统一 transformer，统一了自回归建模与（离散）扩散建模，以自适应处理各种混合模态的输入输出。",
+      "与完全自回归模型不同，它混合使用自回归与离散扩散两种目标。",
+      "支持视觉问答、文生图、文本引导的 inpainting/extrapolation 以及混合模态生成。",
+      "作者称在多项基准上达到与同等或更大参数量的专用理解/生成模型相当或更优的表现。",
+      "该论文为 ICLR 2025 接收，v7 修订于 2025-09-08。"
+    ],
+    "raw_excerpt": "Unlike fully autoregressive models, Show-o unifies autoregressive and (discrete) diffusion modeling to adaptively handle inputs and outputs of various and mixed modalities."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "InternVL3: Exploring Advanced Training and Test-Time Recipes for Open-Source Multimodal Models",
+    "url": "https://arxiv.org/abs/2504.10479v3",
+    "published_at": "2025-04-14",
+    "key_points": [
+      "InternVL3 提出 native multimodal pre-training 范式：不是在纯文本 LLM 上做后置适配，而是在单一预训练阶段同时从多模态数据与纯文本语料中联合获得多模态与语言能力。",
+      "论文将 conventional post-hoc pipeline 描述为：先预训练纯文本 LLM，再通过多阶段流程/多模态对齐改造为支持视觉输入的 MLLM，并指出这会带来模态对齐挑战。",
+      "论文正文 §2.1 明确写明 InternVL3 的架构与其前代遵循同一总体框架，即「ViT-MLP-LLM」范式。",
+      "尽管 native pre-training 范式理论上支持从零训练 MLLM，InternVL3 实际选择用预训练权重初始化 ViT 与 LLM 组件以降低算力成本。",
+      "视觉编码器有两种配置：InternViT-300M 与 InternViT-6B；语言模型使用 Qwen2.5 系列与 InternLM3-8B，且仅用预训练 base 模型、不用 instruction-tuned 变体。",
+      "模型中的 MLP 是随机初始化的两层网络；沿用 InternVL2.5 的 pixel unshuffle 操作，将视觉 token 数降至四分之一，每个 448×448 图像 tile 用 256 个视觉 token 表示。",
+      "InternVL3 引入 Variable Visual Position Encoding (V2PE)，对视觉 token 使用更小的位置增量 δ（δ<1），文本 token 保持增量 1。",
+      "InternVL3-78B 在 MMMU 基准上取得 72.2 分，论文自述为开源 MLLM 中的新 SOTA（属作者自述主张）。"
+    ],
+    "raw_excerpt": "The architecture of InternVL3 follows the same general framework as its predecessors, adhering to the \"ViT-MLP-LLM\" paradigm. ... Although the native pre-training paradigm discussed later could enable training MLLMs from scratch, we choose to initialize the ViT and LLM components with pre-trained model weights to reduce computational costs. ... The multilayer perceptron (MLP) utilized in the model is a two-layer network with random initialization."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Chameleon: Mixed-Modal Early-Fusion Foundation Models",
+    "url": "https://arxiv.org/abs/2405.09818v2",
+    "published_at": "2024-05-16",
+    "key_points": [
+      "Chameleon 是一族 early-fusion、token-based 的 mixed-modal 模型，能够在任意序列中理解并生成图像与文本。",
+      "论文提出针对 early-fusion、token-based、mixed-modal 设定量身定制的架构参数化（architectural parameterization）。",
+      "Chameleon 从训练起始阶段（from inception）就采用一套稳定的训练方法，并配有对齐配方。",
+      "Chameleon 在单一模型中同时完成视觉问答、图像描述、文本生成、图像生成与长形式混合模态生成等任务。",
+      "论文将自身定位为「full multimodal documents 统一建模」的一步，与后置适配式 MLLM 形成对照。"
+    ],
+    "raw_excerpt": "We present Chameleon, a family of early-fusion token-based mixed-modal models capable of understanding and generating images and text in any arbitrary sequence. We outline a stable training approach from inception, an alignment recipe, and an architectural parameterization tailored for the early-fusion, token-based, mixed-modal setting. ... Chameleon marks a significant step forward in a unified modeling of full multimodal documents."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "haotian-liu/LLaVA",
+    "url": "https://github.com/haotian-liu/LLaVA",
+    "published_at": "2024-08-12",
+    "key_points": [
+      "stars: 25078",
+      "forks: 2776",
+      "open issues: 1141",
+      "主语言 Python，license Apache-2.0",
+      "仓库创建于 2023-04-17",
+      "last push: 2024-08-12（即最近提交/推送时间）",
+      "README 最新 Release 条目为 [2024/05/10] LLaVA-NeXT (Stronger) 与 LLaVA-NeXT (Video)"
+    ],
+    "raw_excerpt": "haotian-liu/LLaVA\nstars: 25078 | forks: 2776 | open issues: 1141 | language: Python\ncreated: 2023-04-17 | last push: 2024-08-12\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "OpenGVLab/InternVL",
+    "url": "https://github.com/OpenGVLab/InternVL",
+    "published_at": "2025-09-22",
+    "key_points": [
+      "stars: 10170",
+      "forks: 792",
+      "open issues: 316",
+      "主语言 Python，license MIT",
+      "仓库创建于 2023-11-22",
+      "last push: 2025-09-22",
+      "README 最新 News 条目为 2025/08/30：开源 InternVL3_5-GPT-OSS-20B-A4B 训练代码与 CascadeRL（离线 RL + 在线 RL 两阶段）"
+    ],
+    "raw_excerpt": "OpenGVLab/InternVL\nstars: 10170 | forks: 792 | open issues: 316 | language: Python\ncreated: 2023-11-22 | last push: 2025-09-22\nlicense: MIT"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "vllm-project/vllm",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "stars: 95401",
+      "forks: 23918",
+      "open issues: 9408",
+      "主语言 Python，license Apache-2.0",
+      "仓库创建于 2023-02-09",
+      "last push: 2026-10-25",
+      "README 自述为 LLM 推理与服务库，起源于 UC Berkeley Sky Computing Lab，称有 2000+ contributors",
+      "README 列出的关键技术：PagedAttention、continuous batching、chunked prefill、prefix caching、speculative decoding、disaggregated prefill/decode/encode",
+      "README 称支持 NVIDIA/AMD/Intel GPU 与 x86/ARM/PowerPC CPU"
+    ],
+    "raw_excerpt": "vllm-project/vllm\nstars: 95401 | forks: 23918 | open issues: 9408 | language: Python\ncreated: 2023-02-09 | last push: 2026-10-25\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "modelscope/ms-swift",
+    "url": "https://github.com/modelscope/ms-swift",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "stars: 15930",
+      "forks: 1753",
+      "open issues: 599",
+      "主语言 Python，license Apache-2.0",
+      "仓库创建于 2023-08-01",
+      "last push: 2026-10-23",
+      "README 自述为 SWIFT (Scalable lightWeight Infrastructure for Fine-Tuning)，面向大模型与多模态大模型微调",
+      "topics 含 multimodal、qwen3-vl、qwen3-omni、grpo、lora、megatron、moe 等"
+    ],
+    "raw_excerpt": "modelscope/ms-swift\nstars: 15930 | forks: 1753 | open issues: 599 | language: Python\ncreated: 2023-08-01 | last push: 2026-10-23\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "hpcaitech/Open-Sora",
+    "url": "https://github.com/hpcaitech/Open-Sora",
+    "published_at": "2026-04-09",
+    "key_points": [
+      "stars: 29876",
+      "forks: 3094",
+      "open issues: 14",
+      "主语言 Python，license Apache-2.0",
+      "仓库创建于 2024-02-20",
+      "last push: 2026-04-09",
+      "README 最新 News 为 [2025.03.12] 发布 Open-Sora 2.0 (11B)，称在 VBench 与 Human Preference 上与 11B HunyuanVideo、30B Step-Video 表现相当，训练成本约 $200K"
+    ],
+    "raw_excerpt": "hpcaitech/Open-Sora\nstars: 29876 | forks: 3094 | open issues: 14 | language: Python\ncreated: 2024-02-20 | last push: 2026-04-09\nlicense: Apache-2.0"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "QwenLM/Qwen2.5-VL（现重定向为 QwenLM/Qwen3-VL）",
+    "url": "https://github.com/QwenLM/Qwen2.5-VL",
+    "published_at": null,
+    "key_points": [
+      "该仓库 URL 现重定向至 QwenLM/Qwen3-VL（GitHub API 返回 301，指向 repositories/849239437），即 Qwen2.5-VL 仓库已被改名为 Qwen3-VL 仓库",
+      "页面显示 301 Commits",
+      "README 现介绍 Qwen3-VL，称其为 Qwen 系列迄今最强视觉语言模型，提供 Dense 与 MoE 架构、Instruct 与 Thinking 版本",
+      "README 列出的架构更新：Interleaved-MRoPE、DeepStack（融合多层级 ViT 特征）、Text–Timestamp Alignment",
+      "README 称原生 256K 上下文，可扩展至 1M",
+      "News 条目：2025.11.27 发布 Qwen3-VL 论文；2025.10.21 发布 Qwen3-VL-2B 与 32B",
+      "本次未能取得该仓库的 stars / forks / last push 数值（API 301 重定向，网页抓取未返回计数）"
+    ],
+    "raw_excerpt": "main Branches Tags Go to file Code Open more actions menu Latest commit History 301 Commits 301 Commits ... Qwen3-VL ... Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date. ... Available in Dense and MoE architectures that scale from edge to cloud, with Instruct and reasoning‑enhanced Thinking editions"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "Qwen2.5-Omni 官方博客（Qwen Blog）",
+    "url": "https://qwenlm.github.io/blog/qwen2.5-omni/",
+    "published_at": null,
+    "key_points": [
+      "Qwen 官方将 Qwen2.5-Omni 描述为「end-to-end multimodal model」，采用 Thinker-Talker 架构，端到端处理文本、图像、音频、视频输入并流式输出文本与语音。",
+      "官方明确表述「the entire architecture operates as a cohesive single model, enabling end-to-end training and inference」，即强调单一模型端到端训练与推理。",
+      "Thinker 是 Transformer decoder，并「accompanied by encoders for audio and image」——即仍保留独立的音频/图像编码器，属于编码器+统一主干而非完全无编码器的原生 token 化。",
+      "官方称 Qwen2.5-Omni 在 OmniBench 等需多模态整合的任务上达到 state-of-the-art（此为厂商自述主张，需交叉验证）。",
+      "官方称其在音频能力上超过同规模 Qwen2-Audio，并与 Qwen2.5-VL-7B 表现相当。",
+      "官方提出 TMRoPE（Time-aligned Multimodal RoPE）用于同步视频与音频时间戳。",
+      "官方路线图表述「we strive to integrate more modalities towards an omni-model」，指向继续向更多模态统一的方向演进。"
+    ],
+    "raw_excerpt": "Thinker is a Transformer decoder, accompanied by encoders for audio and image that facilitate information extraction. ... Consequently, the entire architecture operates as a cohesive single model, enabling end-to-end training and inference."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "InternVL3.5 官方博客（InternVL Blog, 2025-08-26）",
+    "url": "https://internvl.github.io/blog/2025-08-26-InternVL-3.5/",
+    "published_at": "2025-08-26",
+    "key_points": [
+      "InternVL3.5 官方明确表示其架构「follow the ViT-MLP-LLM paradigm」，即坚持模块化拼接（视觉编码器 + MLP 投影 + 语言模型）路线。",
+      "官方提出 Decoupled Vision-Language Deployment (DvD)，将视觉编码器与语言模型分离部署在不同 GPU 上，以平衡计算负载——这是模块化路线在推理部署上的直接收益主张。",
+      "官方提出 Visual Resolution Router (ViR)，动态调整视觉 token 分辨率以在不损失性能的前提下优化效率。",
+      "官方称上述设计使 InternVL3.5 相比前代 InternVL3 取得最高 +16.0% 的整体推理性能提升与 4.05 倍推理加速。",
+      "训练流程为四阶段：Multimodal Continual Pre-Training (CPT)、Supervised Fine-Tuning (SFT)、Cascade RL（先离线 MPO，后在线 GSPO）。",
+      "官方称 InternVL3.5-241B-A28B 在开源 MLLM 中于通用多模态、推理、文本与 agentic 任务上取得 state-of-the-art，缩小与 GPT-5 等商业模型的差距（厂商自述主张）。",
+      "官方开源了各训练阶段（CPT / CPT+SFT / CPT+SFT+MPO / 完整 Cascade RL）的权重。"
+    ],
+    "raw_excerpt": "InternVL3.5 family is built upon the following designs: Dynamic High-Resolution Architecture: We follow the ViT-MLP-LLM paradigm of ear[lier work] ... our Decoupled Vision-Language Deployment (DvD) strategy separates the vision encoder and language model across different GPUs, effectively balancing computational load."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Chameleon: Mixed-Modal Early-Fusion Foundation Models (arXiv 2405.09818v2)",
+    "url": "https://arxiv.org/abs/2405.09818v2",
+    "published_at": "2024-05-16",
+    "key_points": [
+      "Chameleon 被作者定义为「a family of early-fusion token-based mixed-modal models」，可在任意序列中理解并生成图像与文本，是原生统一（early-fusion、token-based）路线的代表性官方表述。",
+      "论文称其提出了「a stable training approach from inception」以及针对 early-fusion token-based 设定的架构参数化方案，暗示该路线存在训练稳定性难题需要专门设计。",
+      "论文称 Chameleon 在单一模型中同时实现图像描述、文本生成与图像生成，并在长形式混合模态生成的人类评测中匹配或超过 Gemini Pro 与 GPT-4V（作者自述主张）。",
+      "论文称其在纯文本任务上超过 Llama-2，并与 Mixtral 8x7B、Gemini-Pro 具竞争力。",
+      "注意：本条仅取得摘要，未读到方法/实验章节，不足以支撑训练成本或推理效率的量化结论。"
+    ],
+    "raw_excerpt": "We present Chameleon, a family of early-fusion token-based mixed-modal models capable of understanding and generating images and text in any arbitrary sequence. We outline a stable training approach from inception, an alignment recipe, and an architectural parameterization tailored for the early-fusion, token-based, mixed-modal setting."
+  }
+]

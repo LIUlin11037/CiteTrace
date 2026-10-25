@@ -1,0 +1,101 @@
+{
+  "n_questions": 6,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9286616161616162,
+  "alignment_questions": 6,
+  "mean_coverage": 0.9166666666666666,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9090909090909091,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 4.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9365530303030303,
+      "coverage": 0.9375
+    },
+    "rag": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9166666666666666,
+      "coverage": 0.75
+    }
+  },
+  "scores": [
+    {
+      "question_id": "hq-inference-serving",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 20,
+      "citations_missing": [],
+      "alignment_rate": 0.9545454545454546,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "hq-quantization",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 39,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "hq-structured-output",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 0.75,
+      "missed_key_points": [
+        "借助 tool/function calling 的 schema 强制调用（tool_choice）可获得结构化输出，但部分模型不支持强制调用"
+      ],
+      "unsupported_claims": [
+        "XGrammar 论文作者为引擎作者团队，属厂商/作者自述而非独立第三方评测"
+      ]
+    },
+    {
+      "question_id": "hq-judge-bias",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "hq-pdf-parsing",
+      "subdomain": "rag",
+      "citation_existence_rate": 1.0,
+      "citations_total": 24,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 0.75,
+      "missed_key_points": [
+        "解析质量往往比 embedding 模型选型更影响最终效果"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "hq-agent-observability",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 38,
+      "citations_missing": [],
+      "alignment_rate": 0.9090909090909091,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

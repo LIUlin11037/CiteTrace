@@ -1,0 +1,29 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9166666666666666,
+  "mean_coverage": 0.75,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9166666666666666,
+      "coverage": 0.75
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 35,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 0.75,
+      "missed_key_points": [
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

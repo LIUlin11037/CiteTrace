@@ -1,0 +1,833 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Survey of Hallucination in Natural Language Generation (Ji et al., ACM CSUR)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2202.03629",
+    "published_at": "2022-02-08",
+    "key_points": [
+      "该综述给出 NLP 语境下最通行、最具包容性的幻觉定义：生成内容无意义（nonsensical）或对所提供的源内容不忠实（unfaithful to the provided source content）。",
+      "幻觉一词最早出现在计算机视觉领域（Baker and Kanade 2000），当时带有正面含义（超分辨率、图像修复、图像合成），与 NLG 中作为待避免错误的用法不同。",
+      "按 Maynez et al. 2020、Huang et al. 2021、Dziri et al. 2021a 的分类，幻觉分为两大类型：内在幻觉（intrinsic）与外在幻觉（extrinsic）。",
+      "内在幻觉定义：生成输出与源内容相矛盾（contradicts the source content）；论文给出的例子是源文称 Ebola 疫苗于 2019 年获 FDA 批准，而生成摘要写成 2021 年。",
+      "外在幻觉定义：生成输出无法从源内容中得到验证，即既不能被源内容支持也不能被其反驳（can neither be supported nor contradicted by the source）。",
+      "论文明确指出外在幻觉并不总是错误，因为它可能来自事实正确的外部信息；这类事实性幻觉可通过召回额外背景知识提升生成文本的信息量。",
+      "但论文同时指出，多数文献仍对外在幻觉持谨慎态度，因为其不可验证性从事实安全角度增加了风险。",
+      "定义存在任务依赖性：不同 NLG 任务对“源”的界定不同——抽象摘要是输入待摘要文本，data-to-text 是非语言数据，对话系统是对话历史与/或外部知识句。",
+      "该综述覆盖的下游任务包括抽象摘要、对话生成、生成式问答、data-to-text、机器翻译与视觉-语言生成，并单设一节讨论 LLM 中的幻觉（该节于 2024 年 1 月更新）。",
+      "论文关键词明确列出 Hallucination、Intrinsic Hallucination、Extrinsic Hallucination、Faithfulness in NLG、Factuality in NLG、Consistency in NLG，显示忠实性与事实性被作为并列的评估维度。",
+      "论文指出幻觉在现实应用中带来安全风险，例如医疗场景下由患者信息表生成的幻觉摘要可能危及患者，机器翻译生成的用药说明若含幻觉可能造成生命危险。"
+    ],
+    "raw_excerpt": "Within the context of NLP, the above definition of hallucination, the generated content that is nonsensical or unfaithful to the provided source content (Filippova 2020; Maynez et al. 2020; Parikh et al. 2020; Zhou et al. 2021b), is the most inclusive and standard. ... (1) Intrinsic Hallucinations: The generated output that contradicts the source content. ... (2) Extrinsic Hallucinations: The generated output that cannot be verified from the source content (i.e., output that can neither be supported nor contradicted by the source). ... Notably, the extrinsic hallucination is not always erroneous because it could be from factually correct external information (Maynez et al. 2020; Thomson and Reiter 2020)."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions (Huang et al., ACM TOIS)",
+    "url": "https://arxiv.org/html/2311.05232v2",
+    "published_at": "2023-11-09",
+    "key_points": [
+      "该综述将 LLM 幻觉界定为“看似合理但不符合事实的内容”（plausible yet nonfactual content），并指出 LLM 能生成高度可信、类人的回答，使幻觉检测尤为困难。",
+      "论文明确区分传统 NLG 幻觉与 LLM 幻觉：传统 NLG 中幻觉被定义为无意义或对源内容不忠实，分为内在（与源内容矛盾）与外在（无法由源内容验证）两类。",
+      "论文主张 LLM 作为开放式系统，幻觉的范畴更广，主要表现为事实性错误（predominantly manifesting factual errors），因此需要重新评估和调整既有分类体系。",
+      "论文提出面向 LLM 应用重新定义的幻觉分类法（redefined taxonomy），并称其为分层（layered）的详细分类。",
+      "论文将自身范围界定为可信性挑战中的一个关键子集：专门处理事实性（factuality），并扩展到忠实性幻觉（faithfulness hallucinations）。",
+      "论文关键词为 Large Language Models、Hallucination、Factuality、Faithfulness，表明事实性与忠实性是两大并列的界定维度。",
+      "论文按成因组织缓解方法，成因与缓解路径分为数据相关（data-related）、训练相关（training-related）、推理相关（inference-related）三类。",
+      "论文将 LLM 训练划分为预训练、监督微调（SFT）、强化学习人类反馈（RLHF）三个阶段，并认为分析各阶段有助于阐明幻觉来源。",
+      "论文指出预训练阶段通过大规模语料的自回归下一 token 预测，使模型获得句法、世界知识与推理能力，是幻觉成因分析的基础环节。",
+      "论文将理解 LLM 的知识边界（knowledge boundaries）列为幻觉研究的未来方向之一，并指出检索增强 LLM 在对抗幻觉方面仍存在局限。",
+      "该综述发表于 ACM Transactions on Information Systems（TOIS），DOI 为 10.1145/3703155，v2 修订于 2024-11-19。"
+    ],
+    "raw_excerpt": "Notably, hallucinations in conventional natural language generation (NLG) tasks have been extensively studied (Huang et al., 2021a; Ji et al., 2023a), with hallucinations defined as generated content that is either nonsensical or unfaithful to the provided source content. These hallucinations are categorized into two types: intrinsic hallucination, where the generated output contradicts the source content, and extrinsic hallucination, where the generated output cannot be verified from the source. However, ... as LLMs typically function as open-ended systems, the scope of hallucination encompasses a broader concept, predominantly manifesting factual errors. This shift necessitates a reevaluation and adjustment of the existing taxonomy of hallucinations ... our work narrows down to a critical subset of trustworthiness challenges, specifically addressing factuality and extending the discussion to include faithfulness hallucinations."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DoLa: Decoding by Contrasting Layers Improves Factuality in Large Language Models",
+    "url": "https://arxiv.org/abs/2309.03883v2",
+    "published_at": "2023-09-07",
+    "key_points": [
+      "提出 DoLa：通过对比后层与早层投影到词表空间的 logits 差异来得到下一 token 分布，无需检索外部知识、无需额外微调。",
+      "方法依据的假设是事实性知识在 transformer 中一般定位于特定层。",
+      "在多项选择任务与开放式生成任务上均报告真实性提升。",
+      "报告 LLaMA 系列模型在 TruthfulQA 上提升 12–17 个绝对百分点。",
+      "该版本为 ICLR 2024 主会论文，v2 修订于 2024-03-11。"
+    ],
+    "raw_excerpt": "Our approach obtains the next-token distribution by contrasting the differences in logits obtained from projecting the later layers versus earlier layers to the vocabulary space ... for example improving the performance of LLaMA family models on TruthfulQA by 12-17% absolute points"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Chain-of-Note: Enhancing Robustness in Retrieval-Augmented Language Models",
+    "url": "https://arxiv.org/abs/2311.09210v2",
+    "published_at": "2023-11-15",
+    "key_points": [
+      "指出 RAG 的可靠性边界：检索到的信息不保证可靠，无关文档会误导回答，并可能让模型忽略自身已具备的知识。",
+      "提出 Chain-of-Noting（CoN）：对每篇检索文档生成顺序阅读笔记，评估其与问题的相关性后再整合成最终答案。",
+      "用 ChatGPT 构造 CoN 训练数据，训练在 LLaMa-2 7B 上。",
+      "在四个开放域 QA 基准上评测。",
+      "在检索文档完全为噪声的条件下，EM 平均提升 +7.9。",
+      "对超出预训练知识范围的实时问题，拒答率提升 +10.5。"
+    ],
+    "raw_excerpt": "CoN achieves an average improvement of +7.9 in EM score given entirely noisy retrieved documents and +10.5 in rejection rates for real-time questions that fall outside the pre-training knowledge scope."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+    "url": "https://arxiv.org/abs/2404.16130v2",
+    "published_at": "2024-04-24",
+    "key_points": [
+      "指出常规 RAG 在面向整个语料的全局性问题（如「数据集的主要主题是什么」）上失效，因为这类任务本质是 query-focused summarization 而非显式检索任务。",
+      "GraphRAG 用 LLM 两阶段构建图索引：先从源文档抽取实体知识图谱，再为紧密关联实体的分组预生成社区摘要。",
+      "回答时用每个社区摘要生成部分回答，再对所有部分回答汇总为最终回答。",
+      "实验设定为约 100 万 token 量级数据集上的全局 sensemaking 类问题。",
+      "相对常规 RAG 基线，在生成答案的 comprehensiveness 与 diversity 上有显著提升（摘要未给出具体数值）。"
+    ],
+    "raw_excerpt": "For a class of global sensemaking questions over datasets in the 1 million token range, we show that GraphRAG leads to substantial improvements over a conventional RAG baseline for both the comprehensiveness and diversity of generated answers."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs",
+    "url": "https://arxiv.org/abs/2306.13063v2",
+    "published_at": "2023-06-22",
+    "key_points": [
+      "定义了三组件框架：引出言语化置信度的提示策略、生成多响应的采样方法、计算一致性的聚合技术。",
+      "在置信度校准与失败预测两类任务上评测，覆盖五类数据集（含常识与算术推理）与五个常用 LLM（含 GPT-4、LLaMA 2 Chat）。",
+      "发现 LLM 在言语化置信度时倾向过度自信，可能是在模仿人类表达信心的模式。",
+      "模型能力增强时，校准与失败预测表现均提升。",
+      "白盒方法优于黑盒方法但差距不大，AUROC 为 0.522 至 0.605。",
+      "没有任何一种技术能稳定优于其他技术，且所有被考察方法在需要专业知识的困难任务上均表现不佳。"
+    ],
+    "raw_excerpt": "Comparisons with white-box methods indicate that while white-box methods perform better, the gap is narrow, e.g., 0.522 to 0.605 in AUROC. ... none of these techniques consistently outperform others, and all investigated methods struggle in challenging tasks, such as those requiring professional knowledge"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Beyond Hallucinations: Enhancing LVLMs through Hallucination-Aware Direct Preference Optimization",
+    "url": "https://arxiv.org/abs/2311.16839v2",
+    "published_at": "2023-11-28",
+    "key_points": [
+      "提出 HA-DPO，把幻觉问题重构为偏好选择任务：对同一图像的两条回答（一条准确、一条幻觉）让模型偏好非幻觉回答。",
+      "提出构造正（非幻觉）/负（幻觉）样本对的高效流水线，以保证风格一致的高质量偏好数据。",
+      "应用于三个主流多模态模型。",
+      "MiniGPT-4 加 HA-DPO 后 POPE 准确率从 51.13% 升至 86.13%（绝对提升 35%）。",
+      "同一模型 MME 分数从 932.00 升至 1326.46（相对提升 42.32%）。"
+    ],
+    "raw_excerpt": "the MiniGPT-4 model, when enhanced with HA-DPO, demonstrated a substantial improvement: POPE accuracy rose from 51.13% to 86.13% (an absolute improvement of 35%), and the MME score surged from 932.00 to 1326.46 (a relative improvement of 42.32%)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "RAGTruth: A Hallucination Corpus for Developing Trustworthy Retrieval-Augmented Language Models",
+    "url": "https://arxiv.org/abs/2401.00396v2",
+    "published_at": "2023-12-31",
+    "key_points": [
+      "指出即使接入 RAG，LLM 仍会给出与检索内容不符或相矛盾的声明。",
+      "RAGTruth 包含近 18,000 条由多种 LLM 在 RAG 框架下自然生成的回答。",
+      "标注在个案与词两个层级进行，并包含幻觉强度的评估。",
+      "基准测试了不同 LLM 的幻觉频率，并评估了若干现有幻觉检测方法的有效性。",
+      "用该高质量数据微调一个相对小的 LLM，可在幻觉检测上达到与使用 GPT-4 等 SOTA 大模型的提示式方法相当的水平。"
+    ],
+    "raw_excerpt": "RAGTruth comprises nearly 18,000 naturally generated responses from diverse LLMs using RAG. ... it is possible to finetune a relatively small LLM and achieve a competitive level of performance in hallucination detection when compared to the existing prompt-based approaches using state-of-the-art large language models such as GPT-4."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation",
+    "url": "https://arxiv.org/abs/2305.14251v2",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "FActScore 把生成文本拆成一系列原子事实，计算被可靠知识源支持的原子事实百分比。",
+      "人工评测显示 ChatGPT 生成的人物传记 FActScore 仅为 58%。",
+      "提出用检索加强语言模型自动估计 FActScore 的模型，误差率低于 2%。",
+      "用该自动指标评测了 13 个较新 LM 的 6,500 条生成，若由人工评测需花费 2.6 万美元。",
+      "发现 GPT-4 与 ChatGPT 比公开模型更符合事实，Vicuna 与 Alpaca 是表现最好的公开模型之一。"
+    ],
+    "raw_excerpt": "we introduce FACTSCORE, a new evaluation that breaks a generation into a series of atomic facts and computes the percentage of atomic facts supported by a reliable knowledge source. ... (e.g., ChatGPT only achieves 58%)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Faith and Fate: Limits of Transformers on Compositionality",
+    "url": "https://arxiv.org/abs/2305.18654v3",
+    "published_at": "2023-05-29",
+    "key_points": [
+      "考察 transformer LLM 在三个组合性任务上的极限：多位数乘法、逻辑网格谜题、经典动态规划问题。",
+      "把组合性任务表述为计算图以系统量化复杂度，并把推理步骤拆解为中间子过程。",
+      "实证发现 transformer LLM 通过把多步组合推理化简为线性化子图匹配来解题，未必发展出系统性问题求解能力。",
+      "给出理论论证：随任务复杂度上升，自回归生成的性能会快速衰减。",
+      "注：该文是组合性推理能力极限分析，并非幻觉缓解方法，不能作为缓解方法族的增益证据。"
+    ],
+    "raw_excerpt": "we provide theoretical arguments on abstract multi-step reasoning problems that highlight how autoregressive generations' performance can rapidly decay with increased task complexity."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models",
+    "url": "https://arxiv.org/abs/2404.18796v2",
+    "published_at": "2024-04-29",
+    "key_points": [
+      "指出现有评测常用单个大模型（如 GPT-4）作裁判，成本高且引入同模型偏差，而超大模型往往并非必要。",
+      "提出 PoLL（Panel of LLM evaluators），用多个较小模型组成评审团。",
+      "覆盖三种裁判设定、六个数据集。",
+      "由更多小模型组成的 PoLL 优于单一大型裁判，且因由不同模型家族构成而具有更小的同模型偏差。",
+      "成本比单一大型裁判低七倍以上。",
+      "注：该文是评测方法（judge 设计），不是多智能体验证缓解幻觉的方法，不能作为该缓解族的增益证据。"
+    ],
+    "raw_excerpt": "we find that using a PoLL composed of a larger number of smaller models outperforms a single large judge, exhibits less intra-model bias due to its composition of disjoint model families, and does so while being over seven times less expensive."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "IAAR-Shanghai/UHGEval — Eval Suite & Benchmarks: UHGEval, HaluEval, HalluQA (ACL 2024)",
+    "url": "https://github.com/IAAR-Shanghai/UHGEval",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据自述为 ACL 2024 工作，定位为「user-friendly evaluation framework」，聚合 UHGEval、HaluEval、HalluQA 等基准。",
+      "语言为 Python，stars 184、forks 12，最近 push 时间 2025-06-07。",
+      "仅取得仓库简介与统计元数据，未读取 README 正文，故不能据此判断其评测指标定义、数据规模或已知噪声问题。"
+    ],
+    "raw_excerpt": "[ACL 2024] User-friendly evaluation framework: Eval Suite & Benchmarks: UHGEval, HaluEval, HalluQA, etc. | lang: Python | last push: 2025-06-07 | ★184, forks 12"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "HowieHwong/TrustLLM — LLM trustworthiness evaluation across truthfulness, safety, fairness, robustness, privacy and ethics (ICML 2024)",
+    "url": "https://github.com/HowieHwong/TrustLLM",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据自述为 ICML 2024 工作，评测维度包含 truthfulness、safety、fairness、robustness、privacy、ethics 六项。",
+      "提供 Python/CLI 工具包，支持本地模型、兼容 API 与 AI agent 编排。",
+      "stars 632、forks 69，最近 push 时间 2026-10-04，显示该评测套件在 2026 年仍在维护。",
+      "仅取得简介级元数据，未读取正文，不能作为其 truthfulness 子基准有效性的依据。"
+    ],
+    "raw_excerpt": "[ICML 2024] TrustLLM: LLM trustworthiness evaluation across truthfulness, safety, fairness, robustness, privacy and ethics. Python/CLI toolkit for local models, compatible APIs and AI agent orchestration. | last push: 2026-10-04 | ★632, forks 69"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "MemTensor/HaluMem — operation-level hallucination evaluation benchmark for agent memory systems",
+    "url": "https://github.com/MemTensor/HaluMem",
+    "published_at": null,
+    "key_points": [
+      "仓库简介自称「the first operation level hallucination evaluation benchmark tailored to agent memory systems」，即把幻觉评测对象从静态问答扩展到智能体记忆系统的操作层面。",
+      "stars 178、forks 19，最近 push 时间 2026-09-03。",
+      "该自述中的「first」属营销性主张，未找到权威第三方来源交叉验证，按纪律不得采信为事实。",
+      "仅取得简介级元数据，未读取 README 正文。"
+    ],
+    "raw_excerpt": "HaluMem is the first operation level hallucination evaluation benchmark tailored to agent memory systems. | last push: 2026-09-03 | ★178, forks 19"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "project-miracl/nomiracl — multilingual hallucination evaluation dataset for RAG robustness to first-stage retrieval errors",
+    "url": "https://github.com/project-miracl/nomiracl",
+    "published_at": null,
+    "key_points": [
+      "仓库简介称 NoMIRACL 是面向 RAG 场景的多语言幻觉评测数据集，用于评估 LLM 在首阶段检索错误下的鲁棒性，覆盖 18 种语言。",
+      "stars 27、forks 5，最近 push 时间 2024-11-29。",
+      "仅取得简介级元数据，未读取 README 正文，无法确认其指标定义与标注流程。"
+    ],
+    "raw_excerpt": "NoMIRACL: A multilingual hallucination evaluation dataset to evaluate LLM robustness in RAG against first-stage retrieval errors on 18 languages. | last push: 2024-11-29 | ★27, forks 5"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "ahnjaewoo/timechara — TimeChara: Evaluating Point-in-Time Character Hallucination of Role-Playing LLMs (ACL 2024 Findings)",
+    "url": "https://github.com/ahnjaewoo/timechara",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据自述为 ACL 2024 Findings 论文代码与基准，评测对象为角色扮演 LLM 的「point-in-time character hallucination」（时间点角色幻觉）。",
+      "stars 23、forks 1，最近 push 时间 2024-12-20。",
+      "仅取得简介级元数据，未读取正文，不能作为其评测有效性的依据。"
+    ],
+    "raw_excerpt": "Code and benchmark for our Findings of ACL 2024 paper - \"TimeChara: Evaluating Point-in-Time Character Hallucination of Role-Playing Large Language Models\" | last push: 2024-12-20 | ★23, forks 1"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "HelloBench: Evaluating Long Text Generation Capabilities of Large Language Models (arXiv:2409.16191)",
+    "url": "https://arxiv.org/abs/2409.16191",
+    "published_at": "2024-09-24",
+    "key_points": [
+      "该论文提出 HelloBench，按 Bloom 分类法把长文本生成拆为五个子任务：开放式问答、摘要、对话、文本补全、启发式文本生成。",
+      "同时提出 HelloEval 评测方法，作者报告其与人工评测的相关性高于 ROUGE、BLEU 等传统指标以及 LLM-as-a-Judge 方法。",
+      "作者在约 30 个主流 LLM 上实验，报告多数 LLM 无法生成超过 4000 词的文本，且长文本存在严重重复与质量退化。",
+      "该来源与 q3 所列幻觉基准（TruthfulQA/HaluEval/FActScore/RAGAS/SimpleQA/LongFact/FreshQA）无直接关系，仅可作为「长文本生成评测中 LLM-as-judge 与人工相关性」的旁证，不构成对任一目标基准饱和/噪声/污染问题的证据。"
+    ],
+    "raw_excerpt": "we introduce the Hierarchical Long Text Generation Benchmark (HelloBench) ... we compare HelloEval with traditional metrics (e.g., ROUGE, BLEU, etc.) and LLM-as-a-Judge methods, which show that HelloEval has the highest correlation with human evaluation."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "guardrails-ai/guardrails — Python framework for Input/Output Guards and structured data generation",
+    "url": "https://github.com/guardrails-ai/guardrails",
+    "published_at": null,
+    "key_points": [
+      "README 自述定位：Guardrails 是一个 Python 框架，通过运行 Input/Output Guards 来「detect, quantify and mitigate the presence of specific types of risks」，同时用于让 LLM 生成结构化数据。",
+      "能力以 Guardrails Hub 上的预置 validator 形式提供，多个 validator 可组合成 Input/Output Guards 拦截 LLM 输入输出；README 示例包含 RegexMatch、CompetitorCheck、ToxicLanguage 等。",
+      "结构化输出通过两条路径实现：支持 function calling 的模型走 function call 语法，不支持的模型则把 schema 注入 prompt（prompt optimization）。",
+      "可部署为独立服务：guardrails start 启动 Flask 服务并通过 REST API 交互；README 建议生产部署用 Docker + Gunicorn 作为 WSGI server 以提升性能与可扩展性。",
+      "README 声明兼容闭源与开源 LLM（'Guardrails can be used with proprietary and open-source LLMs'）。",
+      "README 公告：自 2026-07-06 起 validator 迁移为标准 PyPI 包（pip 直接安装），并停止托管式 remote inferencing，计划截止日 2026-08-25——即该项目的托管推理能力正在下线，属于工程落地中的可用性变化。",
+      "README 提到 2025-02-12 发布 Guardrails Index，声称是首个对比 24 个 guardrails 在 6 个最常见类别上性能与延迟的基准。",
+      "仓库提交历史显示 3,306 Commits（页面可见的活跃度指标）。"
+    ],
+    "raw_excerpt": "Guardrails is a Python framework that helps build reliable AI applications by performing two key functions: Guardrails runs Input/Output Guards in your application that detect, quantify and mitigate the presence of specific types of risks. ... [July 6, 2026] Guardrails validators are moving to standard PyPI packages you install directly with pip, and Guardrails is discontinuing its hosted remote inferencing. ... Planned cutoff: August 25, 2026. ... [Feb 12, 2025] We just launched Guardrails Index -- the first of its kind benchmark comparing the performance and latency of 24 guardrails across 6 most common categories!"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "explodinggradients/ragas — Supercharge Your LLM Application Evaluations",
+    "url": "https://github.com/explodinggradients/ragas",
+    "published_at": null,
+    "key_points": [
+      "README 自述定位为评估与优化 LLM 应用的 toolkit，提供「Objective Metrics」（同时包含 LLM-based 与传统指标）、测试集自动生成、与 LangChain 及主流可观测性工具的集成。",
+      "README 当前展示的示例指标是通用的 DiscreteMetric（自定义 aspect critique，如 summary_accuracy），而非早期版本主打的 faithfulness / answer relevancy 等 RAG 专用指标——README 正文未给出 faithfulness 的定义或任何效果数值。",
+      "仓库页面显示 16.1k stars、1.8k forks、61 watching，提交历史 1,147 Commits。",
+      "README 引用信息显示项目归属已变为 VibrantLabs（cite 条目 author 为 VibrantLabs，安装源指向 github.com/vibrantlabsai/ragas），与仓库路径 explodinggradients/ragas 不一致，提示项目所有权/组织发生过迁移。",
+      "README 声明默认收集最小化匿名使用数据，可通过环境变量 RAGAS_DO_NOT_TRACK=true 关闭。",
+      "README 中 quickstart 模板目前仅 rag_eval 可用，agent_evals / benchmark_llm / prompt_evals / workflow_eval 标注为 Coming Soon。"
+    ],
+    "raw_excerpt": "Objective metrics, intelligent test generation, and data-driven insights for LLM apps ... 🎯 Objective Metrics: Evaluate your LLM applications with precision using both LLM-based and traditional metrics. ... Cite Us: @misc{ragas2024, author = {VibrantLabs}, title = {Ragas: Supercharge Your LLM Application Evaluations} ... Stars 16.1k stars Watchers 61 watching Forks 1.8k forks"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Guardrails Index — benchmark of 24 guardrails across 6 risk categories (index.guardrailsai.com)",
+    "url": "https://index.guardrailsai.com",
+    "published_at": null,
+    "key_points": [
+      "该基准把 AI 安全拆成 6 个类别（Jailbreaking、PII Detection、Content Moderation、Topic Restriction、Competitors Check、Hallucination），并为每类整理数据集与模型。",
+      "Hallucination 类别下表现最好的模型是 Provenance LLM，性能分数 0.77（次优 0.75）——即该基准中最好的幻觉检测 guardrail 准确率不足 0.8。",
+      "其他类别的最佳分数：Jailbreaking 0.81、PII Detection 0.65、Content Moderation（Toxic Language）0.72、Topic Restriction（Hybrid）0.93、Competitor Check 0.67。",
+      "页面标注 'Guardrails AI joins Harvey AI'，提示该项目/公司已被 Harvey AI 收购或并入。",
+      "页面提供 PDF 下载与模型排行榜（Model Leaderboard），但网页正文只展示准确率类分数，延迟数据需从 PDF 获取。"
+    ],
+    "raw_excerpt": "We broke AI safety down into 6 categories and curated datasets and models that demonstrate the state of AI guardrails using LLMs and other open source models. ... Hallucination: AI hallucinations can result in inaccurate and misleading text that is nonetheless compelling and convincing. Learn how different models tend to generate false or unsupported information. Best Model Provenance LLM Performance: 0.77 Top Models Comparison 0.77 0.75"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：hallucination mitigation LLM（按 stars 排序）",
+    "url": "https://github.com/The-Martyr/CausalMM",
+    "published_at": null,
+    "key_points": [
+      "以 'hallucination mitigation LLM' 检索并按 stars 排序，返回的头部仓库 star 数极低：最高为 The-Martyr/CausalMM（★67，ICLR 2025，多模态 LLM 注意力因果性缓解幻觉），其后为 taco-group/Re-Align（★52，EMNLP'25，视觉语言模型图像检索对齐）、hukcc/Awesome-Video-Hallucination（★44）、Intelligent-Computing-Research-Group/HaVen（★44）、ZhangYiqun018/agent-for-debate（★43）。",
+      "这批高相关仓库绝大多数是论文配套代码（ICLR/EMNLP/ACL/DATE/ICASSP 论文仓库），而非生产级工程库；其 star 量级（数十）与主流框架（万级）相差两个数量级以上。",
+      "部分仓库已停止更新：ziweiji/Self_Reflection_Medical 最后 push 为 2023-10-09，Terry-Xu-666/visual_inference_chain 为 2024-11-15，VILA-Lab/DRAG 为 2025-08-23。",
+      "检索结果中包含多个 'Awesome-' 论文清单类仓库（Awesome-Video-Hallucination、awesome-hallucination-mllm、Awesome-LLM-LVLM-Hallucination-Detection-and-Mitigation），说明该领域知识仍以论文聚合清单形式组织，而非统一工程实现。",
+      "该检索结果中未出现 LangChain、LlamaIndex、Guardrails AI、RAGAS 等主流工程框架，说明此检索索引对主流项目的覆盖不完整。"
+    ],
+    "raw_excerpt": "Found 10 repos for 'hallucination mitigation LLM' (sorted by stars): - The-Martyr/CausalMM (★67, forks 5) desc: [ICLR 2025] Mitigating Modality Prior-Induced Hallucinations in Multimodal Large Language Models via Deciphering Attention Causality ... - taco-group/Re-Align (★52, forks 1) ... - ziweiji/Self_Reflection_Medical (★30, forks 7) desc: Code for paper Towards Mitigating LLM Hallucination via Self Reflection ... last push: 2023-10-09"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：guardrails LLM grounding validation（按 stars 排序）",
+    "url": "https://github.com/kedarnathedulearn449-ops/LLM-Guardrails-Gateway-v3.0",
+    "published_at": null,
+    "key_points": [
+      "以 'guardrails LLM grounding validation' 检索仅返回 7 个仓库，且 star 数全部为 0 或 1，说明该检索式下没有命中成熟项目。",
+      "这些仓库的 README 简介普遍声称具备 grounding / factual grounding 校验能力，例如 LLM-Guardrails-Gateway-v3.0 声称在响应释放前审计 'factual grounding, prompt leakage'；SpecGuard-AI 声称含 'evidence gate, server-side citations and an independent grounding validator'。",
+      "部分仓库简介给出未经验证的量化主张，例如 AegisLLM 声称 'high accuracy (96% Recall@5)' 与 'reduces token cost by 38%'——此类数字无第三方验证，属营销性主张。",
+      "llm-evaluation-guardrails-framework 的简介提到在 CI/CD 发布门禁中跟踪 'latency/cost regression'，反映工程落地中延迟与成本被当作需回归监控的一等指标。",
+      "groundlens（★7，Rust）声称无需模型即可将 LLM 答案与其来源比对，输出 PASS/REVIEW/FAIL 三态并保留签名记录。"
+    ],
+    "raw_excerpt": "Found 7 repos for 'guardrails LLM grounding validation' (sorted by stars): - kedarnathedulearn449-ops/LLM-Guardrails-Gateway-v3.0 (★1, forks 0) ... audits model responses (factual grounding, prompt leakage) before they are released. ... - rajveer100704/AegisLLM-Continual-Learning-RAG-System (★1, forks 0) ... It ensures high accuracy (96% Recall@5), reduces token cost by 38%, and enforces safety via multi-layer guardrails and grounding validation."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：RAG framework retrieval augmented generation（按 stars 排序）",
+    "url": "https://github.com/truefoundry/cognita",
+    "published_at": null,
+    "key_points": [
+      "以 'RAG framework retrieval augmented generation' 检索，最高 star 为 truefoundry/cognita（★4410，forks 393，最后 push 2026-03-13），自述为面向生产环境的模块化 RAG 框架。",
+      "Andrew-Jang/RAGHub（★2015）是社区维护的 RAG 框架与资源清单，非可运行框架。",
+      "pinecone-io/canopy（★1034）最后 push 为 2024-11-13，已约两年无提交，属停更状态。",
+      "Bessouat40/RAGLight（★673）最后 push 2026-10-16，仍活跃，并已加入 MCP 集成以连接外部工具与数据源。",
+      "fate-ubw/RAGLAB（★314，EMNLP 2024 Demo Oral）最后 push 2024-10-18，为研究导向框架，已停更。",
+      "该检索结果同样未返回 LangChain、LlamaIndex 等最主流 RAG 框架，进一步说明检索索引覆盖不完整。"
+    ],
+    "raw_excerpt": "Found 10 repos for 'RAG framework retrieval augmented generation' (sorted by stars): - truefoundry/cognita (★4410, forks 393) desc: RAG (Retrieval Augmented Generation) Framework for building modular, open source applications for production by TrueFoundry ... last push: 2026-03-13 - Andrew-Jang/RAGHub (★2015, forks 187) ... - pinecone-io/canopy (★1034, forks 128) ... last push: 2024-11-13 - Bessouat40/RAGLight (★673, forks 102) ... last push: 2026-10-16"
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "github",
+    "title": "Hallucination Leaderboard (Vectara HHEM) — README, last updated 2026-10-22",
+    "url": "https://github.com/vectara/hallucination-leaderboard",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "该排行榜由 Vectara 用其 Hallucination Evaluation Model (HHEM) 计算，衡量的是 LLM 在「摘要一篇文档」时引入幻觉的频率，属于第三方独立评测而非厂商自评。",
+      "榜单同时报告四个指标：Hallucination Rate、Factual Consistency Rate、Answer Rate、Average Summary Length (Words)，即把「拒答/不回答」与「编造」分开计量。",
+      "截至 2026-10-22 的榜单中，排名靠前的模型幻觉率约 1.8%–5%：antgroup/finix_s1_32b 1.8%、openai/gpt-5.4-nano-2026-03-17 3.1%、google/gemini-2.5-flash-lite 3.3%、microsoft/Phi-4 3.7%、meta-llama/Llama-3.3-70B-Instruct-Turbo 4.1%、deepseek-ai/DeepSeek-V4.1-Flash 4.2%。",
+      "同一榜单中多款前沿/旗舰模型幻觉率处于 7%–12% 区间：google/gemini-2.5-pro 7.0%、openai/gpt-5.4-pro-2026-03-05 8.3%、openai/gpt-5.5 9.3%、anthropic/claude-opus-5-5 9.9%、anthropic/claude-sonnet-4-20250514 10.3%、google/gemini-3.1-pro-preview 10.4%、openai/gpt-5-nano-2025-08-07 10.5%、anthropic/claude-opus-4-5-20251101 10.9%、deepseek-ai/DeepSeek-R1 11.3%、anthropic/claude-opus-4-1-20250805 11.8%。",
+      "榜单显示幻觉率与模型规模/旗舰定位不单调相关：小模型（如 gpt-5.4-nano 3.1%、gemini-2.5-flash-lite 3.3%）在摘要幻觉指标上优于同系列旗舰（gpt-5.4-pro 8.3%、gemini-2.5-pro 7.0%）。",
+      "榜单存在同一厂商不同版本间的大幅波动，例如 openai/gpt-5.4-nano 3.1% 与 openai/gpt-5.4-pro 8.3%、openai/gpt-6-sol 6.5% 与 openai/gpt-6-astra 8.7%，说明该指标对具体版本与配置高度敏感。",
+      "榜单维护者声明会随模型与 HHEM 模型更新而定期刷新，并保留基于 HHEM-1.0 的历史版本榜单，提示跨时间比较需注意评测器版本差异。"
+    ],
+    "raw_excerpt": "Public LLM leaderboard computed using Vectara's Hallucination Evaluation Model, also known as HHEM. This evaluates how often an LLM introduces hallucinations when summarizing a document. We plan to update this regularly as our model and the LLMs get updated over time. ... Last updated on October 22, 2026 ... antgroup/finix_s1_32b 1.8% 98.2% 99.5% 172.4 ... openai/gpt-5.4-nano-2026-03-17 3.1% 96.9% 100.0% 144.4 ... google/gemini-2.5-pro 7.0% 93.0% 99.1% 106.4 ... anthropic/claude-opus-4-1-20250805 11.8% 88.2% 92.4% 129.1"
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "web",
+    "title": "Introducing Claude 4 (Anthropic 官方发布博客)",
+    "url": "https://www.anthropic.com/news/claude-4",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 的 Claude 4（Opus 4 / Sonnet 4）发布博客在正文中未报告任何幻觉率（hallucination rate）或事实性（factuality）量化指标，能力主张集中在 SWE-bench（Opus 4 72.5%、Sonnet 4 72.7%）与 Terminal-bench（43.2%）等编码/智能体基准。",
+      "该博客对可靠性的表述是定性的行为改进而非幻觉率数字：称两款模型在易出现「走捷径或钻漏洞」的智能体任务上比 Sonnet 3.7 少 65% 出现该行为。",
+      "博客称模型「附带大量测试与评估以最小化风险并最大化安全」，并提到实施了面向更高 AI Safety Level（如 ASL-3）的措施，但未在博客层面给出幻觉/事实性评估结果。",
+      "博客末尾列出性能基准数据来源为各家发布帖与系统卡（OpenAI o3 launch post、o3 system card、GPT-4.1 launch post、GPT-4.1 hosted evals、Gemini 2.5 Pro Preview model card、Claude 3.7 Sonnet launch post），即厂商间对比主要引用彼此公开材料而非统一第三方评测。",
+      "博客中「world's best coding model」「state-of-the-art」等表述属于厂商自述的营销性主张，且其依据为厂商自选基准（SWE-bench Verified），未提供独立第三方验证。"
+    ],
+    "raw_excerpt": "Claude Opus 4 is the world's best coding model, with sustained performance on complex, long-running tasks and agent workflows. ... Both models are 65% less likely to engage in this behavior than Sonnet 3.7 on agentic tasks that are particularly susceptible to shortcuts and loopholes. ... They come with extensive testing and evaluation to minimize risk and maximize safety, including implementing measures for higher AI Safety Levels like ASL-3."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+    "url": "https://arxiv.org/abs/2305.14325",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "多智能体辩论（multi-agent debate）：多个 LLM 实例先各自独立给出答案，再在多轮中阅读并批评其他智能体的回答与推理过程，据此更新自身答案，最终收敛到共同答案。",
+      "论文报告辩论方法在六项推理、事实性与问答任务上优于单模型基线（zero-shot CoT 与 reflection）。",
+      "推理任务量化结果（3 agents、2 轮辩论）：算术 67.0%→81.8%，小学数学 GSM8K 77.0%→85.0%，国际象棋最优着法归一化分数 91.4→122.9 ΔPS。",
+      "单智能体 reflection 基线在算术上 67.0%→72.1%，但在 GSM8K 上反而从 77.0% 降到 75.0%，说明自我反思并非稳定增益。",
+      "多智能体多数投票（Multi-Agent Majority）弱于辩论：算术 69.0%、GSM8K 81.0%、国际象棋 102.2，均低于辩论的 81.8/85.0/122.9。",
+      "作者构建了一个新的名人计算机科学家传记事实性基准，指出当代语言模型在该类内容上幻觉倾向尤其高，常弄错机构与日期。",
+      "辩论降低幻觉的机制被描述为：随着辩论推进，各实例对不确定事实产生分歧，从而将这些不确定事实从答案中省略或纠正。",
+      "方法只需黑盒访问模型生成接口，不需要 logits 或梯度，可与检索、提示工程等正交组合。",
+      "作者指出辩论作为多智能体博弈，收敛性在理论上并不保证，只是经验上观察到收敛；且模型智能体因指令微调/RLHF 而表现得较为“随和”，需要“固执”提示才能延长辩论并获得更好结果。"
+    ],
+    "raw_excerpt": "We also demonstrate that our approach improves the factual validity of generated content, reducing fallacious answers and hallucinations that contemporary models are prone to. ... Debate results are also less likely to include false facts that models are internally uncertain of. This is because as the debate progresses, individual model instances tend to disagree on uncertain facts and omit them from the answer. ... In general, debate can be seen as a multi-agent game, where convergence is not guaranteed. Empirically, however, we find that language models are able to converge on a single shared answer after multiple rounds of debate."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Should we be going MAD? A Look at Multi-Agent Debate Strategies for LLMs",
+    "url": "https://arxiv.org/abs/2311.17371",
+    "published_at": "2024-07-18",
+    "key_points": [
+      "该研究基准测试了多种辩论与提示策略，考察成本、时间与准确率之间的权衡。",
+      "核心结论：当前形式的多智能体辩论系统并不能可靠地超越其他提示策略，例如 self-consistency 与使用多条推理路径的 ensembling。",
+      "但在进行超参数调优后，部分 MAD 系统（如 Multi-Persona）表现更好，说明 MAD 协议本身未必更差，而是对超参数设置更敏感、更难优化。",
+      "作者据此提出改进辩论策略的洞见，例如调整智能体间的一致度（agent agreement levels），可显著提升性能并超过所评估的所有非辩论协议。",
+      "作者开源了包含多种 SOTA 协议与评估脚本的代码库，用于在常用研究数据集上做基准测试。"
+    ],
+    "raw_excerpt": "Importantly, we find that multi-agent debating systems, in their current form, do not reliably outperform other proposed prompting strategies, such as self-consistency and ensembling using multiple reasoning paths. However, when performing hyperparameter tuning, several MAD systems, such as Multi-Persona, perform better. This suggests that MAD protocols might not be inherently worse than other approaches, but that they are more sensitive to different hyperparameter settings and difficult to optimize."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Semantic Entropy Probes: Robust and Cheap Hallucination Detection in LLMs",
+    "url": "https://arxiv.org/abs/2406.15927",
+    "published_at": "2024-06-22",
+    "key_points": [
+      "提出 Semantic Entropy Probes (SEP)：在单次生成（single generation）的隐藏状态上训练线性探针，直接近似 semantic entropy，测试时无需多次采样。",
+      "semantic entropy (SE) 的计算成本是朴素生成的 5–10 倍（需对每个 query 采样通常 5–10 个生成），这是其实际部署的主要障碍；SEP 将该开销降至「几乎为零」。",
+      "SEP 以 semantic entropy 而非模型准确率作为监督信号训练，因此不需要昂贵的人工准确率标注。",
+      "作者报告 SEP 在幻觉检测上保持高性能，且比直接预测准确率的探针方法在 out-of-distribution 数据上泛化更好。",
+      "论文承认 SEP 与 10 倍成本更高的基线（即完整 SE）之间仍存在性能差距（Figure 1）。",
+      "semantic entropy 的三步流程：采样多个生成 → 用 NLI 模型（如 DeBERTa）做双向蕴含判定以聚类语义等价生成 → 在语义簇上聚合不确定性；实践中 N=10。",
+      "论文使用 discrete variant of SE，无需 token 概率，因而兼容黑盒模型。"
+    ],
+    "raw_excerpt": "A major limitation of SE and other sampling-based approaches is that they require multiple model generations for each input query, typically between 5 and 10. This results in a 5-to-10-fold higher cost compared to naive generation without SE... We show that SEPs retain high performance for hallucination detection and generalize better to out-of-distribution data than previous probing methods that directly predict model accuracy."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Re-Ex: Revising after Explanation Reduces the Factual Errors in LLM Responses",
+    "url": "https://arxiv.org/abs/2402.17097",
+    "published_at": "2024-02-27",
+    "key_points": [
+      "该来源经核实为基于外部检索 + 解释 + 修订的事后纠错方法（Re-Ex），不属于不确定性量化/选择性预测范畴，与子问题 f2 不相关，仅作为检索失败的记录保留，其内容不应被用于回答 f2。"
+    ],
+    "raw_excerpt": "Re-Ex introduces a novel reasoning step dubbed as the factual error explanation step. Re-Ex revises the initial response of LLMs using 3-steps: first, external tools are used to retrieve the evidences of the factual errors in the initial LLM response..."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture",
+    "url": "https://arxiv.org/abs/2401.08406v3",
+    "published_at": "2024-01-16",
+    "key_points": [
+      "该文对比 RAG 与 fine-tuning 两种将专有/领域数据注入 LLM 的路径，覆盖 Llama2-13B、GPT-3.5、GPT-4 等模型。",
+      "作者报告：对模型做 fine-tuning 带来超过 6 个百分点的准确率提升，且该增益与 RAG 可叠加，RAG 在此基础上再提升 5 个百分点。",
+      "在一个特定实验中，fine-tuned 模型能跨地域利用信息回答特定问题，答案相似度从 47% 提升到 72%。",
+      "该研究为农业领域单案例研究，其 fine-tuning 指领域数据微调，并非针对事实性对齐（factuality alignment）的偏好优化训练。"
+    ],
+    "raw_excerpt": "We see an accuracy increase of over 6 p.p. when fine-tuning the model and this is cumulative with RAG, which increases accuracy by 5 p.p. further. In one particular experiment, we also demonstrate that the fine-tuned model leverages information from across geographies to answer specific questions, increasing answer similarity from 47% to 72%."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "zjunlp/KnowledgeEditingPapers — Must-read Papers on Knowledge Editing for Large Language Models",
+    "url": "https://github.com/zjunlp/KnowledgeEditingPapers",
+    "published_at": null,
+    "key_points": [
+      "该仓库是面向大语言模型知识编辑（knowledge editing）的论文清单型资源库，约 1254 stars、78 forks。",
+      "仓库最近一次推送时间为 2026-08-20，表明该方向在 2024–2026 期间仍有持续更新。",
+      "仅取得仓库元数据（stars、描述、最后推送时间），未读取 README 正文，故不能据此得出任何关于方法有效性或增益的结论。"
+    ],
+    "raw_excerpt": "Must-read Papers on Knowledge Editing for Large Language Models. (★1254, forks 78, last push: 2026-08-20)"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "zjunlp/PitfallsKnowledgeEditing — Unveiling the Pitfalls of Knowledge Editing for Large Language Models (ICLR 2024)",
+    "url": "https://github.com/zjunlp/PitfallsKnowledgeEditing",
+    "published_at": null,
+    "key_points": [
+      "该仓库对应一篇被标注为 ICLR 2024 的论文，标题为《Unveiling the Pitfalls of Knowledge Editing for Large Language Models》，即聚焦知识编辑的缺陷/陷阱。",
+      "仓库语言为 Python，约 22 stars、2 forks，最近推送时间为 2024-06-13。",
+      "仅取得仓库元数据，未读取 README 或论文正文，故其关于知识编辑副作用的具体结论（如是否引入新幻觉、知识冲突、泛化失败）尚无法作为证据引用。"
+    ],
+    "raw_excerpt": "[ICLR 2024] Unveiling the Pitfalls of Knowledge Editing for Large Language Models (★22, forks 2, lang: Python, last push: 2024-06-13)"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "DoLa: Decoding by Contrasting Layers Improves Factuality in Large Language Models",
+    "url": "https://arxiv.org/abs/2309.03883v2",
+    "published_at": "2023-09-07",
+    "key_points": [
+      "DoLa 是一种无需外部检索、无需额外微调的解码策略：通过对比后层与早层投影到词表空间得到的 logits 差异来获得下一 token 分布。",
+      "该方法的前提假设是事实性知识在 LLM 中一般定位于特定的 transformer 层。",
+      "作者称 DoLa 在多项选择任务与开放式生成任务上均一致提升真实性（truthfulness）。",
+      "具体数字：在 TruthfulQA 上使 LLaMA 系列模型提升 12–17 个绝对百分点。",
+      "论文发表于 2023-09-07（v2），作者含 Yung-Sung Chuang、Yujia Xie、Hongyin Luo、Yoon Kim、James Glass、Pengcheng He。"
+    ],
+    "raw_excerpt": "Our approach obtains the next-token distribution by contrasting the differences in logits obtained from projecting the later layers versus earlier layers to the vocabulary space... DoLa consistently improves the truthfulness across multiple choices tasks and open-ended generation tasks, for example improving the performance of LLaMA family models on TruthfulQA by 12-17% absolute points"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Inference-Time Intervention: Eliciting Truthful Answers from a Language Model (ITI)",
+    "url": "https://arxiv.org/abs/2306.03341",
+    "published_at": "2023-06-06",
+    "key_points": [
+      "ITI 在推理期沿一组方向、在有限数量的注意力头上平移模型激活值，以提升真实性。",
+      "具体数字：在指令微调的 LLaMA（Alpaca）上，ITI 将真实性从 32.5% 提升到 65.1%（TruthfulQA 基准）。",
+      "作者明确指出存在 truthfulness 与 helpfulness 之间的权衡，并通过对干预强度（intervention strength）的调参来平衡二者。",
+      "ITI 的数据效率主张：仅用数百个样本即可定位 truthful directions，而 RLHF 类方法需要大量标注。",
+      "该文为 NeurIPS 2023 spotlight，v6 修订于 2024-06-26。"
+    ],
+    "raw_excerpt": "ITI operates by shifting model activations during inference, following a set of directions across a limited number of attention heads... On an instruction-finetuned LLaMA called Alpaca, ITI improves its truthfulness from 32.5% to 65.1%. We identify a tradeoff between truthfulness and helpfulness and demonstrate how to balance it by tuning the intervention strength."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Lookback Lens: Detecting and Mitigating Contextual Hallucinations in Large Language Models Using Only Attention Maps",
+    "url": "https://arxiv.org/abs/2407.07071",
+    "published_at": "2024-07-09",
+    "key_points": [
+      "Lookback Lens 针对的是「上下文幻觉」（contextual hallucination），即摘要或基于给定段落的问答中与输入上下文不符的输出，而非 TruthfulQA 式的世界知识型幻觉。",
+      "检测特征为每个注意力头上「对上下文的注意力权重」与「对新生成 token 的注意力权重」之比（lookback ratio）。",
+      "基于 lookback ratio 的线性分类器效果与使用 LLM 全部隐状态或文本蕴含模型的更复杂检测器相当。",
+      "该检测器可跨任务迁移，甚至跨模型迁移：在 7B 模型上训练后可不经重训直接用于 13B 模型。",
+      "缓解方式为分类器引导的解码（classifier-guided decoding），在 XSum 摘要任务上减少 9.6% 的幻觉。",
+      "该文为 EMNLP 2024 主会长文，v2 修订于 2024-10-03。"
+    ],
+    "raw_excerpt": "We hypothesize that contextual hallucinations are related to the extent to which an LLM attends to information in the provided context versus its own generations... a simple classifier-guided decoding approach is able to reduce the amount of hallucination, for example by 9.6% in the XSum summarization task."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Whose Data, Whose Benchmark? A User-Centric Framework for Auditing Evaluation Resources",
+    "url": "https://arxiv.org/abs/2610.19268",
+    "published_at": "2026-10-13",
+    "key_points": [
+      "该文提出一个以用户为中心的基准审计框架，跨 16 个评测资源、7 个维度考察基准内容、元数据、文档与评分流程。",
+      "配对评分实验显示：保持语义不变的答案改写会使 DROP 的 exact-match 准确率从 100.0% 降至 33.3%。",
+      "同一实验显示 TruthfulQA 在答案改写下表现出「依赖具体指标（metric-dependent）」的参考相似度下降，即其得分对答案表述变体敏感。",
+      "该文指出全部 16 个资源都只操作化了「来源用户」语境，没有任何一个操作化「目标用户」语境。"
+    ],
+    "raw_excerpt": "Paired scoring experiments further show that meaning-preserving answer variants reduce DROP exact-match accuracy from 100.0% to 33.3%, while TruthfulQA exhibits metric-dependent reductions in reference similarity."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Argument Graph Uncertainty: Quantifying Uncertainty from the Logical Structure of Reasoning Chains",
+    "url": "https://arxiv.org/abs/2610.20328",
+    "published_at": "2026-10-14",
+    "key_points": [
+      "该文（2026 年 10 月提交）在 GPQA、MMLU-Pro 与 TruthfulQA 三个基准上评估其不确定性估计方法，说明 TruthfulQA 在 2026 年仍被作为活跃的多选题评测基准使用。",
+      "该文将 TruthfulQA 与 GPQA、MMLU-Pro 并列为「高风险推理任务」的评测集，并在多个推理模型上报告其方法优于基于 token 与基于一致性的不确定性基线。"
+    ],
+    "raw_excerpt": "Evaluated on GPQA, MMLU-Pro and TruthfulQA, our method consistently surpasses token-based and consistency-based uncertainty baselines across multiple reasoning models."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Measuring short-form factuality in large language models (SimpleQA)",
+    "url": "https://arxiv.org/html/2411.04368v1",
+    "published_at": "2024-11-07",
+    "key_points": [
+      "SimpleQA 含 4,326 道短答案事实性问题，设计目标为「有挑战性」（对抗 GPT-4 回答收集）与「易评分」（每题仅一个无争议答案）。",
+      "评分体系为三分类：correct / incorrect / not attempted；理想模型应在不确定时选择不作答，因此该基准被定位为测「模型是否知道自己知道什么」（know what they know）。",
+      "作者明确承认这是对事实性问题的「范围缩减」（reduction of scope），代价是留下未解问题：短答案事实性的改善是否能泛化到长答案事实性。",
+      "问题构建要求：必须有单一答案且需明确答案范围（如问「哪一年」而非「何时」）；参考答案不随时间变化；参考答案须有网页证据支持；须对模型有挑战性（四条 GPT-4 补全中至少一条错误才保留）；须在 2023 年 12 月 31 日前可回答。",
+      "为保持「常青」，题目被要求指定时间点（如「第 13 季中 Meredith 的伴侣是谁」），但作者禁止使用「as of 2023」这类附加限定，认为会使数据集显得做作（contrived）。",
+      "数据质量核查：随机抽 1,000 题由第三位标注者作答，ChatGPT 评分器判定准确率 94.4%；其中被判错的 56 例经人工复核有 15 例为自动评分器假阴性，剩余 41 例（4.1%）为真实错误。",
+      "参考答案由两名独立 AI 标注者一致同意确定，并要求两名标注者找到的来源中至少有两个不同域名。",
+      "作者称 GPT-4o 与 Claude 在该基准上得分均低于 50%。"
+    ],
+    "raw_excerpt": "This reduction of scope is important because it makes measuring factuality much more tractable, albeit at the cost of leaving open research questions such as whether improved behavior on short-form factuality generalizes to long-form factuality. ... Each answer in SimpleQA is graded as either correct, incorrect, or not attempted. A model with ideal behavior would get as many questions correct as possible while not attempting the questions for which it is not confident it knows the correct answer."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Long-form factuality in large language models (LongFact + SAFE)",
+    "url": "https://arxiv.org/html/2403.18802v4",
+    "published_at": "2024-11-07",
+    "key_points": [
+      "LongFact 由 GPT-4（gpt-4-0613）生成，含 2,280 条 soliciting 长答案的事实性 prompt，覆盖 38 个人工选定的主题，分为 LongFact-Concepts 与 LongFact-Objects 两个任务（每任务每主题 30 条，共 1,140 条）。",
+      "设计动机：作者指出 TruthfulQA、HaluEval、FreshQA、HalluQA、FELM 等既有基准「大多由测试单一事实点的 prompt 构成」，只需短答案而非数段长文；FActScore 虽需长答案但主题覆盖窄。",
+      "配套评估方法 SAFE（Search-Augmented Factuality Evaluator）用 LLM 将长回答拆解为单条事实，再对每条事实发起 Google 搜索查询并判断是否被检索结果支持；实现使用 gpt-3.5-turbo-0125 与 Serper 搜索 API。",
+      "聚合指标为 F1@K：precision 为被支持事实占比，recall 为所提供被支持事实数相对用户偏好事实数超参数 K 的比值。",
+      "在约 16k 条单条事实上，SAFE 与众包人类标注者的一致率为 72%；在 100 个分歧案例的随机子集中，SAFE 胜出 76%；SAFE 成本比人类标注者低 20 倍以上。",
+      "作者明确区分 factuality 与 hallucination：其方法判断回答是否与外部既定知识一致（factuality），而非是否与模型内部知识一致（hallucination）。",
+      "在 LongFact 上评测了 Gemini、GPT、Claude、PaLM-2 四个模型家族共 13 个模型，总体发现模型越大长文事实性越好。"
+    ],
+    "raw_excerpt": "many established benchmarks such as TruthfulQA (Lin et al., 2022), HaluEval (Li et al., 2023), FreshQA (Vu et al., 2023), HalluQA (Cheng et al., 2023b), and FELM (Chen et al., 2023) mostly consist of prompts that test knowledge of a single factoid ... and thus only require a short response rather than several paragraphs to be fully answered. ... We focus on factuality and factual errors, not hallucination, as our proposed evaluation method focuses on determining whether a response is factual with respect to external established knowledge (factuality) rather than whether the response is consistent with the model's internal knowledge (hallucination)."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "FreshLLMs: Refreshing Large Language Models with Search Engine Augmentation (FreshQA)",
+    "url": "https://arxiv.org/abs/2310.03214",
+    "published_at": "2023-11-22",
+    "key_points": [
+      "FreshQA 被定位为「动态 QA 基准」，覆盖多样的问答题型，既包含需要快速变化的世界知识的问题，也包含需要被驳斥的假前提（false premise）问题。",
+      "采用两模式（two-mode）评估流程，用以同时测量正确性与幻觉；作者称其人工评估涉及超过 50K 条判断。",
+      "核心发现：所有模型（不论规模）在涉及快速变化知识与假前提的问题上都表现吃力。",
+      "配套方法 FreshPrompt 通过把搜索引擎检索到的相关且最新信息注入 prompt 来提升表现，优于 Self-Ask 等检索增强提示方法与商业系统 Perplexity.ai。",
+      "分析显示检索证据的数量与顺序都会影响生成答案的正确性；且指示模型给出简洁直接的答案比鼓励冗长回答更能减少幻觉。",
+      "作者承诺以固定间隔更新 FreshQA（commit to updating it at regular intervals），这一承诺本身即意味着基准答案会随时间变动。"
+    ],
+    "raw_excerpt": "we introduce FreshQA, a novel dynamic QA benchmark encompassing a diverse range of question and answer types, including questions that require fast-changing world knowledge as well as questions with false premises that need to be debunked. ... all models (regardless of model size) struggle on questions that involve fast-changing knowledge and false premises. ... To facilitate future work, we release FreshQA at this https URL and commit to updating it at regular intervals."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation (arXiv:2309.15217v2)",
+    "url": "https://arxiv.org/html/2309.15217v2",
+    "published_at": "2023-09-26 (v1); v2 revised 2025-04-28",
+    "key_points": [
+      "faithfulness 的定义：答案 a_s(q) 对上下文 c(q) 是 faithful 的，当且仅当答案中所做的 claims 可以从上下文中推断出来（\"We say that the answer a_s(q) is faithful to the context c(q) if the claims that are made in the answer can be inferred from the context\"）。",
+      "faithfulness 的计算流程是两步 LLM 提示：先用 LLM 从答案中抽取一组 statements S(a_s(q))（目的是把长句分解为更短、更聚焦的断言），再逐条核验这些 statement 是否可由 context 支持；最终分数为被支持的 statement 占比。",
+      "论文实现与全部实验中的 prompt 均由 gpt-3.5-turbo-16k（OpenAI API）执行，即该指标完全依赖 LLM judge，而非 NLI 模型或人工规则。",
+      "RAGAS 定位为 reference-free 评估：不依赖 ground-truth 人工标注即可计算 faithfulness、answer relevance、context relevance 三个维度。",
+      "为验证指标，作者构建 WikiEval 数据集：选取 50 个 2022 年后有近期编辑的 Wikipedia 页面，用 ChatGPT 生成问题与答案，并由两名英语流利的标注者按三个维度标注。",
+      "标注者间一致率：faithfulness 与 context relevance 约 95%，answer relevance 约 90%；分歧经讨论解决。",
+      "Table 1（WikiEval 上 pairwise 比较与人工判断的一致率/accuracy）：Ragas 为 faithfulness 0.95、answer relevance 0.78、context relevance 0.70；GPT Score 基线为 0.72 / 0.52 / 0.63；GPT Ranking 基线为 0.54 / 0.40 / 0.52。",
+      "评测协议是 pairwise 比较（比较两个答案或两段 context，看指标偏好是否与人工偏好一致），而非绝对分数的相关性；并列分数随机打破。",
+      "论文自述相关工作局限：现有模型在标准提示策略下难以检测幻觉（引 Li et al. 2023；Azaria and Mitchell 2023）；直接用 ChatGPT 打 0-100 或 5 星评分虽效果不错，但\"对 prompt 设计敏感\"。"
+    ],
+    "raw_excerpt": "We say that the answer a_s(q) is faithful to the context c(q) if the claims that are made in the answer can be inferred from the context. To estimate faithfulness, we first use an LLM to extract a set of statements, S(a_s(q)). The aim of this step is to decompose longer sentences into shorter and more focused assertions. ... In our implementation and experiments, all prompts are evaluated using the gpt-3.5-turbo-16k model ... Table 1: Agreement with human annotators in pairwise comparisons of faithfulness, answer relevance and context relevance, using the WikEval dataset (accuracy). [Ragas: 0.95 / 0.78 / 0.70; GPT Score: 0.72 / 0.52 / 0.63; GPT Ranking: 0.54 / 0.40 / 0.52]"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "RAGChecker: A Fine-grained Framework for Diagnosing Retrieval-Augmented Generation (arXiv:2408.08067v2)",
+    "url": "https://arxiv.org/html/2408.08067v2",
+    "published_at": "2024-08-15 (v1); v2 2024-08-17",
+    "key_points": [
+      "RAGChecker 将 RAGAS 归类为遵循 TruLens 提出的 \"RAG Triad\"（context relevance / groundedness / answer relevance）概念、并通过提示 LLM 或 NLI 模型预测分数的端到端打分框架，与 ARES、CRUD-RAG 同属一类。",
+      "RAGChecker 指出 RAGAS、TruLens、ARES 等框架\"只对某些指标提供细粒度评估\"（offer fine-grained evaluation only on certain metrics），而 RAGChecker 的全部指标基于 claim 级蕴含检查。",
+      "RAGChecker 把 \"metric reliability\"（指标与人工判断的一致性）列为 RAG 评估的三大挑战之一，并专门构建人工判断数据集做 meta-evaluation，比较对象包含 RAGAS、TruLens、ARES、CRUD-RAG 四个框架。",
+      "RAGChecker 摘要声称其 meta-evaluation 显示与人工判断的相关性显著优于其他评估指标（\"Meta evaluation verifies that RAGChecker has significantly better correlations with human judgments than other evaluation metrics\"）——此为作者自述主张，具体相关系数未在已读章节中出现。",
+      "RAGChecker 对 faithfulness 的定义：模型回复 m 的 claims 中被检索 chunks 蕴含的比例（\"the proportion of c_i(m) that are entailed in retrieved chunks\"），即对提供上下文的忠实度，越高越好。",
+      "RAGChecker 将回复中的错误 claim 细分为三类并给出对应指标：与 ground truth 矛盾的 claim、被无关 chunk 蕴含的 claim（irrelevant noise sensitivity）、不被任何检索 chunk 蕴含的 claim（hallucination）。",
+      "RAGChecker 认为 n-gram（BLEU/ROUGE）、embedding（BERTScore）与 LLM-based 方法在简短答案上表现良好，但无法识别长回复中的细微差别。"
+    ],
+    "raw_excerpt": "RAGAS [5] and ARES [35] followed the RAG Triad concept and improved the score prediction approaches on different datasets. ... While some frameworks offer fine-grained evaluation only on certain metrics (e.g., RAGAS [5], TruLens [6], ARES [35]) ... (3) metric reliability: the reliability of existing metrics for RAG remains under-explored. ... Meta evaluation verifies that RagChecker has significantly better correlations with human judgments than other evaluation metrics. ... we first compute the proportion of c_i(m) that are entailed in retrieved chunks. This metric is faithfulness"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "RagChecker: A Fine-grained Framework for Diagnosing Retrieval-Augmented Generation (arXiv abstract page, arXiv:2408.08067)",
+    "url": "https://arxiv.org/abs/2408.08067",
+    "published_at": "2024-08-15",
+    "key_points": [
+      "摘要明确将 \"reliability of measurements\" 列为 RAG 评估的难点之一，并把与人工判断的相关性作为框架有效性的判据。",
+      "该工作由 Amazon AWS AI 与上海交通大学、西湖大学等合作完成，代码开源于 github.com/amazon-science/RAGChecker，属于独立于 RAGAS 作者团队的第三方评估框架。",
+      "论文评估了 8 个 RAG 系统，覆盖 10 个领域，用于展示指标体系的诊断能力。"
+    ],
+    "raw_excerpt": "Despite Retrieval-Augmented Generation (RAG) showing promising capability in leveraging external knowledge, a comprehensive evaluation of RAG systems is still challenging due to the modular nature of RAG, evaluation of long-form responses and reliability of measurements. ... Meta evaluation verifies that RAGChecker has significantly better correlations with human judgments than other evaluation metrics."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models (EMNLP 2023 Main, v3)",
+    "url": "https://arxiv.org/abs/2305.11747",
+    "published_at": "2023-05-19 (v1); v3 2023-10-23",
+    "key_points": [
+      "HaluEval 定位为「generated and human-annotated hallucinated samples」的集合，用于评测 LLM 识别幻觉的能力；被 EMNLP 2023 Main Conference 接收（Long Paper）。",
+      "数据构造采用 ChatGPT-based 两步框架：sampling-then-filtering（先多样化采样、再高质量过滤）。",
+      "基准总规模为 35,000 条 hallucinated/normal 样本，由两部分构成：5,000 条通用用户查询 + ChatGPT 回复（人工标注），以及 30,000 条来自三个任务的特定任务样本（问答、知识 grounded 对话、文本摘要）。",
+      "通用查询部分取自 Alpaca 的 52K instruction tuning 数据；为筛出最易产生幻觉的查询，对每个查询用 ChatGPT 采样 3 个回复，仅保留三次回复相似度最低的 5,000 条查询。",
+      "采样阶段设计了两种幻觉采样方式（one-pass instruction following 与 conversational schema），并配合三类指令要素：intention description、hallucination pattern、hallucination demonstration。",
+      "幻觉类型按任务分别沿用既有分类：问答 4 类（comprehension、factualness、specificity、inference，引自 Zheng et al. 2023）；知识对话 3 类（extrinsic-soft、extrinsic-hard、extrinsic-grouped，引自 Das et al. 2023）；摘要 3 类（factual、non-factual、intrinsic，引自 Cao et al. 2022）。",
+      "特定任务样本的种子数据为从 HotpotQA、OpenDialKG、CNN/Daily Mail 训练集各随机采样 30,000 条实例后生成其幻觉版本。",
+      "过滤阶段用带 ground-truth 答案的 few-shot 指令让 ChatGPT 在两个幻觉候选中选「最合理、最难」的一个；指令明确要求「If both answers are incorrect, choose the better one. You MUST select an answer from the provided two answers.」",
+      "作者报告 ChatGPT 约 19.5% 的回复存在编造不可验证信息的幻觉，涉及语言、气候、技术等主题。",
+      "识别难度：ChatGPT 在问答任务上识别幻觉的准确率仅 62.59%。",
+      "作者报告提供外部知识或增加中间推理步骤可提升 LLM 识别幻觉的能力，而将幻觉样本与正确答案对比反而使模型更困惑、性能下降。"
+    ],
+    "raw_excerpt": "we introduce the Hallucination Evaluation benchmark for Large Language Models (HaluEval), a large collection of generated and human-annotated hallucinated samples for evaluating the performance of LLMs in recognizing hallucination. To generate these samples, we propose a ChatGPT-based two-step framework, i.e., sampling-then-filtering. ... we end up generating a total of 30,000 hallucinated samples for the three tasks. ... we use ChatGPT to sample three responses for each query and only retain 5,000 queries with the lowest similarity among three responses."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "IAAR-Shanghai/UHGEval — Eval Suite & Benchmarks: UHGEval, HaluEval, HalluQA (ACL 2024)",
+    "url": "https://github.com/IAAR-Shanghai/UHGEval",
+    "published_at": "last push 2025-06-07",
+    "key_points": [
+      "该仓库自述为 ACL 2024 的用户友好评测框架，集成的基准包括 UHGEval、HaluEval、HalluQA 等。",
+      "仓库元数据（stars 184、forks 12、最近推送 2025-06-07）表明 HalluQA 作为独立基准存在于该评测套件中，与 HaluEval 并列。",
+      "仅获得仓库描述与元数据，未读取 README 正文，故不能据此对 HalluQA 的数据构造或标注质量下结论。"
+    ],
+    "raw_excerpt": "[ACL 2024] User-friendly evaluation framework: Eval Suite & Benchmarks: UHGEval, HaluEval, HalluQA, etc."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "RUCAIBox/HaluEval — official repository of the HaluEval benchmark",
+    "url": "https://github.com/RUCAIBox/HaluEval",
+    "published_at": "last push 2024-02-12",
+    "key_points": [
+      "该仓库为 HaluEval 官方代码与数据仓库，自述为「a large-scale hallucination evaluation benchmark for Large Language Models」。",
+      "仓库元数据：stars 605、forks 49、最近推送 2024-02-12，说明基准发布后仍有维护但更新已趋缓。",
+      "仅获得仓库描述与元数据，未读取 README 正文，故数据字段、划分与已知问题需另行取证。"
+    ],
+    "raw_excerpt": "This is the repository of HaluEval, a large-scale hallucination evaluation benchmark for Large Language Models."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "langchain-ai/langchain — README（The agent engineering platform）",
+    "url": "https://github.com/langchain-ai/langchain",
+    "published_at": null,
+    "key_points": [
+      "README 将 LangChain 定位为 \"The agent engineering platform\"／\"a framework for building agents and LLM-powered applications\"，核心价值叙述是组件互操作与第三方集成。",
+      "README 列出的能力主张为：Real-time data augmentation（连接 LLM 到多样数据源与外部/内部系统）、Model interoperability、Rapid prototyping、Production-ready features（经 LangSmith 提供监控/评估/调试）、Vibrant community、Flexible abstraction layers。",
+      "README 全文未出现 hallucination、grounding、faithfulness 等词，也未给出任何幻觉率、延迟或 token 成本的量化数字；与检索/接地相关的唯一表述是 \"Real-time data augmentation\"。",
+      "README 中 \"Production-ready features\" 的可靠性主张被归因于 LangSmith 的 monitoring/evaluation/debugging 集成，而非框架本身对幻觉的抑制机制。"
+    ],
+    "raw_excerpt": "Real-time data augmentation — Easily connect LLMs to diverse data sources and external/internal systems, drawing from LangChain's vast library of integrations with model providers, tools, vector stores, retrievers, and more ... Production-ready features — Deploy reliable applications with built-in support for monitoring, evaluation, and debugging through integrations like LangSmith."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "run-llama/llama_index — README（LlamaIndex Framework）",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": null,
+    "key_points": [
+      "README 明确声明公司重心已转移：\"The current focus of LlamaIndex is to build the best AI-powered engine for document parsing and extraction\"，OSS 框架降级为 \"an open toolkit that you're welcome to use\"，主推 LlamaParse / LiteParse / ParseBench / ExtractBench。",
+      "README 对框架能力的描述停留在数据接入与检索接口层面：data connectors、以 indices/graphs 结构化数据、\"an advanced retrieval/query interface over your data: Feed in any LLM input prompt, get back retrieved context and knowledge-augmented output\"。",
+      "README 未出现 hallucination 或 grounding 字样，未给出任何幻觉率、延迟或 token 成本的量化指标；\"knowledge-augmented output\" 是唯一与接地相关的表述。",
+      "README 自述其基准投入方向是解析与抽取（ParseBench、ExtractBench），而非 RAG 幻觉率基准。",
+      "README 自带免责声明：\"This README is not updated as frequently as the documentation.\"，即 README 主张的时效性弱于文档站。"
+    ],
+    "raw_excerpt": "The current focus of LlamaIndex is to build the best AI-powered engine for document parsing and extraction. ... Provides an advanced retrieval/query interface over your data: Feed in any LLM input prompt, get back retrieved context and knowledge-augmented output. ... ParseBench and ExtractBench represent our commitment towards open benchmarking for parsing and extraction."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "deepset-ai/haystack — README（open-source AI orchestration framework）",
+    "url": "https://github.com/deepset-ai/haystack",
+    "published_at": null,
+    "key_points": [
+      "README 将 Haystack 定位为 \"an open-source AI orchestration framework for building production-ready LLM applications in Python\"，强调对 retrieval、routing、memory、generation 的显式控制与透明可追踪架构。",
+      "README 的可靠性主张以 guardrails 与可观测性形式出现：agent 生命周期钩子（before_llm、before_tool、on_exit）\"for guardrails and custom logic\"，并开箱追踪 step_count、token_usage 与 tool calls \"for monitoring and cost control\"。",
+      "README 未出现 hallucination 或 grounding 字样，未给出任何幻觉率、延迟或 token 成本的量化数字；token_usage 仅作为可被追踪的运行时指标存在，README 未提供其开销数值。",
+      "README 的 context engineering 主张为：对信息在到达模型前如何被 retrieved、ranked、filtered、combined、structured、routed 提供显式控制，且 retrieval/memory/tools/generation 透明可追踪。",
+      "README 提供现成 agent 模板（Agent Pack，含 deep research agent 与 advanced RAG agent）与 SkillToolset 渐进式技能发现，以减少进入上下文的技能描述。"
+    ],
+    "raw_excerpt": "Extend agent behavior with lifecycle hooks (`before_llm`, `before_tool`, `on_exit`, …) for guardrails and custom logic, and track `step_count`, `token_usage`, and tool calls out of the box for monitoring and cost control. ... Design flexible systems with explicit control over how information is retrieved, ranked, filtered, combined, structured, and routed before it reaches the model."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "LlamaIndex 文档：Building Performant RAG Applications for Production",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "文档把目标表述为优化检索与生成以\"answer more queries over more complex datasets accurately and without hallucinations\"，但全文未给出任何幻觉率、延迟或 token 成本的量化测量结果。",
+      "文档承认朴素 RAG 栈的失效边界：\"A big issue with the standard RAG stack (top-k retrieval + basic text splitting) is that it doesn't do well as the number of documents scales up - e.g. if you have 100 different PDFs.\"",
+      "文档承认 embedding 大 chunk 会导致 \"lost in the middle\" 问题，故建议解耦检索用 chunk 与合成用 chunk（embed 摘要或句子并链接窗口）。",
+      "文档指出 reranker 的收益与代价：dense/hybrid retriever 为召回率调优、top-1 未必最相关，reranker 用\"a stronger, slower model\"对 top-k 重排，即精度提升以额外延迟/算力为代价；建议 similarity_top_k=10-20 重排至 top_n=3-5。",
+      "文档承认部分优化手段本身有成本：自动生成摘要 \"can be expensive\"；metadata 过滤的 cons 是标签难定义且仅支持文档级关键词检索。"
+    ],
+    "raw_excerpt": "The end goal is to optimize your retrieval and generation performance to answer more queries over more complex datasets accurately and without hallucinations. ... A reranker addresses this by running a stronger, slower model over the top-k candidates and reordering them before they reach the LLM. ... Also autogenerating summaries can be expensive."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "RAGTruth: A Hallucination Corpus for Developing Trustworthy Retrieval-Augmented Language Models (arXiv:2401.00396, v2)",
+    "url": "https://arxiv.org/abs/2401.00396",
+    "published_at": "2023-12-31",
+    "key_points": [
+      "论文明确指出 RAG 本身不足以消除幻觉：\"Despite the integration of RAG, LLMs may still present unsupported or contradictory claims to the retrieved contents.\"",
+      "RAGTruth 语料含近 18,000 条由多个 LLM 在 RAG 设置下自然生成的回答，经人工在案例级与词级双重标注，并标注幻觉强度。",
+      "该基准的测量对象是不同 LLM 的幻觉频率与既有幻觉检测方法的有效性，而非不同 RAG 框架（LangChain/LlamaIndex/Haystack）之间的幻觉率差异。",
+      "论文报告可用高质量数据微调一个相对小的 LLM，在幻觉检测上达到与基于 GPT-4 的 prompt 方法相当的性能水平。",
+      "该论文为 v2（2024-05-17 修订），初版 2023-12-31。"
+    ],
+    "raw_excerpt": "Retrieval-augmented generation (RAG) has become a main technique for alleviating hallucinations in large language models (LLMs). Despite the integration of RAG, LLMs may still present unsupported or contradictory claims to the retrieved contents. ... RAGTruth comprises nearly 18,000 naturally generated responses from diverse LLMs using RAG."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "vectara/hallucination-leaderboard — Hallucination Leaderboard (HHEM)",
+    "url": "https://github.com/vectara/hallucination-leaderboard",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "该榜单用 Vectara 的 Hallucination Evaluation Model (HHEM) 计算 LLM 在「对短文档做摘要」时引入幻觉的频率，即评测场景限定为摘要任务，而非开放域问答。",
+      "榜单页面标注最后更新日期为 2026 年 10 月 22 日。",
+      "榜单同时报告四个指标：Hallucination Rate、Factual Consistency Rate、Answer Rate、Average Summary Length (Words)。",
+      "openai/gpt-5-nano-2025-08-07 幻觉率 10.5%、事实一致性 89.5%、回答率 100.0%。",
+      "openai/gpt-5-mini-2025-08-07 幻觉率 12.9%、事实一致性 87.1%。",
+      "openai/gpt-5-minimal-2025-08-07 幻觉率 14.7%；openai/gpt-5-high-2025-08-07 幻觉率 15.1%（同一 GPT-5 家族内不同推理档位幻觉率不同，high 档反而更高）。",
+      "google/gemini-2.5-flash-lite 幻觉率 3.3%（榜单中 Gemini 2.5 系列最低），google/gemini-2.5-pro 幻觉率 7.0%，google/gemini-2.5-flash 幻觉率 7.8%。",
+      "google/gemini-3-pro-preview 幻觉率 13.6%、gemini-3-flash-preview 13.5%、gemini-3.1-pro-preview 10.4%、gemini-3.1-flash-lite-preview 8.2%。",
+      "meta-llama/Llama-3.3-70B-Instruct-Turbo 幻觉率 4.1%、事实一致性 95.9%。",
+      "meta-llama/Llama-4-Scout-17B-16E-Instruct 幻觉率 7.7%；meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8 幻觉率 8.2%。",
+      "榜单首位为 antgroup/finix_s1_32b，幻觉率 1.8%；openai/gpt-5.4-nano-2026-03-17 以 3.1% 位列第二。",
+      "榜单中存在同一厂商多代模型幻觉率不单调下降的现象，例如 openai/gpt-4o-2024-08-06 为 9.6%，而 gpt-5-high-2025-08-07 为 15.1%。"
+    ],
+    "raw_excerpt": "Public LLM leaderboard computed using Vectara's Hallucination Evaluation Model, also known as HHEM. This evaluates how often an LLM introduces hallucinations when summarizing a document. ... Last updated on October 22, 2026 | Model | Hallucination Rate | Factual Consistency Rate | Answer Rate | Average Summary Length (Words) | ... openai/gpt-5-nano-2025-08-07 10.5 % 89.5 % 100.0 % 105.7 ... google/gemini-2.5-pro 7.0 % 93.0 % 99.1 % 106.4 ... meta-llama/Llama-3.3-70B-Instruct-Turbo 4.1 % 95.9 % 99.5 % 64.6 ... google/gemini-3-pro-preview 13.6 % 86.4 % 99.4 % 101.9 ... openai/gpt-5-high-2025-08-07 15.1 % 84.9 % 99.9 % 162.7"
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "vectara/hallucination-leaderboard（仅取得仓库元数据，未读到 README 正文）",
+    "url": "https://github.com/vectara/hallucination-leaderboard",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库描述为：Leaderboard Comparing LLM Performance at Producing Hallucinations when Summarizing Short Documents（比较 LLM 在摘要短文档时产生幻觉表现的排行榜）。",
+      "语言为 Python，stars 3323，forks 107，最后推送时间 2026-10-23。",
+      "该仓库是 HHEM 相关评测的候选一手来源，但本轮未能读取 README 正文，故其评测方法、拒答计分规则、模型清单均无证据支持。"
+    ],
+    "raw_excerpt": "Leaderboard Comparing LLM Performance at Producing Hallucinations when Summarizing Short Documents"
+  },
+  {
+    "sub_question_id": "f11",
+    "source_type": "github",
+    "title": "lechmazur/confabulations（仅取得仓库元数据，未读到 README 正文）",
+    "url": "https://github.com/lechmazur/confabulations",
+    "published_at": "2025-08-07",
+    "key_points": [
+      "仓库描述为：Hallucinations (Confabulations) Document-Based Benchmark for RAG. Includes human-verified questions and answers。",
+      "语言为 HTML，stars 250，forks 9，最后推送时间 2025-08-07。",
+      "该仓库声称包含人工核验的问答数据，可能作为第三方评测的候选来源，但本轮未读到正文，无法确认其是否与厂商自评结果做过同模型对比。"
+    ],
+    "raw_excerpt": "Hallucinations (Confabulations) Document-Based Benchmark for RAG. Includes human-verified questions and answers."
+  }
+]

@@ -1,0 +1,499 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+    "url": "https://arxiv.org/abs/2306.05685",
+    "published_at": "2023-06-09 (v1), v4 2023-12-24; NeurIPS 2023 Datasets and Benchmarks Track",
+    "key_points": [
+      "该论文明确提出并命名 \"LLM-as-a-judge\" 这一判定范式：用强 LLM（如 GPT-4）作为人类的替代者（surrogate）来给开放式问题的回答打分。",
+      "提出动机：传统基准（MMLU、HELM 等）无法区分对齐后的 chat 模型与基座模型，与用户真实偏好存在根本性偏差；而人工评测虽是黄金标准，但\"exceptionally slow and costly\"。",
+      "论文将 LLM-as-a-judge 的两大优势界定为 scalability（可扩展性）与 explainability（可解释性，不仅给分还给理由）。",
+      "论文明确列出该范式的局限：position bias、verbosity bias、self-enhancement bias，以及有限的推理能力。",
+      "判定范式上，论文讨论了 pairwise comparison（两两比较）与 single answer grading（单答案打分），并补充 reference-guided grading（提供参考答案的评分，如数学题）。",
+      "论文自陈各范式的权衡：pairwise 在选手数量增加时因组合数平方增长而缺乏可扩展性；single answer grading 难以辨别细微差异且绝对分数比相对比较更不稳定。",
+      "一致性证据：GPT-4 判官与受控专家投票及众包人类投票的一致率超过 80%，达到人类-人类之间的一致水平。",
+      "论文主张未来基准应采用混合评测框架：把既有能力型基准与基于 LLM-as-a-judge 的偏好型基准结合。",
+      "position bias 实测：Claude-v1 默认 prompt 下顺序一致性仅 23.8%、75.0% 偏向第一个答案；GPT-3.5 为 46.2%；GPT-4 为 65.0%（仅 GPT-4 在 60% 以上案例给出一致结果）。",
+      "Claude-v1 还表现出 name bias（在 rename prompt 下偏向 \"Assistant A\"）。"
+    ],
+    "raw_excerpt": "While human evaluation is the gold standard for assessing human preferences, it is exceptionally slow and costly. To automate the evaluation, we explore the use of state-of-the-art LLMs, such as GPT-4, as a surrogate for humans. ... We call this approach \"LLM-as-a-judge\". / LLM-as-a-judge offers two key benefits: scalability and explainability. / the pairwise comparison may lack scalability when the number of players increases, given that the number of possible pairs grows quadratically; single answer grading may be unable to discern subtle differences between specific pairs, and its results may become unstable"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
+    "url": "https://arxiv.org/abs/2303.16634",
+    "published_at": "2023-03-29 (v1), v3 2023-05-23",
+    "key_points": [
+      "G-Eval 把 LLM 评测定义为\"form-filling paradigm\"（表单填写范式）：让 LLM 按预定义评分维度（如 coherence、consistency、fluency、relevance）输出 1-5 分。",
+      "方法三要素：(1) 含任务定义与评测标准的 prompt；(2) 由 LLM 自动生成的 chain-of-thoughts（Evaluation Steps）；(3) 基于输出 token 概率的评分函数。",
+      "评分函数用概率加权求和把离散分数连续化：score = Σ p(s_i) × s_i，以解决单一分值主导分布、以及 LLM 只输出整数导致大量并列（ties）的问题。",
+      "与人工评测的关系被量化为相关性：G-Eval + GPT-4 在 SummEval 摘要任务上与人类的 Spearman 相关为 0.514（Kendall-Tau 0.418），论文称大幅超越此前所有方法。",
+      "与传统自动指标的关系：BLEU/ROUGE/METEOR 等基于参考的指标与人类判断相关性较低，尤其在开放式生成任务上；且需要昂贵的参考文本。",
+      "与既有 LLM 评测器的关系：早期 LLM 评测器（如 GPTScore，用生成目标文本的条件概率打分）与人类对应性仍低于中等规模神经评测器（如 UniEval）。",
+      "前提假设：LLM 具备按自然语言标准执行评测的能力，且 CoT 能通过提供更多上下文与指引提升评测表现；论文同时指出 LLM 评测器对指令与 prompt 敏感。",
+      "论文指出 LLM 评测器存在偏好 LLM 生成文本的偏差，若用作自我改进的奖励信号可能导致 self-reinforcement。",
+      "SummEval 上对比：UniEval 平均 Spearman 0.474、BARTScore 0.385、GPTScore 0.417、ROUGE-1 0.192、BERTScore 0.225，G-Eval-4 为 0.514。"
+    ],
+    "raw_excerpt": "we present G-Eval, a framework of using large language models with chain-of-thoughts (CoT) and a form-filling paradigm, to assess the quality of NLG outputs. ... We show that G-Eval with GPT-4 as the backbone model achieves a Spearman correlation of 0.514 with human on summarization task, outperforming all previous methods by a large margin. / we use the probability-weighted summation of the output scores as the final score. / LLM-based metrics have a potential issue of preferring LLM-generated texts over human-written texts"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Prometheus: Inducing Fine-grained Evaluation Capability in Language Models",
+    "url": "https://arxiv.org/abs/2310.08491",
+    "published_at": "2023-10-12 (v1), v2 2024-03-09; ICLR 2024",
+    "key_points": [
+      "Prometheus 把\"用强闭源 LLM（如 GPT-4）作为长文本回答评测器\"描述为 de facto standard（事实标准），即该范式在 2023 年已成为业界默认做法。",
+      "论文指出闭源判官的三项适用性限制：closed-source nature（不透明）、uncontrolled versioning（版本不可控）、prohibitive costs（成本过高），对大规模评测与自定义标准（如儿童可读性）场景不可靠。",
+      "提出开源替代：基于 Feedback Collection 数据集（1K 条细粒度评分细则 score rubrics、20K 条指令、100K 条由 GPT-4 生成的回答与语言反馈）训练 13B 的 Prometheus 评测模型。",
+      "关键前提假设：Prometheus 在\"提供适当参考材料（参考答案、评分细则 score rubric）\"时才能达到与 GPT-4 相当的评测能力——即细粒度评分细则与参考材料是该范式的输入前提。",
+      "量化结果：在 45 条自定义评分细则下，Prometheus 与人类评测者的 Pearson 相关为 0.897，GPT-4 为 0.882，ChatGPT 为 0.392。",
+      "在四个基准（MT Bench、Vicuna Bench、Feedback Bench、Flask Eval）的 1222 条自定义评分细则上，与 GPT-4 的相关性呈相似趋势。",
+      "Prometheus 在两个人类偏好基准（HHH Alignment、MT Bench Human Judgment）上取得最高准确率，优于显式在人类偏好数据上训练的开源奖励模型，论文据此提出其作为通用奖励模型的潜力。"
+    ],
+    "raw_excerpt": "Recently, using a powerful proprietary Large Language Model (LLM) (e.g., GPT-4) as an evaluator for long-form responses has become the de facto standard. However, for practitioners with large-scale evaluation tasks and custom criteria in consideration (e.g., child-readability), using proprietary LLMs as an evaluator is unreliable due to the closed-source nature, uncontrolled versioning, and prohibitive costs. / we propose Prometheus, a fully open-source LLM that is on par with GPT-4's evaluation capabilities when the appropriate reference materials (reference answer, score rubric) are accompanied."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+    "url": "https://arxiv.org/abs/2306.05685",
+    "published_at": "2023-06-09 (v1); v4 2023-12-24",
+    "key_points": [
+      "该论文明确将 LLM-as-a-judge 的局限归纳为四类：position bias、verbosity bias、self-enhancement bias，以及 limited reasoning ability，并提出缓解其中部分偏差的方案。",
+      "论文将 position bias 定义为：LLM 表现出偏好某些位置（而非内容）的倾向，并指出该偏差并非 LLM 评测所独有，在人类决策与其他机器学习领域中也已被观察到。",
+      "论文给出 position bias 的具体实例：让 GPT-4 评测 GPT-3.5 与 Vicuna-13B 的两个回答，当 GPT-3.5 的回答被放在第一位时，GPT-4 认为其更详细、更优；交换顺序后判断随之改变。",
+      "论文区分了三种 LLM-as-a-judge 实现形式：pairwise comparison、single answer grading、reference-guided grading，并指出 single answer grading 的绝对分数在更换 judge 模型时比相对 pairwise 结果波动更大、更不稳定。",
+      "论文报告 GPT-4 judge 与人类偏好的一致率超过 80%，达到人类-人类之间的一致水平（基于 3K 专家投票与 3K 众包投票）。",
+      "论文公开了 80 道 MT-bench 多轮问题、3K 专家投票与 30K 带人类偏好标注的对话。",
+      "该文发表于 NeurIPS 2023 Datasets and Benchmarks Track。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models (PoLL)",
+    "url": "https://arxiv.org/abs/2404.18796",
+    "published_at": "2024-04-29 (v1); v2 2024-05-01",
+    "key_points": [
+      "论文指出，当前评测普遍依赖单一大型模型（如 GPT-4）作为 judge，该方法成本高，且已被证明会引入 intra-model bias（模型内偏差）。",
+      "论文提出用由多个较小模型组成的评审团（Panel of LLM evaluators, PoLL）替代单一大型 judge；在三种 judge 设置、六个数据集上，PoLL 表现优于单一大型 judge。",
+      "论文称 PoLL 因由不同模型家族的成员构成而表现出更少的 intra-model bias，同时成本降低七倍以上。",
+      "注意：以上均为摘要级陈述，本轮未读取该文正文实验章节，量化细节（具体数据集、偏差度量方式）未取证。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "JudgeLM: Fine-tuned Large Language Models are Scalable Judges (README)",
+    "url": "https://github.com/baaivision/JudgeLM",
+    "published_at": "2023-10-01",
+    "key_points": [
+      "README 将微调 judge 的关键偏差明确归为三类：position bias、knowledge bias、format bias。",
+      "针对上述偏差，JudgeLM 引入三项技术：swap augmentation（交换答案顺序做数据增强）、reference support（提供参考基准答案）、reference drop（训练时随机丢弃参考，避免模型过度依赖参考）。",
+      "README 模型表中，加入 reference 后各规模一致提升：JudgeLM-7B Agreement 81.11→84.08，13B 84.33→85.47，33B 89.03→89.32。",
+      "JudgeLM-33B（w/ reference）Precision 84.00、Recall 86.21、F1 84.98、Consistency 92.37。",
+      "README 声称与 teacher judge（GPT-4）的一致率超过 90%，并称该一致率超过人与人之间的一致率（human-to-human agreement）。",
+      "训练数据规模：JudgeLM-100K 含 100K 训练 judge 样本 + 5K 验证样本，judgement 由 GPT-4 生成。",
+      "微调超参（JudgeLM-13B）：global batch size 128、lr 2e-5、3 epochs、max length 2048；训练命令含 --swap_aug_ratio 0.5 与 --ref_drop_ratio 0.5。",
+      "效率主张：JudgeLM-7B 在 8×A100 上判 5K 样本需 3 分钟。",
+      "仓库状态：15 commits，论文被 ICLR2025 接收为 Spotlight。"
+    ],
+    "raw_excerpt": "we then analyze the key biases in fine-tuning LLM as a judge and consider them as position bias, knowledge bias, and format bias. To address these issues, JudgeLM introduces a bag of techniques including swap augmentation, reference support, and reference drop, which clearly enhance the judge's performance. ... JudgeLM obtains high agreement with the teacher judge, achieving an agreement exceeding 90% that even surpasses human-to-human agreement."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Prometheus-Eval: A repository for evaluating LLMs in generation tasks (README)",
+    "url": "https://github.com/prometheus-eval/prometheus-eval",
+    "published_at": null,
+    "key_points": [
+      "Prometheus 2 (8x7B) 在 5 点 Likert 直接评分（direct assessment）上与 GPT-4-1106 的 Pearson 相关系数为 0.6–0.7，覆盖 VicunaBench、MT-Bench、FLASK。",
+      "Prometheus 2 (8x7B) 在 pairwise ranking 基准（HHH Alignment、MT Bench Human Judgment、Auto-J Eval）上与人类判断的一致率为 72%–85%。",
+      "Prometheus 2 (7B) 仅需 16 GB VRAM，可在消费级 GPU 运行，达到 8x7B 至少 80% 的评测表现。",
+      "Prometheus 2 相对 Prometheus 1 (13B) 新增 pairwise ranking（relative grading）格式支持。",
+      "2025/04 发布 M-Prometheus（3B/7B/14B），在多语言 meta-evaluation 基准 MM-Eval 与 M-RewardBench 上优于此前开源 judge；7B/14B 在 RewardBench 上分别超过 Prometheus 2 7B 与 8x7B。",
+      "2024/06 发布 BiGGen-Bench：9 项核心能力、77 个任务、765 个实例，每个实例带特定评估标准（evaluation criteria）；用 5 个 evaluator LM 评了 103 个前沿模型。",
+      "Prometheus 2 BGB (8x7B) 在 absolute grading 任务上声称超过 Claude-3-Opus。",
+      "工程接口：pip install prometheus-eval，支持 vllm 本地推理与 litellm 调用外部 API（含 GPT-4）；提供 ABSOLUTE_PROMPT 与 SCORE_RUBRIC_TEMPLATE 模板，评分 1–5。",
+      "README 自述该库仍处于 beta 阶段。"
+    ],
+    "raw_excerpt": "It achieves a Pearson correlation of 0.6 to 0.7 with GPT-4-1106 on a 5-point Likert scale across multiple direct assessment benchmarks, including VicunaBench, MT-Bench, and FLASK. It also scores a 72% to 85% agreement with human judgments across multiple pairwise ranking benchmarks, including HHH Alignment, MT Bench Human Judgment, and Auto-J Eval."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "How to Correctly Report LLM-as-a-Judge Evaluations (LLM-judge-reporting, README)",
+    "url": "https://github.com/UW-Madison-Lee-Lab/LLM-judge-reporting",
+    "published_at": "2025-11-27",
+    "key_points": [
+      "该框架指出 judge 因 specificity 与 sensitivity 不完美而产生噪声，导致准确率估计有偏；已有偏差校正方法在实践中未被充分利用，且通常假设已知精确的 specificity/sensitivity。",
+      "提供 plug-in 偏差校正点估计：theta = (p + q0 - 1) / (q0 + q1 - 1)，其中 p 为测试集被判正确的比例，q0 为 specificity，q1 为 sensitivity。",
+      "提供同时反映测试集与校准集不确定性的置信区间：confidence_interval(p, q0, q1, n, m0, m1, alpha)。",
+      "提供自适应校准样本分配算法 allocate_calibration_sample(m, p, q0_pilot, q1_pilot, m_pilot)，在 specificity 与 sensitivity 两类校准样本间分配预算以降低估计不确定性。",
+      "使用前提：judge 优于随机，即 q0 + q1 > 1，否则分母为零。",
+      "仓库提供可复现脚本：python -m run.figure2_bias_adjustment / figure3_ci_length / figure4_monte_carlo，以及对应 notebook。",
+      "仓库状态：85 stars、4 forks、9 commits，最近推送 2025-11-27；对应 arXiv 论文 2511.21140（Lee et al., 2025）。"
+    ],
+    "raw_excerpt": "While scalable, their judgments are noisy due to imperfect specificity and sensitivity of LLMs, leading to biased accuracy estimates. ... This work presents a simple plug-in framework that corrects such bias and constructs confidence intervals reflecting uncertainty from both test and calibration dataset ... Bias-adjusted point estimate: theta = (p + q0 - 1) / (q0 + q1 - 1)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models (arXiv:2404.18796)",
+    "url": "https://arxiv.org/abs/2404.18796",
+    "published_at": "2024-05-01",
+    "key_points": [
+      "论文指出单一大型 judge（如 GPT-4）成本高，且已被证明会引入 intramodel bias（模型内偏差）。",
+      "论文发现非常大的模型往往并非必要，提出用 Panel of LLM evaluators（PoLL）替代单一大型 judge。",
+      "在三种 judge 设置、六个数据集上，由多个较小模型组成的 PoLL 优于单一大型 judge。",
+      "PoLL 因由不同模型家族（disjoint model families）组成而表现出更少的 intra-model bias。",
+      "PoLL 的成本比单一大型 judge 低七倍以上（over seven times less expensive）。",
+      "版本信息：v1 提交于 2024-04-29，v2 修订于 2024-05-01。"
+    ],
+    "raw_excerpt": "While this method has grown in popularity, it is costly, has been shown to introduce intramodel bias, and in this work, we find that very large models are often unnecessary. We propose instead to evaluate models using a Panel of LLm evaluators (PoLL). Across three distinct judge settings and spanning six different datasets, we find that using a PoLL composed of a larger number of smaller models outperforms a single large judge, exhibits less intra-model bias due to its composition of disjoint model families, and does so while being over seven times less expensive."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "A Survey on LLM-as-a-Judge (arXiv:2411.15594v6)",
+    "url": "https://arxiv.org/abs/2411.15594",
+    "published_at": "2024-11-23 (v1); v6 2025-10-19",
+    "key_points": [
+      "该综述将 LLM-as-a-Judge 的可靠性确立为核心问题，明确表述为：仅采用 LLM-as-a-Judge 并不能保证评测准确、与既定标准一致。",
+      "综述把可靠性拆为两条主线：(1) 提升 judge 可靠性的策略（提升一致性、缓解偏差、适配不同评测场景）；(2) 评估 judge 可靠性的方法论（指标、数据集、方法，并指出潜在偏差来源与缓解手段）。",
+      "综述提出一个面向可靠性的新基准（reliability-oriented benchmark），用于评估 LLM-as-a-Judge 系统本身。",
+      "综述给出 LLM-as-a-Judge 的形式化与非形式化定义，并提出一个「情境化的可靠性定义」，纳入输入变异性、模型特性与上下文依赖。",
+      "综述指出该范式被采用的两大障碍：缺乏系统性梳理（定义缺失、实践不一致）与可靠性问题。",
+      "综述列举了 LLM-as-a-Judge 的落地场景，包括学术同行评审（引用 ICLR 2025 使用 LLM 辅助审稿的官方博客）。",
+      "版本历史显示该综述自 2024-11 至 2025-10 经历 6 个版本，v6 为 2025-10-19。",
+      "作者机构包括 IDEA Research、中科院计算所、清华、北大、港科大（含广州）等。"
+    ],
+    "raw_excerpt": "The second challenge concerns reliability (Yu et al., 2024b), as merely employing LLM-as-a-Judge does not ensure accurate evaluations aligned with established standards. ... We explore strategies to enhance reliability, including improving consistency, mitigating biases, and adapting to diverse assessment scenarios. Additionally, we propose methodologies for evaluating the reliability of LLM-as-a-Judge systems, supported by a novel benchmark designed for this purpose."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：'LLM judge evaluation benchmark bias'（6 个仓库）",
+    "url": "https://github.com/omnirogue/jevlab",
+    "published_at": null,
+    "key_points": [
+      "检索返回的 6 个仓库均为低热度个人项目：最高为 sebuzdugan/frai-benchmark（9 stars），其余为 0–1 stars。",
+      "omnirogue/jevlab 自述为离线 LLM-as-Judge 评测工具，含 position/verbosity bias 诊断、Platt 校准与一致率基准（MCP + CLI + UI），最后推送 2026-10-17。",
+      "baranozgurtas/llm-judge-audit 自述为可复现的 LLM-judge 可靠性基准，覆盖人类一致率、位置偏差、冗长偏差与顺序敏感性，最后推送 2026-10-06。",
+      "Mrawdian/llm-debate-judge-bias 自述案例：在信任 LLM 判定的增益前先审计 judge，该 judge 曾伪造出 +6 的优势，审计后降至约 0。",
+      "sebuzdugan/frai-benchmark 采用多前沿模型组成「专家小组」互相评判以降低偏差，最后推送 2026-09-15。",
+      "上述仓库均无机构背书，不能作为 OpenAI/Anthropic/Google/LMArena/HELM 等官方立场的证据。"
+    ],
+    "raw_excerpt": "JevLab: Offline LLM-as-Judge evaluation, position/verbosity bias diagnostics, Platt calibration & agreement benchmark studio (MCP + CLI + UI) ... Before trusting an LLM-judged gain, audit the judge: here it faked a +6 advantage that fell to ~0."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators",
+    "url": "https://arxiv.org/abs/2404.04475v2",
+    "published_at": "2024-04-06",
+    "key_points": [
+      "论文提出用回归分析（广义线性模型 GLM）控制自动评测器偏差的方法，以 AlpacaEval 的长度偏差为案例研究。",
+      "AlpacaEval 使用 LLM 估计回答质量，与人类偏好高度相关，但已知偏好生成更长输出的模型。",
+      "长度控制版 AlpacaEval 回答的反事实问题是：\"如果模型与基线的输出长度相同，偏好会是多少？\"",
+      "方法步骤：先拟合 GLM，用待控制的中介变量（长度差）及其他相关特征预测有偏自动标注器的偏好；再在长度差为零的条件下预测偏好，得到长度控制后的偏好。",
+      "长度控制不仅提升了指标对模型冗长程度操纵的鲁棒性，还将与 LMSYS Chatbot Arena 的 Spearman 相关系数从 0.94 提升到 0.98。",
+      "论文将长度等虚假相关因素视为因果图中的不良中介变量，用基于回归的因果推断技术做调整。",
+      "论文指出这类自动评测方法往往通过利用虚假相关（输出长度、是否含列表、位置偏差等）来达到与人类标注者的高相关。"
+    ],
+    "raw_excerpt": "Even simple, known confounders such as preference for longer outputs remain in existing automated evaluation metrics. ... We introduce a length-controlled AlpacaEval that aims to answer the counterfactual question: \"What would the preference be if the model's and baseline's output had the same length?\" ... Length-controlling not only improves the robustness of the metric to manipulations in model verbosity, but we also find that it increases the Spearman correlation with LMSYS Chatbot Arena from 0.94 to 0.98."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+    "url": "https://arxiv.org/abs/2306.05685v4",
+    "published_at": "2023-06-09",
+    "key_points": [
+      "论文考察 LLM-as-a-judge 的使用与局限，明确列出位置偏差、冗长偏差（verbosity bias）与自我增强偏差，以及推理能力有限等问题，并提出缓解部分偏差的方案。",
+      "论文提出 MT-bench（多轮问题集）与 Chatbot Arena（众包对战平台）两个基准，用于验证 LLM judge 与人类偏好的一致性。",
+      "结果显示 GPT-4 等强 LLM judge 在受控与众包人类偏好上均能达到 80% 以上一致率，与人类之间的一致率相当。",
+      "注：本条仅取得摘要，未读到正文中 verbosity bias 实验的具体量化结果，故不作为量化结论依据。"
+    ],
+    "raw_excerpt": "We examine the usage and limitations of LLM-as-a-judge, including position, verbosity, and self-enhancement biases, as well as limited reasoning ability, and propose solutions to mitigate some of them. ... strong LLM judges like GPT-4 can match both controlled and crowdsourced human preferences well, achieving over 80% agreement"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "LLM Evaluators Recognize and Favor Their Own Generations",
+    "url": "https://arxiv.org/abs/2404.13076",
+    "published_at": "2024-04-15",
+    "key_points": [
+      "论文将 self-preference 定义为：LLM 评估器给自己的输出打分高于他人输出，而人类标注者认为二者质量相同。",
+      "作者报告 GPT-4 与 Llama 2 在开箱（out of the box）状态下即具备非平凡（non-trivial）的准确率，能把自身输出与其他 LLM 及人类的输出区分开。",
+      "通过微调 LLM，作者发现自我识别能力（self-recognition capability）与自我偏好偏差强度之间存在线性相关。",
+      "作者称通过受控实验表明该因果解释能够抵御直接的混淆因素（confounders）。",
+      "论文的核心论点是自我识别能力对自我偏好有贡献，并讨论自我识别会干扰无偏评估及更广泛的 AI 安全问题。",
+      "该文为 arXiv v1，2024-04-15 提交，仅一版；作者为 Arjun Panickssery、Samuel R. Bowman、Shi Feng。"
+    ],
+    "raw_excerpt": "One such bias is self-preference, where an LLM evaluator scores its own outputs higher than others' while human annotators consider them of equal quality. ... We discover that, out of the box, LLMs such as GPT-4 and Llama 2 have non-trivial accuracy at distinguishing themselves from other LLMs and humans. By fine-tuning LLMs, we discover a linear correlation between self-recognition capability and the strength of self-preference bias; using controlled experiments, we show that the causal explanation resists straightforward confounders."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Self- and Other-Labels Induce Bidirectional Bias in LLM Judges",
+    "url": "https://arxiv.org/abs/2608.18091",
+    "published_at": "2026-08-16",
+    "key_points": [
+      "论文指出自我偏好（judge 偏好自身输出）此前主要在生成文本上研究，而生成文本中风格特征与回答质量不可避免地混杂，导致既有测量无法把真实自我偏好与这些混淆因素分离。",
+      "作者改变评估对象：让十个 LLM 评估从共享池中选出的叙事约束集合（narrative constraints），这些集合不带风格指纹但保留可恢复的模型特定签名。",
+      "在盲评（blind evaluation）条件下自我偏好消失；在控制选择质量与 judge 严厉度后，仅剩一个方向相反的小效应。",
+      "在质量匹配（matched quality）条件下，仅凭 self-/other- 标签（不点名任何模型）即可双向移动分数：judge 抬高 self-labeled 选择的分数、压低 other-labeled 选择的分数，与选择的真实来源无关。",
+      "作者提出两点贡献：作者身份归因（authorship attribution）是评估偏差的一个独立驱动因素；无真值任务（ground-truth-free tasks）可作为研究 LLM judge 行为的受控工具。",
+      "该文标注为 EMNLP Findings 2026；v1 于 2026-06-06 提交，2026-10-16 更新为当前版本。"
+    ],
+    "raw_excerpt": "As LLM-as-a-judge becomes increasingly widespread, self-preference -- the tendency of a judge to favor its own outputs -- raises growing concerns about evaluation reliability. However, this bias has been studied predominantly on generated text, where stylistic features and response quality are inevitably conflated. As a result, existing measurements cannot separate genuine self-preference from these confounds. ... Under blind evaluation, self-preference disappears, with a small effect remaining in the opposite direction once selection quality and judge severity are controlled. Under matched quality, however, self- and other-labels alone -- without naming any model -- shift scores bidirectionally."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Self-Preference Is Weak or Absent in Verifiable Instruction-Following Revision: A Four-Model Test Under Genuine Authorship",
+    "url": "https://arxiv.org/abs/2606.20093",
+    "published_at": "2026-06-30",
+    "key_points": [
+      "研究设定为 IFEval 上的指令遵循修订任务，其中\"有效\"由确定性验证器（deterministic verifier）判定，而非由另一个模型判定。",
+      "流程为：模型写出草稿，官方 IFEval 验证器判定某处修改为有效修正，随后模型分别以\"真实的上下文内作者\"身份和\"中立的全新模型\"身份接受或拒绝该修改。",
+      "跨四个中端模型家族、85 组 author-versus-fresh 对比，未检测到自我偏好：作者拒绝已验证有效修正的比例与中立模型评判同一草稿时基本一致，差距为 −5.1 个百分点，95% CI [−12.9, +2.7]。",
+      "来自较小规模试点实验的\"自我怀疑（self-skepticism）\"提示效应在大规模实验中未能复现。",
+      "唯一稳健的观察是定性的：当作者确实拒绝一个已验证有效的修正时，其陈述理由中 97% 属于发现缺陷（flaw-catching）而非偏好性理由。",
+      "该文将自身定位为对\"已记录的自我偏好偏差\"（models favoring their own generations when acting as judges）这一既有结论的检验。"
+    ],
+    "raw_excerpt": "A documented self-preference bias (models favoring their own generations when acting as judges) raises the question of whether models also resist valid corrections to their own writing. ... Across four mid-tier model families and 85 author-versus-fresh comparisons, we find no detectable self-preference: authors reject verified-good fixes to their own drafts at essentially the same rate as fresh models judging the same drafts (gap -5.1 pp, 95% CI [-12.9, +2.7])."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "CLExEval: A Human-in-the-Loop Framework for Qualitative Evaluation of LLM Clinical Reasoning",
+    "url": "https://arxiv.org/abs/2606.31608",
+    "published_at": "2026-06-30",
+    "key_points": [
+      "该框架结合 5,600 条专家医师标注与 200 条临床推理轨迹（来自 40 个罕见诊断病例）。",
+      "在人工核验的失败集（n = 142）上评估 LLM-as-a-Judge：GPT-4o-mini 批准了 47.9% 临床上不正确的输出。",
+      "HuatuoGPT-o1 批准了所有有效计分的失败样本，并表现出正向的自我偏好偏差（positive self-preference bias）。",
+      "作者结论：缺乏专家锚定验证的独立自动化临床评估可能大幅高估临床可靠性。",
+      "论文另报告 GPT-4o-mini 在信息稀缺条件下诊断准确率从 95.0% 降至 32.5%（verbosity bias），以及 68.6% 的推理-输出不匹配率。"
+    ],
+    "raw_excerpt": "We further evaluate the LLM-as-a-Judge paradigm on a human-verified failure set (n = 142). GPT-4o-mini approved 47.9% of clinically incorrect outputs, while HuatuoGPT-o1 approved all validly scored failures and showed a positive self-preference bias. These results suggest that standalone automated clinical evaluations can substantially overestimate clinical reliability without expert-grounded validation."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+    "url": "https://arxiv.org/abs/2306.05685",
+    "published_at": "2023-06-09",
+    "key_points": [
+      "该论文明确考察了 LLM-as-a-judge 的使用局限，列举的偏差类型为 position bias、verbosity bias、self-enhancement bias，以及有限的推理能力（limited reasoning ability）。",
+      "论文摘要中列举的偏差清单不包含 sycophancy、authority bias / name bias、score clustering / central tendency，因此该来源不能直接支持本子问题三个目标偏差中的任何一个。",
+      "论文报告强 LLM judge（如 GPT-4）与受控人类偏好及众包人类偏好均能达到 80% 以上一致率（over 80% agreement），与人类之间的一致率处于同一水平。",
+      "论文提出针对部分上述偏差的缓解方案（propose solutions to mitigate some of them），但摘要未给出各偏差的具体量化幅度。",
+      "该论文发表于 NeurIPS 2023 Datasets and Benchmarks Track，v4 修订于 2023-12-24。",
+      "论文公开了 MT-bench 问题集、3K 专家投票与 30K 带人类偏好的对话数据。"
+    ],
+    "raw_excerpt": "We examine the usage and limitations of LLM-as-a-judge, including position, verbosity, and self-enhancement biases, as well as limited reasoning ability, and propose solutions to mitigate some of them. ... Our results reveal that strong LLM judges like GPT-4 can match both controlled and crowdsourced human preferences well, achieving over 80% agreement, the same level of agreement between humans."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Large Language Models Cannot Self-Correct Reasoning Yet",
+    "url": "https://arxiv.org/abs/2310.01798",
+    "published_at": "2023-10-03",
+    "key_points": [
+      "该论文主题为 LLM 内在自我纠错（intrinsic self-correction）在推理任务上的有效性，与本子问题的谄媚偏差、权威偏差、评分刻度偏差三个维度均无直接关系。",
+      "论文结论为：在没有外部反馈的情况下，LLM 难以自我纠正其回答，有时自我纠错后性能反而下降。",
+      "该来源被记录为无效取证（检索误命中），不用于支撑 f3 的任何结论。"
+    ],
+    "raw_excerpt": "In the context of reasoning, our research indicates that LLMs struggle to self-correct their responses without external feedback, and at times, their performance even degrades after self-correction."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+    "url": "https://arxiv.org/abs/2305.14325",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "该论文主题为多智能体辩论（multiagent debate）提升事实性与推理能力，与本子问题的三类 judge 偏差无直接关系。",
+      "论文主张多个语言模型实例在多轮中提出并辩论各自的回答与推理过程，以达成共同最终答案，并称该方法提升了数学与策略推理表现。",
+      "该来源被记录为无效取证（检索误命中），不用于支撑 f3 的任何结论。"
+    ],
+    "raw_excerpt": "we present a complementary approach to improve language responses where multiple language model instances propose and debate their individual responses and reasoning processes over multiple rounds to arrive at a common final answer."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Demystifying evals for AI agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 将 agent 评测的 grader 分为三类：code-based、model-based、human，并主张按任务选择合适 grader 是有效评测设计的关键要素。",
+      "Anthropic 明确列出 model-based grader（即 LLM judge）的弱点：非确定性（non-deterministic）、比代码评分更贵、且“需要与人类评分者校准以保证准确性”（requires calibration with human graders for accuracy）。",
+      "Anthropic 列出 model-based grader 的方法包括：rubric-based scoring、natural language assertions、pairwise comparison、reference-based evaluation、multi-judge consensus。",
+      "Anthropic 将 human grader 的用途之一定义为“用于校准 model-based grader”（Used to calibrate model-based graders），并列举 SME review、crowdsourced judgment、spot-check sampling、A/B testing、inter-annotator agreement 等方法。",
+      "Anthropic 指出 agent 评测中错误会传播和累积（mistakes can propagate and compound），且前沿模型可能找到超越静态评测设定的解法——举例 Opus 4.5 在 τ2-bench 订票任务中发现政策漏洞，按评测字面判定为“失败”，但对用户实际是更好的方案。",
+      "Anthropic 区分 capability evals（应起始于低通过率）与 regression evals（应接近 100% 通过率），并建议 capability eval 通过率变高后可“毕业”为持续运行的 regression suite 以捕捉漂移。",
+      "Anthropic 描述客户实践：Descript 从人工评分演进到由产品团队定义标准的 LLM grader，并配合“定期人工校准”（periodic human calibration）；Bolt AI 使用 LLM judges 评估指令遵循等行为。",
+      "Anthropic 强调因模型输出在多次运行间存在波动，需对同一 task 运行多次 trial 以获得更一致的结果。",
+      "Anthropic 指出评测需与生产监控、A/B 测试、用户研究结合，才能为持续改进提供信号。",
+      "Anthropic 指出确定性 grader 对编码 agent 更自然（代码能否运行、测试是否通过），并以 SWE-bench Verified 与 Terminal-Bench 为例；文中称 LLM 在该 eval 上一年内从 40% 提升到 >80%。"
+    ],
+    "raw_excerpt": "Model-based graders ... Weaknesses: Non-deterministic / More expensive than code / Requires calibration with human graders for accuracy. ... Human graders ... Used to calibrate model-based graders. ... They evolved from manual grading to LLM graders with criteria defined by the product team and periodic human calibration."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference (arXiv:2403.04132, v1)",
+    "url": "https://arxiv.org/abs/2403.04132",
+    "published_at": "2024-03-07",
+    "key_points": [
+      "论文摘要声明：众包人类投票与专家评分者（expert raters）之间「in good agreement」，但摘要未给出任何具体一致率数值。",
+      "论文摘要声明众包问题足够多样且具区分度，并称这些分析共同构成 Chatbot Arena 可信度的基础。",
+      "平台截至 2024 年 1 月累计约 240K 投票、来自约 90K 用户，覆盖 100 多种语言。",
+      "论文将 MT-Bench 与 AlpacaEval 归类为「用 GPT-4 近似人类判断」的静态基准，与 Chatbot Arena 的实时人类偏好路线相区分。"
+    ],
+    "raw_excerpt": "We confirm that the crowdsourced questions are sufficiently diverse and discriminating and that the crowdsourced human votes are in good agreement with those of expert raters. These analyses collectively establish a robust foundation for the credibility of Chatbot Arena."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Chatbot Arena (arXiv:2403.04132) — HTML 全文（第 1–3 节，抓取被截断）",
+    "url": "https://arxiv.org/html/2403.04132v1",
+    "published_at": "2024-03-07",
+    "key_points": [
+      "论文指出人类偏好本身是 noisy 的，因此「确保人类评估的质量」被列为构建该平台的核心挑战之一。",
+      "平台采用成对比较（pairwise comparison）而非绝对打分，理由是很难在大量不同用户间维持一致的评分标准（consistent grading rubric）。",
+      "论文明确列出静态基准的风险包括 contamination、saturation、overfitting 以及 lack of human alignment。",
+      "论文使用 Bradley–Terry 模型与 E-values 做排名估计，并设计主动采样算法加速排名收敛。",
+      "论文贡献列表包含对 vote quality 的深入分析，但抓取到的正文部分未包含该章节的具体数值。"
+    ],
+    "raw_excerpt": "Moreover, ensuring the quality of human evaluations is crucial given the noisy nature of human preferences. ... it is difficult to set a consistent grading rubric across different people. Hence, we adopt a pairwise comparison mechanism"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "HELM (Holistic Evaluation of Language Models) — Stanford CRFM 官方站点首页",
+    "url": "https://crfm.stanford.edu/helm/",
+    "published_at": null,
+    "key_points": [
+      "该页面为 JavaScript 渲染的单页应用，抓取仅返回标题「Holistic Evaluation of Language Models (HELM)」，未获得任何关于 judge、一致率或使用边界的正文内容。"
+    ],
+    "raw_excerpt": "Holistic Evaluation of Language Models (HELM)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "HELM Classic leaderboard 页面（Stanford CRFM）",
+    "url": "https://crfm.stanford.edu/helm/classic/latest/",
+    "published_at": null,
+    "key_points": [
+      "该页面同样为 JS 渲染，抓取仅返回标题「Holistic Evaluation of Language Models (HELM)」，未获得任何正文事实。"
+    ],
+    "raw_excerpt": "Holistic Evaluation of Language Models (HELM)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models (arXiv:2404.18796, v2)",
+    "url": "https://arxiv.org/abs/2404.18796",
+    "published_at": "2024-04-29",
+    "key_points": [
+      "该论文提出用 Panel of LLM evaluators (PoLL) 替代单一大型 judge 模型来评测 LLM 生成质量。",
+      "论文称在三种不同的 judge 设置（three distinct judge settings）、覆盖六个数据集（six different datasets）上，由更多更小模型组成的 PoLL 优于单个大型 judge。",
+      "论文称 PoLL 因由不相交的模型家族（disjoint model families）组成，表现出更少的 intra-model bias。",
+      "论文称 PoLL 在取得上述效果的同时，成本比单一大型 judge 低七倍以上（over seven times less expensive）。",
+      "论文指出单一大型模型（如 GPT-4）做 judge 的做法成本高，且已被证明会引入 intramodel bias；本文发现非常大的模型往往是不必要的。",
+      "版本信息：v1 提交于 2024-04-29，v2 修订于 2024-05-01；作者含 Pat Verga、Sebastian Hofstatter、Sophia Althammer、Patrick Lewis 等 9 人。",
+      "该 arXiv 摘要页未列出具体基准分数表格，也未提供代码仓库链接（页面仅有通用的 Links to Code 占位控件）。"
+    ],
+    "raw_excerpt": "We propose instead to evaluate models using a Panel of LLm evaluators (PoLL). Across three distinct judge settings and spanning six different datasets, we find that using a PoLL composed of a larger number of smaller models outperforms a single large judge, exhibits less intra-model bias due to its composition of disjoint model families, and does so while being over seven times less expensive."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "sean-mas/llm-judge-reliability — How much LLM-judge agreement survives chance correction?",
+    "url": "https://github.com/sean-mas/llm-judge-reliability",
+    "published_at": "2026-09-07",
+    "key_points": [
+      "仓库用 FaithBench（Bao et al., NAACL 2025）的人类专家标注，对三个部署层级的 LLM judge 做校准测量：付费前沿 API、托管开源权重模型、本地开源权重模型。",
+      "规模：7,012 条判定，预注册，held-out 测试集只读一次；测试集 488 条，每条每 judge 重复 3 次，temperature 0。",
+      "原始一致率：Tier1 付费 46.6%、Tier2 托管 51.4%、Tier3 本地 47.3%。",
+      "Cohen's kappa：Tier1 0.129、Tier2 0.162、Tier3 0.131；95% CI（2,000 次按 item 的 bootstrap）分别为 [0.084,0.175]、[0.109,0.214]、[0.083,0.178]。",
+      "PABAK 分别为 -0.069、0.029、-0.055；三次重复间的 kappa 波动为 0.014/0.020/0.017。",
+      "机会校正（chance correction）使一致率下降 33.7–35.2 个百分点：约 47% 的原始一致率变为约 0.13 的 kappa。",
+      "人类标注者之间在同一二分类任务上的一致率为 82.0%。",
+      "敏感性（检出 unfaithful 项）0.253/0.349/0.269，特异性 0.868/0.930/0.916；解析失败率 0.5%/2.9%/2.5%。",
+      "在 28.0%–68.6%（宽 40.6 个百分点）的发布阈值区间内，三个 judge 都会放行人类标注本应拦截的版本。",
+      "分析者自身的分箱（binarisation）选择可使 kappa 变动最多 0.069，与跨部署层级的最大差异 0.065 相当。",
+      "仓库提供 CI gate（analysis/ci_gate.py）在每次 push 时复现所有头条数字，判定存储已提交，无需 API key。"
+    ],
+    "raw_excerpt": "| Raw agreement | 46.6% | 51.4% | 47.3% |\n| **Cohen's kappa** | **0.129** | **0.162** | **0.131** |\n| 95% CI (2,000 bootstrap resamples over items) | [0.084, 0.175] | [0.109, 0.214] | [0.083, 0.178] |\n... **Chance correction removes 33.7 to 35.2 points.** Raw agreement near 47% becomes a kappa near 0.13 ... The human annotators agree with each other 82.0% of the time on the same binary task."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "kulykivska/llm-judge — Measure an LLM judge against human labels before you trust it",
+    "url": "https://github.com/kulykivska/llm-judge",
+    "published_at": "2026-10-01",
+    "key_points": [
+      "工具计算 judge 与人类标签的一致率（agreement）与 Cohen's kappa，并给出逐类 precision/recall、逐切片（slice）指标、自一致性（同一 case 问 3 次统计矛盾）与 CI 门禁。",
+      "demo 用 20 条 QA step、judge 为规则而非模型：与人类一致率 70.0%，Cohen's kappa 0.476（moderate）。",
+      "逐类结果：blocked（support 3）precision/recall/f1 全为 0.00；fail（support 9）0.64/0.78/0.70；pass（support 8）0.78/0.88/0.82。",
+      "切片结果：mobile 8 条，一致率 62.5%、kappa 0.400；web 12 条，一致率 75.0%、kappa 0.532。",
+      "CLI 支持 --min-agreement 0.85 与 --min-kappa 0.7 阈值，低于下限时 eval 以非零码退出，用于阻止降低一致率的 prompt 变更合并。",
+      "无第三方依赖；Anthropic adapter 为可选 extra；任何带 complete() 方法的对象都可作为模型。",
+      "明确声明不自己标注数据：人类标签是唯一 ground truth，用另一个 judge 给 judge 打分「measures nothing」；解析失败的 case 会被报告而非丢弃。"
+    ],
+    "raw_excerpt": "| agreement with people | 70.0% |\n| Cohen's kappa | 0.476 (moderate) |\n... 70% sounds usable. The rest of the report is why it is not:\n- **`blocked`: zero precision, zero recall.** ...\n`eval` exits non-zero below the floor, so a prompt change that costs agreement does not merge."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "chenggma/llm-judge-audit — Pre-registered audit of LLM-as-judge (protocol phase)",
+    "url": "https://github.com/chenggma/llm-judge-audit",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "仓库状态为 work in progress / protocol phase：截至 2026-09-25 已收集 720 条回答、4,479 条判定，分析与 REPORT.md 尚未撰写，README 内容为预注册设计而非结果。",
+      "审计范围包括：与人类 gold label 的一致率、位置/长度/自我偏好偏差、置信度校准（confidence calibration）、噪声下限，以及「廉价 judge → 强 judge → 人类」的预算最优混合评测策略与成本-准确率 Pareto 曲线。",
+      "PROTOCOL.md 在任何数据收集前冻结；最小可检测效应在收集前用 scripts/power_analysis.py 计算：N=450 items 时，judge 间一致率差异小于约 7 个百分点在 item 层面不可分辨，因此不做排序，改以 constraint-level 分析（约 2,000 单元）为主。",
+      "docs/ANNOTATION_GUIDE.md 定义人类标注协议，并标注为 κ-gated（以 kappa 为门禁）。",
+      "所有 API 响应缓存在 data/cache/ 并提交为「record 原始数据」，API 花费记录在 data/cache/cost_ledger.jsonl。"
+    ],
+    "raw_excerpt": "> **Status (2026-09-25): work in progress.** Data collection is ongoing (720 responses, 4,479 judgments so far); the analysis and `REPORT.md` have not been written. Treat everything below as the pre-registered design, not as results.\n... `docs/ANNOTATION_GUIDE.md` — human labeling protocol (κ-gated)"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "pln-fing-udelar/fast-krippendorff — Fast computation of Krippendorff's alpha (★162)",
+    "url": "https://github.com/pln-fing-udelar/fast-krippendorff",
+    "published_at": "2026-10-15",
+    "key_points": [
+      "提供 Krippendorff's alpha 的快速 Python 实现，通过 pip install krippendorff 安装；原始实现基于 Thomas Grill 的 grrrr/krippendorff-alpha。",
+      "输入为 reliability data matrix，形状 (M, N)：M 为 coder/rater 数（行），N 为 unit/item 数（列）；支持 level_of_measurement（如 interval）。",
+      "README 给出宽表（units 为行、coders 为列，缺失标注用 NaN/None）与长表（unit_id, coder_id, score）两种标注数据格式的转换方法（转置或 pivot）。",
+      "提供 bootstrap_ci 函数：可设 confidence_level、n_resamples（示例 2000）、alternative_threshold（示例 0.800），返回 alpha、CI 上下界、standard_error 与 Krippendorff q 值 P(alpha* < alpha_min)。",
+      "实现不使用对 coder 的嵌套循环，但类别数 V 需较小，因为内部使用 VxV 矩阵。",
+      "仓库有 CI 与 codecov 覆盖率徽章；引用条目为 castro-2017-fast-krippendorff。"
+    ],
+    "raw_excerpt": "Fast computation of [Krippendorff's alpha](https://en.wikipedia.org/wiki/Krippendorff%27s_alpha) agreement measure.\n... `krippendorff.alpha` expects the reliability data matrix to have shape `(M, N)` (where `M` is the number of coders/raters and `N` is the number of units/items)\n... The implementation is fast because it doesn't use nested loops over the coders. However, `V` should be small, since it uses a `VxV` matrix."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "heolin/agreement — Implementation of popular agreement metrics (Cohen kappa, Fleiss kappa, Krippendorff alpha)",
+    "url": "https://github.com/heolin/agreement",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "仓库描述为「Implementation of popular agreement metrics such as Cohen kappa, Fleiss kappa, Krippendorff alpha」，语言 Python，最近 push 2026-10-21，★16、forks 3。",
+      "该条目仅来自 GitHub 搜索元数据（描述、语言、stars、最近提交时间），未读取 README 正文，因此其具体 API、支持的度量变体与是否含 judge 校准流程均未验证。"
+    ],
+    "raw_excerpt": "Implementation of popular agreement metrics such as Cohen kappa, Fleiss kappa, Krippendorff alpha — lang: Python | last push: 2026-10-21 | ★16, forks 3"
+  }
+]

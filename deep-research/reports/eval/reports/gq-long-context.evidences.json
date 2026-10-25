@@ -1,0 +1,700 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Extending Context Window of Large Language Models via Positional Interpolation (Position Interpolation, PI)",
+    "url": "https://arxiv.org/abs/2306.15595v2",
+    "published_at": "2023-06-27",
+    "key_points": [
+      "位置插值（PI）把输入位置索引线性下采样（linearly down-scales）到原始上下文窗口大小，而不是外推到训练长度之外。",
+      "PI 将基于 RoPE 的预训练 LLM（LLaMA 7B–65B）上下文扩展到最多 32768，只需极少微调（1000 步以内）。",
+      "论文给出的理论结论：插值的上界至少比外推的上界小约 600 倍，因此更稳定。",
+      "外推的问题被明确表述为：超出训练上下文长度会产生灾难性高的注意力分数，从而彻底破坏自注意力机制。",
+      "PI 扩展后的模型保留原架构，可复用大部分既有优化与基础设施。",
+      "PI 在原始上下文窗口内的任务上质量保持相对良好（passkey retrieval、语言建模、长文档摘要）。"
+    ],
+    "raw_excerpt": "Position Interpolation linearly down-scales the input position indices to match the original context window size, rather than extrapolating beyond the trained context length which may lead to catastrophically high attention scores that completely ruin the self-attention mechanism. Our theoretical study shows that the upper bound of interpolation is at least ~600x smaller than that of extrapolation."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "YaRN: Efficient Context Window Extension of Large Language Models",
+    "url": "https://arxiv.org/abs/2309.00071",
+    "published_at": "2023-08-31",
+    "key_points": [
+      "RoPE 能有效编码位置信息，但模型无法泛化到训练时的序列长度之外（fail to generalize past the sequence length they were trained on）。",
+      "YaRN 是计算高效的上下文窗口扩展方法，相比此前方法只需 1/10 的 token 和 1/2.5 的训练步数。",
+      "YaRN 在少于原始预训练数据约 0.1% 的数据上微调后达到当时的 SOTA 上下文扩展效果。",
+      "结合推理时的 Dynamic Scaling 技术，Dynamic-YaRN 可在完全不微调的情况下实现 2 倍以上的上下文窗口扩展。",
+      "论文梳理了 RoPE 插值方法谱系：PI（位置插值）→ NTK-aware（考虑高频损失）→ 两个改进：Dynamic NTK（免微调）与 NTK-by-parts（少量长上下文数据微调时表现最好）→ YaRN。",
+      "NTK-aware 与 Dynamic NTK 已被开源模型采用：Code Llama 使用 NTK-aware，Qwen 7B 使用 Dynamic NTK。",
+      "位置编码的一个反复出现的局限是无法泛化到训练时见过的上下文窗口之外；ALiBi 等方案只能做有限泛化，没有方法能泛化到显著长于预训练长度的序列。",
+      "YaRN 适用于 RoPE 训练的模型家族，包括 LLaMA、GPT-NeoX、PaLM。"
+    ],
+    "raw_excerpt": "Rotary Position Embeddings (RoPE) have been shown to effectively encode positional information in transformer-based language models. However, these models fail to generalize past the sequence length they were trained on. We present YaRN ... requiring 10x less tokens and 2.5x less training steps than previous methods. ... YaRN reaches state-of-the-art performances in context window extensions after fine-tuning on less than ~0.1% of the original pre-training data."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens",
+    "url": "https://arxiv.org/abs/2402.13753",
+    "published_at": "2024-02-21",
+    "key_points": [
+      "LongRoPE 首次把预训练 LLM 的上下文窗口扩展到 2048k token，微调步数最多仅 1k，训练长度在 256k 以内。",
+      "其关键创新之一是识别并利用位置插值中的两种非均匀性（non-uniformities），通过高效搜索得到更好的微调初始化，并在免微调场景下实现 8 倍扩展。",
+      "采用渐进式扩展策略：先微调出 256k 长度的 LLM，再对扩展后的模型做第二次位置插值以达到 2048k。",
+      "在 8k 长度上重新调整 LongRoPE 以恢复短上下文窗口的性能。",
+      "论文指出当前扩展上下文窗口受限于三点：高微调成本、长文本稀缺、新 token 位置引入的灾难性数值（catastrophic values introduced by new token positions），因此此前扩展多止步于约 128k。",
+      "LongRoPE 扩展后的模型保留原架构，仅对位置嵌入做小幅修改，可复用大部分既有优化。"
+    ],
+    "raw_excerpt": "This paper introduces LongRoPE that, for the first time, extends the context window of pre-trained LLMs to an impressive 2048k tokens, with up to only 1k fine-tuning steps at within 256k training lengths ... we identify and exploit two forms of non-uniformities in positional interpolation through an efficient search ... enabling an 8x extension in non-fine-tuning scenarios."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "url": "https://arxiv.org/abs/2404.06654",
+    "published_at": "2024-04-09",
+    "key_points": [
+      "论文区分了模型「宣称的上下文长度」与「实际有效性能长度」：几乎所有模型在 vanilla NIAH 上接近满分，但随着上下文变长出现大幅性能下降。",
+      "被评测的 17 个长上下文模型中，虽然都宣称支持 32K token 或更长的上下文，但只有一半能在 32K 长度上维持令人满意的性能。",
+      "NIAH（needle-in-a-haystack）只反映表层检索能力，不足以代表长上下文理解；RULER 增加了多跳追踪（multi-hop tracing）与聚合（aggregation）等任务类别。",
+      "RULER 支持自定义序列长度与任务复杂度，共 13 类代表性任务。",
+      "支持 200K 上下文长度的 Yi-34B 在输入变长与任务变复杂时仍有很大改进空间。",
+      "该工作发表于 COLM 2024。"
+    ],
+    "raw_excerpt": "Despite achieving nearly perfect accuracy in the vanilla NIAH test, almost all models exhibit large performance drops as the context length increases. While these models all claim context sizes of 32K tokens or greater, only half of them can maintain satisfactory performance at the length of 32K."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "url": "https://arxiv.org/abs/2205.14135",
+    "published_at": "2022-05-27",
+    "key_points": [
+      "自注意力的时间与内存复杂度对序列长度是二次的（quadratic in sequence length），这是长序列上 Transformer 慢且吃内存的根因。",
+      "FlashAttention 是 IO 感知的精确注意力算法（exact attention），用 tiling 减少 GPU HBM 与片上 SRAM 之间的内存读写次数，不牺牲模型质量。",
+      "论文分析了 FlashAttention 的 IO 复杂度，显示其 HBM 访问次数少于标准注意力，并在一系列 SRAM 尺寸下达到最优。",
+      "论文明确指出此前的近似注意力方法通过牺牲模型质量来降低计算复杂度，且往往拿不到实际墙钟加速。",
+      "实测加速：BERT-large（512）端到端 15%，GPT-2（1K）3 倍，Long Range Arena（1K–4K）2.4 倍。",
+      "扩展的 block-sparse FlashAttention 属于近似注意力算法，比现有任何近似注意力方法都快。",
+      "FlashAttention 使更长上下文成为可能：Path-X（16K）61.4% 准确率、Path-256（64K）63.1% 准确率，均为首次超过随机水平。"
+    ],
+    "raw_excerpt": "Transformers are slow and memory-hungry on long sequences, since the time and memory complexity of self-attention are quadratic in sequence length. Approximate attention methods have attempted to address this problem by trading off model quality to reduce the compute complexity, but often do not achieve wall-clock speedup. We argue that a missing principle is making attention algorithms IO-aware ... FlashAttention, an IO-aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on-chip SRAM."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "url": "https://arxiv.org/abs/2312.00752",
+    "published_at": "2023-12-01",
+    "key_points": [
+      "线性注意力、门控卷积、循环模型、结构化状态空间模型（SSM）等次二次时间（subquadratic-time）架构，是为解决 Transformer 在长序列上的计算低效而提出的。",
+      "论文指出这类模型的关键弱点是缺乏基于内容的推理能力（inability to perform content-based reasoning），这是它们此前在语言等重要模态上不如注意力的原因。",
+      "Mamba 让 SSM 参数成为输入的函数（selective），使模型能沿序列长度维度选择性地传播或遗忘信息。",
+      "Mamba 推理吞吐比 Transformer 高 5 倍，对序列长度呈线性缩放（linear scaling in sequence length），性能在真实数据上随序列长度提升直至百万级。",
+      "Mamba 是不含注意力、甚至不含 MLP 块的端到端架构；Mamba-3B 在语言建模上超过同尺寸 Transformer，并与两倍尺寸的 Transformer 相当。"
+    ],
+    "raw_excerpt": "Many subquadratic-time architectures such as linear attention, gated convolution and recurrent models, and structured state space models (SSMs) have been developed to address Transformers' computational inefficiency on long sequences, but they have not performed as well as attention on important modalities such as language. We identify that a key weakness of such models is their inability to perform content-based reasoning ... Mamba enjoys fast inference (5x higher throughput than Transformers) and linear scaling in sequence length."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "url": "https://arxiv.org/abs/2404.06654",
+    "published_at": "2024-04-09 (v1); v3 2024-08-06",
+    "key_points": [
+      "论文指出 needle-in-a-haystack (NIAH) 测试只反映\"表层\"的长上下文理解能力（原文：indicative of only a superficial form of long-context understanding）。",
+      "作者提出 RULER 基准，可自定义序列长度与任务复杂度，在原始 NIAH 基础上扩展出多种 needle 类型与数量的变体。",
+      "RULER 新增 multi-hop tracing 与 aggregation 两类任务，用于测试检索之外的行为。",
+      "评测了 17 个长上下文模型、13 类代表性任务。",
+      "结论：尽管在原始 NIAH 上接近满分，几乎所有模型随上下文长度增加出现大幅性能下降；这些模型均宣称支持 32K 以上上下文，但只有一半能在 32K 长度维持令人满意的性能。",
+      "对宣称支持 200K 上下文的 Yi-34B 的分析显示，随输入长度与任务复杂度提升仍有很大改进空间。",
+      "论文发表于 COLM 2024，并开源 RULER。"
+    ],
+    "raw_excerpt": "Despite achieving nearly perfect accuracy in the vanilla NIAH test, almost all models exhibit large performance drops as the context length increases. While these models all claim context sizes of 32K tokens or greater, only half of them can maintain satisfactory performance at the length of 32K."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens",
+    "url": "https://arxiv.org/abs/2402.13753",
+    "published_at": "2024-02-21",
+    "key_points": [
+      "LongRoPE 将预训练 LLM 的上下文窗口扩展到 2048k token，微调步数最多约 1k 步、训练长度在 256k 以内，同时保持原始短上下文窗口的性能。",
+      "方法一：通过高效搜索识别并利用位置插值中的两种非均匀性（non-uniformities），为微调提供更好的初始化，并在不微调场景下实现 8x 扩展。",
+      "方法二：渐进式扩展策略——先微调出 256k 长度的模型，再对已扩展模型做第二次位置插值以达到 2048k 上下文。",
+      "方法三：在 8k 长度上重新调整 LongRoPE，以恢复短上下文性能。",
+      "在 LLaMA2 与 Mistral 上做了多任务实验；扩展后的模型保持原有架构，仅对位置嵌入做小幅修改，可复用大部分既有优化。"
+    ],
+    "raw_excerpt": "this paper introduces LongRoPE that, for the first time, extends the context window of pre-trained LLMs to an impressive 2048k tokens, with up to only 1k fine-tuning steps at within 256k training lengths, while maintaining performance at the original short context window."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "LongRoPE2: Near-Lossless LLM Context Window Scaling",
+    "url": "https://arxiv.org/abs/2502.20082",
+    "published_at": "2025-02-27",
+    "key_points": [
+      "提出假设：高维 RoPE 维度训练不足，是现有方法持续出现分布外（OOD）问题的原因。",
+      "提出由 \"needle-driven\" perplexity 引导的进化搜索（evolutionary search）来求 RoPE rescaling 参数，以缓解高维训练不足问题。",
+      "提出混合上下文窗口训练（mixed context window training）：长上下文序列使用重缩放后的 RoPE，同时用原始 RoPE 保持短上下文性能。",
+      "在 LLaMA3-8B 与 Phi3-mini-3.8B 上跨多个基准验证了该假设与方法有效性。",
+      "LongRoPE2 将 LLaMA3-8B 扩展到 128K 有效上下文长度，同时保留超过 98.5% 的短上下文性能，仅用 10B token——比 Meta 的方法少 80 倍，而后者未能达到目标有效上下文长度。"
+    ],
+    "raw_excerpt": "Remarkably, LongRoPE2 extends LLaMA3-8B to achieve a 128K effective context length while retaining over 98.5% of short-context performance, using only 10B tokens -- 80x fewer than Meta's approach, which fails to reach the target effective context length."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "MiniMax-01: Scaling Foundation Models with Lightning Attention (arXiv:2501.08313v1)",
+    "url": "https://arxiv.org/abs/2501.08313",
+    "published_at": "2025-01-14",
+    "key_points": [
+      "MiniMax-Text-01 的上下文窗口在训练阶段可达 100 万 token，并在推理阶段外推到 400 万 token。",
+      "模型为 MoE 架构：32 个专家，总参数 456B，每 token 激活 45.9B。",
+      "架构为混合注意力：每 7 个使用 lightning attention（linear attention 的 I/O-aware 实现）的 transnormer block 后接 1 个 softmax attention transformer block，共 80 层。",
+      "每个注意力模块 64 个 head，head dimension 为 128；softmax attention 层使用 GQA，group size 为 8。",
+      "RoPE 施加于一半的注意力 head 维度，base frequency 设为 10,000。",
+      "hidden size 为 6144，每层 32 个专家、top-2 路由，每个专家 FFN hidden dimension 为 9216。",
+      "模型总参数规模的选取受一条工程约束驱动：在最多 8 张 GPU、640GB 显存、8-bit 量化的单机上处理超过 100 万 token。",
+      "为 lightning attention 推理实现的 CUDA kernel 在 Nvidia H20 上达到端到端超过 75% 的 MFU。",
+      "论文给出不同模型的 prefilling latency 对比（Figure 2）：MiniMax-Text-01 与 Llama3-70B 在 H800、tensor parallelism=8、W8A16 8-bit weight-only 量化下用自研推理框架测试，其他模型通过官方 API 测试，数据以二次函数拟合。",
+      "论文称其模型在超过 200k 的上下文上表现显著更好（Figure 1c，RULER 长上下文基准）。",
+      "MiniMax-VL-01 通过继续训练 512B vision-language token 得到，采用四阶段训练流程。",
+      "论文将上下文窗口扩展归因于更强 GPU 与更好的 I/O-aware softmax attention 实现，并指出进一步扩展受限于 transformer 的二次计算复杂度。",
+      "权重与 API 公开：代码与权重发布于 https://github.com/MiniMax-AI。"
+    ],
+    "raw_excerpt": "The context window of MiniMax-Text-01 can reach up to 1 million tokens during training and extrapolate to 4 million tokens during inference at an affordable cost. ... one transformer block with softmax attention follows every seven transnormer blocks (Qin et al., 2022a) with lightning attention. ... We determined the model's total parameters based on a practical constraint: the ability to process more than 1 million tokens on a single machine with up to 8 GPUs and 640GB memory using 8-bit quantization."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "vllm-project/vllm — README (high-throughput LLM inference and serving engine)",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据：95,404 stars，23,918 forks，语言 Python，最近 push 时间 2026-10-25。",
+      "README 自述为 LLM 推理与 serving 库，最初在 UC Berkeley Sky Computing Lab 开发，现有 2000+ 贡献者。",
+      "通过 PagedAttention 高效管理 attention 的 key/value 显存。",
+      "支持 continuous batching、chunked prefill、prefix caching。",
+      "支持 tensor、pipeline、data、expert、context 五种并行方式用于分布式推理（context parallelism 与长上下文切分直接相关）。",
+      "优化 attention kernel 包括 FlashAttention、FlashInfer、TRTLLM-GEN、FlashMLA、Triton。",
+      "支持 FP8、MXFP8/MXFP4、NVFP4、INT8、INT4、GPTQ/AWQ、GGUF 等量化格式。",
+      "支持 speculative decoding（n-gram、suffix、EAGLE、DFlash）与 disaggregated prefill/decode/encode。",
+      "声称无缝支持 Hugging Face 上 200+ 模型架构，包括 decoder-only LLM、MoE LLM、混合注意力与状态空间模型（Mamba、Qwen3.5）、多模态模型、embedding/retrieval 模型。",
+      "硬件后端覆盖 NVIDIA、AMD、Intel GPU 与 x86/ARM/PowerPC CPU，并有 Google TPU、Intel Gaudi、IBM Spyre、Huawei Ascend、Apple Silicon 等插件。",
+      "仓库共 23,762 次提交。"
+    ],
+    "raw_excerpt": "vLLM is fast with: State-of-the-art serving throughput; Efficient management of attention key and value memory with PagedAttention; Continuous batching of incoming requests, chunked prefill, prefix caching ... Tensor, pipeline, data, expert, and context parallelism for distributed inference ... vLLM seamlessly supports 200+ model architectures on Hugging Face"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "sgl-project/sglang — 仓库元数据（SGLang serving framework）",
+    "url": "https://github.com/sgl-project/sglang",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据：38,111 stars，9,881 forks，语言 Python，最近 push 时间 2026-10-25。",
+      "仓库描述为面向大语言模型与多模态模型的高性能 serving 框架（仅元数据与简介，README 正文未能读取）。"
+    ],
+    "raw_excerpt": "SGLang is a high-performance serving framework for large language models and multimodal models. (★38111, forks 9881, last push: 2026-10-25)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Dao-AILab/flash-attention — 仓库元数据（Fast and memory-efficient exact attention）",
+    "url": "https://github.com/Dao-AILab/flash-attention",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库元数据：25,211 stars，3,188 forks，语言 Python，最近 push 时间 2026-10-24。",
+      "仓库描述为快速且显存高效的精确注意力实现（仅元数据与简介，README 正文未能读取）。"
+    ],
+    "raw_excerpt": "Fast and memory-efficient exact attention (★25211, forks 3188, last push: 2026-10-24)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Effective context engineering for AI agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 将 context engineering 定义为 prompt engineering 的自然演进：prompt engineering 指编写与组织 LLM 指令的方法，而 context engineering 指在推理过程中策展与维护最优 token 集合（含 prompt 之外落入上下文的所有其他信息）的策略集合。",
+      "Anthropic 明确把上下文视为有限资源且边际收益递减：随着上下文窗口 token 数增加，模型从中准确召回信息的能力下降，这一现象被称为 context rot，且在所有模型上都会出现，只是退化幅度不同。",
+      "Anthropic 用「attention budget」解释该现象，并归因于 transformer 架构的 n² 成对关系：上下文越长，模型捕捉这些成对关系的能力被摊薄，形成上下文规模与注意力聚焦之间的天然张力。",
+      "Anthropic 指出位置编码插值（position encoding interpolation）等技术可让模型处理更长序列，但会带来 token 位置理解上的退化。",
+      "Anthropic 的结论是性能呈「渐变」而非「断崖」：模型在长上下文下仍具能力，但信息检索精度与长程推理相比短上下文会下降。",
+      "Anthropic 给出的工程原则是：好的 context engineering 意味着找到能最大化目标结果概率的、最小的高信号 token 集合。",
+      "Anthropic 认为 agent 在循环中会不断产生可能与下一轮推理相关的数据，这些信息必须被循环式地精炼（cyclically refined），因此策展是迭代行为而非一次性写 prompt。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Building effective agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/building-effective-agents",
+    "published_at": "2024-12-19",
+    "key_points": [
+      "Anthropic 将 agentic systems 区分为 workflows（由预定义代码路径编排 LLM 与工具）与 agents（由 LLM 动态决定自身流程与工具使用）。",
+      "Anthropic 明确建议先找最简单的方案：对许多应用而言，用检索（retrieval）与 in-context examples 优化单次 LLM 调用通常就已足够（\"optimizing single LLM calls with retrieval and in-context examples is usually enough\"）。",
+      "Anthropic 指出 agentic 系统常以延迟与成本换取更好的任务表现，需要判断该权衡是否值得。",
+      "Anthropic 把「增强型 LLM（augmented LLM）」定义为 agentic 系统的基础构件：LLM 加上检索、工具、记忆等增强，且当前模型能自行生成搜索 query、选择工具、决定保留哪些信息。",
+      "该文顶部注明：文中描述的多数工具生态自 2024 年 12 月起已变化，当前做法参见 Claude Managed Agents 与相关文档。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Language Modeling with Editable External Knowledge (ERASE), arXiv:2406.11830",
+    "url": "https://arxiv.org/abs/2406.11830",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "该论文针对 RAG 的知识更新问题提出 ERASE：在每次新增文档时，增量地删除或改写知识库中的其他条目，而非仅改进检索或推理。",
+      "论文称在两个新基准（针对新闻文章流与会话流问答）上，ERASE 相对常规 RAG 的准确率绝对提升为 7–13%（Mixtral-8x7B）与 6–10%（Llama-3-8B）。",
+      "该来源仅取到摘要，未读到方法与实验章节，且其对比对象是「常规 RAG」而非长上下文模型，与长上下文 vs RAG 的直接对比关系较弱。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Efficient Streaming Language Models with Attention Sinks (StreamingLLM)",
+    "url": "https://arxiv.org/abs/2309.17453",
+    "published_at": "2023-09-29 (v1), last revised 2024-04-07 (v4); ICLR 2024",
+    "key_points": [
+      "提出 attention sink 现象：即使初始 token 语义上不重要，模型仍将大量注意力分数分配给它们；原因是 Softmax 要求注意力分数归一化，模型需要一个「倾倒」多余注意力的位置。",
+      "方法：保留 attention sink token 的 KV（仅 4 个初始 token 即足够）加上滑动窗口内的最近 token KV，无需微调即可让有限注意力窗口训练的 LLM 泛化到无限序列长度。",
+      "压缩机制是「固定大小的 KV cache」：只保留 4 个 sink token + 滑动窗口，因此 cache 大小与序列长度解耦，显存恒定。",
+      "实测规模：可使 Llama-2-[7,13,70]B、MPT-[7,30]B、Falcon-[7,40]B、Pythia-[2.9,6.9,12]B 稳定建模 400 万（4M）token 甚至更长。",
+      "速度：在流式设置下相比 sliding window with recomputation 基线最高 22.2x 加速。",
+      "预训练侧发现：在全部训练样本开头加入一个可学习的 placeholder token 作为专用 attention sink，可使 1.6 亿参数模型在流式场景下只需单个 sink token 即保持性能。",
+      "论文明确指出纯 window attention 在序列长度超过 cache 大小后会崩溃（哪怕只驱逐第一个 token 的 KV）。"
+    ],
+    "raw_excerpt": "StreamingLLM simply keeps the attention sink tokens' KV (with just 4 initial tokens sufficing) together with the sliding window's KV to anchor the attention computation and stabilize the model's performance. With StreamingLLM, models including Llama-2-[7, 13, 70]B, MPT-[7, 30]B, Falcon-[7, 40]B, and Pythia-[2.9,6.9,12]B can reliably model 4 million tokens, and potentially even more. Compared with the only viable baseline, sliding window with recomputation, StreamingLLM achieves up to 22.2x speedup."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models",
+    "url": "https://arxiv.org/abs/2306.14048",
+    "published_at": "2023-06-24 (v1), latest v3",
+    "key_points": [
+      "核心观察：LLM 推理时注意力矩阵稀疏度超过 95%，即仅 5% 的 KV cache 就足以解码出相同的输出 token，理论上支持最高 20x 的 KV cache 缩减而不掉精度。",
+      "第二个观察：所有 token 的累积注意力分数服从幂律分布，存在一小组关键 token（Heavy Hitters, H2）；完全移除 H2 会导致模型功能显著退化。",
+      "方法：H2O 是一种 KV cache 驱逐策略，动态保留「近期 token + H2 token」的平衡；将 KV cache 驱逐形式化为动态子模（dynamic submodular）问题并给出理论保证。",
+      "关键工程结论：基于每个解码步的局部统计（仅对前序 token 的注意力分数求和）贪心保留 H2，效果与考虑未来 token 注意力相当。",
+      "压缩率配置：论文主推 20% heavy hitters 的 cache 预算配置。",
+      "吞吐：在 OPT-6.7B 与 OPT-30B 上，相比 DeepSpeed Zero-Inference、Hugging Face Accelerate、FlexGen 分别最高提升 29x、29x、3x 吞吐。",
+      "延迟：相同 batch size 下最高降低 1.9x 延迟。",
+      "评测模型覆盖 OPT、LLaMA、GPT-NeoX，任务范围广泛。"
+    ],
+    "raw_excerpt": "We observe that even when trained densely, the attention matrices of LLMs are over 95% sparse at inference time... Therefore, only 5% of the KV cache is sufficient for decoding the same output token at each generation step, which suggests it may be possible to have up to a 20x reduction in KV cache size without an accuracy drop. ... Our implementation of H2O with 20% heavy hitters improves the throughput over three leading inference systems DeepSpeed Zero-Inference, Hugging Face Accelerate, and FlexGen by up to 29x, 29x, and 3x on OPT-6.7B and OPT-30B."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "SnapKV: LLM Knows What You are Looking for Before Generation",
+    "url": "https://arxiv.org/abs/2404.14469",
+    "published_at": "2024-04-22 (v1), last revised 2024-06-17 (v2)",
+    "key_points": [
+      "核心发现：每个注意力头在生成过程中持续关注特定的 prompt 注意力特征，且该模式可从 prompt 末尾的「observation window」提前获得，即生成前就能判断哪些 KV 重要。",
+      "方法：无需微调，按注意力头为单位选择聚类的关键 KV 位置进行压缩，选中的前缀 KV 与 observation window 的 KV 拼接构成新 KV cache。",
+      "压缩/效率实测（16K token 输入）：相比 baseline 生成速度提升 3.6x，内存效率提升 8.2x。",
+      "精度：在 16 个长序列数据集上与全 KV cache 基线保持可比性能。",
+      "100K+ 实测：在单张 A100-80GB 上用 HuggingFace 实现（少量代码改动）可处理最多 380K 上下文 token，Needle-in-a-Haystack 测试中精度下降可忽略。",
+      "论文指出既有 KV 驱逐方法（StreamLLM、H2O、FastGen、Scissorhands）主要压缩解码阶段追加的 KV，而忽略了 prompt 阶段 KV 的压缩——后者才是长上下文场景的内存瓶颈。"
+    ],
+    "raw_excerpt": "SnapKV achieves a consistent decoding speed with a 3.6x increase in generation speed and an 8.2x enhancement in memory efficiency compared to the baseline when processing inputs of 16K tokens. At the same time, it maintains comparable performance to the baseline models across 16 long sequence datasets. Moreover, SnapKV can process up to 380K context tokens on a single A100-80GB GPU using HuggingFace implementation with minor changes, exhibiting only a negligible accuracy drop in the Needle-in-a-Haystack test."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Scissorhands: Exploiting the Persistence of Importance Hypothesis for LLM KV Cache Compression at Test Time",
+    "url": "https://arxiv.org/abs/2305.17118",
+    "published_at": "2023-05-26 (v1), latest v2",
+    "key_points": [
+      "提出「重要性持久性假设」（Persistence of Importance）：只有曾在某一步产生显著影响的 pivotal token 才会在未来步骤继续产生显著影响。",
+      "实证支撑：句子中靠后的 token 主要只关注句子早期 token 已重点关注过的 token，在多数 transformer 层中重叠率超过 90%（Repetitive Attention Pattern）。",
+      "方法：无需微调，在固定内存预算下管理 KV cache，以更高概率保留 pivotal token，使 KV cache 大小始终低于预设 budget。",
+      "压缩率：将 KV cache 推理显存降低最多 5x，且不损害模型质量。",
+      "可与 4-bit 量化结合，实现最高 20x 压缩。",
+      "动机数据：batch size 128、序列长度 2048 时，OPT-175B 的 KV cache 约 1152GB，而模型权重仅 325GB；LLaMA-65B 为 640GB vs 130GB；BLOOM 为 950GB vs 352GB——KV cache 主导显存消耗。"
+    ],
+    "raw_excerpt": "We hypothesize the persistence of importance: only pivotal tokens, which had a substantial influence at one step, will significantly influence future generations. ... we validate that Scissorhands reduces the inference memory usage of the KV cache by up to 5X without compromising model quality. We further demonstrate that Scissorhands can be combined with 4-bit quantization, traditionally used to compress model weights, to achieve up to 20X compression."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "SnapKV (related-work 章节对各方法的横向定位)",
+    "url": "https://arxiv.org/html/2404.14469v2",
+    "published_at": "2024-06-17 (v2)",
+    "key_points": [
+      "SnapKV 论文对 StreamingLLM 的评价：只保留最近 token 与 attention sinks（最初几个 token），会丢失被丢弃的中间 token 所承载的重要信息。",
+      "SnapKV 论文对 H2O 的评价：基于累积注意力分数的评分函数在生成阶段贪心丢弃 KV，能有效压缩生成阶段追加的 KV，但忽略了 prompt KV 的压缩。",
+      "SnapKV 论文对 Scissorhands 的评价：聚焦于识别并保留在生成步中与先前 token 窗口保持一致注意力模式的 pivotal token，但只关注生成阶段的 pivotal token 窗口，忽略了包含关键信息的超长 prompt，可能导致无法从 prompt 中抽取细节信息。",
+      "SnapKV 论文对 FastGen 的评价：双阶段算法含四种 KV cache 压缩策略，先用 prompt 编码的 profiling 结果选策略，再在生成阶段动态驱逐，但同样存在忽略 prompt KV 压缩的问题。",
+      "背景数据：论文列举 GPT-4 与 Command-R 上下文 128K、Claude-3 为 200K、Gemini-Pro-1.5 为 1M。"
+    ],
+    "raw_excerpt": "In StreamLLM [5], only the most recent tokens and attention sinks (first few tokens) are retained to reduce the KV cache size, making it lose the important information carried by the discarded middle tokens. Heavy-Hitter Oracle (H2O) [6] introduces a policy that greedily drops KVs during generation based on a scoring function derived from cumulative attention. While this approach effectively compresses the KVs appended to the cache during generation, it overlooks compression of prompt KVs... ScissorHands [7] focuses on identifying and retaining pivotal tokens... However, this method concentrates solely on the window of previous pivotal tokens in generation and neglects the extensive prompt."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache (ICML 2024)",
+    "url": "https://arxiv.org/abs/2402.02750v2",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "KIVI 是无需微调的 2-bit KV cache 量化算法，将 KV cache 压缩到 2bit。",
+      "核心发现：key cache 应按 per-channel（沿通道维分组）量化，value cache 应按 per-token 量化。",
+      "在 Llama、Falcon、Mistral 上使用 2bit KV 量化可维持几乎相同质量，峰值显存（含模型权重）降低 2.6×。",
+      "显存降低使 batch size 最大提升 4×，真实负载吞吐提升 2.35×~3.47×。",
+      "方法采用 group size 32 的 group-wise round-to-nearest 量化，并保留 residual（全精度）部分以维持精度。"
+    ],
+    "raw_excerpt": "From this analysis, we developed a tuning-free 2bit KV cache quantization algorithm named KIVI. With hardware-friendly implementation, KIVI can enable Llama, Falcon, and Mistral models to maintain almost the same quality while using 2.6× less peak memory (including model weight)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "KIVI 正文 Table 1：Llama-2-13B 上不同 KV 量化配置的模拟结果（group size 32）",
+    "url": "https://arxiv.org/html/2402.02750v2",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "Llama-2-13B 上 16bit 基线：CoQA 66.37、TruthfulQA 29.53。",
+      "4bit（K per-token, V per-token）：CoQA 66.48、TruthfulQA 29.51，与 16bit 基本持平。",
+      "2bit（K per-token, V per-token）：CoQA 降至 52.93、TruthfulQA 降至 24.98，出现明显精度下降。",
+      "2bit（K per-channel, V per-token）：CoQA 63.53、TruthfulQA 28.60，是 2bit 下最准确的配置。",
+      "2bit（K per-channel, V per-channel）：CoQA 崩至 2.88、TruthfulQA 0.74；2bit（K per-token, V per-channel）：CoQA 2.80、TruthfulQA 0.26，即 value cache 按 per-channel 量化会导致精度崩溃。",
+      "误差分析：K 按 per-token 量化的 attention score 相对误差为 47.00，per-channel 为 9.60；V 按 per-token 的注意力输出相对误差 Δ 为 3.55，per-channel 为 49.89。"
+    ],
+    "raw_excerpt": "16bit 66.37 29.53 / 4bit (K-T, V-T) 66.48 29.51 / 2bit (K-T, V-T) 52.93 24.98 / 2bit (K-C, V-T) 63.53 28.60 / 2bit (K-C, V-C) 2.88 0.74 / 2bit (K-T, V-C) 2.80 0.26"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization",
+    "url": "https://arxiv.org/abs/2401.18079v6",
+    "published_at": "2024-01-31",
+    "key_points": [
+      "KVQuant 提出四项技术：Per-Channel Key Quantization、Pre-RoPE Key Quantization、Non-Uniform KV Cache Quantization（敏感度加权非均匀数据类型）、Per-Vector Dense-and-Sparse Quantization。",
+      "在 LLaMA、Llama-2、Llama-3、Mistral 上，3-bit 量化在 Wikitext-2 与 C4 上的 perplexity 退化 < 0.1。",
+      "3-bit 方案带来 4.8× 的 cached activation 显存压缩，从而支持 4.8× 更长的上下文。",
+      "使 LLaMA-7B 可在单张 A100-80GB 上服务最长 1M 上下文，在 8-GPU 系统上最长 10M 上下文。",
+      "仅移除 1% 的 outlier（per-vector 而非 per-matrix 检测）即可在 3-bit 下达到 <0.1 perplexity 退化。",
+      "自定义 CUDA kernel 在 4-bit 精度下对 LLaMA-7B 的 Key/Value 矩阵向量乘相对 fp16 基线最高约 1.7× 加速。",
+      "消融：Key 用 per-channel 而非 per-token 量化，在 3-bit LLaMA-7B 上带来 3.82 的 Wikitext-2 perplexity 改善；Pre-RoPE 量化带来 0.82 perplexity 改善；非均匀量化相对 3-bit 均匀方法带来 0.29 perplexity 改善。"
+    ],
+    "raw_excerpt": "By removing only 1% of outliers, we can attain under 0.1 perplexity degradation on both Wikitext-2 and C4 for 3-bit KV cache quantization with the LLaMA, Llama-2, Llama-3, and Mistral models, thereby facilitating accurate inference with 4.8× longer context length."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "QServe: W4A8KV4 Quantization and System Co-design for Efficient LLM Serving (MLSys 2025)",
+    "url": "https://arxiv.org/abs/2405.04532v3",
+    "published_at": "2024-05-07",
+    "key_points": [
+      "QoQ 算法采用 W4A8KV4：4-bit 权重、8-bit 激活、4-bit KV cache。",
+      "选择 KV4 而非 KV8 的理由：解码阶段 attention 是计算强度为 1 MAC/element 的 batched GEMV，访存由 KV cache 主导，KV4 相对 KV8 提供 2× 的 attention 峰值性能；batch=64 时 attention 占总运行时 50% 以上。",
+      "4-bit KV 量化会带来精度退化，QServe 用 SmoothAttention 缓解：把激活量化的难点从 keys 转移到 queries，而 queries 不被量化。",
+      "现有 INT4 方法在 GPU 上去量化权重或部分和时有 20%-90% 的运行时开销；A100 上一次 CUDA core 操作相当于 50 次 INT4 tensor core 操作。",
+      "相比 TensorRT-LLM，QServe 将 Llama-3-8B 最大服务吞吐在 A100 上提升 1.2×、L40S 上 1.4×；Qwen1.5-72B 在 A100 上 2.4×、L40S 上 3.5×，并将服务美元成本降低 3×。"
+    ],
+    "raw_excerpt": "Additionally, we develop SmoothAttention to effectively mitigate the accuracy degradation incurred by 4-bit KV quantization. ... Quantizing the KV cache can be viewed as effectively increasing the memory bandwidth. Therefore, KV4 offers 2× peak performance for attention over KV8."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks",
+    "url": "https://arxiv.org/abs/2412.15204v2",
+    "published_at": "2024-12-19",
+    "key_points": [
+      "LongBench v2 由 503 道高难度多项选择题构成，上下文长度范围为 8k 到 2M words。",
+      "覆盖六大任务类别：单文档 QA、多文档 QA、长上下文学习（long in-context learning）、长对话历史理解、代码仓库理解、长结构化数据理解。",
+      "数据由近 100 位具有不同专业背景的高学历人员构造，并经过自动与人工双重审核以保证质量与难度。",
+      "在 15 分钟时限下，人类专家仅达到 53.7% 准确率。",
+      "直接作答的最佳模型仅达 50.1% 准确率；o1-preview 达到 57.7%，超出人类基线 4%。",
+      "作者据此强调增强推理能力与扩展推理期计算（inference-time compute）对解决长上下文挑战的重要性。"
+    ],
+    "raw_excerpt": "LongBench v2 consists of 503 challenging multiple-choice questions, with contexts ranging from 8k to 2M words, across six major task categories... resulting in human experts achieving only 53.7% accuracy under a 15-minute time constraint... the best-performing model, when directly answers the questions, achieves only 50.1% accuracy. In contrast, the o1-preview model... achieves 57.7%, surpassing the human baseline by 4%."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly",
+    "url": "https://arxiv.org/abs/2410.02694v3",
+    "published_at": "2024-10-03",
+    "key_points": [
+      "HELMET 指出开发者常依赖 needle-in-a-haystack（NIAH）等合成任务或任意挑选的任务子集来评测长上下文模型，但这些做法能否反映下游应用多样性并不清楚。",
+      "论文将既有基准的问题归为四类：应用覆盖有限、上下文长度不足、指标不可靠、与 base 模型不兼容（导致评测信号含噪）。",
+      "HELMET 包含七个以应用为中心的任务类别，提供最高 128K token 的可控长度、基于模型的评测（model-based evaluation）以及 few-shot prompting 以稳健评测 base 模型。",
+      "基于 59 个长上下文模型的系统研究得出：NIAH 这类合成任务不能可靠预测下游性能。",
+      "HELMET 各任务类别之间趋势各异且相关性低。",
+      "多数长上下文模型在 NIAH 上取得满分，但当任务需要全上下文推理或遵循复杂指令时，开源模型显著落后于闭源模型，且差距随长度增加而扩大。",
+      "作者建议用其 RAG 任务做快速模型开发（易运行且更能预测其他下游性能），并主张跨多样任务的整体性评测。"
+    ],
+    "raw_excerpt": "we find that existing benchmarks often provide noisy signals due to limited coverage of applications, insufficient context lengths, unreliable metrics, and incompatibility with base models... (1) synthetic tasks like NIAH do not reliably predict downstream performance; (2) the diverse categories in HELMET exhibit distinct trends and low correlations with each other; and (3) while most LCLMs achieve perfect NIAH scores, open-source models significantly lag behind closed ones when tasks require full-context reasoning or following complex instructions -- the gap widens as length increases."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "How to Train Long-Context Language Models (Effectively) (ProLong, arXiv:2410.02660v4, ACL 2025)",
+    "url": "https://arxiv.org/abs/2410.02660",
+    "published_at": "2024-10-03 (v1); v4 2025-12-03",
+    "key_points": [
+      "论文研究 continued training 与 SFT 两个阶段，目标是让 LM 有效利用长上下文信息；作者为 Tianyu Gao、Alexander Wettig、Howard Yen、Danqi Chen。",
+      "作者主张评估协议应使用广泛的长上下文下游任务集合，而非 perplexity 或简单 needle-in-a-haystack (NIAH) 测试，并且应在 SFT 之后评估模型，因为这样更能反映长上下文能力。",
+      "数据配比结论一：code repositories 与 books 是优质的长数据来源，但必须与高质量短上下文数据结合使用（原文：\"code repositories and books are excellent sources of long data, but it is crucial to combine them with high-quality short-context data\"）。",
+      "课程/长度策略结论二：用超过评估长度的序列长度进行训练可以提升长上下文性能（原文：\"training with a sequence length beyond the evaluation length boosts long-context performance\"）。",
+      "SFT 数据结论三：仅使用短指令数据集即可在长上下文任务上取得强性能（原文：\"for SFT, using only short instruction datasets yields strong performance on long-context tasks\"）。",
+      "最终模型 ProLong-8B 从 Llama-3 初始化、训练 40B tokens，在 128K 长度上于同规模模型中报告 state-of-the-art 长上下文性能（该 SOTA 主张出自论文作者自述）。",
+      "ProLong 在多数长上下文任务上优于 Llama-3.1-8B-Instruct，而长上下文训练所用 token 数仅为其 5%。",
+      "ProLong 可有效处理最长 512K tokens，作者称其为公开可用 LM 中最长上下文窗口之一。",
+      "论文被 ACL 2025 接收；代码、数据与模型已公开。"
+    ],
+    "raw_excerpt": "We find that (1) code repositories and books are excellent sources of long data, but it is crucial to combine them with high-quality short-context data; (2) training with a sequence length beyond the evaluation length boosts long-context performance; (3) for SFT, using only short instruction datasets yields strong performance on long-context tasks. Our final model, ProLong-8B, which is initialized from Llama-3 and trained on 40B tokens, demonstrates state-of-the-art long-context performance among similarly sized models at a length of 128K."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "princeton-nlp/ProLong — Homepage for ProLong and paper \"How to Train Long-Context Language Models (Effectively)\"",
+    "url": "https://raw.githubusercontent.com/princeton-nlp/ProLong/main/README.md",
+    "published_at": "last push 2025-09-12",
+    "key_points": [
+      "ProLong 是从 Llama-3-8B 继续训练并 SFT 得到的长上下文模型族，最大上下文窗口 512K tokens；主模型为 princeton-nlp/Llama-3-8B-ProLong-512k-Instruct。",
+      "训练配置（两阶段课程）：长上下文继续训练先在 64K 训练数据上训 20B tokens，再在 512K 训练数据上训 20B tokens。",
+      "SFT 阶段使用 UltraChat 数据集（约 1B tokens），即 SFT 数据本身是短指令数据而非长文档合成任务。",
+      "公开的数据集划分：Stage 1 为 64K 训练数据（40B tokens，princeton-nlp/prolong-data-64K），Stage 2 为 512K 训练数据（40B tokens，princeton-nlp/prolong-data-512K）。",
+      "长数据来源域清单（未打包原始数据，Llama-3 tokenizer）：Code repos 689GB、Books (SlimPajama) 180GB、FineWeb (sampled) 864GB、FineWeb-edu (sampled) 365GB、OpenWebMath 48GB、Wikipedia (Dolma) 14GB、Textbooks 1GB、Tulu-v2 1GB、StackExchange (SlimPajama) 135GB、ArXiv (SlimPajama) 210GB。",
+      "数据构造流程：用自研 datatools 按长度过滤并打包（pack），示例命令为 pack --pack_length 65536 --min_length 65536，即只保留长度不低于目标上下文长度的文档再拼接。",
+      "README 明确说明提供未打包原始数据，目的是让使用者可以实验不同的数据长度与数据配比（\"If you want to experiment with different data lengths or data mixtures\"）。",
+      "训练代码基于 Hugging Face Transformers，改动包括支持 mosaicml-streaming 数据格式、FlashAttention-2 变长注意力（document masking）以及 in-batch 长度排序 dataloader。",
+      "作者称在长上下文预训练数据、SFT 数据及其他设计选择上做了充分消融（ablations）。"
+    ],
+    "raw_excerpt": "Long-context continued training: 20B tokens on 64K training data, and 20B tokens on 512K training data; Supervised fine-tuning (SFT): UltraChat; Maximum context window: 512K tokens. ... If you want to experiment with different data lengths or data mixtures, We also provide the (unpacked, unfiltered, but tokenized) raw data from each domain below."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context (v5, Gemini Team, Google)",
+    "url": "https://arxiv.org/html/2403.05530v5",
+    "published_at": "2024-03-08 (v1); v5 revised 2024-12-16",
+    "key_points": [
+      "论文标题与主张：Gemini 1.5 家族是「capable of recalling and reasoning over fine-grained information from millions of tokens of context, including multiple long documents and hours of video and audio」。",
+      "宣称的上下文规模：Gemini 1.5 模型「have the ability to recall and reason over fine-grained information from up to at least 10M tokens」，论文称这是当时 LLM 中前所未有的规模。",
+      "NIAH 实测（Figure 1）：Gemini 1.5 Pro 在 text、video、audio 三种模态上，对 1M tokens haystack 达到「near-perfect 'needle' recall (>99.7%)」。",
+      "10M 扩展结果：文本模态扩展到 10M tokens（约 7M 词）仍维持该召回水平；音频 9.7M tokens（最长 107 小时）；视频 9.9M tokens（最长 10.5 小时）。",
+      "摘要层面结论：「near-perfect retrieval (>99%) up to at least 10M tokens」，并将其与 Claude 3.0（200k）和 GPT-4 Turbo（128k）对比，称为 generational leap。",
+      "Figure 1 注明：所有模态的性能数据来自 2024 年 2 月版本的 Gemini 1.5 Pro（非更新版）。",
+      "合成 NIAH 任务「inspired by Kamradt (2023)」，用于探测模型在 distractor context 中可靠召回信息的能力；Gemini 1.5 Pro 与 1.5 Flash 均达到 >99% needle recall。",
+      "长上下文与外部检索的关系（原文表述）：在更真实的多模态长上下文基准上，Gemini 1.5 Pro「outperforming all competing models across all modalities even when these models are augmented with external retrieval methods」。",
+      "长上下文能力未牺牲核心能力：Gemini 1.5 Pro 相对 1.0 Pro 在 50 个基准中胜出 44 个；相对 1.0 Ultra 胜出 35/45。",
+      "架构：Gemini 1.5 Pro 是 sparse mixture-of-experts (MoE) Transformer 模型。",
+      "长上下文带来的新能力示例：仅将 500 页参考语法、词典与约 400 条平行句放入上下文，模型即可学习英语→Kalamang 翻译，水平接近用同样材料学习的人类。",
+      "Gemini 1.5 Flash 为更轻量变体，同样支持从 32k 到 10M tokens 的长上下文，相对 1.0 Pro 在 50 个基准中胜出 41 个。"
+    ],
+    "raw_excerpt": "Studying the limits of Gemini 1.5's long-context ability, we find continued improvement in next-token prediction and near-perfect retrieval (>99%) up to at least 10M tokens, a generational leap over existing models such as Claude 3.0 (200k) and GPT-4 Turbo (128k). ... Figure 1: Gemini 1.5 Pro achieves near-perfect \"needle\" recall (>99.7%) up to 1M tokens of \"haystack\" in all modalities, i.e., text, video and audio. It even maintains this recall performance when extending to 10M tokens in the text modality (approximately 7M words); 9.7M tokens in the audio modality (up to 107 hours); 9.9M tokens in the video modality (up to 10.5 hours). ... we also see Gemini 1.5 Pro outperforming all competing models across all modalities even when these models are augmented with external retrieval methods."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+    "url": "https://arxiv.org/abs/2405.04434v5",
+    "published_at": "2024-05-07",
+    "key_points": [
+      "DeepSeek-V2 总参数 236B，每 token 激活 21B，支持 128K token 上下文长度。",
+      "MLA（Multi-head Latent Attention）通过把 KV cache 压缩成一个 latent vector 来保证推理效率。",
+      "与 DeepSeek 67B 相比，DeepSeek-V2 将 KV cache 减少 93.3%，最大生成吞吐提升至 5.76 倍，训练成本节省 42.5%。",
+      "论文明确指出 MQA 与 GQA 虽能降低 KV cache 需求，但其性能不及 MHA（消融见附录 D.1），MLA 则声称性能优于 MHA 同时 KV cache 显著更小。"
+    ],
+    "raw_excerpt": "MLA guarantees efficient inference through significantly compressing the Key-Value (KV) cache into a latent vector... Compared with DeepSeek 67B, DeepSeek-V2 achieves significantly stronger performance, and meanwhile saves 42.5% of training costs, reduces the KV cache by 93.3%, and boosts the maximum generation throughput to 5.76 times."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V2 (HTML 全文) — Section 2.1 Multi-Head Latent Attention: Boosting Inference Efficiency",
+    "url": "https://arxiv.org/html/2405.04434v5",
+    "published_at": "2024-05-07",
+    "key_points": [
+      "MHA 在推理时需为每个 token 缓存 2·n_h·d_h·l 个元素（n_h 为注意力头数，d_h 为每头维度，l 为层数），这是 KV cache 显存占用的标准计算式。",
+      "MLA 的核心是对 key 与 value 做低秩联合压缩：c_t^KV = W^DKV · h_t，再由 W^UK / W^UV 上投影得到 k_t^C 与 v_t^C，因此只需缓存压缩后的 latent 向量而非完整 K/V。",
+      "论文将 MQA 与 GQA 定位为「减少 KV cache 但性能不及 MHA」的既有方案，MLA 旨在同时取得优于 MHA 的性能与更小的 KV cache。"
+    ],
+    "raw_excerpt": "During inference, all keys and values need to be cached to accelerate inference, so MHA needs to cache 2 n_h d_h l elements for each token. ... The core of MLA is the low-rank joint compression for keys and values to reduce KV cache: c_t^KV = W^DKV h_t"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts (arXiv:2307.03172v3)",
+    "url": "https://arxiv.org/abs/2307.03172v3",
+    "published_at": "2023-07-06",
+    "key_points": [
+      "论文分析语言模型在两个需要从输入上下文中识别相关信息的任务上的表现：多文档问答（multi-document QA）与键值检索（key-value retrieval）。",
+      "改变相关信息在上下文中的位置会导致性能显著下降，说明当时的语言模型无法稳健利用长输入上下文中的信息。",
+      "性能通常在相关信息出现在输入上下文开头或结尾时最高，而当模型必须访问长上下文中间的相关信息时显著退化——即使对显式支持长上下文的模型也如此。",
+      "论文据此提出新的评测协议，用于评估后续长上下文语言模型。"
+    ],
+    "raw_excerpt": "We find that performance can degrade significantly when changing the position of relevant information, indicating that current language models do not robustly make use of information in long input contexts. In particular, we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Long Context vs. RAG for LLMs: An Evaluation and Revisits (arXiv:2501.01880v1)",
+    "url": "https://arxiv.org/abs/2501.01880v1",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "论文把「扩展上下文窗口（Long Context, LC）」与「用检索器选择性获取相关信息（RAG）」定位为让 LLM 纳入超长外部上下文的两种主要策略。",
+      "作者指出既有研究结论相互矛盾：部分论文认为 RAG 在特定场景更优（Xu et al. 2024a; Yu et al. 2024），另一些则强调 LC 结果更好（Li et al. 2024; Xu et al. 2024b）。",
+      "该研究在过滤掉「无需外部上下文即可回答」的问题、识别最有效检索方法、并扩展数据集后重新评测，结论是：在问答基准上 LC 总体优于 RAG，尤其在基于 Wikipedia 的问题上。",
+      "基于摘要式（summarization-based）检索的表现与 LC 相当，而基于分块（chunk-based）检索落后于 LC。",
+      "但 RAG 在对话类（dialogue-based）与通用问句（general question）查询上具有优势。",
+      "论文强调既有研究忽视了「上下文相关性（context relevance）」的重要性。"
+    ],
+    "raw_excerpt": "We show that LC generally outperforms RAG in question-answering benchmarks, especially for Wikipedia-based questions. Summarization-based retrieval performs comparably to LC, while chunk-based retrieval lags behind. However, RAG has advantages in dialogue-based and general question queries."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Long Context vs. RAG for LLMs: An Evaluation and Revisits — Table 1 汇总的既有对比研究结论",
+    "url": "https://arxiv.org/html/2501.01880v1",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "Self-ROUTE（Li et al. 2024）：LC 持续优于 RAG，但 RAG 成本更低；该方法让模型通过自我反思（self-reflection）在 RAG 与 LC 之间选择以降低成本。",
+      "ChatQA2（Xu et al. 2024a）：在不超过 32K 的序列长度上，RAG 优于 LC；从 3K 到 24K，更大的上下文窗口对 RAG 更有利。",
+      "LongBench（Bai et al. 2024a）：检索对 4K 模型有帮助，但对 16K/32K 模型没有帮助。",
+      "Ret-LC LLM（Xu et al. 2024b）：在多跳（multi-hop）基准上 LC 优于 4K RAG；RAG 在 70B/43B 模型上对所有上下文长度都有提升；对 LC 模型，top-5 或 top-10 检索结果效果最佳。",
+      "OP-RAG（Yu et al. 2024）：高效检索可以优于暴力式（brute-force）全上下文输入；RAG 中分块过多会损害性能；保留原始顺序优于按分数排序。",
+      "LC LLM-RAG（Jin et al. 2024）：先检索更多段落会先提升性能随后下降；把高分信息排在首尾有帮助。",
+      "Leng et al. 2024（LC RAG Performance）：多数闭源模型的 RAG 在上下文增至 100k token 前持续改善；多数开源模型的 RAG 在 16k–32k 达到峰值后性能下降。",
+      "LongBench v2（Bai et al. 2024b）：GPT-4o 在 128k 下不用 RAG 表现更好，但其性能随 RAG 上下文增至 128k 持续上升；Qwen2.5 与 GLM-4-Plus 在 RAG 上下文超过 32k 后性能下降。",
+      "关于分块策略的共识：检索单元应更长（Jiang et al. 2024b），分块数量应保持较少（Yu et al. 2024）；选 top 5–10 个分块通常效果较好，检索超过 20 个分块效果下降（Xu et al. 2024b）。",
+      "关于「LC 与 RAG 结合是否有利」存在分歧：部分研究认为结合有效（Xu et al. 2024b; Jiang et al. 2024b），另一些认为结合可能无益（Bai et al. 2024a; Jin et al. 2024）。"
+    ],
+    "raw_excerpt": "Self-ROUTE ( S ) ⋆ LC consistently outperforms RAG, but RAG has lower cost. Li et al. (2024) ... ChatQA2 ( C ) For sequence lengths up to 32K, RAG outperforms LC. ... LongBench ( B ) Retrieval helps 4k model, but not 16k/32k models. ... Most close models' RAG improves up to 100k tokens. Most open models' RAG peak at 16k-32k then performance drops."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "arxiv",
+    "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach (Self-Route)",
+    "url": "https://arxiv.org/abs/2407.16833",
+    "published_at": "2024-07-23 (v1); v2 2024-10-17",
+    "key_points": [
+      "论文对 RAG 与长上下文（LC）LLM 做了系统性对比，覆盖多个公开数据集与三个最新 LLM。",
+      "核心发现：在资源充足（resourced sufficiently）时，长上下文在平均性能上稳定优于 RAG。",
+      "但 RAG 显著更低的成本仍是其明确优势。",
+      "作者据此提出 Self-Route：基于模型自我反思（self-reflection）把查询路由到 RAG 或长上下文。",
+      "Self-Route 在保持与纯长上下文可比性能的同时，显著降低计算成本。",
+      "该文被 EMNLP 2024 industry track 接收。"
+    ],
+    "raw_excerpt": "Results reveal that when resourced sufficiently, LC consistently outperforms RAG in terms of average performance. However, RAG's significantly lower cost remains a distinct advantage. Based on this observation, we propose Self-Route, a simple yet effective method that routes queries to RAG or LC based on model self-reflection. Self-Route significantly reduces the computation cost while maintaining a comparable performance to LC."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "Effective context engineering for AI agents (Anthropic Engineering)",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 把 context engineering 定义为：在推理过程中策划与维护最优 token 集合（含系统指令、工具、MCP、外部数据、消息历史）的策略集合，是 prompt engineering 的延伸。",
+      "提出 context rot 概念：随上下文窗口 token 数增加，模型从上下文中准确召回信息的能力下降；该特性在所有模型上都出现，只是退化幅度不同。",
+      "因此上下文应被视为有限资源、边际收益递减；LLM 有「注意力预算」（attention budget），每引入一个新 token 都会消耗该预算。",
+      "退化归因于 transformer 的 n² 成对注意力关系、训练数据中短序列更常见、以及位置编码插值带来的位置理解退化。",
+      "工程目标是找到「最小的高信号 token 集合」以最大化达成期望结果的概率。",
+      "工具设计应返回 token 高效的信息并鼓励高效的 agent 行为；臃肿的工具集是常见失败模式。"
+    ],
+    "raw_excerpt": "Studies on needle-in-a-haystack style benchmarking have uncovered the concept of context rot: as the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases. ... Context, therefore, must be treated as a finite resource with diminishing marginal returns."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 明确给出「何时不必用 RAG」的阈值：知识库小于 200,000 token（约 500 页材料）时，可直接把整个知识库放进 prompt，无需 RAG。",
+      "配合 prompt caching，该做法可降低延迟 >2x、成本最多降低 90%。",
+      "知识库继续增大则需要更可扩展的方案，即 Contextual Retrieval。",
+      "Contextual Retrieval 由 Contextual Embeddings 与 Contextual BM25 两个子技术组成，做法是在嵌入与建 BM25 索引前为每个 chunk 前置 50-100 token 的 chunk 专属解释性上下文。",
+      "量化结果：该方法把失败检索数量降低 49%，与 rerank 结合后降低 67%。",
+      "实验覆盖代码库、小说、arXiv 论文、科学论文等多个知识域，以及多种嵌入模型与检索策略。",
+      "使用 prompt caching 时，生成上下文化 chunk 的一次性成本为每百万文档 token 1.02 美元。"
+    ],
+    "raw_excerpt": "If your knowledge base is smaller than 200,000 tokens (about 500 pages of material), you can just include the entire knowledge base in the prompt that you give the model, with no need for RAG or similar methods. ... This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "Longformer: The Long-Document Transformer (arXiv:2004.05150v2)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2004.05150",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "滑动窗口注意力在固定窗口 w 下，每个 token 只 attend 左右各 1/2·w 个 token，计算复杂度为 O(n×w)，随输入长度 n 线性增长（对比全注意力 O(n²)）。",
+      "多层堆叠可扩大感受野：在 ℓ 层 transformer 中，顶层感受野大小为 ℓ×w（假设各层 w 固定），因此顶层有能力构建覆盖整个输入的表示。",
+      "膨胀滑动窗口（dilated sliding window，窗口间隔 d）在固定 d 与 w 时感受野为 ℓ×d×w，即使 d 很小也能达到数万 token。",
+      "Longformer 明确将窗口注意力类比 CNN 的堆叠感受野扩展机制，并引用 Wu et al. 2019 说明顶层可访问所有输入位置。",
+      "Longformer 引入任务驱动的 global attention（额外的 Q_g/K_g/V_g 投影），论文称其对迁移学习场景下的下游性能「critical」，即纯局部窗口不足。",
+      "Longformer 论文本身未给出相对全注意力的信息损失上界或形式化近似误差界，只给出复杂度与感受野的形式化陈述。"
+    ],
+    "raw_excerpt": "Given a fixed window size w, each token attends to 1/2·w tokens on each side (Fig. 2(b)). The computation complexity of this pattern is O(n×w), which scales linearly with input sequence length n. In a transformer with ℓ layers, the receptive field size at the top layer is ℓ×w (assuming w is fixed for all layers). ... Assuming a fixed d and w for all layers, the receptive field is ℓ×d×w, which can reach tens of thousands of tokens even for small values of d."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "Big Bird: Transformers for Longer Sequences (arXiv:2007.14062v2, NeurIPS 2020)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2007.14062",
+    "published_at": "2020-07-28",
+    "key_points": [
+      "BigBird 将稀疏注意力形式化为有向图 D 上的广义注意力：边集即被计算的内积集合，邻接矩阵 A(i,j)=1 表示 query i attend key j；全注意力对应完全有向图（全 1 矩阵），因此「降低二次复杂度」被转化为图稀疏化问题。",
+      "BigBird 由三部分组成：g 个全局 token（attend 全序列）、每个 token attend w 个局部邻居（滑动窗口）、每个 token attend r 个随机 token；整体复杂度对 token 数线性。",
+      "理论结论一：BigBird 是序列函数的通用近似器（universal approximator of sequence functions），并且是图灵完备的（Turing complete），从而保留了二次全注意力模型的这些性质。",
+      "理论结论二：加入额外 token 后，仅用 O(n) 次内积即可表达所有紧致域上的连续序列到序列函数。",
+      "理论分析指出 O(1) 个全局 token（如 CLS）在稀疏注意力机制中带来可证明的收益——这是对 ETC 等 global token 设计的理论正当化。",
+      "论文明确指出多数此前的稀疏/近似注意力方法是启发式的、缺乏理论保证，且经验上不如原版 transformer 通用稳健（Longformer 是其主要例外）。",
+      "随机图论证：在 Θ̃(n) 条边的随机图中任意两节点最短路径为对数级，谱上近似完全图，随机游走混合快，因此信息可在任意节点对之间快速流动——这是随机注意力成分的理论依据。",
+      "BigBird 摘要称该稀疏注意力可处理长度达此前同硬件下 8 倍的序列。"
+    ],
+    "raw_excerpt": "We show that BigBird is a universal approximator of sequence functions and is Turing complete, thereby preserving these properties of the quadratic, full attention model. Along the way, our theoretical analysis reveals some of the benefits of having O(1) global tokens (such as CLS), that attend to the entire sequence as part of the sparse attention mechanism. ... In particular, we show that adding extra tokens allows one to express all continuous sequence to sequence functions with only O(n)-inner products."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "Mistral 7B (arXiv:2310.06825)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2310.06825",
+    "published_at": "2023-10-10",
+    "key_points": [
+      "Mistral 7B 采用 sliding window attention（SWA），每个 token 最多 attend 上一层 W 个 token；窗口外的 token 仍可通过堆叠层间接影响下一个词预测。",
+      "形式化信息传播结论：每层注意力中信息最多向前移动 W 个 token，因此经过 k 层注意力后信息最多可前移 k×W 个 token。",
+      "递归地，位置 i 在第 k 层的隐状态 h_i 可访问输入层中距离最远 W×k 的 token。",
+      "Mistral 7B 配置：window_size = 4096，n_layers = 32，context_len = 8192；据此最后一层理论注意力跨度约为 131K token。",
+      "SWA 使 KV cache 可用固定大小的 rolling buffer（位置 i 存于 i mod W），序列长度超过 W 后缓存不再增长；在 32k 序列上缓存内存降低 8 倍且不影响模型质量（作者主张）。",
+      "在 16K 序列长度、W=4096 时，配合修改版 FlashAttention 与 xFormers，相对 vanilla attention 基线有 2 倍加速（作者主张）。"
+    ],
+    "raw_excerpt": "At each attention layer, information can move forward by W tokens. Hence, after k attention layers, information can move forward by up to k×W tokens. ... The hidden state in position i of the layer k, h_i, attends to all hidden states from the previous layer with positions between i−W and i. Recursively, h_i can access tokens from the input layer at a distance of up to W×k tokens ... At the last layer, using a window size of W=4096, we have a theoretical attention span of approximately 131K tokens."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "Longformer 对 Blockwise / Sparse Transformer 复杂度的转述（同 2004.05150 正文 §2 Related Work）",
+    "url": "https://ar5iv.labs.arxiv.org/html/2004.05150",
+    "published_at": "2020-04-10",
+    "key_points": [
+      "Longformer 将 Sparse Transformer（Child et al. 2019）描述为使用块大小 8x8 的膨胀滑动窗口、基于 BlockSparse 实现，是与其注意力模式最相似的先前工作。",
+      "Longformer 指出 Blockwise attention（Qiu et al. 2019）虽做了预训练并在 QA 上评测，但未包含语言建模评测，且所用 QA 数据集文档相对较短（SQuAD 上下文通常落在 512 限制内，MRQA 通过丢弃长文档样本构建），因此其在长文档任务上的有效性未被验证。",
+      "Longformer 将此前长文档方法归为两类：从左到右分块处理（不适配需要双向上下文的迁移学习任务）与定义稀疏注意力模式；并指出截断、分块+任务模型、两阶段检索等绕开 512 限制的做法都受信息损失或级联误差影响。"
+    ],
+    "raw_excerpt": "The model with the most similar attention pattern to ours is Sparse Transformer Child et al. 2019, which uses a form of dilated sliding window of blocks of size 8x8 provided by BlockSparse Gray et al. 2017. ... Blockwise attention Qiu et al. 2019 pretrained their models and evaluated on question answering (QA). However, the evaluation is limited as it doesn't include language modeling, and the QA datasets are of relatively short documents."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "BigBird 对既有稀疏方法复杂度的转述（同 2007.14062 正文 §1.1 Related Work）",
+    "url": "https://ar5iv.labs.arxiv.org/html/2007.14062",
+    "published_at": "2020-07-28",
+    "key_points": [
+      "BigBird 转述：Child et al. 2019 的稀疏模型将复杂度降到 O(n√n)，Kitaev et al. 2019 用 LSH 做近邻搜索进一步降到 O(n log n)，Qiu et al. 2019 通过块稀疏降低复杂度。",
+      "BigBird 指出自回归稀疏方法（Dai et al. 2019、Sukhbaatar et al. 2019、Rae et al. 2019）在从左到右语言建模上表现良好，但在需要双向上下文的任务上表现不佳。",
+      "BigBird 强调这些近似方法「不附带理论保证」（do not come with theoretical guarantees），这是其提出通用近似/图灵完备性证明的动机。"
+    ],
+    "raw_excerpt": "Child et al. 2019 proposed a sparse model that reduces the complexity to O(n√n), Kitaev et al. 2019 further reduced the complexity to O(n log(n)) by using LSH to compute nearest neighbors. ... Moreover, these approximations do not come with theoretical guarantees."
+  }
+]

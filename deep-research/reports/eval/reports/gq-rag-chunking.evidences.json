@@ -1,0 +1,491 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Chunking Strategies for LLM Applications (Pinecone Learn)",
+    "url": "https://www.pinecone.io/learn/chunking-strategies/",
+    "published_at": "2025-06-28",
+    "key_points": [
+      "Pinecone 将 chunking 定义为「把大段文本拆成更小片段（chunks）的过程」，并称其为一种预处理技术，用于优化最终存入向量数据库的内容的相关性。",
+      "Pinecone 给出 chunking 必要性的两个理由：一是让 embedding 模型能把数据装进其上下文窗口（超出会被截断丢弃），二是保证 chunk 本身含有可供检索的信息。",
+      "Pinecone 指出切分粒度的核心权衡：chunk 要大到含有意义信息，又要小到能支撑低延迟的 RAG 与 agentic 工作负载；并给出经验法则——若一段文本脱离上下文对人仍有意义，对语言模型也有意义。",
+      "Pinecone 的分类体系为两级：Fixed-size chunking（最常用、推荐作为起点）与 \"Content-aware\" chunking；后者下含 Simple Sentence and Paragraph splitting、Recursive Character Level Chunking、Document structure-based chunking、Semantic Chunking。",
+      "固定长度切分的 chunk 大小通常取 embedding 模型的最大上下文窗口（文中举例 llama-text-embed-v2 为 1024、text-embedding-3-small 为 8196），并提醒不同模型分词方式不同需准确估算 token 数。",
+      "递归字符切分被描述为「在按特定字符切分与使用更语义化切分器之间的良好折中」，同时尽可能保证固定 chunk 大小。",
+      "文档结构感知切分针对 PDF、DOCX、HTML、代码、Markdown、LaTeX 等格式，利用标题、表格、标签、Markdown 语法层级、LaTeX 章节与公式等结构信息生成更语义连贯的 chunk。",
+      "Pinecone 指出长上下文模型仍存在 lost-in-the-middle 问题，即使文档能整体放入上下文，埋在中部的相关信息也可能被漏掉，因此仍需控制送入下游 LLM 的信息量。",
+      "Pinecone 列出选择切分策略时需考虑的四个变量：被切分数据的类型、所用 embedding 模型、用户查询的长度与复杂度预期、检索结果在下游应用中的用途。"
+    ],
+    "raw_excerpt": "In the context of building LLM-related applications, chunking is the process of breaking down large text into smaller segments called chunks. It's an essential preprocessing technique that helps optimize the relevance of the content ultimately stored in a vector database. ... Fixed-sized chunking will be the best path in most cases, and we recommend starting here and iterating only after determining it insufficient. ... \"Content-aware\" chunking refers to strategies that adhere to structure to help inform the meaning of our chunks."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 将传统 RAG 预处理流程描述为三步：把语料拆成通常不超过几百 token 的小 chunk、用 embedding 模型把 chunk 转为向量、存入向量数据库以支持语义相似度检索。",
+      "Anthropic 指出传统 RAG 的核心缺陷是「破坏上下文」：单个 chunk 往往缺乏足够上下文（如「公司营收环比增长 3%」未说明是哪家公司、哪个时期），导致检索失败或信息无法被有效使用。",
+      "Contextual Retrieval 的做法是在 embedding 之前为每个 chunk 前置一段针对该 chunk 的解释性上下文，形成 Contextual Embeddings，并对同一上下文构建 BM25 索引形成 Contextual BM25。",
+      "Anthropic 报告该方法可将检索失败率降低 49%，与 reranking 结合后降低 67%（此为厂商自报数据，需注意其营销属性）。",
+      "Anthropic 明确将自身方法与若干既有「用上下文改进检索」的方案区分开，并列出这些方案：给 chunk 添加通用文档摘要（其实验显示收益非常有限）、HyDE 假设文档嵌入、summary-based indexing（评估后性能较低）。",
+      "Anthropic 补充说明：若知识库小于约 200,000 token（约 500 页材料），可直接把整个知识库放进 prompt，无需 RAG 或类似方法——这构成 chunking 适用边界的一个官方表述。"
+    ],
+    "raw_excerpt": "Contextual Retrieval solves this problem by prepending chunk-specific explanatory context to each chunk before embedding (\"Contextual Embeddings\") and creating the BM25 index (\"Contextual BM25\"). ... original_chunk = \"The company's revenue grew by 3% over the previous quarter.\" contextualized_chunk = \"This chunk is from an SEC filing on ACME corp's performance in Q2 2023; the previous quarter's revenue was $314 million. The company's revenue grew by 3% over the previous quarter.\""
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Building Performant RAG Applications for Production (LlamaIndex Docs)",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 把「解耦用于检索的 chunk 与用于合成的 chunk」列为构建生产级 RAG 的首要技术，理由是检索最优的 chunk 表示与合成最优的表示可能不同。",
+      "LlamaIndex 给出父子/小到大思路的两种官方实现方式：一是 embed 文档摘要并链接到该文档下的 chunk（先文档级召回再 chunk 级召回）；二是 embed 句子并链接到该句子周围的窗口。",
+      "LlamaIndex 解释第二种方式的价值：既能做更细粒度的相关上下文检索（因为 embed 巨大 chunk 会导致 lost in the middle 问题），又能保证 LLM 合成时有足够上下文。",
+      "LlamaIndex 指出标准 RAG 栈（top-k 检索 + 基础文本切分）在文档数量规模化时表现不佳，需要借助结构化信息（元数据过滤、文档层级摘要 + 递归检索）提升检索精度。",
+      "LlamaIndex 将「动态按任务类型检索」列为独立优化维度，指出 top-k 相似度检索针对事实型问答优化，而摘要型、对比型查询需要不同的检索技术。",
+      "LlamaIndex 将 reranking 作为独立环节：稠密/混合检索器面向召回调优，需用更强的 cross-encoder 对 top-k 候选重排以提升精度。"
+    ],
+    "raw_excerpt": "A key technique for better retrieval is to decouple chunks used for retrieval with those that are used for synthesis. ... The optimal chunk representation for retrieval might be different than the optimal consideration used for synthesis. ... 2. Embed a sentence, which then links to a window around the sentence. This allows for finer-grained retrieval of relevant context (embedding giant chunks leads to \"lost in the middle\" problems), but also ensures enough context for LLM synthesis."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Financial Report Chunking for Effective Retrieval Augmented Generation (arXiv:2402.05131v3)",
+    "url": "https://arxiv.org/html/2402.05131v3",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "论文提出以文档结构元素（structural element components）为主要依据进行切分，而非仅按段落级（paragraph-level）切分，作者主张这种切分方式“无需调参即可得到最佳 chunk size”。",
+      "作者称据其所知这是首个针对文档理解、特别是财务报告处理的 chunking 系统性研究（first systematic study on chunking for document understanding）。",
+      "研究范围限定为美国 SEC 财务报告（10-K、10-Q、8-K），作者指出这类文档在尺寸、版式和表格信息上带来独特处理挑战。",
+      "论文将既有切分策略归纳为四类：fixed size（固定长度，忽略文本结构）、recursive（用标点等分隔符迭代细分）、contextual（借助句子切分等 NLP 技术保留上下文语义）、hybrid（组合多种方式）。",
+      "论文指出 chunk size 的选择涉及多个维度：若使用向量库，chunk 的 token 数受嵌入模型 token 上限约束；不同 chunk size 可能导致不理想的检索结果；被检索 chunk 的 token 数还可能影响 LLM 生成答案的质量。",
+      "论文声称基于元素类型的切分在财务报告场景“大幅提升”RAG 结果，并称其框架可评估不同元素类型对检索上下文与准确性的贡献。",
+      "作者机构为 Unstructured Technologies（https://unstructured.io），即该研究与其商业文档解析产品同源，属需交叉验证的利益相关方主张。"
+    ],
+    "raw_excerpt": "We propose an expanded approach to chunk documents by moving beyond mere paragraph-level chunking to chunk primary by structural element components of documents. Dissecting documents into these constituent elements creates a new way to chunk documents that yields the best chunk size without tuning. ... Findings support that element type based chunking largely improve RAG results on financial reporting."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Financial Report Chunking for Effective Retrieval Augmented Generation — arXiv abstract/metadata page (arXiv:2402.05131v3)",
+    "url": "https://arxiv.org/abs/2402.05131",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "该论文提交于 2024-02-05，最新版本 v3 修订于 2024-03-16，学科分类为 cs.CL（Computation and Language）。",
+      "摘要层面仅给出定性结论（元素类型切分改善财务报告 RAG 结果），未在摘要中报告任何具体 chunk size 数值、overlap 设置或 Recall@k / nDCG / faithfulness 指标分数。",
+      "论文提供 HTML (experimental) 全文版本，可用于读取方法与结果章节。"
+    ],
+    "raw_excerpt": "[Submitted on 5 Feb 2024 (v1), last revised 16 Mar 2024 (this version, v3)] ... Subjects: Computation and Language (cs.CL)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "chonkie-inc/chonkie — The lightweight ingestion library for fast, efficient and robust RAG pipelines (README)",
+    "url": "https://github.com/chonkie-inc/chonkie",
+    "published_at": null,
+    "key_points": [
+      "Chonkie 自我定位为「轻量级 ingestion 库」，覆盖 fetch → chunk → refine → embed → 写入向量库的端到端流程。",
+      "README 列出 11 种 chunker：TokenChunker（固定 token 大小）、FastChunker（SIMD 加速的字节级切分，宣称 100+ GB/s）、SentenceChunker（按句）、RecursiveChunker（按可定制规则层级切分）、SemanticChunker（按语义相似度，灵感来自 Greg Kamradt）、LateChunker（先嵌入再切分以获得更好的 chunk embedding）、CodeChunker（按代码结构）、NeuralChunker（神经模型切分）、SlumberChunker（用 LLM 找语义边界，又称 AgenticChunker）、TableChunker（按行或字符数切 markdown 表格）、TeraflopAIChunker（调用 TeraflopAI 分割 API）。",
+      "支持 Pipeline 组合：可链式 chunk_with / refine_with（如 recursive→semantic，再 overlap 与 embeddings 精修），并提供异步 arun 接口。",
+      "宣称 32+（正文另一处写 45+）集成，覆盖 tokenizer、embedding provider、LLM、refineries、porters、向量数据库；宣称开箱支持 56 种语言。",
+      "提供自托管 REST API server（chonkie serve / docker compose up），端点覆盖所有 chunker、refinery 与 pipeline，pipeline 配置存于本地 SQLite。",
+      "仓库提交历史显示 2,219 commits；仓库内含 BENCHMARKS.md、llms.txt、Dockerfile 等文件。"
+    ],
+    "raw_excerpt": "Chonkie provides several chunkers to help you split your text efficiently for RAG applications. ... TokenChunker | token | Splits text into fixed-size token chunks. FastChunker | fast | SIMD-accelerated byte-based chunking at 100+ GB/s. ... SemanticChunker | semantic | Splits text into chunks based on semantic similarity. Inspired by the work of Greg Kamradt. LateChunker | late | Embeds text and then splits it to have better chunk embeddings. ... SlumberChunker | slumber | Splits text using an LLM to find semantically meaningful chunks. Also known as \"AgenticChunker\"."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "chonkie-inc/chonkie — BENCHMARKS.md（Chonkie vs LangChain vs LlamaIndex 速度与包体积）",
+    "url": "https://raw.githubusercontent.com/chonkie-inc/chonkie/main/BENCHMARKS.md",
+    "published_at": null,
+    "key_points": [
+      "基准数据来源：100K 与 500K 篇 Wikipedia 文章（HuggingFace 数据集 chonkie-ai/wikipedia-100k、wikipedia-500k），以及 Paul Graham Essays 数据集（GPT-2 tokenizer）；100K 测试在 Google Colab A100 上运行，500K 测试在 GCP c3-highmem-4（32GB RAM）上运行。",
+      "Token chunking（100K 文章）：Chonkie 58 秒 / 4.82 MB/s，LangChain 1 分 10 秒 / 4 MB/s（慢 1.21x），LlamaIndex 50 分钟 / 0.09 MB/s（慢 51.7x）。",
+      "Sentence chunking（100K 文章）：Chonkie 59 秒，LlamaIndex 3 分 59 秒（慢 4.05x）；表中标注 LangChain 无对应 chunker（\"Chunker Doesn't exist\"）。",
+      "Recursive chunking（100K 文章）：Chonkie 1 分 19 秒，LangChain 2 分 45 秒（慢 2.09x）；表中标注 LlamaIndex 无对应 chunker。",
+      "Semantic chunking（100K 文章，sentence-transformers/all-minilm-l6-v2）：Chonkie 默认设置 13 分 59 秒，LangChain 1 小时 13 秒（慢 4.35x），LlamaIndex 1 小时 24 分 15 秒（慢 6.07x）。",
+      "包体积对比（默认安装）：Chonkie 15 MiB，LangChain 80 MiB（约 5.3x），LlamaIndex 171 MiB（约 11.4x）；含语义功能时 Chonkie 62 MiB、LangChain 625 MiB、LlamaIndex 678 MiB。",
+      "该基准由 Chonkie 项目方自行发布，属厂商自测，非第三方独立评测。"
+    ],
+    "raw_excerpt": "| Library | Time | MB/s | Speed Factor | | 🦛 Chonkie | 58 sec | 4.82 MB/s | 1x | | 🔗 LangChain | 1 min 10 sec | 4 MB/s| 1.21x slower | | 📚 LlamaIndex | 50 min | 0.09 MB/s| 51.7x slower | ... | 🦛 Chonkie | 15 MiB | 1x | | 🔗 LangChain | 80 MiB | ~5.3x CHONKier | | 📚 LlamaIndex | 171 MiB | ~11.4x CHONKier |"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "isaacus-dev/semchunk — A fast, lightweight Python library for splitting text into semantically meaningful chunks (README)",
+    "url": "https://github.com/isaacus-dev/semchunk",
+    "published_at": null,
+    "key_points": [
+      "semchunk 的目标是「在切分文本时尽可能保留局部语义上下文」，核心是一种「新颖的层级切分算法（hierarchical chunking algorithm）」。",
+      "与 tokenizer 无关：chunkerify() 可接受 Tiktoken 编码、Transformers/tokenizers 分词器、模型名（如 gpt-4、cl100k_base、isaacus/kanon-2-tokenizer）或自定义 token 计数函数。",
+      "支持 chunk overlap（按比例 <1 或绝对 token 数 >=1）与 chunk offsets 返回；支持多进程（processes>1）与 progress 进度条。",
+      "提供可选的 AI-powered chunking：传入 Isaacus enrichment 模型（如 kanon-2-enricher）作为 chunking_model，需 Isaacus SDK 与 API key。",
+      "README 声称被 Docling、Microsoft Intelligence Toolkit 与 Isaacus API 采用，且「每月下载数百万次」。",
+      "README 声称「相比最接近的竞品，RAG 性能提升 15%」，并指向仓库内 Benchmarks 章节（该章节正文本次未能抓取，属项目方自述主张）。",
+      "仓库有 196 commits；搜索结果显示 stars 约 667、最近 push 2026-06-13；另有社区维护的 Rust 移植 semchunk-rs。"
+    ],
+    "raw_excerpt": "semchunk is a Python library for splitting text into smaller chunks while preserving as much local semantic context as possible. semchunk supports AI-powered chunking, chunk overlapping, and chunk offsets, and works with any tokenizer or token counter, including those from Tiktoken and Transformers. Powered by a novel hierarchical chunking algorithm, semchunk delivers 15% better RAG performance than its closest competitors (see Benchmarks 📊). semchunk is production-ready. It is downloaded millions of times per month and is used in Docling, the Microsoft Intelligence Toolkit, and the Isaacus API."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：chunking 生态候选库（stars / 最近 push / 简介）",
+    "url": "https://github.com/search?q=chunking+evaluation+RAG+chunk+quality&type=repositories",
+    "published_at": null,
+    "key_points": [
+      "isaacus-dev/semchunk：★667、forks 48、Python、last push 2026-06-13，简介为「fast, lightweight and easy-to-use Python library for splitting text into semantically meaningful chunks」。",
+      "feyninc/chonkiejs：★367、forks 15、TypeScript、last push 2026-10-03，简介为「CHONK your texts with Chonkie — Type-friendly, light-weight, fast and super-simple chunking library」，即 Chonkie 的 JS 移植。",
+      "GiovanniPasq/chunky：★189、forks 20、Python、last push 2026-10-17，简介为「Open-source toolkit for reliable RAG pipelines: convert PDFs to Markdown, clean documents, inspect chunks, compare chunking strategies, and enrich metadata for LLM applications」，即带 chunk 可视化与策略对比的工具。",
+      "SecludedCoder/chonkie：★43、forks 145、last push 2024-11-08，简介为「The no-nonsense RAG chunking library」（同名早期/派生仓库，活跃度低）。",
+      "sitong721/RAGChunkEval：★12、Python、last push 2026-08-14，简介为「A benchmark toolkit for evaluating and optimizing document chunking strategies in RAG systems with retrieval metrics and quality analysis」（中英双语描述）。",
+      "bengodgart/rag-chunking-eval：★1、Python、last push 2026-07-29，简介为「Measure RAG retrieval quality across chunking configs (size x overlap x splitter): hit-rate@k and MRR per config」，即按 chunk size × overlap × splitter 网格评估 hit-rate@k 与 MRR。",
+      "Joannaj00/RAGLens：★1、Jupyter Notebook、last push 2026-02-26，简介为「visualizes and evaluates retrieval quality across chunking, embedding, and reranking strategies」。",
+      "JellyZhang0101/Rag-Eval-Lab：★1、Python、last push 2026-06-03，简介为「A Chinese RAG evaluation dashboard for comparing chunk size, top-k retrieval, answer quality, and latency」。",
+      "上述 chunk 评估类仓库 stars 均在个位数到十余量级，说明该细分方向尚无高热度事实标准工具。"
+    ],
+    "raw_excerpt": "- isaacus-dev/semchunk (★667, forks 48) desc: A fast, lightweight and easy-to-use Python library for splitting text into semantically meaningful chunks. lang: Python | last push: 2026-06-13 ... - sitong721/RAGChunkEval (★12, forks 0) desc: A benchmark toolkit for evaluating and optimizing document chunking strategies in RAG systems with retrieval metrics and quality analysis. ... - bengodgart/rag-chunking-eval (★1, forks 0) desc: Measure RAG retrieval quality across chunking configs (size x overlap x splitter): hit-rate@k and MRR per config, so you pick with data not vibes."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": "2024-09-19",
+    "key_points": [
+      "Anthropic 提出 Contextual Retrieval，包含两个子技术：Contextual Embeddings（在嵌入前为每个 chunk 前置一段 chunk 专属的说明性上下文）与 Contextual BM25（在构建 BM25 索引前同样前置该上下文）。",
+      "该方法据其自述可将检索失败次数（failed retrievals）降低 49%；与 reranking 结合后降低 67%。",
+      "上下文由 Claude 3 Haiku 生成，提示词要求模型基于整篇文档为 chunk 生成简短定位性上下文；生成的上下文通常为 50–100 tokens，并被前置到 chunk 之前再嵌入与建 BM25 索引。",
+      "传统 RAG 的切分做法被描述为：将语料切成通常不超过几百个 token 的小块（'usually no more than a few hundred tokens'）。",
+      "Anthropic 报告称，在 chunk 上附加通用文档摘要（generic document summaries）的实验收益非常有限，基于摘要的索引（summary-based indexing）评估表现较低。",
+      "成本估算所依据的假设配置为：800 token 的 chunk、8k token 的文档、50 token 的上下文指令、每 chunk 100 token 的上下文，据此一次性生成 contextualized chunks 的成本为每百万文档 token 1.02 美元。",
+      "当知识库小于 200,000 tokens（约 500 页）时，Anthropic 建议直接把整个知识库放进 prompt，无需 RAG。",
+      "实验覆盖多个知识领域（codebases、fiction、ArXiv papers、Science Papers）、多种嵌入模型、检索策略与评估指标。"
+    ],
+    "raw_excerpt": "The method is called \"Contextual Retrieval\" and uses two sub-techniques: Contextual Embeddings and Contextual BM25. This method can reduce the number of failed retrievals by 49% and, when combined with reranking, by 67%. ... The resulting contextual text, usually 50-100 tokens, is prepended to the chunk before embedding it and before creating the BM25 index. ... Assuming 800 token chunks, 8k token documents, 50 token context instructions, and 100 tokens of context per chunk, the one-time cost to generate contextualized chunks is $1.02 per million document tokens."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models (arXiv:2409.04701v3)",
+    "url": "https://arxiv.org/abs/2409.04701v3",
+    "published_at": "2024-09-07",
+    "key_points": [
+      "论文提出 late chunking 方法：先用长上下文嵌入模型对长文本的全部 token 做嵌入，切分（chunking）发生在 transformer 之后、mean pooling 之前，因此得名 'late'。",
+      "动机是：稠密向量检索系统通常在较短文本段上表现更好，因此实践者常把文档切成小块分别编码；但这样产生的 chunk 嵌入会丢失来自周围 chunk 的上下文信息，导致表示次优。",
+      "late chunking 产生的 chunk 嵌入保留完整上下文信息，论文称其在多种检索任务上取得更优结果。",
+      "该方法无需额外训练即可应用于多种长上下文嵌入模型；论文另提出针对嵌入模型的专门微调方法以进一步提升效果。",
+      "作者：Michael Günther, Isabelle Mohr, Daniel James Williams, Bo Wang, Han Xiao（Jina AI 团队）。"
+    ],
+    "raw_excerpt": "we introduce a novel method called late chunking, which leverages long context embedding models to first embed all tokens of the long text, with chunking applied after the transformer model and just before mean pooling - hence the term late in its naming. The resulting chunk embeddings capture the full contextual information, leading to superior results across various retrieval tasks. The method is generic enough to be applied to a wide range of long-context embedding models and works without additional training."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Is Semantic Chunking Worth the Computational Cost?",
+    "url": "https://arxiv.org/abs/2410.13070",
+    "published_at": "2024-10-16",
+    "key_points": [
+      "arXiv:2410.13070 (cs.CL, cs.IR), submitted 16 Oct 2024, v1; authors Renyi Qu, Ruixuan Tu, Forrest Bao (Vectara, Inc.; University of Wisconsin–Madison).",
+      "The paper systematically evaluates semantic chunking against fixed-size chunking on three proxy retrieval-related tasks: document retrieval, evidence retrieval, and retrieval-based answer generation.",
+      "Fixed-size chunking baseline splits documents sequentially into fixed-size chunks based on a predefined or user-specified number of sentences per chunk, and uses overlapping sentences between consecutive chunks to maintain contextual continuity.",
+      "Document retrieval experiment: 10 datasets (BEIR-derived, with six short-document datasets stitched into longer synthetic documents averaging ~100 sentences), 100 sampled queries per dataset, top-k chunks retrieved for k ∈ [1,3,5,10], retrieved chunks mapped back to source documents.",
+      "Evidence retrieval experiment: datasets from RAGBench selected because they contain long documents with ground-truth evidence sentences; metric is the number of ground-truth evidence sentences present in the retrieved top-k chunks.",
+      "Answer generation experiment: gpt-4o-mini as the generative model, top-5 retrieved chunks as input, generated answers compared to ground-truth responses using semantic similarity measures.",
+      "The authors state Recall@k and NDCG@k are not suitable for their setup because the number of relevant documents or evidence sentences is not fixed (unlike k), so they report F1@5 instead.",
+      "Embedder used for all reported results: dunzhang/stella_en_1.5B_v5, chosen as the best among those tested; three embedding models were initially tested based on MTEB Leaderboard rankings.",
+      "Document retrieval F1@5 (%) results: Miracl* Fixed-size 69.45 / Breakpoint 81.89 / Clustering 67.35; NQ* 43.79 / 63.93 / 41.01; Scidocs* 16.82 / 17.60 / 19.87; Scifact* 35.27 / 36.27 / 35.70; BioASQ* 61.86 / 61.87 / 62.49; NFCorpus* 21.36 / 21.07 / 22.12; HotpotQA 90.59 / 87.37 / 84.79; MSMARCO 93.58 / 92.23 / 93.18; ConditionalQA 68.11 / 64.44 / 65.94; Qasper 90.99 / 89.27 / 90.77.",
+      "Fixed-size chunker excelled on non-stitched datasets while semantic chunkers performed better on stitched datasets; the gap between semantic and fixed-size chunkers narrowed as document length increased.",
+      "Fixed-size chunker performed best on 3 out of 5 evidence-retrieval datasets, but differences between fixed-size and the two semantic chunkers were minimal.",
+      "Overall conclusion stated by the authors: the computational costs associated with semantic chunking are not justified by consistent performance gains."
+    ],
+    "raw_excerpt": "Since the number of relevant documents or evidence sentences is not fixed (unlike the k value for retrieved chunks), traditional metrics such as Recall@k and NDCG@k are not suitable. F1 provides a balanced measure that accounts for both precision and recall under these circumstances. Therefore, we use F1@5 as the metric. ... The results show that the computational costs associated with semantic chunking are not justified by consistent performance gains."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "sitong721/RAGChunkEval — benchmark toolkit for evaluating and optimizing document chunking strategies in RAG",
+    "url": "https://github.com/sitong721/RAGChunkEval",
+    "published_at": null,
+    "key_points": [
+      "仓库自述定位为「用于评估和优化 RAG 系统中文档切片策略的基准工具」，并声称支持检索指标与质量分析（仅来自仓库简介，README 正文未读取）。",
+      "仓库元数据：Python 语言，12 stars，0 forks，最后推送时间 2026-08-14。",
+      "该仓库的存在说明有工程实践者尝试构建 chunking 策略的横向评估工具，但 stars 数量极低，不能据此推断其为领域内被广泛采用的 benchmark。"
+    ],
+    "raw_excerpt": "A benchmark toolkit for evaluating and optimizing document chunking strategies in RAG systems with retrieval metrics and quality analysis. 一个用于评估和优化 RAG 系统中文档切片策略的基准工具，支持检索指标和质量分析。"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "harishkumard24/RAG-Chunking-Benchmark — modular benchmarking framework for RAG chunking strategies",
+    "url": "https://github.com/harishkumard24/RAG-Chunking-Benchmark",
+    "published_at": null,
+    "key_points": [
+      "仓库自述为「模块化 RAG chunking 策略基准测试框架」，使用语义检索、多指标评估与加权排序，为不同文档类型推荐最优 chunking 方法（仅来自仓库简介，README 正文未读取）。",
+      "仓库元数据：Python 语言，1 star，0 forks，最后推送时间 2026-06-25。",
+      "该仓库声称覆盖「不同文档类型」下的策略推荐，但未取得其实际对比的策略清单与数据集，无法确认是否包含固定长度/递归/语义/结构感知/父子文档等全部策略。"
+    ],
+    "raw_excerpt": "A modular benchmarking framework for evaluating RAG chunking strategies using semantic retrieval, multi-metric evaluation, and weighted ranking to recommend the optimal chunking method for different document types."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "shantanu-deshmukh/chunktuner — benchmark chunking strategies for your RAG corpus",
+    "url": "https://github.com/shantanu-deshmukh/chunktuner",
+    "published_at": null,
+    "key_points": [
+      "仓库自述为「针对你的 RAG 语料 benchmark chunking 策略并给出推荐配置」，提供 CLI、Python 库与 MCP server 三种形态（仅来自仓库简介，README 正文未读取）。",
+      "仓库元数据：Python 语言，2 stars，0 forks，最后推送时间 2026-06-21。",
+      "其定位是面向用户自有语料的参数调优工具，而非在统一公开数据集上做跨策略横向对比的学术 benchmark。"
+    ],
+    "raw_excerpt": "Benchmark chunking strategies for your RAG corpus. Get a recommended config. CLI, Python library, and MCP server."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "boddetijayanth22/rag-retrieval-evaluation-framework — benchmarking chunking strategies with ChromaDB and Sentence Transformers",
+    "url": "https://github.com/boddetijayanth22/rag-retrieval-evaluation-framework",
+    "published_at": null,
+    "key_points": [
+      "仓库自述为模块化 RAG 评估框架，使用 ChromaDB 与 Sentence Transformers 对 chunking 策略进行 benchmark（仅来自仓库简介，README 正文未读取）。",
+      "仓库元数据：Python 语言，1 star，0 forks，最后推送时间 2026-07-22。",
+      "技术栈信息（ChromaDB 向量库 + Sentence Transformers 嵌入）表明其对比实验基于稠密检索指标，但具体指标定义与数据集未取得。"
+    ],
+    "raw_excerpt": "A modular Retrieval-Augmented Generation (RAG) evaluation framework for benchmarking chunking strategies using ChromaDB and Sentence Transformers."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "TheNarhawl/RAG-Scope-RU — ablation studies of RAG components including chunking on Russian corpora",
+    "url": "https://github.com/TheNarhawl/RAG-Scope-RU",
+    "published_at": null,
+    "key_points": [
+      "仓库自述为 RAG 各组件（chunking、embeddings、retrieval、LLMs）消融研究的实验沙盒，语料为俄语（仅来自仓库简介，README 正文未读取）。",
+      "仓库元数据：Jupyter Notebook 语言，9 stars，0 forks，最后推送时间 2026-10-17。",
+      "该仓库将 chunking 作为消融变量之一，但语料限定为俄语，不能直接外推到中文或英文场景。"
+    ],
+    "raw_excerpt": "Research sandbox for ablation studies of RAG components (chunking, embeddings, retrieval, LLMs) on Russian-language corpora."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "arXiv cs.IR recent submissions listing (Fri, 23 Oct 2026) — 检索通道可用性证据",
+    "url": "https://arxiv.org/list/cs.IR/recent",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "arXiv 列表页可正常抓取，页面显示 cs.IR 当日（2026-10-23）共 27 条新提交，全站近期共 125 条条目。",
+      "该 recent 列表页前 50 条标题中未出现 chunking 相关论文，说明 chunking 策略对比类工作并非 cs.IR 近期高频主题，需依赖关键词检索而非浏览列表定位。",
+      "此条仅证明 arXiv 站点本身可达（而 API 端点 export.arxiv.org 返回 429），不构成任何关于 chunking 综述/benchmark 存在性的实质证据。"
+    ],
+    "raw_excerpt": "Information Retrieval — Authors and titles for recent submissions — Fri, 23 Oct 2026 ... Total of 125 entries : 1-50 ... Fri, 23 Oct 2026 (showing 27 of 27 entries )"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic 官方博客)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": "2024-09-19",
+    "key_points": [
+      "Anthropic 称 Contextual Retrieval 使用两个子技术：Contextual Embeddings 与 Contextual BM25；该方法可将检索失败次数降低 49%，与 reranking 结合后可降低 67%。",
+      "指标定义为 1 - recall@20，即「相关文档未能在 top-20 chunks 内被检索到的百分比」，检索深度为 top-20 chunks。",
+      "评测覆盖多个知识领域：codebases、fiction、ArXiv papers、Science Papers，并跨多个 embedding 模型与检索策略做实验。",
+      "报告的平均性能数字基于表现最好的 embedding 配置 Gemini Text 004，且检索 top-20 chunks。",
+      "具体数值：Contextual Embeddings 使 top-20 chunk 检索失败率降低 35%（5.7% → 3.7%）；Contextual Embeddings + Contextual BM25 降低 49%（5.7% → 2.9%）。",
+      "加入 reranking（初始检索 top 150，rerank 后取 top 20，使用 Cohere reranker）后，Reranked Contextual Embedding + Contextual BM25 使失败率降低 67%（5.7% → 1.9%）。",
+      "上下文由 Claude 3 Haiku 按固定 prompt 生成，通常 50-100 tokens，拼接在 chunk 之前再用于 embedding 与构建 BM25 索引。",
+      "成本估算：按 800 token chunks、8k token 文档、50 token 指令、100 token 上下文计算，生成 contextualized chunks 的一次性成本为每百万文档 token 1.02 美元。",
+      "Anthropic 自述其他基于上下文的方案（给 chunk 加通用文档摘要、HyDE、summary-based indexing）实验效果有限或较差。",
+      "Anthropic 明确提示 chunk size、chunk boundary、chunk overlap 的选择会影响检索性能，并建议始终运行评测。"
+    ],
+    "raw_excerpt": "We experimented across various knowledge domains (codebases, fiction, ArXiv papers, Science Papers), embedding models, retrieval strategies, and evaluation metrics. ... We use 1 minus recall@20 as our evaluation metric, which measures the percentage of relevant documents that fail to be retrieved within the top 20 chunks. ... Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35% (5.7% → 3.7%). Combining Contextual Embeddings and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 49% (5.7% → 2.9%). ... Reranked Contextual Embedding and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 67% (5.7% → 1.9%)."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "GitHub 仓库搜索结果：Anthropic Contextual Retrieval 的复现/消融类项目（仅元数据）",
+    "url": "https://github.com/tunahanaliozturk/contextual-retrieval-ablation",
+    "published_at": null,
+    "key_points": [
+      "GitHub 仓库搜索返回多个声称复现或扩展 Anthropic Contextual Retrieval 的项目，但本次仅取得仓库元数据（描述、语言、最近推送时间），未读到 README 正文。",
+      "tunahanaliozturk/contextual-retrieval-ablation 的仓库描述称：在 BEIR 上做 chunking/embedding 消融，对比 naive、sentence-window、contextual（Anthropic）与 late chunking（Jina）四种方案，各实验组使用同一 embedding 模型，并做配对 bootstrap 显著性检验。",
+      "alexPantoja90210/contextual-retrieval-reproduction 的仓库描述称：复现 Anthropic 公布的 contextual retrieval 基准并给出结论，规模为 737 chunks、248 queries，用 Pass@k 对照指南中的数字，并称基线被精确复现（80.92 / 87.15 / 90.06）。",
+      "YUALAB/contextual-retrieval-japanese 的仓库描述称：为 AQUA Research TR-007 提供数据与代码，检验 Contextual Retrieval 在日文场景是否有效，对比 Anthropic contextual retrieval、structure-aligned chunking 与 LLM reranking。",
+      "syedahmad0786/contextual-retrieval 的仓库描述称：实现并测量 Anthropic Contextual Retrieval（2024），对比 LLM-situated chunks 与 plain chunks，在人为构造歧义的语料上给出可复现的 recall@5 基准，使用本地 Ollama。",
+      "上述仓库 stars 均极低（0-33），属社区个人项目，不构成权威第三方验证；且本次未能读取正文，其结论不可采信为证据。"
+    ],
+    "raw_excerpt": "tunahanaliozturk/contextual-retrieval-ablation — desc: Chunking/embedding ablation on BEIR: naive vs sentence-window vs contextual (Anthropic) vs late chunking (Jina), same embedding model across arms, paired bootstrap significance. | alexPantoja90210/contextual-retrieval-reproduction — desc: Reproduces Anthropic's published contextual retrieval benchmark and prints a verdict: 737 chunks, 248 queries, Pass@k against the figures in the guide. Baseline reproduced exactly — 80.92 / 87.15 / 90.06."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models (arXiv:2409.04701v3)",
+    "url": "https://arxiv.org/abs/2409.04701v3",
+    "published_at": "2024-09-07",
+    "key_points": [
+      "论文由 Jina AI GmbH 与 Weaviate B.V. 作者合作完成（Michael Günther, Isabelle Mohr, Daniel James Williams, Bo Wang, Han Xiao），v1 提交于 2024-09-07，v3 修订于 2025-07-07，共 11 页。",
+      "方法定义：late chunking 先用长上下文 embedding 模型嵌入长文本的全部 token，切分发生在 transformer 之后、mean pooling 之前，因此 chunk 嵌入保留全文上下文。",
+      "该方法不需要额外训练即可应用于任何使用 mean pooling 的长上下文 embedding 模型，并可与任意切分策略组合。",
+      "论文提出两项扩展：针对超长文档的 long late chunking（带重叠窗口的分段编码），以及一种专门的 embedding 模型微调方法以进一步提升 late chunking 效果。",
+      "论文声称在多种检索任务上优于 naive chunking，并声明代码开源于 https://github.com/jina-ai/late-chunking 以保证可复现。",
+      "论文指出即使模型支持长上下文，短文本上的检索表现仍更好，因此 chunking 通常仍能提升检索效果（见附录 A.1）。"
+    ],
+    "raw_excerpt": "we introduce a novel method called late chunking, which leverages long context embedding models to first embed all tokens of the long text, with chunking applied after the transformer model and just before mean pooling - hence the term late in its naming."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Late Chunking 论文正文 Table 1：Berlin 示例的 naive vs late chunking 余弦相似度（ar5iv HTML 全文）",
+    "url": "https://ar5iv.labs.arxiv.org/html/2409.04701",
+    "published_at": "2024-09-07",
+    "key_points": [
+      "实验设置：用 jina-embeddings-v2-small 分别以 naive chunking 与 late chunking 编码 Berlin 维基文章的三个句子，计算其嵌入与单词 \"Berlin\" 嵌入的余弦相似度。",
+      "含 \"Berlin\" 的首句：naive 0.8486 vs late 0.8495（几乎无差异）。",
+      "仅含指代 \"Its\" 的第二句：naive 0.7084 vs late 0.8249（提升约 0.117）。",
+      "仅含指代 \"the city\" 的第三句：naive 0.7535 vs late 0.8498（提升约 0.096）。",
+      "论文解释：late chunking 在切分前已让模型看到上下文，因此把 \"Berlin\" 的语义编码进了指代句的嵌入中。",
+      "论文将 naive chunking 的失败模式命名为 lost context problem（长距离语义依赖跨 chunk 时，指代无法解析）。"
+    ],
+    "raw_excerpt": "Table 1 shows that, with naive chunking, texts that do not contain the word \"Berlin\" have low similarity scores, even though both sentences, in context, refer to the city of Berlin. With late chunking, you can see that the similarity scores are much higher."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "jina-ai/late-chunking README：BEIR 检索任务 nDCG@10 对比表",
+    "url": "https://raw.githubusercontent.com/jina-ai/late-chunking/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "评测设置：在 BEIR 的若干检索任务上，将文档切成固定 256 token 的字符串块；传统切分与 late chunking 均使用 jina-embeddings-v2-small-en 模型；指标为 nDCG@10。",
+      "SciFact：传统切分 64.20%，late chunking 66.10%，不切分 63.89%。",
+      "TRECCOVID：传统切分 63.36%，late chunking 64.70%，不切分 65.18%（不切分最高）。",
+      "FiQA2018：传统切分 33.25%，late chunking 33.84%，不切分 33.43%。",
+      "NFCorpus：传统切分 23.46%，late chunking 29.98%，不切分 30.40%（不切分最高）。",
+      "Quora：传统切分、late chunking、不切分三者均为 87.19%（无差异）。",
+      "README 结论：所有数据集上 late chunking 都不低于传统切分；部分数据集上 late chunking 优于整文档单嵌入，另一些数据集则不切分最优；文档平均长度越长，late chunking 带来的 nDCG 提升越大。",
+      "README 说明评测任务名为 SciFactChunked、TRECCOVIDChunked、FiQA2018Chunked、NFCorpusChunked、QuoraChunked，可用 run_chunked_eval.py 复现。",
+      "README 指出 jina-embeddings-v2-base-en 支持 8192 token 输入（约十页标准文本）。"
+    ],
+    "raw_excerpt": "In all cases, late chunking improved the score. In some cases, it also outperforms encoding the whole document into a single embedding, while for other datasets, no chunking performs best. ... One can also see that the average length of the documents correlates with greater improvement in the nDCG scores through late chunking."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Introducing Contextual Retrieval (Anthropic 官方工程博客)",
+    "url": "https://www.anthropic.com/news/contextual-retrieval",
+    "published_at": "2024-09",
+    "key_points": [
+      "Anthropic 提出 Contextual Retrieval，包含两个子技术：Contextual Embeddings 与 Contextual BM25；做法是在 embedding 和建 BM25 索引之前，为每个 chunk 前置一段 chunk 专属的解释性上下文。",
+      "上下文由 Claude 3 Haiku 依据整篇文档生成，生成的上下文文本通常为 50–100 tokens，被 prepend 到 chunk 之前。",
+      "成本测算中明确给出其假设的 chunk 配置：800 token 的 chunk、8k token 的文档、50 token 的 context 指令、每 chunk 100 token 的上下文；据此生成 contextualized chunk 的一次性成本为每百万文档 token 1.02 美元。",
+      "Anthropic 明确将 chunk 边界列为实施考量之一，指出 chunk size、chunk boundary、chunk overlap 的选择会影响检索性能。",
+      "评测设置：跨代码库、小说、arXiv 论文、科学论文等领域，使用表现最好的 embedding 配置（Gemini Text 004），检索 top-20 chunks，指标为 1 - recall@20。",
+      "结果：Contextual Embeddings 使 top-20 chunk 检索失败率降低 35%（5.7% → 3.7%）；Contextual Embeddings + Contextual BM25 降低 49%（5.7% → 2.9%）；再加 reranking 后降低 67%（5.7% → 1.9%）。",
+      "Reranking 流程的具体数值：先初始检索取 top 150 个候选 chunk，经 reranker（测试用 Cohere reranker）打分后取 top 20 送入模型。",
+      "Anthropic 报告称向模型传入 top-20 chunks 比 top-10 或 top-5 更有效。",
+      "Anthropic 提到曾试验「给 chunk 加通用文档摘要」，但收益非常有限；summary-based indexing 评测表现也较低。",
+      "Anthropic 指出若知识库小于 200,000 tokens（约 500 页），可直接把整个知识库放进 prompt，无需 RAG。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Text Split skill - Azure AI Search (Microsoft Learn 官方文档)",
+    "url": "https://learn.microsoft.com/en-us/azure/search/cognitive-search-skill-textsplit",
+    "published_at": null,
+    "key_points": [
+      "Azure AI Search 的 Text Split skill 提供 textSplitMode 参数，可选 pages 或 sentences 两种切分模式。",
+      "maximumPageLength 参数仅在 pages 模式下生效：以字符为单位时最小 300、最大 50000、默认 5000；算法会尽量在句子边界断开，因此实际 chunk 可能略小于该值。",
+      "文档明确给出面向 embedding 模型的推荐值：对文本 embedding 模型，page length 的通用建议是 512 tokens。",
+      "pageOverlapLength 参数控制相邻页之间的重叠：每一页以上一页末尾的该数量字符或 token 开头；设为 0 则无重叠。",
+      "unit 参数（preview）可指定按 characters（默认）或 azureOpenAITokens 切分，并会影响 maximumPageLength 与 pageOverlapLength 的计量单位。",
+      "azureOpenAITokenizerParameters（preview）中 encoderModelName 默认 cl100k_base（GPT-4 使用），可选 r50k_base、p50k_base、p50k_edit；文档注明当前不支持 GPT-4o 使用的 o200k_base 编码。",
+      "该 skill 输出除 textItems 外，还输出 offsets 与 lengths（含 UTF-8、UTF-16、CodePoint 三种编码的位置元数据）。",
+      "文档说明该 skill 适用于下游有最大文本长度要求的场景，例如把数据块传给 Azure OpenAI 等模型提供方的 embedding skill。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Building Performant RAG Applications for Production (LlamaIndex 官方文档)",
+    "url": "https://docs.llamaindex.ai/en/stable/optimizing/production_rag/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 官方文档把「解耦用于检索的 chunk 与用于合成的 chunk」列为提升检索的关键技术，即检索粒度与合成粒度可以不同。",
+      "LlamaIndex 给出两种多粒度实现方式：(1) embed 文档摘要，摘要链接到该文档的各个 chunk，先做文档级高层检索再取 chunk；(2) embed 句子，句子链接到其周围的窗口（window），实现细粒度检索同时保留足够上下文。",
+      "LlamaIndex 明确指出 embedding 过大的 chunk 会导致 lost-in-the-middle 问题。",
+      "LlamaIndex 提供 Document Summary Index、Recursive Retrieval、Metadata Replacement Postprocessor 等具体模块来实现上述多粒度/递归检索。",
+      "LlamaIndex 指出标准 RAG 栈（top-k 检索 + 基础文本切分）在文档数量扩大时表现不佳（例如 100 个不同 PDF 的场景），建议引入结构化检索（元数据过滤 + 自动检索，或文档层级摘要 → 原始 chunk 的递归检索）。",
+      "LlamaIndex 的 reranking 建议给出具体数值：检索更宽的候选集（similarity_top_k=10-20），再 rerank 到较小的 top_n（3–5）。",
+      "LlamaIndex 推荐的默认 reranker 是本地 cross-encoder（SentenceTransformerRerank），示例模型包括 cross-encoder/ms-marco-MiniLM-L6-v2（速度优先）与 Qwen/Qwen3-Reranker-0.6B（更强多语言能力）。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Chunking Strategies for LLM Applications (Pinecone Learn)",
+    "url": "https://www.pinecone.io/learn/chunking-strategies/",
+    "published_at": "2025-06-28",
+    "key_points": [
+      "Pinecone 官方 Learn 文章（作者 Roie Schwaber-Cohen、Arjun Patel，日期 Jun 28, 2025）系统讨论 chunking 方法与 chunk size 权衡。",
+      "Pinecone 指出 chunking 的两个必要性：让 embedding 模型能把数据装进其上下文窗口，以及让 chunk 本身含有检索所需的信息。",
+      "Pinecone 说明固定大小切分（fixed-size chunking）通常以 embedding 模型的最大上下文窗口作为 chunk token 数，并举例：llama-text-embed-v2 为 1024，text-embedding-3-small 为 8196。",
+      "Pinecone 明确推荐：固定大小切分在多数情况下是最佳起点，建议先从这里开始，只有在确认其不足后才迭代到更复杂的方法。",
+      "Pinecone 指出不同 embedding 模型的分词方式不同，因此需要准确估计 token 数。",
+      "Pinecone 指出过大的 chunk 可能引入噪声、稀释单句的重要性，使精确匹配更难；过小的 chunk 则可能导致检索结果不精确或漏掉相关内容。",
+      "Pinecone 提到长上下文模型（如 o1、Claude 4 Sonnet 的 200k 上下文窗口）虽可容纳未切分文档，但大 chunk 会增加下游延迟与成本，且长上下文模型存在 lost-in-the-middle 问题。",
+      "Pinecone 给出经验法则：如果一个文本块脱离周围上下文后对人类仍有意义，那么它对语言模型也有意义。",
+      "Pinecone 将选择 chunking 策略的考量归纳为四类：数据类型与结构、所用 embedding 模型、用户查询的长度与复杂度、检索结果在下游应用中的用途。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Chonkie Docs — Chunkers Overview（官方文档）",
+    "url": "https://docs.chonkie.ai/oss/chunkers/overview",
+    "published_at": null,
+    "key_points": [
+      "官方文档列出 12 种 chunking 策略：CodeChunker（基于 AST 按代码结构切分）、FastChunker（SIMD 加速的字节级切分，宣称 100+ GB/s）、LateChunker（Late Chunking 算法，面向 RAG 高召回）、NeuralChunker（微调 BERT 模型按语义漂移切分）、RecursiveChunker（递归切分，适合结构清晰的长文档）、SemanticChunker（按语义相似度分组）、SentenceChunker（按句子边界切分）、SlumberChunker（通过 Genie 接口用生成式 LLM 做 agentic chunking）、TableChunker（按行切分大型 markdown 表格并保留表头）、TeraflopAIChunker（调用 TeraflopAI Segmentation API，面向法律等垂直领域）、TokenChunker（固定 token 大小切分）。",
+      "文档给出「Availability」矩阵，说明不同 chunker 随安装方式（默认 / chonkie[all] / Chonkie JS / API）可用性不同，即部分策略需额外依赖或仅特定发行版提供。",
+      "所有 chunker 共享统一接口：chunk(text)、chunk_batch(texts)、直接调用 chunker(text)，以及异步变体 achunk / achunk_batch / achunk_document。",
+      "文档称所有 chunker 均为线程安全；异步方法通过 asyncio.to_thread 在线程池中执行同步方法，因此可在 FastAPI/Starlette/aiohttp 等异步框架中安全使用。",
+      "文档自述 FastChunker 为「100+ GB/s」、SlumberChunker 为「S-tier chunk quality」，属厂商自述性能/质量主张，未见第三方基准佐证。"
+    ],
+    "raw_excerpt": "Chonkie provides multiple chunking strategies to handle different text processing needs. ... CodeChunker Splits code based on its structure using ASTs. ... FastChunker SIMD-accelerated byte-based chunking at 100+ GB/s. ... LateChunker Chunks using Late Chunking algorithm, best for higher recall in your RAG applications. ... NeuralChunker Uses a fine-tuned BERT model to split text based on semantic shifts. ... SlumberChunker Agentic chunking using generative models (LLMs) via the Genie interface for S-tier chunk quality."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Node Parser Modules（官方文档）",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/modules/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 官方将 node parser 分为「基于文件的解析器」与「文本切分器」两类；基于文件的包括 SimpleFileNodeParser、HTMLNodeParser（基于 beautifulsoup，默认标签集为 p/h1-h6/li/b/i/u/section）、JSONNodeParser、MarkdownNodeParser。",
+      "文本切分器包括 CodeSplitter（按编程语言切分，参数为 chunk_lines / chunk_lines_overlap / max_chars）、SentenceSplitter（尊重句子边界，参数 chunk_size / chunk_overlap）、TokenTextSplitter（按原始 token 数切分）、SemanticSplitterNodeParser（按句子间 embedding 相似度自适应选择断点，参数 buffer_size / breakpoint_percentile_threshold）。",
+      "SentenceWindowNodeParser 将文档切成单句节点，并在 metadata 中保存前后各 window_size 句的「窗口」，配合 MetadataReplacementNodePostProcessor 在送入 LLM 前替换为上下文。",
+      "HierarchicalNodeParser 将输入切成多个层级大小的节点，每个节点持有父节点引用，配合 AutoMergingRetriever 使用。",
+      "LangchainNodeParser 可把任意 LangChain text splitter 包装为 LlamaIndex node parser（示例使用 RecursiveCharacterTextSplitter）。",
+      "LlamaIndex 提供 Chunker 这一多用途 node parser，封装 chonkie 的 chunker：可用别名初始化（如 Chunker(\"recursive\", chunk_size=2048)），也可直接传入 chonkie chunker 实例（如 RecursiveChunker()）；有效别名列表见 Chunker.valid_chunker_types 属性。",
+      "官方文档自陈 SemanticSplitterNodeParser 的局限：正则主要适用于英文句子，且 breakpoint percentile 阈值可能需要调参。"
+    ],
+    "raw_excerpt": "The Chunker is a multi purpose node parser that wraps around the chonkie chunkers. you can initialize your parser using an alias for any of the supported chonkie chunking strategies, the full list of valid aliases can be accessed via Chunker.valid_chunker_types attribute. ... LangchainNodeParser: You can also wrap any existing text splitter from langchain with a node parser."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "LlamaIndex Docs — Node Parser Usage Pattern（官方文档）",
+    "url": "https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 将 node parser 定义为「接收 document 列表、切分为 Node 对象的抽象」，每个 node 是父文档的一个 chunk，且父文档的 metadata、text、metadata templates 等属性会被子节点继承。",
+      "node parser 有三种使用方式：独立调用（get_nodes_from_documents）、作为 IngestionPipeline 的 transformations 之一、或通过 Settings.text_splitter / 索引级 transformations 在 from_documents() 时自动生效。",
+      "示例默认参数为 SentenceSplitter(chunk_size=1024, chunk_overlap=20)，即 LlamaIndex 文档默认以 token 计 1024 大小、20 重叠。"
+    ],
+    "raw_excerpt": "Node parsers are a simple abstraction that take a list of documents, and chunk them into Node objects, such that each node is a specific chunk of the parent document. When a document is broken into nodes, all of it's attributes are inherited to the children nodes (i.e. metadata, text and metadata templates, etc.)."
+  }
+]

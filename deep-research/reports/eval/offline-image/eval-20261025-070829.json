@@ -1,0 +1,33 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 0.0,
+  "mean_alignment": 0.0,
+  "alignment_questions": 0,
+  "mean_coverage": 0.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 0.0,
+      "alignment": 0.0,
+      "coverage": 0.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-react",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": null,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "ReAct 交替进行推理（Thought）与行动（Action/Observation）",
+        "行动通常对应工具调用或环境交互",
+        "纯 CoT 只有内部推理链、不与外部环境交互",
+        "提到 ReAct 原始论文（Yao et al.）"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

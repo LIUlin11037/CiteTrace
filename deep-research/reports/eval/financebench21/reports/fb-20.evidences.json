@@ -1,0 +1,460 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Highlights, 737 Program（737 MAX 产能速率）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 在 2022 年将 737 生产速率提升至每月 31 架。",
+      "Boeing 表示将根据市场需求与供应链能力实施进一步的\"逐步\"（gradual）产能提升。",
+      "该段落未给出 2023 年的具体 737 目标速率数字，也未给出提升的时间节点。",
+      "737 项目 2022 年发生异常生产成本 1.88 亿美元（2021 年为 18.87 亿美元）。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Highlights, 787 Program（787 产能速率）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 当时以低速率生产 787，并预期在 2023 年逐步回到每月 5 架。",
+      "Boeing 在 2021 年第三季度判定低于每月 5 架的速率属于\"异常低\"产能速率，会产生异常生产成本。",
+      "2022 年 7 月 28 日获 FAA 授权恢复交付，8 月恢复交付；2022 年全年交付 31 架 787。",
+      "截至 2022-12-31 约有 100 架 787 在库存中（2021 年末约 110 架），其中大部分预期在 2024 年底前交付。",
+      "2022 年第四季度将 787 异常生产成本总额估计上调至 28 亿美元，其中大部分将在 2023 年底前发生。"
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Highlights, 777 and 777X Programs（777/777X 产能速率与 777X-9 停产）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 当时对 777/777X 两个项目合计以每月 3 架的生产速率运行。",
+      "2022 年 4 月 Boeing 决定在 2022 与 2023 年期间暂停 777X-9 的生产；该停产于 2022 年第二季度实施。",
+      "该停产预计产生约 15 亿美元的异常生产成本。",
+      "777X-9 首次交付时间由原先预期的 2023 年末推迟至 2025 年。",
+      "777X-8 货机于 2022 年第一季度启动，首次交付预期在 2027 年。"
+    ],
+    "raw_excerpt": "We are currently producing at a combined production rate of 3 per month for the 777/777X programs. ... In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n]"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Highlights, 767 Program（767 产能速率）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "767 总装线同时包含商用项目与支持 KC-46A 加油机项目的衍生机型。",
+      "Boeing 当时对 767 以合计每月 3 架的生产速率运行。",
+      "767 商用项目毛利率接近盈亏平衡。",
+      "该段落未提及 2023 年 767 产能速率的任何变化计划。"
+    ],
+    "raw_excerpt": "The 767 assembly line includes the commercial program and a derivative to support the KC-46A Tanker program. The commercial program has near break-even gross margins. We are currently producing at a combined rate of 3 aircraft per month."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Highlights, 747 Program（747 停产，界定项目范围）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 于 2022 年第四季度完成 747 的生产。",
+      "最后一架 747 的交付预期在 2023 年初进行。",
+      "结束 747 生产未对 Boeing 的财务状况、经营成果或现金流产生重大影响。"
+    ],
+    "raw_excerpt": "We completed production of the 747 in the fourth quarter of 2022 and delivery of the last aircraft is expected to occur in early 2023. Ending production of the 747 did not have a material impact on our financial position, results of operations or cash flows."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Liquidity and Capital Resources（2023 年资本开支方向）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 预期 2023 年资本开支高于 2022 年。",
+      "2022 年资本开支为 12 亿美元，2021 年为 10 亿美元，2020 年为 13 亿美元。",
+      "2022 年经营活动现金流改善主要受 737 MAX 交付量上升与 787 恢复交付推动。"
+    ],
+    "raw_excerpt": "Capital expenditures totaled $1.2 billion in 2022, compared with $1.0 billion in 2021 and $1.3 billion in 2020. We expect capital expenditures in 2023 to be higher than in 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA Deliveries 表与 Program Accounting Quantities（各项目交付与会计数量基线）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31, p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年 BCA 交付量：737 为 387 架（含公司间 13 架）、747 为 5 架、767 为 33 架（含公司间 15 架）、777 为 24 架、787 为 31 架，合计 480 架。",
+      "2021 年 BCA 交付量合计 340 架；2020 年合计 157 架。",
+      "2022 年末项目会计数量：737 为 10,800 架、767 为 1,267 架、777 为 1,790 架、777X 为 400 架、787 为 1,600 架。",
+      "2022 年 737 项目会计数量增加 400 架，767 增加 24 架，777 增加 40 架，777X 增加 50 架，787 增加 100 架。"
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: 737 * 747 767 * 777 787 Total / 2022 ... Deliveries 387 (13) 5 33 (15) 24 31 480 ... Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 Program Highlights（生产速率 31/月与「逐步提升」表述）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "截至 FY2022 10-K，737 项目生产速率为 31 架/月（2022 年内由更低水平提升至 31/月）。",
+      "公司对后续提升的表述为「further gradual production rate increases」，未给出具体数字目标，条件为市场需求与供应链产能。",
+      "该文件未出现 38 架/月 的 737 目标。",
+      "2022 年 737 项目异常生产成本为 1.88 亿美元（2021 年为 18.87 亿美元）。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1 Business：737 稳定在 31/月 已遇运营与供应链挑战",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "公司在 2022 年末披露 737 项目在「稳定于 31 架/月」上遭遇运营与供应链挑战。",
+      "提产计划被描述为基于市场需求与供应链产能的「逐步」提升，未承诺具体速率或时点。",
+      "同一段落说明 787 产能「最终在 2023 年提升至 5 架/月」。",
+      "777X 生产当时处于暂停状态，预计 2023 年恢复。"
+    ],
+    "raw_excerpt": "The 737 program has experienced operational and supply chain challenges stabilizing production at 31 per month. We plan to gradually increase 737 production rates based on market demand and supply chain capacity. ... Production of the 777X is currently paused and is expected to resume in 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 Program：2023 年逐步回到 5/月；Q4 2022 因供应链主动放缓",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "进入 FY2023 时 787 的目标速率为 5 架/月，且为「逐步」达成，而非 10 架/月。",
+      "2022 年第四季度公司决定放缓近期 787 生产，原因是供应链约束以及检查与返工成本上升。",
+      "787 异常生产成本总估计在 2022 年 Q4 上调至 28 亿美元，其中大部分预计在 2023 年底前发生。",
+      "截至 2022 年末 787 库存约 100 架，其中大部分预计在 2024 年底前交付。",
+      "2022 年全年交付 787 共 31 架。"
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. ... During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023. ... The increase was primarily driven by a decision in the fourth quarter of 2022 to slow down near-term production due to supply chain constraints and increased inspection and rework costs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 会计口径：低于 5/月 即属「异常低产能」",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "公司在 2021 年第三季度认定，787 生产速率低于 5 架/月 属于「异常低生产速率」，会产生异常生产成本。",
+      "因此 5 架/月 是波音会计与运营口径下的 787 正常化基准线。",
+      "截至 2022 年 12 月 31 日，787 累计已确认异常成本 17 亿美元。"
+    ],
+    "raw_excerpt": "In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs. ... Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 777X 生产暂停（2022–2023）与 777/777X 合计速率",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年 4 月公司决定在 2022 与 2023 年期间暂停 777X-9 生产，并于 2022 年第二季度实施该暂停。",
+      "该暂停预计产生约 15 亿美元异常生产成本。",
+      "777/777X 两个项目当前合计生产速率为 3 架/月。",
+      "777X-9 计划初始交付年份为 2025 年。"
+    ],
+    "raw_excerpt": "In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n] ... We are currently producing at a combined production rate of 3 per month for the 777/777X programs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 交付暂停与恢复（2021-05 至 2022-08）作为产能/交付中断先例",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "787 交付于 2021 年 5 月因生产质量问题（含供应链）暂停，2022 年 7 月 28 日获 FAA 授权恢复，8 月起恢复交付。",
+      "2021 年 3 月至 5 月间交付 14 架，随后交付暂停。",
+      "2022 年交付 31 架；2021 年末与 2022 年末库存分别约 110 架与 100 架。",
+      "公司称已实施生产流程变更，使新造飞机符合规范、无需后续检查与返工。"
+    ],
+    "raw_excerpt": "We received FAA authorization to resume delivery on July 28, 2022 and deliveries resumed in August. During 2022, we delivered 31 aircraft to customers. ... During 2021, we delivered 14 aircraft between March and May 2021 prior to deliveries being paused in May 2021 due to production quality issues including in our supply chain."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737-7 / 737-10 取证与交付时间表（FY2023 起点预期）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "公司当时预期 737-7 于 2023 年完成取证并首次交付，737-10 于 2023 年开始 FAA 取证试飞、2024 年首次交付。",
+      "截至 2022 年末，库存中有 27 架 737-7 与 3 架 737-10；积压订单中 737-7 为 236 架、737-10 为 720 架。",
+      "737 MAX 累计已交付 1,033 架。",
+      "《2023 年综合拨款法》修订 ACSAA 第 116 条，使 2020 年 12 月 27 日前提交的取证申请（含 737-7、737-10）不再受该机组告警规格约束。"
+    ],
+    "raw_excerpt": "2023, and the 737-10 to begin FAA certification flight testing in 2023 with first delivery in in 2024. At December 31, 2022, we had 27 737-7 and 3 737-10 aircraft in inventory and 236 737-7 and 720 737-10 aircraft in backlog and have delivered a total of 1,033 737 MAX aircraft."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 2022 年 BCA 交付量与 2023 年资本开支预期",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年 BCA 交付：737 为 387 架（含 13 架公司内部交付）、787 为 31 架、777 为 24 架、767 为 33 架（含 15 架内部）、747 为 5 架，合计 480 架。",
+      "2021 年合计交付 340 架，其中 737 为 263 架、787 为 14 架。",
+      "2022 年 BCA 收入 258.67 亿美元，营业亏损 23.70 亿美元。",
+      "公司预计 2023 年资本开支高于 2022 年（2022 年为 12 亿美元）。"
+    ],
+    "raw_excerpt": "Deliveries 387 (13) 5 33 (15) 24 31 480 ... BCA revenues increased by $6,374 million in 2022 compared with 2021 primarily due to higher 737 and 787 deliveries in 2022. ... We expect capital expenditures in 2023 to be higher than in 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA deliveries by program (FY2022 actual, baseline for FY2023 comparison)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "FY2022 BCA deliveries totaled 480 aircraft, including intercompany deliveries.",
+      "FY2022 deliveries by program: 737 = 387 (including 13 intercompany), 747 = 5, 767 = 33 (including 15 intercompany), 777 = 24, 787 = 31.",
+      "FY2021 BCA deliveries totaled 340 aircraft: 737 = 263 (16 intercompany), 747 = 7, 767 = 32 (13 intercompany), 777 = 24, 787 = 14.",
+      "Cumulative deliveries at Dec 31, 2022: 737 = 8,132; 747 = 1,572; 767 = 1,271; 777 = 1,701; 787 = 1,037."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: 737 * 747 767 * 777 787 Total / 2022 Cumulative deliveries 8,132 1,572 1,271 1,701 1,037 / Deliveries 387 (13) 5 33 (15) 24 31 480 / 2021 ... Deliveries 263 (16) 7 32 (13) 24 14 340"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 program production rate (FY2022 actual and forward intent)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9 / p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing increased the 737 production rate to 31 per month in 2022.",
+      "Boeing stated it expects to implement further gradual 737 production rate increases based on market demand and supply chain capacity.",
+      "The 10-K does not state a specific numeric 737 monthly rate target for 2023.",
+      "737 program abnormal production costs were $188 million in 2022 versus $1,887 million in 2021."
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 program: planned return to 5 per month in 2023, inventory overhang",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing was producing 787s at low rates and expected to gradually return to 5 per month in 2023.",
+      "Boeing delivered 31 787 aircraft to customers during 2022 after deliveries resumed in August 2022.",
+      "Approximately 100 787 aircraft were in inventory at Dec 31, 2022 versus approximately 110 at Dec 31, 2021.",
+      "Most aircraft in inventory at Dec 31, 2022 were expected to be delivered by the end of 2024."
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. ... During 2022, we delivered 31 aircraft to customers. ... At December 31, 2022, and 2021, we had approximately 100 and 110 aircraft in inventory. Most of the aircraft in inventory at December 31, 2022 are expected to deliver by the end of 2024."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 delivery pause attributed to production quality issues including in the supply chain",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9 / p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "787 deliveries were suspended from May 2021 to August 2022.",
+      "Boeing attributed the pause to production quality issues including in its supply chain.",
+      "Boeing said it implemented production process changes so newly built airplanes meet specifications without further inspections and rework.",
+      "Boeing continued inspections and rework on built and stored 787 aircraft."
+    ],
+    "raw_excerpt": "including a suspension of 787 deliveries from May 2021 to August 2022. We continue to conduct inspections and rework on built and stored 787 aircraft. ... deliveries were paused in May 2021 due to production quality issues including in our supply chain. We have implemented changes in the production process designed to ensure that newly-built airplanes meet our specifications and do not require further inspections and rework."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — labor instability and supply chain disruption cited as 777X profitability risk; 777/777X combined rate",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing cited continued production disruption due to labor instability and supply chain disruption as a factor affecting 777X program profitability.",
+      "Boeing was producing at a combined rate of 3 per month for the 777/777X programs.",
+      "777X-9 first delivery was revised in Q1 2022 from late 2023 to 2025."
+    ],
+    "raw_excerpt": "These factors include continued production disruption due to labor instability and supply chain disruption, customer negotiations, further production rate adjustments for the 777X or other commercial aircraft programs ... We are currently producing at a combined production rate of 3 per month for the 777/777X programs."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — achieving planned production rate targets framed as a core dependency of the commercial business",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing states its Commercial Airplanes business depends on its ability to maintain a healthy production system and achieve planned production rate targets.",
+      "The same risk disclosure groups production rate achievement with ensuring every airplane conforms to specifications and with developing/certifying new models."
+    ],
+    "raw_excerpt": "Our Commercial Airplanes business depends on our ability to maintain a healthy production system, ensure every airplane in our production system conforms to our exacting specifications, achieve planned production rate targets, successfully develop and certify"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — capex expected higher in 2023 than 2022",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Capital expenditures were $1.2 billion in 2022, versus $1.0 billion in 2021 and $1.3 billion in 2020.",
+      "Boeing expected capital expenditures in 2023 to be higher than in 2022."
+    ],
+    "raw_excerpt": "Capital expenditures totaled $1.2 billion in 2022, compared with $1.0 billion in 2021 and $1.3 billion in 2020. We expect capital expenditures in 2023 to be higher than in 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 Program Highlights (production rate 31/month, abnormal production costs)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing increased the 737 production rate to 31 per month in 2022.",
+      "Boeing expects to implement further gradual 737 production rate increases based on market demand and supply chain capacity.",
+      "Boeing expensed abnormal production costs of $188 million and $1,887 million related to the 737 program during 2022 and 2021 respectively.",
+      "The 737 program accounting quantity increased by 400 units during 2022 due to normal progress of obtaining additional orders and delivering airplanes."
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Business environment: 737 stabilization at 31/month, 777X production paused",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9",
+    "published_at": "2023",
+    "key_points": [
+      "The 737 program experienced operational and supply chain challenges stabilizing production at 31 per month.",
+      "Boeing plans to gradually increase 737 production rates based on market demand and supply chain capacity.",
+      "Production of the 777X is currently paused and is expected to resume in 2023.",
+      "Boeing states its Commercial Airplanes business depends on its ability to achieve planned production rate targets."
+    ],
+    "raw_excerpt": "The 737 program has experienced operational and supply chain challenges stabilizing production at 31 per month. We plan to gradually increase 737 production rates based on market demand and supply chain capacity. ... Production of the 777X is currently paused and is expected to resume in 2023."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 Program: abnormally low rate threshold of 5/month and abnormal cost estimate",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing is currently producing the 787 at low rates and expects to gradually return to 5 per month in 2023.",
+      "In Q3 2021 Boeing determined that 787 production rates below 5 per month represented abnormally low production rates and result in abnormal production costs.",
+      "Boeing also determined that inspections and rework costs on inventoried aircraft are excessive and must be accounted for as abnormal production costs expensed as incurred.",
+      "Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion.",
+      "In Q4 2022 Boeing adjusted the total estimate of abnormal production costs up to $2.8 billion, with most expected to be incurred by the end of 2023; at December 31, 2021 the expectation was approximately $2 billion cumulative.",
+      "During 2022 Boeing delivered 31 787 aircraft; at December 31, 2022 and 2021 it had approximately 100 and 110 aircraft in inventory."
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs. ... Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion. During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA deliveries table and abnormal production cost breakdown by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "BCA deliveries are disclosed as annual unit counts separate from monthly production rates: 2022 deliveries were 737 387, 747 5, 767 33, 777 24, 787 31, total 480 (intercompany deliveries in parentheses).",
+      "2021 deliveries were 737 263, 747 7, 767 32, 777 24, 787 14, total 340.",
+      "BCA revenues increased by $6,374 million in 2022 versus 2021 primarily due to higher 737 and 787 deliveries.",
+      "Abnormal production costs in 2022 were $1,753 million: $1,240 million 787, $325 million 777X, $188 million 737.",
+      "BCA loss from operations was $2,370 million in 2022 versus $6,475 million in 2021, reflecting higher 737 deliveries and lower abnormal production costs."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: ... Deliveries 387 (13) 5 33 (15) 24 31 480 ... Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 7 Inventories: deferred production costs and aircraft in inventory",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p80",
+    "published_at": "2023",
+    "key_points": [
+      "Commercial aircraft programs inventory includes approximately 250 737 aircraft and 100 787 aircraft at December 31, 2022, versus 335 737 and 110 787 at December 31, 2021.",
+      "737 deferred production costs were $2,955 million at December 31, 2022 versus $1,296 million at December 31, 2021; unamortized tooling and other non-recurring costs were $626 million and $617 million.",
+      "At December 31, 2022, $3,555 million of 737 deferred production costs and unamortized tooling/non-recurring costs are expected to be recovered from units in the accounting quantity with firm orders, and $26 million from units representing expected future orders.",
+      "777X program inventory included $4,059 million and $3,363 million of work in process at December 31, 2022 and 2021."
+    ],
+    "raw_excerpt": "Commercial aircraft programs inventory includes approximately 250 737 aircraft and 100 787 aircraft at December 31, 2022 as compared with 335 737 aircraft and 110 787 aircraft at December 31, 2021. ... deferred production costs of $2,955 and $1,296 and unamortized tooling and other non-recurring costs of $626 and $617."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 7: 777X production pause abnormal costs and 787 deferred production costs",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p81",
+    "published_at": "2023",
+    "key_points": [
+      "In April 2022 Boeing decided to pause production of the 777X-9 during 2022 and 2023; the pause results in abnormal production costs expensed as incurred until production resumes.",
+      "Boeing expensed abnormal production costs of $325 million related to 777X during 2022.",
+      "787 deferred production costs were $12,689 million at December 31, 2022 versus $11,693 million at December 31, 2021; supplier advances $1,831/$1,907 million; unamortized tooling and other non-recurring costs $1,722/$1,815 million.",
+      "At December 31, 2022, $9,881 million of 787 deferred production costs, unamortized tooling and other non-recurring costs are expected to be recovered from units in the accounting quantity with firm orders, and $4,530 million from units representing expected future orders.",
+      "Boeing expensed 787 abnormal production costs of $1,240 million and $468 million during 2022 and 2021."
+    ],
+    "raw_excerpt": "In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. The production pause is resulting in abnormal production costs that are being expensed as incurred until 777X-9 production resumes. We expensed abnormal production costs of $325 during the year ended December 31, 2022. ... deferred production costs of $12,689 and $11,693"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Critical Accounting Policies: Program Accounting definition and rate/quantity sensitivity",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p50",
+    "published_at": "2023",
+    "key_points": [
+      "Program accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity.",
+      "A program consists of the estimated number of units (accounting quantity) of a product to be produced in a continuing, long-term production effort.",
+      "Boeing reviews its program accounting quantities quarterly."
+    ],
+    "raw_excerpt": "Program accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity. A program consists of the estimated number of units (accounting quantity) of a product to be produced in a continuing, long-term production effort"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program accounting estimates: production rate adjustments as a loss driver",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p51",
+    "published_at": "2023",
+    "key_points": [
+      "Factors that must be estimated include program accounting quantity, sales price, labor and employee benefit costs, material costs, and procured part costs.",
+      "If Boeing is required to reduce the accounting quantity and/or production rates, or experience further delivery delays, it could face earnings charges.",
+      "777X profitability is subject to further production rate adjustments for the 777X or other commercial aircraft programs, and contraction of the accounting quantity.",
+      "The 767, 777X and 787 programs had near break-even or single-digit margins at December 31, 2022."
+    ],
+    "raw_excerpt": "Our program revenue and cost assumptions reflect our current best estimate. However, if we are required to reduce the accounting quantity and/or production rates, experience further delivery delays, incur addition[al] ... These factors include continued production disruption due to labor instability and supply chain disruption, customer negotiations, further production rate adjustments for the 777X or other commercial aircraft programs, contraction of the accounting quantity"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Cash flow discussion: accounts payable and production rates",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023",
+    "key_points": [
+      "Growth in Accounts Payable in 2022 was a source of cash, while reductions in Accounts Payable in 2021 were a use of cash generally reflecting increases in production rates.",
+      "Cash provided by Advances and progress billings was $0.1 billion in 2022 versus $2.5 billion in 2021.",
+      "Capital expenditures totaled $1.2 billion in 2022; Boeing expects 2023 capital expenditures to be higher than in 2022.",
+      "Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021."
+    ],
+    "raw_excerpt": "Growth in Accounts Payable in 2022 is a source of cash while reductions in Accounts Payable in 2021 were a use of cash generally reflecting increases in production rates. ... Capital expenditures totaled $1.2 billion in 2022 ... We expect capital expenditures in 2023 to be higher than in 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog conversion and revenue recognition basis (delivery/acceptance)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023",
+    "key_points": [
+      "Backlog is converted into revenue primarily based on cost incurred or at delivery and acceptance of products, depending on the applicable revenue recognition model.",
+      "Total backlog at December 31, 2022 was $404,381 million; approximately 17% is expected to convert to revenue through 2023 and approximately 71% through 2026.",
+      "There is significant uncertainty regarding timing of backlog conversion due to timing of 787 deliveries from inventory, timing of 737 MAX delivery resumption in China, and timing of 777X/737-7/737-10 entry into service."
+    ],
+    "raw_excerpt": "Backlog is converted into revenue, primarily based on the cost incurred or at delivery and acceptance of products, depending on the applicable revenue recognition model. ... We expect approximately 17% to be converted to revenue through 2023 and approximately 71% through 2026"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program accounting quantities and cumulative firm orders by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "2022 program accounting quantities: 737 10,800; 747 1,574; 767 1,267; 777 1,790; 777X 400; 787 1,600.",
+      "2022 undelivered units under firm orders: 737 3,653; 747 1; 767 106; 777 69; 777X 244; 787 505.",
+      "Cumulative firm orders represent cumulative commercial jet deliveries plus undelivered firm orders."
+    ],
+    "raw_excerpt": "Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 ... Undelivered units under firm orders 3,653 1 106 69 244 505 (8) ... Cumulative firm orders represent the cumulative number of commercial jet aircraft deliveries plus undelivered firm orders."
+  }
+]

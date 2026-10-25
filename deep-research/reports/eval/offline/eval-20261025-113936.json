@@ -1,0 +1,35 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 0.9230769230769231,
+  "mean_alignment": 0.6363636363636364,
+  "alignment_questions": 1,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 0.9230769230769231,
+      "alignment": 0.6363636363636364,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-react",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.9230769230769231,
+      "citations_total": 14,
+      "citations_missing": [
+        "https://blog.langchain.com/langchain-v1/"
+      ],
+      "alignment_rate": 0.6363636363636364,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "该推理能力在足够大的语言模型中自然涌现，即存在模型规模门槛[^3]",
+        "工具定义本身大量消耗上下文，其内部曾见到工具定义消耗 134K tokens[^6]",
+        "Anthropic 的工具定义 token 开销[^6]",
+        "= arXiv:2201.11903[^6]"
+      ]
+    }
+  ]
+}

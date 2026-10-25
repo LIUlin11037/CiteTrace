@@ -1,0 +1,791 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Semantic conventions for generative client AI spans (OpenTelemetry GenAI semantic conventions)",
+    "url": "https://raw.githubusercontent.com/open-telemetry/semantic-conventions-genai/main/docs/gen-ai/gen-ai-spans.md",
+    "published_at": null,
+    "key_points": [
+      "该文档标题为 \"Semantic conventions for generative client AI spans\"，文档状态为 Development（非 Stable）。",
+      "规范定义的 GenAI span 类型包括：Inference、Embeddings、Retrievals、Fetch response、Memory、Execute tool span。",
+      "Embeddings span：gen_ai.operation.name SHOULD 为 `embeddings`；span name SHOULD 为 `{gen_ai.operation.name} {gen_ai.request.model}`；span kind SHOULD 为 CLIENT；span status SHOULD 遵循 Recording Errors 文档。",
+      "Embeddings span 的 Required 属性为 gen_ai.operation.name 与 gen_ai.provider.name；Conditionally Required 为 error.type（出错时）、gen_ai.request.model（可用时）、server.port（设置了 server.address 时）。",
+      "Embeddings span 的 Recommended 属性包括 gen_ai.embeddings.dimension.count、gen_ai.request.encoding_formats、gen_ai.response.model、gen_ai.usage.input_tokens、server.address。",
+      "Retrievals span：gen_ai.operation.name SHOULD 为 `retrieval`；span name SHOULD 为 `{gen_ai.operation.name} {gen_ai.data_source.id}`；span kind SHOULD 为 CLIENT。",
+      "Retrievals span 的 Required 属性为 gen_ai.operation.name；Conditionally Required 包括 error.type、gen_ai.data_source.id、gen_ai.provider.name、gen_ai.request.model、server.port。",
+      "Retrievals span 的 Recommended 属性包括 gen_ai.retrieval.top_k、server.address；gen_ai.retrieval.documents 为 Opt-In（需显式开启才记录检索到的文档内容）。",
+      "对采样决策重要的属性 SHOULD 在 span 创建时（at span creation time）提供：gen_ai.operation.name、gen_ai.provider.name、gen_ai.request.model、server.address、server.port。",
+      "gen_ai.operation.name 的已知取值包含 chat、create_agent（Create GenAI agent）、create_memory 等，说明 agent 生命周期操作被建模为独立的 operation 类型。",
+      "gen_ai.provider.name 的已知取值包含 anthropic、aws.bedrock、azure.ai.inference、gcp.gemini、gcp.gen_ai、gcp.vertex_ai、openai 等。",
+      "token 用量属性存在层级关系：细分用量属性是总量与聚合计数的子集，例如输入 100 文本 token（其中 40 为缓存）+ 200 图像 token 时，gen_ai.usage.input_tokens 记为 300，gen_ai.usage.cache_read.input_tokens 记为 40。",
+      "当供应商同时暴露计费单位与 token 数（如 Cohere 的 usage.billed_units 与 usage.tokens）时，instrumentation SHOULD 上报计费口径的计数，以匹配客户实际被计费的单位。"
+    ],
+    "raw_excerpt": "# Semantic conventions for generative client AI spans\n\n**Status**: [Development][DocumentStatus]\n\n- [Spans](#spans)\n  - [Inference](#inference)\n  - [Embeddings](#embeddings)\n  - [Retrievals](#retrievals)\n  - [Fetch response](#fetch-response)\n  - [Memory](#memory)\n  - [Execute tool span](#execute-tool-span)\n\n### Embeddings\n\nDescribes GenAI embeddings span - a request to a Generative AI model or service that generates an embeddings based on the input.\n\nThe `gen_ai.operation.name` SHOULD be `embeddings`.\n\n**Span name** SHOULD be `{gen_ai.operation.name} {gen_ai.request.model}`.\n\n**Span kind** SHOULD be `CLIENT`.\n\n... The following attributes can be important for making sampling decisions and SHOULD be provided **at span creation time** (if provided at all): gen_ai.operation.name, gen_ai.provider.name, gen_ai.request.model, server.address, server.port\n\n| `create_agent` | Create GenAI agent | Development |"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Generative AI semantic conventions（原 opentelemetry.io 规范页，已迁移公告）",
+    "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/",
+    "published_at": null,
+    "key_points": [
+      "OpenTelemetry 官方文档站上的 GenAI span 语义约定页面已不再维护，内容迁移至独立的 OpenTelemetry GenAI semantic conventions 仓库。",
+      "该页面仅保留迁移提示，不再承载规范正文，说明 GenAI 语义约定当前处于独立仓库快速演进阶段。"
+    ],
+    "raw_excerpt": "Moved: Generative AI semantic conventions Important GenAI semantic conventions have moved to the OpenTelemetry GenAI semantic conventions repository. This page has moved and is no longer maintained in this repository."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Local Allow, Global Deny: Why Per-Action Authorization Does Not Compose in LLM Agents (arXiv:2610.27620)",
+    "url": "https://arxiv.org/search/?searchtype=all&query=LLM+agent+observability+trace&start=0",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "该论文区分了 single-trace safety 与 relational k-safety 两类性质，并提出按 observability 划分的 monitor profile 阶梯（摘要级信息，未读正文）。",
+      "论文给出一个不可能性结论：relational purpose violations 属于 2-safety hyperproperty，不存在单条 trace 上的 blame 位置，因此逐动作监控器无法检出（摘要级信息）。",
+      "论文称在所调查的六个 guardrail 中，没有一个实现 cross-execution monitoring（摘要级信息）。",
+      "该来源仅通过 arXiv 搜索页摘要获得，未读取方法/实验章节，不能作为结论依据。"
+    ],
+    "raw_excerpt": "We characterize CAFs along two axes, expressiveness (single-trace safety versus relational k-safety) and observability (a ladder of monitor profiles). Our central result is an impossibility: relational purpose violations form a 2-safety hyperproperty with no per-trace locus of blame, so a per-action monitor that never raises a false alarm detects none of them"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "TraceLite: Efficient Trace Reduction for SWE Agents via Optical Compression and Redundancy Removal (arXiv:2610.28612)",
+    "url": "https://arxiv.org/search/?searchtype=all&query=LLM+agent+observability+trace&start=0",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "论文指出软件工程 agent 通过迭代工具调用解题，其交互 trace 持续增长，带来大量 token 消耗与推理开销（摘要级信息）。",
+      "论文报告 agent 轨迹同时存在 cross-step 冗余与 phase-level 冗余两种结构（摘要级信息）。",
+      "论文报告在 SWE-bench Verified 上达到 78.25% resolve rate，并将平均输入 token 消耗与 API 成本分别降低 33.05% 与 21.30%，每次观测压缩延迟 0.438 秒（摘要级数字，未核对结果表格）。",
+      "该来源仅通过 arXiv 搜索页摘要获得，未读取方法/实验章节，不能作为结论依据。"
+    ],
+    "raw_excerpt": "Software engineering agents solve repository-level tasks through iterative tool use, but their continuously growing interaction traces incur substantial token consumption and inference overhead. ... agent trajectories exhibit both cross-step and phase-level redundancy."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "NIOCIS: Typed-Decision Next-Hop Routing with Node-Conditioned Option Spaces for Tool-Use Agents (arXiv:2610.25985)",
+    "url": "https://arxiv.org/search/?searchtype=all&query=LLM+agent+observability+trace&start=0",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "论文提出一个路由层，将工具使用 agent 的执行日志折叠为 typed decision，以减少每步重复的模型推理（摘要级信息，摘要被截断）。",
+      "该来源仅通过 arXiv 搜索页摘要获得且内容被截断，未读取正文，不能作为结论依据。"
+    ],
+    "raw_excerpt": "Tool-use agents pay per decision: at each hop a language model re-reads the state and thinks for seconds, though its actions are finite and decisions recur. We present NIOCIS, a routing layer that folds execution logs i..."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Beyond Accuracy: Disentangling Decomposition from Typed-State Quality Assurance in Multi-Agent LLM Pipelines (arXiv:2610.31280)",
+    "url": "https://arxiv.org/search/?searchtype=all&query=LLM+agent+observability+trace&start=0",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "该论文标题与主题涉及多 agent LLM 流水线中的 typed-state 质量保证与任务分解的区分（仅标题级信息，摘要被截断未读到）。",
+      "该来源仅通过 arXiv cs.SE recent 列表页获得标题与作者，未读取摘要正文或方法章节，不能作为结论依据。"
+    ],
+    "raw_excerpt": "Beyond Accuracy: Disentangling Decomposition from Typed-State Quality Assurance in Multi-Agent LLM Pipelines"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "raga-ai-hub/RagaAI-Catalyst — Python SDK for Agent AI Observability, Monitoring and Evaluation",
+    "url": "https://github.com/raga-ai-hub/RagaAI-Catalyst",
+    "published_at": "2026-02-11",
+    "key_points": [
+      "仓库描述称其为面向 Agent AI 可观测性、监控与评估的 Python SDK，包含 agent、llm 与 tools 三类 tracing（仅仓库元数据/描述，未读 README 正文）。",
+      "仓库描述提到具备自托管 dashboard，以及带 timeline 与 execution graph 视图的分析能力（仅元数据）。",
+      "元数据：★16178、forks 3574、语言 Python、最后推送 2026-02-11。",
+      "该来源仅获得 stars/描述/推送时间等元数据，未读取 README 正文，按研究纪律不得作为结论依据。"
+    ],
+    "raw_excerpt": "Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent, llm and tools tracing, debugging multi-agentic system, self-hosted dashboard and advanced analytics with timeline and execution graph view"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "traccia-ai/traccia-py — OpenTelemetry-native SDK for AI agent observability",
+    "url": "https://github.com/traccia-ai/traccia-py",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "仓库描述称其为 OpenTelemetry-native 的 AI agent 可观测性 SDK，覆盖 tracing、evaluation、debugging、governance 与运行时策略执行（仅元数据）。",
+      "仓库描述称其框架无关，面向 OpenAI Agents、LangGraph、CrewAI 及生产环境 LLM 应用（仅元数据）。",
+      "元数据：★127、forks 24、语言 Python、最后推送 2026-10-21。",
+      "该来源仅获得元数据，未读取 README 正文，不得作为结论依据。"
+    ],
+    "raw_excerpt": "OpenTelemetry-native SDK for AI agent observability, tracing, evaluation, debugging, governance, and runtime policy enforcement. Framework-agnostic and built for OpenAI Agents, LangGraph, CrewAI, and LLM applications in production."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "Cygnux-Labs/Tracekit — Tamper-evident tracing, policy gates and cross-checks for AI agents",
+    "url": "https://github.com/Cygnux-Labs/Tracekit",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库描述称其提供面向 AI agent 的防篡改（tamper-evident）tracing、策略门（policy gates）与交叉校验（cross-checks）（仅元数据）。",
+      "元数据：★150、forks 20、语言 Python、最后推送 2026-10-24。",
+      "该来源仅获得元数据，未读取 README 正文，不得作为结论依据。"
+    ],
+    "raw_excerpt": "Tamper-evident tracing, policy gates and cross-checks for AI agents: see what the agent did, and why."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "future-agi/future-agi — end-to-end platform for evaluating, observing and improving LLM/agent apps",
+    "url": "https://github.com/future-agi/future-agi",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库描述称其为开源端到端平台，用于评估、观测与改进 LLM 及 AI agent 应用，功能面包括 Tracing、Evals、Simulations、Datasets、Gateway、Guardrails（仅元数据）。",
+      "仓库描述称其可自托管，采用 Apache 2.0 许可（仅元数据）。",
+      "元数据：★2198、forks 695、语言 Python、最后推送 2026-10-24。",
+      "该来源仅获得元数据，未读取 README 正文，不得作为结论依据。"
+    ],
+    "raw_excerpt": "Open-source, end-to-end platform for evaluating, observing, and improving LLM and AI agent applications. Tracing · Evals · Simulations · Datasets · Gateway · Guardrails. Self-hostable. Apache 2.0."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "traceloop/openllmetry — Open-source observability for your LLM application",
+    "url": "https://github.com/traceloop/openllmetry",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示 7.5k stars、1.2k forks、1,434 commits，许可证 Apache-2.0。",
+      "README 自述：OpenLLMetry 是构建在 OpenTelemetry 之上的一组扩展，因为底层使用 OpenTelemetry，可接入已有的可观测性方案（Datadog、Honeycomb 等）。",
+      "由 Traceloop 构建与维护，采用 Apache 2.0 许可。",
+      "仓库包含面向 LLM 提供商与向量数据库的标准 OpenTelemetry instrumentations，以及便于上手的 Traceloop SDK；SDK 仍输出标准 OpenTelemetry 数据。",
+      "README 声明其语义约定（semantic conventions）已成为 OpenTelemetry 的一部分。",
+      "支持的目标（destinations）清单包含 OpenTelemetry Collector、Datadog、Grafana、Honeycomb、New Relic、SigNoz、Sentry、Splunk、Dynatrace、Azure Application Insights、Google Cloud、Tencent Cloud 等 20+ 项。",
+      "instrumentation 覆盖的 LLM 提供商包括 OpenAI/Azure OpenAI、Anthropic、Bedrock、Cohere、Google Generative AI (Gemini)、Groq、Mistral AI、Ollama、Vertex AI、Together AI 等。",
+      "instrumentation 覆盖的向量数据库包括 Chroma、LanceDB、Marqo、Milvus、Pinecone、Qdrant、Weaviate。",
+      "instrumentation 覆盖的框架包括 LangChain、LangGraph、LlamaIndex、CrewAI、Haystack、LiteLLM、OpenAI Agents、Agno、AWS Strands；协议侧覆盖 MCP。",
+      "README 声明自 v0.49.2 及以上版本起，SDK 与 instrumentations 不再记录或收集任何 telemetry。",
+      "本地运行时可用 Traceloop.init(disable_batch=True) 关闭批量发送以便立即看到 traces。"
+    ],
+    "raw_excerpt": "OpenLLMetry is a set of extensions built on top of OpenTelemetry that gives you complete observability over your LLM application. Because it uses OpenTelemetry under the hood, it can be connected to your existing observability solutions - Datadog, Honeycomb, and others. ... Our semantic conventions are now part of OpenTelemetry!"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Arize-ai/openinference — Conventions and plugins complementary to OpenTelemetry for tracing AI applications",
+    "url": "https://github.com/Arize-ai/openinference",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示 2,427 commits。",
+      "README 自述：OpenInference 是一组与 OpenTelemetry 互补的约定（conventions）与插件，用于对 AI 应用做 tracing。",
+      "OpenInference 被 Arize Phoenix 与 Arize AX 原生支持，但也可用于任何 OpenTelemetry 兼容后端。",
+      "规范（specification）以 markdown 文件形式维护在 spec 目录中。",
+      "规范设计目标是提供对 LLM 调用以及周边应用上下文的洞察，例如从向量库检索（retrieval from vector stores）与外部工具（如搜索引擎或 API）的使用。",
+      "规范与传输格式、文件格式无关，意图与 JSON、ProtoBuf、DataFrames 等其他规范配合使用。",
+      "提供多语言 instrumentations，Python 侧覆盖 OpenAI、OpenAI Agents、Claude Agent SDK、LlamaIndex、DSPy、Bedrock、LangChain、MCP、MistralAI、Portkey、Guardrails、VertexAI、CrewAI、Haystack、LiteLLM、Groq、Anthropic、Google GenAI、Google ADK、Autogen AgentChat、PydanticAI、smolagents、Pipecat、Strands Agents、Ollama、Cohere 等。",
+      "提供 span processors 用于跨 instrumentation 库归一化与转换数据，其中包括 openinference-instrumentation-openllmetry（用于 OpenLLMetry/Traceloop traces）与 openinference-instrumentation-openlit（用于 OpenLIT traces）。",
+      "提供 openinference-semantic-conventions 包，作为 LLM 应用 tracing 的语义约定。",
+      "仓库含 Java、JS、Go 等多语言目录，README 提供 30+ 种语言版本。"
+    ],
+    "raw_excerpt": "OpenInference is a set of conventions and plugins that is complementary to OpenTelemetry to enable tracing of AI applications. OpenInference is natively supported by Arize Phoenix and Arize AX, but can be used with any OpenTelemetry-compatible backend as well. ... It's designed to provide insight into the invocation of LLMs and the surrounding application context such as retrieval from vector stores and the usage of external tools such as search engines or APIs."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "Arize-ai/phoenix — Arize Phoenix open-source AI observability platform",
+    "url": "https://github.com/Arize-ai/phoenix",
+    "published_at": null,
+    "key_points": [
+      "仓库页面显示 10,400 commits。",
+      "README 自述：Phoenix 是 Arize 的开源 AI 可观测性平台，面向实验、评估与排障。",
+      "Tracing 能力基于 OpenTelemetry-based instrumentation 追踪 LLM 应用的运行时。",
+      "Phoenix 明确是开源且自托管（open-source and self-hosted）；托管平台为 Arize AX，同一套 OpenTelemetry/OpenInference instrumentation 在两者上通用。",
+      "部署方式包括本地 pip/conda 安装（pip install arize-phoenix; phoenix serve）、uvx 免安装运行、Docker Hub 镜像、Kubernetes Helm chart、Docker Compose，以及 Google Cloud Shell 与 Azure 模板。",
+      "README 提示 Azure 模板使用明文 HTTP（Azure Container Instances 不终止 TLS），生产使用前需前置 TLS 代理。",
+      "除 tracing 外还提供 Evaluation（用 LLM 对响应与检索做基准评估）、Datasets（版本化数据集）、Experiments、Playground、Prompt Management。",
+      "提供 Remote MCP Server，可将 Claude Code、Cursor 等 MCP 客户端连到 Phoenix 实例的 /mcp 端点以查询 traces、datasets、experiments。",
+      "对框架的开箱支持包括 OpenAI Agents SDK、Claude Agent SDK、LangGraph、Vercel AI SDK、Mastra、CrewAI、LlamaIndex、DSPy；LLM 提供商包括 OpenAI、Anthropic、Google GenAI、Google ADK、AWS Bedrock、OpenRouter、LiteLLM。",
+      "自动埋点细节指向 OpenInference 项目。"
+    ],
+    "raw_excerpt": "Arize Phoenix is Arize's open-source AI observability platform designed for experimentation, evaluation, and troubleshooting. ... Tracing - Trace your LLM application's runtime using OpenTelemetry-based instrumentation. ... Note Phoenix is open-source and self-hosted. For a managed platform, Arize offers Arize AX — the same OpenTelemetry/OpenInference instrumentation works with both."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "AgentOps-AI/agentops — Observability and DevTool platform for AI Agents",
+    "url": "https://github.com/AgentOps-AI/agentops",
+    "published_at": null,
+    "key_points": [
+      "搜索元数据：5,913 stars、647 forks、Python、last push 2026-06-25；仓库页面显示 811 commits。",
+      "README 自述：AgentOps 帮助开发者构建、评估与监控 AI agents，覆盖从原型到生产。",
+      "AgentOps app 以 MIT 许可证开源，代码位于 app 目录。",
+      "README 提供 Self-Host 章节：可将完整 AgentOps app（Dashboard + API backend）跑在自己的机器/云上，配置见 app/README.md。",
+      "trace 数据模型体现为 span 层级：session span 作为所有其他 span 的根，另有 agent span、operation/task span、workflow span，并支持嵌套形成 span 层级。",
+      "所有装饰器支持 Input/Output Recording、异常处理、async/await、generator 函数、自定义属性与名称。",
+      "提供 Replay Analytics and Debugging：step-by-step agent execution graphs（逐步的 agent 执行图）。",
+      "提供 LLM Cost Management：追踪在 LLM 基础模型提供商处的花费。",
+      "原生集成 CrewAI、AG2 (AutoGen)、Agno、LangGraph、OpenAI Agents SDK（Python 与 TypeScript）、Camel AI、LangChain（通过 LangchainCallbackHandler）。",
+      "初始化方式为 agentops.init(<API KEY>)，结束为 agentops.end_session('Success')。"
+    ],
+    "raw_excerpt": "AgentOps helps developers build, evaluate, and monitor AI agents. From prototype to production. ... The AgentOps app is open source under the MIT license. ... # Create a session span (root for all other spans) ... All decorators support: Input/Output Recording, Exception Handling, Async/await functions, Generator functions, Custom attributes and names"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "langfuse/langfuse — Open source agent evals & observability (repository metadata only)",
+    "url": "https://github.com/langfuse/langfuse",
+    "published_at": null,
+    "key_points": [
+      "搜索元数据：36,297 stars、4,061 forks、TypeScript、last push 2026-10-24。",
+      "仓库描述为「Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform」。",
+      "配套 SDK 仓库 langfuse/langfuse-python 元数据：501 stars、385 forks、Python、last push 2026-10-23。"
+    ],
+    "raw_excerpt": "langfuse/langfuse (★36297, forks 4061) desc: 🪢 Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform. lang: TypeScript | last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangSmith Observability — 文档首页（Docs by LangChain）",
+    "url": "https://docs.smith.langchain.com/administration/data_retention",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 将 traces 定义为「agents 在生产环境中做了什么」的记录，用途包括调试失败、监控质量、构建评估数据集。",
+      "文档列出生产可观测性的能力面：查看 traces（Messages/Turns/Details 视图）、构建 dashboards 与 alerts 以跟踪质量、配置 automations（rules、webhooks、online evaluations）、收集用户反馈（queues 或 inline annotation）。",
+      "文档明确将「trace pricing、retention 和 limits」指向 Usage and billing 页面，说明 trace 计费与保留期是独立于功能文档的配置项。",
+      "文档提到 LangSmith Engine 可自动检测 traces 中反复出现的问题并诊断根因。",
+      "注意：该 URL 实际返回的是文档站通用落地页，未包含 data retention 的具体数值。"
+    ],
+    "raw_excerpt": "Traces are the record of what your agents did in production. Use them to debug failures, monitor quality, and build the datasets you evaluate against. ... Monitor performance Build dashboards and set alerts to track quality and catch issues early. Configure automations Automate workflows with rules, webhooks, and online evaluations. ... For trace pricing, retention, and limits, see Usage and billing."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "LangSmith Administration Concepts — 资源层级、workspace 与数据保留/用量限额的作用域",
+    "url": "https://docs.smith.langchain.com/administration/concepts",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 的资源层级为 Organization → Workspace → Agent/Application → Resources（trace projects、datasets、prompts、deployments 等）。",
+      "文档的 scope 表中，Data Retention 与 Usage Limits 的作用域为 Workspace（并注明组织级设置「即将推出」），即保留期与用量上限按 workspace 配置。",
+      "Workspace 被描述为隔离信任边界（trust boundaries）与访问控制的单元，权限在 workspace 级别授予。",
+      "资源标签（resource tags，key-value）用于进一步隔离资源并配合 ABAC 做访问控制。",
+      "API key 支持设置过期时间，默认永不过期；文档建议不要用个人访问令牌（PAT）为应用做认证。"
+    ],
+    "raw_excerpt": "Data Retention, Usage Limits | Workspace* ... * Data retention settings and usage limits will be available soon for the organization level as well ... A workspace separates trust boundaries for resources and access control."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "Datadog Docs — Agent Observability SDK Reference（仅取得站点导航结构）",
+    "url": "https://docs.datadoghq.com/llm_observability/instrumentation/sdk/",
+    "published_at": null,
+    "key_points": [
+      "抓取该 URL 仅返回 Datadog 文档站的导航目录，未返回 SDK 参考正文，因此无法从中提取推荐字段或属性清单。",
+      "导航结构显示 Datadog 将 LLM/Agent 可观测性归入 APM Tracing 体系，与 Logs、Profiler、Monitors and Alerting、Sensitive Data（Protecting Sensitive Data）等模块并列。",
+      "导航中存在「Protecting Sensitive Data」「Credential Management」「Creating Access Policies」等条目，表明 PII/敏感数据保护是 Datadog 平台级能力而非 LLM 专属。",
+      "导航中存在 OpenTelemetry 的「Semantic Mapping」「Ingestion Sampling」「Resource Attribute Mapping」条目，说明采样与语义映射在 OTel 接入路径中配置。",
+      "本条仅记录导航结构这一事实，不构成对 Datadog 推荐字段或告警配置的结论。"
+    ],
+    "raw_excerpt": "Agent Observability SDK Reference ... APM Tracing ... Protecting Sensitive Data ... OpenTelemetry ... Semantic Mapping ... Ingestion Sampling ... Monitors and Alerting"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "raga-ai-hub/RagaAI-Catalyst — Agent AI Observability, Monitoring and Evaluation Framework",
+    "url": "https://github.com/raga-ai-hub/RagaAI-Catalyst",
+    "published_at": "2026-02-11",
+    "key_points": [
+      "仓库自述为 Agent AI 可观测性、监控与评估框架的 Python SDK，★16178、fork 3574，最近 push 2026-02-11。",
+      "自述功能包括 agent、LLM 与 tools 三类 tracing，多智能体系统调试，自托管 dashboard，以及带时间线与执行图（execution graph）视图的分析。",
+      "该仓库为第三方开源项目，非 Datadog/LangSmith/Braintrust/W&B 官方文档，不能用于支撑厂商推荐字段结论。"
+    ],
+    "raw_excerpt": "Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent, llm and tools tracing, debugging multi-agentic system, self-hosted dashboard and advanced analytics with timeline and execution graph view"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "future-agi/future-agi — 端到端 LLM/Agent 评估与观测平台",
+    "url": "https://github.com/future-agi/future-agi",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库自述为开源、可自托管的端到端平台，用于评估、观测与改进 LLM 与 AI agent 应用，★2198，Apache 2.0，最近 push 2026-10-24。",
+      "自述能力面为 Tracing、Evals、Simulations、Datasets、Gateway、Guardrails 六项。",
+      "该仓库为第三方项目，仅可作为工具生态线索。"
+    ],
+    "raw_excerpt": "Open-source, end-to-end platform for evaluating, observing, and improving LLM and AI agent applications. Tracing · Evals · Simulations · Datasets · Gateway · Guardrails. Self-hostable. Apache 2.0."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "traccia-ai/traccia-py — OpenTelemetry-native AI agent observability SDK",
+    "url": "https://github.com/traccia-ai/traccia-py",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "仓库自述为 OpenTelemetry 原生的 AI agent 可观测性 SDK，覆盖 tracing、evaluation、debugging、governance 与运行时策略执行（runtime policy enforcement），★127，最近 push 2026-10-21。",
+      "自述与框架无关（framework-agnostic），面向 OpenAI Agents、LangGraph、CrewAI 等生产环境 LLM 应用。",
+      "该仓库规模较小（★127），仅可作为 OTel 原生路线存在的线索，不足以支撑结论。"
+    ],
+    "raw_excerpt": "OpenTelemetry-native SDK for AI agent observability, tracing, evaluation, debugging, governance, and runtime policy enforcement. Framework-agnostic and built for OpenAI Agents, LangGraph, CrewAI, and LLM applications in production."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "arXiv cs.SE recent submissions listing (Fri, 23 Oct 2026)",
+    "url": "https://arxiv.org/list/cs.SE/recent",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "该页面为 arXiv Software Engineering (cs.SE) 分类的近期投稿列表页，仅提供论文编号、标题、作者、comments 与主题分类等元数据，不含正文、方法或实验章节。",
+      "页面显示当日（Fri, 23 Oct 2026）共 38 条新投稿，该分类近期总计 187 条。",
+      "在返回的前若干条条目中，可见与 LLM/agent 相关的条目包括 arXiv:2610.31588（VERA: A Responsible AI Dashboard for Assessing LLM Deployments in Light of the EU AI Act）、arXiv:2610.31351（Automating Feature Flag Cleanup at Scale with Multi-Agent LLM Systems: An Industrial Experience at DoorDash）、arXiv:2610.31280（Beyond Accuracy: Disentangling Decomposition from Typed-State Quality Assurance in Multi-Agent LLM Pipelines），但列表页未显示任何标题直接涉及 agent trace schema 或 observability data model。",
+      "该来源为列表/索引页，按取证纪律不能作为关于字段定义或结论的证据。"
+    ],
+    "raw_excerpt": "Software Engineering — Authors and titles for recent submissions — Fri, 23 Oct 2026 ... Total of 187 entries : 1-50 ... [1] arXiv:2610.31588 ... Title: VERA: A Responsible AI Dashboard for Assessing LLM Deployments in Light of the EU AI Act"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "aevyraai/witness — Execution trace schema for AI agent pipelines",
+    "url": "https://github.com/aevyraai/witness",
+    "published_at": "2026-07-20",
+    "key_points": [
+      "仓库自述定位为「AI agent 流水线的执行 trace schema」（Execution trace schema for AI agent pipelines）。",
+      "语言为 Python，stars 为 0，forks 为 0，最近一次 push 时间为 2026-07-20。",
+      "仅获得仓库描述与元数据，未读取 README 正文，因此无法确认其字段定义、数据量或训练/运行配置。"
+    ],
+    "raw_excerpt": "aevyraai/witness (★0, forks 0) — desc: Execution trace schema for AI agent pipelines. lang: Python | last push: 2026-07-20"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "shashwat134/coding-agent-tracing — normalize coding agents into a shared LangSmith trace schema",
+    "url": "https://github.com/shashwat134/coding-agent-tracing",
+    "published_at": "2026-07-21",
+    "key_points": [
+      "仓库自述目标是把 Claude Code、Codex、dcode 等多个 coding agent 归一化到一套共享的 LangSmith trace schema，用于重建、调试与评测 agent 会话。",
+      "语言为 Python，stars 为 0，forks 为 0，最近一次 push 时间为 2026-07-21。",
+      "仅获得仓库描述与元数据，未读取 README 正文，因此无法确认其具体字段清单与归一化映射规则。"
+    ],
+    "raw_excerpt": "shashwat134/coding-agent-tracing (★0, forks 0) — desc: One observability layer across coding agents — normalize Claude Code, Codex, dcode & more into a shared LangSmith trace schema to reconstruct, debug, and eval agent sessions."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "AshwinUgale/tracelint — deterministic linter for agent execution traces",
+    "url": "https://github.com/AshwinUgale/tracelint",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "仓库自述为一个针对 agent 运行记录的确定性 linter：读取执行 trace，标记结构性缺陷（被忽略的错误、schema 违规、循环），并附带证据，不使用 LLM judge。",
+      "语言为 Python，stars 为 12，forks 为 2，最近一次 push 时间为 2026-10-21。",
+      "该描述间接表明 agent trace 中存在可被规则化检测的「schema 违规」与「循环」等结构性问题类别，但未读取 README 正文，无法获得具体字段定义。"
+    ],
+    "raw_excerpt": "AshwinUgale/tracelint (★12, forks 2) — desc: A deterministic linter for agent runs — reads the execution trace and flags structural bugs (ignored errors, schema violations, loops) with evidence. No LLM judge."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Why Do Multi-Agent LLM Systems Fail? (MAST)",
+    "url": "https://arxiv.org/abs/2503.13657",
+    "published_at": "2025-03-17 (v1); v3 2025-10-26",
+    "key_points": [
+      "提出首个多智能体系统失败分类体系 MAST（Multi-Agent System Failure Taxonomy），基于 150 条 trace 的严格分析构建，由专家人工标注指导。",
+      "MAST 共识别 14 种失败模式（failure modes），归为 3 大类：(i) system design issues（系统设计问题）、(ii) inter-agent misalignment（智能体间失配）、(iii) task verification（任务验证）。",
+      "标注一致性高：人类标注者间 kappa = 0.88。",
+      "发布 MAST-Data 数据集：跨 7 个主流 MAS 框架收集的 1600+ 条带标注 trace，号称是首个刻画 MAS 失败动态的数据集。",
+      "为支持规模化标注，开发了 LLM-as-a-Judge 流水线，与人工标注达成高一致性。",
+      "用 MAST 与 MAST-Data 分析了不同模型（GPT4、Claude 3、Qwen2.5、CodeLlama）与不同任务（coding、math、general agent）上的失败模式分布。",
+      "论文指出这些失败需要更复杂的解决方案，并公开了 MAST-Data、MAST 与 LLM 标注器。"
+    ],
+    "raw_excerpt": "We introduce MAST-Data, a comprehensive dataset of 1600+ annotated traces collected across 7 popular MAS frameworks. ... we build the first Multi-Agent System Failure Taxonomy (MAST). We develop MAST through rigorous analysis of 150 traces, guided closely by expert human annotators and validated by high inter-annotator agreement (kappa = 0.88). This process identifies 14 unique modes, clustered into 3 categories: (i) system design issues, (ii) inter-agent misalignment, and (iii) task verification. To enable scalable annotation, we develop an LLM-as-a-Judge pipeline with high agreement with human annotations."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "RITE: Evaluating End-to-End Resilience to Silent Tool Errors in E-Commerce Agentic Systems",
+    "url": "https://arxiv.org/abs/2610.27777",
+    "published_at": "2026-10 (announced)",
+    "key_points": [
+      "关注工具调用中的「静默错误」（silent errors）：工具调用的期望输出可能在 agent 开发与执行之间发生偏移，返回一个看似合理但实际错误的数值，且不产生显式失败信号。",
+      "这类静默错误会沿后续决策传播到最终答案，因此需要端到端评估 agent 的韧性。",
+      "提出 Silent-error Resilience Task：在静默错误污染中间状态后，评估 agent 是否仍能完成原始查询。",
+      "构建 RITE 基准，来自人工编写的工业工作流与生产日志派生的输入；使用语义错误分类体系（semantic error taxonomy）向固定工作流前缀注入错误，冻结已记录的工具行为，再让 agent 自由继续。",
+      "数据集规模：9 个电商工作流、167 个匹配单元，共 501 个实例（含静默错误、正确值、显式失败三类）。",
+      "实验结论（摘要层面）：在 10 个近期 LLM 上，静默错误大约使任务成功率减半。"
+    ],
+    "raw_excerpt": "The expected output of a tool call can shift between agent development and execution, allowing a plausible but incorrect value to be returned without an explicit failure signal. These silent errors may propagate through subsequent decisions into final answers. ... We introduce RITE, a benchmark built from human-authored industrial workflows and production-log-derived inputs. ... It contains 167 matched units across nine e-commerce workflows, yielding 501 silent-error, correct-value, and explicit-failure instances. Across 10 recent LLMs, silent errors roughly halve task success"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "LangSmith Observability concepts（runs / traces / threads / trajectories）",
+    "url": "https://docs.smith.langchain.com/observability/concepts",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 中 agent 执行的每个工作单元（模型调用、工具调用、信息检索）记录为一个 run；单次操作的所有 run 归入一个 trace。",
+      "run 对应 OpenTelemetry 中的 span；run 通过唯一 trace ID 绑定到 trace。",
+      "单个 trace 最多 25,000 个 run，超过后 LangSmith 拒绝该 trace 的后续 run。",
+      "thread 表示多轮会话的 trace 序列，通过传入 thread_id metadata key 将 trace 归组。",
+      "trajectory 是 thread 内 trace 的投影，为扁平有序的消息列表（human/AI/tool 消息各出现一次，去除 run 嵌套）。",
+      "trace 级富化信息包括 feedback（tag + score，绑定 run ID，可为连续或离散）、tags（字符串）、metadata（key-value 对）。",
+      "发送 trace 有两种方式：integrations（自动埋点，覆盖 LangChain/LangGraph/OpenAI/Anthropic/CrewAI 等）与 manual instrumentation（@traceable 装饰器、trace context manager、RunTree API）。",
+      "LangSmith SaaS 保留 trace 数据 180 天，之后永久删除，仅保留有限 metadata 用于用量统计；加入 dataset 的数据可永久保留。"
+    ],
+    "raw_excerpt": "In LangSmith, every unit of work an agent performs, such as a model call, tool invocation, or information retrieval, is recorded as a run. The runs for a single operation are collected into a trace. ... If you are familiar with OpenTelemetry, you can think of a run as a span. ... Each trace is limited to a maximum of 25,000 runs."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "LangSmith Run data format（run 字段清单与 run types）",
+    "url": "https://docs.smith.langchain.com/reference/data_formats/run_data_format",
+    "published_at": null,
+    "key_points": [
+      "run 记录字段包含：id (UUID)、name、inputs (object)、run_type (string)、start_time、end_time、extra、error、outputs (object)、events (array，流式场景相关)、tags (array of strings)、trace_id (UUID)、dotted_order、status、child_run_ids、direct_child_run_ids、parent_run_ids、parent_run_id、feedback_stats、reference_example_id、session_id、in_dataset、serialized、inputs_s3_urls、outputs_s3_urls、price_model_id、app_path、last_queued_at、share_token。",
+      "run_type='llm' 时，inputs 通常包含发送给模型的 messages 数组；outputs 通常包含模型返回的 messages 数组。",
+      "token 用量字段：total_tokens、prompt_tokens、completion_tokens（均为 integer）。",
+      "成本字段：total_cost、prompt_cost、completion_cost（均为 decimal），另有 price_model_id 标识所用定价模型。",
+      "延迟相关字段：start_time、end_time，以及 first_token_time（仅对 run_type='llm' 且启用 streaming 的 run 有效，记录模型输出首个 token 生成时间）。",
+      "status 字段取值示例：'error'、'pending'、'success'；error 字段记录错误消息。",
+      "run_type 枚举共 8 种：chain（步骤序列/组合）、llm（语言模型调用）、embedding（embedding API 调用）、prompt（提示模板，格式化输入后传给模型）、tool（模型调用的函数或外部动作）、retriever（获取相关文档或上下文的查询）、parser（将原始模型输出转为结构化格式的输出解析器）。",
+      "dotted_order 是分层可排序键，格式为 <run_start_time>Z<run_uuid>.<child_run_start_time>Z<child_run_uuid>…；id 等于 dotted_order 最后 36 字符，trace_id 等于 dotted_order 中第一个 UUID，parent_run_id 为倒数第二个 UUID。",
+      "feedback_stats 为该 run 的反馈统计聚合（如 {correctness: {n, avg}}）。"
+    ],
+    "raw_excerpt": "total_tokens integer Total number of tokens processed by the run. prompt_tokens integer Number of tokens in the prompt of the run. completion_tokens integer Number of tokens in the completion of the run. total_cost decimal Total cost associated with processing the run. ... first_token_time datetime Time when the first token of a model output was generated. Only applies for runs with run_type=\"llm\" and streaming enabled."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "LangSmith Trace with OpenTelemetry（OTLP 接入）",
+    "url": "https://docs.langchain.com/langsmith/trace-with-opentelemetry",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 支持基于 OpenTelemetry 的 tracing：OTel SDK 产生 span，经 OTLP 协议送到 OpenTelemetry Collector，Collector 批量分发（fanout）到一个或多个后端，LangSmith 在其 OTLP endpoint 接收 span 并展示为 trace。",
+      "OTLP endpoint 为 https://api.smith.langchain.com/otel（base URL），认证通过 OTEL_EXPORTER_OTLP_HEADERS 中的 x-api-key 传递。",
+      "OTEL_EXPORTER_OTLP_ENDPOINT 是 base URL，OTLP/HTTP exporter 会自行追加 /v1/traces；若把 base endpoint 写成 .../otel/v1/traces 会导致重复路径并返回 404。",
+      "自托管 LangSmith 需在 api endpoint 后追加 /api/v1，例如 OTEL_EXPORTER_OTLP_ENDPOINT=https://ai-company.com/api/v1/otel。",
+      "可通过 Langsmith-Project header 指定项目名（默认 'default'）；agent-based workspace 改用 Langsmith-Agent-Id 与 Langsmith-Agent-Environment（local/development/staging/production）两个 header，二者必须同时设置，且不能与 Langsmith-Project 并用，否则返回 400。",
+      "LangChain/LangGraph 应用可通过 pip install \"langsmith[otel]\" 并设置 LANGSMITH_OTEL_ENABLED=true 启用 OTel 集成，要求 langsmith>=0.3.18，推荐 >=0.4.25。",
+      "非 LangChain 应用可用标准 OTel client 手动埋点，需设置 span 属性如 langsmith.span.kind=LLM、langsmith.metadata.user_id、gen_ai.system、gen_ai.request.model、llm.request.type=chat。",
+      "区域化 SaaS endpoint：GCP EU 用 eu.api.smith.langchain.com，GCP APAC 用 apac.api.smith.langchain.com，AWS US 用 aws.api.smith.langchain.com。"
+    ],
+    "raw_excerpt": "The OpenTelemetry SDK instruments your application code and emits spans. Spans travel via the OTLP protocol to an OpenTelemetry Collector, which batches and routes them to one or more destinations simultaneously (fanout). LangSmith receives spans at its OTLP endpoint and displays them as traces in the dashboard. ... OTEL_EXPORTER_OTLP_ENDPOINT = https://api.smith.langchain.com/otel"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Langfuse Data Model（observations / traces / sessions）",
+    "url": "https://langfuse.com/docs/observability/data-model",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 将应用数据组织为三个核心概念：observations、traces、sessions。",
+      "observation 是应用的单个步骤：LLM 调用、工具调用、检索步骤等；可嵌套以反映应用结构；Langfuse 支持 LLM 专用 observation 类型如 generations 和 events。",
+      "Langfuse 把 span 称为 observation，同时 span 也是具体的 observation 类型之一。",
+      "trace 表示单次请求或操作（如一次从用户提问到最终回复的 chatbot 交互），是共享同一 trace_id 的所有 observation 的逻辑分组。",
+      "trace 级属性 user_id、session_id、tags、metadata 存在于该 trace 内每个 observation 上，SDK 会自动传播。",
+      "存储上 Langfuse 只有一张 observations 表，每行保存 observation 级数据加一份 trace 级属性副本，以加速查询与聚合。",
+      "observation 行包含的字段示例：id、type、name、latency、trace_id、trace_name、user_id、session_id。",
+      "可添加的属性类型：Environments（区分 production/staging/development）、Tags、User、Metadata（自定义 key-value）、Releases & Versions。",
+      "Langfuse 构建在 OpenTelemetry 之上，因此不锁定 Langfuse 专用 SDK，可同时把 trace 发往多个目的地（如 Langfuse + Datadog）。",
+      "Langfuse 不同步发送 trace，而是在本地批量缓冲后后台发送；短生命周期应用必须在退出前显式调用 flush()，否则队列中未发送的 trace 会丢失。"
+    ],
+    "raw_excerpt": "Observations are the individual steps of your application: LLM calls, tool calls, retrieval steps, and so on. ... A trace represents a single request or operation ... It is the logical grouping of all observations that share the same trace_id. ... Conceptually, Langfuse stores one observations table, and each row holds the observation-level data plus a copy of the trace-level attributes."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Langfuse Observation Types（observation 类型枚举）",
+    "url": "https://langfuse.com/docs/observability/features/observation-types",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 支持的 observation 类型共 10 种：event、span、generation、agent、tool、chain、retriever、evaluator、embedding、guardrail。",
+      "event 是基础构件，用于追踪 trace 中的离散事件；span 是表示工作单元持续时间的通用 observation 类型。",
+      "generation 记录 AI 模型的生成，包含 prompts、token usage 和 costs。",
+      "agent 决定应用流程，例如在 LLM 指导下使用工具；tool 表示单个动作（如函数或 API 调用，例如 weather API）。",
+      "chain 是不同应用步骤之间的链接（如把上下文从 retriever 传给 LLM 调用）；retriever 表示只做查找而不改变状态的数据检索步骤，如调用向量库、数据库或其他知识源。",
+      "evaluator 表示评估 LLM 输出相关性/正确性/有用性的函数；embedding 是生成 embedding 的 LLM 调用，可包含 model、token usage 和 costs；guardrail 是防御恶意内容或越狱的组件。",
+      "框架集成会自动设置 observation 类型（如 langchain 中 @tool 装饰的方法自动设为 tool）；也可在 SDK 中通过 as_type（Python）/ asType（TypeScript）手动指定。",
+      "observation 类型要求 Python SDK >= 3.3.1、TypeScript SDK >= 4.0.0。",
+      "示例代码显示 observation 可更新 input、output、metadata、model、usageDetails（如 {input: prompt_tokens, output: completion_tokens}）等字段。",
+      "retriever 类型示例中，input 记录 {query, topK}，output 记录检索结果，metadata 记录 {vectorStore: 'pinecone', similarity: 'cosine'}。"
+    ],
+    "raw_excerpt": "generation logs generations of AI models incl. prompts, token usage and costs. ... retriever represents a data-retrieval step that only looks something up rather than changing state, such as a call to a vector store, database, or other knowledge source. ... embedding is a call to a LLM to generate embeddings and can include model, token usage and costs"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Langfuse Token & Cost Tracking（usage details / cost details）",
+    "url": "https://langfuse.com/docs/observability/features/token-and-cost-tracking",
+    "published_at": null,
+    "key_points": [
+      "对每次 LLM generation，Langfuse 记录两项内容，且各自按 usage type 拆分：usage details（每种 usage type 消耗的单位数）与 cost details（每种 usage type 的美元成本）。",
+      "usage details 与 cost details 都记录在 type 为 generation 和 embedding 的 observation 上。",
+      "两者均可为 ingested（通过 API、SDK 或集成从 LLM 响应发送）或 inferred（Langfuse 依据 generation 的 model 参数与含各 usage type 价格的 model definition 推算）。",
+      "两者同时存在时，ingested 值优先于 inferred 值。",
+      "usage type 示例包括 input、output，以及随 provider 而异的更细类型如 cached_tokens、audio_tokens。",
+      "Langfuse 内置 OpenAI、Anthropic、Google 等流行模型的价格，多数集成自动捕获 usage 与 cost，通常无需配置。",
+      "若模型指定了 tokenizer，Langfuse 会自动为 ingested generation 计算 token 数；支持的 tokenizer 包括 gpt-4o→o200k_base、gpt*→cl100k_base、claude*→@anthropic-ai/tokenizer。",
+      "model definition 中的 usage type 键必须与 generation 的 usage_details 对象中的键完全匹配。",
+      "支持 pricing tiers（按 usage 阈值、model 参数、metadata 条件匹配），用于上下文长度或 service_tier 导致的分档定价。",
+      "对 OpenAI o1 等 reasoning 模型，若未 ingest token 数，Langfuse 无法推断成本，因为无法看到 reasoning tokens。"
+    ],
+    "raw_excerpt": "For every LLM generation, Langfuse records two things, each broken down by usage type (for example input and output, or more specific types like cached_tokens and audio_tokens that vary by provider): Usage details: number of units consumed per usage type; Cost details: USD cost per usage type. Both are captured on observations of type generation and embedding"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "Langfuse OpenTelemetry (OTLP) 接入",
+    "url": "https://langfuse.com/integrations/native/opentelemetry",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 可在 /api/public/otel（OTLP）endpoint 接收 trace，作为 OpenTelemetry Backend 使用。",
+      "OTEL_EXPORTER_OTLP_ENDPOINT 示例：https://cloud.langfuse.com/api/public/otel（EU）；其他区域为 us.cloud.langfuse.com、jp.cloud.langfuse.com、hipaa.cloud.langfuse.com；本地部署（>= v3.22.0）为 http://localhost:3000/api/public/otel。",
+      "认证使用 Basic Auth：OTEL_EXPORTER_OTLP_HEADERS=\"Authorization=Basic ${AUTH_STRING},x-langfuse-ingestion-version=4\"，AUTH_STRING 为 pk-lf-...:sk-lf-... 的 base64 编码。",
+      "Langfuse 目前支持 OTLP over HTTP，包括 HTTP/JSON 与 HTTP/protobuf；尚不支持 gRPC。",
+      "直接通过 OpenTelemetry 发送 span 时需带 x-langfuse-ingestion-version: 4 header，否则直接摄入的 OTel 数据可能延迟最多 10 分钟才出现在 v4 数据模型与 v2 Observations/Metrics API 中。",
+      "signal-specific 配置下 trace endpoint 为 /api/public/otel/v1/traces。",
+      "OTLP endpoint 取代了已弃用的 POST /api/public/ingestion API。",
+      "使用 OTel 时，若需按 userId、sessionId、metadata、version、release、tags 过滤与聚合，必须把这些 trace 级属性传播到 trace 内每个 span，而非仅根 span。",
+      "属性映射：userId 经 langfuse.user.id 或 user.id，sessionId 经 langfuse.session.id 或 session.id，metadata 经 langfuse.trace.metadata.*，version 经 langfuse.version，release 经 langfuse.release，tags 经 langfuse.trace.tags，trace_name 经 langfuse.trace.name。",
+      "推荐用 OpenTelemetry Baggage 配合 BaggageSpanProcessor 传播这些属性；SDK 提供 propagate_attributes()（Python）/ propagateAttributes()（TypeScript）辅助方法。",
+      "Langfuse 会把收到的 OTel trace 映射到 Langfuse 数据模型，并支持 OTel GenAI 生态中流行的额外属性（attribute mapping），因为 GenAI 的 Semantic Conventions 仍在演进。",
+      "OTel 原生 Langfuse SDK 是官方 OpenTelemetry client 之上的薄层，自动把 span 转为 Langfuse observation，并提供 token usage、cost tracking、prompt linking、scoring 等 LLM 专用 helper；默认聚焦 LLM 相关 span（Langfuse SDK span、带 gen_ai.* 属性的 span、已知 LLM instrumentor）。"
+    ],
+    "raw_excerpt": "Langfuse can receive traces on the /api/public/otel (OTLP) endpoint. ... Please note that Langfuse currently supports OTLP over HTTP with both HTTP/JSON and HTTP/protobuf. gRPC is not supported yet. ... If you want to filter and aggregate by userId, sessionId, metadata, version, release, or tags, you need to propagate these trace-level attributes to every span in the trace."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Langfuse Pricing (official pricing page)",
+    "url": "https://langfuse.com/pricing",
+    "published_at": null,
+    "key_points": [
+      "Langfuse Cloud 计费以 \"units\" 为单位：Hobby 档含 50k units/月，Core 与 Pro 档含 100k units/月，超出部分 $8/100k units，量大可更低（有 pricing calculator）。",
+      "各档位月费：Hobby 免费；Core $29/月；Pro $199/月；Enterprise $2499/月。",
+      "数据保留期按档位区分：Hobby 30 天、Core 90 天、Pro 3 年（含 data retention management）、Enterprise 可定制。",
+      "Ingestion 吞吐上限按档位区分：Hobby 1,000 requests/min，Core 4,000 requests/min。",
+      "Self-hosted（OSS）为 MIT 许可免费，无用量计费。",
+      "Pro 档起提供 data retention management、SOC2 & ISO27001 报告、HIPAA-ready region。"
+    ],
+    "raw_excerpt": "Hobby ... 50k units / month included 30 days data access ... Core ... 100k units / month included, additional: $8/100k units. Lower with volume ( pricing calculator ) 90 days data access ... Pro ... 3 years data access Data retention management ... Ingestion throughput 1,000 requests / min (Hobby) / 4,000 requests / min (Core)"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Langfuse Docs — Billable Units",
+    "url": "https://langfuse.com/docs/administration/billable-units",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 计费口径为 ingested units，units 由三类实体构成：traces、observations、scores。",
+      "计费公式：Units = Count of Traces + Count of Observations + Count of Scores。",
+      "由 Langfuse 自身功能（LLM-as-a-Judge、Annotation Queues、experiments）产生的 trace/observation/score 同样计入可计费 units。",
+      "官方给出的示例量级：20,070 traces + 119,500 observations + 561 scores = 140,131 units/月（约 1,681,572 units/年），即单条 trace 平均约 6 个 observation。",
+      "Self-hosted OSS 无用量计费，但该 units 定义仍可用于估算数据量与迁移到 Cloud 的成本。",
+      "可在内置 Langfuse Usage Management dashboard 中读取实际 units 计数。"
+    ],
+    "raw_excerpt": "Langfuse pricing is based on the number of ingested units per billing period. Units are either traces , observations or scores . Units = Count of Traces + Count of Observations + Count of Scores ... For the example above: Units = 20,070 Traces + 119,500 Observations + 561 Scores = 140,131 units / month"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Langfuse Docs — Sampling",
+    "url": "https://langfuse.com/docs/observability/features/sampling",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 的采样在客户端（client-side）完成，用于控制采集到 Langfuse 的 trace 量。",
+      "采样率通过 LANGFUSE_SAMPLE_RATE 环境变量或 SDK 构造参数 sample_rate / sampleRate 配置，取值 0–1，默认值为 1（全量采集）。",
+      "采样决策发生在 trace 级别：一条 trace 被采样则其内部所有 observations 与 scores 一并被采样；未被采样则整条 trace 的 observations 与 scores 都不发送。",
+      "Langfuse 尊重 OpenTelemetry 的采样决策，可在 OTEL SDK 中配置 sampler（如 TraceIdRatioBasedSampler(0.2) 只发送 20% trace）来控制成本与降噪。",
+      "官方将采样定位为高流量应用降低数据量与成本的手段（\"can significantly reduce data volume for high-traffic applications\"）。"
+    ],
+    "raw_excerpt": "Sampling can be used to control the volume of traces collected by Langfuse. Sampling is handled client-side. ... The default value is 1, meaning that all traces are collected. A value of 0.2 means that only 20% of the traces are collected. The SDK samples on the trace level meaning that if a trace is sampled, all observations and scores within that trace will be sampled as well. ... Langfuse respects OpenTelemetry's sampling decisions."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangSmith Docs — Usage and billing (data retention & billing model)",
+    "url": "https://docs.langchain.com/langsmith/usage-and-billing",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 按数据保留期把 trace 分为两档：Base 保留 14 天，Extended 保留 180 天；Extended 单价更高（具体价格指向 pricing page）。",
+      "自 2026 年 9 月 14 日起，SaaS 客户的最长长期 trace 保留期上限改为 180 天；Enterprise 客户可在该上限内按 workspace 自定义 extended 保留期。",
+      "保留期变更只对新 trace 生效，已有 trace 保持原档位。",
+      "发票上只有两个计费指标：\"LangSmith Traces (Base Charge)\"（包含所有 trace，不分档）与 \"LangSmith Traces (Extended Data Retention Upgrades)\"（只计被升级为 extended 的 trace）。",
+      "存在保留期自动升级机制：online evaluators、automation rules、以及显式传 extend_trace_retention=true 的 API/SDK feedback 会把 base trace 升级为 extended，从而同时提高保留期与成本；新创建的 online evaluator 与 automation rule 默认开启升级，可显式 opt out。",
+      "通过 UI 提交的 feedback/notes 与手动加入 annotation queue 不会升级保留期；Experiments 的 runs 默认以 extended 保留期创建。",
+      "保留期结束后 trace 在 UI 与 API 中不可访问，输入输出等用户数据随后从内部系统删除；部分 trace 元数据可能被无限期保留用于分析与计费。",
+      "Monitoring 面板依赖保留超过 30 天的 trace 元数据，因此 base 档 trace 过期后监控图表仍保持准确；Datasets 为无限期保留。"
+    ],
+    "raw_excerpt": "LangSmith has two tiers of traces based on Data Retention ... Base ... Extended ... Retention Period 14 days 180 days ... On your LangSmith invoice, you will see two metrics that we charge for: LangSmith Traces (Base Charge) ... LangSmith Traces (Extended Data Retention Upgrades). ... Most traces use base retention. Some actions, such as online evaluators and automation rules, can extend a trace to a longer retention period at a higher cost."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "LangSmith Pricing (official pricing page)",
+    "url": "https://www.langchain.com/pricing-langsmith",
+    "published_at": null,
+    "key_points": [
+      "LangSmith 采用按量付费（pay-as-you-go），计价货币单位为 LSU（LangChain Standard Units），标价 $1.00 / LSU。",
+      "Developer 档 $0/seat/月，含 5k base traces/月，超出后按量付费，限 1 个 seat。",
+      "Plus 档 $39/seat/月，含 10k base traces/月，超出后按量付费，seat 不限。",
+      "Enterprise 档为定制价格 + 按量付费，支持 self-hosted 与 hybrid 部署。",
+      "trace 用量按 \"base traces\" 计量，页面提供 usage calculator 估算月度账单，并注明 \"Actual LSU consumption varies with the work your agents perform\"。",
+      "页面提供 trace ingestion 与 trace size 的小时级限额说明链接（hourly trace ingestion and trace event limits）。"
+    ],
+    "raw_excerpt": "Pay-as-you-go. LSU LangChain Standard Units. $1.00 / LSU ... Developer ... Up to 5k base traces / mo, then pay-as-you-go ... Plus ... $39 / seat per month ... Up to 10k base traces / mo, then pay-as-you-go ... Trace volume (Observability & Evaluation) 5k base traces / mo included Pay as you go thereafter"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Datadog Docs — Agent Observability (LLM Observability) overview",
+    "url": "https://docs.datadoghq.com/llm_observability.md",
+    "published_at": null,
+    "key_points": [
+      "Datadog 的 LLM 可观测产品现名为 Agent Observability；应用中每个被处理的请求在 Datadog 中表示为一条 trace。",
+      "一条 trace 可代表单次 LLM 推理（含 tokens、错误信息、延迟）、预定义的 LLM 工作流，或由 LLM agent 执行的动态工作流。",
+      "每条 trace 包含若干 span，span 表示 agent 做出的每个选择或工作流的每个步骤；trace 还可包含输入输出、延迟、隐私问题、错误等。",
+      "该产品提供开箱即用的成本/延迟/性能/用量趋势仪表盘，以及自动分析 trace 以识别成本与可靠性问题的 Insights 功能（无需额外配置）。"
+    ],
+    "raw_excerpt": "Each request fulfilled by your application is represented as a trace on the Agent Observability page in Datadog. ... Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, latency, privacy issues, errors, and more."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Datadog Pricing list (official pricing page)",
+    "url": "https://www.datadoghq.com/pricing/list/",
+    "published_at": null,
+    "key_points": [
+      "Datadog 通用 APM 计价：APM Ingestion 按 ingested GB 计 $0.10/GB/月（年付口径）。",
+      "APM Indexed Spans 按保留期分档计价（年付口径）：7 天 $1.27/1M spans/月，15 天 $1.70/1M spans/月，30 天 $2.50/1M spans/月。",
+      "Logs 计价：Ingestion $0.10/GB/月；Indexed Log Events 按保留期分档：3 天 $1.06/1M、7 天 $1.27/1M、15 天 $1.70/1M、30 天 $2.50/1M（年付口径）。",
+      "Flex Logs Storage 按存储事件数计价：$0.05/1M events stored/月（年付口径）。",
+      "该定价页正文中未出现 LLM Observability / Agent Observability 的独立计价条目。"
+    ],
+    "raw_excerpt": "APM Ingestion* Per ingested GB, per month $ 0.10 ... APM - Indexed Spans* Per 1M indexed spans (7-day retention), per month $ 1.27 ... (15-day retention) $ 1.70 ... (30-day retention) $ 2.50 ... Logs - Ingestion Per ingested logs (1GB), per month $ 0.10"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Datadog Sensitive Data Scanner (official docs, markdown)",
+    "url": "https://docs.datadoghq.com/security/sensitive_data_scanner.md",
+    "published_at": null,
+    "key_points": [
+      "Sensitive Data Scanner 的扫描范围明确包含 Agent Observability traces（即 LLM 可观测性 trace），可扫描 LLM 应用的 inputs 与 outputs，用于防止 prompt、completion 与 LLM workflow metadata 中的 PII、API key、专有信息泄露。",
+      "对 Agent Observability 数据源，支持的动作是 Redact、Partially redact、Hash 三种；Mask 动作在 Agent Observability 列标注为 No（Mask 仅支持 Logs、APM、RUM，Events 亦为 No）。",
+      "四种动作语义：Redact 用自选 token（如 [sensitive_data]）替换整个匹配值；Partially redact 只替换匹配值中的特定部分；Hash 用不可逆唯一标识符替换整个匹配值；Mask 为混淆，持有 Data Scanner Unmask 权限的用户可反混淆查看原文。",
+      "执行位置有两种：云端扫描时数据先离开客户环境提交到 Datadog 后端，在后端处理阶段完成扫描与脱敏，之后才被索引并展示在 UI；客户环境内扫描则通过 Observability Pipelines 的 Sensitive Data Scanner processor 在日志离开本地前完成脱敏。",
+      "云端扫描可扫描的内容粒度：Logs 覆盖全部结构化与非结构化内容（含 message 与 attribute values）；APM 仅 span attribute values；RUM 仅 event attribute values；Events 仅 event attribute values。",
+      "云端扫描可为每个产品设置 10% 到 99% 之间的采样率以控制成本；但文档注明扫描采样数据时无法选择会混淆数据的动作。",
+      "规则来源包括 Datadog Scanning Rule Library 中的预定义规则（检测 email 地址、信用卡号、API key、authorization token、网络与设备信息等常见模式），以及用户自建 regex 规则。",
+      "Agent Observability 的扫描采用托管配置模型，与遥测数据扫描不同：组织首次访问 Agent Observability Settings 页面时会自动创建一个默认扫描组。",
+      "Datadog 声明其工具与策略符合 PCI v4.0。",
+      "对云存储与代码仓库（Secret Scanning），Sensitive Data Scanner 只能检测敏感数据，不能施加混淆动作。"
+    ],
+    "raw_excerpt": "Sensitive Data Scanner can scan Agent Observability traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata. ... | Mask | Yes | Yes | Yes | No | No | ... With Sensitive Data Scanner in the cloud, you submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Langfuse Docs — Masking sensitive LLM data",
+    "url": "https://langfuse.com/docs/observability/features/masking",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 的 masking 定位是让用户在 trace 数据离开应用之前脱敏，用途包括：对 trace 或 observation 的 inputs、outputs、metadata 中的敏感信息脱敏；在导出前转换 OpenTelemetry span attributes；满足合规或隐私要求的细粒度数据过滤。",
+      "Python SDK 提供两个 masking 钩子：mask_otel_spans（推荐，新项目应优先使用）与 mask（legacy）。",
+      "mask_otel_spans 在导出阶段运行，时机在 Langfuse 决定本客户端应导出哪些 OpenTelemetry span 之后、且在 Langfuse media 处理之后；覆盖范围包括 Langfuse SDK span 与由该客户端导出的第三方 instrumentation 的原始 OpenTelemetry span attributes。",
+      "legacy 的 mask 参数在 Langfuse SDK attributes 创建时同步运行，只作用于通过 start_observation()、update() 等 Langfuse SDK API 写入的数据，不会检查第三方 instrumentation 产生的最终原始 OpenTelemetry span attributes。",
+      "mask_otel_spans 接收一个 OpenTelemetry 导出批次（params.spans），批次不保证包含完整 trace、请求或 Langfuse observation 树；返回稀疏 patch，OtelSpanPatch 先执行 delete_attributes 再应用 set_attributes，同一 key 同时出现时 set_attributes 生效。",
+      "该钩子只能修改 span attributes，不能修改 span name、IDs、父子关系、resource attributes、events、links 或 instrumentation scope。",
+      "mask_otel_spans 是同步函数，通常运行在 OpenTelemetry batch span processor 的 worker 线程上，应保持确定性与快速；文档明确建议避免长耗时工作、无界重试、请求级状态、当前 active span 与异步 I/O，因为慢速 masking 会堵塞导出队列并延迟 span 导出。",
+      "失败语义：若 mask_otel_spans 抛异常或返回无效的 MaskOtelSpansResult，Langfuse 会丢弃整个导出批次；若单个 OtelSpanPatch 无效，则只丢弃该 span；若返回的 attribute 值无效，则只删除受影响的 attribute。",
+      "masking 只影响经由该 Langfuse 客户端导出的 span；若同一批 OpenTelemetry span 通过另一个 span processor 或 exporter 发往其他可观测性后端，该后端会收到自己那份未修改的副本，需单独配置脱敏。",
+      "Python SDK v5 中 metadata attributes（langfuse.observation.metadata.<key> 与 langfuse.trace.metadata.<key>）存放的是 JSON 编码值，需用 json.loads() 解码、并以 json.dumps() 写回替换值。"
+    ],
+    "raw_excerpt": "Masking gives you control over the tracing data sent to Langfuse. Use masking functions to redact sensitive information before trace data leaves your application ... mask_otel_spans ... Recommended ... At export stage, after Langfuse decides which OpenTelemetry spans this client should export and after Langfuse media handling ... If mask_otel_spans raises an exception or returns an invalid MaskOtelSpansResult, Langfuse drops the whole export batch."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Langfuse — Security & Compliance Overview",
+    "url": "https://langfuse.com/security",
+    "published_at": null,
+    "key_points": [
+      "Langfuse 声明其符合 GDPR，并提供 data retention、data masking、data deletion 三项能力以管理个人数据的处理，且可签署 DPA（数据处理协议）。",
+      "Langfuse Cloud 的数据驻留区域：US 与 HIPAA region 位于 us-west-2（Oregon），EU region 位于 eu-west-1（Ireland），JP region 位于 ap-northeast-1（Japan）。",
+      "Langfuse Cloud 运行在 AWS 与 ClickHouse Cloud 的隔离区域环境中；Postgres、ClickHouse、Redis、S3 等支撑服务同样受该云安全计划覆盖，包括私网部署、最小权限服务访问、静态与传输加密、监控与供应商合规审查。",
+      "若客户要求在自己账号或 VPC 内实现基础设施级隔离，可使用 self-hosted Langfuse 或联系 Enterprise 方案；自托管版本可完全离线/air-gapped 运行。",
+      "Langfuse 提供三种部署模型：Langfuse Cloud（多租户 SaaS，含 US、EU、Japan、HIPAA 数据区域）、Self-hosted OSS（MIT 许可，部署于自有基础设施）、Self-hosted Enterprise Edition（商业许可，含额外安全/合规特性与厂商支持）。",
+      "租户隔离机制：所有产品数据按 project 划分作用域，每条记录关联 projectId，API key 按 project 作用域，认证请求在查询前经 RBAC 授权。",
+      "客户侧控制手段包括 masking、data retention、data deletion、region selection、SSO/SCIM 与 audit logs，用于减少到达 Langfuse 的数据量及其留存时长。",
+      "合规框架覆盖 SOC 2 Type II、ISO 27001、HIPAA，以及面向政府的 Hardening；生产服务基于同一开源代码库，接受年度第三方渗透测试。"
+    ],
+    "raw_excerpt": "Langfuse is GDPR compliant, and offers data retention, data masking and data deletion capabilities to manage the processing of personal data. You can enter into a DPA with Langfuse. ... US & HIPAA region: us-west-2 (Oregon) / EU region: eu-west-1 (Ireland) / JP region: ap-northeast-1 (Japan) ... Langfuse Self-Hosted can be run fully offline/air-gapped."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Braintrust Docs — Observe logs (Logs / tracing overview)",
+    "url": "https://www.braintrust.dev/docs/guides/logs",
+    "published_at": null,
+    "key_points": [
+      "Braintrust 将每次请求捕获为 trace（traces），可在 UI 中实时查看、过滤与分析，用于监控生产行为、定位问题并为改进收集数据。",
+      "日志（logs）与实验（experiments）使用同一数据结构：同一套埋点代码同时适用于 logging 与 evaluation，生产与测试捕获的 trace 数据一致。",
+      "Scores 与 feedback 同时作用于 logs 和 experiments；生产数据可直接转为评测数据集（evaluation datasets）。",
+      "Logs 页面以可搜索、可过滤的表格展示所有 trace，每一行代表一条完整 trace 及其 root span；可浏览 trace 与单个 span。",
+      "支持按 metadata 或 tags 对相关 trace 分组，并可创建自定义列（custom columns）以展示重要字段值。",
+      "支持对 trace 打标签（tags）、将日志导出为 CSV/JSON，或用 CLI（bt sync pull、bt view logs）在本地拉取与查看。",
+      "内置 AI agent「Loop」可用自然语言调查日志；「Patterns」按计划在 trace 积压上排查反复出现的问题并给出证据与修复建议；「Topics」对每条 trace 按 facets（Task 用户意图、Sentiment 情绪、Issues agent 问题）打标并聚类成主题。",
+      "自定义 dashboard 可跨 logs 与 experiments 聚合指标，跟踪请求数（request counts）、延迟（latency）、token 用量、成本、scores 与自定义指标随时间的变化。",
+      "文档将「Score online」列为对生产质量做在线评估的下一步能力。",
+      "文档将「静默失败检测（silent failure detection）」描述为 Topics 的用途之一：捕获不会触发显式检查的质量问题。"
+    ],
+    "raw_excerpt": "After instrumenting your application, Braintrust captures every request as traces that you can view, filter, and analyze in real time. ... Logs use the same data structure as experiments ... Custom dashboards aggregate metrics across your logs and experiments. Track request counts, latency, token usage, costs, scores, and custom metrics over time. ... Each row represents a complete trace with its root span."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "W&B Weave Docs — Trace objects（访问受限，未取得正文）",
+    "url": "https://docs.wandb.ai/weave/guides/tracking/trace-objects",
+    "published_at": null,
+    "key_points": [
+      "该 URL 返回访问码墙（\"Access Restricted\"），未获得任何关于 Weave Op 字段、attributes 或 trace 对象结构的正文内容。",
+      "本条仅记录抓取失败这一事实，不包含任何可用于回答子问题的技术结论。"
+    ],
+    "raw_excerpt": "Access Restricted To gain access to this doc, provide your access code below. Enter access code Access"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Datadog Docs — LLM Observability Monitoring（仅返回站点导航，未取得正文）",
+    "url": "https://docs.datadoghq.com/llm_observability/monitoring/",
+    "published_at": null,
+    "key_points": [
+      "该页面为 JavaScript 渲染，抓取结果仅包含 Datadog 全站导航目录（Agent、APM、Logs、Monitors、Metrics 等条目），未返回 LLM Observability 监控正文。",
+      "抓取结果中可见站点存在 Monitors and Alerting、Monitor Types、Notification Rules 等通用告警文档入口，但未取得任何 LLM Observability 专属指标或告警配置示例内容。",
+      "本条仅记录抓取失败这一事实，不包含任何可用于回答子问题的技术结论。"
+    ],
+    "raw_excerpt": "Investigate / Home / Docs / API ... Monitors and Alerting Draft Monitors Configure Monitors Monitor Templates Monitor Types Notifications ... [truncated]"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Generative AI semantic conventions have moved (opentelemetry.io 迁移公告页)",
+    "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/",
+    "published_at": null,
+    "key_points": [
+      "opentelemetry.io 上原有的 GenAI 语义约定页面（含 agent spans 页面）已标记为迁移，不再在该仓库维护。",
+      "GenAI 语义约定已迁移至独立的 OpenTelemetry GenAI semantic conventions 仓库。",
+      "该页面本身不再包含 agent span 的规范正文，仅剩迁移提示。"
+    ],
+    "raw_excerpt": "Moved: Generative AI semantic conventions Important GenAI semantic conventions have moved to the OpenTelemetry GenAI semantic conventions repository . This page has moved and is no longer maintained in this repository."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Semantic conventions for generative client AI spans (gen-ai-spans.md, open-telemetry/semantic-conventions-genai)",
+    "url": "https://raw.githubusercontent.com/open-telemetry/semantic-conventions-genai/main/docs/gen-ai/gen-ai-spans.md",
+    "published_at": null,
+    "key_points": [
+      "该文档状态为 Development（非 Stable），即 GenAI span 语义约定仍在演进中。",
+      "文档的 span 类型目录包含：Inference、Embeddings、Retrievals、Fetch response、Memory、Execute tool span，说明 tool 调用被建模为独立的 span 类型。",
+      "Embeddings span 的 gen_ai.operation.name SHOULD 为 `embeddings`，span name SHOULD 为 `{gen_ai.operation.name} {gen_ai.request.model}`，span kind SHOULD 为 CLIENT。",
+      "Retrievals span 的 gen_ai.operation.name SHOULD 为 `retrieval`，span name SHOULD 为 `{gen_ai.operation.name} {gen_ai.data_source.id}`，span kind SHOULD 为 CLIENT。",
+      "gen_ai.operation.name 的已知取值包含 `chat`、`create_agent`（Create GenAI agent）、`create_memory`、`embeddings`、`retrieval` 等，其中 `create_agent` 表明 agent 创建本身被建模为一种 operation。",
+      "GenAI span 的 Required 属性包含 gen_ai.operation.name 与 gen_ai.provider.name；条件必填包含 error.type（出错时）、gen_ai.request.model（可得时）、server.port（设置 server.address 时）。",
+      "为便于采样决策，gen_ai.operation.name、gen_ai.provider.name、gen_ai.request.model、server.address、server.port 应在 span 创建时（at span creation time）就提供。",
+      "token 用量属性区分总量与细分：gen_ai.usage.input_tokens 为总量，gen_ai.usage.cache_read.input_tokens、gen_ai.usage.text.input_tokens、gen_ai.usage.image.input_tokens 为子集，文档给出 100 text tokens（40 cached）+ 200 image tokens → input_tokens=300、cache_read=40 的示例。",
+      "gen_ai.provider.name 的已知取值包含 openai、anthropic、aws.bedrock、azure.ai.inference、gcp.gemini、gcp.gen_ai、gcp.vertex_ai。",
+      "Retrievals span 提供 gen_ai.retrieval.top_k（Recommended）与 gen_ai.retrieval.documents（Opt-In，含 id 与 score）属性。"
+    ],
+    "raw_excerpt": "### Execute tool span ... **Span kind** SHOULD be `CLIENT`. ... The following attributes can be important for making sampling decisions and SHOULD be provided **at span creation time** (if provided at all): gen_ai.operation.name, gen_ai.provider.name, gen_ai.request.model, server.address, server.port ... | `create_agent` | Create GenAI agent | ... if a request has 100 text tokens (40 cached) and 200 image tokens: - `gen_ai.usage.input_tokens`: 300 - `gen_ai.usage.cache_read.input_tokens`: 40"
+  }
+]

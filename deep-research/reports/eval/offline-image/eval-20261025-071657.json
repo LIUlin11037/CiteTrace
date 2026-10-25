@@ -1,0 +1,38 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 0.7631578947368421,
+  "mean_alignment": 1.0,
+  "alignment_questions": 1,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 0.7631578947368421,
+      "alignment": 1.0,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-react",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.7631578947368421,
+      "citations_total": 38,
+      "citations_missing": [
+        "reports/eval/reports/gq-react.md · ## 摘要 L3-8；## 一、ReAct 的核心思想 L9-10；### 1.2 核心机制 L15-22",
+        "reports/eval/reports/gq-react.md · ### 1.4 实验证据 L28-36",
+        "reports/eval/reports/gq-react.md · ## 三、ReAct 与纯 CoT 的关键区别 L60-66",
+        "reports/eval/reports/gq-react.md · ### 3.2 区别二：是否接地于外部环境 L68-73",
+        "reports/eval/reports/gq-react.md · ### 3.3 区别三：失败模式的方向相反 L74-82",
+        "reports/eval/reports/gq-react.md · ### 3.4 区别四：可解释性与可纠正性的形态不同 L84-87",
+        "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置 L101-107",
+        "reports/eval/reports/gq-react.md · ## 五、矛盾与不确定性 L120-126",
+        "reports/eval/reports/gq-tool-use.md · ### 2.3 工具学习范式的系统化 L41-46"
+      ],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

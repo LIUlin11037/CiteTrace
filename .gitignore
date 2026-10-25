@@ -15,5 +15,8 @@ __pycache__/
 .mypy_cache/
 
 # ---- 项目产物 ----
-reports/
+# 评测产物（报告 + 汇总）要进仓库：它们是 README 里所有数字的复现依据。
+# 其余运行输出（临时报告、日志）仍然忽略。
+deep-research/reports/*
+!deep-research/reports/eval/
 checkpoints.sqlite3*

@@ -1,0 +1,219 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — RAGFlow 数据源与模板切分",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 2.3 基于分隔符与结构的递归切分 · L27-36",
+    "published_at": null,
+    "key_points": [
+      "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项。",
+      "RAGFlow 提供文本切分的可视化（Visualization of text chunking）以支持人工干预。",
+      "RAGFlow 支持的数据源类型包括 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源。",
+      "该片段仅枚举输入数据源类型，未涉及 PDF 格式特性、版面分析、阅读顺序重建或表格结构识别的任何定义，不能作为 q1 的证据。"
+    ],
+    "raw_excerpt": "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项，并提供文本切分的可视化（Visualization of text chunking）以支持人工干预[^12]。其支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源[^12]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — 切分在 RAG 流水线中的位置",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ## 一、切分在 RAG 中的位置与动机 · L9-13",
+    "published_at": null,
+    "key_points": [
+      "Jina AI 官方博客将 RAG 典型流水线定义为 chunking-embedding-retrieving-generating（切分-嵌入-检索-生成）。",
+      "Anthropic 官方工程博客描述预处理步骤为：将知识库拆分为较小的文本块（通常不超过几百个 token），再用嵌入模型转为向量嵌入，存入向量数据库以支持语义相似度检索。",
+      "该片段把 chunking 定位为 RAG 流水线的一环，位于文档解析之后，但未描述解析环节本身的定义或难点。"
+    ],
+    "raw_excerpt": "Jina AI 官方博客将 RAG 典型流水线定义为 chunking-embedding-retrieving-generating（切分-嵌入-检索-生成）[^2]。Anthropic 官方工程博客对预处理步骤的描述是：将知识库（语料）拆分为较小的文本块（chunk），通常不超过几百个 token；再用嵌入模型将 chunk 转为向量嵌入；存入向量数据库以支持语义相似度检索[^4]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 2.3 基于分隔符与结构的递归切分 · L27-36",
+    "published_at": null,
+    "key_points": [
+      "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项，并提供文本切分的可视化以支持人工干预。",
+      "RAGFlow 支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源。",
+      "【弱证据说明】该片段仅为产品能力清单，未报告任何 PDF/表格解析的失败模式、错误率或量化瓶颈，不能作为本子问题的结论依据。"
+    ],
+    "raw_excerpt": "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项，并提供文本切分的可视化（Visualization of text chunking）以支持人工干预[^12]。其支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源[^12]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "2025年多模态大模型的主流架构路线",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-multimodal.md · ## 六、矛盾与不确定性 · L80-84",
+    "published_at": null,
+    "key_points": [
+      "Qwen-VL-Plus 与 Qwen-VL-Max 支持百万像素级超高分辨率与极端宽高比图像输入，并给出 DocVQA 93.1%、ChartQA 79.8%、AI2D 79.3%、TextVQA 79.5%、MMMU 51.4%、MathVista 51.0%、MM-Bench-CN 75.1% 等基准数字。",
+      "该仓库 README 未描述其视觉-语言连接机制。",
+      "该报告自身声明：所引性能数字绝大多数来自论文或厂商自述，缺少独立第三方基准交叉验证。",
+      "【弱证据说明】DocVQA/ChartQA 在此仅作为模型基准分数出现，未讨论文档解析器的失败模式或瓶颈，不能作为本子问题的结论依据。"
+    ],
+    "raw_excerpt": "Qwen-VL 第一代仓库 README 仅说明 Qwen-VL-Plus 与 Qwen-VL-Max 支持百万像素级超高分辨率与极端宽高比图像输入，并给出 DocVQA 93.1%、ChartQA 79.8%、AI2D 79.3%、TextVQA 79.5%、MMMU 51.4%、MathVista 51.0%、MM-Bench-CN 75.1% 等基准数字，但**未描述其视觉-语言连接机制**[^21]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 2.3 基于分隔符与结构的递归切分 · L27-36",
+    "published_at": null,
+    "key_points": [
+      "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项。",
+      "RAGFlow 提供文本切分的可视化（Visualization of text chunking）以支持人工干预。",
+      "RAGFlow 声称支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源。"
+    ],
+    "raw_excerpt": "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项，并提供文本切分的可视化（Visualization of text chunking）以支持人工干预[^12]。其支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源[^12]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（生态热度参考节）",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-agentic-rag.md · ### 4.5 生态热度参考 · L133-138",
+    "published_at": null,
+    "key_points": [
+      "该报告记录了一批 GitHub 仓库的 stars/forks 元数据，抓取时点为 2026-10-14。",
+      "所列仓库为 langgenius/dify（158443 stars、25058 forks）、langchain-ai/langchain（147842 stars、24795 forks）、infiniflow/ragflow（92201 stars、10985 forks）、langchain-ai/langgraph（43254 stars、7354 forks）、bytedance/deer-flow（83852 stars、11680 forks）、mem0ai/mem0（67164 stars、7903 forks）、ruvnet/ruflo（74633 stars、8874 forks）、headroomlabs-ai/headroom（75321 stars、5846 forks）。",
+      "该清单中不含 PyMuPDF、pdfplumber、Unstructured、Marker、MinerU、Docling、Table Transformer、PaddleOCR/PP-StructureV3 等文档解析工具。"
+    ],
+    "raw_excerpt": "GitHub 仓库检索结果（抓取时点 2026-10-14）显示：langgenius/dify stars 158443、forks 25058，描述为构建 Agentic workflows 与 RAG pipelines 的协作工作区；langchain-ai/langchain stars 147842、forks 24795，描述为 'The agent engineering platform'；infiniflow/ragflow stars 92201、forks 10985；langchain-ai/langgraph stars 43254、forks 7354；bytedance/deer-flow stars 83852、forks 11680……mem0ai/mem0 stars 67164、forks 7903……headroomlabs-ai/headroom stars 75321、forks 5846，描述为在 RAG chunks 等进入 LLM 前压缩以降低 token 消耗[^14]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — 切分在 RAG 中的位置与动机",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ## 一、切分在 RAG 中的位置与动机 · L9-11",
+    "published_at": null,
+    "key_points": [
+      "Jina AI 官方博客将 RAG 典型流水线定义为 chunking-embedding-retrieving-generating（切分-嵌入-检索-生成）四阶段。",
+      "Anthropic 官方工程博客将预处理描述为：将知识库（语料）拆分为较小的文本块（chunk），通常不超过几百个 token；再用嵌入模型将 chunk 转为向量嵌入；存入向量数据库以支持语义相似度检索。",
+      "Jina AI 博客给出切分动机：RAG 需要把文档切分为较小文本块（例如 512 token 以内），存入向量数据库，由嵌入模型生成向量表示。"
+    ],
+    "raw_excerpt": "Jina AI 官方博客将 RAG 典型流水线定义为 chunking-embedding-retrieving-generating（切分-嵌入-检索-生成）[^2]。Anthropic 官方工程博客对预处理步骤的描述是：将知识库（语料）拆分为较小的文本块（chunk），通常不超过几百个 token；再用嵌入模型将 chunk 转为向量嵌入；存入向量数据库以支持语义相似度检索[^4]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "GraphRAG 深度研究报告：问题定位与索引构建流程 — 六阶段数据流",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-graph-rag.md · ### 2.2 六阶段数据流 · L53-63",
+    "published_at": null,
+    "key_points": [
+      "官方索引流程分为 6 个 phase：Phase 1 Compose TextUnits、Phase 2 Document Processing、Phase 3 Graph Extraction、Phase 4 Graph Augmentation、Phase 5 Community Summarization、Phase 6 Text Embedding。",
+      "Phase 1 将文本切分为 TextUnit，chunk 大小以 token 计、用户可配置，默认 1200 tokens。",
+      "官方文档将 GraphRAG 索引包定义为一个数据管道与转换套件，旨在用 LLM 从非结构化文本中提取有意义的结构化数据。"
+    ],
+    "raw_excerpt": "官方索引流程分为 6 个 phase[^20]：\n\n1. **Phase 1 Compose TextUnits**：将文本切分为 TextUnit，chunk 大小以 token 计、用户可配置，默认 1200 tokens[^20]。\n2. **Phase 2 Document Processing**：文档处理。\n3. **Phase 3 Graph Extraction**：图抽取。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "GraphRAG 深度研究报告：问题定位与索引构建流程 — 关键默认参数",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-graph-rag.md · ### 2.6 关键默认参数 · L87-108",
+    "published_at": null,
+    "key_points": [
+      "依据仓库 main 分支 defaults.py：分块类型 ChunkerType.Tokens、分块大小 1200、分块重叠 100、编码模型 o200k_base。",
+      "社区报告 max_length 默认 2000、max_input_length 默认 8000；默认 embedding 模型 text-embedding-3-large；默认 completion 模型 gpt-4.1。",
+      "官方文档明确声明：许多配置值有默认值但不在文档中复述，需直接参考代码中的 constants。"
+    ],
+    "raw_excerpt": "| 分块类型 | ChunkerType.Tokens |\n| 分块大小 | 1200 |\n| 分块重叠 | 100 |\n| 编码模型 | o200k_base |\n| 社区报告 max_length | 2000 |\n| 社区报告 max_input_length | 8000 |"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — 基于分隔符与结构的递归切分",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 2.3 基于分隔符与结构的递归切分 · L27-35",
+    "published_at": null,
+    "key_points": [
+      "LangChain `TextSplitter` 基类默认 `chunk_size=4000`、`chunk_overlap=200`，`length_function` 默认为 `len`（即按字符计长）。",
+      "LangChain `RecursiveCharacterTextSplitter` 默认 separators 为 `[\"\\n\\n\", \"\\n\", \" \", \"\"]`，`keep_separator` 默认 True，递归尝试不同分隔符直至可用。",
+      "LlamaIndex `SentenceSplitter` 走段落—句子—子句层级路线：默认 `separator=\" \"`、`paragraph_separator=\"\\n\\n\\n\"`，`secondary_chunking_regex` 默认 `\"[^,.;。？！]+[,.;。？！]?|[,.;。？！]\"`（支持中英文标点）。",
+      "Haystack `DocumentSplitter` 默认 `split_by=\"word\"`、`split_length=200`、`split_overlap=0`、`split_threshold=0`；`split_by` 支持 function、page、passage、period、word、line、sentence、token，token 模式用 tiktoken，默认 `tokenizer_encoding=\"o200k_base\"`。"
+    ],
+    "raw_excerpt": "LangChain 的 `TextSplitter` 基类默认 `chunk_size=4000`、`chunk_overlap=200`，`length_function` 默认为 `len`（即按字符计长）[^7]。……Haystack 的 `DocumentSplitter` 提供更细的切分单位枚举：默认 `split_by=\"word\"`、`split_length=200`、`split_overlap=0`、`split_threshold=0`[^11]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — RAGFlow 模板化切分与异构数据源",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 2.3 基于分隔符与结构的递归切分 · L27-36",
+    "published_at": null,
+    "key_points": [
+      "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项。",
+      "RAGFlow 提供文本切分的可视化（Visualization of text chunking）以支持人工干预。",
+      "RAGFlow 支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源。",
+      "该来源未说明 RAGFlow 的 PDF 解析器内部机制，也未说明表格如何序列化。"
+    ],
+    "raw_excerpt": "RAGFlow 采用「Template-based chunking」（基于模板的切分），提供多种模板选项，并提供文本切分的可视化（Visualization of text chunking）以支持人工干预[^12]。其支持 Word/PPT/Excel/TXT/图片/PDF/扫描件/结构化数据/网页等异构数据源[^12]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — 量化关系的证据缺口",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 4.2 量化关系的证据缺口 · L101-107",
+    "published_at": null,
+    "key_points": [
+      "现有证据中没有任何量化证据支撑「chunk size / overlap 与 recall、precision、answer faithfulness 之间的量化关系」。",
+      "关于语义切分评估的证据 [5] 与 [6] 实为同一篇论文（arXiv:2410.13070）的两个来源，不构成两个独立来源，且只给出「semantic chunking 计算成本未被性能提升证明」的定性结论。",
+      "Anthropic 声称的「检索失败率降低 49%、结合 reranking 后降低 67%」为厂商自报数据，需交叉验证，且该数据针对 Contextual Retrieval 方法整体，而非单纯的切分粒度变量。",
+      "Pinecone 与 Weaviate 两篇博客的具体数值建议章节在抓取中被截断，未取得任何具体数值建议。"
+    ],
+    "raw_excerpt": "本课题的核心问题「切分粒度如何影响检索质量」，在现有证据中**没有任何量化证据支撑**。……Anthropic 声称的「检索失败率降低 49%、结合 reranking 后降低 67%」为厂商自报数据，需交叉验证，且该数据针对的是 Contextual Retrieval 方法整体，而非单纯的切分粒度变量[^4]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "RAG 中文档切分（chunking）主流策略与粒度对检索质量的影响 — 未解决的参数矛盾：LlamaIndex SentenceSplitter 默认 overlap",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-chunking.md · ### 4.1 未解决的参数矛盾：LlamaIndex SentenceSplitter 默认 overlap · L95-99",
+    "published_at": null,
+    "key_points": [
+      "证据 [9] 显示 LlamaIndex `SentenceSplitter` 默认 `chunk_size=DEFAULT_CHUNK_SIZE`、`chunk_overlap=SENTENCE_CHUNK_OVERLAP=200`（token 计）。",
+      "证据 [10] 显示 LlamaIndex 全局常量 `DEFAULT_CHUNK_OVERLAP = 20`（tokens）。",
+      "证据 [25] 指出 `TokenTextSplitter` 从 constants 导入 `DEFAULT_CHUNK_OVERLAP`，其默认值为 20，因此全局常量 20 实际服务于 `TokenTextSplitter` 而非 `SentenceSplitter`。",
+      "原报告判定：无法在现有证据下判定 `SentenceSplitter` 默认 overlap 为 200 还是 20，故不作为确定事实。"
+    ],
+    "raw_excerpt": "两条证据对同一框架同一参数给出 200 与 20 两个互斥数值，且都声称来自官方源码。……**本报告无法在现有证据下判定 `SentenceSplitter` 默认 overlap 究竟为 200 还是 20，故不将其作为确定事实写入正文。**"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "如何评测一个 RAG 系统：检索侧与生成侧的指标拆解 — 上下文相关性指标",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-eval.md · ### 2.2 上下文相关性指标（无 ground truth 或部分无标签时） · L36-44",
+    "published_at": null,
+    "key_points": [
+      "RAGAS 的 Context Precision 评估检索器将相关 chunk 排在无关 chunk 之前的能力，计算方式为上下文中每个 chunk 的 precision@k 的均值。",
+      "公式为 `Context Precision@K = Σ_{k=1}^{K}(Precision@k × v_k) / (top K 结果中相关项总数)`，其中 v_k ∈ {0,1} 为 rank k 的相关性指示。",
+      "文档区分两种用法：有 reference answer 时用 ContextPrecision；无 reference 但有生成响应时用 ContextUtilization。",
+      "LlamaIndex 的 Retrieval Evaluation 模块使用 MRR、hit-rate、precision 等排序指标，需问题集与 ground-truth 排序，并支持从非结构化语料合成生成 (question, context) 对。"
+    ],
+    "raw_excerpt": "**Context Precision（RAGAS）**：评估检索器将相关 chunk 排在无关 chunk 之前的能力，即相关 chunk 被置于排名顶部的程度。计算方式为上下文中每个 chunk 的 precision@k 的均值；Precision@k 是 rank k 处相关 chunk 数与该 rank 处 chunk 总数之比。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "如何评测一个 RAG 系统：检索侧与生成侧的指标拆解 — 摘要（三条评测路线与覆盖缺口）",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-eval.md · ## 摘要 · L3-8",
+    "published_at": null,
+    "key_points": [
+      "主流评测做法可归为三条路线：RAGAS 类指标库（Context Precision / Context Recall / Faithfulness / Answer Relevancy，强调 reference-free）、BEIR/KILT/RGB/MultiHop-RAG/RAGBench/CRUD-RAG 类基准数据集、RAGChecker/Azure RAG evaluators/Amazon Bedrock evaluations 类「检索侧/生成侧解耦诊断」。",
+      "检索侧核心指标为排序质量类（NDCG@k、MAP@K、Recall@K、Precision@K、MRR）与上下文相关性类（Context Precision、Context Recall、Context Entities Recall）。",
+      "生成侧核心指标为忠实性/接地性（Faithfulness、Groundedness）、答案相关性、完整性（Response Completeness）与噪声敏感度（Noise Sensitivity）。",
+      "该报告所依据的 44 条证据中，没有任何一条提供可核验的公开评测数值量级，也没有任何一条来自 LLM-as-judge 偏差研究。"
+    ],
+    "raw_excerpt": "需要明确的是：本报告所依据的 44 条证据中，**没有任何一条提供可核验的公开评测数值量级**，也**没有任何一条来自 LLM-as-judge 偏差研究**，这两点是本报告的主要覆盖缺口。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "如何评测一个 RAG 系统：检索侧与生成侧的指标拆解 — Bedrock 检索配置与 chunk 返回数量",
+    "url": "C:/Users/workbien/Desktop/agent/deep-research/reports/eval/reports/gq-rag-eval.md · ## 矛盾与不确定性 · L172-201",
+    "published_at": null,
+    "key_points": [
+      "Amazon Bedrock 知识库查询默认返回最多 5 条结果，每条对应一个 source chunk。",
+      "`numberOfResults` 参数设置返回结果的最大数量；若启用分层分块，该参数映射到子 chunk 数量。",
+      "搜索类型包括 Default（由 Bedrock 决定）、Hybrid（向量嵌入语义搜索 + 原始文本搜索）、Semantic（仅向量嵌入）；Hybrid 搜索仅支持 Amazon RDS、Amazon OpenSearch Serverless 和 MongoDB 向量存储。",
+      "该页为检索配置文档，未包含 RAG 评测指标清单或评测数字。"
+    ],
+    "raw_excerpt": "Amazon Bedrock 的检索配置文档显示：知识库查询默认返回最多 5 条结果，每条对应一个 source chunk；`numberOfResults` 参数设置返回结果的最大数量，若启用分层分块，该参数映射到子 chunk 数量[^36]。"
+  }
+]

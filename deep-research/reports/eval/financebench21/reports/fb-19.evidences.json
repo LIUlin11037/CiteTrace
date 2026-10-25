@@ -1,0 +1,394 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors（半导体行业周期性自述）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p20",
+    "published_at": "2022",
+    "key_points": [
+      "AMD 在 10-K 风险因素中自述半导体行业「高度周期性」（highly cyclical），并称该行业经历过严重下行。",
+      "该文件将行业周期性归因于：持续快速的技术变革、供需的剧烈波动、持续的新产品推出、价格侵蚀，以及一般经济状况的下行。",
+      "AMD 称过去的下行期曾造成重大亏损，原因包括平均售价大幅下降与供需的周期性特征。",
+      "该文件将 2022 年下半年 Client 分部收入下滑归因于 PC 市场宏观环境疲弱与 PC 供应链的库存修正。"
+    ],
+    "raw_excerpt": "The semiconductor industry is highly cyclical and has experienced significant downturns, often in conjunction with constant and rapid technological change, wide fluctuations in supply and demand, continuous new product introductions, price erosion and declines in general economic conditions. We have incurred substantial losses in previous downturns, due to substantial declines in average selling prices; the cyclical nature of supply and demand"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — Item 1A Risk Factors（航空业周期性自述）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p8",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 在 10-K 中自述航空业「一直是周期性的」（has been cyclical）且竞争激烈，经历过显著的利润波动。",
+      "该文件描述了一条传导链条：全球经济环境显著恶化 → 新飞机订单减少或客户推迟/取消合同订单与付款 → 收入、盈利能力、现金流下降、合同积压减少。",
+      "该文件指出 Boeing 的商用飞机积压订单由跨越数年的交付计划构成，因此宏观经济、行业或客户冲击可能长期影响交付。",
+      "该文件称 Boeing 收入的重要部分来自数量有限的商用航空公司客户。"
+    ],
+    "raw_excerpt": "airline industry has been cyclical and very competitive and has experienced significant profit swings and constant challenges to be more cost competitive. Significant deterioration in the global economic environment, the airline industry generally or the financial stability of one or more of our major customers could result in fewer new orders for aircraft or services, or could cause customers to seek to postpone or cancel contractual orders and/or payments to us, which could result in lower revenues, profitability and cash flows and a reduction in our contractual backlog."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — MD&A 行业展望（GDP 增速与飞机需求量的关联）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 将「经济增长」列为航空出行需求的基本驱动因素之一。",
+      "Boeing 的 Commercial Market Outlook 预测 20 年间客运与货运流量年增长率为 3.8%。",
+      "Boeing 基于全球 GDP 年均增长 2.6% 的长期预测，推导出未来 20 年约 41,170 架新飞机的需求。",
+      "该文件称该行业仍易受外生冲击影响，包括燃油价格飙升、信贷市场冲击、恐怖主义行为、自然灾害、冲突、流行病、大流行病及更严格的环境监管。"
+    ],
+    "raw_excerpt": "The long-term outlook for the industry remains positive due to the fundamental drivers of air travel demand: economic growth, increasing propensity to travel due to increased trade, globalization and improved airline services driven by liberalization of air traffic rights between countries. Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period. Based on long-term global economic growth projections of 2.6% in average annual gross domestic product, we project demand for approximately 41,170 new airplanes over the next 20 years."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — Consolidated Results of Operations（2020–2022 收入与营业利润）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 总收入：2022 年 66,608 百万美元、2021 年 62,286 百万美元、2020 年 58,158 百万美元。",
+      "Boeing GAAP 营业利润：2022 年 -3,547 百万美元、2021 年 -2,902 百万美元、2020 年 -12,767 百万美元。",
+      "Boeing 营业利润率：2022 年 -5.3%、2021 年 -4.7%、2020 年 -22.0%。",
+      "Boeing 归属于股东的净亏损：2022 年 4,935 百万美元、2021 年 4,202 百万美元、2020 年 11,873 百万美元。",
+      "Commercial Airplanes 分部收入：2022 年 25,867 百万美元、2021 年 19,493 百万美元、2020 年 16,162 百万美元。"
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 \nGAAP\nLoss from operations ($3,547) ($2,902) ($12,767)\nOperating margins (5.3) % (4.7) % (22.0) %\nEffective income tax rate (0.6) % 14.8 % 17.5 %\nNet loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Consolidated Results of Operations (p24)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "合并收入：2020 = $58,158M；2021 = $62,286M；2022 = $66,608M",
+      "GAAP 营业亏损：2020 = ($12,767)M；2021 = ($2,902)M；2022 = ($3,547)M",
+      "营业利润率：2020 = (22.0)%；2021 = (4.7)%；2022 = (5.3)%",
+      "归属股东净亏损：2020 = ($11,873)M；2021 = ($4,202)M；2022 = ($4,935)M",
+      "摊薄每股亏损：2020 = ($20.88)；2021 = ($7.15)；2022 = ($8.30)",
+      "Core operating loss（非 GAAP）：2020 = ($14,150)M；2021 = ($4,075)M；2022 = ($4,690)M",
+      "2022 年收入较 2021 年增加 $4,322M，由 BCA 与 BGS 增长驱动，部分被 BDS 下降抵消",
+      "2021 年收入较 2020 年增加 $4,128M，由 BCA、BDS、BGS 共同增长驱动"
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 / GAAP Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % / Net loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873) / Diluted loss per share ($8.30) ($7.15) ($20.88)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Summary of Business Segment Data (p62) 与 Revenues 表 (p24)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "分部收入（$M）Commercial Airplanes：2020 = 16,162；2021 = 19,493；2022 = 25,867",
+      "分部收入（$M）Defense, Space & Security：2020 = 26,257；2021 = 26,540；2022 = 23,162",
+      "分部收入（$M）Global Services：2020 = 15,543；2021 = 16,328；2022 = 17,611",
+      "分部收入（$M）Boeing Capital：2020 = 261；2021 = 272；2022 = 199",
+      "分部营业损益（$M）Commercial Airplanes：2020 = (13,847)；2021 = (6,475)；2022 = (2,370)",
+      "分部营业损益（$M）Defense, Space & Security：2020 = 1,539；2021 = 1,544；2022 = (3,544)",
+      "分部营业损益（$M）Global Services：2020 = 450；2021 = 2,017；2022 = 2,727",
+      "Segment operating loss 合计：2020 = (11,795)；2021 = (2,808)；2022 = (3,158)",
+      "利息与债务费用：2020 = (2,156)；2021 = (2,682)；2022 = (2,533)"
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 … (Loss)/earnings from operations: Commercial Airplanes ($2,370) ($6,475) ($13,847) / Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — BCA Deliveries by Model (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BCA 总交付量：2020 = 157 架；2021 = 340 架；2022 = 480 架",
+      "2020 年分机型交付：737 = 43（内部 14）、747 = 5、767 = 30（内部 11）、777 = 26、787 = 53",
+      "2021 年分机型交付：737 = 263（内部 16）、747 = 7、767 = 32（内部 13）、777 = 24、787 = 14",
+      "2022 年分机型交付：737 = 387（内部 13）、747 = 5、767 = 33（内部 15）、777 = 24、787 = 31",
+      "2022 年末累计交付：737 = 8,132；747 = 1,572；767 = 1,271；777 = 1,701；787 = 1,037",
+      "2020 年末累计交付：737 = 7,482；747 = 1,560；767 = 1,206；777 = 1,653；787 = 992"
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: … 2022 … Deliveries 387 (13) 5 33 (15) 24 31 480 / 2021 … Deliveries 263 (16) 7 32 (13) 24 14 340 / 2020 … Deliveries 43 (14) 5 30 (11) 26 53 157"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — BCA Results of Operations (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BCA 收入占公司总收入比重：2020 = 28%；2021 = 31%；2022 = 39%",
+      "BCA 营业利润率：2020 = (85.7)%；2021 = (33.2)%；2022 = (9.2)%",
+      "BCA R&D 支出：2020 = $1,385M；2021 = $1,140M；2022 = $1,510M",
+      "2022 年 BCA 收入增加 $6,374M，主因 737 与 787 交付量上升",
+      "2021 年 BCA 收入增加 $3,331M，主因 737 MAX 复飞后交付上升，且 2020 年含 $498M 的 737 MAX 客户补偿（减少收入）",
+      "2021 年 BCA 收入增长部分被 787 交付下降抵消"
+    ],
+    "raw_excerpt": "Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % / Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)%"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — 亏损构成：reach-forward loss 与异常生产成本 (p25, p31, p32, p81)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2020 年 BCA 亏损反映 777X 项目 reach-forward loss $6,493M",
+      "2021 年 BCA 亏损反映 787 项目 reach-forward loss $3,460M",
+      "2021 年 737 异常生产成本 $1,887M；787 异常生产成本 $468M",
+      "2022 年异常生产成本合计 $1,753M：787 = $1,240M、777X = $325M、737 = $188M",
+      "2020 年另有：737 异常生产成本 $2,567M、遣散费 $623M、737 MAX 客户补偿 $498M、737NG 框件修理 $336M、COVID 停产导致上半年异常生产成本 $270M",
+      "737 MAX 客户补偿支付：2020 = $2.2B；2021 = $2.5B；2022 年让步 $1.0B",
+      "787 交付于 2021 年 5 月至 2022 年 8 月暂停",
+      "2021 年 BCA 亏损较 2020 年收窄 $7,372M，主因 2020 年 $6,493M 的 777X reach-forward loss 不再发生"
+    ],
+    "raw_excerpt": "The 2020 loss reflects the reach-forward loss on the 777X program of $6,493 million, lower deliveries and lower program margins resulting from the COVID-19 pandemic … The 2021 loss reflects the reach-forward loss on the 787 program of $3,460 million, abnormal production costs related to the 737 program of $1,887 million, and abnormal production costs related to the 787 program of $468 million … including a suspension of 787 deliveries from May 2021 to August 2022"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Backlog by Segment (p29, p32, p41, p116)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Total backlog：2021-12-31 = $377,499M；2022-12-31 = $404,381M",
+      "Commercial Airplanes backlog：2021 = $296,882M；2022 = $329,824M",
+      "Defense, Space & Security backlog：2021 = $59,828M；2022 = $54,373M",
+      "Global Services backlog：2021 = $20,496M；2022 = $19,338M（下降 6%）",
+      "Contractual backlog：2021 = $356,362M；2022 = $381,977M；Unobligated backlog：2021 = $21,137M；2022 = $22,404M",
+      "2022 年飞机订单取消额 $11,251M，涉及 737 与 787",
+      "2022 年 ASC 606 调整使 backlog 净减少 $4,675M，主因 777X 在 ASC 606 准备金中净增加",
+      "2022 年末 backlog 转化节奏：约 17% 于 2023 年转为收入，约 71% 于 2026 年前，其余更晚",
+      "2022 年末 BDS backlog 中 28% 来自非美国客户"
+    ],
+    "raw_excerpt": "Our backlog at December 31 was as follows: … Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499 … We expect approximately 17% to be converted to revenue through 2023 and approximately 71% through 2026 … Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million and relate to 737 and 787 aircraft."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Program Accounting Quantities and Firm Orders (p30, p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p30",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年末未交付确定订单（架）：737 = 3,653；747 = 1；767 = 106；777 = 69；777X = 244；787 = 505（其中 8 架为 BCC 订购）",
+      "2022 年末累计确定订单（架）：737 = 11,785；747 = 1,573；767 = 1,377；777 = 1,770；777X = 244；787 = 1,542",
+      "2020 年末未交付确定订单（架）：737 = 3,282；787 = 458；777X = 191",
+      "737 产能于 2022 年提升至 31 架/月",
+      "2022 年末 787 在库存约 100 架（2021 年末约 110 架），预计大部分 2024 年底前交付",
+      "787 计划 2023 年逐步回到 5 架/月产能",
+      "2022 年 737 项目会计数量增加 400 架至 10,800 架"
+    ],
+    "raw_excerpt": "2022 Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 / Undelivered units under firm orders 3,653 1 106 69 244 505 (8) / Cumulative firm orders 11,785 1,573 1,377 1,770 244 1,542 … We increased the production rate to 31 per month in 2022 … We are currently producing at low rates and expect to gradually return to 5 per month in 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Defense, Space & Security Results (p37, p38)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BDS 收入占公司总收入比重：2020 = 45%；2021 = 43%；2022 = 35%",
+      "BDS 营业利润率：2020 = 5.9%；2021 = 5.8%；2022 = (15.3)%",
+      "2022 年 BDS 由盈转亏，主因固定价格开发项目计提：VC-25B $1,452M、KC-46A Tanker $1,374M、MQ-25 $579M、T-7A Red Hawk Production Options $552M、T-7A EMD $203M、Commercial Crew $288M",
+      "2022 年累计合同 catch-up 调整比 2021 年不利 $4,284M",
+      "BDS 交付量（2020/2021/2022）：F/A-18 = 20/21/14；F-15 = 4/16/12；CH-47 新造 = 27/15/19；AH-64 新造 = 19/27/25；KC-46 Tanker = 14/13/15",
+      "FY23 美国国防部拨款 $817B、NASA $25.4B（2022 年 12 月立法）"
+    ],
+    "raw_excerpt": "Revenues $23,162 $26,540 $26,257 / % of total company revenues 35 % 43 % 45 % / (Loss)/earnings from operations ($3,544) $1,544 $1,539 / Operating margins (15.3)% 5.8 % 5.9 % … Charges of fixed price development programs in 2022 included VC-25B ($1,452 million), KC-46A Tanker ($1,374 million), MQ-25 ($579 million), T-7A Red Hawk Production Options ($552 million)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Global Services Revenue Breakdown (p116, p25)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BGS 商业合同收入：2020 = $6,936M；2021 = $7,527M；2022 = $9,560M",
+      "BGS 政府合同收入：2020 = $8,368M；2021 = $8,553M；2022 = $7,681M",
+      "BGS 合同收入合计：2020 = $15,304M；2021 = $16,080M；2022 = $17,241M",
+      "BGS 分部总收入：2020 = $15,543M；2021 = $16,328M；2022 = $17,611M",
+      "BGS 营业损益：2020 = $450M；2021 = $2,017M；2022 = $2,727M",
+      "2021 年 BGS 利润增加 $1,567M，主因 2020 年 COVID 相关计提不再发生及商业服务量上升",
+      "BGS 收入中来自美国政府比重：2020 = 41%；2021 = 40%；2022 = 33%"
+    ],
+    "raw_excerpt": "Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 / Total revenues from contracts with customers 17,241 16,080 15,304 … Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Cash Flow, Liquidity and Debt (p43, p30)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "融资活动现金流：2020 = +$35.0B（流入）；2021 = −$5.6B；2022 = −$1.3B",
+      "投资活动现金流：2020 = −$18.4B；2021 = +$9.3B；2022 = +$4.4B",
+      "资本支出：2020 = $1.3B；2021 = $1.0B；2022 = $1.2B",
+      "2022 年末总债务 $57.0B，其中约 $14.5B 本金将在未来三年到期；飞机融资承诺 $16.1B",
+      "2022 年净亏损 $5.1B，2021 年净亏损 $4.3B",
+      "Advances and progress billings 现金：2020 = 流出 $1.1B；2021 = 流入 $2.5B；2022 = 流入 $0.1B",
+      "2022 与 2021 年分别收到所得税退税 $1.5B 与 $1.7B"
+    ],
+    "raw_excerpt": "Cash used by financing activities was $1.3 billion during 2022, compared with $5.6 billion during 2021 and cash provided of $35.0 billion in 2020 … As of December 31, 2022, our debt totaled $57.0 billion of which approximately $14.5 billion of principal payments on outstanding debt will become due over the next three years."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: 行业长期展望与 Commercial Market Outlook 假设（p23）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 将 air travel demand 的根本驱动因素表述为：economic growth、因贸易增加与全球化带来的 travel propensity 上升、以及航空运输权自由化带来的服务改善。",
+      "Boeing Commercial Market Outlook 预测 20 年期内客运与货运交通量年增长率为 3.8%。",
+      "该预测基于全球 GDP 年均增长 2.6% 的长期假设，并据此推算未来 20 年约 41,170 架新飞机需求。",
+      "Boeing 同时声明行业仍易受外生冲击影响，包括燃油价格飙升、信贷市场冲击、恐怖主义、自然灾害、冲突、流行病/大流行病及更严格的环境监管。"
+    ],
+    "raw_excerpt": "The long-term outlook for the industry remains positive due to the fundamental drivers of air travel demand: economic growth, increasing propensity to travel due to increased trade, globalization and improved airline services driven by liberalization of air traffic rights between countries. Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period. Based on long-term global economic growth projections of 2.6% in average annual gross domestic product, we project demand for approximately 41,170 new airplanes over the next 20 years."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: 航空公司财务表现与新增运力需求（p22）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 明确表述 airline financial performance 会影响对新增运力（new capacity）的需求，即航空公司盈利状况是飞机需求的传导环节。",
+      "Boeing 引用 IATA 数据：2020 年全球航空业净亏损 1380 亿美元，2021 年净亏损 420 亿美元。",
+      "Boeing 引用 IATA 预测：2022 年全球航空业亏损 69 亿美元，其中北美盈利约 99 亿美元但被其他地区亏损抵消；2023 年全球预测盈利 46 亿美元。",
+      "上述内容为 Boeing 对 IATA 数据的二手引用，非 IATA 原始报告，亦未给出任何弹性或滞后估计。"
+    ],
+    "raw_excerpt": "Airline financial performance, which influences demand for new capacity, has been adversely impacted by the COVID-19 pandemic. According to the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Development: go-ahead 至 initial delivery 时间跨度表（p36）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p36",
+    "published_at": "2022",
+    "key_points": [
+      "Boeing 披露主要 Commercial Airplanes 衍生型号与项目的 go-ahead 年份与计划首次交付年份：737-7 为 2011→2023，737-10 为 2017→2024，777X-9 为 2013→2025，777X-8F 为 2022→2027。",
+      "该表度量的是项目启动到首次交付的开发/取证周期（跨度 6–12 年），而非订单到交付（order-to-delivery）的滞后结构。",
+      "Boeing 声明上述开发进度受多项不确定性影响，包括取证要求变化、全球监管对开发机型审查趋严，以及交付延迟可能触发订单取消或合同终止条款。"
+    ],
+    "raw_excerpt": "Program Development The following chart summarizes the time horizon between go-ahead and planned initial delivery for major Commercial Airplanes derivatives and programs. Go-ahead and Initial Delivery 737-7 2011 2023 737-10 2017 2024 777X-9 2013 2025 777X-8F 2022 2027"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog 规模与分部结构（p29）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "截至 2022-12-31，Boeing 总 backlog 为 $404,381M，2021 年末为 $377,499M。",
+      "分部构成（2022 年末）：Commercial Airplanes $329,824M；Defense, Space & Security $54,373M；Global Services $19,338M；未分配/抵销 $846M。",
+      "其中 contractual backlog $381,977M（2021: $356,362M），unobligated backlog $22,404M（2021: $21,137M）。",
+      "contractual backlog 排除购买选择权、未签正式合同的已宣布订单、客户有单方终止权的订单，以及未获拨款的美国政府与非美国政府合同资金。",
+      "2022 年 contractual backlog 增长主因 BCA backlog 增加，部分被 BDS backlog 下降抵销。"
+    ],
+    "raw_excerpt": "Our backlog at December 31 was as follows: … Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499 … Contractual backlog $381,977 $356,362 / Unobligated backlog 22,404 21,137"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog 转化时间表（p116）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 预计 2022 年末 $404,381M 总 backlog 中约 17% 于 2023 年内转为收入。",
+      "约 71% 于 2026 年底前转为收入，其余在此之后。",
+      "公司声明 backlog 转收入的时点存在 significant uncertainty，原因包括 787 库存交付节奏、中国 737 MAX 交付恢复、777X/737-7/737-10 投入运营时间，以及 COVID-19 的持续影响。",
+      "backlog 按成本发生进度或产品交付与验收转为收入，取决于适用的收入确认模型。"
+    ],
+    "raw_excerpt": "Our backlog at December 31, 2022 was $404,381. We expect approximately 17% to be converted to revenue through 2023 and approximately 71% through 2026, with the remainder thereafter. There is significant uncertainty regarding the timing of when backlog will convert into revenue due to timing of 787 deliveries from inventory, timing of 737 MAX delivery resumption in China, timing of entry into service of the 777X, 737-7 and/or 737-10, and the lingering effects of the COVID-19 pandemic."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog 的可取消性与 ASC 606 剔除（p29 / p32）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29 / p32",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年飞机订单取消金额合计 $11,251M，涉及 737 与 787 机型。",
+      "2022 年 ASC 606 调整使 backlog 净减少 $4,675M，主因 777X 计入 ASC 606 reserve 净增，部分被 737 与 787 的 reserve 净减抵销。",
+      "ASC 606 调整考虑客户控制型或有事项、客户履约承诺程度、地缘政治事件或相关制裁影响，以及客户到期足额付款的可能性。",
+      "公司明示：若长期无法在中国交付 737 MAX，和/或 777X、737-7、737-10 投入运营进一步延迟，可能发生 backlog 减少和/或重大订单取消。",
+      "BCA backlog 2022 年末 $329,824M，高于 2021 年末 $296,882M，反映新订单超过交付与价格升级，但被订单取消及不符合 ASC 606 入账条件的订单价值增加所抵销。"
+    ],
+    "raw_excerpt": "Contractual backlog of unfilled orders excludes purchase options, announced orders for which definitive contracts have not been executed, orders where customers have the unilateral right to terminate, and unobligated U.S. and non-U.S. government contract funding. … Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million and relate to 737 and 787 aircraft. The net ASC 606 adjustments for the year ended December 31, 2022 resulted in a decrease to backlog of $4,675 million…"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Global Services（BGS）收入、利润率与 backlog（p40 / p116 / p62）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p40 / p116 / p62",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BGS 收入：2022 年 $17,611M，2021 年 $16,328M，2020 年 $15,543M；占公司总收入 26%/26%/27%。",
+      "BGS 经营利润：2022 年 $2,727M，2021 年 $2,017M，2020 年 $450M；经营利润率 15.5%/12.4%/2.9%。",
+      "BGS 收入拆分（2022）：Commercial $9,560M，Government $7,681M；来自美国政府收入占 BGS 33%（2021: 40%，2020: 41%）。",
+      "BGS backlog 2022 年末 $19,338M，较 2021 年末 $20,496M 下降 6%，主因以前年度授予合同的收入确认。",
+      "BGS 2022 年收入增长 $1,283M，主因商业服务量上升，部分被政府服务量与业绩下降抵销；政府服务量下降部分源于 2022 年第二季度终止一项发动机分销协议。",
+      "BGS 2020 年计提包括 $531M 存货减值、$178M 分销权减值、$398M 预期信用损失增加、$115M 合同终止与设施减值、$72M 遣散费。"
+    ],
+    "raw_excerpt": "Revenues $17,611 $16,328 $15,543 … Earnings from operations $2,727 $2,017 $450 … Operating margins 15.5 % 12.4 % 2.9 % … BGS total backlog of $19,338 million at December 31, 2022 decreased by 6% from $20,496 million at December 31, 2021, primarily due to revenue recognized on contracts awarded in prior years. … Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 分部收入与经营利润三年对比（p24 / p62）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24 / p62",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "收入（2022/2021/2020）：BCA $25,867M / $19,493M / $16,162M；BDS $23,162M / $26,540M / $26,257M；BGS $17,611M / $16,328M / $15,543M；Boeing Capital $199M / $272M / $261M。",
+      "经营利润（2022/2021/2020）：BCA ($2,370M) / ($6,475M) / ($13,847M)；BDS ($3,544M) / $1,544M / $1,539M；BGS $2,727M / $2,017M / $450M；Boeing Capital $29M / $106M / $63M。",
+      "公司总收入（2022/2021/2020）：$66,608M / $62,286M / $58,158M；GAAP 经营亏损 ($3,547M) / ($2,902M) / ($12,767M)。",
+      "BGS 是 2020 年唯一保持正经营利润的分部（$450M）。",
+      "BDS 2022 年经营亏损 $3,544M，主因开发项目计提；BCA 2022 年亏损收窄主因 2021 年 $3,460M 787 reach-forward loss 未再发生及 737 交付增加。"
+    ],
+    "raw_excerpt": "Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 … (Loss)/earnings from operations: Commercial Airplanes ($2,370) ($6,475) ($13,847) / Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 国防业务政府依赖度与 backlog 集中度线索（p37 / p115 / p39）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37 / p115 / p39",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BDS 收入中来自美国政府占 89%（2022/2021/2020 均为 89%）。",
+      "2022 年末 BDS backlog 中 28% 归属非美国客户。",
+      "BDS backlog 2022 年末 $54,373M，较 2021 年末减少 $5,455M，主因授标时点。",
+      "FY23 综合拨款法案为美国国防部提供 $817B、NASA $25.4B，覆盖 F/A-18、F-15EX、CH-47、AH-64、V-22、KC-46A、MQ-25、SLS 等项目；FY23 拨款未包含新增 P-8 资金。",
+      "FY23 拨款支持 F/A-18 生产延续至 2025 日历年内。",
+      "BDS 收入按客户所在地拆分（2022）：美国客户 $17,144M，非美国客户 $6,018M；BDS 收入 99% 按 over time 确认。"
+    ],
+    "raw_excerpt": "At the end of 2022, 28% of BDS backlog was attributable to non-U.S. customers. … Revenue from the U.S. government 89 % 89 % 89 % … Total backlog of $54,373 million at December 31, 2022 was $5,455 million lower than December 31, 2021 due to the timing of awards … The FY23 appropriations did not include funding for additional P-8 aircraft."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 双寡头结构的公司自述与竞争者（p22 / p30）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22 / p30",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 自述为 100 座以上飞机的主要两家制造商之一。",
+      "Airbus 在政府支持下长期重金投入，建立了与 Boeing 竞争的产品家族。",
+      "Airbus 于 2018 年收购 Bombardier C Series 多数股权（现 A220）后，继续扩展 100–150 座跨大陆市场。",
+      "COMAC 于 2022 年交付首架 C919，是处于不同开发阶段的竞争者之一。",
+      "737 MAX 停飞及多辖区交付暂停显著降低了 Boeing 在单通道飞机交付方面的市场份额，可能为竞争者提供获取更多订单与提升份额的机会。"
+    ],
+    "raw_excerpt": "We are one of the two major manufacturers of 100+ seat [airplanes] … With government support, Airbus has historically invested heavily to create a family of products to compete with ours. After the acquisition of a majority share of Bombardier's C Series (now A220) in 2018, Airbus continues to expand in the 100-150 seat transcontinental market. Other competitors are also in different phases of developing commercial jet aircraft, including Commercial Aircraft Corporation of China, Ltd. (COMAC), which delivered its first C919 aircraft in 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 需求侧周期性：IATA 行业盈亏与 20 年流量预测（p22 / p23）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22 / p23",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "据 IATA，航空业净亏损 2020 年为 $138B、2021 年为 $42B。",
+      "IATA 预测 2022 年全球行业亏损 $6.9B，其中北美盈利约 $9.9B，被其他地区亏损抵销。",
+      "IATA 预测 2023 年全球行业盈利 $4.6B。",
+      "Boeing Commercial Market Outlook 预测未来 20 年客运与货运流量增速为 3.8%。",
+      "公司称航空业长期前景仍正面，驱动因素为经济增长、出行倾向提升、贸易与全球化、以及航权自由化。"
+    ],
+    "raw_excerpt": "According to the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally. … Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-yea[r period]"
+  }
+]

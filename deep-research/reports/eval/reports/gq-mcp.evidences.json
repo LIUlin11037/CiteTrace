@@ -1,0 +1,936 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Model Context Protocol — Introduction (官方文档 Getting Started)",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "published_at": null,
+    "key_points": [
+      "官方将 MCP 定义为 \"an open-source standard for connecting AI applications to external systems\"。",
+      "MCP 让 AI 应用（如 Claude、ChatGPT）连接三类外部资源：数据源（本地文件、数据库）、工具（搜索引擎、计算器）、工作流（专门化的 prompts）。",
+      "官方使用 USB-C 类比：\"Think of MCP like a USB-C port for AI applications\"，即提供连接 AI 应用与外部系统的标准化方式。",
+      "官方给出的价值主张按角色划分：对开发者是降低构建/集成 AI 应用的时间与复杂度；对 AI 应用是获得数据源、工具与应用的生态；对终端用户是更有能力、可代为访问数据并执行动作的应用。",
+      "官方称 MCP 是开放协议，被 Claude、ChatGPT、Visual Studio Code、Cursor、MCPJam 等客户端与服务器支持，表述为 \"build once and integrate everywhere\"。"
+    ],
+    "raw_excerpt": "MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. ... Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Anthropic — Introducing the Model Context Protocol (2024 年 11 月发布公告)",
+    "url": "https://www.anthropic.com/news/model-context-protocol",
+    "published_at": "2024-11-25",
+    "key_points": [
+      "公告开篇称 Anthropic 开源 MCP，定位为 \"a new standard for connecting AI assistants to the systems where data lives\"，涵盖内容仓库、业务工具与开发环境。",
+      "问题陈述：模型能力虽快速进步，但 \"even the most sophisticated models are constrained by their isolation from data—trapped behind information silos and legacy systems\"。",
+      "碎片化机制的直接表述：\"Every new data source requires its own custom implementation, making truly connected systems difficult to scale.\"（每个新数据源都需要各自的定制实现，导致真正互联的系统难以规模化）。",
+      "MCP 的解决方案表述：\"It provides a universal, open standard for connecting AI systems with data sources, replacing fragmented integrations with a single protocol.\"",
+      "架构界定：开发者可以要么通过 MCP servers 暴露数据，要么构建连接这些服务器的 AI 应用（MCP clients）；协议支持 \"secure, two-way connections\"。",
+      "发布时交付三部分：MCP 规范与 SDK、Claude Desktop 应用内的本地 MCP server 支持、开源 MCP servers 仓库。",
+      "发布时提供 Google Drive、Slack、GitHub、Git、Postgres、Puppeteer 的预构建 MCP servers；早期采用者包括 Block、Apollo，开发工具方包括 Zed、Replit、Codeium、Sourcegraph。",
+      "公告明确 \"Instead of maintaining separate connectors for each data source, developers can now build against a standard protocol.\"",
+      "MCP 由 Anthropic 的 David Soria Parra 与 Justin Spahr-Summers 创建。"
+    ],
+    "raw_excerpt": "Every new data source requires its own custom implementation, making truly connected systems difficult to scale. MCP addresses this challenge. It provides a universal, open standard for connecting AI systems with data sources, replacing fragmented integrations with a single protocol. ... Instead of maintaining separate connectors for each data source, developers can now build against a standard protocol."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "MCP Specification (revision 2025-06-18) — 规范正文",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "规范将 MCP 定义为 \"an open protocol that enables seamless integration between LLM applications and external data sources and tools\"，并声明本规范定义 \"the authoritative protocol requirements\"，以 schema.ts 中的 TypeScript schema 为基础。",
+      "规范列出 MCP 让应用可以做的三件事：与语言模型共享上下文信息；向 AI 系统暴露工具与能力；构建可组合的集成与工作流。",
+      "协议使用 JSON-RPC 2.0 消息在 Hosts（发起连接的 LLM 应用）、Clients（宿主应用内的连接器）、Servers（提供上下文与能力的服务）之间通信。",
+      "规范明确 MCP 借鉴 Language Server Protocol 的思路：LSP 为整个开发工具生态标准化了如何增加对编程语言的支持，MCP 以类似方式标准化如何把额外上下文与工具集成进 AI 应用生态。",
+      "服务端特性（server features）为三原语：Resources（上下文与数据）、Prompts（模板化消息与工作流）、Tools（供模型执行的函数）。",
+      "客户端特性包括 Sampling（服务端发起的 agentic 行为与递归 LLM 交互）、Roots（服务端对 uri/文件系统边界的询问）、Elicitation（服务端向用户索取额外信息）。",
+      "基础协议要点：JSON-RPC 消息格式、有状态连接（stateful connections）、服务端与客户端能力协商。",
+      "安全原则要求：用户必须明确同意并理解所有数据访问与操作；工具代表任意代码执行，工具行为描述（如 annotations）在非可信服务器情形下应视为不可信；宿主在调用任何工具前必须获得用户明确同意。"
+    ],
+    "raw_excerpt": "MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem of development tools. In a similar way, MCP standardizes how to integrate additional context and tools into the ecosystem of AI applications."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "MCP Architecture 概览（官方 docs/learn/architecture）",
+    "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+    "published_at": null,
+    "key_points": [
+      "关于抽象层次边界的关键限定句：\"MCP focuses solely on the protocol for context exchange—it does not dictate how AI applications use LLMs or manage the provided context.\"（MCP 只负责上下文交换的协议，不规定 AI 应用如何使用 LLM 或管理所提供的上下文）。",
+      "参与者模型：MCP Host（协调并管理一个或多个 MCP client 的 AI 应用，如 Claude Code、Claude Desktop）、MCP Client（维护与某个 server 的连接并为 host 获取上下文）、MCP Server（向 client 提供上下文的程序）。",
+      "host 为每个 MCP server 创建一个 MCP client，每个 client 维护一条专用连接。",
+      "MCP 分为两层：Data layer（基于 JSON-RPC 的客户端-服务器通信协议，含能力与版本发现、tools/resources/prompts/notifications 等核心原语）与 Transport layer（通信机制与通道，含连接建立、消息分帧、授权）。",
+      "两种传输：Stdio transport（同机本地进程间标准输入输出，无网络开销）与 Streamable HTTP transport（HTTP POST 上行 + 可选 SSE 流式，支持 bearer token、API key、自定义 header，推荐用 OAuth 获取令牌）。",
+      "MCP 是 stateless 协议：每个请求在 _meta 字段中携带协议版本与该请求相关的能力；服务器通过强制的 server/discover 请求公布支持的版本与能力。",
+      "三原语的控制权划分：Tools 由 model 控制（模型可自动发现并调用）、Resources 由 application 控制（应用决定如何选取/检索/传入）、Prompts 由 user 控制。",
+      "Resources 通过唯一 URI 标识并声明 MIME type，支持 Direct Resources 与带参数的 Resource Templates 两种发现模式；应用可自行决定是用 embeddings 选取相关片段、关键词搜索，还是把原始数据整体传给模型。",
+      "Tools 使用 JSON Schema 做输入校验，协议操作为 tools/list（发现）与 tools/call（执行）。",
+      "MCP 项目范围包括：MCP Specification、MCP SDKs、MCP Development Tools（含 MCP Inspector）、MCP Reference Server Implementations。"
+    ],
+    "raw_excerpt": "MCP focuses solely on the protocol for context exchange—it does not dictate how AI applications use LLMs or manage the provided context. ... Data layer: Defines the JSON-RPC based protocol for client-server communication, including capability and version discovery, and core primitives, such as tools, resources, prompts and notifications."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "MCP Server Concepts（官方 docs/learn/server-concepts）",
+    "url": "https://modelcontextprotocol.io/docs/learn/server-concepts",
+    "published_at": null,
+    "key_points": [
+      "官方以控制主体区分三原语：Tools 是 \"Functions that your LLM can actively call, and decides when to use them based on user requests\"，控制方为 Model；Resources 是 \"Passive data sources that provide read-only access to information for context\"，控制方为 Application；Prompts 是 \"Pre-built instruction templates\"，控制方为 User。",
+      "Tools 是 schema 定义的接口，MCP 使用 JSON Schema 做校验；每个 tool 执行单一操作，具有明确输入输出；执行前可能需要用户同意。",
+      "Tools 被描述为 model-controlled，即模型可自动发现并调用；MCP 通过 UI 展示、逐次执行审批对话框、预授权权限设置、活动日志等机制强调人类监督。",
+      "Resources 暴露文件、API、数据库等数据，应用可直接访问并决定如何使用——\"whether that's selecting relevant portions, searching with embeddings, or passing it all to the model\"。",
+      "Resources 支持 Direct Resources（固定 URI）与 Resource Templates（带参数动态 URI）两种发现模式，并声明 MIME type。"
+    ],
+    "raw_excerpt": "Tools: Functions that your LLM can actively call, and decides when to use them based on user requests. ... Resources: Passive data sources that provide read-only access to information for context ... Application ... Prompts: Pre-built instruction templates ... User"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "MCP Specification — Versioning（协议版本与修订状态）",
+    "url": "https://modelcontextprotocol.io/specification/versioning",
+    "published_at": null,
+    "key_points": [
+      "MCP 使用 YYYY-MM-DD 形式的字符串版本标识，表示最后一次不向后兼容变更的日期；向后兼容的更新不递增版本号。",
+      "抓取时点的当前协议版本为 2026-07-28；修订状态分为 Draft、Current、Final。",
+      "每个请求通过 _meta 字段中的 io.modelcontextprotocol/protocolVersion 键声明所用协议版本，服务器独立接受或拒绝每个请求；Streamable HTTP 上同一值也通过 MCP-Protocol-Version header 传递。",
+      "客户端与服务器可同时支持多个协议版本；版本不支持时服务器返回 UnsupportedProtocolVersionError 并列出其支持的版本。",
+      "server/discover 是强制 RPC，返回服务器支持的协议版本、能力与身份；对 2025-11-25 及更早的握手式版本，需参考 Backward Compatibility 说明。"
+    ],
+    "raw_excerpt": "The Model Context Protocol uses string-based version identifiers following the format YYYY-MM-DD, to indicate the last date backwards incompatible changes were made. ... The current protocol version is 2026-07-28."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Architecture — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/architecture",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 采用 client-host-server 架构，每个 host 可运行多个 client 实例。",
+      "Host 进程作为容器与协调者：创建并管理多个 client 实例；控制 client 连接权限与生命周期；执行安全策略与用户同意要求；处理用户授权决策；协调 AI/LLM 集成与 sampling；管理跨 client 的上下文聚合。",
+      "每个 client 由 host 创建，维护一个隔离的 server 连接：每个 server 建立一个有状态会话；处理协议协商与能力交换；双向路由协议消息；管理订阅与通知；维持 server 之间的安全边界。",
+      "host 创建并管理多个 client，每个 client 与某个特定 server 是 1:1 关系。",
+      "Server 通过 MCP primitives 暴露 resources、tools、prompts；独立运行、职责聚焦；通过 client 接口请求 sampling；必须遵守安全约束；可以是本地进程或远程服务。",
+      "设计原则之一：server 不应能读取整个对话，也不能“看进”其他 server；完整对话历史保留在 host 侧。",
+      "MCP 基于 JSON-RPC，是一个有状态会话协议，聚焦于 client 与 server 之间的上下文交换与 sampling 协调。",
+      "采用基于能力的协商机制：client 与 server 在初始化时显式声明各自支持的特性，能力决定会话期间可用的协议特性与 primitives。",
+      "Server 声明 resource subscriptions、tool support、prompt templates 等能力；client 声明 sampling 支持与通知处理等能力；双方必须在整个会话中遵守已声明的能力。",
+      "能力与特性的绑定示例：发出 resource subscription 通知要求 server 声明 subscription 支持；tool 调用要求 server 声明 tool 能力；sampling 要求 client 在其能力中声明支持。"
+    ],
+    "raw_excerpt": "The Model Context Protocol (MCP) follows a client-host-server architecture where each host can run multiple client instances. ... Built on JSON-RPC, MCP provides a stateful session protocol focused on context exchange and sampling coordination between clients and servers. ... A host application creates and manages multiple clients, with each client having a 1:1 relationship with a particular server. ... Servers should not be able to read the whole conversation, nor \"see into\" other servers"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Base Protocol — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "协议由若干组件构成：Base Protocol（核心 JSON-RPC 消息类型）、Lifecycle Management（连接初始化、能力协商、会话控制）、Authorization（基于 HTTP 传输的认证授权框架）、Server Features（resources、prompts、tools）、Client Features（sampling 与 root 目录列表）、Utilities（logging、参数补全等横切关注点）。",
+      "所有实现 MUST 支持 base protocol 与 lifecycle management；其他组件 MAY 按需实现。",
+      "client 与 server 之间的所有消息 MUST 遵循 JSON-RPC 2.0 规范。",
+      "协议定义三类消息：Requests、Responses、Notifications。",
+      "Request 结构为 {jsonrpc:\"2.0\", id: string|number, method: string, params?: object}，可由 client 发往 server 或反向；MUST 包含字符串或整数 ID；与基础 JSON-RPC 不同，ID MUST NOT 为 null；同一会话内 ID MUST NOT 被请求方重复使用。",
+      "Response 结构为 {jsonrpc:\"2.0\", id, result?: object, error?: {code:number, message:string, data?:unknown}}；MUST 携带与对应请求相同的 ID；细分为成功结果与错误两类，result 与 error 二者 MUST 只设其一、MUST NOT 同时设置；error 至少包含错误码与消息，错误码 MUST 为整数。",
+      "Notification 结构为 {jsonrpc:\"2.0\", method: string, params?: object}，是单向消息，接收方 MUST NOT 回复；Notification MUST NOT 包含 ID。",
+      "HTTP 传输的实现 SHOULD 遵循授权规范；STDIO 传输的实现 SHOULD NOT 遵循该授权规范，而应从环境获取凭据；client 与 server MAY 协商自定义认证授权策略。",
+      "协议的完整定义以 TypeScript schema 为唯一事实来源（source of truth），另有由其自动生成的 JSON Schema 供工具使用。",
+      "_meta 字段由 MCP 保留，用于附加元数据；以 modelcontextprotocol 或 mcp 为段的合法前缀（如 modelcontextprotocol.io/、mcp.dev/）为 MCP 保留。"
+    ],
+    "raw_excerpt": "All messages between MCP clients and servers MUST follow the JSON-RPC 2.0 specification. The protocol defines these types of messages: Requests ... Responses ... Notifications ... Notifications MUST NOT include an ID. ... The full specification of the protocol is defined as a TypeScript schema. This is the source of truth for all protocol messages and structures."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Server Features / Primitives — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/server",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "Server 通过 MCP 为语言模型添加上下文提供基础构件（primitives），共三个：Prompts、Resources、Tools。",
+      "Prompts：预定义的模板或指令，用于引导语言模型交互。",
+      "Resources：结构化数据或内容，为模型提供附加上下文。",
+      "Tools：可执行函数，允许模型执行动作或检索信息。",
+      "三者构成控制权层级：Prompts 由用户控制（user-controlled），是用户选择调用的交互式模板，例如斜杠命令、菜单选项。",
+      "Resources 由应用控制（application-controlled），是由 client 附加和管理的上下文数据，例如文件内容、git 历史。",
+      "Tools 由模型控制（model-controlled），是暴露给 LLM 以执行动作的函数，例如 API POST 请求、文件写入。"
+    ],
+    "raw_excerpt": "Servers provide the fundamental building blocks for adding context to language models via MCP. These primitives enable rich interactions between clients, servers, and language models: Prompts: Pre-defined templates or instructions that guide language model interactions; Resources: Structured data or content that provides additional context to the model; Tools: Executable functions that allow models to perform actions or retrieve information. ... Primitive | Control | Description | Example — Prompts | User-controlled | Interactive templates invoked by user choice | Slash commands, menu options; Resources | Application-controlled | Contextual data attached and managed by the client | File contents, git history; Tools | Model-controlled | Functions exposed to the LLM to take actions | API POST requests, file writing"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Client Features: Roots — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/client",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 提供标准化方式让 client 向 server 暴露文件系统 “roots”；roots 界定 server 可在文件系统中操作的边界，使 server 了解其可访问的目录与文件。",
+      "Server 可以向支持 roots 的 client 请求 roots 列表，并在列表变化时收到通知。",
+      "支持 roots 的 client MUST 在初始化时声明 roots 能力，形如 {\"capabilities\":{\"roots\":{\"listChanged\":true}}}；listChanged 表示 client 是否会在 roots 列表变化时发出通知。",
+      "获取 roots 的方式：server 发送 roots/list 请求，client 返回 {\"roots\":[{\"uri\":\"file:///home/user/projects/myproject\",\"name\":\"My Project\"}]}。",
+      "roots 变化时，支持 listChanged 的 client MUST 发送 notifications/roots/list_changed 通知。",
+      "Root 数据类型包含 uri（唯一标识，当前规范中 MUST 为 file:// URI）与可选的 name（人类可读的显示名）。",
+      "错误处理：client 不支持 roots 时返回 -32601（Method not found），内部错误返回 -32603。",
+      "安全要求：client MUST 仅暴露具备适当权限的 roots、校验所有 root URI 以防路径穿越、实施访问控制并监控 root 可达性；server SHOULD 处理 roots 不可用的情况、在操作中遵守 root 边界、对所有路径按给定 roots 校验。",
+      "实现指引：client SHOULD 在向 server 暴露 roots 前征求用户同意；server SHOULD 在使用前检查 roots 能力。"
+    ],
+    "raw_excerpt": "The Model Context Protocol (MCP) provides a standardized way for clients to expose filesystem \"roots\" to servers. Roots define the boundaries of where servers can operate within the filesystem, allowing them to understand which directories and files they have access to. Servers can request the list of roots from supporting clients and receive notifications when that list changes. ... Clients that support roots MUST declare the roots capability during initialization ... To retrieve roots, servers send a roots/list request ... When roots change, clients that support listChanged MUST send a notification: notifications/roots/list_changed"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Client Features: Sampling — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/client/sampling",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "Sampling 提供标准化方式，让 server 通过 client 请求语言模型进行采样（“completions” 或 “generations”）。",
+      "该流程让 client 保持对模型访问、模型选择与权限的控制，同时让 server 能利用 AI 能力，且 server 无需持有 API key。",
+      "Server 可以请求文本、音频或图像形式的交互，并可在提示中可选地包含来自 MCP server 的上下文。",
+      "Sampling 使 server 能在其他 MCP server 特性内部嵌套 LLM 调用，从而实现 agentic 行为。",
+      "出于信任与安全，SHOULD 始终有可拒绝采样请求的人类在环（human in the loop）；应用 SHOULD 提供便于审阅采样请求的 UI、允许用户在发送前查看和编辑提示、在交付前呈现生成结果供审阅。",
+      "支持 sampling 的 client MUST 在初始化时声明 sampling 能力，形如 {\"capabilities\":{\"sampling\":{}}}。",
+      "Server 通过发送 sampling/createMessage 请求来请求语言模型生成，参数包含 messages、modelPreferences、systemPrompt、maxTokens 等。",
+      "采样消息内容类型包括 text、image（base64 数据 + mimeType）、audio（base64 数据 + mimeType）。",
+      "模型选择采用偏好系统：三个归一化（0-1）优先级 costPriority、speedPriority、intelligencePriority，加上可选的 model hints。",
+      "Hints 作为子串灵活匹配模型名，按偏好顺序评估；client MAY 将 hints 映射到其他提供商的等价模型；hints 仅为建议性，最终模型选择由 client 决定。",
+      "错误处理示例：client 可返回 {\"code\":-1,\"message\":\"User rejected sampling request\"}。"
+    ],
+    "raw_excerpt": "The Model Context Protocol (MCP) provides a standardized way for servers to request LLM sampling (\"completions\" or \"generations\") from language models via clients. This flow allows clients to maintain control over model access, selection, and permissions while enabling servers to leverage AI capabilities—with no server API keys necessary. ... Sampling in MCP allows servers to implement agentic behaviors, by enabling LLM calls to occur nested inside other MCP server features. ... To request a language model generation, servers send a sampling/createMessage request"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "web",
+    "title": "Client Features: Elicitation — Model Context Protocol Specification (2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "Elicitation 在本版规范中为新引入的特性，其设计可能在未来协议版本中演进。",
+      "Elicitation 提供标准化方式，让 server 在交互过程中通过 client 向用户请求额外信息，使 client 保持对用户交互与数据共享的控制，同时让 server 动态收集必要信息。",
+      "Server 使用 JSON schema 向用户请求结构化数据以校验响应。",
+      "Elicitation 使 server 能在其他 MCP server 特性内部嵌套用户输入请求，从而实现交互式工作流。",
+      "安全要求：server MUST NOT 使用 elicitation 请求敏感信息；应用 SHOULD 提供明确标示哪个 server 在请求信息的 UI、允许用户发送前审阅和修改响应、提供明确的拒绝与取消选项。",
+      "支持 elicitation 的 client MUST 在初始化时声明 elicitation 能力，形如 {\"capabilities\":{\"elicitation\":{}}}。",
+      "Server 通过发送 elicitation/create 请求向用户索取信息，参数包含 message 与 requestedSchema。",
+      "requestedSchema 使用受限的 JSON Schema 子集，仅限扁平对象与原始类型属性；有意不支持复杂嵌套结构、对象数组等高级特性以简化 client 实现。",
+      "支持的 schema 类型为 string（支持 email、uri、date、date-time 格式）、number/integer、boolean、enum（含 enumNames）。",
+      "响应采用三动作模型：accept（用户明确批准并提交数据，content 含符合 schema 的数据）、decline（用户明确拒绝，通常省略 content）、cancel（用户未做明确选择即关闭，通常省略 content）。",
+      "server 应分别处理三种状态：accept 处理提交数据；decline 处理明确拒绝（如提供替代方案）；cancel 处理关闭（如稍后再次提示）。"
+    ],
+    "raw_excerpt": "Elicitation is newly introduced in this version of the MCP specification and its design may evolve in future protocol versions. ... The Model Context Protocol (MCP) provides a standardized way for servers to request additional information from users through the client during interactions. ... Servers MUST NOT use elicitation to request sensitive information. ... To request information from a user, servers send an elicitation/create request ... The three response actions are: Accept ... Decline ... Cancel"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-03-26 — Transports (stdio & Streamable HTTP)",
+    "url": "https://modelcontextprotocol.io/specification/2025-03-26/basic/transports",
+    "published_at": "2025-03-26",
+    "key_points": [
+      "MCP 使用 JSON-RPC 编码消息，JSON-RPC 消息 MUST 为 UTF-8 编码；协议定义两种标准传输机制：stdio 与 Streamable HTTP。",
+      "stdio 传输中客户端将 MCP 服务器作为子进程启动，服务器从 stdin 读 JSON-RPC 消息、向 stdout 写消息；消息以换行符分隔且 MUST NOT 含内嵌换行。",
+      "stdio 下服务器 MAY 向 stderr 写 UTF-8 字符串用于日志；服务器 MUST NOT 向 stdout 写任何非合法 MCP 消息的内容，客户端 MUST NOT 向服务器 stdin 写任何非合法 MCP 消息的内容。",
+      "Streamable HTTP 明确取代 protocol version 2024-11-05 中的 HTTP+SSE 传输。",
+      "Streamable HTTP 中服务器作为独立进程可处理多个客户端连接，使用 HTTP POST 与 GET 请求，可选使用 SSE 流式传输多条服务器消息。",
+      "服务器 MUST 提供单一 HTTP 端点路径（MCP endpoint）同时支持 POST 与 GET 方法，例如 https://example.com/mcp。",
+      "安全要求：服务器 MUST 校验所有入站连接的 Origin 头以防 DNS rebinding；本地运行时 SHOULD 仅绑定 localhost(127.0.0.1) 而非 0.0.0.0；SHOULD 对所有连接实现认证。",
+      "客户端发往服务器的每条 JSON-RPC 消息 MUST 是一个新的 HTTP POST 请求；客户端 MUST 在 Accept 头中同时列出 application/json 与 text/event-stream。",
+      "若 POST 输入仅含 JSON-RPC 响应或通知，服务器接受时 MUST 返回 HTTP 202 Accepted 且无 body；无法接受时返回 HTTP 错误码（如 400）。",
+      "若 POST 输入含 JSON-RPC 请求，服务器 MUST 返回 Content-Type: text/event-stream 以启动 SSE 流，或返回 application/json 单个 JSON 对象；客户端 MUST 同时支持这两种情况。",
+      "客户端 MAY 对 MCP endpoint 发起 HTTP GET 以打开 SSE 流；服务器 MUST 返回 text/event-stream 或 HTTP 405 Method Not Allowed。",
+      "客户端 MAY 同时保持多条 SSE 流连接；服务器 MUST 只在其一连接上发送每条 JSON-RPC 消息，MUST NOT 跨流广播同一消息。",
+      "可恢复性：服务器 MAY 为 SSE 事件附加 id 字段，若存在则 MUST 在该 session 内所有流中全局唯一（若未使用 session 管理，则为该客户端的所有流）；客户端恢复时 SHOULD 发 HTTP GET 并带 Last-Event-ID 头；服务器 MUST NOT 重放本应发往其他流的消息。",
+      "Session 管理：使用 Streamable HTTP 的服务器 MAY 在初始化时通过包含 InitializeResult 的 HTTP 响应中的 Mcp-Session-Id 头分配 session ID；session ID SHOULD 全局唯一且密码学安全（如安全生成的 UUID、JWT 或密码学哈希），MUST 只含可见 ASCII 字符（0x21–0x7E）。",
+      "若服务器在初始化时返回 Mcp-Session-Id，客户端 MUST 在所有后续 HTTP 请求的 Mcp-Session-Id 头中携带它；要求 session ID 的服务器对缺少该头的请求（初始化除外）SHOULD 返回 HTTP 400 Bad Request。",
+      "服务器 MAY 随时终止 session，之后对携带该 session ID 的请求 MUST 返回 HTTP 404 Not Found；客户端收到 404 后 MUST 通过发送不带 session ID 的新 InitializeRequest 开启新 session。",
+      "不再需要某 session 的客户端 SHOULD 向 MCP endpoint 发送带 Mcp-Session-Id 头的 HTTP DELETE 显式终止；服务器 MAY 以 HTTP 405 Method Not Allowed 表示不允许客户端终止 session。",
+      "向后兼容：想支持旧客户端的服务器应同时保留旧传输的 SSE 与 POST 端点及新的 MCP endpoint；想支持旧服务器的客户端应先 POST InitializeRequest，若成功则判定为新 Streamable HTTP，若失败于 4xx（如 405/404）则改发 GET 期待首个 endpoint 事件以判定为旧 HTTP+SSE 传输。",
+      "协议与传输无关（transport-agnostic），可实现于任何支持双向消息交换的通道；自定义传输 MUST 保留 JSON-RPC 消息格式与 MCP 定义的生命周期要求。"
+    ],
+    "raw_excerpt": "This replaces the HTTP+SSE transport from protocol version 2024-11-05. ... The server MUST provide a single HTTP endpoint path (hereafter referred to as the MCP endpoint) that supports both POST and GET methods. ... A server using the Streamable HTTP transport MAY assign a session ID at initialization time, by including it in an Mcp-Session-Id header on the HTTP response containing the InitializeResult."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2024-11-05 — Transports (stdio & HTTP with SSE)",
+    "url": "https://modelcontextprotocol.io/specification/2024-11-05/basic/transports",
+    "published_at": "2024-11-05",
+    "key_points": [
+      "2024-11-05 版定义两种标准传输：stdio 与 HTTP with Server-Sent Events (SSE)。",
+      "旧 SSE 传输中服务器 MUST 提供两个端点：一个 SSE 端点供客户端建立连接并接收服务器消息，一个普通 HTTP POST 端点供客户端向服务器发送消息。",
+      "客户端连接时服务器 MUST 发送一个 endpoint 事件，其中包含供客户端发送消息使用的 URI；此后所有客户端消息 MUST 以 HTTP POST 请求发往该端点。",
+      "服务器消息以 SSE message 事件发送，消息内容以 JSON 编码在事件 data 中。",
+      "旧版同样要求服务器 MUST 校验 Origin 头以防 DNS rebinding、本地运行 SHOULD 仅绑定 127.0.0.1、SHOULD 对所有连接实现认证。",
+      "旧版 stdio 描述与新版一致：客户端启动子进程、换行分隔消息、stderr 用于日志、stdout 不得写非 MCP 消息。"
+    ],
+    "raw_excerpt": "The server MUST provide two endpoints: An SSE endpoint, for clients to establish a connection and receive messages from the server; A regular HTTP POST endpoint for clients to send messages to the server. When a client connects, the server MUST send an endpoint event containing a URI for the client to use for sending messages."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-06-18 — Lifecycle (initialization, capability negotiation, shutdown)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 定义严格的生命周期：Initialization（能力协商与协议版本协商）、Operation（正常协议通信）、Shutdown（优雅终止连接）。",
+      "初始化阶段 MUST 是客户端与服务器之间的首次交互，双方在此阶段建立协议版本兼容性、交换并协商能力、共享实现信息。",
+      "客户端 MUST 通过发送 initialize 请求启动该阶段，请求包含：支持的协议版本（protocolVersion）、客户端能力（capabilities）、客户端实现信息（clientInfo）。",
+      "服务器 MUST 以自己的能力与信息响应，返回 protocolVersion、capabilities、serverInfo，以及可选的 instructions 字段。",
+      "初始化成功后客户端 MUST 发送 notifications/initialized 通知，表示已准备好开始正常操作。",
+      "在服务器响应 initialize 请求前，客户端 SHOULD NOT 发送除 ping 之外的请求；在收到 initialized 通知前，服务器 SHOULD NOT 发送除 ping 与 logging 之外的请求。",
+      "版本协商：客户端 MUST 在 initialize 中发送其支持的协议版本（SHOULD 为最新支持版本）；若服务器支持该版本 MUST 返回同一版本，否则 MUST 返回其支持的另一版本（SHOULD 为服务器最新支持版本）；若客户端不支持服务器返回的版本，SHOULD 断开连接。",
+      "若使用 HTTP，客户端 MUST 在所有后续请求中携带 MCP-Protocol-Version: <protocol-version> HTTP 头。",
+      "能力协商：客户端与服务器能力决定 session 期间可用的可选协议特性。客户端能力包括 roots、sampling、elicitation、experimental；服务器能力包括 prompts、resources、tools、logging、completions、experimental。",
+      "能力对象可描述子能力：listChanged（支持 prompts/resources/tools 的列表变更通知）、subscribe（仅 resources，支持订阅单项变更）。",
+      "Operation 阶段双方 MUST 遵守已协商的协议版本，且只使用成功协商的能力。",
+      "Shutdown 阶段未定义专门的关闭消息，而由底层传输机制表示连接终止：stdio 下客户端 SHOULD 先关闭子进程输入流，等待服务器退出，超时则发 SIGTERM，再不退出则发 SIGKILL；服务器 MAY 通过关闭输出流并退出来发起关闭；HTTP 传输下通过关闭相关 HTTP 连接表示关闭。",
+      "实现 SHOULD 为所有发出的请求设置超时以防挂起连接与资源耗尽；超时后发送方 SHOULD 发出该请求的取消通知并停止等待响应；SDK 与中间件 SHOULD 支持按请求配置超时；收到对应请求的进度通知时 MAY 重置超时计时，但 SHOULD 始终强制最大超时。",
+      "实现 SHOULD 准备处理这些错误情形：协议版本不匹配、必需能力协商失败、请求超时；示例初始化错误返回 code -32602、message \"Unsupported protocol version\"，data 中含 supported 与 requested 字段。"
+    ],
+    "raw_excerpt": "The initialization phase MUST be the first interaction between client and server. During this phase, the client and server: Establish protocol version compatibility; Exchange and negotiate capabilities; Share implementation details. ... After successful initialization, the client MUST send an initialized notification to indicate it is ready to begin normal operations."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-06-18 — Authorization (OAuth 2.1 based)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "MCP 在传输层提供授权能力，使客户端能代表资源所有者向受限 MCP 服务器发起请求；该规范定义面向 HTTP 类传输的授权流程。",
+      "授权对 MCP 实现是 OPTIONAL 的；使用 HTTP 类传输的实现 SHOULD 遵循本规范；使用 STDIO 传输的实现 SHOULD NOT 遵循本规范，而应从环境获取凭据；使用其他传输的实现 MUST 遵循其协议既有的安全最佳实践。",
+      "该授权机制基于以下规范并实现其特性的选定子集：OAuth 2.1 IETF DRAFT (draft-ietf-oauth-v2-1-13)、OAuth 2.0 Authorization Server Metadata (RFC 8414)、OAuth 2.0 Dynamic Client Registration Protocol (RFC 7591)、OAuth 2.0 Protected Resource Metadata (RFC 9728)。",
+      "角色划分：受保护的 MCP 服务器充当 OAuth 2.1 resource server；MCP 客户端充当 OAuth 2.1 client；授权服务器负责与用户交互并签发访问令牌，其实现细节不在本规范范围内。",
+      "授权服务器 MUST 实现 OAuth 2.1 并为机密客户端与公共客户端采取适当安全措施；授权服务器与 MCP 客户端 SHOULD 支持 RFC 7591 动态客户端注册。",
+      "MCP 服务器 MUST 实现 RFC 9728 Protected Resource Metadata，客户端 MUST 使用它进行授权服务器发现；授权服务器 MUST 提供 RFC 8414 Authorization Server Metadata，客户端 MUST 使用它。",
+      "MCP 服务器返回 401 Unauthorized 时 MUST 使用 WWW-Authenticate 头指示资源服务器元数据 URL（RFC 9728 Section 5.1）；客户端 MUST 能解析 WWW-Authenticate 头并恰当响应 401。",
+      "服务器返回的 Protected Resource Metadata 文档 MUST 包含 authorization_servers 字段且至少含一个授权服务器；多个授权服务器时由客户端按 RFC 9728 Section 7.6 选择。",
+      "MCP 客户端 MUST 实现 RFC 8707 Resource Indicators，在授权请求与令牌请求中都 MUST 包含 resource 参数，且 MUST 使用 MCP 服务器的 canonical URI 标识目标资源。",
+      "canonical URI 示例：https://mcp.example.com/mcp、https://mcp.example.com、https://mcp.example.com:8443；无效示例：mcp.example.com（缺 scheme）、https://mcp.example.com#fragment（含 fragment）；实现 SHOULD 一致使用不带尾斜杠的形式。",
+      "令牌使用：客户端 MUST 使用 Authorization: Bearer <access-token> 请求头；授权 MUST 包含在客户端到服务器的每个 HTTP 请求中，即使属于同一逻辑 session；访问令牌 MUST NOT 放在 URI 查询字符串中。",
+      "服务器 MUST 按 OAuth 2.1 Section 5.2 校验访问令牌，并 MUST 校验令牌是专门以其为预期受众签发的（RFC 8707 Section 2）；无效或过期令牌 MUST 收到 HTTP 401。",
+      "客户端 MUST NOT 向 MCP 服务器发送非该服务器授权服务器签发的令牌；MCP 服务器 MUST NOT 接受或中转任何其他令牌（禁止 token passthrough）。",
+      "错误码约定：401 Unauthorized 表示需要授权或令牌无效；403 Forbidden 表示 scope 无效或权限不足；400 Bad Request 表示授权请求格式错误。",
+      "通信安全：所有授权服务器端点 MUST 通过 HTTPS 提供；所有重定向 URI MUST 为 localhost 或使用 HTTPS。",
+      "MCP 客户端 MUST 按 OAuth 2.1 Section 7.5.2 实现 PKCE，以防授权码拦截与注入攻击；客户端 MUST 在授权服务器注册重定向 URI，授权服务器 MUST 对预注册值做精确匹配校验；客户端 SHOULD 使用并校验 state 参数。",
+      "授权服务器 SHOULD 签发短期访问令牌以降低泄漏影响；对公共客户端，授权服务器 MUST 按 OAuth 2.1 Section 4.3.1 轮换 refresh token。"
+    ],
+    "raw_excerpt": "This authorization mechanism is based on established specifications listed below, but implements a selected subset of their features ... OAuth 2.1 IETF DRAFT (draft-ietf-oauth-v2-1-13), OAuth 2.0 Authorization Server Metadata (RFC8414), OAuth 2.0 Dynamic Client Registration Protocol (RFC7591), OAuth 2.0 Protected Resource Metadata (RFC9728). ... MCP clients MUST implement Resource Indicators for OAuth 2.0 as defined in RFC 8707 to explicitly specify the target resource for which the token is being requested."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-03-26 — Changelog (changes since 2024-11-05)",
+    "url": "https://modelcontextprotocol.io/specification/2025-03-26/changelog",
+    "published_at": "2025-03-26",
+    "key_points": [
+      "2025-03-26 相对 2024-11-05 的主要变更：新增基于 OAuth 2.1 的完整授权框架（PR #133）。",
+      "2025-03-26 用更灵活的 Streamable HTTP 传输取代了此前的 HTTP+SSE 传输（PR #206）。",
+      "2025-03-26 新增对 JSON-RPC batching 的支持（PR #228）。",
+      "2025-03-26 新增全面的工具注解（tool annotations），用于描述工具行为，例如是否只读或具破坏性（PR #185）。",
+      "其他 schema 变更：ProgressNotification 新增 message 字段以提供描述性状态更新；新增对音频数据的支持，与既有文本、图像内容类型并列；新增 completions 能力以显式表示支持参数自动补全建议。"
+    ],
+    "raw_excerpt": "Added a comprehensive authorization framework based on OAuth 2.1 (PR #133). Replaced the previous HTTP+SSE transport with a more flexible Streamable HTTP transport (PR #206). Added support for JSON-RPC batching (PR #228). Added comprehensive tool annotations for better describing tool behavior, like whether it is read-only or destructive (PR #185)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-06-18 — Changelog (changes since 2025-03-26)",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/changelog",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "2025-06-18 移除了对 JSON-RPC batching 的支持（PR #416）——即 2025-03-26 引入的 batching 在下一版被撤销。",
+      "2025-06-18 新增结构化工具输出（structured tool output）支持（PR #371）。",
+      "2025-06-18 将 MCP 服务器归类为 OAuth Resource Servers，并新增 protected resource metadata 以发现对应的 Authorization server（PR #338）。",
+      "2025-06-18 要求 MCP 客户端实现 RFC 8707 Resource Indicators，以防恶意服务器获取访问令牌（PR #734）。",
+      "2025-06-18 在授权规范与新增的安全最佳实践页中澄清了安全考量与最佳实践。",
+      "2025-06-18 新增 elicitation 支持，使服务器可在交互中向用户请求补充信息（PR #382）。",
+      "2025-06-18 新增工具调用结果中的 resource links 支持（PR #603）。",
+      "2025-06-18 要求使用 HTTP 时在后续请求中通过 MCP-Protocol-Version 头指定已协商的协议版本（PR #548）。",
+      "2025-06-18 将 Lifecycle Operation 中的 SHOULD 改为 MUST。",
+      "其他 schema 变更：为更多接口类型新增 _meta 字段并规定其用法（PR #710）；CompletionRequest 新增 context 字段以包含此前已解析的变量（PR #598）；新增 title 字段用于人类友好显示名，使 name 可作为程序化标识符（PR #663）。"
+    ],
+    "raw_excerpt": "Remove support for JSON-RPC batching (PR #416). Add support for structured tool output (PR #371). Classify MCP servers as OAuth Resource Servers, adding protected resource metadata to discover the corresponding Authorization server. (PR #338). Require MCP clients to implement Resource Indicators as described in RFC 8707 ... Require negotiated protocol version to be specified via MCP-Protocol-Version header in subsequent requests when using HTTP (PR #548). Change SHOULD to MUST in Lifecycle Operation."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-11-25 — Changelog (changes since 2025-06-18)",
+    "url": "https://modelcontextprotocol.io/specification/2025-11-25/changelog",
+    "published_at": "2025-11-25",
+    "key_points": [
+      "2025-11-25 主要变更：增强授权服务器发现，支持 OpenID Connect Discovery 1.0（PR #797）。",
+      "2025-11-25 允许服务器为 tools、resources、resource templates、prompts 暴露 icons 作为附加元数据（SEP-973）。",
+      "2025-11-25 通过 WWW-Authenticate 增强授权流程，支持增量式 scope 同意（incremental scope consent）（SEP-835）。",
+      "2025-11-25 新增对 OAuth Client ID Metadata Documents 作为推荐客户端注册机制的支持（SEP-991, PR #1296）。",
+      "2025-11-25 新增 URL 模式 elicitation（SEP-1036），并更新 ElicitResult 与 EnumSchema 以支持 titled/untitled/single-select/multi-select 枚举（SEP-1330）。",
+      "2025-11-25 通过 tools 与 toolChoice 参数为 sampling 增加工具调用支持（SEP-1577）。",
+      "2025-11-25 新增 tasks 的实验性支持，用于通过轮询与延迟结果获取来跟踪持久请求（SEP-1686）。",
+      "2025-11-25 次要变更：澄清使用 stdio 传输的服务器可将 stderr 用于所有类型的日志（不仅是错误消息）（PR #670）。",
+      "2025-11-25 澄清 Streamable HTTP 传输中服务器对无效 Origin 头必须返回 HTTP 403 Forbidden（PR #1439）。",
+      "2025-11-25 支持轮询 SSE 流，允许服务器自行断开（SEP-1699）；并澄清 GET 流支持轮询、恢复始终通过 GET 进行（无论流由何种方式发起）、事件 ID 应编码流身份、断开包含服务器主动关闭（Issue #1847）。",
+      "2025-11-25 使 OAuth 2.0 Protected Resource Metadata 发现与 RFC 9728 对齐，WWW-Authenticate 头变为可选并可回退到 .well-known 端点（SEP-985）。",
+      "2025-11-25 确立 JSON Schema 2020-12 为 MCP schema 定义的默认方言（SEP-1613）。",
+      "2025-11-25 其他 schema 变更：将请求负载与 RPC 方法定义解耦为独立参数 schema（SEP-1319, PR #1284）。",
+      "2025-11-25 治理与流程更新：正式化 MCP 治理结构（SEP-932）、建立社区沟通实践（SEP-994）、正式化 Working Groups 与 Interest Groups（SEP-1302）、建立 SDK 分级体系（SEP-1730）。"
+    ],
+    "raw_excerpt": "Enhance authorization server discovery with support for OpenID Connect Discovery 1.0. (PR #797) ... Enhance authorization flows with incremental scope consent via WWW-Authenticate (SEP-835) ... Add support for OAuth Client ID Metadata Documents as a recommended client registration mechanism (SEP-991, PR #1296) ... Clarify that servers must respond with HTTP 403 Forbidden for invalid Origin headers in Streamable HTTP transport. (PR #1439)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification 2025-11-25 — Transports (stdio & Streamable HTTP, updated)",
+    "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+    "published_at": "2025-11-25",
+    "key_points": [
+      "2025-11-25 版仍定义两种标准传输：stdio 与 Streamable HTTP；Streamable HTTP 仍明确取代 2024-11-05 的 HTTP+SSE 传输。",
+      "2025-11-25 的 stdio 描述中，消息为单个 JSON-RPC request、notification 或 response（不再提及 batch），与 2025-06-18 移除 batching 一致。",
+      "2025-11-25 澄清服务器 MAY 向 stderr 写 UTF-8 字符串用于任何日志目的，包括信息、调试与错误消息；客户端 MAY 捕获、转发或忽略 stderr 输出，且 SHOULD NOT 假定 stderr 输出表示错误状态。",
+      "2025-11-25 明确：若 Origin 头存在且无效，服务器 MUST 返回 HTTP 403 Forbidden，响应体 MAY 含无 id 的 JSON-RPC 错误响应。",
+      "2025-11-25 的 POST 请求体 MUST 为单个 JSON-RPC request、notification 或 response（不再允许数组批处理）。",
+      "2025-11-25 新增 SSE 轮询机制：服务器 SHOULD 立即发送一个含事件 ID 与空 data 字段的 SSE 事件，以便客户端用该事件 ID 作为 Last-Event-ID 重连。",
+      "2025-11-25 允许服务器在已发送带事件 ID 的 SSE 事件后随时关闭连接（但不终止 SSE 流）以避免维持长连接，客户端 SHOULD 随后通过重连来「轮询」该 SSE 流；关闭前服务器 SHOULD 发送带标准 retry 字段的 SSE 事件，客户端 MUST 遵守该 retry 字段等待指定毫秒数后重连。",
+      "2025-11-25 要求事件 ID SHOULD 编码足够信息以标识来源流，使服务器能将 Last-Event-ID 关联到正确的流；恢复机制适用于 POST 或 GET 发起的流，恢复始终通过带 Last-Event-ID 的 HTTP GET 进行。",
+      "2025-11-25 要求客户端 MUST 以安全方式处理 session ID（参见 Session Hijacking 缓解措施）。"
+    ],
+    "raw_excerpt": "If the Origin header is present and invalid, servers MUST respond with HTTP 403 Forbidden. ... The server SHOULD immediately send an SSE event consisting of an event ID and an empty data field in order to prime the client to reconnect (using that event ID as Last-Event-ID). ... This mechanism applies regardless of how the original stream was initiated (via POST or GET). Resumption is always via HTTP GET with Last-Event-ID."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "MCP Specification — Versioning (version identifier format, revision states, negotiation)",
+    "url": "https://modelcontextprotocol.io/specification/versioning",
+    "published_at": null,
+    "key_points": [
+      "MCP 使用 YYYY-MM-DD 格式的字符串版本标识，表示最后一次不向后兼容变更的日期；只要变更保持向后兼容，协议版本号就不会递增。",
+      "修订版本可标记为 Draft（进行中）、Current（当前可用、可继续接收向后兼容变更）、Final（已完成、不再变更）。",
+      "该页面显示当前协议版本为 2026-07-28，晚于本子问题所列的 2025-11-25。",
+      "该页面描述的协商机制为：每个请求通过 _meta 字段中的 io.modelcontextprotocol/protocolVersion 键声明所用协议版本，服务器逐请求独立接受或拒绝；在 Streamable HTTP 上同一值也由 MCP-Protocol-Version 头携带。",
+      "若服务器不支持所请求版本，会返回 UnsupportedProtocolVersionError 并列出其支持的版本；客户端可用双方都支持的版本重试，或向用户报错。",
+      "希望预先选定版本的客户端可调用 server/discover，这是一个强制 RPC，单次请求返回服务器支持的协议版本、能力与身份；调用它是可选的。",
+      "该页面指出，与基于握手的协议修订（2025-11-25 及更早）的互操作性需参见 Backward Compatibility 章节。",
+      "特性可被标记为 Deprecated：仍属规范但计划移除，须记录迁移路径，并在移除前至少保留十二个月（在加速移除例外下至少九十天）。"
+    ],
+    "raw_excerpt": "The Model Context Protocol uses string-based version identifiers following the format YYYY-MM-DD, to indicate the last date backwards incompatible changes were made. ... The current protocol version is 2026-07-28. ... Every request declares the protocol version it is using via the io.modelcontextprotocol/protocolVersion key in its _meta field, and the server accepts or rejects each request independently. ... For interoperability with servers and clients that implement the handshake-based protocol revisions (2025-11-25 and earlier), see Backward Compatibility."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "modelcontextprotocol/servers — Model Context Protocol Servers（官方参考实现集合）",
+    "url": "https://github.com/modelcontextprotocol/servers",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库页面显示 Stars 91.5k、Forks 11.9k、Watchers 628，累计 4,826 commits，最近一次 push 为 2026-10-25。",
+      "该仓库定位已收窄：README 明确说明它只承载 MCP steering group 维护的少量 reference servers，完整服务器清单应去 MCP Registry 浏览。",
+      "README 列出 7 个现行 reference servers：Everything、Fetch、Filesystem、Git、Memory、Sequential Thinking、Time。",
+      "README 列出 13 个已归档（archived）的参考服务器，包括 AWS KB Retrieval、Brave Search、EverArt、GitHub、GitLab、Google Drive、Google Maps、PostgreSQL、Puppeteer、Redis、Sentry、Slack、SQLite；其中 Brave Search 已由官方 @brave/brave-search-mcp-server 取代，Slack 现由 Zencoder 维护。",
+      "README 明确的生产可用性免责声明：这些服务器是用于演示 MCP 特性与 SDK 用法的参考实现、面向开发者的教学示例，并非 production-ready 方案，开发者需自行评估安全需求并实施防护。",
+      "README 列出 10 个官方 SDK 语言：C#、Go、Java、Kotlin、PHP、Python、Ruby、Rust、Swift、TypeScript。",
+      "仓库治理表述为「Managed by Anthropic, but built together with the community」，许可证为 Apache 2.0（新贡献）与 MIT（既有代码）并存。",
+      "分发方式：TypeScript 服务器可直接用 npx 运行（如 @modelcontextprotocol/server-memory），Python 服务器可用 uvx 或 pip 运行（如 mcp-server-git）。"
+    ],
+    "raw_excerpt": "This repository is a collection of reference implementations for the Model Context Protocol (MCP)... The servers in this repository are intended as reference implementations to demonstrate MCP features and SDK usage. They are meant to serve as educational examples for developers building their own MCP servers, not as production-ready solutions. ... Managed by Anthropic, but built together with the community."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "modelcontextprotocol/python-sdk — 官方 Python SDK",
+    "url": "https://github.com/modelcontextprotocol/python-sdk",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库页面显示 Stars 24.7k、Forks 4.1k、Watchers 177，累计 1,108 commits，最近 push 为 2026-10-25。",
+      "该 SDK 同时提供 server 与 client 两侧实现，可构建向任意 MCP host 暴露 tools/resources/prompts 的服务器，也可构建连接任意 MCP server 的客户端。",
+      "支持全部标准传输：stdio、Streamable HTTP 与 SSE。",
+      "运行环境要求 Python 3.11+；安装方式为 uv add \"mcp[cli]\" 或 pip install \"mcp[cli]\"，cli extra 额外提供 mcp dev / mcp run / mcp install 命令行工具。",
+      "README 提及文档包含「What's new in v2」与迁移指南，表明 SDK 已进入 v2 版本线。",
+      "许可证为 MIT。"
+    ],
+    "raw_excerpt": "The Model Context Protocol lets you build servers that expose data and functionality to LLM applications in a secure, standardized way. ... Speak every standard transport: stdio, Streamable HTTP, and SSE. Requirements: Python 3.11+."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "modelcontextprotocol/registry — 社区驱动的 MCP 服务器注册中心",
+    "url": "https://github.com/modelcontextprotocol/registry",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库页面显示 Stars 7.4k、Forks 1.0k，累计 751 commits，最近 push 为 2026-10-24；实现语言为 Go。",
+      "定位表述：MCP registry 为 MCP 客户端提供服务器清单，相当于 MCP 服务器的应用商店（app store）。",
+      "README 记录的里程碑：2025-09-08 registry 以 preview 形式上线（仍属预览版，可能发生破坏性变更或数据重置，GA 后续发布）；2025-10-24 Registry API 进入 API freeze（v0.1），冻结期内无破坏性变更以便集成方实现支持，同时继续开发 v1 以走向 GA。",
+      "发布机制：服务器不通过向该仓库提 PR 上架，而是使用独立的 mcp-publisher CLI 从服务器自身项目发布。",
+      "设有 Registry Working Group，负责人为 Stacklok 的 Radoslav Dimitrov，成员来自 PulseMCP、TeamSpark、Ravenmail。",
+      "提供预构建 Docker 镜像（ghcr.io/modelcontextprotocol/registry），标签含 latest、main 与具体版本号；后端依赖 PostgreSQL。"
+    ],
+    "raw_excerpt": "The MCP registry provides MCP clients with a list of MCP servers, like an app store for MCP servers. ... 2025-10-24 update: The Registry API has entered an API freeze (v0.1). ... 2025-09-08 update: The registry has launched in preview."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "MCP 官方文档 — Introduction / Clients（modelcontextprotocol.io）",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "published_at": null,
+    "key_points": [
+      "官方文档将 MCP 描述为连接 AI 应用与外部系统的开源标准，并以「AI 应用的 USB-C 端口」作类比。",
+      "官方文档点名支持 MCP 的客户端包括 AI 助手 Claude 与 ChatGPT，以及开发工具 Visual Studio Code、Cursor、MCPJam 等，并称其为「广泛的生态支持（Broad ecosystem support）」。",
+      "文档示例中提及 Claude Code 结合 Figma 设计生成完整 Web 应用、企业聊天机器人连接组织内多个数据库等使用场景。",
+      "文档导航包含 Architecture、Security、Build MCP Apps 等章节，表明协议文档已扩展到在 AI 客户端内运行交互式应用（MCP Apps）的能力。"
+    ],
+    "raw_excerpt": "MCP is an open protocol supported across a wide range of clients and servers. AI assistants like Claude and ChatGPT, development tools like Visual Studio Code, Cursor, MCPJam, and many others all support MCP — making it easy to build once and integrate everywhere."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "GitHub 仓库检索结果：MCP 相关高星项目（search_repos 元数据）",
+    "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "检索结果中 modelcontextprotocol/typescript-sdk 显示 Stars 13,648、Forks 2,337，语言 TypeScript，最近 push 2026-10-23。",
+      "社区高星 MCP server 项目示例：hangwin/mcp-chrome（Stars 12,508，TypeScript，基于 Chrome 扩展暴露浏览器能力，最近 push 2026-01-06）、mobile-next/mobile-mcp（Stars 9,960，TypeScript，面向 iOS/Android 移动自动化与抓取，最近 push 2026-10-24）、getsentry/MobileBuildMCP（Stars 6,506，TypeScript，iOS/macOS 构建工具，最近 push 2026-10-22）、jacob-bd/gemini-notebook-mcp-cli（Stars 6,389，Python，最近 push 2026-10-23）。",
+      "上述社区项目的活跃度差异明显：mcp-chrome 最近 push 停留在 2026-01-06，而 mobile-mcp、MobileBuildMCP、gemini-notebook-mcp-cli 均在 2026-10-22 至 10-24 有提交。"
+    ],
+    "raw_excerpt": "modelcontextprotocol/typescript-sdk (★13648, forks 2337) desc: The official TypeScript SDK for Model Context Protocol servers and clients | lang: TypeScript | last push: 2026-10-23 ... hangwin/mcp-chrome (★12508 ...) last push: 2026-01-06"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Changelog",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "该 changelog 列出的是相对上一修订版 2025-11-25 的变更。",
+      "移除协议级 session 与 Streamable HTTP 传输中的 Mcp-Session-Id 头；列表类端点（tools/list、resources/list、prompts/list）不再随连接变化；需要跨调用状态的服务器改用服务器签发的显式 handle，作为普通工具参数传递（SEP-2567）。",
+      "使 MCP 无状态化：移除 initialize / notifications/initialized 握手；每个请求在 _meta 中携带协议版本与客户端能力（io.modelcontextprotocol/protocolVersion、io.modelcontextprotocol/clientCapabilities）。",
+      "客户端 SHOULD 在每个请求上标识自身（io.modelcontextprotocol/clientInfo），服务器 SHOULD 在每个结果的 _meta 中标识自身（io.modelcontextprotocol/serverInfo）。",
+      "版本不匹配返回 UnsupportedProtocolVersionError（SEP-2575）。",
+      "新增 server/discover：服务器 MUST 实现该 RPC，用于公布其支持的协议版本、能力与身份；客户端 MAY 在任何其他请求之前调用它做前置版本选择，或在 STDIO 上用作向后兼容探测（SEP-2575）。",
+      "以 subscriptions/listen 取代 HTTP GET 端点与 resources/subscribe / resources/unsubscribe：单一长生命周期的 POST 响应流，用于服务器到客户端的变更通知；客户端按类型选择订阅（toolsListChanged、promptsListChanged、resourcesListChanged、resourceSubscriptions），服务器以 io.modelcontextprotocol/subscriptionId 标记通知。",
+      "请求作用域的通知（notifications/progress、notifications/message）仍走其所属请求的响应流，不走 subscriptions/listen 流（SEP-2575）。",
+      "移除 ping、logging/setLevel 与 notifications/roots/list_changed；日志级别改为通过 _meta 中的 io.modelcontextprotocol/logLevel 按请求设置，未携带该字段的请求服务器 MUST NOT 发出 notifications/message（SEP-2575）。",
+      "实验性 tasks 移出核心协议，成为官方扩展 io.modelcontextprotocol/tasks；以 tasks/get 轮询与新增 tasks/update 取代阻塞式 tasks/result，移除 tasks/list，并允许服务器无需逐请求 opt-in 即可主动返回 task handle（SEP-2663）。",
+      "引入 Multi Round-Trip Requests (MRTR) 模式，取代此前服务器主动发起请求（roots/list、sampling/createMessage、elicitation/create）的做法：服务器返回 InputRequiredResult（resultType: \"input_required\"），其 inputRequests 字段携带所需补充信息，客户端在重试原请求时以 inputResponses 提供（SEP-2322）。",
+      "所有结果现在都携带必需的 resultType 字段：普通结果为 \"complete\"，多轮往返的中间结果为 \"input_required\"；客户端 MUST 将缺少该字段的早期协议服务器结果视为 \"complete\"（SEP-2322）。",
+      "移除 Streamable HTTP 传输的 SSE 流可恢复性与消息重投（Last-Event-ID 头与 SSE event ID）；响应流中断即丢失在途请求，客户端 MUST 以新请求 ID 重新发起（SEP-2575）。",
+      "次要变更：在 ClientCapabilities 与 ServerCapabilities 中新增 extensions 字段以支持核心协议之外的可选扩展。",
+      "次要变更：要求 Streamable HTTP POST 请求携带标准 MCP 请求头（Mcp-Method、Mcp-Name），并支持通过 x-mcp-header 从工具参数映射自定义头（SEP-2243）。",
+      "次要变更：通过新的 CacheableResult 接口，要求 tools/list、prompts/list、resources/list、resources/read、resources/templates/list 的结果携带 ttlMs 与 cacheScope 字段；ttlMs 为新鲜度提示（毫秒），cacheScope（\"public\" 或 \"private\"）控制共享中间层是否可缓存。",
+      "次要变更：资源未找到错误码由 -32002 改为 -32602（Invalid Params）以对齐 JSON-RPC 规范。",
+      "次要变更：定义错误码分配策略，划分 JSON-RPC 服务器错误区间——-32000 至 -32019 保留为实现自定义（现有 SDK 用法被 grandfather），-32020 至 -32099 保留给 MCP 规范；相应重编号：HeaderMismatch -32001 → -32020，MissingRequiredClientCapability -32003 → -32021，UnsupportedProtocolVersion -32004 → -32022。",
+      "弃用：Roots、Sampling、Logging 三个特性被弃用（SEP-2577），弃用窗口内仍完全可用，但新实现不应再增加支持；建议迁移方式为用工具参数/资源 URI/服务器配置替代 Roots、直接集成 LLM 供应商 API 替代 Sampling、用 stderr 或 OpenTelemetry 替代 Logging。",
+      "弃用：HTTP+SSE 传输（自 2025-03-26 起已弃用）按特性生命周期政策重新归类为 Deprecated（SEP-2596），迁移至 Streamable HTTP。"
+    ],
+    "raw_excerpt": "Make MCP stateless: remove the initialize / notifications/initialized handshake. Every request now carries its protocol version and client capabilities in _meta (io.modelcontextprotocol/protocolVersion, io.modelcontextprotocol/clientCapabilities). ... Add server/discover: servers MUST implement this RPC to advertise their supported protocol versions, capabilities, and identity. ... Remove protocol-level sessions and the Mcp-Session-Id header from the Streamable HTTP transport."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Lifecycle (Versioning and Compatibility)",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/lifecycle",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "该页定义客户端与服务器如何就「双方在说什么」达成一致：协议版本在每个请求上声明；可选扩展通过 capabilities 协商；并与更早的、基于握手的协议修订版互操作。",
+      "原文明确：「There is no negotiation handshake.」每个请求携带其协议版本，服务器独立地接受或拒绝每个请求。",
+      "术语定义：Modern 指以逐请求元数据传递版本、身份与能力的协议版本（2026-07-28 及以后）；Legacy 指以 initialize 握手建立会话的协议版本（2025-11-25 及更早）；Dual-era 指同时支持两者的实现。",
+      "每个请求在其 _meta 字段中声明所用协议版本；在 HTTP 上，该版本同时由 MCP-Protocol-Version 头携带。",
+      "若服务器未实现所请求版本（未知版本，或已知但选择不支持），MUST 返回 UnsupportedProtocolVersionError，并在 data 中列出其支持的版本（示例 code 为 -32022，supported 为 [\"2026-07-28\", \"2025-11-25\"]）。",
+      "客户端 SHOULD 从 supported 列表中选择双方共同支持的版本并重试请求，若无兼容版本则向用户报错。",
+      "服务器 MUST 实现 server/discover；客户端 MAY 在发送任何其他请求前调用它以预先了解服务器支持的版本，但并非必需——客户端可以自由地内联调用任意 RPC，并在首选版本不受支持时处理 UnsupportedProtocolVersionError。",
+      "扩展协商：扩展在 capabilities 的 extensions 字段中公布，该字段是扩展标识符到各扩展设置对象的映射；扩展标识符 MUST 遵循 _meta 键命名规则并带强制前缀。",
+      "示例：客户端以 io.modelcontextprotocol/ui 标识 MCP Apps 扩展，以 io.modelcontextprotocol/tasks 标识 Tasks 扩展；空对象表示支持且无额外设置。",
+      "若一方支持某扩展而另一方不支持，支持方 MUST 回退到核心协议行为或以适当错误拒绝请求；扩展 SHOULD 记录其预期的回退行为。",
+      "向后兼容：希望同时支持 legacy 客户端（期待 initialize 握手）与 modern 客户端（使用逐请求元数据）的服务器 MAY 同时实现两种行为。",
+      "需要与两类服务器互操作的客户端按传输方式探测服务器所属时代：stdio 上用 server/discover 探测，遇到任何非「可识别的 modern 错误」即回退；Streamable HTTP 上先尝试 modern 请求，并在回退前检查 400 Bad Request 的响应体。",
+      "两种情况下，可识别的 modern JSON-RPC 错误（如 UnsupportedProtocolVersionError）标识 modern 服务器——客户端应以受支持版本重试而非回退；其他任何情况标识 legacy 服务器。",
+      "时代判定是服务器属性而非单个请求属性；客户端 SHOULD 在服务器进程（stdio）或 origin（HTTP）生命周期内缓存结果，MAY 跨同一服务器配置的重启持久化，并在缓存假设失效时重新探测。",
+      "仅支持 modern 版本的服务器 SHOULD 在返回给 initialize 请求的任何错误中列出其支持的协议版本（任何传输上），因为 legacy 客户端没有向前回退机制，该消息可能是其能呈现给用户的唯一诊断信息。",
+      "兼容性矩阵：Modern 客户端 + Modern 服务器 = 可用（server/discover 可选，版本不匹配以 UnsupportedProtocolVersionError 暴露后重试）；Modern 客户端 + Legacy 服务器 = 失败（stdio 上客户端 SHOULD 先发 server/discover 以确定性失败）；Dual-era 服务器对 Modern 客户端 = 可用；Dual-era 服务器对 Legacy 客户端 = 可用（stdio 探测返回非 modern 错误或超时则回退到 initialize；HTTP 上 modern 请求返回无 modern 错误体的 4xx 则回退到 initialize，并可能进一步回退到已弃用的 HTTP+SSE 传输）；Legacy 客户端 + Modern 服务器 = 失败（stdio 上服务器以 JSON-RPC 错误拒绝 initialize，具体错误码为实现自定义；HTTP 上请求缺少必需头，按服务器校验返回 400 Bad Request）；Legacy 客户端 + Dual-era 服务器 = 可用；Legacy + Legacy = 按 legacy 修订版工作。",
+      "Dual-era 服务器依据客户端如何开启交互来选择行为：携带 modern 逐请求 _meta 的请求按本修订版无状态处理；initialize 请求则选择 legacy 语义，作用域为 stdio 进程（stdio）或会话（HTTP），按协商出的 legacy 协议版本执行。",
+      "Dual-era 服务器 MAY 在同一端点或进程上并发服务两个时代。"
+    ],
+    "raw_excerpt": "There is no negotiation handshake. Every request carries its protocol version, and the server accepts or rejects each request independently ... Modern: protocol versions that convey version, identity, and capabilities as per-request metadata (revision 2026-07-28 and later). Legacy: protocol versions that establish a session with an initialize handshake (2025-11-25 and earlier)."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Architecture",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "MCP 采用 client-host-server 架构，每个 host 可运行多个 client 实例。",
+      "原文明确：「MCP is a stateless protocol: every request is self-contained and carries its own protocol version and capabilities.」",
+      "Host 进程作为容器与协调者：创建并管理多个 client 实例、控制客户端连接权限与生命周期、执行安全策略与同意要求、处理用户授权决策、协调 AI/LLM 集成与 sampling、管理跨客户端的上下文聚合。",
+      "每个 client 由 host 创建，且只与一个 server 通信：与恰好一个 server 通信、在每个请求上附加协议版本与能力、双向路由协议消息、管理订阅与通知、维护 server 之间的安全边界。",
+      "Server 通过 MCP 原语暴露 resources、tools、prompts；独立运行、职责聚焦；在回复中通过 InputRequiredResult 请求客户端输入（sampling、elicitation、roots）；必须遵守安全约束；可以是本地进程或远程服务。",
+      "设计原则包括：server 应极易构建；server 应高度可组合；server 不应能读取整个对话、也不能「看进」其他 server；特性可在 server 与 client 上渐进添加。",
+      "能力协商：客户端在每个请求的 _meta.io.modelcontextprotocol/clientCapabilities 中包含其能力；服务器在响应 server/discover 时公布其能力，客户端可在任何其他请求之前调用它以预先发现能力。",
+      "服务器声明 tool 支持、资源订阅、prompt 模板等能力；客户端声明 sampling 支持与 elicitation 处理等能力；双方必须在整个交互中遵守已声明能力；额外能力可通过协议扩展协商。",
+      "每项能力按请求解锁特定协议特性：例如接收资源更新通知需要以所需资源 URI 打开 subscriptions/listen 流；工具调用需要服务器声明 tool 能力。"
+    ],
+    "raw_excerpt": "MCP is a stateless protocol: every request is self-contained and carries its own protocol version and capabilities. ... Clients include their capabilities in _meta.io.modelcontextprotocol/clientCapabilities on every request. Servers advertise their capabilities in response to server/discover, which clients may call before any other request for up-front capability discovery."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Transports (overview)",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "协议语义在所有传输上一致；传输是一种绑定（binding），定义消息如何分帧与投递、请求元数据如何携带、取消与终止如何发出信号，但不定义消息含义。",
+      "标准传输绑定为 stdio（客户端启动的子进程上以换行分隔的消息）与 Streamable HTTP（每条消息是对单一 MCP 端点的 HTTP POST，回复以 JSON 对象或请求作用域的 SSE 流返回）；也可实现自定义传输。",
+      "MCP 使用 JSON-RPC 编码消息，消息 MUST 为 UTF-8。",
+      "绑定 MUST 将客户端发出的请求与通知投递给服务器、将服务器发出的响应与通知投递给客户端；不存在其他消息方向——按消息模式，服务器不发起 JSON-RPC 请求，客户端不发送 JSON-RPC 响应。",
+      "所有协议元数据都在消息体内传递：每个请求在 _meta.io.modelcontextprotocol/* 字段中携带其协议版本与客户端能力。",
+      "绑定 MAY 额外将选定的消息体字段镜像到信封元数据中；Streamable HTTP 将其镜像到 HTTP 头，以便中间层无需解析消息体即可路由与检查请求；消息体仍是事实来源，镜像元数据的绑定需定义如何拒绝不匹配。",
+      "取消：stdio 上客户端发送 notifications/cancelled 通知；Streamable HTTP 上客户端关闭该请求的响应流。",
+      "自定义传输 MUST 保留 JSON-RPC 消息格式、消息模式与逐请求元数据模型；运行于可靠双向字节流（如 Unix domain socket 或 TCP）的自定义传输 SHOULD 复用 stdio 分帧。",
+      "向后兼容：更早的协议修订版建立连接作用域的会话并使用 initialize 握手，且允许服务器发起 JSON-RPC 请求；与这些修订版互操作的客户端与服务器按 Versioning: Backward Compatibility 检测对方时代并回退。"
+    ],
+    "raw_excerpt": "All protocol metadata travels in the message body: every request carries its protocol version and client capabilities in _meta.io.modelcontextprotocol/* fields. A binding MAY additionally mirror selected body fields into envelope metadata. The Streamable HTTP transport mirrors them into HTTP headers ... The body remains the source of truth."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Streamable HTTP transport binding",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "Streamable HTTP 于协议版本 2025-03-26 引入，用以取代 2024-11-05 的 HTTP+SSE 传输。",
+      "修订版 2026-07-28 改变了 Streamable HTTP 的行为，客户端必须确保正确处理向后兼容；变更包括：移除 GET 流端点、移除协议级 session。",
+      "服务器暴露单一 HTTP 端点（MCP endpoint）接受 POST；客户端将每个 JSON-RPC 请求或通知作为独立的 HTTP POST 发送。",
+      "服务器以单个 JSON 对象或作用域限于该请求的 SSE 流回复，SSE 流携带请求相关通知，随后是最终响应。",
+      "服务器到客户端的交互（sampling、elicitation、roots）按 MRTR（SEP-2322）以 input requests 形式嵌入结果中。",
+      "长生命周期的变更通知（如列表变更、资源更新）通过 subscriptions/listen 请求的响应流投递。",
+      "安全：服务器 MUST 校验所有入站连接的 Origin 头以防 DNS rebinding；Origin 头存在且无效时 MUST 返回 HTTP 403 Forbidden；本地运行时 SHOULD 仅绑定 localhost（127.0.0.1）而非 0.0.0.0；SHOULD 为所有连接实现适当认证。",
+      "客户端 MUST 使用 HTTP POST；MUST 在 Accept 头中同时列出 application/json 与 text/event-stream；MUST 在每个 POST 请求上包含请求元数据头。",
+      "POST 消息体 MUST 是单个 JSON-RPC 请求或通知；客户端 MUST NOT 发送 JSON-RPC 响应。",
+      "若消息体是通知：服务器接受则 MUST 返回 202 Accepted 且无消息体；无法接受则 MUST 返回 HTTP 错误状态码（如 400 Bad Request）。",
+      "若消息体是请求：服务器 MUST 返回 Content-Type: application/json（单个 JSON 对象）或 Content-Type: text/event-stream（SSE 响应流），客户端 MUST 同时支持两者。",
+      "本修订版核心协议未定义 Streamable HTTP 上的客户端到服务器通知；核心协议中唯一的客户端发送通知 notifications/cancelled 仅用于 stdio 传输，在 Streamable HTTP 上关闭 SSE 响应流本身即为取消信号。",
+      "服务器 MAY 在最终响应前于 SSE 流上发送 JSON-RPC 通知（如 notifications/progress、notifications/message），这些通知 MUST 与发起该请求相关。",
+      "服务器 MUST NOT 在该流上发送独立的 JSON-RPC 请求；服务器到客户端交互按 MRTR 嵌入 InputRequiredResult 的 input requests 中——这是相对 2025-03-26 至 2025-11-25 协议版本的变化（那些版本允许服务器在 SSE 流上发送此类请求）。",
+      "通过 Last-Event-ID 恢复 SSE 流不被支持。",
+      "关闭 SSE 响应流 MUST 被服务器视为该请求的取消；由于每个请求有自己的响应流，传输层断开是明确无歧义的。",
+      "请求元数据：Streamable HTTP 将选定的 JSON-RPC 消息体字段镜像到 HTTP 头，以便中间层（负载均衡器、网关、可观测性工具）无需解析消息体即可路由与检查请求。",
+      "协议版本头：对 MCP 端点的每个 POST 请求 MUST 包含 MCP-Protocol-Version 头，例如 MCP-Protocol-Version: 2026-07-28。",
+      "该头的值 MUST 与请求体 _meta 中携带的 io.modelcontextprotocol/protocolVersion 字段一致；若不一致，服务器 MUST 以 400 Bad Request 和 HeaderMismatch JSON-RPC 错误拒绝该请求。"
+    ],
+    "raw_excerpt": "Revision 2026-07-28 changed the behavior of Streamable HTTP. Clients must ensure they handle backwards compatibility correctly. Changes included: Removal of the GET stream endpoint. Removal of protocol-level sessions. ... Every POST request to the MCP endpoint MUST include an MCP-Protocol-Version header. ... The header value MUST match the io.modelcontextprotocol/protocolVersion field carried in the request body's _meta."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "MCP Specification 2026-07-28 — Base Protocol (basic/index)",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/index",
+    "published_at": "2026-07-28",
+    "key_points": [
+      "MCP 由若干协同工作的关键组件构成：Base Protocol（核心 JSON-RPC 消息类型）、Versioning and Compatibility（协议版本协商、扩展协商、与更早协议修订版的互操作）、Message Patterns（请求与响应、多轮往返 MRTR、订阅与通知）、Authorization、Server Features（resources、prompts、tools）、Client Features（elicitation、sampling、根目录列表）、Utilities（日志、参数补全）。",
+      "所有实现 MUST 支持 base protocol、versioning 与 message patterns；其他组件 MAY 按应用需要实现。",
+      "所有 MCP 客户端与服务器之间的消息 MUST 遵循 JSON-RPC 2.0；请求 MUST 包含字符串或整数 ID，与基础 JSON-RPC 不同，ID MUST NOT 为 null。",
+      "结果响应 MUST 包含 result 字段，且 MUST 包含 resultType 字段以指示结果类型。",
+      "resultType 为 \"complete\" 表示请求成功完成并包含最终内容；为 \"input_required\" 表示请求未完成、需要更多信息，结果包含 InputRequiredResult 对象。",
+      "扩展 MAY 增加额外的 ResultType 值；客户端无法识别的 resultType 值 MUST 被视为无效。",
+      "为向后兼容不包含 resultType 的早期协议版本服务器，客户端 MUST 将缺失的 resultType 视为 \"complete\"。",
+      "错误码：MCP 对通用协议失败使用标准 JSON-RPC 2.0 错误码（-32700、-32600 至 -32603）；JSON-RPC 2.0 将 -32000 至 -32099 保留为实现自定义服务器错误，MCP 对该区间划分如下。",
+      "-32000 至 -32019 为 legacy 区间：该子区间内的码由实现在此策略引入前分配，新码 MUST NOT 在此分配，新实现 SHOULD NOT 使用该子区间的码；除 -32002 外，接收方 MUST NOT 假定这些码有特定含义。",
+      "-32020 至 -32099 保留给 MCP 规范：该子区间的错误码仅由 MCP 规范定义并记录于 schema；实现 MUST NOT 发出该子区间内未被规范定义的码，且 MUST 仅按规范指定的含义使用已定义的码。"
+    ],
+    "raw_excerpt": "The result MUST include a resultType field to indicate the type of the result. ... A resultType of \"complete\" indicates the request completed successfully ... A resultType of \"input_required\" indicates the request is incomplete and more information is needed to process the request. ... -32020 to -32099 — reserved for the MCP specification."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "github",
+    "title": "modelcontextprotocol/modelcontextprotocol — 规范与文档仓库（仅元数据）",
+    "url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "仓库描述为「Specification and documentation for the Model Context Protocol」，主语言 TypeScript，约 9528 stars、1881 forks，最近 push 时间为 2026-10-23。",
+      "该仓库是上述 modelcontextprotocol.io 规范页面的上游来源仓库（仅取得元数据，未读取 README 正文，故不作为任何规范内容的结论依据）。"
+    ],
+    "raw_excerpt": "Specification and documentation for the Model Context Protocol (★9528, forks 1881, lang: TypeScript, last push: 2026-10-23)"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Model context protocol (MCP) — OpenAI Agents SDK (Python) 官方文档",
+    "url": "https://openai.github.io/openai-agents-python/mcp/",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Agents Python SDK 文档设有专门的 \"Model context protocol (MCP)\" 章节，说明该 SDK 支持 MCP。",
+      "文档列出 SDK 支持的四种 MCP 接入方式：HostedMCPTool（由 OpenAI Responses API 代表模型调用公网可达的 MCP server）、MCPServerStreamableHttp、MCPServerSse、MCPServerStdio。",
+      "文档明确 \"Let OpenAI's Responses API call a publicly reachable MCP server on the model's behalf\" 对应 Hosted MCP server tools via HostedMCPTool，即 Responses API 侧托管 MCP 调用。",
+      "文档称 Agents SDK 支持 mcp Python 包的两个大版本，依赖范围为 mcp>=1.19.0,<3。",
+      "该页面未给出任何发布日期，也未包含 OpenAI 宣布支持 MCP 的时间或公告原文表述。"
+    ],
+    "raw_excerpt": "The Model context protocol (MCP) standardises how applications expose tools and context to language models. ... The Agents Python SDK understands multiple MCP transports. This lets you reuse existing MCP servers or build your own to expose filesystem, HTTP, or connector backed tools to an agent. ... Let OpenAI's Responses API call a publicly reachable MCP server on the model's behalf | Hosted MCP server tools via HostedMCPTool"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "OpenAI 官方博客页（未能读取正文，仅记录访问失败）",
+    "url": "https://openai.com/index/simplifying-agentic-ai-with-mcp/",
+    "published_at": null,
+    "key_points": [
+      "该 URL 被尝试作为 OpenAI 关于 MCP 的官方博客公告页抓取，但返回 HTTP 403 Forbidden，正文未能读取。",
+      "因此本来源不提供任何可核实的发布日期或原文表述，不得作为结论依据。"
+    ],
+    "raw_excerpt": "Error executing tool fetch_page: Client error '403 Forbidden' for url 'https://openai.com/index/simplifying-agentic-ai-with-mcp/'"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "OpenAI Platform 文档：Tools / connectors / MCP 指南（未能读取正文，仅记录访问失败）",
+    "url": "https://platform.openai.com/docs/guides/tools-connectors-mcp",
+    "published_at": null,
+    "key_points": [
+      "该 URL 被尝试作为 OpenAI 官方文档中 Responses API MCP connector 指南抓取，但返回 HTTP 403 Forbidden，正文未能读取。",
+      "因此本来源不提供任何可核实的发布日期或原文表述，不得作为结论依据。"
+    ],
+    "raw_excerpt": "Error executing tool fetch_page: Client error '403 Forbidden' for url: https://platform.openai.com/docs/guides/tools-connectors-mcp"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "microsoft/mcp-for-beginners",
+    "url": "https://github.com/microsoft/mcp-for-beginners",
+    "published_at": null,
+    "key_points": [
+      "Microsoft 在 GitHub 上维护名为 mcp-for-beginners 的开源 MCP 课程仓库，星标数 17508、fork 数 5662。",
+      "该仓库描述称其通过 .NET、Java、TypeScript、JavaScript、Rust 和 Python 的跨语言实例介绍 Model Context Protocol (MCP) 基础。",
+      "仓库最近一次 push 时间为 2026-10-25。"
+    ],
+    "raw_excerpt": "microsoft/mcp-for-beginners (★17508, forks 5662) — This open-source curriculum introduces the fundamentals of Model Context Protocol (MCP) through real-world, cross-language examples in .NET, Java, TypeScript, JavaScript, Rust and Python."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Cursor 官方文档：Model Context Protocol (MCP)",
+    "url": "https://cursor.com/docs/context/mcp",
+    "published_at": null,
+    "key_points": [
+      "Cursor 文档称其支持三种 MCP transport：stdio（本地，Cursor 管理，单用户 shell 命令）、SSE（本地/远程，部署为 server，多用户，URL 指向 SSE endpoint，OAuth）、Streamable HTTP（本地/远程，部署为 server，多用户，URL 指向 HTTP endpoint，OAuth）。",
+      "Cursor 文档列出支持的 MCP 协议能力与扩展：Tools（Supported）、Prompts（Supported）、Resources（Supported）、Roots（Supported）、Elicitation（Supported）、Apps 扩展（Supported）。",
+      "该能力表中未出现 Sampling 条目（既未标 Supported 也未标 Unsupported）。",
+      "Cursor 支持 MCP Apps 扩展，MCP 工具可在标准工具输出之外返回交互式 UI，并遵循渐进增强：宿主无法渲染 app UI 时同一工具仍可通过普通 MCP 响应工作。",
+      "Cursor 通过 mcp.json 配置 MCP server，项目级路径为 .cursor/mcp.json，全局路径为 ~/.cursor/mcp.json；STDIO server 需配置 type/command，可选 args、env、envFile。",
+      "Cursor 对需要 OAuth 的 MCP server 使用 authorization code flow with PKCE，读取 RFC 9728 保护资源元数据与 RFC 8707 resource indicator，并支持 dynamic client registration（注册为无 client secret 的 public client）。",
+      "Cursor 为 MCP OAuth 使用固定回调地址：Web/Cursor Agents 为 https://www.cursor.com/agents/mcp/oauth/callback，桌面应用为 http://localhost:8787/callback。",
+      "Cursor 提供扩展 API vscode.cursor.mcp.registerServer() 用于以编程方式注册 MCP server，无需修改 mcp.json。"
+    ],
+    "raw_excerpt": "Cursor supports three transport methods: Transport | Execution environment | Deployment | Users | Input | Auth — stdio | Local | Cursor manages | Single user | shell command | Manual ; SSE | Local/Remote | Deploy as server | Multiple users | URL to an SSE endpoint | OAuth ; Streamable HTTP | Local/Remote | Deploy as server | Multiple users | URL to an HTTP endpoint | OAuth ... Feature Support: Tools Supported; Prompts Supported; Resources Supported; Roots Supported; Elicitation Supported; Apps (extension) Supported"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "VS Code 官方文档：Add MCP servers in VS Code",
+    "url": "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "VS Code 文档在 MCP: Add Server 流程中提供两类连接方式：输入 server URL 时选择 HTTP（HTTP or Server-Sent Events），输入启动命令时选择 Command (stdio)，后者通过标准输入输出通信。",
+      "VS Code 文档说明 server 除 tools 外还可提供 Resources（通过 Add Context > MCP Resources 附加，或运行 MCP: Browse Resources）与 Prompts（在 chat 中输入 /<server>.<prompt> 使用服务端 prompt 模板）。",
+      "VS Code 文档标注 MCP Apps 为 Experimental，支持的服务端可在 chat 中显示交互式表单或可视化。",
+      "VS Code 文档给出配置目的地差异：Global > Copilot Global 写入 $COPILOT_HOME/mcp-config.json（未设置时为 ~/.copilot/mcp-config.json）；工作区根 .mcp.json 用于团队共享；工作区 .vscode/mcp.json 或用户 profile mcp.json 标注为 deprecated 但仍可用。",
+      "VS Code 文档提示本地 MCP server 可在用户机器上运行代码，工具可凭用户权限访问外部服务，安装前需审查发布者、命令或端点及请求的访问权限。",
+      "该页面标注日期为 10/21/2026。"
+    ],
+    "raw_excerpt": "What you have | Choose | Enter — A server URL | HTTP (HTTP or Server-Sent Events) | The publisher's MCP endpoint. ; A launch command | Command (stdio) | The command and its arguments. The server communicates through standard input and output. ... Servers can provide more than tools. Available capabilities depend on the server and your session: Resources: attach server-provided data to a request from Add Context > MCP Resources, or run MCP: Browse Resources. Prompts: use a server's prompt template by typing /<server>.<prompt> in chat. MCP Apps (Experimental): supported servers can display interactive forms or visualizations in chat."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "VS Code 官方文档：MCP configuration reference",
+    "url": "https://code.visualstudio.com/docs/copilot/reference/mcp-configuration",
+    "published_at": null,
+    "key_points": [
+      "VS Code 配置参考列出 server transports：工作区或 profile 的 mcp.json 支持 stdio、HTTP 和 SSE；工作区根 .mcp.json（portable Copilot 格式）支持 stdio 和 HTTP；Copilot 用户 mcp-config.json 支持 stdio、HTTP 和 SSE。",
+      "VS Code 对 HTTP 类 server 的连接策略为：先尝试 HTTP Stream transport，若 HTTP 不受支持则回退到 SSE。",
+      "HTTP/SSE server 配置字段包括 type（\"http\" 或 \"sse\"）、url（必填）、headers（可选，用于认证或配置）、oauth（可选）。",
+      "VS Code 还可连接监听 Unix socket 或 Windows named pipe 的 MCP server，路径形式为 unix:///path/to/server.sock 或 pipe:///pipe/named-pipe。",
+      "VS Code 支持对本地 stdio MCP server 启用沙箱（sandboxEnabled），限制文件系统与网络访问，仅支持 macOS 和 Linux；启用沙箱时工具确认会被自动批准。",
+      "stdio server 配置字段包括 type、command（必填）、args、cwd、env、envFile、dev（开发模式 watch/debug）、sandboxEnabled、sandbox。"
+    ],
+    "raw_excerpt": "Server transports: stdio, HTTP, and SSE (workspace or profile mcp.json) ... Use this configuration for servers that communicate over HTTP. VS Code first tries the HTTP Stream transport and falls back to SSE if HTTP is not supported. ... type: Server connection type — \"http\", \"sse\""
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "VS Code 官方博客：VS Code now supports the complete Model Context Protocol specification",
+    "url": "https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support",
+    "published_at": "2025-06-12",
+    "key_points": [
+      "VS Code 官方博客（2025-06-12）宣布 VS Code 支持完整的 Model Context Protocol 规范。",
+      "该博客称在 5 月引入的 tools 与 workspace awareness 之外，现在可以使用 authorization、prompts、resources 和 sampling。",
+      "博客称 sampling 是 MCP server 自行发起语言模型请求的能力，server 无需自管 AI SDK 与 API key，可使用用户已有的模型订阅。",
+      "博客称 streamable HTTP transport 在上一版本（previous version）中落地，与新的 authorization 规范结合可支持独立扩展的远程 MCP server。",
+      "博客称 Prompts 在 VS Code 中以 slash command 形式出现，调用方式为 /mcp.servername.promptname。",
+      "博客称 Resources 可被直接交互，例如 Playwright MCP server 的截图可作为 resource 拖入工作区、标注或分享，调试工具返回的日志可流式更新。"
+    ],
+    "raw_excerpt": "VS Code now supports the complete Model Context Protocol specification. ... Beyond the initial tools and workspace awareness we introduced in May, you can now use authorization, prompts, resources, and sampling. ... Combined with streamable HTTP transport (which landed in our previous version), this enables remote MCP servers that can scale independently ... Perhaps the most upvoted MCP capability is Sampling, the ability for MCP servers to make their own language model requests."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "VS Code 1.102 Release Notes (June 2025)",
+    "url": "https://code.visualstudio.com/updates/v1_102",
+    "published_at": "2025-07-09",
+    "key_points": [
+      "VS Code 1.102（June 2025 release，发布日期 2025-07-09）的 release notes 宣布 MCP support is now generally available in VS Code。",
+      "1.102 引入 MCP view 与 gallery，用于安装和管理 MCP server。",
+      "1.102 将 MCP server 作为 profiles 与 Settings Sync 中的一等资源（first-class resources）。",
+      "1.102 同时宣布 GitHub Copilot Chat 扩展以 MIT 许可开源，代码位于 microsoft/vscode-copilot-chat。"
+    ],
+    "raw_excerpt": "June 2025 (version 1.102) — Release date: July 9, 2025 ... MCP: MCP support is now generally available in VS Code (Show more). Easily install and manage MCP servers with the MCP view and gallery (Show more). MCP servers as first-class resources in profiles and Settings Sync (Show more)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Model Context Protocol — Introduction (官方文档)",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "published_at": null,
+    "key_points": [
+      "MCP 被官方定义为「连接 AI 应用与外部系统的开源标准」（open-source standard for connecting AI applications to external systems）。",
+      "MCP 的连接对象被明确分为三类：数据源（本地文件、数据库）、工具（搜索引擎、计算器）、工作流（专门化的 prompt）。",
+      "官方用「AI 应用的 USB-C 端口」作类比：USB-C 提供连接电子设备的标准化方式，MCP 提供连接 AI 应用与外部系统的标准化方式。",
+      "官方称 MCP 是「一次构建、处处集成」（build once and integrate everywhere），并列出 Claude、ChatGPT、VS Code、Cursor 等客户端支持。",
+      "官方将 MCP 的价值主张落在减少开发与集成的时间与复杂度，而非模型推理能力本身。"
+    ],
+    "raw_excerpt": "MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. ... Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Model Context Protocol — Architecture (官方文档 learn/architecture)",
+    "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+    "published_at": null,
+    "key_points": [
+      "官方明确划定 MCP 的作用边界：MCP 只关注上下文交换的协议，不规定 AI 应用如何使用 LLM 或如何管理所提供的上下文。",
+      "MCP 分为两层：数据层（基于 JSON-RPC 的客户端-服务器通信协议，含能力与版本发现、核心原语）与传输层（通信机制与通道，含连接建立、消息分帧、授权）。",
+      "数据层定义三类服务端原语：Tools（AI 应用可调用的可执行函数）、Resources（提供上下文信息的数据源）、Prompts（可复用的交互模板）。",
+      "原语配有发现（*/list）、获取（*/get）与执行（tools/call）方法，且列表是动态的（listings can be dynamic）。",
+      "MCP 采用 client-server 架构：MCP Host（如 Claude Code、Claude Desktop）为每个 MCP Server 创建一个 MCP Client，每个 client 与对应 server 保持专用连接。",
+      "传输层支持两种机制：Stdio（本机进程间通信，无网络开销）与 Streamable HTTP（远程通信，支持 bearer token、API key 等 HTTP 认证，推荐 OAuth）。",
+      "官方称 MCP 是无状态协议（stateless protocol），每个请求在 _meta 字段中携带协议版本与相关能力。"
+    ],
+    "raw_excerpt": "MCP focuses solely on the protocol for context exchange—it does not dictate how AI applications use LLMs or manage the provided context. ... MCP consists of two layers: Data layer: Defines the JSON-RPC based protocol for client-server communication ... Transport layer: Defines the communication mechanisms and channels ..."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Model Context Protocol Specification 2025-06-18 — Architecture",
+    "url": "https://modelcontextprotocol.io/specification/2025-06-18/architecture",
+    "published_at": "2025-06-18",
+    "key_points": [
+      "规范版架构描述为 client-host-server 架构，每个 host 可运行多个 client 实例，基于 JSON-RPC，是「聚焦上下文交换与采样协调」的有状态会话协议。",
+      "Host 承担编排职责：创建管理多个 client、控制连接权限与生命周期、执行安全策略与用户同意、协调 AI/LLM 集成与采样、跨 client 聚合上下文。",
+      "设计原则之一：server 不应能读取整个对话，也不能「看进」其他 server；完整对话历史保留在 host 侧，每个 server 连接保持隔离。",
+      "采用基于能力的协商机制（capability negotiation）：客户端与服务端在初始化时显式声明支持的特性，工具调用要求服务端声明 tool 能力。",
+      "设计原则强调 server 应极易构建、高度可组合，且特性可在 server 与 client 上渐进式添加。"
+    ],
+    "raw_excerpt": "Built on JSON-RPC, MCP provides a stateful session protocol focused on context exchange and sampling coordination between clients and servers. ... Servers should not be able to read the whole conversation, nor \"see into\" other servers ... Full conversation history stays with the host"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Anthropic — Introducing the Model Context Protocol (官方发布公告)",
+    "url": "https://www.anthropic.com/news/model-context-protocol",
+    "published_at": "2024-11-25",
+    "key_points": [
+      "Anthropic 将 MCP 定位为「把 AI 助手连接到数据所在系统」的开放标准，覆盖内容仓库、业务工具与开发环境。",
+      "公告把要解决的问题定义为集成碎片化：每接入一个新数据源都需要各自的定制实现，导致真正互联的系统难以规模化。",
+      "MCP 的解法是「用单一协议替代碎片化集成」（replacing fragmented integrations with a single protocol），而非改进模型本身能力。",
+      "架构上开发者有两条路径：通过 MCP server 暴露数据，或构建连接这些 server 的 AI 应用（MCP client）。",
+      "发布时同时提供规范与 SDK、Claude Desktop 的本地 MCP server 支持、以及开源 MCP server 仓库（含 Google Drive、Slack、GitHub、Git、Postgres、Puppeteer 预置 server）。",
+      "公告称 MCP 由 Anthropic 的 David Soria Parra 与 Justin Spahr-Summers 创建。"
+    ],
+    "raw_excerpt": "Every new data source requires its own custom implementation, making truly connected systems difficult to scale. MCP addresses this challenge. It provides a universal, open standard for connecting AI systems with data sources, replacing fragmented integrations with a single protocol."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "About the MCP Registry（官方文档）",
+    "url": "https://modelcontextprotocol.io/registry/about",
+    "published_at": null,
+    "key_points": [
+      "抓取时页面顶部横幅声明：MCP Registry 目前处于 preview 阶段，GA 之前可能发生破坏性变更或数据重置。",
+      "MCP Registry 是面向公开可访问 MCP 服务器的官方集中式元数据仓库，由 Anthropic、GitHub、PulseMCP、Microsoft 等生态主要贡献方支持。",
+      "Registry 提供四项能力：服务器元数据的统一发布入口、基于 DNS 验证的命名空间管理、供客户端与聚合器发现服务器的 REST API、标准化的安装与配置信息。",
+      "服务器元数据以标准化 server.json 格式存储，包含唯一名称（如 io.github.user/server-name）、包位置（npm 包名或远程 URL）、执行指令（命令行参数、环境变量）及描述与能力等发现数据。",
+      "Registry 只托管指向 npm/PyPI/Docker Hub 等包仓库的元数据，不托管代码与二进制；不支持私有服务器，私有场景建议自建私有 registry。",
+      "Registry 定位为供下游聚合器（marketplace）消费，不面向 host 应用直接消费；host 应用应通过符合官方 OpenAPI spec 的其他 registry 的 REST API 获取数据。",
+      "信任机制采用反向 DNS 命名空间认证（GitHub 账号或域名验证）；安全扫描委托给底层包仓库与下游聚合器，Registry 自身聚焦命名空间认证与元数据托管。",
+      "反垃圾机制包括命名空间认证、字段长度与正则校验、人工下架；正在考虑更严格限流、AI 垃圾检测与社区举报。"
+    ],
+    "raw_excerpt": "The MCP Registry is currently in preview. Breaking changes or data resets may occur before general availability. ... The MCP Registry is the official centralized metadata repository for publicly accessible MCP servers, backed by major trusted contributors to the MCP ecosystem such as Anthropic, GitHub, PulseMCP, and Microsoft."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "MCP Registry FAQ（官方文档）",
+    "url": "https://modelcontextprotocol.io/registry/faq",
+    "published_at": null,
+    "key_points": [
+      "抓取时 FAQ 页同样带有 preview 横幅，提示 GA 前可能有破坏性变更或数据重置。",
+      "官方术语区分：\"Official MCP Registry API\" 指 https://registry.modelcontextprotocol.io 提供的 REST API，是 \"MCP Registry API\"（实现官方 OpenAPI spec 的 API）的超集，其 OpenAPI spec 可从 /openapi.yaml 下载。",
+      "截至抓取时，服务器无法删除/取消发布（unpublish），相关讨论仍在进行中。",
+      "服务器元数据更新需提交带新版本号的 server.json；已发布版本元数据不可变（类似 npm）。",
+      "发布时可携带自定义元数据，位于 _meta.io.modelcontextprotocol.registry/publisher-provided，上限 4KB（4096 字节 JSON），超限则发布失败。"
+    ],
+    "raw_excerpt": "The MCP Registry is currently in preview. Breaking changes or data resets may occur before general availability. ... \"Official MCP Registry API\" — The REST API served at https://registry.modelcontextprotocol.io, which is a superset of the MCP Registry API."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Official MCP Registry 首页（registry.modelcontextprotocol.io）",
+    "url": "https://registry.modelcontextprotocol.io/",
+    "published_at": null,
+    "key_points": [
+      "首页为前端渲染的服务器浏览界面，静态抓取仅得到 UI 骨架，服务器列表显示为 \"Loading servers...\"，未渲染出任何服务器条目或总数。",
+      "页面提供三个 API Base URL 选项：Production（registry.modelcontextprotocol.io）、Staging（staging.registry.modelcontextprotocol.io）、Local（localhost:8080），另有 Custom 自定义选项。",
+      "页面含 \"Show only latest versions\" 过滤开关与 \"Recently Updated\" 排序视图，说明 registry 支持按最新版本去重与按更新时间浏览。"
+    ],
+    "raw_excerpt": "Official MCP Registry ... Recently Updated ... Loading servers... ... API Base URL ... Production (registry.modelcontextprotocol.io) ... Staging (staging.registry.modelcontextprotocol.io) ... Local (localhost:8080)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "SDK Tiering System（官方文档，对应 SEP-1730）",
+    "url": "https://modelcontextprotocol.io/community/sdk-tiers",
+    "published_at": null,
+    "key_points": [
+      "SDK 分级体系（SEP-1730）的关键日期：2026 年 1 月 23 日一致性测试（conformance tests）可用；2026 年 2 月 23 日正式发布官方 SDK 分级结果。",
+      "SDK 分三级：Tier 1 为完全支持（完整协议实现，含 sampling、elicitation 等非实验性可选能力）；Tier 2 为积极维护、正朝完整协议支持推进；Tier 3 为实验性、部分实现或专用 SDK。",
+      "实验性特性与协议扩展（如 Tasks、MCP Apps）不纳入任何 Tier 的强制要求。",
+      "一致性测试通过率门槛：Tier 1 需 100%，Tier 2 需 80%，Tier 3 无最低要求。",
+      "Tier 1 其他要求：新协议特性需在新 spec 版本发布前完成（时间线按版本协商）、issue 分诊 2 个工作日内、P0 严重 bug 7 天内解决、需有稳定版本与清晰版本策略、完整文档含全部特性示例、发布依赖更新策略与路线图。",
+      "Tier 2 其他要求：新协议特性 6 个月内支持、issue 分诊 1 个月内、P0 bug 两周内解决、至少一个稳定版本、基础文档、发布依赖更新策略、发布通往 Tier 1 的计划。",
+      "一致性分数仅针对适用必需测试计算：排除 pending/skipped 测试、实验性特性测试、遗留向后兼容测试（除非 SDK 声明支持遗留）以及 conformance 仓库中标记为 disputed 的测试。",
+      "降级机制：最新稳定版一致性测试连续 4 周失败则降级（Tier 1→2 为任一测试失败，Tier 2→3 为超过 20% 测试失败）；issue 两个月未处理也可能被降级。",
+      "升级流程：维护者自评 → 在 modelcontextprotocol/modelcontextprotocol 仓库开 issue 附证据 → 通过自动化一致性测试 → 获 SDK 工作组维护者批准，最终由 SDK 工作组裁定。"
+    ],
+    "raw_excerpt": "Key dates: January 23, 2026: Conformance tests available; February 23, 2026: Official SDK tiering published. ... Tier 1: Fully supported SDKs with complete protocol implementation ... Tier 2: Actively-maintained SDKs working toward full protocol specification support; Tier 3: Experimental, partially implemented, or specialized SDKs."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "MCP Blog 首页（官方博客）",
+    "url": "https://blog.modelcontextprotocol.io/",
+    "published_at": null,
+    "key_points": [
+      "官方博客首页提到已发布 MCP 规范新版本 2026-07-28，并同步发布对应 SDK。",
+      "博客称跨 Tier 1 SDK 每月下载量接近 5 亿次，TypeScript 与 Python SDK 累计下载量均突破 10 亿次。",
+      "官方 Ruby SDK 发布 1.0.0，为首个稳定版本，公共 API 稳定、破坏性变更仅在主版本发布，遵循 VERSIONING.md 的语义化版本策略。",
+      "Ruby SDK 已达到 SDK 分级体系中 Tier 2 的全部要求（记录于 Tier 2 assessment），并正朝 Tier 1 推进。",
+      "博客首页另提到已发布更新版 MCP 路线图，覆盖下一次规范发布及后续方向，由核心维护者与各工作组共同制定。"
+    ],
+    "raw_excerpt": "Across our Tier 1 SDKs, we're seeing close to half-a-billion downloads a month, with both TypeScript and Python SDKs crossing the 1 billion total downloads threshold. ... Version 1.0.0 of the official Ruby SDK ... now meets every Tier 2 requirement of the SDK tiering system, as recorded in the Tier 2 assessment, and development toward Tier 1 is ongoing."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "modelcontextprotocol/modelcontextprotocol — seps 目录（SEP 清单）",
+    "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/seps",
+    "published_at": null,
+    "key_points": [
+      "SEP 仓库中存在文件 1730-sdks-tiering-system.md，即 SDK 分级体系的提案编号 SEP-1730。",
+      "同目录下另有与治理/一致性相关的提案，如 2484-conformance-tests-required-for-final-seps.md、1302-formalize-working-groups-and-interest-groups-in-mc.md、2085-governance-succession-and-amendment.md。",
+      "目录中可见较新的提案编号（如 2640-skills-extension、2663-tasks-extension、2575-stateless-mcp、2567-sessionless-mcp、2322-MRTR），反映 SEP 编号已推进至 2600 以上。"
+    ],
+    "raw_excerpt": "1730-sdks-tiering-system.md ... 2484-conformance-tests-required-for-final-seps.md ... 2640-skills-extension.md ... 2663-tasks-extension.md"
+  }
+]

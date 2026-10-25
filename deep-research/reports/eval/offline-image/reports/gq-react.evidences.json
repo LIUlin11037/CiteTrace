@@ -1,0 +1,659 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（报告正文：摘要 / 一、核心思想 / 1.2 核心机制）",
+    "url": "reports/eval/reports/gq-react.md · ## 摘要 L3-8；## 一、ReAct 的核心思想 L9-10；### 1.2 核心机制 L15-22",
+    "published_at": null,
+    "key_points": [
+      "ReAct 的核心思想是让同一个语言模型以交错（interleaved）的方式同时生成 reasoning traces（推理轨迹）与 task-specific actions（任务特定动作），使推理与行动互为支撑。",
+      "reasoning traces 的作用是帮助模型诱导（induce）、跟踪（track）、更新（update）行动计划，并处理异常情况。",
+      "actions 的作用是让模型与外部来源（知识库或环境）交互，以收集额外信息。",
+      "ReAct 论文的出发点是一个领域分工现象：LLM 的 reasoning 能力（以 chain-of-thought prompting 为代表）与 acting 能力（以 action plan generation 为代表）此前被作为两个独立课题研究。",
+      "官方项目页给出 ReAct 轨迹的结构定义：reasoning trace（thought）与 action 交错，并由环境返回 observation 响应 action。",
+      "ReAct 的单步不是「想一步」，而是「想一步 → 做一个动作 → 收到环境反馈」的完整闭环。"
+    ],
+    "raw_excerpt": "ReAct 的核心思想是让同一个语言模型以**交错（interleaved）**的方式同时生成 reasoning traces（推理轨迹）与 task-specific actions（任务特定动作），使推理与行动互为支撑：推理帮助模型诱导、跟踪、更新行动计划并处理异常，动作则让模型与外部来源（知识库或环境）交互以收集额外信息[^1]。……项目页进一步给出了 ReAct 轨迹的结构定义：reasoning trace（thought）与 action 交错，并由环境返回 observation 响应 action[^2]。也就是说，ReAct 的单步不是「想一步」，而是「想一步 → 做一个动作 → 收到环境反馈」的完整闭环。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 1.3 Prompt 构成与「何时想、何时做」的自主权",
+    "url": "reports/eval/reports/gq-react.md · ### 1.3 Prompt 构成与「何时想、何时做」的自主权 L24-27",
+    "published_at": null,
+    "key_points": [
+      "ReAct prompt 由 few-shot task-solving trajectories 组成，其中包含人工书写的 text reasoning traces 与 actions，以及针对 actions 的环境 observations。",
+      "针对决策类任务，作者设计的是带稀疏 reasoning traces 的人类轨迹，让 LM 自行决定何时 think、何时 act。",
+      "推理的发生时机由模型在轨迹中自行判断，而非由提示强制每步都推理。"
+    ],
+    "raw_excerpt": "ReAct prompt 由 few-shot task-solving trajectories 组成，其中包含人工书写的 text reasoning traces 与 actions，以及针对 actions 的环境 observations[^2]。针对决策类任务，作者设计的是**带稀疏 reasoning traces 的人类轨迹**，让 LM 自行决定何时 think、何时 act[^2]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 1.4 实验证据（HotpotQA/Fever 与 ALFWorld/WebShop 两组实验）",
+    "url": "reports/eval/reports/gq-react.md · ### 1.4 实验证据 L28-36",
+    "published_at": null,
+    "key_points": [
+      "知识密集型任务实验：在 HotpotQA 与 Fever 上，ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题。",
+      "交互式决策基准实验：在 ALFWorld 与 WebShop 上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升。",
+      "上述实验仅用一到两个 in-context 示例进行提示。",
+      "报告自述：HotpotQA/Fever 部分缺少原始论文 Table 1/2 的具体 EM/准确率数字（PaLM-540B 下 ReAct vs CoT vs CoT-SC 的对比）。",
+      "报告自述：ALFWorld/WebShop 部分缺少具体成功率数值与基线名称，也未说明是 PaLM-540B 还是 GPT-3 设定。"
+    ],
+    "raw_excerpt": "- **知识密集型任务**：在 HotpotQA 与 Fever 上，ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题[^1]。\n- **交互式决策基准**：在两个交互式决策基准 ALFWorld 与 WebShop 上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅用一到两个 in-context 示例进行提示[^1]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 三、ReAct 与纯 CoT 的关键区别（3.1 输出空间与循环结构）",
+    "url": "reports/eval/reports/gq-react.md · ## 三、ReAct 与纯 CoT 的关键区别 L60-66",
+    "published_at": null,
+    "key_points": [
+      "纯 CoT 只生成一条思维链——一系列中间推理步骤——作为 few-shot 提示中的示范，模型全程不与外部环境交互。",
+      "CoT 的输出是一条思维链，一次性生成后即给出答案；ReAct 的输出是 reasoning trace 与 action 交错、并由环境返回 observation 响应 action 的结构。",
+      "工程化表述：CoT 是「单次前向的文本生成」，ReAct 是「生成 → 执行 → 观测 → 再生成」的循环。",
+      "所有 CoT 变体（zero-shot、self-consistency、plan-and-solve、ToT）的输出空间始终是文本推理步骤，没有任何一个变体引入「动作触发环境观测」这一环节。"
+    ],
+    "raw_excerpt": "**关键观察**：以上所有 CoT 变体——无论 zero-shot、self-consistency、plan-and-solve 还是 ToT——其输出空间始终是**文本推理步骤**，没有任何一个变体引入「动作触发环境观测」这一环节。这正是 ReAct 与整个 CoT 家族的分界线。……用工程语言表述：CoT 是「单次前向的文本生成」，ReAct 是「生成 → 执行 → 观测 → 再生成」的循环。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 3.2 区别二：是否接地于外部环境（含 reason-only / act-only / ReAct 三方对比）",
+    "url": "reports/eval/reports/gq-react.md · ### 3.2 区别二：是否接地于外部环境 L68-73",
+    "published_at": null,
+    "key_points": [
+      "项目页的对比说明：reason-only baseline（即 chain-of-thought）因未接地于外部环境而受错误信息影响。",
+      "项目页的对比说明：act-only baseline 因缺乏推理而无法综合出最终答案。",
+      "项目页的对比说明：ReAct 以可解释且事实性的轨迹解决任务。",
+      "论文侧对应表述：ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题。",
+      "CoT 的知识来源完全在模型参数内部，推理链条再长也不引入新信息；ReAct 的 action 显式地把模型接到外部来源（知识库或环境）上以收集额外信息。"
+    ],
+    "raw_excerpt": "项目页的对比说明指出：reason-only baseline（即 chain-of-thought）因未接地于外部环境而受错误信息影响；act-only baseline 因缺乏推理而无法综合出最终答案；ReAct 以可解释且事实性的轨迹解决任务[^2]。论文侧的对应表述是：ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题[^1]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 3.3 区别三：失败模式的方向相反",
+    "url": "reports/eval/reports/gq-react.md · ### 3.3 区别三：失败模式的方向相反 L74-82",
+    "published_at": null,
+    "key_points": [
+      "CoT 侧失败模式：未接地导致幻觉与错误传播，且推理链条中的错误会沿链条传播。",
+      "act-only 侧失败模式：缺乏推理导致无法综合出最终答案。",
+      "ReAct 侧：项目页给出 ALFWorld 上的失败示例，承认 ReAct 并非完美。",
+      "报告自述：关于 ReAct 自身的失败模式（推理灵活性不足、陷入循环、无法回溯），给定证据中只有项目页「并非完美 + 一个 ALFWorld 失败示例」这一句定性描述，缺少论文中的具体失败案例与错误率统计。"
+    ],
+    "raw_excerpt": "- **CoT 侧**：未接地导致幻觉与错误传播，且推理链条中的错误会沿链条传播[^1][^2]。……- **act-only 侧**：缺乏推理导致无法综合出最终答案[^2]。- **ReAct 侧**：项目页给出 ALFWorld 上的失败示例，承认 ReAct 并非完美[^2]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 3.4 区别四：可解释性与可纠正性的形态不同",
+    "url": "reports/eval/reports/gq-react.md · ### 3.4 区别四：可解释性与可纠正性的形态不同 L84-87",
+    "published_at": null,
+    "key_points": [
+      "CoT 的思维链本身可读，但它是纯文本的推理叙述，缺乏与外部世界交互的锚点。",
+      "ReAct 的轨迹包含 thought、action、observation 三类元素，人工检查时不仅能读到模型「怎么想」，还能读到模型「做了什么」以及环境「返回了什么」。",
+      "项目页主张 ReAct 格式便于人工检查，并可通过修改少量 model thoughts 进行行为纠正。"
+    ],
+    "raw_excerpt": "CoT 的思维链本身也是可读的，但它是纯文本的推理叙述，缺乏与外部世界交互的锚点。ReAct 的轨迹包含 thought、action、observation 三类元素[^2]，因此人工检查时不仅能读到模型「怎么想」，还能读到模型「做了什么」以及环境「返回了什么」。项目页据此主张 ReAct 格式便于人工检查，并可通过修改少量 model thoughts 进行行为纠正[^2]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 四、ReAct 在工程生态中的位置（官方代码仓库范围与元数据）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置 L101-107",
+    "published_at": null,
+    "key_points": [
+      "ReAct 论文附带项目站点与代码。",
+      "官方 GitHub 仓库 ysymyth/ReAct 明确标注为 ICLR 2023 论文的 GPT-3 prompting 代码。",
+      "该仓库覆盖 hotpotqa、fever、alfworld、webshop 四个 notebook。",
+      "仓库元数据为 4224 stars、404 forks、MIT 许可。"
+    ],
+    "raw_excerpt": "ReAct 论文附带项目站点与代码[^1]，官方 GitHub 仓库 ysymyth/ReAct 明确标注为 ICLR 2023 论文的 GPT-3 prompting 代码，覆盖 hotpotqa、fever、alfworld、webshop 四个 notebook，元数据为 4224 stars、404 forks、MIT 许可[^22]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "gq-react.md · 五、矛盾与不确定性（量化对比缺失的自述）",
+    "url": "reports/eval/reports/gq-react.md · ## 五、矛盾与不确定性 L120-126",
+    "published_at": null,
+    "key_points": [
+      "报告明确承认：HotpotQA/Fever 上 ReAct 与 CoT 的量化对比缺失，论文侧仅有定性转述，因此只能陈述定性结论。",
+      "报告明确承认：ALFWorld/WebShop 的 34% 与 10% 绝对成功率提升来自论文摘要，缺少具体成功率数值与基线名称，在给定证据中无法被独立验证。",
+      "报告记录了「ReAct 已被主流框架吸收为标准 agent 类型」与官方弃用公告（LangGraph v1 弃用 create_react_agent、LangChain v1 以 create_agent 为新标准）之间的未调和矛盾。"
+    ],
+    "raw_excerpt": "**1. HotpotQA / Fever 上的量化对比缺失。** 论文侧仅有「ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题」这一句定性转述[^1]，缺少原始论文 Table 1/2 的具体 EM/准确率数字（PaLM-540B 下 ReAct vs CoT vs CoT-SC 的对比）。因此本文无法给出 ReAct 与 CoT 在知识密集型任务上的量化对比，只能陈述定性结论。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测 · 2.3 工具学习范式的系统化（ReAct 数字的独立复述）",
+    "url": "reports/eval/reports/gq-tool-use.md · ### 2.3 工具学习范式的系统化 L41-46",
+    "published_at": null,
+    "key_points": [
+      "ReAct 让 LLM 以交织（interleaved）方式同时生成推理轨迹（reasoning traces）和任务特定动作（actions）。",
+      "推理轨迹帮助模型归纳、追踪、更新行动计划并处理异常；动作让模型与外部来源（知识库、环境）交互以获取额外信息。",
+      "在 HotpotQA、Fever 上通过调用 Wikipedia API 缓解幻觉与错误传播。",
+      "在 ALFWorld、WebShop 两个交互式决策基准上，分别以 34% 和 10% 的绝对成功率超越模仿学习与强化学习方法，且仅用 1–2 个 in-context 示例。"
+    ],
+    "raw_excerpt": "ReAct 让 LLM 以交织（interleaved）方式同时生成推理轨迹（reasoning traces）和任务特定动作（actions）[^3]。推理轨迹帮助模型归纳、追踪、更新行动计划并处理异常；动作让模型与外部来源（知识库、环境）交互以获取额外信息[^3]。在 HotpotQA、Fever 上通过调用 Wikipedia API 缓解幻觉与错误传播；在 ALFWorld、WebShop 两个交互式决策基准上，分别以 34% 和 10% 的绝对成功率超越模仿学习与强化学习方法，且仅用 1–2 个 in-context 示例[^3]。"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "上下文工程（Context Engineering）报告 · 参考来源（ReAct 与 CoT 论文的版本/日期条目）",
+    "url": "reports/eval/reports/gq-context-eng.md · ## 参考来源 L204-213",
+    "published_at": null,
+    "key_points": [
+      "知识库中登记了 ReAct 论文的版本条目：ReAct: Synergizing Reasoning and Acting in Language Models — arXiv:2210.03629v3，日期 2022-10-06。",
+      "知识库中登记了 CoT 论文的版本条目：Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — arXiv:2201.11903v6，日期 2022-01-28。",
+      "该条目仅为参考文献列表登记，未包含论文正文内容。"
+    ],
+    "raw_excerpt": "[^5]: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — https://arxiv.org/abs/2201.11903v6 （arxiv, 2022-01-28）\n[^6]: ReAct: Synergizing Reasoning and Acting in Language Models — https://arxiv.org/abs/2210.03629v3 （arxiv, 2022-10-06）"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（1.4 实验证据）",
+    "url": "reports/eval/reports/gq-react.md · ### 1.4 实验证据 · L28-35",
+    "published_at": null,
+    "key_points": [
+      "ReAct 论文报告两组实验：知识密集型任务与交互式决策基准。",
+      "在 HotpotQA 与 Fever 上，ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题。",
+      "在两个交互式决策基准 ALFWorld 与 WebShop 上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅用一到两个 in-context 示例进行提示。",
+      "该报告自述上述两组结论在给定证据中均为定性转述或摘要级数字：HotpotQA/Fever 部分缺少原始论文 Table 1/2 的具体 EM/准确率数字（PaLM-540B 下 ReAct vs CoT vs CoT-SC 的对比），ALFWorld/WebShop 部分缺少具体成功率数值与基线名称，也未说明是 PaLM-540B 还是 GPT-3 设定。"
+    ],
+    "raw_excerpt": "在 HotpotQA 与 Fever 上，ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题[^1]。在两个交互式决策基准 ALFWorld 与 WebShop 上，ReAct 相比模仿学习与强化学习方法分别取得 34% 与 10% 的绝对成功率提升，且仅用一到两个 in-context 示例进行提示[^1]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（五、矛盾与不确定性）",
+    "url": "reports/eval/reports/gq-react.md · ## 五、矛盾与不确定性 · L120-130",
+    "published_at": null,
+    "key_points": [
+      "HotpotQA / Fever 上的量化对比缺失：论文侧仅有「ReAct 通过与简单 Wikipedia API 交互，克服了 chain-of-thought reasoning 中普遍存在的幻觉与错误传播问题」这一句定性转述，缺少原始论文 Table 1/2 的具体 EM/准确率数字（PaLM-540B 下 ReAct vs CoT vs CoT-SC 的对比）。",
+      "ALFWorld / WebShop 的提升数字无法交叉验证：34% 与 10% 来自论文摘要，但缺少具体成功率数值与基线名称，且未说明是 PaLM-540B 还是 GPT-3 设定。",
+      "ReAct 的「事实性」主张强度有限：项目页主张 ReAct 以「可解释且事实性的轨迹」解决任务，但证据基础是 HotpotQA/Fever 上的定性结论，缺少细粒度的事实性错误率统计，只能视为作者主张而非已量化的结论。",
+      "ReAct 失败模式缺乏实证：关于推理灵活性不足、陷入循环、无法回溯，给定证据中只有项目页「并非完美 + 一个 ALFWorld 失败示例」这一句定性描述，缺少论文中的具体失败案例与错误率统计。"
+    ],
+    "raw_excerpt": "**4. ReAct 失败模式缺乏实证。** 关于 ReAct 的失败模式（推理灵活性不足、陷入循环、无法回溯），给定证据中只有项目页「并非完美 + 一个 ALFWorld 失败示例」这一句定性描述[^2]，缺少论文中的具体失败案例与错误率统计。因此本文无法给出「CoT 的幻觉/事实错误 vs ReAct 的推理不灵活」这一两侧失败模式的实证对比。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（3.3 区别三：失败模式的方向相反）",
+    "url": "reports/eval/reports/gq-react.md · ### 3.3 区别三：失败模式的方向相反 · L74-83",
+    "published_at": null,
+    "key_points": [
+      "CoT 侧失败模式：未接地导致幻觉与错误传播，且推理链条中的错误会沿链条传播；Zero-shot-CoT 还存在计算错误、缺失步骤错误、语义误解错误三类缺陷；标准 CoT 的单路径贪心解码存在明显性能上限。",
+      "act-only 侧失败模式：缺乏推理导致无法综合出最终答案。",
+      "ReAct 侧：项目页给出 ALFWorld 上的失败示例，承认 ReAct 并非完美。",
+      "关于 ReAct 自身的失败模式（推理灵活性不足、陷入循环、无法回溯），给定证据中只有项目页「并非完美 + 一个 ALFWorld 失败示例」这一句定性描述，缺少论文中的具体失败案例与错误率统计，因此无法给出 ReAct 失败模式的实证量化对比。"
+    ],
+    "raw_excerpt": "需要明确指出：关于 ReAct 自身的失败模式（推理灵活性不足、陷入循环、无法回溯），给定证据中只有项目页「并非完美 + 一个 ALFWorld 失败示例」这一句定性描述，缺少论文中的具体失败案例与错误率统计，因此无法在本文中给出 ReAct 失败模式的实证量化对比（详见「矛盾与不确定性」）。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（二、纯 Chain-of-Thought 的定义与边界）",
+    "url": "reports/eval/reports/gq-react.md · ## 二、纯 Chain-of-Thought 的定义与边界 · L43-53",
+    "published_at": null,
+    "key_points": [
+      "标准 CoT 使用的是朴素贪心解码（naive greedy decoding），即单条推理路径、单次前向生成。",
+      "Self-Consistency 采样一组多样化的推理路径而非只取贪心那一条，再对答案做边缘化投票。",
+      "Self-Consistency 相对标准 CoT 的提升为 GSM8K +17.9%、SVAMP +11.0%、AQuA +12.2%、StrategyQA +6.4%、ARC-challenge +3.9%。",
+      "Self-Consistency 的直觉是复杂推理问题通常存在多条通往唯一正确答案的思考路径。",
+      "Plan-and-Solve 指出 Zero-shot-CoT 存在三类缺陷——计算错误、缺失步骤错误、语义误解错误。"
+    ],
+    "raw_excerpt": "**Self-Consistency**：标准 CoT 使用的是朴素贪心解码（naive greedy decoding），即单条推理路径、单次前向生成；self-consistency 采样一组多样化的推理路径而非只取贪心那一条，再对答案做边缘化投票[^5]。相对标准 CoT 的提升为 GSM8K +17.9%、SVAMP +11.0%、AQuA +12.2%、StrategyQA +6.4%、ARC-challenge +3.9%[^5]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "多智能体系统（Multi-Agent LLM）主流协作模式与适用场景（1.6 反思/进化机制）",
+    "url": "reports/eval/reports/gq-multi-agent.md · ### 1.6 反思/进化机制（横切能力） · L41-46",
+    "published_at": null,
+    "key_points": [
+      "综述考察「哪些机制促进智能体能力的增长」，即反思/进化类机制。",
+      "Reflexion 通过语言反馈（linguistic feedback）而非更新权重来强化语言 agent。",
+      "Reflexion agent 对任务反馈信号进行口头反思（verbally reflect），并将反思文本保存在自身的 episodic memory buffer 中，以在后续试验（subsequent trials）中引导更好的决策。",
+      "在 HumanEval 编码基准上，Reflexion 达到 91% pass@1，超过此前 SOTA 的 GPT-4 的 80%。"
+    ],
+    "raw_excerpt": "代表性工作是 Reflexion：通过语言反馈（linguistic feedback）而非更新权重来强化语言 agent；Reflexion agent 对任务反馈信号进行口头反思（verbally reflect），并将反思文本保存在自身的 episodic memory buffer 中，以在后续试验（subsequent trials）中引导更好的决策[^26]。在 HumanEval 编码基准上，Reflexion 达到 91% pass@1，超过此前 SOTA 的 GPT-4 的 80%[^26]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（3.6 评估对象扩展到轨迹与成本）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 3.6 差异六：评估对象从\"输出质量\"扩展到\"轨迹与成本\" · L101-108",
+    "published_at": null,
+    "key_points": [
+      "SoK 论文将 agentic 检索-生成循环形式化为有限时域部分可观测马尔可夫决策过程（finite-horizon POMDP），显式建模其控制策略与状态转移。",
+      "该论文识别出自主循环固有的系统性风险：复合式幻觉传播（compounding hallucination propagation）、记忆投毒（memory poisoning）、检索失配（retrieval misalignment）、级联式工具执行漏洞（cascading tool-execution vulnerabilities）。",
+      "该论文批评传统静态评估实践对 agentic 系统不适用，指出需要成本感知编排、稳定自适应检索、形式化轨迹评估与监督机制等研究方向。",
+      "该论文指出当前研究缺乏将 Agentic RAG 作为序列决策系统的系统性理解，导致架构高度碎片化、评估方法不一致、可靠性风险未解决。"
+    ],
+    "raw_excerpt": "该论文将 agentic 检索-生成循环形式化为**有限时域部分可观测马尔可夫决策过程（finite-horizon POMDP）**，显式建模其控制策略与状态转移[^31]。该论文识别出自主循环固有的严重系统性风险：**复合式幻觉传播（compounding hallucination propagation）、记忆投毒（memory poisoning）、检索失配（retrieval misalignment）、级联式工具执行漏洞（cascading tool-execution vulnerabilities）**"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（3.5 失败模式的位置发生迁移）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 3.5 差异五：失败模式的位置发生迁移 · L93-100",
+    "published_at": null,
+    "key_points": [
+      "第三方分析列出三类在生产中反复出现的失败模式：Retrieval Thrash（检索反复但不收敛）、Tool storms（工具调用过度、级联并重试直至预算耗尽）、Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）。",
+      "该文指出这些失败通常表现为「模型变差了」，但根因并非基础模型，而是缺乏预算控制（budgets）、弱停止规则（weak stopping rules）以及对 agent 决策循环零可观测性。",
+      "retrieval thrash 具体场景：用户询问加州远程员工报销政策，agent 反复改写查询（broadening→narrowing→broadening），多轮后耗尽检索预算，答案质量相比第一轮几乎没有提升。"
+    ],
+    "raw_excerpt": "第三方分析列出三类在生产中反复出现的失败模式：**Retrieval Thrash（检索反复但不收敛）、Tool storms（工具调用过度、级联并重试直至预算耗尽）、Context bloat（上下文窗口被低信号内容填满，直到模型不再遵循自身指令）**[^32]。该文指出这些失败通常表现为\"模型变差了\"，但根因并非基础模型，而是缺乏预算控制（budgets）、弱停止规则（weak stopping rules）以及对 agent 决策循环零可观测性[^32]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "上下文工程（Context Engineering）：定义、与提示词工程的关系与差异（1.3 上下文是有限资源）",
+    "url": "reports/eval/reports/gq-context-eng.md · ### 1.3 为什么需要它：上下文是有限资源 · L28-46",
+    "published_at": null,
+    "key_points": [
+      "工程侧观察到四类失效模式：Context Poisoning（幻觉或其他错误进入上下文并被反复引用）、Context Distraction（上下文过长导致模型过度关注上下文而忽略训练所学）、Context Confusion（多余上下文影响回答）、Context Clash（上下文各部分相互矛盾）。",
+      "DeepMind 在 Gemini 2.5 技术报告中记录，玩 Pokémon 的 Gemini agent 偶尔产生幻觉并污染其上下文，导致 goals/summary 等部分被错误信息污染，模型会执着于不可能或不相关的目标。",
+      "Gemini 2.5 Pro 虽支持 1M+ token 上下文，但在 agentic 设置中上下文显著超过 100k token 后，agent 倾向于重复其庞大历史中的动作，而非综合出新的计划。",
+      "Databricks 研究发现 Llama 3.1 405b 的模型正确率在约 32k 上下文时开始下降，更小的模型下降更早。"
+    ],
+    "raw_excerpt": "例证方面：DeepMind 在 Gemini 2.5 技术报告中记录，玩 Pokémon 的 Gemini agent 偶尔产生幻觉并污染其上下文，导致 goals/summary 等部分被错误信息污染，模型会执着于不可能或不相关的目标[^12]。……Gemini 2.5 Pro 虽支持 1M+ token 上下文，但在 agentic 设置中上下文显著超过 100k token 后，agent 倾向于重复其庞大历史中的动作，而非综合出新的计划[^12]。"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（五、矛盾与不确定性 + 参考来源）",
+    "url": "reports/eval/reports/gq-react.md · ## 五、矛盾与不确定性 · L120-122 与 ## 参考来源 · L134-139",
+    "published_at": null,
+    "key_points": [
+      "Search-R1 指出，用提示让具备推理能力的 LLM 在推理时使用搜索引擎往往次优，因为 LLM 可能并不完全具备「如何最优地与搜索引擎交互」的能力。",
+      "Search-R1 通过 RL 让 LLM 在逐步推理过程中自主学习生成搜索查询并进行实时检索，在 7 个 QA 数据集上相比同设定 RAG 基线，Qwen2.5-7B 提升 41%、Qwen2.5-3B 提升 20%。",
+      "ToolRL 指出当前 LLM 常通过 SFT 获取工具使用能力，但 SFT 难以泛化到不熟悉或复杂的工具使用场景，转而用 GRPO 训练并设计工具使用任务的奖励，实验显示相比基座模型提升 17%、相比 SFT 模型提升 15%。",
+      "这些工作可视为对 ReAct 式「推理中调用工具」范式的训练侧改进，但它们本身不再以 ReAct 命名。",
+      "给定证据未说明 Search-R1 / ToolRL 与 ReAct prompting 范式之间的直接继承或替代关系，也未给出二者在相同基准上的对照数字。"
+    ],
+    "raw_excerpt": "与此同时，ReAct 的思想仍在被后续研究扩展。例如 Search-R1 指出，用提示让具备推理能力的 LLM 在推理时使用搜索引擎往往次优，因为 LLM 可能并不完全具备「如何最优地与搜索引擎交互」的能力；Search-R1 通过 RL 让 LLM 在逐步推理过程中自主学习生成搜索查询并进行实时检索，在 7 个 QA 数据集上相比同设定 RAG 基线，Qwen2.5-7B 提升 41%、Qwen2.5-3B 提升 20%[^17]。……这些工作可视为对 ReAct 式「推理中调用工具」范式的训练侧改进，但它们本身不再以 ReAct 命名。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LangChain ReAct agent 模板循环结构）",
+    "url": "reports/eval/reports/gq-react.md · ### 3.2 区别二：是否接地于外部环境 · L68-70",
+    "published_at": null,
+    "key_points": [
+      "LangChain 官方维护的 ReAct agent 模板把循环写为：接收用户 query → 推理并决定动作 → 用可用工具执行动作 → 观察动作结果 → 重复第 2-4 步直到能给出最终答案。"
+    ],
+    "raw_excerpt": "LangChain 官方维护的 ReAct agent 模板把循环写为：接收用户 query → 推理并决定动作 → 用可用工具执行动作 → 观察动作结果 → 重复第 2-4 步直到能给出最终答案[^6]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LangChain 对 agent 的定义）",
+    "url": "reports/eval/reports/gq-react.md · ### 3.1 区别一：输出空间与循环结构 · L62-67",
+    "published_at": null,
+    "key_points": [
+      "LangChain 官方对 agent 的定义为：agent 是一个在循环中调用工具直到任务完成的模型（a model calling tools in a loop until a given task is complete）。"
+    ],
+    "raw_excerpt": "LangChain 官方对 agent 的定义更为凝练：agent 是一个在循环中调用工具直到任务完成的模型（a model calling tools in a loop until a given task is complete）[^25]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LangGraph v1 弃用 create_react_agent）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-110",
+    "published_at": null,
+    "key_points": [
+      "LangGraph v1 发布说明设有专门小节「Deprecation of create_react_agent」。",
+      "LangGraph 的 create_react_agent 预构建组件已被官方弃用，转而推荐 LangChain 的 create_agent。",
+      "官方给出的弃用理由是 create_agent 提供更简单的接口，并通过引入 middleware 提供更强的定制能力。"
+    ],
+    "raw_excerpt": "LangGraph 的 `create_react_agent` 预构建组件已被弃用，转而推荐 LangChain 的 `create_agent`；理由是 `create_agent` 提供更简单的接口，并通过引入 middleware 提供更强的定制能力[^23]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LangChain v1 create_agent 与 basic agent loop）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-110",
+    "published_at": null,
+    "key_points": [
+      "LangChain v1 发布说明明确 create_agent 是 LangChain 中构建 agent 的新标准，取代 langgraph.prebuilt.create_react_agent。",
+      "create_agent 的底层机制被描述为「basic agent loop」：调用模型 → 让模型选择要执行的工具 → 当模型不再调用工具时结束。"
+    ],
+    "raw_excerpt": "`create_agent` 是 LangChain 中构建 agent 的新标准，取代 `langgraph.prebuilt.create_react_agent`；其底层机制被描述为「basic agent loop」——调用模型 → 让模型选择要执行的工具 → 当模型不再调用工具时结束[^24]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LangChain Agents 文档推荐入口）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-110",
+    "published_at": null,
+    "key_points": [
+      "LangChain Agents 文档当前推荐的构造入口为 from langchain.agents import create_agent。",
+      "该文档中未出现 create_react_agent 作为推荐用法。"
+    ],
+    "raw_excerpt": "LangChain Agents 文档当前推荐的构造入口为 `from langchain.agents import create_agent`，文档中未出现 `create_react_agent` 作为推荐用法[^25]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "上下文工程（Context Engineering）：定义、与提示词工程的关系与差异（LangChain agent 循环两步拆解）",
+    "url": "reports/eval/reports/gq-context-eng.md · ### 3.2 时间性：离散任务 vs 迭代过程 · L87-93",
+    "published_at": null,
+    "key_points": [
+      "LangChain 文档把 agent 循环拆为两步：Model call（带提示词与可用工具调用 LLM，返回响应或工具执行请求）与 Tool execution（执行工具并返回结果）。",
+      "LangChain 文档将上下文按可控性分为 Model Context 等类别，Model Context 指进入模型调用的内容（instructions、message history、tools、response format）。"
+    ],
+    "raw_excerpt": "LangChain 文档把 agent 循环拆为两步：Model call（带提示词与可用工具调用 LLM，返回响应或工具执行请求）与 Tool execution（执行工具并返回结果）[^3]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LlamaIndex 默认 FunctionAgent）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-114",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 的默认 agent 类型是 FunctionAgent，它使用 LLM provider 的 function/tool calling 能力执行工具。",
+      "ReActAgent 与 CodeActAgent 在 LlamaIndex 中被列为「使用不同 prompting 策略执行工具的」其他类型 agent，而非默认类型。"
+    ],
+    "raw_excerpt": "LlamaIndex 的默认 agent 类型是 FunctionAgent，它使用 LLM provider 的 function/tool calling 能力执行工具；ReActAgent 与 CodeActAgent 被列为「使用不同 prompting 策略执行工具的」其他类型 agent，而非默认类型[^7]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（LlamaIndex agent 循环描述）",
+    "url": "reports/eval/reports/gq-react.md · ### 3.1 区别一：输出空间与循环结构 · L62-67",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 对 agent 的描述为：给定任务与一组工具，选择最佳可用工具完成每一步；每步完成后 agent 判断任务是否完成——完成则返回结果，未完成则循环回到起点。"
+    ],
+    "raw_excerpt": "LlamaIndex 对 agent 的描述同样是「给定任务与一组工具，选择最佳可用工具完成每一步；每步完成后 agent 判断任务是否完成——完成则返回结果，未完成则循环回到起点」[^28]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "长上下文是否让 RAG 过时（LlamaIndex 仓库热度元数据）",
+    "url": "reports/eval/reports/gq-long-context.md · ## 四、长上下文是否让 RAG 过时 · L39-49",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 仓库为 52,639 stars、MIT 许可、最近 push 2026-10-23。",
+      "LlamaIndex 仓库 topics 中 rag 与 agents 并列。"
+    ],
+    "raw_excerpt": "LlamaIndex 52,639 stars、MIT、最近 push 2026-10-23，topics 中 rag 与 agents 并列[^17]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（ysymyth/ReAct 官方仓库元数据与 README 建议）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-107",
+    "published_at": null,
+    "key_points": [
+      "官方 GitHub 仓库 ysymyth/ReAct 明确标注为 ICLR 2023 论文的 GPT-3 prompting 代码。",
+      "该仓库覆盖 hotpotqa、fever、alfworld、webshop 四个 notebook。",
+      "该仓库元数据为 4224 stars、404 forks、MIT 许可。",
+      "该仓库 README 建议用户如需将 ReAct 用于更多任务，可尝试 LangChain 的 zero-shot ReAct Agent。"
+    ],
+    "raw_excerpt": "官方 GitHub 仓库 ysymyth/ReAct 明确标注为 ICLR 2023 论文的 GPT-3 prompting 代码，覆盖 hotpotqa、fever、alfworld、webshop 四个 notebook，元数据为 4224 stars、404 forks、MIT 许可[^22]。该仓库 README 建议用户如需将 ReAct 用于更多任务，可尝试 LangChain 的 zero-shot ReAct Agent[^22]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "自动修 Bug 的 Coding Agent 在 SWE-bench 上的技术水平（1.x 字符串解析 vs 2.x tool calling）",
+    "url": "reports/eval/reports/gq-swe-agent.md · ## 一、SWE-bench 是什么：任务定义与评测机制 · L9-24",
+    "published_at": null,
+    "key_points": [
+      "SWE-bench 官方明确指出 release 1.x 与 2.x 结果不一定可比。",
+      "2.x 使用 tool calling 调用动作，1.x 从输出字符串解析动作。",
+      "1.x 及更早结果在支持时温度设为 0.0，2.x 及以后不设置温度参数。"
+    ],
+    "raw_excerpt": "官方明确指出 release 1.x 与 2.x 结果不一定可比——2.x 使用 tool calling 调用动作，1.x 从输出字符串解析动作；1.x 及更早结果在支持时温度设为 0.0，2.x 及以后不设置温度参数[^4]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "自动修 Bug 的 Coding Agent 在 SWE-bench 上的技术水平（mini-SWE-agent 的简单 ReAct agent 循环）",
+    "url": "reports/eval/reports/gq-swe-agent.md · ## 一、SWE-bench 是什么：任务定义与评测机制 · L9-24",
+    "published_at": null,
+    "key_points": [
+      "Bash Only 是 SWE-bench Verified 的默认视图：所有模型在同一个 mini-SWE-agent 环境中运行。",
+      "该设置下所有 LM 都在最小 bash 环境中使用 mini-SWE-agent 评测，无工具、无特殊 scaffold，仅简单 ReAct agent 循环。"
+    ],
+    "raw_excerpt": "该设置下所有 LM 都在最小 bash 环境中使用 mini-SWE-agent 评测（无工具、无特殊 scaffold，仅简单 ReAct agent 循环）[^4]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（Haystack Agent 的 max_agent_steps 与退出原因）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 5.2 跨实现的默认参数横向对比不可行 · L153-161",
+    "published_at": null,
+    "key_points": [
+      "Haystack Agent 设 max_agent_steps 上限，并可配置 exit_conditions。",
+      "exit_reason 取值包括 \"text\"、\"length\"、\"content_filter\"、满足工具退出条件的工具名、\"max_agent_steps\"、以及 hook 设置的自定义原因。",
+      "Haystack Agent 运行元数据输出 step_count、token_usage、tool_call_counts、exit_reason。",
+      "Haystack Agent 默认在 \"length\" 和 \"content_filter\" 时停止。"
+    ],
+    "raw_excerpt": "Haystack Agent：`max_agent_steps` 上限、可配置 `exit_conditions`；退出原因 `exit_reason` 取值包括 \"text\"、\"length\"、\"content_filter\"、满足工具退出条件的工具名、\"max_agent_steps\"、以及 hook 设置的自定义原因；运行元数据输出 step_count、token_usage、tool_call_counts、exit_reason；Agent 默认在 \"length\" 和 \"content_filter\" 时停止[^24]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Human-in-the-loop 在 LLM Agent 系统中的主流实现模式与适用场景（Semantic Kernel auto function calling 最大迭代次数）",
+    "url": "reports/eval/reports/gq-human-in-loop.md · ## 八、辅助机制：Filter 作为审批前置控制点 · L113-122",
+    "published_at": null,
+    "key_points": [
+      "Semantic Kernel 的 auto function calling 循环共 6 步，步骤 2-6 会重复执行。",
+      "该循环重复执行直到模型返回 chat message 或达到最大迭代次数（max iteration number）。",
+      "auto function calling 是默认行为，也可选择手动调用函数。"
+    ],
+    "raw_excerpt": "步骤 2-6 会重复执行，直到模型返回 chat message 或达到最大迭代次数（max iteration number）[^13]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（LangGraph 教程无限循环与 rewrite_count 上限）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 5.7 参考实现本身存在缺陷的证据 · L187-192",
+    "published_at": null,
+    "key_points": [
+      "第三方分析称 LangGraph 官方 agentic RAG 教程本身存在一个无限检索循环的 bug，需要引入 rewrite_count 上限来修复。",
+      "该主张来自第三方技术博客而非 LangGraph 官方确认，现有公开资料不足以确认该缺陷的当前状态（是否已在官方教程中修复）。"
+    ],
+    "raw_excerpt": "第三方分析称 LangGraph 官方 agentic RAG 教程本身存在该 bug：一个无限检索循环，需要引入 rewrite_count 上限来修复；并评论\"如果参考实现都能无限循环，生产系统肯定会\"[^32]。该主张来自第三方技术博客而非 LangGraph 官方确认。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（LangChain / LangGraph 仓库 stars 与活跃度）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 4.5 生态热度参考 · L133-138",
+    "published_at": null,
+    "key_points": [
+      "GitHub 仓库检索结果（抓取时点 2026-10-14）显示 langchain-ai/langchain stars 147842、forks 24795，描述为 'The agent engineering platform'。",
+      "同批次检索显示 langchain-ai/langgraph stars 43254、forks 7354。",
+      "同批次检索显示 langgenius/dify stars 158443、forks 25058，描述为构建 Agentic workflows 与 RAG pipelines 的协作工作区。",
+      "同批次检索显示 bytedance/deer-flow stars 83852、forks 11680；mem0ai/mem0 stars 67164、forks 7903。",
+      "该批次检索结果中未包含 AutoGPT 与 OpenHands 仓库。"
+    ],
+    "raw_excerpt": "GitHub 仓库检索结果（抓取时点 2026-10-14）显示：langgenius/dify stars 158443、forks 25058…langchain-ai/langchain stars 147842、forks 24795，描述为 'The agent engineering platform'；…langchain-ai/langgraph stars 43254、forks 7354；bytedance/deer-flow stars 83852、forks 11680…mem0ai/mem0 stars 67164、forks 7903[^14]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（OpenAI Agents SDK 与 AutoGen 未使用 ReAct 命名）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-114",
+    "published_at": null,
+    "key_points": [
+      "OpenAI Agents SDK 文档描述的 agent loop 以 LLM 原生 tool calling 与 handoff 为核心控制流，文档未将其命名为 ReAct。",
+      "AutoGen AgentChat 文档示例中 agent.run() 返回的消息序列为 TextMessage(user) → ToolCallRequestEvent → ToolCallExecutionEvent → ToolCallSummaryMessage，同样未使用 ReAct 命名。",
+      "LangChain 的 basic agent loop、LlamaIndex 的 agent 循环、OpenAI Agents SDK 的 agent loop、AutoGen 的工具调用序列在结构上同构。"
+    ],
+    "raw_excerpt": "- **OpenAI Agents SDK** 文档描述的 agent loop 以 LLM 原生 tool calling 与 handoff 为核心控制流，文档未将其命名为 ReAct[^27]。\n- **AutoGen AgentChat** 文档示例中 `agent.run()` 返回的消息序列为 TextMessage(user) → ToolCallRequestEvent → ToolCallExecutionEvent → ToolCallSummaryMessage，同样未使用 ReAct 命名[^29]。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（矛盾与不确定性：ReAct 命名被取代）",
+    "url": "reports/eval/reports/gq-react.md · ## 五、矛盾与不确定性 · L120-130",
+    "published_at": null,
+    "key_points": [
+      "「ReAct 已被主流框架吸收为标准 agent 类型」的说法依据的是 ysymyth/ReAct README 建议使用 LangChain zero-shot ReAct Agent。",
+      "该说法与 LangGraph v1 弃用 create_react_agent、LangChain v1 以 create_agent 为新标准、LlamaIndex 默认 FunctionAgent、OpenAI Agents SDK 与 AutoGen 循环未命名 ReAct 等证据冲突，矛盾未调和。",
+      "报告给出的更准确表述是：ReAct 的循环结构被广泛继承，但 ReAct 的命名与预构建组件正在被更高层抽象取代。"
+    ],
+    "raw_excerpt": "**3. 「ReAct 已被主流框架吸收为标准 agent 类型」与官方弃用公告直接矛盾。** 该说法依据的是 ysymyth/ReAct README 建议使用 LangChain zero-shot ReAct Agent[^22]，但与以下证据冲突：LangGraph v1 已弃用 `create_react_agent`[^23]，LangChain v1 以 `create_agent` 为新标准[^24]，LlamaIndex 默认 FunctionAgent[^7]，OpenAI Agents SDK 与 AutoGen 的循环均未命名为 ReAct[^27][^29]。矛盾未调和，不能据此断言 ReAct 仍是默认范式。更准确的表述是：ReAct 的循环**结构**被广泛继承，但 ReAct 的**命名与预构建组件**正在被更高层抽象取代。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Agentic RAG：定义、架构关键差异与工程现状（跨实现默认参数横向对比不可行）",
+    "url": "reports/eval/reports/gq-agentic-rag.md · ### 5.2 跨实现的默认参数横向对比不可行 · L153-164",
+    "published_at": null,
+    "key_points": [
+      "各实现的默认参数配置（迭代轮数、top-k、模型选择）现有公开资料不足以支撑横向对比表。",
+      "CrewAI、AutoGen/MAF、Dify 均无默认迭代轮数/top-k/模型配置证据。",
+      "LlamaIndex 教程默认模型为 gpt-4o-mini，文档提示 agent 需要能力较强的模型，较小模型可能不太可靠。"
+    ],
+    "raw_excerpt": "各实现的默认参数配置（迭代轮数、top-k、模型选择）**现有公开资料不足以支撑横向对比表**。…RAGFlow 的 thinking mode 四档[^8]、CrewAI[^13]、AutoGen/MAF[^12]、Dify[^14] 均**无默认迭代轮数/top-k/模型配置证据**。"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "自动修 Bug 的 Coding Agent 在 SWE-bench 上的技术水平（OpenHands 仓库 README 已改版）",
+    "url": "reports/eval/reports/gq-swe-agent.md · ### 5.3 OpenHands 成绩缺失 · L99-101",
+    "published_at": null,
+    "key_points": [
+      "OpenHands 论文证据仅覆盖引言部分，未取到含 SWE-bench resolve rate 的结果表格。",
+      "OpenHands GitHub 仓库 README 已改版为 Agent Canvas 产品介绍，不再含 benchmark 分数表。"
+    ],
+    "raw_excerpt": "如第三节所述，OpenHands 论文证据仅覆盖引言部分，未取到含 SWE-bench resolve rate 的结果表格[^20]；GitHub 仓库 README 已改版为 Agent Canvas 产品介绍，不再含 benchmark 分数表[^19]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "推理模型的 RL Scaling 与预训练 Scaling 的关系，及 Test-Time Compute 的重要性（含 OpenAI o1 System Card 官方表述转述）",
+    "url": "reports/eval/reports/gq-rl-scaling.md · ### 1.2 推理模型的 RL 路线：官方表述 · L26-28",
+    "published_at": "2024-12-05",
+    "key_points": [
+      "OpenAI o1 System Card 的摘要将 o1 模型系列定义为「trained with large-scale reinforcement learning to reason using chain of thought」（用大规模强化学习训练以使用思维链推理）。",
+      "System Card 正文第 2 节（标注日期 December 5, 2024）说明 o1 大语言模型家族「trained with reinforcement learning to perform complex reasoning」。",
+      "o1 在回答前会「produce a long chain of thought before responding to the user」。",
+      "文档称通过训练，模型学会「refine their thinking process, try different strategies, and recognize their mistakes」。",
+      "o1-mini 被描述为该模型的更快版本，尤其擅长编程。",
+      "该片段未提及 ReAct，也未对 ReAct 式提示作出任何推荐或不推荐的表态。"
+    ],
+    "raw_excerpt": "OpenAI o1 System Card 的摘要将 o1 模型系列定义为「trained with large-scale reinforcement learning to reason using chain of thought」…正文第 2 节（标注日期 December 5, 2024）进一步说明 o1 大语言模型家族「trained with reinforcement learning to perform complex reasoning」，o1 在回答前会「produce a long chain of thought before responding to the user」…文档称通过训练，模型学会「refine their thinking process, try different strategies, and recognize their mistakes」"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测（含 OpenAI 官方 function calling 文档转述）",
+    "url": "reports/eval/reports/gq-tool-use.md · ### 1.1 官方定义与术语分层 · L11-19",
+    "published_at": null,
+    "key_points": [
+      "OpenAI 官方文档把 function calling（亦称 tool calling）定义为「让模型与外部系统交互、访问训练数据之外数据的机制」。",
+      "术语体系分三层：Tools（以 JSON schema 定义的功能；function 是 tool 的一种特定类型，另有 custom tools，输入输出为自由文本）、Tool calls（模型判断需调用工具时返回的特殊响应，含参数）、Tool call outputs（应用侧执行后回传，须含对特定工具调用的引用，示例以 call_id 关联）。",
+      "完整交互流程为：请求中附带工具列表 → 模型返回 tool call（含参数）→ 应用执行并回传 output → 连同原始 prompt、tool call、output 一起回传模型 → 模型生成最终文本响应。",
+      "当应用函数数量多或 schema 庞大时，可将 function calling 与 tool search 配合，延迟加载罕用工具；文档注明仅 gpt-5.4 及之后模型支持 tool_search。",
+      "该官方术语体系以 tool call / tool output 描述与 ReAct 循环同构的交互，未使用 ReAct 命名。"
+    ],
+    "raw_excerpt": "OpenAI 官方文档把 function calling（亦称 tool calling）定义为「让模型与外部系统交互、访问训练数据之外数据的机制」…完整交互流程为：请求中附带工具列表 → 模型返回 tool call（含参数）→ 应用执行并回传 output → 连同原始 prompt、tool call、output 一起回传模型 → 模型生成最终文本响应"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测（含 Anthropic 官方工具调用文档转述）",
+    "url": "reports/eval/reports/gq-tool-use.md · ### 1.2 并行调用与执行语义 · L21-24",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 官方文档规定：默认情况下 Claude 可能在单次响应中调用多个工具，响应 stop_reason 为 tool_use，且单个 assistant turn 中可包含多个 tool_use block。",
+      "API 不规定执行顺序，开发者可并发执行（Promise.all、asyncio.gather）、按出现顺序串行执行，或任意组合。",
+      "官方建议按工具性质选择策略：独立、只读操作通常可安全并行以降低延迟；有副作用、共享状态或有顺序要求的工具更适合串行。",
+      "对每个 tool_use block 必须返回一个 tool_result，全部放在下一条 user message 中，用 tool_use_id 匹配，且所有 tool_result block 必须位于该消息中任何文本内容之前。",
+      "若某个调用未被执行（例如串行执行时前一个调用失败），仍必须为其返回 tool_result 并设置 is_error: true 及简要说明。",
+      "computer use 与 browser use 工具规则更严格：当 Claude 在一个 turn 中返回多个成员工具调用（batch action）时，必须按出现顺序串行执行，并在第一个失败处停止。",
+      "该官方文档片段未出现 ReAct、thought 或 observation 字样。"
+    ],
+    "raw_excerpt": "Anthropic 官方文档规定：默认情况下 Claude 可能在单次响应中调用多个工具，响应 `stop_reason` 为 `tool_use`，且单个 assistant turn 中可包含多个 `tool_use` block…API 不规定执行顺序，开发者可并发执行（`Promise.all`、`asyncio.gather`）、按出现顺序串行执行，或任意组合；官方建议按工具性质选择策略"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "LLM 工具调用（Function Calling）的训练、对齐与评测（含 Anthropic 2025-11-24 三项 beta 特性转述）",
+    "url": "reports/eval/reports/gq-tool-use.md · ### 8.2 上下文成本：工具定义的隐性开销 · L169-173",
+    "published_at": "2025-11-24",
+    "key_points": [
+      "Anthropic 于 2025-11-24 发布三项 beta 特性，使 Claude 能动态发现、学习与执行工具：Tool Search Tool、Programmatic Tool Calling、Tool Use Examples。",
+      "Anthropic 指出工具定义会大量消耗上下文：五 server 示例中 GitHub 35 个工具约 26K tokens、Slack 11 个约 21K tokens、Sentry 5 个约 3K tokens、Grafana 5 个约 3K tokens、Splunk 2 个约 2K tokens，合计 58 个工具约 55K tokens；Anthropic 内部曾见到工具定义消耗 134K tokens。",
+      "Anthropic 明确表示最常见的失败是「选错工具」与「参数不正确」，在工具名称相似时尤其严重（如 notification-send-user 与 notification-send-channel）。",
+      "Tool Search Tool 按需发现工具，官方称相比传统方式保留 191,300 tokens 上下文（传统方式为 122,800）；传统方式下 50+ MCP 工具定义约 72K tokens，加上对话历史与系统提示后约 77K tokens 在任何工作开始前即被占用。",
+      "Programmatic Tool Calling 允许 Claude 在代码执行环境中调用工具，以减少对模型上下文窗口的占用；官方说明「自然语言工具调用每次调用都需要一次完整推理，中间结果无论是否有用都会堆积在上下文中」。",
+      "Tool Use Examples 旨在提供演示工具有效用法的通用标准，因为 JSON schema 只能定义结构上合法的内容，无法表达使用模式（何时包含可选参数、哪些参数组合合理、API 期望的约定）。",
+      "Anthropic 称 Claude for Excel 使用 Programmatic Tool Calling 读取和修改数千行电子表格而不使模型上下文窗口过载。",
+      "该片段未点名 ReAct，但把「自然语言工具调用每次都要完整推理、中间结果堆积」表述为需要被优化的成本。"
+    ],
+    "raw_excerpt": "Anthropic 于 2025-11-24 发布三项 beta 特性，使 Claude 能动态发现、学习与执行工具：Tool Search Tool、Programmatic Tool Calling、Tool Use Examples…Programmatic Tool Calling 允许 Claude 在代码执行环境中调用工具，以减少对模型上下文窗口的占用；自然语言工具调用每次调用都需要一次完整推理，中间结果无论是否有用都会堆积在上下文中"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（第四节：ReAct 在工程生态中的位置）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-116",
+    "published_at": null,
+    "key_points": [
+      "ReAct 的「推理-行动交错 + 环境观测」循环结构在当代 agent 框架中普遍存在：LangChain 的 basic agent loop、LlamaIndex 的 agent 循环、OpenAI Agents SDK 的 agent loop、AutoGen 的工具调用序列都是同构的。",
+      "最直接以 ReAct 命名的预构建组件 create_react_agent 已被官方弃用；LangGraph v1 发布说明设有专门小节「Deprecation of create_react_agent」，官方原文称该预构建组件已被弃用，转而推荐 LangChain 的 create_agent。",
+      "官方给出的弃用理由是 create_agent 提供更简单的接口，并通过引入 middleware 提供更强的定制能力。",
+      "LlamaIndex 默认 agent 类型为 FunctionAgent 而非 ReActAgent；OpenAI Agents SDK 与 AutoGen 的 agent loop 文档均未将其命名为 ReAct。",
+      "该报告明确指出：不能据此断言 ReAct 仍是当前框架的默认命名范式或默认实现；同时指出这两条证据之间的矛盾在给定材料中未被调和。",
+      "该条证据主体为框架厂商（LangChain/LlamaIndex）与 SDK 文档，不等同于 OpenAI/Anthropic/Google 的模型侧官方文档。"
+    ],
+    "raw_excerpt": "因此，可以确认的是：ReAct 的「推理-行动交错 + 环境观测」循环结构在当代 agent 框架中普遍存在（LangChain 的 basic agent loop、LlamaIndex 的 agent 循环、OpenAI Agents SDK 的 agent loop、AutoGen 的工具调用序列都是同构的）。但**不能据此断言 ReAct 仍是当前框架的默认命名范式或默认实现**——恰恰相反，最直接以 ReAct 命名的预构建组件 `create_react_agent` 已被官方弃用"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "ReAct 范式的核心思想及其与纯 Chain-of-Thought 的关键区别（Search-R1 / ToolRL 对提示式工具使用的批评）",
+    "url": "reports/eval/reports/gq-react.md · ## 四、ReAct 在工程生态中的位置：一个未调和的矛盾 · L101-116",
+    "published_at": null,
+    "key_points": [
+      "Search-R1 指出，用提示让具备推理能力的 LLM 在推理时使用搜索引擎往往次优，因为 LLM 可能并不完全具备「如何最优地与搜索引擎交互」的能力。",
+      "Search-R1 通过 RL 让 LLM 在逐步推理过程中自主学习生成搜索查询并进行实时检索，在 7 个 QA 数据集上相比同设定 RAG 基线，Qwen2.5-7B 提升 41%、Qwen2.5-3B 提升 20%。",
+      "ToolRL 指出当前 LLM 常通过 SFT 获取工具使用能力，但 SFT 难以泛化到不熟悉或复杂的工具使用场景，转而用 GRPO 训练并设计工具使用任务的奖励。",
+      "ToolRL 实验显示相比基座模型提升 17%、相比 SFT 模型提升 15%。",
+      "报告注明这些工作可视为对 ReAct 式「推理中调用工具」范式的训练侧改进，但它们本身不再以 ReAct 命名。",
+      "该条证据属学术侧论证，非产业界官方立场。"
+    ],
+    "raw_excerpt": "Search-R1 指出，用提示让具备推理能力的 LLM 在推理时使用搜索引擎往往次优，因为 LLM 可能并不完全具备「如何最优地与搜索引擎交互」的能力…这些工作可视为对 ReAct 式「推理中调用工具」范式的训练侧改进，但它们本身不再以 ReAct 命名。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "上下文工程（Context Engineering）：定义、与提示词工程的关系与差异（Anthropic 官方「演进而非替代」定位）",
+    "url": "reports/eval/reports/gq-context-eng.md · ### 2.1 官方定位：演进，而非替代 · L49-53",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 明确把 context engineering 定位为 prompt engineering 的「自然演进（natural progression）」，而非替代。",
+      "Anthropic 界定的 prompt engineering 是「为获得最优结果而撰写与组织 LLM 指令的方法」，重点是写好提示词、尤其是系统提示。",
+      "该定位针对的是提示工程整体，不是对 ReAct 的直接表态，不能外推为「Anthropic 仍推荐 ReAct 提示」。"
+    ],
+    "raw_excerpt": "Anthropic 明确把 context engineering 定位为 prompt engineering 的「**自然演进**（natural progression）」，而非替代[^1]。其界定的 prompt engineering 是「为获得最优结果而撰写与组织 LLM 指令的方法」，重点是写好提示词、尤其是系统提示[^1]。"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "多智能体系统（Multi-Agent LLM）主流协作模式与适用场景（Anthropic 官方 agent 选型建议）",
+    "url": "reports/eval/reports/gq-multi-agent.md · ## 三、多智能体何时失效或不如单智能体 · L71-72",
+    "published_at": null,
+    "key_points": [
+      "Anthropic 建议：构建 LLM 应用时先找最简单的方案，只在必要时才增加复杂度——这可能意味着根本不构建 agentic 系统。",
+      "agentic 系统通常以延迟和成本换取更好的任务表现，开发者应判断这种权衡是否值得。",
+      "选型建议：任务定义明确时，workflows 提供可预测性与一致性；需要灵活性、模型驱动决策且规模较大时，agents 更合适。",
+      "对许多应用而言，用检索和 in-context 示例优化单次 LLM 调用通常就足够了。",
+      "该建议体现官方对多轮 agent 循环的成本审慎态度，但未点名 ReAct。"
+    ],
+    "raw_excerpt": "Anthropic 建议：构建 LLM 应用时先找最简单的方案，只在必要时才增加复杂度——这可能意味着根本不构建 agentic 系统[^22]。agentic 系统通常以延迟和成本换取更好的任务表现，开发者应判断这种权衡是否值得[^22]…对许多应用而言，用检索和 in-context 示例优化单次 LLM 调用通常就足够了[^22]。"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9,
+  "mean_coverage": 0.25,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9,
+      "coverage": 0.25
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 0.9,
+      "coverage_rate": 0.25,
+      "missed_key_points": [
+        "R1 蒸馏基于 Qwen/Llama 等开源底座",
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

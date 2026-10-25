@@ -1,0 +1,264 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — NOTE 4 – Segment Reporting: sales to major customers (≥10% of consolidated net revenue)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69（印刷页 66）",
+    "published_at": null,
+    "key_points": [
+      "The disclosure is framed as sales to major customers that accounted for at least 10% of the Company's consolidated net revenue, presented for the years ended December 31, 2022, December 25, 2021 and December 26, 2020.",
+      "FY2022: Customer A accounted for 16% of consolidated net revenue; Customer B was below 10% (marked with an asterisk).",
+      "FY2021: Customer A accounted for 14% and Customer B accounted for 11% of consolidated net revenue.",
+      "FY2020: both Customer A and Customer B were below 10% of consolidated net revenue.",
+      "The asterisk footnote is defined as 'Less than 10%'.",
+      "Customers are identified only by anonymous labels (Customer A, Customer B); no company names are disclosed.",
+      "The filing states that sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively.",
+      "This table sits within NOTE 4 – Segment Reporting of the Notes to Consolidated Financial Statements (Part II, Item 8), immediately preceding NOTE 5 – Business Combinations."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 1A Risk Factors: qualitative customer concentration statement",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19（印刷页 16）",
+    "published_at": null,
+    "key_points": [
+      "In the risk factors section, AMD states qualitatively that it expects a small number of customers to continue to account for a substantial part of its revenue.",
+      "The statement is used to explain increased risk of customers defaulting on or delaying payments owed to AMD.",
+      "This risk-factor passage provides no specific percentages and names no customers."
+    ],
+    "raw_excerpt": "The risk related to our customers potentially defaulting on or delaying payments to us is increased because we expect that a small number of customers will continue to account for a substantial part of our revenue."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — NOTE 10 – Concentrations of Credit Risk: accounts receivable concentration",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80（印刷页 77）",
+    "published_at": null,
+    "key_points": [
+      "NOTE 10 – Concentrations of Credit Risk states that financial instruments potentially subjecting the Company to credit concentration consist primarily of investments in time deposits, available-for-sale debt securities and trade receivables.",
+      "As of December 25, 2021, two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance.",
+      "The Company states it does not believe the receivable balance from these customers represents a significant credit risk, based on past collection experience and review of their current credit quality.",
+      "This note measures concentration on an accounts-receivable basis, a different metric from the net-revenue percentages in Note 4."
+    ],
+    "raw_excerpt": "…accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021. However, the Company does not believe the receivable balance from these customers represents a significant credit risk based on past collection experience and review of their current credit quality."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 7 MD&A: segment revenue discussion (no customer-level concentration disclosure)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43–p49（印刷页 40–46）",
+    "published_at": null,
+    "key_points": [
+      "Item 7 Management's Discussion and Analysis discusses FY2022 results by the four reportable segments (Data Center, Client, Gaming, Embedded) rather than by customer.",
+      "FY2022 net revenue was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion.",
+      "The MD&A overview attributes growth to a 64% increase in Data Center segment revenue, a 21% increase in Gaming segment revenue, and the inclusion of Xilinx embedded product sales, partially offset by a 10% decrease in Client segment revenue.",
+      "No customer-concentration percentages or customer code names appear in the MD&A overview and results-of-operations passages retrieved."
+    ],
+    "raw_excerpt": "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue…"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 4 segment net revenue table (denominator context for the 16% figure)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68（印刷页 65）",
+    "published_at": null,
+    "key_points": [
+      "FY2022 segment net revenue: Data Center $6,043 million, Client $6,201 million, Gaming $6,805 million, Embedded $4,552 million, total $23,601 million.",
+      "FY2021 segment net revenue: Data Center $3,694 million, Client $6,887 million, Gaming $5,607 million, Embedded $246 million, total $16,434 million.",
+      "Gaming and Client segment revenues are of comparable magnitude in FY2022, so segment attribution alone does not identify the named customers."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 ; Client 6,201 6,887 5,189 ; Gaming 6,805 5,607 2,746 ; Embedded 4,552 246 143 ; Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD_2022_10K — Note 4 Segment Reporting: sales to major customers ≥10% of consolidated net revenue",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": null,
+    "key_points": [
+      "AMD 2022 财年 10-K 附注以表格披露「sales to major customers that accounted for at least 10% of the Company's consolidated net revenue」，即公司实际采用 10% 收入占比作为主要客户披露门槛。",
+      "Customer A 在 2022、2021、2020 年分别占合并净收入 16%、14%、低于 10%；Customer B 分别为低于 10%、11%、低于 10%。",
+      "表格脚注以「*」表示「Less than 10%」，即未达门槛的年份不列示具体比例。",
+      "AMD 说明 Customer A 与 Customer B 的销售分别来自 Gaming 与 Client 分部。",
+      "该披露以匿名代号（Customer A / Customer B）呈现，未披露客户名称。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; * Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD_2022_10K — Note 4 Segment Reporting: net revenue by segment and sales to external customers by geographic region",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "AMD 按客户账单所在地（billing location）披露外部客户销售：美国 8,049、中国（含香港）5,207、日本 4,177、欧洲 1,773、台湾 2,369、新加坡 1,380、其他国家 646，合计 23,601 百万美元（2022）。",
+      "AMD 披露四个报告分部（Data Center、Client、Gaming、Embedded）的净收入与经营损益，2022 年合计净收入 23,601 百万美元。",
+      "AMD 声明不向经营分部单独分配资产，管理层亦不使用分部资产信息进行评价。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to external customers by geographic regions based on billing location of the customer: … United States $ 8,049 … China (including Hong Kong) 5,207 … Total sales to external customers $ 23,601 $ 16,434 $ 9,763. The Company does not discretely allocate assets to its operating segments, nor does management evaluate operating segments using discrete asset information."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD_2022_10K — Note 10 Concentrations of Credit Risk: accounts receivable concentration",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": null,
+    "key_points": [
+      "AMD 在 Note 10 – Concentrations of Credit Risk 中单独披露应收账款集中度：截至 2021 年 12 月 25 日，两家客户分别约占合并应收账款余额的 20% 与 15%。",
+      "AMD 表示基于过往收款经验与对客户当前信用质量的复核，不认为该应收余额构成重大信用风险。",
+      "该附注将信用风险集中度的载体界定为定期存款、可供出售债务证券与贸易应收款等金融工具。"
+    ],
+    "raw_excerpt": "NOTE 10 – Concentrations of Credit Risk. Financial instruments that potentially subject the Company to concentrations of credit risk consist primarily of investments in time deposits, available-for-sale debt securities and trade receivables. … Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021. However, the Company does not believe the receivable balance from these customers represents a significant credit risk based on past collection experience and review of their current credit quality."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD_2022_10K — Item 1 Business: forward-looking statement on customer concentration",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p4",
+    "published_at": null,
+    "key_points": [
+      "AMD 在 Item 1 Business 的前瞻性陈述风险列举中写明「a small number of customers will continue to account for a substantial part of AMD's revenue in the future」。",
+      "该表述为定性描述，未给出具体客户数量、名称或收入占比数字。"
+    ],
+    "raw_excerpt": "…and a small number of customers will continue to account for a substantial part of AMD's revenue in the future. For a discussion of the factors that could cause actual results to differ materially from the forward-looking statements, see \"Part I, Item 1A-Risk Factors\" and the \"Financial Condition\" section set forth in \"Part II, Item 7-Management's Discussion and Analysis of Financial Condition and Results of Operations,\" or MD&A…"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1A Risk Factors: customer financing portfolio concentration (qualitative contrast sample)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p19",
+    "published_at": null,
+    "key_points": [
+      "Boeing 在 Item 1A 风险因素中以定性方式披露客户融资组合集中度，风险标题为「A significant portion of our customer financing portfolio is concentrated among certain customers and in certain types of Boeing aircraft, which exposes us to concentration risks.」。",
+      "Boeing 说明其组合在客户、地理区域、机型（尤其 717 与 747-8）以及其认为信用等级低于投资级的客户之间存在不同程度的集中。",
+      "该风险因素段落未给出任何量化百分比或具体客户名称。"
+    ],
+    "raw_excerpt": "A significant portion of our customer financing portfolio is concentrated among certain customers and in certain types of Boeing aircraft, which exposes us to concentration risks. A significant portion of our customer financing portfolio is concentrated among certain customers and in distinct geographic regions. Our portfolio is also concentrated by varying degrees across Boeing aircraft product types, most notably 717 and 747-8 aircraft, and among customers that we believe have less than investment-grade credit."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 4/Note on major customers: sales to customers ≥10% of consolidated net revenue (FY2022, FY2021, FY2020)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": null,
+    "key_points": [
+      "The 10-K presents a table titled \"sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years\", i.e. the disclosure threshold is 10% of consolidated net revenue.",
+      "Customer A accounted for 16% of consolidated net revenue in FY2022, 14% in FY2021, and less than 10% (marked \"*\") in FY2020.",
+      "Customer B accounted for 11% of consolidated net revenue in FY2021, and less than 10% (marked \"*\") in both FY2022 and FY2020.",
+      "The footnote states that sales to Customer A consisted of products from the Gaming segment and sales to Customer B consisted of products from the Client segment.",
+      "Customers are referred to anonymously as \"Customer A\" and \"Customer B\"; no customer names are disclosed in this table.",
+      "On the basis of this table, the number of customers at or above the 10% threshold was zero in FY2020, two in FY2021, and one in FY2022."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; * Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Part I, Item 1 Business: single customer at 16% of net revenue",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": null,
+    "key_points": [
+      "In the Business section, AMD states that one customer accounted for 16% of consolidated net revenue for the year ended December 31, 2022.",
+      "That customer's sales consisted of products from the Gaming segment.",
+      "AMD states that the loss of this customer would have a material adverse effect on its business.",
+      "The customer is not named in this passage."
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Part I, Item 1A Risk Factors: qualitative customer concentration language",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p20",
+    "published_at": null,
+    "key_points": [
+      "The Risk Factors section states that a small number of customers will continue to account for a substantial part of AMD's revenue in the future.",
+      "AMD states that if a key customer stops buying its products, or materially reduces its operations or demand, its business would be materially adversely affected.",
+      "This risk-factor language is qualitative and does not quantify the concentration percentage."
+    ],
+    "raw_excerpt": "for a significant part of our revenue in the future. If one of our key customers decides to stop buying our products, or if one of these customers materially reduces its operations or its demand for our products, our business would be materially adversely affected."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note: segment net revenue and operating income FY2022/FY2021/FY2020",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "Total net revenue was $23,601 million in FY2022, $16,434 million in FY2021 and $9,763 million in FY2020.",
+      "Segment net revenue in FY2022: Data Center $6,043M, Client $6,201M, Gaming $6,805M, Embedded $4,552M.",
+      "Segment net revenue in FY2021: Data Center $3,694M, Client $6,887M, Gaming $5,607M, Embedded $246M.",
+      "The Embedded segment grew from $246 million in FY2021 to $4,552 million in FY2022."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 ; Client 6,201 6,887 5,189 ; Gaming 6,805 5,607 2,746 ; Embedded 4,552 246 143 ; Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 7 MD&A Overview: Xilinx acquisition and revenue growth context",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": null,
+    "key_points": [
+      "AMD completed its acquisition of Xilinx in February 2022.",
+      "FY2022 net revenue was $23.6 billion, an increase of 44% compared with FY2021 net revenue of $16.4 billion.",
+      "The FY2022 10-K states that discussions of 2020 items and the 2021-versus-2020 comparison are contained in the FY2021 Form 10-K rather than in this filing."
+    ],
+    "raw_excerpt": "In February 2022, we completed our strategic acquisition of Xilinx, Inc. (Xilinx) ... Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. ... Discussions of 2020 items and year-to-year comparisons between 2021 and 2020 that are not included in this Form 10-K can be found in ... our Annual Report on Form 10-K for the fiscal year ended December 25, 2021."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 Segment Reporting: sales to major customers ≥10% of consolidated net revenue (FY2022/2021/2020)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69 (Note 4 – Segment Reporting)",
+    "published_at": "2023",
+    "key_points": [
+      "AMD disclosed sales to major customers that accounted for at least 10% of consolidated net revenue: Customer A 16% (FY2022), 14% (FY2021), less than 10% (FY2020).",
+      "Customer B was less than 10% of consolidated net revenue in FY2022, 11% in FY2021, and less than 10% in FY2020.",
+      "Sales to Customer A and Customer B consisted of sales of products from the Gaming and Client segments, respectively.",
+      "The disclosure is framed as a threshold table (only customers at or above 10% are shown), so no customer below 10% is quantified."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1. Business: one customer = 16% of FY2022 consolidated net revenue (Gaming segment)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12 (Part I, Item 1. Business)",
+    "published_at": "2023",
+    "key_points": [
+      "One customer accounted for 16% of AMD's consolidated net revenue for the year ended December 31, 2022.",
+      "Sales to that customer consisted of products from AMD's Gaming segment.",
+      "AMD states that a loss of this customer would have a material adverse effect on its business."
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A. Risk Factors: dependence on a small number of customers",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p20 (Part I, Item 1A. Risk Factors)",
+    "published_at": "2023",
+    "key_points": [
+      "AMD's risk factor is titled \"The loss of a significant customer may have a material adverse effect on us.\"",
+      "The risk factor states AMD depends on a small number of customers for a substantial portion of its business.",
+      "AMD states it expects a small number of customers to continue to account for a significant part of its business."
+    ],
+    "raw_excerpt": "The loss of a significant customer may have a material adverse effect on us. We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant par[t] ..."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — FY2022 net revenue by reportable segment (MD&A and Note 4)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48 (MD&A) / p68 (Note 4)",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 total net revenue was $23,601 million.",
+      "FY2022 segment net revenue: Data Center $6,043M; Client $6,201M; Gaming $6,805M; Embedded $4,552M.",
+      "FY2021 segment net revenue for comparison: Data Center $3,694M; Client $6,887M; Gaming $5,607M; Embedded $246M.",
+      "AMD reports four reportable segments (Data Center, Client, Gaming, Embedded) following a Q2 2022 segment reporting change."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 ; Client 6,201 6,887 ; Gaming 6,805 5,607 ; Embedded 4,552 246 ; Total net revenue $ 23,601 $ 16,434"
+  }
+]

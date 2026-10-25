@@ -1,0 +1,55 @@
+{
+  "n_questions": 3,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.6111111111111112,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9583333333333334,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 2.0,
+      "citation_existence": 1.0,
+      "alignment": 0.4375,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-long-context",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 42,
+      "citations_missing": [],
+      "alignment_rate": 0.875,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 0.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "gq-mcp",
+      "subdomain": "agent",
+      "citation_existence_rate": 1.0,
+      "citations_total": 42,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

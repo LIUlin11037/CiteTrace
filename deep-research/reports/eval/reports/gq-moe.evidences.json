@@ -1,0 +1,478 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer (Shazeer et al., 2017)",
+    "url": "https://arxiv.org/html/1701.06538v1",
+    "published_at": "2017-01-23",
+    "key_points": [
+      "MoE 层由 n 个「专家网络」E_1..E_n 与一个「门控网络」G 组成，G 的输出是一个稀疏的 n 维向量。",
+      "MoE 模块输出定义为 y = Σ_{i=1}^{n} G(x)_i · E_i(x)；当 G(x)_i = 0 时无需计算 E_i(x)，计算节省来自门控输出的稀疏性。",
+      "论文将 MoE 定位为「条件计算」（conditional computation）的一种通用神经网络组件：按样本激活部分网络，从而在不按比例增加计算的情况下大幅提升模型容量。",
+      "Noisy Top-K Gating：在 softmax 之前加入可调高斯噪声，然后只保留 top-k 个值、其余置为 −∞（使对应门控值为 0）；稀疏性用于节省计算。",
+      "实验规模：专家数可达数千个，但每个样本只需评估其中少数几个；MoE 以卷积方式插入堆叠 LSTM 层之间，最大模型达 137B 参数。",
+      "论文声称实现 >1000x 的模型容量提升，且在现代 GPU 集群上计算效率仅有轻微损失。",
+      "论文列出条件计算落地的工程障碍：GPU 更擅长算术而非分支、条件计算会缩小条件激活块的批大小、网络带宽可能成为瓶颈、可能需要额外损失项来实现稀疏与负载均衡。",
+      "专家会基于语法与语义变得高度专门化（作者引 Appendix E Table 9）。"
+    ],
+    "raw_excerpt": "The Mixture-of-Experts (MoE) layer consists of a set of n \"expert networks\" E_1, ..., E_n, and a \"gating network\" G whose output is a sparse n-dimensional vector. ... y = Σ_{i=1}^{n} G(x)_i E_i(x) ... We save computation based on the sparsity of the output of G(x). Wherever G(x)_i = 0, we need not compute E_i(x). ... Noisy Top-K Gating: We add two components to the Softmax gating network: sparsity and noise. Before taking the softmax function, we add tunable Gaussian noise, then keep only the top k values, setting the rest to −∞."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity (Fedus, Zoph, Shazeer, 2021/2022, JMLR)",
+    "url": "https://arxiv.org/html/2101.03961v3",
+    "published_at": "2021-01-11",
+    "key_points": [
+      "MoE 的定义性表述：常规深度学习对所有输入复用同一套参数，MoE 则对每个输入选择不同参数，得到「稀疏激活」模型——参数量极大但计算成本恒定。",
+      "路由（routing）机制：Shazeer et al. (2017) 的 MoE 层接收 token 表示 x，将其路由到从 N 个专家 {E_i(x)} 中选出的 top-k 个专家；路由器变量 W_r 产生 logits h(x) = W_r · x，再在 N 个专家上做 softmax 归一化，专家 i 的门控值由此给出。",
+      "Switch 路由把 top-k 简化为 top-1（每 token 只路由到单个专家），带来三点收益：路由器计算减少、每个专家的批大小（expert capacity）至少可减半、路由实现简化且通信成本降低。",
+      "容量因子（capacity factor）：大于 1.0 的容量因子为 token 在专家间分布不完美均衡提供额外缓冲；若路由到某专家的 token 过多（即 dropped tokens），则跳过计算，token 表示经残差连接直接传到下一层。",
+      "容量因子的权衡：提高专家容量并非没有代价，高取值会造成计算与内存浪费；实验中发现保证较低的 token 丢弃率对稀疏专家模型的扩展很重要，通常丢弃率 < 1%。",
+      "负载均衡损失（auxiliary load balancing loss）：为鼓励专家间负载均衡而加入辅助损失；Switch 简化了 Shazeer 2017 中分离的 load-balancing 与 importance-weighting 两项损失。",
+      "负载均衡损失由两个向量构成：f_i 为批次 B 中被路由到专家 i 的 token 比例（argmax p(x) = i 的指示函数均值），P_i 为路由器分配给专家 i 的概率份额均值；均匀路由时二者均应为 1/N。",
+      "该辅助损失在均匀分布下最小化；P 向量可微、f 向量不可微；最终损失乘以专家数 N 以在专家数变化时保持损失量级恒定；系数 α 取 10^-2（在 10^-1 到 10^-5 间扫描）。",
+      "规模与加速主张：基于 T5-Base/T5-Large 在同等算力下获得最高 7x 预训练加速；在 C4 上预训练至万亿参数模型，相对 T5-XXL 获得 4x 加速；多语言上 101 种语言全部获益，91% 的语言获得 4x+ 加速。",
+      "工程手段：通过高效结合数据并行、模型并行与专家并行（expert parallelism）构建最高万亿参数模型；首次证明大型稀疏模型可用 bfloat16 低精度训练；稀疏模型可蒸馏回小型稠密模型，模型规模缩减最高 99% 并保留 30% 的质量增益。",
+      "论文明确指出 MoE 广泛采用受阻于三点：复杂性、通信成本、训练不稳定性。"
+    ],
+    "raw_excerpt": "Mixture of Experts (MoE) models defy this and instead select different parameters for each incoming example. The result is a sparsely-activated model—with an outrageous number of parameters—but a constant computational cost. ... A capacity factor greater than 1.0 creates additional buffer to accommodate for when tokens are not perfectly balanced across experts. If too many tokens are routed to an expert (referred to later as dropped tokens), computation is skipped and the token representation is passed directly to the next layer through the residual connection. Increasing the expert capacity is not without drawbacks, however, since high values will result in wasted computation and memory. ... we use an α = 10^-2"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "BASE Layers: Simplifying Training of Large, Sparse Models (Lewis et al., 2021)",
+    "url": "https://arxiv.org/abs/2103.16716v1",
+    "published_at": "2021-03-30",
+    "key_points": [
+      "BASE（balanced assignment of experts）层是针对大语言模型提出的均衡专家分配层，目标是大幅简化现有的高容量稀疏层。",
+      "稀疏层通过把每个 token 路由到只含模型参数一小部分的专门专家模块，来提升训练与推理效率。",
+      "论文指出难点在于学习能充分利用可用专家的均衡路由函数；已有方法通常依赖路由启发式或辅助的专家均衡损失函数。",
+      "BASE 的做法是把 token 到专家的分配建模为线性分配问题（linear assignment problem），从而得到每个专家接收等量 token 的最优分配。",
+      "该最优分配方案通过保证计算负载均衡来提升效率，并且不需要任何新的超参数或辅助损失，从而简化训练。",
+      "代码在 https://github.com/pytorch/fairseq/ 公开。"
+    ],
+    "raw_excerpt": "Sparse layers can dramatically improve the efficiency of training and inference by routing each token to specialized expert modules that contain only a small fraction of the model parameters. However, it can be difficult to learn balanced routing functions that make full use of the available experts; existing approaches typically use routing heuristics or auxiliary expert-balancing loss functions. In contrast, we formulate token-to-expert allocation as a linear assignment problem, allowing an optimal assignment in which each expert receives an equal number of tokens."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Auxiliary-Loss-Free Load Balancing Strategy for Mixture-of-Experts (Loss-Free Balancing)",
+    "url": "https://arxiv.org/abs/2408.15664",
+    "published_at": "2024-08-28",
+    "key_points": [
+      "论文指出 MoE 中专家负载不均衡会导致路由崩塌（routing collapse）或计算开销上升。",
+      "现有方法普遍使用辅助损失（auxiliary loss）鼓励负载均衡，但较大的辅助损失会向训练引入不可忽视的干扰梯度（interference gradients），从而损害模型性能。",
+      "提出 Loss-Free Balancing：在 top-K 路由决策之前，先对每个专家的路由分数施加一个 expert-wise bias。",
+      "该 bias 依据每个专家近期的负载动态更新，从而持续维持专家负载的均衡分布。",
+      "由于不产生任何干扰梯度，Loss-Free Balancing 也提升了 MoE 训练所能获得的模型性能上限。",
+      "实验在最多 3B 参数、最多 200B token 训练的 MoE 模型上验证；结果显示相比传统辅助损失控制的负载均衡策略，同时取得更好的性能和更好的负载均衡。"
+    ],
+    "raw_excerpt": "before the top-K routing decision, Loss-Free Balancing will first apply an expert-wise bias to the routing scores of each expert. By dynamically updating the bias of each expert according to its recent load, Loss-Free Balancing can consistently maintain a balanced distribution of expert load. ... since Loss-Free Balancing does not produce any interference gradients, it also elevates the upper bound of model performance gained from MoE training. We validate the performance of Loss-Free Balancing on MoE models with up to 3B parameters trained on up to 200B tokens."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report",
+    "url": "https://arxiv.org/html/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 MoE 语言模型，总参数 671B，每个 token 激活 37B。",
+      "架构上采用 Multi-head Latent Attention (MLA) 做高效推理，采用 DeepSeekMoE 做低成本训练；二者在 DeepSeek-V2 中已验证。",
+      "DeepSeek-V3 首创（pioneers）无辅助损失的负载均衡策略（auxiliary-loss-free strategy），目的是最小化为鼓励负载均衡而对模型性能造成的不利影响。",
+      "DeepSeekMoE 相比 GShard 等传统 MoE 架构，使用更细粒度（finer-grained）的专家，并隔离部分专家作为共享专家（shared experts）。",
+      "训练支持 FP8 混合精度训练，并针对训练框架做了全面优化。",
+      "预训练使用 14.8T 高质量多样化 token；预训练过程非常稳定，全程未出现不可恢复的 loss spike，也未执行任何回滚（rollback）。",
+      "上下文长度分两阶段扩展：先扩到 32K，再扩到 128K。",
+      "完整训练仅需 2.788M H800 GPU 小时（预训练 2664K + 上下文扩展 119K + 后训练 5K），按 $2/GPU 小时计约 5.576M 美元。",
+      "预训练阶段每训练 1T token 仅需 180K H800 GPU 小时，即在 2048 张 H800 的集群上约 3.7 天。",
+      "后训练阶段从 DeepSeek-R1 系列的长 Chain-of-Thought 模型中蒸馏推理能力到 DeepSeek-V3，将 R1 的验证与反思模式融入 V3 并显著提升其推理表现。",
+      "评测结果：MMLU 88.5、MMLU-Pro 75.9、GPQA 59.1；在 MATH-500 等特定基准上超过 o1-preview。"
+    ],
+    "raw_excerpt": "DeepSeek-V3 pioneers an auxiliary-loss-free strategy for load balancing ... Compared with traditional MoE architectures like GShard, DeepSeekMoE uses finer-grained experts and isolates some experts as shared ones. ... we support the FP8 mixed precision training ... Throughout the entire training process, we did not experience any irrecoverable loss spikes or perform any rollbacks."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+    "url": "https://arxiv.org/abs/2401.06066",
+    "published_at": "2024-01-11",
+    "key_points": [
+      "论文指出 GShard 等传统 MoE 架构（从 N 个专家中激活 top-K）在保证专家特化（expert specialization，即每个专家获得不重叠且聚焦的知识）方面存在挑战。",
+      "提出两项核心策略：(1) 将专家细分为 mN 个并从中激活 mK 个，从而允许更灵活的激活专家组合；(2) 隔离 K_s 个专家作为共享专家（shared experts），用于捕获共性知识并缓解路由专家之间的冗余。",
+      "2B 规模的 DeepSeekMoE 达到与 GShard 2.9B 相当的性能，而后者拥有 1.5 倍的专家参数与计算量。",
+      "DeepSeekMoE 2B 接近同等总参数量的稠密模型性能，该稠密模型被视为 MoE 模型性能的上界。",
+      "扩展到 16B 参数时，DeepSeekMoE 达到与 LLaMA2 7B 相当的性能，而仅用约 40% 的计算量。",
+      "初步扩展到 145B 参数时，相比 GShard 架构持续验证其显著优势，并以仅 28.5%（甚至可能 18.2%）的计算量达到与 DeepSeek 67B 相当的性能。"
+    ],
+    "raw_excerpt": "It involves two principal strategies: (1) finely segmenting the experts into mN ones and activating mK from them, allowing for a more flexible combination of activated experts; (2) isolating K_s experts as shared ones, aiming at capturing common knowledge and mitigating redundancy in routed experts. ... DeepSeekMoE 16B ... achieves comparable performance with LLaMA2 7B, with only about 40% of computations."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Mixtral of Experts (arXiv:2401.04088v1)",
+    "url": "https://arxiv.org/abs/2401.04088v1",
+    "published_at": "2024-01-08",
+    "key_points": [
+      "Mixtral 8x7B 是稀疏混合专家（SMoE）语言模型，架构与 Mistral 7B 相同，区别在于每层由 8 个前馈块（即专家）组成。",
+      "每个 token 在每一层由路由器网络选择 2 个专家处理当前状态并合并其输出（top-2 路由）。",
+      "每个 token 可访问 47B 参数，但推理时仅使用 13B 激活参数。",
+      "训练上下文长度为 32k tokens。",
+      "被选中的专家在每个时间步可以不同。",
+      "base 与 instruct 模型均以 Apache 2.0 许可发布。"
+    ],
+    "raw_excerpt": "Mixtral has the same architecture as Mistral 7B, with the difference that each layer is composed of 8 feedforward blocks (i.e. experts). For every token, at each layer, a router network selects two experts to process the current state and combine their outputs. ... each token has access to 47B parameters, but only uses 13B active parameters during inference. Mixtral was trained with a context size of 32k tokens"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report (arXiv:2412.19437v2)",
+    "url": "https://arxiv.org/html/2412.19437v2",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 MoE 语言模型，总参数 671B，每个 token 激活 37B。",
+      "架构采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE，二者在 DeepSeek-V2 中已验证。",
+      "预训练语料为 14.8 万亿（14.8T）tokens。",
+      "完整训练仅需 2.788M H800 GPU 小时（预训练 2664K + 上下文扩展 119K + 后训练 5K）。",
+      "按 H800 每小时 2 美元租金计算，总训练成本约 5.576M 美元（预训练 5.328M、上下文扩展 0.238M、后训练 0.01M）。",
+      "预训练每训练 1 万亿 tokens 仅需 180K H800 GPU 小时，即在其 2048 块 H800 GPU 集群上约 3.7 天。",
+      "预训练在不到两个月内完成，成本 2664K GPU 小时。",
+      "采用 FP8 混合精度训练、DualPipe 流水线并行算法与跨节点 all-to-all 通信内核。",
+      "采用无辅助损失的负载均衡策略（auxiliary-loss-free）与多 token 预测（MTP）训练目标。",
+      "上下文长度经两阶段扩展：先到 32K，再到 128K。",
+      "后训练阶段从 DeepSeek-R1 系列模型蒸馏推理能力。",
+      "上述成本仅含官方训练，不含架构/算法/数据的前期研究与消融实验成本。",
+      "训练全程未出现不可恢复的 loss 尖峰，也未执行回滚。"
+    ],
+    "raw_excerpt": "we train DeepSeek-V3 on 14.8T high-quality and diverse tokens ... During the pre-training stage, training DeepSeek-V3 on each trillion tokens requires only 180K H800 GPU hours, i.e., 3.7 days on our cluster with 2048 H800 GPUs. ... DeepSeek-V3 costs only 2.788M GPU hours for its full training. Assuming the rental price of the H800 GPU is $2 per GPU hour, our total training costs amount to only $5.576M."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model (arXiv:2405.04434v5)",
+    "url": "https://arxiv.org/html/2405.04434v5",
+    "published_at": "2024-05-07",
+    "key_points": [
+      "DeepSeek-V2 总参数 236B，每个 token 激活 21B，支持 128K 上下文长度。",
+      "采用 MLA（将 KV cache 压缩为潜在向量）与 DeepSeekMoE（细粒度专家分割 + 共享专家隔离）架构。",
+      "预训练语料为 8.1T tokens。",
+      "相比 DeepSeek 67B，DeepSeek-V2 节省 42.5% 训练成本，KV cache 减少 93.3%，最大生成吞吐提升至 5.76 倍。",
+      "同时发布小模型 DeepSeek-V2-Lite：总参数 15.7B，每 token 激活 2.4B。",
+      "训练中使用专家并行（expert parallelism），并设计了控制通信开销与保证负载均衡的补充机制。",
+      "SFT 使用 150 万条对话样本，RL 阶段采用 GRPO。"
+    ],
+    "raw_excerpt": "It comprises 236B total parameters, of which 21B are activated for each token, and supports a context length of 128K tokens. ... Compared with DeepSeek 67B, DeepSeek-V2 achieves significantly stronger performance, and meanwhile saves 42.5% of training costs, reduces the KV cache by 93.3%, and boosts the maximum generation throughput to 5.76 times. We pretrain DeepSeek-V2 on a high-quality and multi-source corpus consisting of 8.1T tokens"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models (arXiv:2401.06066v1)",
+    "url": "https://arxiv.org/html/2401.06066v1",
+    "published_at": "2024-01-11",
+    "key_points": [
+      "DeepSeekMoE 提出两项策略：(1) 细粒度专家分割——把专家切分为 mN 个并从中激活 mK 个；(2) 共享专家隔离——隔离 Ks 个专家作为始终激活的共享专家。",
+      "细粒度分割的做法是在保持参数总量不变的前提下，通过拆分 FFN 中间隐藏维度实现；并在保持计算量不变的前提下激活更多细粒度专家。",
+      "共享专家用于捕获跨上下文的公共知识，从而缓解路由专家之间的知识冗余。",
+      "论文指出传统 MoE（如 GShard 的 top-K/N）存在知识混杂（knowledge hybridity）与知识冗余（knowledge redundancy）问题，常仅用 8 或 16 个专家。",
+      "DeepSeekMoE 2B 与 GShard 2.9B 性能相当，后者专家参数与计算量是前者的 1.5 倍。",
+      "DeepSeekMoE 16B 与 LLaMA2 7B 性能相当，仅用约 40% 计算量。",
+      "扩展至 145B 参数时，性能与 DeepSeek 67B 相当，仅用 28.5%（甚至可能 18.2%）的计算量。"
+    ],
+    "raw_excerpt": "It involves two principal strategies: (1) finely segmenting the experts into mN ones and activating mK from them, allowing for a more flexible combination of activated experts; (2) isolating K_s experts as shared ones, aiming at capturing common knowledge and mitigating redundancy in routed experts. ... we scale up DeepSeekMoE to 16B parameters and show that it achieves comparable performance with LLaMA2 7B, with only about 40% of computations."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity (arXiv:2101.03961v3)",
+    "url": "https://arxiv.org/abs/2101.03961v3",
+    "published_at": "2021-01-11",
+    "key_points": [
+      "Switch Transformer 简化了 MoE 路由算法（Switch 路由），以降低通信与计算成本。",
+      "基于 T5-Base 与 T5-Large 设计的模型在相同计算资源下取得最高 7 倍的预训练速度提升。",
+      "在多语言设置下，相对 mT5-Base 在全部 101 种语言上均有增益。",
+      "在 Colossal Clean Crawled Corpus 上预训练了规模达万亿参数（trillion parameter）的模型，相对 T5-XXL 取得 4 倍加速。",
+      "论文称首次实现以较低精度（bfloat16）格式训练大型稀疏模型，并提出缓解训练不稳定的技术。",
+      "论文指出 MoE 广泛采用受阻于复杂性、通信成本与训练不稳定三点。"
+    ],
+    "raw_excerpt": "We simplify the MoE routing algorithm and design intuitive improved models with reduced communication and computational costs. ... We design models based off T5-Base and T5-Large to obtain up to 7x increases in pre-training speed with the same computational resources. ... we advance the current scale of language models by pre-training up to trillion parameter models on the \"Colossal Clean Crawled Corpus\" and achieve a 4x speedup over the T5-XXL model."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "microsoft/Tutel — Tutel MoE: An Optimized Mixture-of-Experts Implementation (README)",
+    "url": "https://raw.githubusercontent.com/microsoft/Tutel/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "Tutel 自我定位为面向现代训练与推理的优化 MoE 实现，并提出 \"No-penalty Parallelism/Sparsity/Capacity/.. Switching\"，针对具有动态行为的场景（原文：the first parallel solution proposing \"No-penalty Parallism/Sparsity/Capacity/.. Switching\" for modern training and inference that have dynamic behaviors）。",
+      "Tutel 声明支持 MoE 模型的 NVFP4 / MXFP4 / BlockwiseFP8 低精度直接推理，覆盖 GLM-5.x、DeepSeek-3.x、Kimi-2.x、Kimi-3.x、Qwen3、Gpt-OSS 等模型族。",
+      "Tutel 声明支持的硬件平台包括 A100/A800/H100/MI300（README 另在部署表中列出 B200x8、RTX-6000PRO SXM、MI325x8）。",
+      "README 给出 GLM-5.3-Flash 的吞吐表：MI300 单卡 6,120 tok/s/chip（输入 0% 命中）、32,191 tok/s/chip（输入 90% 命中）、输出 210 tok/s/chip；H200 双卡为 4,900 / 25,774 / 60.9 tok/s/chip。",
+      "README 给出与 vLLM/SGLang 的对比表（项目自述，未经第三方验证）：AMD MI300X x8 + GLM-5.3 场景下 vLLM/SGL 为 0 t/s（MTP=0，OoM），Tutel 为 761 t/s（MTP=0, GPU=8, BSZ=32）；MI300X x8 + Kimi K3 场景 vLLM/SGL 为 0 t/s（OoM），Tutel 为 73.4 t/s（MTP=0），MTP=8 时 287.1 t/s。",
+      "README 列出单机可服务规模：MI300x8/MI325x8（192GB PCIe5）可服务 Kimi K3（2.8TB），max-context-size 1M；MI300x1 可服务 GLM-5.3-Flash（0.3TB），max-context-size 200K；A100x8/H100x8（80G SXM）可服务 GLM-5.x（0.8TB），max-context-size 1M。",
+      "Tutel 提供 Docker 镜像（tutelgroup/deepseek-671b，含 mi300x8-chat-20261020、a100x8-chat-20260707 等标签）与 OpenAI 兼容的 /v1/models、/chat 接口用于部署。"
+    ],
+    "raw_excerpt": "Tutel MoE: An Optimized Mixture-of-Experts Implementation, also the first parallel solution proposing [\"No-penalty Parallism/Sparsity/Capacity/.. Switching\"] for modern training and inference that have dynamic behaviors. Support direct NVFP4/MXFP4/BlockwiseFP8 Inference for MoE-based GLM-5.x / DeepSeek-3.x / Kimi-2.x / Kimi-3.x / Qwen3 / Gpt-OSS using A100/A800/H100/MI300/.. ... | AMD MI300X (750W x8) + GLM-5.3 | 0 t/s (MTP=0, OoM) | 761 t/s (MTP=0, GPU=8, BSZ=32) |"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "SGLang — Deploying DeepSeek with PD Disaggregation and Large-scale Expert Parallelism on 96 H100 GPUs (LMSYS Blog)",
+    "url": "https://lmsys.org/blog/2025-05-05-large-scale-ep/",
+    "published_at": "2025-05-05",
+    "key_points": [
+      "SGLang 官方博客称其已支持 prefill-decode（PD）分离与大规模专家并行（EP），包含 DeepEP、DeepGEMM 与 EPLB（Expert Parallelism Load Balancer）的完整功能。",
+      "实验规模为 12 个节点、每节点 8 张 H100 GPU（共 96 张 H100），部署于 Atlas Cloud。",
+      "在 2000-token 输入序列下，达到每节点 52.3k input tokens/s 与 22.3k output tokens/s 的吞吐。",
+      "博客称这是首个在超大规模上接近 DeepSeek 官方博客所报吞吐的开源实现（原文：the first open-source implementation to nearly match the throughput reported in the official DeepSeek blog at large scale）。",
+      "本地部署折算成本为 $0.20 / 1M output tokens，约为官方 DeepSeek Chat API 成本的五分之一。",
+      "相比同等资源下的朴素张量并行（TP），该优化策略将输出吞吐最高提升 5 倍。",
+      "针对 DeepSeek MLA 注意力层采用 DP Attention（数据并行注意力）以消除跨设备的 KV cache 复制，该方案自 SGLang v0.4 引入，并扩展支持混合数据并行与张量并行。",
+      "Dense FFN 采用数据并行（DP）而非张量并行（TP）：DeepSeek-V3 的 intermediate dimension 为 18,432，高 TP 度（如 TP32）会切分为 576 单元，无法被 H100 常用的 128 对齐边界整除，损害计算效率与显存利用率。",
+      "博客大纲显示其技术内容覆盖 Two-batch Overlap（双批次重叠以隐藏通信）、EPLB 负载均衡器、Disposable Tensor、专家工作负载提取与模拟，以及消融实验（Ablation Study: Two-batch Overlap / EPLB）。"
+    ],
+    "raw_excerpt": "Our implementation, shown in the figure above, runs on 12 nodes in the Atlas Cloud, each equipped with 8 H100 GPUs. It uses prefill-decode disaggregation and large-scale expert parallelism (EP), achieving a speed of 52.3k input tokens per second and 22.3k output tokens per second per node for 2000-token input sequences. ... Compared to vanilla tensor parallelism using the same resources, this optimized strategy improves the output throuhgput by up to 5x. ... ✅ SGLang now supports prefill-decode (PD) disaggregation and large-scale EP, including the full functionality of DeepEP, DeepGEMM, and EPLB."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Mixtral of Experts",
+    "url": "https://arxiv.org/abs/2401.04088v1",
+    "published_at": "2024-01-08",
+    "key_points": [
+      "Mixtral 8x7B 是 Sparse Mixture of Experts (SMoE) 语言模型，架构与 Mistral 7B 相同，区别在于每层由 8 个 feedforward block（即专家）组成。",
+      "每个 token 在每一层由 router 网络选择 2 个专家处理当前状态并合并其输出（top-2 路由）。",
+      "每个 token 可访问 47B 参数，但推理时仅使用 13B 激活参数。",
+      "训练上下文长度为 32k tokens。",
+      "该论文（v1，2024-01-08）的摘要与标题仅覆盖 Mixtral 8x7B，未提及 Mixtral 8x22B 的任何参数、专家数或训练配置。"
+    ],
+    "raw_excerpt": "We introduce Mixtral 8x7B, a Sparse Mixture of Experts (SMoE) language model. Mixtral has the same architecture as Mistral 7B, with the difference that each layer is composed of 8 feedforward blocks (i.e. experts). For every token, at each layer, a router network selects two experts to process the current state and combine their outputs. ... each token has access to 47B parameters, but only uses 13B active parameters during inference. Mixtral was trained with a context size of 32k tokens"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Qwen3 Technical Report",
+    "url": "https://arxiv.org/abs/2505.09388v1",
+    "published_at": "2025-05-14",
+    "key_points": [
+      "Qwen3 系列同时包含 dense 与 Mixture-of-Expert (MoE) 两种架构，参数规模覆盖 0.6B 至 235B。",
+      "Qwen3 引入 thinking 模式与非 thinking 模式的统一框架，并支持 thinking budget 机制以在推理时自适应分配算力。",
+      "Qwen3 相对前代 Qwen2.5 将多语言支持从 29 种扩展到 119 种语言和方言。",
+      "全部 Qwen3 模型以 Apache 2.0 许可公开。",
+      "该摘要未给出 Qwen3-235B-A22B 的专家数量、top-k、共享专家配置或训练 token 量等具体数值。"
+    ],
+    "raw_excerpt": "The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. ... Qwen3 introduces a thinking budget mechanism, allowing users to allocate computational resources adaptively during inference ... Qwen3 expands multilingual support from 29 to 119 languages and dialects"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "GPT-4 Technical Report (arXiv:2303.08774, v6)",
+    "url": "https://arxiv.org/abs/2303.08774",
+    "published_at": "2023-03-15",
+    "key_points": [
+      "OpenAI 官方 GPT-4 技术报告摘要将 GPT-4 描述为 \"a large-scale, multimodal model which can accept image and text inputs and produce text outputs\"。",
+      "摘要明确其架构类别为 \"GPT-4 is a Transformer-based model pre-trained to predict the next token in a document\"，未在摘要中出现 mixture-of-experts 或任何稀疏化架构表述。",
+      "摘要未给出任何参数量数字；报告强调的核心是 \"developing infrastructure and optimization methods that behave predictably across a wide range of scales\"，并称可基于不超过 GPT-4 计算量 1/1,000 的模型预测其部分性能。",
+      "该报告为 100 页文档（Comments 字段：\"100 pages; updated authors list\"），v1 提交于 2023-03-15，v6 修订于 2024-03-04。"
+    ],
+    "raw_excerpt": "GPT-4 is a Transformer-based model pre-trained to predict the next token in a document. ... A core component of this project was developing infrastructure and optimization methods that behave predictably across a wide range of scales. This allowed us to accurately predict some aspects of GPT-4's performance based on models trained with no more than 1/1,000th the compute of GPT-4."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context (arXiv:2403.05530, v5)",
+    "url": "https://arxiv.org/html/2403.05530v5",
+    "published_at": "2024-03-08",
+    "key_points": [
+      "Gemini 1.5 报告第 1 节称该系列 \"incorporates our latest innovations in sparse and dense scaling\"，即官方承认使用了稀疏（sparse）与稠密（dense）两种扩展方式，但所读章节未出现 \"mixture of experts\" 字样。",
+      "报告将效率提升归因于 \"major advances in training, distillation and serving infrastructure\"，而非明确指向 MoE 路由结构。",
+      "报告称 Gemini 1.5 Pro \"surpasses Gemini 1.0 Pro and 1.0 Ultra on a wide array of benchmarks while requiring significantly less compute to train\"——以更少训练算力超越更大模型，是外界推测其为稀疏/MoE 架构的间接线索之一。",
+      "报告未在所读章节披露任何参数量数字；模型规模仅以 Pro / Flash 产品层级区分，Flash 被描述为 \"smaller and way more efficient and faster to serve\"。",
+      "报告给出 Gemini 1.5 Pro 在全部模态上 needle recall >99.7% 直至 1M tokens，文本模态可扩展至 10M tokens（约 7M 词）。"
+    ],
+    "raw_excerpt": "They are members of Gemini 1.5, a new family of highly-capable multimodal models which incorporates our latest innovations in sparse and dense scaling as well as major advances in training, distillation and serving infrastructure ... Gemini 1.5 Pro surpasses Gemini 1.0 Pro and 1.0 Ultra on a wide array of benchmarks while requiring significantly less compute to train."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context, and Next Generation Agentic Capabilities (arXiv:2507.06261, v1)",
+    "url": "https://arxiv.org/html/2507.06261v1",
+    "published_at": "2025-07-01",
+    "key_points": [
+      "Gemini 2.5 报告声明报告结构包含对架构的描述：\"we begin by briefly describing advances we have made in model architecture, training and serving since the release of the Gemini 1.5 model\"，但所抓取的摘要与第 1 节正文中未出现 mixture-of-experts 表述。",
+      "报告将 Gemini 2.X 系列定位为 \"natively multimodal\"，支持 >1M tokens 长上下文与原生工具调用，未在所读章节披露参数量。",
+      "报告以产品层级（2.5 Pro / 2.5 Flash / 2.0 Flash / 2.0 Flash-Lite）区分能力与成本，并称整个系列覆盖 \"the full Pareto frontier of model capability vs cost\"，未给出任何模型规模数字。",
+      "Gemini 2.5 Pro 被描述为 thinking model，输入长度 1M tokens、输出长度 64K tokens，知识截止 2025 年 1 月（Table 1）。"
+    ],
+    "raw_excerpt": "Our report is structured as follows: we begin by briefly describing advances we have made in model architecture, training and serving since the release of the Gemini 1.5 model. ... The Gemini 2.X series are all built to be natively multimodal, supporting long context inputs of >1 million tokens and have native tool use support."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "DeepSeek-R1-Zero 与 DeepSeek-R1 均以 DeepSeek-V3-Base 为起点训练，即 R1 系列继承 V3 的基座权重。",
+      "R1-Zero 完全依赖 RL、不含 SFT；R1 采用多阶段流程，结合拒绝采样、强化学习与监督微调。",
+      "RL 算法为 Group Relative Policy Optimization (GRPO)，奖励仅基于最终答案正确性（规则奖励：accuracy reward + format reward），不使用神经奖励模型。",
+      "R1-Zero 的 RL 训练配置：学习率 3e-6、KL 系数 0.001、采样温度 1；每个问题采样 16 条输出，最大长度在 8.2k 步前为 32,768 token、之后为 65,536 token。",
+      "R1-Zero RL 共训练 10,400 步，对应 1.6 个 training epoch；每步 32 个不同问题，训练 batch size 为 512；每 400 步用最新策略模型替换 reference model。",
+      "每次 rollout 生成 8,192 条输出，随机切分为 16 个 mini-batch，仅训练 1 个 inner epoch。",
+      "AIME 2024 上 R1-Zero 的 pass@1 从初始 15.6% 升至 77.9%，配合自一致性解码可达 86.7%。",
+      "论文将高性能 RL 基础设施的细节放在 Supplementary B.1（本次抓取未覆盖该章节）。"
+    ],
+    "raw_excerpt": "Specifically, we build upon DeepSeek-V3-Base (DeepSeek-AI, 2024b) and employ Group Relative Policy Optimization (GRPO) (Shao et al., 2024) as our RL framework. ... with training continuing for a total of 10,400 steps, corresponding to 1.6 training epochs. Each training step consists of 32 unique questions, resulting in a training batch size of 512."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report (arXiv:2412.19437v2)",
+    "url": "https://arxiv.org/abs/2412.19437",
+    "published_at": "2024-12-27",
+    "key_points": [
+      "DeepSeek-V3 是 Mixture-of-Experts (MoE) 语言模型，总参数 671B，每个 token 激活 37B 参数。",
+      "V3 采用 Multi-head Latent Attention (MLA) 与 DeepSeekMoE 架构，并引入无辅助损失的负载均衡策略（auxiliary-loss-free load balancing）与多 token 预测（multi-token prediction）训练目标。",
+      "V3 预训练使用 14.8 万亿（14.8 trillion）token。",
+      "V3 完整训练仅需 2.788M H800 GPU 小时。",
+      "V3 训练过程稳定，全程未出现不可恢复的 loss spike，也未执行回滚。"
+    ],
+    "raw_excerpt": "We present DeepSeek-V3, a strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token. ... We pre-train DeepSeek-V3 on 14.8 trillion diverse and high-quality tokens ... Despite its excellent performance, DeepSeek-V3 requires only 2.788M H800 GPU hours for its full training."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning — arXiv 摘要页元数据 (2501.12948v2)",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文 v1 提交于 2025-01-22，v2 修订于 2026-01-04，作者署名 DeepSeek-AI（集体署名，含 Daya Guo、Dejian Yang 等）。",
+      "摘要主张：LLM 的推理能力可通过纯强化学习激发，无需人工标注的推理轨迹；模型在数学、编程竞赛与 STEM 等可验证任务上超过依赖人工示范的监督学习对照模型。",
+      "摘要层面未给出总参数/激活参数、训练 token 量或 GPU 小时等具体数字。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "deepseek-ai/DeepSeek-R1 (官方 GitHub 仓库，仅取得元数据)",
+    "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+    "published_at": null,
+    "key_points": [
+      "官方仓库 deepseek-ai/DeepSeek-R1 存在，约 91,954 stars、11,660 forks，最近 push 时间 2025-06-27。",
+      "本次仅取得仓库元数据（stars/forks/最后提交时间），README 正文抓取失败，故仓库内容不得作为架构或算力结论的依据。"
+    ],
+    "raw_excerpt": "deepseek-ai/DeepSeek-R1 (★91954, forks 11660) ... last push: 2025-06-27"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "NVIDIA/Megatron-LM — Megatron-LM and Megatron Core README",
+    "url": "https://github.com/NVIDIA/Megatron-LM",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库元数据：★18264，forks 4664，语言 Python，最近 push 时间 2026-10-24（search_repos 返回）。",
+      "README 称 Megatron Core 提供高级并行策略 TP、PP、DP、EP、CP，其中 EP（Expert Parallelism）即面向 MoE 的专家并行。",
+      "README 称 Megatron Core 支持混合精度 FP16、BF16、FP8、FP4，并提供模型架构与 transformer building blocks。",
+      "README 最新版本标记为 release 0.19.0，许可证 Apache。",
+      "README 新闻条目 [2026/03] 指向技术报告《Scalable Training of Mixture-of-Experts Models with Megatron Core》(arXiv 2603.07685)，称其为关于用 Megatron Core 扩展 MoE 训练、集成内存/通信/计算优化的技术报告。",
+      "README 新闻条目 [2025/08] 列出《Mixture of Experts (MoE) Q3–Q4 2025 Roadmap》(issue #1729)，涵盖 DeepSeek-V3、Qwen3、高级并行策略、FP8 优化与 Blackwell 性能增强等 MoE 特性。",
+      "README 新闻条目 [2026/05] 称 Megatron Core 的 dev 分支包含 DeepSeek-V4 的初始实现，Megatron Bridge 提供转换、推理与预训练 recipe。",
+      "README 新闻条目 [2025/06] 指向 Megatron MoE Model Zoo，称其提供训练 DeepSeek-V3、Mixtral、Qwen3 MoE 模型的最佳实践与优化配置，含性能基准与 checkpoint 转换工具。",
+      "README 称代码库可在数千 GPU 上高效训练 2B 至 462B 参数模型。"
+    ],
+    "raw_excerpt": "Megatron Core is a composable library with GPU-optimized building blocks for custom training frameworks. It provides transformer building blocks, advanced parallelism strategies (TP, PP, DP, EP, and CP), mixed precision support (FP16, BF16, FP8, and FP4), and model architectures ... [2026/03] Scalable Training of Mixture-of-Experts Models with Megatron Core - Technical report on scaling MoE training with integrated optimizations for memory, communication, and computation."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "deepspeedai/DeepSpeed — README",
+    "url": "https://github.com/deepspeedai/DeepSpeed",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据：★43271，forks 5058，语言 Python，最近 push 时间 2026-10-25（search_repos 返回）。",
+      "README 将 DeepSpeed-MoE 列为该库的系统创新之一，与 ZeRO、ZeRO-Infinity、3D-Parallelism、Ulysses Sequence Parallelism 并列。",
+      "README 称 DeepSpeed 曾用于训练 MT-530B、BLOOM(176B)、Jurassic-1(178B)、GLM(130B)、xTrimoPGLM(100B)、YaLM(100B)、GPT-NeoX(20B) 等模型。",
+      "README 最新新闻条目集中在 Muon 优化器、ZeRO-3 SDMA、SuperOffload、ZenFlow、DeepNVMe、DeepCompile、AutoTP 等方向，2025–2026 年新闻中未出现 MoE 专项条目。",
+      "README 称 DeepSpeed 已与 Transformers、Accelerate 等开源 DL 框架集成。"
+    ],
+    "raw_excerpt": "DeepSpeed offers a confluence of system innovations, that has made large scale DL training effective, and efficient, greatly improved ease of use, and redefined the DL training landscape in terms of scale that is possible. These innovations include ZeRO, ZeRO-Infinity, 3D-Parallelism, Ulysses Sequence Parallelism, DeepSpeed-MoE, etc."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "DeepSpeed Tutorial — Mixture of Experts (DeepSpeed-MoE 官方文档)",
+    "url": "https://www.deepspeed.ai/tutorials/mixture-of-experts/",
+    "published_at": null,
+    "key_points": [
+      "文档称 DeepSpeed v0.5 引入对 MoE 模型训练的新支持，MoE 属于稀疏激活模型，其计算成本相对参数规模呈次线性。",
+      "文档举例：Switch Transformer 参数超 1.6 万亿，而训练所需计算约等于一个 100 亿参数稠密模型。",
+      "DeepSpeed MoE 支持五种并行形式并可混合：E（Expert）、E+D（Expert+Data）、E+Z（Expert+ZeRO）、E+D+M（Expert+Data+Model）、E+D+Z、E+Z-Off+M（Expert+ZeRO-Offload+Model）。",
+      "MoE 层 API 为 deepspeed.moe.layer.MoE(hidden_size, expert, num_experts, ep_size, ...)，ep_size 与 num_experts 作为参数传入，允许每层使用不同的专家数与专家并行度。",
+      "文档称旧的 deepspeed.utils.groups.initialize(ep_size=...) 已废弃，训练代码无需再调用。",
+      "支持 Pyramid-Residual MoE（PR-MoE）：num_experts 传列表（如 [4, 8]）构成金字塔结构，use_residual 标志启用残差 MoE 层。",
+      "文档给出示例：WORLD_SIZE=4、EP_WORLD_SIZE=2、EXPERTS=[8] 时，8 个专家分布在 4 张 GPU 上，即 4 experts/GPU 的 E+D 模式。",
+      "文档提到 AutoEP（Automatic Expert Parallelism）可从 DeepSpeed 配置自动检测并替换受支持的 Hugging Face MoE 层。",
+      "文档注明 DeepSpeed MoE 需要 PyTorch 1.8 或以上。"
+    ],
+    "raw_excerpt": "DeepSpeed v0.5 introduces new support for training Mixture of Experts (MoE) models. ... DeepSpeed MoE supports five different forms of parallelism, and it exploits both GPU and CPU memory. ... For AutoEP (Automatic Expert Parallelism), which automatically detects and replaces supported Hugging Face MoE layers from DeepSpeed config, see the AutoEP API docs."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "vllm-project/vllm — 仓库元数据（README 正文未取得）",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "仓库元数据：★95401，forks 23918，语言 Python，最近 push 时间 2026-10-25（search_repos 返回）。",
+      "仓库简介为：A high-throughput and memory-efficient inference and serving engine for LLMs（高吞吐、内存高效的 LLM 推理与服务引擎）。",
+      "注：本来源仅提供元数据与简介，README 正文抓取失败，故其 MoE 支持程度未获正文取证。"
+    ],
+    "raw_excerpt": "vllm-project/vllm (★95401, forks 23918) desc: A high-throughput and memory-efficient inference and serving engine for LLMs | lang: Python | last push: 2026-10-25"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "facebookresearch/fairseq — 仓库元数据（README 正文未取得）",
+    "url": "https://github.com/facebookresearch/fairseq",
+    "published_at": "2025-09-30",
+    "key_points": [
+      "仓库元数据：★32211，forks 6665，语言 Python，最近 push 时间 2025-09-30（search_repos 返回）。",
+      "仓库简介为：Facebook AI Research Sequence-to-Sequence Toolkit written in Python。",
+      "同组织下另有 fairseq2：★1153，forks 147，最近 push 2026-10-21，说明 fairseq 与 fairseq2 为两个独立仓库且活跃度差异明显。",
+      "注：本来源仅提供元数据与简介，README 正文抓取失败，故其 MoE 支持程度未获正文取证。"
+    ],
+    "raw_excerpt": "facebookresearch/fairseq (★32211, forks 6665) desc: Facebook AI Research Sequence-to-Sequence Toolkit written in Python. | lang: Python | last push: 2025-09-30"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "microsoft/Tutel README (raw, main branch)",
+    "url": "https://raw.githubusercontent.com/microsoft/tutel/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 开篇声称支持 \"direct NVFP4/MXFP4/BlockwiseFP8 Inference for MoE-based GLM-5.x / DeepSeek-3.x / Kimi-2.x / Kimi-3.x / Qwen3 / Gpt-OSS using A100/A800/H100/MI300\"，即把 GLM-5.x、DeepSeek-3.x、Kimi-3.x 列为已支持的模型族。",
+      "README 给出 GLM-5.3-Flash 的吞吐表：MI300 单卡 Input 0% Hit (0-8K) 6,120 tok/s/chip、Input 90% Hit 32,191 tok/s/chip、Output (C1) 210 tok/s/chip；RTXPro6K 双卡 3,100 / 16,306 / 98.7；H200 双卡 4,900 / 25,774 / 60.9。",
+      "该吞吐表的来源列分别标注为 \"Tutelgroup\"（链接指向 microsoft/Tutel 仓库自身的 #azure-service 锚点）与 \"Public (SGL/..)\"，即自报数据与未给出具体出处的第三方对比，表中未提供任何复现脚本、测量方法或第三方验证链接。",
+      "README 给出 vLLM/SGL 与 Tutel 的对比表：AMD MI300X (750W x8) + GLM-5.3 上 vLLM/SGL 为 \"0 t/s (MTP=0, OoM)\"，Tutel 为 \"761 t/s (MTP=0, GPU=8, BSZ=32)\"；MI300X x8 + Kimi K3 上 vLLM/SGL 为 \"0 t/s (MTP=0, OoM)\"，Tutel 为 \"73.4 t/s (MTP=0, GPU=8)\"，MTP=8 时为 \"287.1 t/s ×TAR\"。",
+      "README 以显存占用反推模型规模：\"MI300x8/MI325x8 (192GB PCIe5) for Kimi K3 (2.8TB)\"、\"MI300x1/MI325x1 (192GB PCIe5) for GLM-5.3-Flash (0.3TB)\"、\"MI300x8/MI325x8 (192GB PCIe5) for GLM-5.x (0.8TB)\"，即 Kimi K3 约 2.8TB、GLM-5.x 约 0.8TB、GLM-5.3-Flash 约 0.3TB（为权重体积口径，非参数量口径）。",
+      "README 给出的模型下载命令指向 Hugging Face 仓库：nvidia/GLM-5.3-Flash-NVFP4、nvidia/GLM-5.3-NVFP4、moonshotai/Kimi-K3、modal-labs/Kimi-K3-DFlash，以及 nvidia/GLM-5.2-NVFP4、nvidia/GLM-5.1-NVFP4、nvidia/GLM-5-NVFP4、moonshotai/Kimi-K2.7-Code、moonshotai/Kimi-K2.6、nvidia/Kimi-K2.5-NVFP4、nvidia/DeepSeek-V3.2-NVFP4、nvidia/DeepSeek-R1-NVFP4。",
+      "README 正文实际列出的 DeepSeek 型号为 DeepSeek-V3.2 与 DeepSeek-R1，未见 \"DeepSeek-3.x\" 这一具体型号名称；\"DeepSeek-3.x\" 仅出现在开篇的支持模型族概述句中。",
+      "README 中 GLM-5.x 的上下文能力标注为 max-context-size = 1M（MI300x8 与 A100x8/H100x8 配置）且 ❌ Vision，GLM-5.3-Flash 为 200K 且 ✔️ Vision，Kimi K3 为 1M 且 ✔️ Vision。",
+      "README 中所有吞吐数字均以 tok/s/chip 或 t/s 为单位自报，未附带任何官方模型卡引用、第三方 benchmark 链接或可复现的测量配置说明（除 GPU 型号、MTP、BSZ 等少量参数外）。"
+    ],
+    "raw_excerpt": "Support direct NVFP4/MXFP4/BlockwiseFP8 Inference for MoE-based GLM-5.x / DeepSeek-3.x / Kimi-2.x / Kimi-3.x / Qwen3 / Gpt-OSS using A100/A800/H100/MI300/.. ... | MI300 ⚙️ (x1 GPU) | [Tutelgroup](https://github.com/microsoft/Tutel#azure-service) | **6,120** tok/s/chip | **32,191** tok/s/chip | **210** tok/s/chip | ... ✔️ MI300x8/MI325x8 (192GB PCIe5) for Kimi K3 (2.8TB): ✔️ max-context-size = 1M, ✔️ Vision ... | AMD MI300X (750W x8) + Kimi K3 | 0 t/s (MTP=0, OoM) | 73.4 t/s (MTP=0, GPU=8) |"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "microsoft/Tutel repository metadata (search_repos)",
+    "url": "https://github.com/microsoft/Tutel",
+    "published_at": null,
+    "key_points": [
+      "microsoft/Tutel 仓库元数据：★1029、forks 111、主语言 C、last push 2026-10-21。",
+      "仓库描述为 \"Tutel MoE: Optimized Mixture-of-Experts Library, Support GLM/Kimi/Gpt/DeepSeek/Qwen using FP8/NVFP4/MXFP4\"，与 README 中声称支持的模型族一致。",
+      "该元数据仅提供 stars/描述/最近提交时间，不含任何模型发布状态或吞吐数字的验证信息。"
+    ],
+    "raw_excerpt": "- microsoft/Tutel (★1029, forks 111)\n  desc: Tutel MoE: Optimized Mixture-of-Experts Library, Support GLM/Kimi/Gpt/DeepSeek/Qwen using FP8/NVFP4/MXFP4\n  lang: C | last push: 2026-10-21"
+  }
+]

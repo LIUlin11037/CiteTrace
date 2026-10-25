@@ -1,0 +1,743 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG (arXiv:2501.09136v4)",
+    "url": "https://arxiv.org/abs/2501.09136",
+    "published_at": "2025-01-15",
+    "key_points": [
+      "arXiv 编号 2501.09136，标题《Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG》，v1 提交于 2025-01-15，最新版 v4 修订于 2026-04-01。",
+      "作者为 Aditi Singh、Abul Ehtesham、Saket Kumar、Tala Talaei Khoei、Athanasios V. Vasilakos，共 5 人。",
+      "机构（据 HTML 版署名）：Cleveland State University 计算机系、Kent State University、Northeastern University Khoury 计算机学院（含 Roux Institute）、University of Agder (UiA) 的 Center for AI Research。",
+      "该综述给出的 Agentic RAG 定义性表述：将自主 AI agent 嵌入 RAG 流水线，agent 运用 reflection、planning、tool use、multi-agent collaboration 等 agentic design patterns，动态管理检索策略、迭代精炼上下文理解，并通过从顺序步骤到自适应协作的运作结构来适配工作流。",
+      "该综述对传统 RAG 的界定：传统 RAG 流水线通常是静态且线性的（static and linear），限制了复杂多步推理、深层上下文理解与迭代式回答精炼。",
+      "该综述提出的分类框架维度：基于 agent cardinality（智能体数量）、control structure（控制结构）、autonomy（自主性）、knowledge representation（知识表示）四个维度构建 Agentic RAG 架构的原则性分类法（taxonomy）。",
+      "该综述自述其贡献之一是梳理 RAG 范式的演进（evolution of RAG paradigms），包括 naïve、modular、graph-based RAG，及其向 agentic 系统的过渡。",
+      "论文附带 GitHub 仓库 https://github.com/asinghcsu/AgenticRAG-Survey。",
+      "arXiv 学科分类：cs.AI 主分类，交叉 cs.CL、cs.IR；DOI 10.48550/arXiv.2501.09136。"
+    ],
+    "raw_excerpt": "Agentic Retrieval-Augmented Generation (Agentic RAG) transcends these limitations by embedding autonomous AI agents into the RAG pipeline. These agents leverage agentic design patterns reflection, planning, tool use, and multi-agent collaboration to dynamically manage retrieval strategies, iteratively refine contextual understanding, and adapt workflows through operational structures ranging from sequential steps to adaptive collaboration. ... it traces the evolution of RAG paradigms, introduces a principled taxonomy of Agentic RAG architectures based on agent cardinality, control structure, autonomy, and knowledge representation"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG — 正文 HTML 版（第 1 节 Introduction）",
+    "url": "https://arxiv.org/html/2501.09136v4",
+    "published_at": "2026-04-01",
+    "key_points": [
+      "正文明确指出传统 RAG 的局限：传统 RAG 流水线通常是静态且线性的，限制了复杂多步推理、深层上下文理解与迭代式回答精炼；这些局限催生了「自主控制机制」，即动态决定何时检索、如何改写查询、以及何时已收集到足够证据。",
+      "正文将 Agentic RAG 的由来表述为 RAG 与 agentic intelligence 的融合：把自主 agent 直接集成进 RAG 流水线，以实现动态检索、迭代式上下文精炼与自适应工作流编排。",
+      "正文强调 Agentic RAG 引入了一个「显式控制层（explicit control layer）」，用于指导系统如何对外部证据进行推理——协调检索、验证信息、调用工具、精炼回答。",
+      "正文把 agentic design patterns 具体化为 reflection、planning、tool use、multi-agent collaboration，并进一步通过 workflow patterns（prompt chaining、routing、parallelization、orchestrator–worker、evaluator–optimizer 循环）在系统层面组织多提示/多模型/多 agent 的协作。",
+      "正文自述该领域现状：架构多样、术语不一致、缺乏比较性理解，此前没有统一分类法沿原则性设计维度组织 Agentic RAG 系统——这是该综述的立论动机。",
+      "正文目录显示第 5 节给出 Agentic RAG 系统分类法，涵盖 single-agent、multi-agent 与 graph-based 框架；第 2 节讨论 RAG 及其演进并指出传统方法的局限。"
+    ],
+    "raw_excerpt": "However, traditional RAG pipelines are typically static and linear, limiting complex multi-step reasoning, deep contextual understanding, and iterative response refinement. These limitations motivate autonomous control mechanisms that dynamically decide when to retrieve, how to reformulate queries, and when sufficient evidence has been collected. ... The convergence of RAG and agentic intelligence has given rise to Agentic Retrieval-Augmented Generation (Agentic RAG), which integrates autonomous agents directly into the RAG pipeline to enable dynamic retrieval, iterative context refinement, and adaptive workflow orchestration. This introduces an explicit control layer that guides how the system reasons over external evidence"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Retrieval-Augmented Generation for Large Language Models: A Survey (arXiv:2312.10997v5)",
+    "url": "https://arxiv.org/abs/2312.10997",
+    "published_at": "2023-12-18",
+    "key_points": [
+      "arXiv 编号 2312.10997，标题《Retrieval-Augmented Generation for Large Language Models: A Survey》，v1 提交于 2023-12-18（当前 v5）。",
+      "作者为 Yunfan Gao、Yun Xiong、Xinyu Gao、Kangxiang Jia、Jinliu Pan、Yuxi Bi、Yi Dai、Jiawei Sun、Meng Wang、Haofen Wang，共 10 人。",
+      "该综述是 Naive RAG / Advanced RAG / Modular RAG 三范式划分的出处：摘要明确称其考察 RAG 范式的演进，涵盖 Naive RAG、Advanced RAG 与 Modular RAG。",
+      "该综述将 RAG 框架拆解为 retrieval（检索）、generation（生成）、augmentation（增强）三大基础组件进行分析。",
+      "该综述还提出评估框架与基准（evaluation framework and benchmark），并讨论当前挑战与未来研究方向。"
+    ],
+    "raw_excerpt": "This comprehensive review paper offers a detailed examination of the progression of RAG paradigms, encompassing the Naive RAG, the Advanced RAG, and the Modular RAG. It meticulously scrutinizes the tripartite foundation of RAG frameworks, which includes the retrieval, the generation and the augmentation techniques."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (Lewis et al., NeurIPS 2020)",
+    "url": "https://arxiv.org/html/2005.11401v4",
+    "published_at": "2020-05-22",
+    "key_points": [
+      "经典 RAG 架构由两个组件构成：(i) 检索器 p_η(z|x)，参数 η，给定查询 x 返回文本段落的（top-K 截断）分布；(ii) 生成器 p_θ(y_i|x,z,y_{1:i-1})，参数 θ，基于前 i-1 个 token、原始输入 x 与检索到的段落 z 生成当前 token。",
+      "检索器采用 DPR 的 bi-encoder 架构：p_η(z|x) ∝ exp(d(z)^T q(x))，其中 d(z)=BERT_d(z) 为文档编码器产生的稠密表示，q(x)=BERT_q(x) 为查询编码器产生的查询表示。",
+      "top-k(p_η(·|x)) 的计算是一个 Maximum Inner Product Search (MIPS) 问题，可在亚线性时间内近似求解；文档索引被称为 non-parametric memory。",
+      "生成器使用 BART-large（400M 参数的预训练 seq2seq transformer）；将输入 x 与检索内容 z 结合的方式是直接拼接（concatenate）。BART 生成器参数 θ 被称为 parametric memory。",
+      "检索器与生成器在没有任何「应检索哪个文档」直接监督的情况下联合端到端训练，目标是最小化负边际对数似然 ∑_j -log p(y_j|x_j)。",
+      "检索到的文档被当作隐变量处理，有两种边缘化方式：RAG-Sequence 用同一文档预测所有目标 token；RAG-Token 可为每个目标 token 使用不同文档。",
+      "论文指出纯参数化模型的三个缺陷：无法轻易扩展或修订其记忆、无法直接为预测提供洞察（可解释性）、可能产生幻觉（hallucinations）；混合参数化与非参数化记忆可缓解，因为知识可被直接修订与扩展，且被访问的知识可被检视与解释。",
+      "论文报告在 open Natural Questions、WebQuestions、CuratedTrec 上取得 state-of-the-art，并在 TriviaQA 上显著优于专门预训练目标的方法；在 FEVER 事实核查上达到使用强检索监督的 pipeline 模型 4.3% 以内。",
+      "非参数化记忆可被替换，从而在世界变化时更新模型知识。"
+    ],
+    "raw_excerpt": "our models leverage two components: (i) a retriever p_η(z|x) with parameters η that returns (top-K truncated) distributions over text passages given a query x and (ii) a generator p_θ(y_i|x,z,y_{1:i-1}) parametrized by θ that generates a current token based on a context of the previous i-1 tokens y_{1:i-1}, the original input x and a retrieved passage z. ... To combine the input x with the retrieved content z when generating from BART, we simply concatenate them."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Retrieval-Augmented Generation for Large Language Models: A Survey (Gao et al., arXiv:2312.10997v5)",
+    "url": "https://arxiv.org/html/2312.10997v5",
+    "published_at": "2023-12-18",
+    "key_points": [
+      "综述将 RAG 范式划分为三个阶段：Naive RAG、Advanced RAG、Modular RAG；Advanced RAG 与 Modular RAG 的发展正是对 Naive RAG 具体缺陷的回应。",
+      "Naive RAG 遵循传统流程，包含 indexing、retrieval、generation 三步，也被称为 “Retrieve-Read” 框架。",
+      "Indexing 阶段：从 PDF、HTML、Word、Markdown 等多样格式的原始数据开始做清洗与抽取，转换为统一纯文本格式；文档被切分为 chunks、编码为向量并存入向量数据库。",
+      "Retrieval 阶段：收到用户查询后，系统使用与索引阶段相同的编码模型把查询转换为向量表示，计算查询向量与索引语料中各 chunk 向量的相似度分数，优先检索与查询最相似的前 K 个 chunks，这些 chunks 随后作为 prompt 中的扩展上下文。",
+      "Generation 阶段：将原始问题与检索到的 chunks 一起输入 LLM 以生成最终答案。",
+      "Naive RAG 的失效模式一（Retrieval Challenges）：检索阶段常在精确率与召回率上挣扎，导致选中错位或不相关的 chunks，并遗漏关键信息。",
+      "Naive RAG 的失效模式二（Generation Difficulties）：生成时模型可能出现幻觉，产出不被检索上下文支持的内容；该阶段还可能受不相关性、毒性或偏见影响。",
+      "Naive RAG 的失效模式三（Augmentation Hurdles）：检索信息与不同任务的整合可能困难，导致输出不连贯；多来源检索到相似信息时会产生冗余与重复回答；判断各段落的重要性与相关性、保证风格与语气一致也增加复杂度。",
+      "Naive RAG 的失效模式四（单次检索不足）：面对复杂问题，基于原始查询的单次检索（a single retrieval based on the original query）可能不足以获取充分的上下文信息。",
+      "Naive RAG 的失效模式五（过度依赖）：生成模型可能过度依赖增强信息，导致输出只是复述检索内容，而不增加有洞察或综合性的信息。",
+      "Advanced RAG 通过 pre-retrieval 与 post-retrieval 策略改进检索质量：pre-retrieval 聚焦优化索引结构（数据粒度增强、索引结构优化、添加元数据、对齐优化、混合检索）与原始查询（query rewriting、query transformation、query expansion）；post-retrieval 主要包括 rerank chunks 与 context compressing。",
+      "Post-retrieval 中重排（re-ranking）的作用是把最相关内容重新定位到 prompt 的边缘位置；该概念已在 LlamaIndex、LangChain、HayStack 等框架中实现。",
+      "综述指出把所有相关文档直接喂给 LLM 会导致信息过载，无关内容会稀释对关键细节的注意力；因此 post-retrieval 致力于选取必要信息、强调关键部分并缩短待处理上下文。"
+    ],
+    "raw_excerpt": "The Naive RAG follows a traditional process that includes indexing, retrieval, and generation, which is also characterized as a \"Retrieve-Read\" framework ... Retrieval Challenges. The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information. ... Facing complex issues, a single retrieval based on the original query may not suffice to acquire adequate context information."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection (Asai et al., arXiv:2310.11511v1)",
+    "url": "https://arxiv.org/abs/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "论文将 RAG 描述为一种 ad hoc（临时性/非自适应）方法：用检索到的相关知识增强语言模型，以减少事实性错误。",
+      "论文明确指出传统 RAG 的失效模式：不加区分地检索并纳入固定数量的检索段落（indiscriminately retrieving and incorporating a fixed number of retrieved passages），无论检索是否必要、段落是否相关，都会削弱 LM 的通用性，或导致无用的回答生成。",
+      "Self-RAG 的对照设计是：训练单一任意 LM，通过特殊 token（reflection tokens）按需自适应检索，并对检索段落与自身生成进行反思（reflect）。",
+      "reflection tokens 的生成使 LM 在推理阶段可控，从而针对不同任务需求定制行为。",
+      "实验报告 Self-RAG（7B 与 13B 参数）在多项任务上显著优于 state-of-the-art LLM 与检索增强模型，包括在开放域 QA、推理与事实验证任务上优于 ChatGPT 与 retrieval-augmented Llama2-chat，并在长文本生成的事实性与引用准确性上有显著提升。"
+    ],
+    "raw_excerpt": "Retrieval-Augmented Generation (RAG), an ad hoc approach that augments LMs with retrieval of relevant knowledge, decreases such issues. However, indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant, diminishes LM versatility or can lead to unhelpful response generation."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG (v4)",
+    "url": "https://arxiv.org/abs/2501.09136v4",
+    "published_at": "2025-01-15",
+    "key_points": [
+      "传统 RAG 被该综述描述为受限于 static workflows，缺乏多步推理与复杂任务管理所需的适应性。",
+      "Agentic RAG 的做法是把 autonomous AI agents 嵌入 RAG pipeline，从而支持 dynamic retrieval、iterative context refinement 与 adaptive workflow orchestration。",
+      "该综述把 agentic design patterns 归纳为四类：reflection、planning、tool use、multi-agent collaboration。",
+      "该综述引入一个 explicit control layer，用于指导系统如何对外部证据进行推理——协调检索、验证信息、调用工具、精炼回答。",
+      "该综述的 taxonomy 基于四个维度：agent cardinality、control structure、autonomy、knowledge representation。",
+      "综述把 RAG 演进划分为 Naïve RAG（TF-IDF/BM25 关键词检索 + 静态数据集）、Advanced RAG（dense retrieval 如 DPR、neural re-ranking、iterative/multi-hop retrieval）、Modular RAG（把 pipeline 分解为独立可复用组件、支持 hybrid retrieval 与外部工具集成）。",
+      "综述列出的 workflow patterns 包括 prompt chaining、routing、parallelization、orchestrator–worker、evaluator–optimizer loops，用于在系统层面协调多个 prompt/模型/agent。",
+      "综述把 memory management 列为开放研究挑战之一（与 evaluation、coordination、efficiency、governance 并列）。"
+    ],
+    "raw_excerpt": "Despite its promise, traditional RAG systems are constrained by static workflows and lack the adaptability required for multi-step reasoning and complex task management. Agentic Retrieval-Augmented Generation (Agentic RAG) transcends these limitations by embedding autonomous AI agents into the RAG pipeline. These agents leverage agentic design patterns reflection, planning, tool use, and multi-agent collaboration to dynamically manage retrieval strategies, iteratively refine contextual understanding, and adapt workflows... This introduces an explicit control layer that guides how the system reasons over external evidence—coordinating retrieval, validating information, invoking tools, and refining responses"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+    "url": "https://arxiv.org/abs/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "Self-RAG 针对的问题是传统 RAG「indiscriminately retrieving and incorporating a fixed number of retrieved passages, regardless of whether retrieval is necessary, or passages are relevant」。",
+      "Self-RAG 训练单个 LM 以端到端方式同时生成任务输出与间歇插入的特殊 token，即 reflection tokens；reflection tokens 分为 retrieval tokens 与 critique tokens 两类。",
+      "四类 reflection token 及其取值：Retrieve（输入 x 或 x,y；输出 {yes, no, continue}，决定何时检索）；IsRel（输入 x,d；输出 {relevant, irrelevant}，判断段落是否有助于求解 x）；IsSup（输入 x,d,y；输出 {fully supported, partially supported, no support}，判断 y 中所有可验证陈述是否被 d 支持）；IsUse（输入 x,y；输出 {5,4,3,2,1}，判断 y 是否为对 x 的有用回答）。",
+      "reflection tokens 由训练好的 critic model 离线插入原始语料，因此训练时无需托管 critic model，降低开销；critic model 部分地用 GPT-4 提示收集的数据做监督。",
+      "推理算法（Algorithm 1）：LM 先预测 Retrieve token；若为 Yes 则用检索器 R 依据 (x, y_{t-1}) 检索段落集合 D，对每个 d 生成 y_t 并预测 IsRel/IsSup/IsUse，再据此对 y_t 排序；若为 No 则跳过检索直接生成。",
+      "Self-RAG 使用 segment-level beam search，以 reflection token 概率的加权线性和作为 segment score，从而在推理期可调节检索频率并定制模型行为。",
+      "Self-RAG 在 7B 与 13B 规模上训练，论文称其在开放域 QA、推理、事实核查任务上优于 ChatGPT 与 retrieval-augmented Llama2-chat，并在长文本生成的 factuality 与 citation accuracy 上有提升（此为作者自述主张）。"
+    ],
+    "raw_excerpt": "We train an arbitrary LM in an end-to-end manner to learn to reflect on its own generation process given a task input by generating both task output and intermittent special tokens (i.e., reflection tokens). Reflection tokens are categorized into retrieval and critique tokens to indicate the need for retrieval and its generation quality respectively... our inference-time algorithm enables us to (1) flexibly adjust retrieval frequency for different downstream applications and (2) customize models' behaviors to user preferences by leveraging reflection tokens through segment-level beam search using the weighted linear sum of the reflection token probabilities as segment score."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "AkariAsai/self-rag — official implementation of Self-RAG (ICLR 2024)",
+    "url": "https://github.com/AkariAsai/self-rag",
+    "published_at": "2023-10-10",
+    "key_points": [
+      "该仓库是 Self-RAG 论文的官方实现，论文发表于 ICLR 2024（README 标注 Oral top 1%）。",
+      "仓库提供 7B 与 13B 两个已训练模型（selfrag_llama2_7b、selfrag_llama2_13b）以及训练数据集 selfrag_train_data。",
+      "仓库以 Python 实现，MIT 许可，约 2442 stars、223 forks；最近一次 push 为 2024-05-25。"
+    ],
+    "raw_excerpt": "This includes the original implementation of [SELF-RAG: Learning to Retrieve, Generate and Critique through self-reflection](https://arxiv.org/abs/2310.11511) (ICLR 2024, Oral top 1%) ... [7B Model](https://huggingface.co/selfrag/selfrag_llama2_7b) | [13B Model](https://huggingface.co/selfrag/selfrag_llama2_13b) | [Training data](https://huggingface.co/datasets/selfrag/selfrag_train_data)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity",
+    "url": "https://arxiv.org/abs/2403.14403v2",
+    "published_at": "2024-03-21",
+    "key_points": [
+      "Adaptive-RAG 提出一个自适应 QA 框架，依据 query complexity 动态选择从最简单到最复杂的（检索增强）LLM 策略。",
+      "该选择过程由一个 classifier 实现，它是一个较小的 LM，用自动收集的标签训练来预测 incoming query 的复杂度等级。",
+      "该框架在 no-retrieval 方法、单步检索增强 LLM 与迭代式检索增强 LLM 之间自适应切换。",
+      "论文称其在覆盖多种 query 复杂度的开放域 QA 数据集上提升了整体效率与准确率（作者自述，未读到结果表格）。"
+    ],
+    "raw_excerpt": "we propose a novel adaptive QA framework, that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels... This approach offers a balanced strategy, seamlessly adapting between the iterative and single-step retrieval-augmented LLMs, as well as the no-retrieval methods"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions (IRCoT)",
+    "url": "https://arxiv.org/abs/2212.10509v2",
+    "published_at": "2022-12-20",
+    "key_points": [
+      "IRCoT 指出 one-step retrieve-and-read 方式对多步 QA 不足，因为「what to retrieve」取决于「what has already been derived」，而后者又可能取决于先前检索到的内容。",
+      "IRCoT 的做法是把检索与 CoT 中的推理步（句子）交错进行：用 CoT 引导检索，再用检索结果改进 CoT。",
+      "论文报告在 HotpotQA、2WikiMultihopQA、MuSiQue、IIRC 四个数据集上，配合 GPT3 使检索提升最多 21 点、下游 QA 提升最多 15 点（作者自述，未读到结果表格）。",
+      "论文称在 OOD 设置以及更小模型（如 Flan-T5-large、无需额外训练）上也有类似增益，并减少幻觉。"
+    ],
+    "raw_excerpt": "we observe that this one-step retrieve-and-read approach is insufficient for multi-step QA. Here, what to retrieve depends on what has already been derived, which in turn may depend on what was previously retrieved. To address this, we propose IRCoT, a new approach for multi-step QA that interleaves retrieval with steps (sentences) in a CoT, guiding the retrieval with CoT and in turn using retrieved results to improve CoT."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection (arXiv:2310.11511v1)",
+    "url": "https://arxiv.org/abs/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "Self-RAG 训练 7B 与 13B 两种参数规模的模型，通过按需检索（on-demand retrieval）与自反思提升质量与事实性。",
+      "核心机制是 reflection tokens：模型在生成过程中输出特殊 token，分为 retrieval token（{yes, no, continue}，决定何时检索）与 critique token（相关性 relevant/irrelevant、支撑度 fully/partially/no support、效用 5–4–3–2–1）共四类。",
+      "reflection tokens 由 critic 模型离线插入训练语料，因此训练时无需托管 critic 模型；critic 用 Llama 2-7B 初始化，其标注与 GPT-4 预测在多数 token 类别上一致率高于 90%。",
+      "推理阶段使用 segment-level beam search，以 reflection token 概率的加权线性和作为段落打分，可调节检索频率与用户偏好约束。",
+      "论文声称在六项任务上显著优于参数量更大的预训练/指令微调 LLM 及主流 RAG 方法；具体表述为在四项任务上优于 retrieval-augmented ChatGPT，并在所有任务上优于 Llama2-chat 与 Alpaca。",
+      "论文正文明确对比：此类自适应检索方法提升任务表现往往以运行时效率（runtime efficiency）为代价。"
+    ],
+    "raw_excerpt": "We train an arbitrary LM in an end-to-end manner to learn to reflect on its own generation process given a task input by generating both task output and intermittent special tokens (i.e., reflection tokens). ... The critic achieves a higher than 90% agreement with GPT-4-based predictions on most reflection token categories. ... In particular, Self-Rag outperforms retrieval-augmented ChatGPT on four tasks, Llama2-chat and Alpaca on all tasks."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Corrective Retrieval Augmented Generation (CRAG), arXiv:2401.15884v3",
+    "url": "https://arxiv.org/abs/2401.15884v3",
+    "published_at": "2024-01-29",
+    "key_points": [
+      "CRAG 设计一个轻量级 retrieval evaluator 评估检索文档整体质量，输出置信度并触发三种动作之一：{Correct, Incorrect, Ambiguous}。",
+      "动作分支：Correct 走 Knowledge_Refine（decompose-then-recompose 过滤无关信息）；Incorrect 触发大规模网络搜索（先由 query rewriter 改写查询）；Ambiguous 则内部知识精炼与网络搜索两者并用。",
+      "evaluator 由 T5-large 初始化并微调，参数量 0.77B，论文明确对比 Self-RAG 的 critic 模型（指令微调的 LLaMA-2 7B），主张自身更轻量。",
+      "每个问题通常检索 10 篇文档，evaluator 对每个 question-document 对单独打分。",
+      "为与 Self-RAG 可比，实验沿用 Self-RAG 提供的 Contriever 检索结果。",
+      "CRAG 为 plug-and-play，论文中分别接入标准 RAG 与 Self-RAG 两种基线进行验证。",
+      "评测覆盖四个数据集：PopQA、Biography、Pub Health、Arc-Challenge，涵盖短文本与长文本生成任务。"
+    ],
+    "raw_excerpt": "a lightweight retrieval evaluator is designed to assess the overall quality of retrieved documents for a query, returning a confidence degree based on which different knowledge retrieval actions can be triggered. ... Specifically, T5-large (Raffel et al., 2020) is adopted for initializing the retrieval evaluator and fine-tuned. ... Compared with the critic model of Self-RAG (Asai et al., 2024) that instruction-tuned LLaMA-2 (7B), the evaluator designed in CRAG demonstrates the advantages of being quite lightweight (0.77B). ... For every question, there are generally 10 documents retrieved."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity (arXiv:2403.14403v2)",
+    "url": "https://arxiv.org/abs/2403.14403v2",
+    "published_at": "2024-03-21",
+    "key_points": [
+      "Adaptive-RAG 用一个较小的 LM 作为分类器预测查询复杂度，从三种策略中动态选择：无检索（Non Retrieval）、单步检索（Single-step）、多步迭代检索（Multi-step）。",
+      "分类器的训练标签自动收集，来源是各模型的实际预测结果与数据集固有归纳偏置，无需人工标注。",
+      "论文将多步迭代检索描述为对简单查询产生不必要的计算开销，因为需要反复访问 LLM 与 retriever；单步/无检索则不足以处理复杂查询。",
+      "效率度量采用 Time/Query（每查询耗时），性能度量采用 F1，基座 LLM 为 GPT-3.5-Turbo-Instruct。",
+      "评测覆盖单跳（SQuAD、NQ、TriviaQA）与多跳（HotpotQA、2WikiMultiHopQA、MuSiQue）开放域 QA 数据集，并在 GPT-3.5 与 FLAN-T5 系列多种 LLM 上验证。",
+      "代码开源于 https://github.com/starsuzi/Adaptive-RAG。"
+    ],
+    "raw_excerpt": "we propose a novel adaptive QA framework, that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels ... Figure 1: QA performance (F1) and efficiency (Time/Query) for different retrieval-augmented generation approaches. We use the GPT-3.5-Turbo-Instruct as the base LLM."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "langchain-ai/langgraph — GitHub repository",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "stars 43,859；forks 7,534；open issues 516；主语言 Python；license MIT。",
+      "仓库创建于 2023-08-09，最近一次 push 为 2026-10-25（工具返回时点快照）。",
+      "README 自我定位为「Low-level orchestration framework for building stateful agents」（构建有状态 agent 的底层编排框架）。",
+      "仓库 topics 中包含 rag、agents、multiagent、framework 等标签。"
+    ],
+    "raw_excerpt": "Low-level orchestration framework for building stateful agents. ... stars: 43859 | forks: 7534 | open issues: 516 | language: Python | created: 2023-08-09 | last push: 2026-10-25 | license: MIT"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "run-llama/llama_index — GitHub repository",
+    "url": "https://github.com/run-llama/llama_index",
+    "published_at": "2026-10-23",
+    "key_points": [
+      "stars 52,654；forks 8,424；open issues 1,060；主语言 Python；license MIT。",
+      "仓库创建于 2022-11-02，最近一次 push 为 2026-10-23（工具返回时点快照）。",
+      "README 将 LlamaIndex Framework 描述为「an open-source framework to build agentic applications」，并称其历史上是一套支持构建各类 RAG 与 agent 应用的编排工具集。",
+      "README 顶部 NOTE 声明公司当前重心已转向 LlamaParse（agentic OCR / 文档解析与抽取平台）以及 LiteParse、ParseBench、ExtractBench，OSS 框架仍作为开放工具包提供。",
+      "README 称有超过 300 个 LlamaIndex 集成包可与 core 配合使用。",
+      "README 自述该 README 的更新频率低于官方文档。"
+    ],
+    "raw_excerpt": "The current focus of LlamaIndex is to build the best AI-powered engine for document parsing and extraction. ... Since the early days, the framework has consisted of a broad set of orchestration tools enabling developers to build various RAG and agent applications. While we still have the OSS framework available as an open toolkit that you're welcome to use, our primary focus has shifted towards LlamaParse ... LlamaIndex Framework ... is an open-source framework to build agentic applications."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "deepset-ai/haystack — GitHub repository (README)",
+    "url": "https://github.com/deepset-ai/haystack",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "stars 26,834；forks 3,335；open issues 174；主语言 Python；license Apache-2.0。",
+      "仓库创建于 2019-11-14，最近一次 push 为 2026-10-24（工具返回时点快照）。",
+      "仓库 topics 显式包含 agentic-rag、agentic-ai、agent-framework、rag、retrieval-augmented-generation、context-engineering 等标签。",
+      "README 自我定位为「an open-source AI orchestration framework for building production-ready LLM applications in Python」，强调对 retrieval、routing、memory、generation 的显式控制。",
+      "README 的 Features 段落主张「Agents built for production」：提供 before_llm、before_tool、on_exit 等生命周期钩子用于护栏与自定义逻辑，并开箱跟踪 step_count、token_usage 与工具调用以做监控与成本控制。",
+      "README 提到 Agent Pack 提供现成 agent（如 deep research agent、advanced RAG agent），以及 SkillToolset 的渐进式技能发现机制（技能描述仅在需要时进入上下文）。",
+      "README 称单个 Pipeline 可同步或异步运行并逐 token 流式输出，Agent 可并发执行工具调用。"
+    ],
+    "raw_excerpt": "Haystack is an open-source AI orchestration framework for building production-ready LLM applications in Python. Design modular pipelines and agent workflows with explicit control over retrieval, routing, memory, and generation. ... Extend agent behavior with lifecycle hooks (before_llm, before_tool, on_exit, …) for guardrails and custom logic, and track step_count, token_usage, and tool calls out of the box for monitoring and cost control."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "langgenius/dify — GitHub repository",
+    "url": "https://github.com/langgenius/dify",
+    "published_at": "2026-10-25",
+    "key_points": [
+      "stars 159,471；forks 25,204；open issues 1,179；主语言 Python；license 字段为 NOASSERTION（非标准 OSI 标识）。",
+      "仓库创建于 2023-04-12，最近一次 push 为 2026-10-25（工具返回时点快照）。",
+      "仓库 topics 包含 agent、agentic-ai、agentic-framework、agentic-workflow、workflow、low-code、no-code、mcp、rag 等标签。",
+      "README 提供 Dify Cloud、自托管安装、文档与定价四个入口链接。"
+    ],
+    "raw_excerpt": "stars: 159471 | forks: 25204 | open issues: 1179 | language: Python | created: 2023-04-12 | last push: 2026-10-25 | license: NOASSERTION ... topics: agent, agentic-ai, agentic-framework, agentic-workflow, ai, automation, ... low-code, mcp, nextjs, no-code, openai, python, skills, workflow"
+  },
+  {
+    "sub_question_id": "q5",
+    "source_type": "arxiv",
+    "title": "When Agentic Retrieval Fails Silently: Framework and Production Evidence from a Creative AI Assistant",
+    "url": "https://arxiv.org/abs/2610.30423",
+    "published_at": "2026-10-21",
+    "key_points": [
+      "论文提出 agentic 助手场景下传统检索指标（CTR、MRR、behavioral NDCG）失效，原因是这些指标假设用户直接看到并作用于排序结果，而 agentic 助手中由生成层先消费检索输出。",
+      "作者将失效归纳为三类（who / when / what）：agent 先于用户阅读检索结果；用户行为可能发生在检索之后数个轮次或会话；最终结果混合了检索内容与模型自身知识。作者称之为 attribution gap（归因缺口）。",
+      "论文提出 Layered Agentic Retrieval Assessment (LARA)，将检索质量、参与度与结果、产品成功作为三个独立层来度量，并用一个四字段 lineage schema 连接，无需新建模型。",
+      "生产证据来自 Adobe Express：同一套检索基础设施同时服务 gallery 搜索界面与 agentic 助手，后者会话量约为前者的八分之一，用户群体相同。",
+      "Chat 用户比 gallery 用户更频繁改写查询（44.4% vs. 33.1%），作者解释为 chat 中的改写是在细化生成输出。",
+      "论文为 5 页短文，投稿 CHIIR 2027 Industry Track（Industry Track 投稿，非已录用）。"
+    ],
+    "raw_excerpt": "CTR, MRR, and behavioral NDCG assume the user sees ranked results and acts on them. In an agentic assistant, a generation layer consumes retrieval output first, and that assumption breaks in three ways. The agent reads the results before the user does (who). The user's action can come several turns or sessions after retrieval (when). Outcomes blend retrieved content with the model's own knowledge (what caused it). We call this the attribution gap. We propose Layered Agentic Retrieval Assessment (LARA) ... We examine the motivation on Adobe Express, where one retrieval infrastructure serves a gallery search surface and an agentic assistant at roughly one-eighth its session volume for the same user population. Chat users reformulate more than gallery users (44.4% vs. 33.1%) because chat reformulation refines generated output."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection (arXiv:2310.11511v1)",
+    "url": "https://arxiv.org/abs/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "论文为 arXiv:2310.11511v1，提交于 2023-10-17，30 页、2 图、12 表，作者 Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, Hannaneh Hajishirzi。",
+      "摘要称 Self-RAG（7B 与 13B 参数）在多样任务上显著优于当时的 SOTA LLM 与检索增强模型。",
+      "摘要明确 Self-RAG 在开放域 QA、推理与事实核查任务上优于 ChatGPT 和 retrieval-augmented Llama2-chat。",
+      "摘要指出传统 RAG 的问题是不加区分地检索并纳入固定数量的段落，无论检索是否必要、段落是否相关。",
+      "摘要未给出任何具体准确率数字或检索调用次数。"
+    ],
+    "raw_excerpt": "Experiments show that Self-RAG (7B and 13B parameters) significantly outperforms state-of-the-art LLMs and retrieval-augmented models on a diverse set of tasks. Specifically, Self-RAG outperforms ChatGPT and retrieval-augmented Llama2-chat on Open-domain QA, reasoning and fact verification tasks"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Self-RAG 论文正文（HTML 版，第 1–3.2 节）",
+    "url": "https://arxiv.org/html/2310.11511v1",
+    "published_at": "2023-10-17",
+    "key_points": [
+      "引言给出定性结论：Self-RAG 在四个任务上优于 retrieval-augmented ChatGPT，并在所有任务上优于 Llama2-chat 与 Alpaca。",
+      "Self-RAG 用四类 reflection token：Retrieve（是否需要检索）、IsRel（段落是否相关）、IsSup（生成是否被段落支持）、IsUse（回答是否有用，1–5 分）。",
+      "推理算法（Algorithm 1）在每个 segment（实验中以一句话为一段）先预测 Retrieve token；仅当判定需要检索时才调用检索器取回 top passages，否则直接生成。",
+      "检索到的多个段落被并行处理，并通过 reflection token 过滤掉不相关段落，推理时不需要额外的外部模型（critic 只在训练时用）。",
+      "critic 模型由 GPT-4 生成的 reflection token 数据蒸馏而来，与 GPT-4 预测在多数 token 类别上一致率超过 90%；critic 与 generator 均以 Llama 2-7B 初始化。",
+      "正文该部分未出现 PopQA/TriviaQA/PubHealth/ARC-Challenge 的具体分数，也未给出检索调用次数或延迟/token 开销倍数。"
+    ],
+    "raw_excerpt": "In particular, Self-Rag outperforms retrieval-augmented ChatGPT on four tasks, Llama2-chat (Touvron et al., 2023) and Alpaca (Dubois et al., 2023) on all tasks."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Self-RAG 官方项目页 (selfrag.github.io)",
+    "url": "https://selfrag.github.io/",
+    "published_at": null,
+    "key_points": [
+      "项目页称 Self-RAG 在六个任务上优于 vanilla ChatGPT 或 Llama2-chat，并在多数任务上以较大幅度优于这些模型加常用检索增强方法的版本。",
+      "项目页对比标准 RAG：标准 RAG 只检索一次或固定次数，Self-RAG 支持按需自适应检索，可在生成过程中多次检索或完全跳过检索。",
+      "项目页称标准 RAG 不评估段落相关性、也不检查输出是否真被段落支持，而 Self-RAG 通过 reflection token 做这两项检查。",
+      "自适应检索消融（定性表述）：减少检索会使开放域 QA（PopQA）性能相对下降约 40%，而事实核查任务（PubHealth）仅约 2% 的轻微下降。",
+      "项目页提供 7B 与 13B 模型、数据与代码链接，但页面正文未列出各数据集的准确率数值表。"
+    ],
+    "raw_excerpt": "Standard RAG only retrieves once or fixed number of time steps, while Self-RAG enables Adaptive retrieval for diverse task inputs, and can retrieve multiple times while generations, or completely skip retrieval ... retrieval less can hurt performance on Open domain QA (PopQA; 40% relative performance drop) while it gives marginal performance deterioration in fact verification task (PubHealth; 2%)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Corrective Retrieval Augmented Generation (arXiv:2401.15884v3)",
+    "url": "https://arxiv.org/abs/2401.15884v3",
+    "published_at": "2024-01-29",
+    "key_points": [
+      "论文提出 Corrective Retrieval Augmented Generation (CRAG)，用一个轻量级 retrieval evaluator 评估检索文档整体质量并返回 confidence degree，据此触发不同的知识检索动作。",
+      "由于静态有限语料的检索只能返回次优文档，CRAG 使用大规模 web search 作为检索结果的扩展增强手段。",
+      "CRAG 设计了 decompose-then-recompose 算法，对检索文档选择性聚焦关键信息并过滤无关信息。",
+      "CRAG 是 plug-and-play 的，可无缝耦合到多种 RAG-based 方法。",
+      "实验覆盖四个数据集（短文本与长文本生成任务），作者称 CRAG 能显著提升 RAG-based 方法的表现；摘要未给出任何具体分数。",
+      "版本历史：v1 2024-01-29，v2 2024-02-16，v3 2024-10-07（v3 更新了结果、增加分析并修正笔误）。"
+    ],
+    "raw_excerpt": "a lightweight retrieval evaluator is designed to assess the overall quality of retrieved documents for a query, returning a confidence degree based on which different knowledge retrieval actions can be triggered. Since retrieval from static and limited corpora can only return sub-optimal documents, large-scale web searches are utilized as an extension for augmenting the retrieval results."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Corrective Retrieval Augmented Generation — 正文（Section 4 CRAG / 4.1-4.3，arXiv HTML v3）",
+    "url": "https://arxiv.org/html/2401.15884v3",
+    "published_at": "2024-10-07",
+    "key_points": [
+      "relevance score 被量化为三种 confidence degree，并触发对应动作：{Correct, Incorrect, Ambiguous}。",
+      "retrieval evaluator 用 T5-large 初始化并微调，参数量 0.77B；论文明确对比 Self-RAG 的 critic model 是指令微调的 LLaMA-2 (7B)，称 CRAG 的 evaluator 相当轻量。",
+      "为保证与 Self-RAG 可比，实验采用 Self-RAG 提供的同一份 Contriever 检索结果；每个问题一般检索 10 篇文档，evaluator 对每个 question-document pair 单独打分。",
+      "Correct 分支：至少一篇检索文档的 confidence score 高于上阈值时触发，随后对该文档做 knowledge refinement（decompose-then-recompose）提取关键知识条。",
+      "Incorrect 分支：所有检索文档的 confidence score 都低于下阈值时触发，此时放弃检索结果，通过 web search 从互联网寻找新知识源（query rewriter 改写查询后搜索）。",
+      "Ambiguous 分支：不属于上述两种情况的中间态，evaluator 给出中间分数；此时同时使用 refined internal knowledge 与 web search 得到的 external knowledge（两者相加）。",
+      "Algorithm 1 明确：CORRECT → 仅 Knowledge_Refine；INCORRECT → 仅 Web_Search；AMBIGUOUS → Knowledge_Refine + Web_Search。"
+    ],
+    "raw_excerpt": "The relevance score is quantified into a total of three confidence degrees and then triggered the corresponding actions: { Correct , Incorrect , Ambiguous } ... Compared with the critic model of Self-RAG ( Asai et al., 2024 ) that instruction-tuned LLaMA-2 (7B), the evaluator designed in CRAG demonstrates the advantages of being quite lightweight (0.77B)."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Corrective Retrieval Augmented Generation — 正文（ar5iv 镜像，Section 4.3 Action Trigger 阈值定义）",
+    "url": "https://ar5iv.labs.arxiv.org/html/2401.15884",
+    "published_at": "2024-01-29",
+    "key_points": [
+      "Correct 判定：至少一篇检索文档的 confidence score 高于 upper threshold。",
+      "Incorrect 判定：所有检索文档的 confidence score 均低于 lower threshold，即全部被视为无关、对生成无帮助。",
+      "Ambiguous 判定：除上述两种情形外的其余情况，通常发生在检索准确性难以区分、evaluator 给出中间分数时。",
+      "论文提到曾做 preliminary experiments，仅使用 Correct 与 Incorrect 两个动作（Discussion 段落，正文在此处被截断）。",
+      "CRAG 被实验性地接入 RAG 与 Self-RAG 两种框架，以展示其对 RAG-based 方法的适应性；四个数据集为 PopQA、Biography、Pub Health、Arc-Challenge。"
+    ],
+    "raw_excerpt": "Here, a retrieval is assumed Correct when the confidence score of at least one retrieved document is higher than the upper threshold. ... a retrieval is assumed Incorrect when the confidence scores of all retrieved documents are below the lower threshold."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "HuskyInSalt/CRAG — 官方代码仓库 README",
+    "url": "https://github.com/HuskyInSalt/CRAG",
+    "published_at": "2024-10-08",
+    "key_points": [
+      "该仓库是论文 Corrective Retrieval Augmented Generation（Yan, Gu, Zhu, Ling）的官方源码发布。",
+      "仓库热度：476 stars、52 forks、29 open issues，语言 Python，创建于 2024-01-29，最后 push 2024-10-08。",
+      "README 正文复述了论文摘要中的方法主张：轻量级 retrieval evaluator 评估检索文档质量并触发不同知识检索动作。",
+      "README 摘录中未包含任何数据集分数表格、触发比例或延迟数据（本次仅取到 README 前段）。"
+    ],
+    "raw_excerpt": "This repository releases the source code for the paper: - [Corrective Retrieval Augmented Generation](https://arxiv.org/pdf/2401.15884.pdf). Shi-Qi Yan, Jia-Chen Gu, Yun Zhu, Zhen-Hua Ling ... a lightweight retrieva[tor]"
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "alphaXiv 论文页（含 AI 生成概览）— Corrective Retrieval Augmented Generation",
+    "url": "https://www.alphaxiv.org/abs/2401.15884",
+    "published_at": null,
+    "key_points": [
+      "【二手 AI 生成概览，非论文原文，需交叉验证】该概览称：与 SelfRAG-LLaMA2-7b 结合时，CRAG 相对标准 RAG 的提升为 PopQA +7.0%、Biography FactScore +14.9%、PubHealth +36.6%、Arc-Challenge +15.4%。",
+      "【二手 AI 生成概览】该概览称：Self-CRAG（CRAG 接入 Self-RAG）在 LLaMA2-hf-7b 下相对独立 Self-RAG 提升 PopQA +20.0% 准确率、Biography FactScore +36.9%。",
+      "【二手 AI 生成概览】该概览称 T5-based retrieval evaluator 的相关性判定准确率为 84.3%，高于 ChatGPT 的 58.0%。",
+      "【二手 AI 生成概览】该概览称消融显示去掉 Correct / Incorrect / Ambiguous 任一动作都会导致性能下降，去掉 knowledge refinement、query rewriting、external knowledge selection 也会下降。",
+      "该页面未给出各基线的绝对分数，也未给出 Incorrect/Ambiguous 分支的实际触发比例或 web search 的延迟开销。"
+    ],
+    "raw_excerpt": "When integrated with SelfRAG-LLaMA2-7b, CRAG achieved significant accuracy improvements: 7.0% on PopQA, 14.9% FactScore increase on Biography, 36.6% accuracy gain on PubHealth, and 15.4% improvement on Arc-Challenge. ... The T5-based retrieval evaluator achieved 84.3% accuracy in relevance assessment, significantly outperforming commercial LLMs like ChatGPT (58.0% accuracy)"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity (arXiv:2403.14403v2)",
+    "url": "https://arxiv.org/abs/2403.14403v2",
+    "published_at": "2024-03-21",
+    "key_points": [
+      "论文提出自适应 QA 框架，依据查询复杂度在「无检索」「单步检索」「多步迭代检索」三类策略间动态选择。",
+      "选择过程由一个较小的 LM 分类器实现，分类器用自动收集的标签训练，标签来自模型实际预测结果与数据集内在归纳偏置。",
+      "作者在覆盖多种查询复杂度的开放域 QA 数据集上验证，声称相比包括自适应检索方法在内的相关基线提升了整体效率与准确率。",
+      "论文发表于 NAACL 2024（v1 提交 2024-03-21，v2 修订 2024-03-28）。",
+      "代码开源于 https://github.com/starsuzi/Adaptive-RAG。"
+    ],
+    "raw_excerpt": "we propose a novel adaptive QA framework, that can dynamically select the most suitable strategy for (retrieval-augmented) LLMs from the simplest to the most sophisticated ones based on the query complexity. Also, this selection process is operationalized with a classifier, which is a smaller LM trained to predict the complexity level of incoming queries with automatically collected labels ... This approach offers a balanced strategy, seamlessly adapting between the iterative and single-step retrieval-augmented LLMs, as well as the no-retrieval methods"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Adaptive-RAG 正文（HTML 版，Method 章节）",
+    "url": "https://arxiv.org/html/2403.14403v2",
+    "published_at": "2024-03-28",
+    "key_points": [
+      "论文将三种检索策略形式化：Non Retrieval（LLM 直接生成答案）、Single-step Retrieval（一次检索后生成）、Multi-step Retrieval（LLM 与 Retriever 多轮交互，每步 d_i = Retriever(q, c_i; D)，上下文 c_i 可包含此前文档与答案）。",
+      "多步方法对复杂多跳查询有效，但因反复访问 Retriever 与 LLM 而计算开销大；单步/无检索方法对复杂查询则明显不足。",
+      "Figure 1 以「QA performance (F1)」对「efficiency (Time/Query)」呈现不同检索增强方法的权衡，基础 LLM 为 GPT-3.5-Turbo-Instruct。",
+      "实验覆盖单跳数据集 Rajpurkar et al. 2016（SQuAD）、Joshi et al. 2017（TriviaQA）、Kwiatkowski et al. 2019（Natural Questions）与多跳数据集 Yang et al. 2018（HotpotQA）、Ho et al. 2020（2WikiMultiHopQA）、Trivedi et al. 2022b（MuSiQue）。",
+      "实验在多种 LLM 上进行，包括 GPT-3.5 与 FLAN-T5 系列。",
+      "论文将 Mallen et al. 2023（基于实体频率的自适应检索）与 Trivedi et al. 2023（IRCoT 式多步）分别批评为过于简单与过于复杂，并称 Self-RAG（Asai et al. 2024）为同期工作。"
+    ],
+    "raw_excerpt": "In this multi-step approach, LLM interacts with Retriever in several rounds ... at every retrieval step i, new documents d_i are retrieved from D and then incorporated into the input of LLMs ... However, it is important to recognize that this multi-step approach can be resource-intensive due to the repeated accesses to Retriever and LLM, which entail substantial computational costs. | Figure 1: QA performance (F1) and efficiency (Time/Query) for different retrieval-augmented generation approaches. We use the GPT-3.5-Turbo-Instruct as the base LLM."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "ACL Anthology: Adaptive-RAG (NAACL 2024, 2024.naacl-long.389)",
+    "url": "https://aclanthology.org/2024.naacl-long.389/",
+    "published_at": "2024-06",
+    "key_points": [
+      "正式出版信息：NAACL 2024 Volume 1 (Long Papers)，页码 7036–7050，DOI 10.18653/v1/2024.naacl-long.389。",
+      "该落地页仅提供摘要与引用信息，未包含实验表格数值。"
+    ],
+    "raw_excerpt": "In Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers), pages 7036–7050 ... DOI: 10.18653/v1/2024.naacl-long.389"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "starsuzi/Adaptive-RAG 官方代码仓库 README",
+    "url": "https://github.com/starsuzi/Adaptive-RAG",
+    "published_at": "2024-04-05",
+    "key_points": [
+      "仓库为论文官方实现（NAACL 2024），Apache-2.0 许可，约 418 stars / 59 forks，最后 push 2024-05-02。",
+      "三种检索策略在代码中对应具体系统名：ircot_qa（multi-step）、oner_qa（single-step）、nor_qa（zero / 无检索）。",
+      "分类器为 t5-large，分别针对 flan-t5-xl、flan-t5-xxl、gpt 三种 LLM 各训练一个；训练数据由 silver 数据（模型自身答对的样本）与 binary 数据（数据集归纳偏置）拼接而成。",
+      "评测数据集为 nq、squad、trivia、2wikimultihopqa、hotpotqa、musique，测试集与 dev 集各子采样 500 条。",
+      "仓库提供 predictions.tar.gz（三种策略的预测结果）与 data.tar.gz（分类器数据），并有 evaluate_final_acc.py 用于最终准确率评测；README 本身未列出 F1/EM 结果表。",
+      "README 称 Adaptive-RAG 已被 LlamaIndex、LangChain（LangGraph）与 Cohere notebooks 采纳为示例实现。"
+    ],
+    "raw_excerpt": "SYSTEM=ircot_qa # ircot_qa (multi), oner_qa (single), nor_qa (zero) ... You will train a `t5-large` model using the training dataset created from each of the three different LLMs ... We provide all the results for three different retrieval strategies in [`predictions.tar.gz`](./predictions.tar.gz). ... Finally, you are able to evaluate the QA performance of our Adaptive-RAG (based on the identified query complexity results) with the following code! python ./evaluate_final_acc.py"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions (IRCoT), arXiv:2212.10509v2, ACL'23",
+    "url": "https://arxiv.org/abs/2212.10509v2",
+    "published_at": "2022-12-20 (v1); v2 revised 2023-06-23",
+    "key_points": [
+      "论文提出 IRCoT：将检索与思维链（CoT）中的每个推理句交替进行，用 CoT 引导检索、再用检索结果改进 CoT。",
+      "实验覆盖四个多步 QA 数据集：HotpotQA、2WikiMultihopQA、MuSiQue、IIRC。",
+      "摘要给出的聚合结论：使用 GPT3 时检索提升至多 21 点（up to 21 points），下游 QA 提升至多 15 点（up to 15 points）。",
+      "作者与机构：Harsh Trivedi、Niranjan Balasubramanian（Stony Brook University），Tushar Khot、Ashish Sabharwal（Allen Institute for AI）。",
+      "论文指出 one-step retrieve-and-read（仅用问题做一次检索）对多步 QA 不足，因为「检索什么」取决于「已经推导出什么」。",
+      "代码、数据与 prompt 开源于 https://github.com/stonybrooknlp/ircot。"
+    ],
+    "raw_excerpt": "Using IRCoT with GPT3 substantially improves retrieval (up to 21 points) as well as downstream QA (up to 15 points) on four datasets: HotpotQA, 2WikiMultihopQA, MuSiQue, and IIRC. ... Here, what to retrieve depends on what has already been derived, which in turn may depend on what was previously retrieved."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "IRCoT 正文（HTML 全文）§1–§4：方法、超参与实验设置",
+    "url": "https://arxiv.org/html/2212.10509v2",
+    "published_at": "2023-06-23",
+    "key_points": [
+      "检索提升的精确口径为「11-21 recall points」，且是在 fixed-budget optimal recall 设置下相对 one-step、基于问题的检索（OneR）测得。",
+      "QA 提升口径为「up to 15 F1 points」，同时生成 CoT 中的事实性错误最多减少 50%。",
+      "IRCoT 检索器的关键超参：每步检索段落数 K ∈ {2,4,6,8}；推理步数上限设为 8 步（超过即终止并返回已收集段落）。",
+      "收集段落总数上限设为 15 段，以便在模型上下文限制内仍能放入若干 in-context 示例。",
+      "One-step Retriever (OneR) 基线用问题作为查询一次检索 K 段，K ∈ {5,7,9,11,13,15}，按 dev 集选最优。",
+      "检索指标：所有检索系统最多允许 15 段，衡量 gold 段落在其中的 recall。",
+      "底层检索器为 Elasticsearch 上的 BM25；CoT 生成器与 reader 使用 GPT3 (code-davinci-002) 及 Flan-T5 (11B/3B/0.7B)。",
+      "每个数据集从原 dev 集随机抽 100 题调超参、另抽 500 题作测试集；3 组 demonstration 各 15 题，报告 3 次结果的均值与标准差。",
+      "GPT3 (code-davinci-002) 上下文上限 8K word pieces；Flan-T5 上下文限制为 6K word pieces。",
+      "Flan-T5-XL (3B) + IRCoT 的 QA 表现超过参数量大 58 倍的 GPT3 + one-step 检索。"
+    ],
+    "raw_excerpt": "retrieval using IRCoT is substantially more effective than the baseline, one-step, question-based retrieval by 11-21 recall points under a fixed-budget optimal recall setup ... IRCoT Retriever has one key hyperparameter: K ∈ {2,4,6,8}, the number of paragraphs to retrieve at each step ... set to 8 in our experiments. has been reached, we terminate the process and return all collected paragraphs as the retrieval result. ... We cap the total number of collected paragraphs ... set to 15 in our experiments."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "StonyBrookNLP/ircot — 官方代码仓库（元数据）",
+    "url": "https://github.com/StonyBrookNLP/ircot",
+    "published_at": "created 2022-12-20; last push 2024-06-12",
+    "key_points": [
+      "官方仓库为 StonyBrookNLP/ircot，Apache-2.0 许可，284 stars、44 forks，最近一次推送 2024-06-12。",
+      "仓库 topics 标注：chain-of-thought、multi-step-reasoning、multi-step-retrieval、retrieval-augmented-qa。",
+      "本次抓取未取得 README 正文（工具返回 readme unavailable），故仓库侧无模型清单/数据量/训练配置等正文级证据可用。"
+    ],
+    "raw_excerpt": "stars: 284 | forks: 44 | open issues: 13 | language: Jsonnet ... README excerpt: (readme unavailable)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "LangGraph 官方文档：Persistence（checkpointer vs store）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 提供两套互补的持久化系统：checkpointer 持久化单个 thread 的图状态快照，store 持久化图状态之外的应用自定义数据。",
+      "checkpointer 定位为短期、thread 级记忆，用途包括对话连续性、human-in-the-loop、time travel 与容错；store 定位为长期、跨 thread 记忆，用于用户偏好、事实与共享知识。",
+      "checkpointer 通过 graph config 中的 thread_id 访问；store 由节点或应用代码读写条目。",
+      "启用方式是在编译图时传入：builder.compile(checkpointer=checkpointer, store=store)，调用时以 configurable.thread_id 指定会话。",
+      "官方建议多数应用同时使用两者：checkpointer 跟踪当前 thread，store 跟踪跨 thread 的持久信息。",
+      "子图各自管理自己的 checkpoint namespace，父图可能不会立即看到子图的状态更新；跨图边界的数据应通过 Store 共享状态。",
+      "InMemorySaver/MemorySaver 把 checkpoint 存在内存中，进程重启即丢失；生产环境应改用 PostgresSaver 或 SqliteSaver。",
+      "长对话中 checkpoint 会持续累积，官方建议定期裁剪或设置保留策略以控制延迟与存储成本。"
+    ],
+    "raw_excerpt": "Checkpointers persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance. Stores persist application-defined data outside the graph state. Use them for long-term, cross-thread memory, including user preferences, facts, and shared knowledge."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "LangGraph 官方文档：Graph API（State / Nodes / Edges / StateGraph / 编译）",
+    "url": "https://docs.langchain.com/oss/python/langgraph/graph-api",
+    "published_at": null,
+    "key_points": [
+      "LangGraph 把 agent 工作流建模为图，由三个关键组件定义行为：State（共享数据结构，表示应用当前快照）、Nodes（编码 agent 逻辑的函数，接收当前状态、执行计算或副作用、返回更新后的状态）、Edges（根据当前状态决定下一个执行哪个 Node 的函数，可以是条件分支或固定转移）。",
+      "官方原文强调：nodes do the work, edges tell what to do next；通过组合 Nodes 与 Edges 可以构建复杂的、循环的（looping）工作流，并随时间演进状态。",
+      "底层图算法采用消息传递，灵感来自 Google 的 Pregel 系统，程序以离散的 super-step 推进；同一 super-step 内并行运行的节点属于同一步，顺序运行的节点属于不同 super-step。",
+      "节点在任一入边（channel）收到新消息（状态）时被激活，执行后返回更新；每个 super-step 结束时无入消息的节点标记为 inactive，当所有节点 inactive 且无消息在途时图执行终止。",
+      "StateGraph 是主要使用的图类，由用户定义的 State 对象参数化；State 由 schema 与 reducer 函数组成，reducer 规定状态更新如何被应用。",
+      "构建流程为：先定义 state，再添加 nodes 与 edges，最后 compile；compile 会做结构检查（如无孤立节点），并且是指定 checkpointers 与 breakpoints 等运行时参数的地方。",
+      "图必须先编译才能使用；State schema 可用 TypedDict、dataclass 或 Pydantic BaseModel，并支持区分 input/output schema 与私有 state channel。"
+    ],
+    "raw_excerpt": "Edges: Functions that determine which Node to execute next based on the current state. They can be conditional branches or fixed transitions. By composing Nodes and Edges, you can create complex, looping workflows that evolve the state over time. ... In short: nodes do the work, edges tell what to do next."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "LlamaIndex 官方文档：Multi-agent patterns（AgentWorkflow / orchestrator / custom planner）",
+    "url": "https://docs.llamaindex.ai/en/stable/understanding/agent/multi_agent/",
+    "published_at": null,
+    "key_points": [
+      "LlamaIndex 提供三种多 agent 编排模式：内置 AgentWorkflow（声明一组 agent，由它管理交接）、内置 orchestrator 模式（一个 orchestrator agent 决定下一个调用哪个子 agent，子 agent 以 tools 形式暴露给它）、自定义 planner（自己写 LLM 提示做规划并在代码中命令式调用 agent）。",
+      "AgentWorkflow 本身是一个预配置好的 Workflow，专门理解 agents、state 与 tool-calling；用户提供 agent 数组并指定起始 agent。",
+      "AgentWorkflow 的运行循环为：把用户消息交给 root agent → 执行该 agent 选择的工具 → 允许 agent 在它决定时把控制权 handoff 给另一个 agent → 重复直到某个 agent 返回最终答案；任意时刻当前活跃 agent 都可以选择把控制权交还用户。",
+      "AgentWorkflow 负责全部编排，并在过程中流式发出事件，便于向用户反馈进度。",
+      "FunctionAgent 通过 tools 列表声明可调用工具，通过 can_handoff_to 声明可交接的目标 agent，通过 system_prompt 描述角色与交接时机。",
+      "AgentWorkflow 支持 initial_state 传入共享状态字典（如 research_notes、report_content、review），供各 agent 在循环中读写。",
+      "orchestrator 模式把每个子 agent 的 run 方法包装成工具函数（如 call_research_agent / call_write_agent / call_review_agent），交给顶层 orchestrator agent 作为 tools，由它决定调用顺序。",
+      "工具函数通过 ctx.store.edit_state() 读写 workflow 的共享状态，从而在 agent 之间传递中间产物（研究笔记、报告正文、评审意见）。"
+    ],
+    "raw_excerpt": "AgentWorkflow is itself a Workflow pre-configured to understand agents, state and tool-calling. You supply an array of one or more agents, tell it which one should start, and it will: Give the root agent the user message. Execute whatever tools that agent selects. Allow the agent to \"handoff\" control to another agent when it decides. Repeat until an agent returns a final answer."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Haystack 官方文档：Agent 组件（tool-using loop、exit_conditions、state_schema）",
+    "url": "https://docs.haystack.deepset.ai/docs/agent",
+    "published_at": null,
+    "key_points": [
+      "Haystack 的 Agent 组件是一个基于循环的系统：使用支持工具的 chat-based LLM 与外部工具，迭代地解决复杂用户查询，直到满足某个可配置的 exit_conditions。",
+      "Agent 迭代过程为：调用工具、更新状态、生成提示，循环往复；它能根据用户输入动态选择工具，用 schema 维护并校验运行时状态，并流式输出 LLM 的 token。",
+      "exit_conditions 默认是 [\"text\"]（模型返回无工具调用的完整回复即停止），也可指定某个工具名，表示该工具执行后停止；退出条件在运行时求值而非初始化时校验。",
+      "Agent 返回字典包含 messages（完整对话历史）、last_message、step_count、token_usage、tool_call_counts、exit_reason，以及基于 state_schema 的动态键。",
+      "exit_reason 取值包括 \"text\"、\"length\"、\"content_filter\"、满足退出条件的工具名、\"max_agent_steps\"，或由 hook 通过 stop_run 设置的自定义原因；官方指出它便于用 ConditionalRouter 把 agent 输出路由到下游。",
+      "state_schema 定义 agent 的运行时状态（键名到类型配置的映射），工具可通过 inputs_from_state 与 outputs_to_state 读写状态键。",
+      "Agent 的 tools 参数支持 Tool、ComponentTool、PipelineTool、AgentTool、MCPTool、Toolset、MCPToolset、SearchableToolset 等类型，即 pipeline 与 agent 都可被包装成工具供 agent 调用。",
+      "chat_generator 是唯一必填参数，必须是支持工具的 Chat Generator；Agent 在 pipeline 中最常见的位置是 ChatPromptBuilder 或用户输入之后。"
+    ],
+    "raw_excerpt": "The Agent component is a loop-based system that uses a chat-based large language model (LLM) and external tools to solve complex user queries. It works iteratively—calling tools, updating state, and generating prompts—until one of the configurable exit_conditions is met."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Haystack 官方文档：Pipelines（分支、循环、agentic pipelines）",
+    "url": "https://docs.haystack.deepset.ai/docs/pipelines",
+    "published_at": null,
+    "key_points": [
+      "Haystack pipeline 是不同组件与集成的有向多重图（directed multigraph），支持同时多流、独立组件、循环等多种连接方式，不必是连续的信息流。",
+      "官方明确「Haystack 的 loops 与 branches 使构建 agent 这类复杂应用成为可能」，并列出教程：Building a Chat Agent with Function Calling、Building an Agentic RAG with Fallback to Websearch、Loop-Based Auto-Correction、Define & Run Tools、Conversational RAG using Memory。",
+      "pipeline 可以有多个分支并发处理数据；组件可以在迭代循环中工作，循环次数可设上限。",
+      "循环的典型用法是自纠正：generator 产出 → validator 校验 → 若输出有错则回环到 generator 重新生成，直到通过校验再向下游传递。",
+      "pipeline 可借助 ConditionalRouter 这类决策组件把多个用例组合进同一条 pipeline。",
+      "异步运行时，依赖允许的组件会并行执行；可用 concurrency_limit 限制同时运行的组件数，同步 run 则顺序执行。"
+    ],
+    "raw_excerpt": "Haystack loops and branches enable the creation of complex applications like agents. ... Components in a pipeline can work in iterative loops, which you can cap at a desired number. This can be handy for scenarios like self-correcting loops, where you have a generator producing some output and then a validator component to check if the output is correct."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Dify 官方文档：Knowledge Retrieval 节点",
+    "url": "https://docs.dify.ai/en/guides/workflow/node/knowledge-retrieval",
+    "published_at": null,
+    "key_points": [
+      "Knowledge Retrieval 节点用于把已有知识库接入 workflow：针对查询在指定知识库中检索相关信息，并把结果作为上下文内容输出给下游节点（如 LLM）。",
+      "官方示例的 Chatflow 链路为：User Input 节点收集用户查询 → Knowledge Retrieval 节点在选定知识库中检索并输出结果 → LLM 节点结合用户查询与检索到的知识生成回复 → Answer 节点返回给用户。",
+      "节点需配置三件事：检索什么（query）、在哪检索（知识库）、如何处理检索结果（节点级 retrieval settings）；query 可选文本变量（如 userinput.query）或图片变量（需多模态知识库，单图 ≤2MB）。",
+      "可添加多个知识库，此时先从所有知识库同时检索，再按节点级检索设置合并处理。",
+      "检索设置分两层，官方比喻为两道连续的过滤器：知识库级设置决定初始结果池，节点级设置进一步 rerank 或收窄结果池。",
+      "节点级 rerank 设置包括 Weighted Score（语义相似度与关键词匹配的相对权重，仅当所有知识库均为 High Quality 索引模式时可用）、Rerank Model、Top K、Score Threshold。",
+      "默认在整个知识库上检索，可开启手动或自动 metadata filtering 把检索限制到特定文档，以提升精确率。",
+      "节点输出为名为 result 的变量，是检索到的文档分块数组，含内容、metadata、标题等属性；若结果含图片附件，result 还包含 files 字段。",
+      "在 LLM 节点中使用时，在 Context 中选择该 result 变量，并在 system instruction 中引用 Context 变量；chatflow 中默认在引用知识的回复旁显示 citation。"
+    ],
+    "raw_excerpt": "Use the Knowledge Retrieval node to integrate existing knowledge bases into your workflows. The node searches specific knowledge for information relevant to queries and outputs results as contextual content for use in downstream nodes (e.g., LLMs). ... Retrieval settings exist at two layers: the knowledge base level and the knowledge retrieval node level. Think of them as two consecutive filters."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Dify 官方文档：Agent 节点（classic Agent 与 new Agent）",
+    "url": "https://docs.dify.ai/en/guides/workflow/node/agent",
+    "published_at": null,
+    "key_points": [
+      "Dify 的 classic Agent 节点让 LLM 自主控制工具，迭代决定使用哪些工具、何时使用，而不是预先规划每一步；Agent 动态推理问题并按需调用工具完成复杂任务。",
+      "Agent 策略有两种：Function Calling（用 LLM 原生函数调用能力，通过 tools 参数直接传工具定义，适合 GPT-4、Claude 3.5 等）与 ReAct（用结构化提示引导显式推理，遵循 Thought → Action → Observation 循环，适合无原生函数调用或需要显式推理轨迹的模型）。",
+      "工具配置包含 Authorization（凭证）、Description（说明工具做什么、何时使用，官方指出这会影响 Agent 的决策）、Parameters（必填与可选输入及校验）。",
+      "执行控制包括 Max Iterations（防止无限循环的安全上限，官方建议简单任务 3-5 次、复杂研究 10-15 次）与 Memory（用 TokenBufferMemory 控制记住多少条历史消息，窗口越大上下文越多但 token 成本越高）。",
+      "Agent 节点输出包括 Final Answer、Tool Outputs（每次工具调用结果）、Reasoning Trace（逐步决策过程，ReAct 策略下尤其详细，位于 JSON 输出中）、Iteration Count、Success Status、Agent Logs。",
+      "Instructions 与 Context 用自然语言定义 Agent 的角色、目标与上下文，可用 Jinja2 语法引用上游 workflow 节点的变量；Query 指定 Agent 要处理的任务，可来自前序节点的动态内容。",
+      "新版 Agent 节点处于 beta、仅 Workflow 应用可用：它把 agent 作为 workflow 的一个步骤运行，agent 作为带自身能力与沙箱的完整 worker 接入，用户只指定任务，它自行完成并把结果交回流程其余部分。",
+      "新版节点可邀请已发布的 agent（能力在 Agents 中集中管理，发布更新后所有引用它的 workflow 都会获得更新），也可在节点上创建一次性 agent；两个节点邀请同一 agent 仍各自在独立沙箱中运行，节点间需通过声明输出并下游引用来传递结果。"
+    ],
+    "raw_excerpt": "The classic Agent node gives your LLM autonomous control over tools, enabling it to iteratively decide which tools to use and when to use them. Instead of pre-planning every step, the Agent reasons through problems dynamically, calling tools as needed to complete complex tasks. ... The new Agent node runs an agent as one step of a workflow."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Agentic retrieval in Azure AI Search (Microsoft Learn)",
+    "url": "https://learn.microsoft.com/en-us/azure/search/search-agentic-retrieval-concept",
+    "published_at": null,
+    "key_points": [
+      "Azure AI Search 将 agentic retrieval 定义为面向聊天/ copilot 应用中复杂问题的 multi-query pipeline，用于 RAG 模式与 agent-to-agent 工作流。",
+      "该管线可用基于 LLM 的 query planning（preview）把复杂查询拆解为更小、更聚焦的 subqueries，以提升对专有内容与外部内容的覆盖；query planning 可利用 chat history 作为额外上下文。",
+      "各 subquery 并行执行，每个 subquery 都经过语义 rerank 以提升最相关结果的排序；随后把最佳结果合并为统一响应供 LLM 生成有依据的答案。",
+      "除合并内容外，还可返回 source references 与 activity log（执行活动日志），使调用方可只用 grounding 数据，或再传给 LLM 生成完整答案。",
+      "架构流程分四阶段：workflow initiation（应用带 query 与 conversation history 调用 knowledge base 的 retrieve action）、query planning、query execution、result synthesis。",
+      "检索推理强度（retrieval reasoning effort）可配置：minimal 时跳过 query planning 直接把查询发给知识源；low 与 medium 时由 LLM 生成聚焦 subqueries；默认值为 low，配置在 knowledge base 上。",
+      "组件包括 knowledge base（编排管线、管理知识源与查询参数）、knowledge source（可为 indexed 即由搜索索引支撑，或 remote 即在查询时从外部平台取内容）、search index（存文本与向量并带 semantic configuration）、semantic ranker（管线内部用于 L2 reranking）、LLM（Azure OpenAI，可负责规划查询与选择知识源、摘要网页结果、以及通过 answer synthesis 生成带引用的答案）。",
+      "文档明确说明 agentic retrieval 相比单查询管线会增加延迟（adds latency），但能处理单查询无法处理的复杂度，例如包含多个诉求的问题、依赖对话前文的问题、需要改写/同义词扩展的问题以及拼写错误。",
+      "文档注明标记为 preview 的功能不受 SLA 覆盖、不建议用于生产负载；生产负载建议使用 2026-04-01 版 REST API。",
+      "Azure AI Search 同时支撑 Foundry IQ，即 Microsoft Foundry 门户中把企业内容转为可复用、权限感知（permission-aware）知识库的托管知识层。"
+    ],
+    "raw_excerpt": ""
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents",
+    "url": "https://arxiv.org/abs/2504.12516",
+    "published_at": "2025-04-16",
+    "key_points": [
+      "BrowseComp 由 OpenAI 提出，共 1,266 道题，要求 agent 持续浏览互联网以寻找难以发现、相互纠缠（entangled）的信息。",
+      "答案被设计为简短、可对照参考答案自动校验；评分方式是用 AI 模型判断预测答案与参考答案是否语义等价，评分 prompt 沿用 Humanity's Last Exam。",
+      "题目构造采用「倒置」策略：从一个事实出发构造答案难找但易验证的问题；训练者需确认 GPT-4o（含/不含浏览）、OpenAI o1 以及早期 deep research 模型都无法解出。",
+      "数据集通过 https://github.com/openai/simple-evals 发布，并嵌入 canary 字符串以防训练数据泄漏。",
+      "论文明确将 BrowseComp 定位为衡量 agent「持久性（persistence）与搜索创造性」的核心浏览能力，而非真实用户查询分布（不覆盖长答案生成、歧义消解）。"
+    ],
+    "raw_excerpt": "We present BrowseComp, a simple yet challenging benchmark for measuring the ability for agents to browse the web. BrowseComp comprises 1,266 questions that require persistently navigating the internet in search of hard-to-find, entangled information."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "BrowseComp (HTML full text) — 人类表现与评测设计",
+    "url": "https://arxiv.org/html/2504.12516v1",
+    "published_at": "2025-04-16",
+    "key_points": [
+      "人类基线：在 1,255 道被尝试的题目中，888 道（70.8%）在尝试两小时后放弃，367 道（29.2%）被人类训练者解出；解出的题中训练者答案与参考答案一致率为 86.4%（317/367）。",
+      "Figure 1 显示早期版本 OpenAI Deep Research 在 BrowseComp 上的准确率随「browsing effort」（测试时计算量）平滑提升，即准确率与测试时计算呈平滑缩放关系。",
+      "题目难度校验标准包括：训练者需做五次简单 Google 搜索确认答案不在搜索结果首页；另一人 10 分钟内无法解出；被他人 10 分钟内解出率超过 40% 的题目需返工修改。",
+      "题目主题分布由 ChatGPT 模型事后分类统计（Figure 2）。"
+    ],
+    "raw_excerpt": "Figure 1: BrowseComp performance of an early version of OpenAI Deep Research with varying browsing effort. Accuracy scales smoothly with test-time compute. ... Human gave up after two hours 888 / 1,255 (70.8%); Solved by human 367 / 1,255 (29.2%)"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG",
+    "url": "https://arxiv.org/abs/2501.09136",
+    "published_at": "2025-01-15",
+    "key_points": [
+      "该综述明确指出传统 RAG 受限于静态工作流（static workflows），缺乏多步推理与复杂任务管理所需的适应性；Agentic RAG 通过把自主 agent 嵌入 RAG 流水线来突破这一限制。",
+      "Agentic RAG 的 agentic 设计模式包括 reflection（反思）、planning（规划）、tool use（工具使用）与 multi-agent collaboration（多智能体协作）。",
+      "综述按 agent 基数（agent cardinality）、控制结构、自主性、知识表示四个维度给出 Agentic RAG 架构分类法，并比较各框架的设计权衡。",
+      "综述将「评估（evaluation）、协调、记忆管理、效率（efficiency）与治理」列为关键开放研究挑战——即该领域尚无成熟统一评测体系。"
+    ],
+    "raw_excerpt": "Despite its promise, traditional RAG systems are constrained by static workflows and lack the adaptability required for multi-step reasoning and complex task management. ... Finally, it identifies key open research challenges related to evaluation, coordination, memory management, efficiency, and governance"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2503.09516",
+    "published_at": "2025-03-12",
+    "key_points": [
+      "Search-R1 让 LLM 在逐步推理过程中自主生成（多次）搜索查询并进行实时检索，用多轮搜索交互轨迹做 RL 优化，采用 retrieved token masking 与基于结果的简单奖励函数。",
+      "在七个问答数据集上，Search-R1 相比多种 RAG 基线在同设置下提升 41%（Qwen2.5-7B）与 20%（Qwen2.5-3B）。",
+      "论文提供了关于 RL 优化方法、LLM 选择以及「响应长度动态（response length dynamics）」的实证分析——即多轮检索带来的轨迹长度/成本变化。",
+      "代码与模型 checkpoint 已开源。"
+    ],
+    "raw_excerpt": "Search-R1 optimizes LLM reasoning trajectories with multi-turn search interactions, leveraging retrieved token masking for stable RL training and a simple outcome-based reward function. Experiments on seven question-answering datasets show that Search-R1 improves performance by 41% (Qwen2.5-7B) and 20% (Qwen2.5-3B) over various RAG baselines under the same setting."
+  }
+]

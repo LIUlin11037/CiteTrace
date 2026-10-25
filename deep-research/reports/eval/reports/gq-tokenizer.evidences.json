@@ -1,0 +1,567 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Neural Machine Translation of Rare Words with Subword Units (Sennrich, Haddow, Birch; ACL 2016)",
+    "url": "https://arxiv.org/html/1508.07909v5",
+    "published_at": "2015-08-31 (v1); v5 2016-06-10",
+    "key_points": [
+      "BPE 原始出处为 Gage (1994) 的数据压缩算法：迭代地把序列中最频繁的字节对替换为一个未使用的单字节；Sennrich 等将其改造为词切分，合并对象从字节对改为字符或字符序列。",
+      "算法初始化：符号词表以字符词表初始化，每个词表示为字符序列，并附加一个特殊的词尾符号 '·'（end-of-word），该符号使得翻译后可以还原原始分词。",
+      "Algorithm 1 (Learn BPE operations) 的步骤：对词频字典反复执行 get_stats 统计相邻符号对频次 → 取频次最大的 pair → merge_vocab 合并 → 重复 num_merges 次（示例中 num_merges=10）。",
+      "为效率起见不考虑跨词边界的符号对，因此算法可直接在从文本抽取的词频字典上运行，每个词以其频次加权。",
+      "合并准则为「最高共现频次」（most frequent pair），即纯频次驱动、贪心且确定性的替换。",
+      "论文给出示例：从字典 {'low','lowest','newer','wider'} 学到的合并操作为 r·→r·、l o→lo、lo w→low、e r·→er·；未见词 'lower' 会被切分为 'low er·'。",
+      "论文评估两种 BPE 应用方式：源端与目标端各自学习独立编码，或在两端词表并集上学习编码（称为 joint BPE）。",
+      "论文主张 BPE 能用固定大小的变长字符序列词表表示开放词表，比大词表加回退词典更简单有效；在 WMT15 英德、英俄任务上相对回退词典基线分别提升 1.1 和 1.3 BLEU。"
+    ],
+    "raw_excerpt": "Byte Pair Encoding (BPE) [Gage (1994)] is a simple data compression technique that iteratively replaces the most frequent pair of bytes in a sequence with a single, unused byte. We adapt this algorithm for word segmentation. Instead of merging frequent pairs of bytes, we merge characters or character sequences. ... we initialize the symbol vocabulary with the character vocabulary, and represent each word as a sequence of characters, plus a special end-of-word symbol '·', which allows us to restore the original tokenization after translation. ... For efficiency, we do not consider pairs that cross word boundaries."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates (Taku Kudo; ACL 2018)",
+    "url": "https://arxiv.org/html/1804.10959v1",
+    "published_at": "2018-04-29",
+    "key_points": [
+      "Unigram 语言模型假设各子词独立出现，子词序列 x=(x1..xM) 的概率为各子词出现概率之积 P(x)=∏p(xi)，且 Σ_{x∈V} p(x)=1，V 为预先确定的词表。",
+      "最可能的切分为 x* = argmax_{x∈S(X)} P(x)，其中 S(X) 是由输入句构建的切分候选集合，x* 用 Viterbi 算法求得。",
+      "给定词表 V 时，子词出现概率 p(xi) 通过 EM 算法估计，以最大化边缘似然 L=Σ log(Σ_{x∈S(X)} P(x))，把切分视为隐变量。",
+      "词表 V 本身未知，联合优化词表与概率不可解，故采用迭代算法：(1) 从训练语料启发式构造一个较大的种子词表；(2) 重复「固定词表下用 EM 估计概率 → 对每个子词计算删除该子词后总似然的损失 → 按损失排序只保留前 η%（如 η=80）的子词」直到 |V| 达到目标大小；始终保留单字符子词以避免 OOV。",
+      "BPE 的合并准则为频次：先按字符切分，最频繁的子串最早被合并，常见词最终保留为单一符号，罕见字符组合被切成更小单元；通常词表仅需 16k–32k 即可不显著增加编码句长。",
+      "BPE 的固有局限：基于贪心且确定性的符号替换，无法给出带概率的多种切分，因此难以直接用于依赖切分概率 P(x|X) 的子词正则化。",
+      "WordPiece 与 BPE 的区别（作者脚注转述）：严格说 WordPiece 模型不同于 BPE，但因其同样采用增量式词表生成、只是损失函数不同，作者将其视为 BPE 的变体；WordPiece 使用似然而非频次作为合并判据。",
+      "子词正则化在训练时对每个参数更新在线采样切分（k=1 近似边缘似然）；解码时可用 one-best 切分 x*=argmax P(x|X)，或用 n-best 切分配合长度惩罚得分 score(x,y)=log P(y|x)/|y|^λ。"
+    ],
+    "raw_excerpt": "The unigram language model makes an assumption that each subword occurs independently, and consequently, the probability of a subword sequence x=(x1,...,xM) is formulated as the product of the subword occurrence probabilities p(xi) ... x* is obtained with the Viterbi algorithm ... One downside is, however, that BPE is based on a greedy and deterministic symbol replacement, which can not provide multiple segmentations with probabilities. ... Strictly speaking, wordpiece model (Schuster and Nakajima, 2012) is different from BPE. We consider wordpiece as a variant of BPE, as it also uses an incremental vocabulary generation with a different loss function."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "github",
+    "title": "openai/tiktoken — README (fast BPE tokeniser for OpenAI models)",
+    "url": "https://raw.githubusercontent.com/openai/tiktoken/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "tiktoken 是用于 OpenAI 模型的快速 BPE 分词器；示例编码包括 o200k_base、cl100k_base，并可通过 encoding_for_model(\"gpt-4o\") 取得对应模型的编码。",
+      "README 明确列出 BPE 的四条性质：(1) 可逆且无损，token 能还原为原始文本；(2) 可作用于任意文本，包括不在分词器训练数据中的文本；(3) 压缩文本，token 序列短于原文对应字节，实践中平均每个 token 约对应 4 个字节；(4) 让模型看到常见子词，例如 \"ing\" 使 \"encoding\" 常被切成 \"encod\"+\"ing\"，有助于模型泛化与理解语法。",
+      "README 提供 _educational 子模块用于教学与可视化 BPE 过程，含 train_simple_encoding() 与 SimpleBytePairEncoding.from_tiktoken(\"cl100k_base\")。",
+      "tiktoken 的 Encoding 对象由 pat_str（预分词正则）、mergeable_ranks（可合并的 rank 表）、special_tokens 等参数构造，说明其 BPE 实现以「预分词 + 合并 rank 表」为核心数据结构。",
+      "README 声称 tiktoken 比同类开源分词器快 3–6 倍（在 1GB 文本上以 GPT-2 分词器测量，对比 tokenizers==0.13.2 / transformers==4.24.0 / tiktoken==0.2.0）——此为项目自述的性能主张，非独立第三方评测。"
+    ],
+    "raw_excerpt": "tiktoken is a fast BPE tokeniser for use with OpenAI's models. ... Byte pair encoding (BPE) is a way of converting text into tokens. It has a couple desirable properties: 1) It's reversible and lossless, so you can convert tokens back into the original text 2) It works on arbitrary text, even text that is not in the tokeniser's training data 3) It compresses the text: the token sequence is shorter than the bytes corresponding to the original text. On average, in practice, each token corresponds to about 4 bytes."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Neural Machine Translation of Rare Words with Subword Units — arXiv 摘要页（元数据核对）",
+    "url": "https://arxiv.org/abs/1508.07909",
+    "published_at": "2015-08-31 (v1); v5 2016-06-10",
+    "key_points": [
+      "该论文 2015-08-31 首次提交，共 5 个版本，v5 为 2016-06-10，注明 accepted at ACL 2016。",
+      "摘要说明论文讨论多种词切分技术的适用性，包括简单字符 n-gram 模型与基于 BPE 压缩算法的切分，并在 WMT15 英德、英俄任务上相对回退词典基线提升 1.1 与 1.3 BLEU。"
+    ],
+    "raw_excerpt": "We discuss the suitability of different word segmentation techniques, including simple character n-gram models and a segmentation based on the byte pair encoding compression algorithm, and empirically show that subword models improve over a back-off dictionary baseline for the WMT 15 translation tasks English-German and English-Russian by 1.1 and 1.3 BLEU, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Subword Regularization — arXiv 摘要页（元数据核对）",
+    "url": "https://arxiv.org/abs/1804.10959",
+    "published_at": "2018-04-29",
+    "key_points": [
+      "该论文 2018-04-29 提交，仅 v1，注明 Accepted as a long paper at ACL2018，作者 Taku Kudo（Google）。",
+      "摘要指出：同一词表下切分本身存在歧义、可能有多种切分；论文提出子词正则化（训练时按概率采样多种切分），并提出基于 unigram 语言模型的新子词切分算法以支持更好的子词采样。"
+    ],
+    "raw_excerpt": "While sentences are usually converted into unique subword sequences, subword segmentation is potentially ambiguous and multiple segmentations are possible even with the same vocabulary. ... for better subword sampling, we propose a new subword segmentation algorithm based on a unigram language model."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "No Single Tokenizer Feature Reliably Predicts Downstream Language Model Performance",
+    "url": "https://arxiv.org/abs/2610.21679",
+    "published_at": "2026-10-20",
+    "key_points": [
+      "该研究分析了约 200 个语言模型，覆盖九种不同语言，同时评测模型与其 tokenizer。",
+      "研究检验了各类已提出的 tokenizer 内在指标（intrinsic tokenizer evaluations）与模型在多种 benchmark 上表现之间是否存在关系。",
+      "核心结论：尽管已有大量且多样的 tokenizer 内在指标，没有任何一个指标能在模型家族、任务和语言之间一致地预测下游性能。",
+      "作者据此主张需要新的 tokenizer 评测指标与方法，并提出一个基于语言学的（linguistically grounded）新指标，称其能捕捉现有指标遗漏的 tokenizer 质量维度，但预测力仍可能随模型家族、语言和任务而变化。",
+      "该文被 EMNLP 2026 Findings 接收，10 页。"
+    ],
+    "raw_excerpt": "In this paper, we analyze approximately 200 language models trained on nine different languages. We evaluate both models and their tokenizers and test whether there is a relationship between any proposed intrinsic tokenizer evaluations and model performance, as measured by a wide variety of benchmarks. Despite the quantity and variety of proposed intrinsic tokenizer metrics, we find that none consistently predicts downstream performance across model families, tasks, and languages."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "ANI: Adaptive Numerical Injection for Unifying Semantic and Arithmetic Representations in Numerical Reasoning",
+    "url": "https://arxiv.org/abs/2609.39294",
+    "published_at": "2026-09-30",
+    "key_points": [
+      "论文明确指出基于文本的 tokenization 经常把数字切碎（fragments numbers），显著妨碍精确的算术推理。",
+      "提出 ANI（Adaptive Numerical Injection）混合框架，用上下文感知的门控机制，选择性地把数值 embedding（具体为 FoNE）注入隐空间。",
+      "在多种 LLM 上评测，ANI 相对官方参考模型在 MATH 上提升 9.5 个点，同时在通用语言 benchmark 上保持稳健表现。",
+      "该工作被 EMNLP 2026 接收，代码发布于 github.com/Jinsung-Jeon/ANI_EMNLP。"
+    ],
+    "raw_excerpt": "However, text-based tokenization often fragments numbers, significantly hindering precise arithmetic reasoning. ... we demonstrate that ANI enhances MATH performance by 9.5 points over the official reference model, while maintaining robust performance on general linguistic benchmarks."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Efficient Multilingual Neural Machine Translation via Corpus-Driven Vocabulary Pruning: An English-Arabic Case Study",
+    "url": "https://arxiv.org/abs/2608.03480",
+    "published_at": "2026-08-04",
+    "key_points": [
+      "论文指出大型预训练多语言模型面临词表与 embedding 层过大导致的内存与算力开销问题。",
+      "提出词表剪枝加定向微调的优化框架，在 M2M100、NLLB-200、mBART-50 三个模型上以英阿语言对评测。",
+      "该方法把词表规模从 12.8 万以上降到约 1 万 token，实现 60% 内存节省且性能无损。",
+      "剪枝并微调后的 M2M100 取得 BLEU 42.04（对比 OPUS-MTen-ar 双语模型的 44.59），但在 COMET 上显著更优（0.8730 vs 0.7911）。"
+    ],
+    "raw_excerpt": "Our approach reduces the vocabulary size from over 128,000 to approximately 10,000 tokens, enabling a 60% memory saving without any loss in performance. ... the pruned and fine-tuned M2M100 model achieves a competitive BLEU score of 42.04 (against 44.59 for the OPUS-MTen-ar bilingual model) while it significantly outperforms it on the COMET metric (0.8730 vs 0.7911)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Optimizing Korean-Centric LLMs via Token Pruning",
+    "url": "https://arxiv.org/abs/2604.16235",
+    "published_at": "2026-04-17",
+    "key_points": [
+      "论文对 Qwen3、Gemma-3、Llama-3、Aya 等最先进多语言 LLM 做系统性 benchmark，采用 token pruning（删除与目标应用无关语言的 token 与 embedding 参数）。",
+      "设置三种词表配置：Original、English-Korean (EnKo)、English-Korean-Chinese (EnKoZh)。",
+      "评测覆盖通用能力、文化素养、指令遵循与机器翻译等 benchmark。",
+      "发现：token pruning 通过消除语言混淆显著提升生成稳定性；在机器翻译上常常提升韩语特定任务表现。",
+      "指令遵循能力呈现与架构相关的差异，作者将其与潜在跨语言表征联系起来；词表规模的显著缩减验证了 token pruning 是内存受限、领域特定部署的有效优化策略，但推理延迟收益有限。"
+    ],
+    "raw_excerpt": "Our findings indicate that token pruning significantly improves generation stability by eliminating language confusion, and in the case of machine translation, frequently enhances performance on Korean-specific tasks. While instruction-following capabilities display architecture-dependent variance linked to latent cross-lingual representations, the significant reduction in vocabulary size validates token pruning as a highly effective optimization strategy for memory-constrained, domain-specific deployments, despite modest gains in inference latency."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "MultiHashFormer: Hash-based Generative Language Models",
+    "url": "https://arxiv.org/abs/2606.28057",
+    "published_at": "2026-08-28",
+    "key_points": [
+      "论文指出语言模型用 embedding 矩阵表示 token，其参数量随词表规模线性增长。",
+      "提出 MultiHashFormer：每个 token 表示为多个独立哈希函数生成的离散哈希 ID 短序列（hash signature），由 Hash Encoder 压缩为单一隐向量，再由 Hash Decoder 生成下一 token 的哈希签名并映射回文本。",
+      "在 100M、1B、3B 三个参数规模上评测，MultiHashFormer 在多个 benchmark 上一致优于标准 Transformer LM。",
+      "该模型能以恒定参数开销处理多语言词表扩展，无需任何修改。",
+      "该工作被 EMNLP 2026 接收。"
+    ],
+    "raw_excerpt": "Language models (LMs) represent tokens using embedding matrices that scale linearly with the vocabulary size. ... We evaluate our approach at the 100M, 1B and 3B parameter scales, demonstrating that MultiHashFormer consistently outperforms standard Transformer LMs across multiple benchmarks. Furthermore, we show that our model handles multilingual vocabulary expansion with a constant parameter footprint without any modifications."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Enhancing Cross-Lingual Transfer through Reversible Transliteration: A Huffman-Based Approach for Low-Resource Languages",
+    "url": "https://arxiv.org/abs/2509.17493",
+    "published_at": "2025-09-22",
+    "key_points": [
+      "该文研究面向低资源语言的跨语言迁移增强，采用基于 Huffman 编码的可逆音译（reversible transliteration）方法。",
+      "论文关注 LLM 训练语料语言日益多样化的背景下的低资源语言表征问题。",
+      "（注：仅取到摘要开头部分，未读到方法/实验章节，具体效应量未获取。）"
+    ],
+    "raw_excerpt": "As large language models (LLMs) are trained on increasingly diverse and extens[ive corpora] ... Enhancing Cross-Lingual Transfer through Reversible Transliteration: A Huffman-Based Approach for Low-Resource Languages"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "The Llama 3 Herd of Models (arXiv:2407.21783v3)",
+    "url": "https://arxiv.org/html/2407.21783v3",
+    "published_at": "2024-07-31 (v1); v3 revised 2024-11-23",
+    "key_points": [
+      "Llama 3 系列包含 8B、70B、405B 三个参数规模的稠密 Transformer 模型，旗舰模型上下文窗口最高 128K tokens。",
+      "Llama 3 预训练语料约 15T 多语言 tokens，相比 Llama 2 的 1.8T tokens 大幅增加。",
+      "旗舰 405B 模型在 15.6T 文本 tokens 上预训练，使用 8K 上下文窗口，随后经继续预训练扩展到 128K。",
+      "预训练数据来源覆盖至 2023 年底，采用行级去重（30M 文档桶内出现超过 6 次的行被移除）、脏词计数过滤成人站点、以及基于 token 分布 KL 散度的离群文档过滤。",
+      "论文声明 Llama 3 8B/70B 在多语言数据上预训练，但发布时定位为英文使用。"
+    ],
+    "raw_excerpt": "We pre-train Llama 3 on a corpus of about 15T multilingual tokens, compared to 1.8T tokens for Llama 2. ... we pre-trained a flagship model with 405B trainable parameters on 15.6T text tokens."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report (arXiv:2412.19437v2)",
+    "url": "https://arxiv.org/html/2412.19437v2",
+    "published_at": "2024-12 (v2)",
+    "key_points": [
+      "DeepSeek-V3 为 MoE 架构，总参数 671B，每 token 激活 37B。",
+      "DeepSeek-V3 在 14.8T 高质量多样化 tokens 上预训练。",
+      "上下文长度分两阶段扩展：先到 32K，再到 128K。",
+      "完整训练消耗 2.788M H800 GPU 小时（预训练 2664K、上下文扩展 119K、后训练 5K），按 $2/GPU 小时计约 5.576M 美元。",
+      "论文称除显式说明外，DeepSeek-V3 的其他细节沿用 DeepSeek-V2 的设置。"
+    ],
+    "raw_excerpt": "We pre-train DeepSeek-V3 on 14.8 trillion diverse and high-quality tokens ... In the first stage, the maximum context length is extended to 32K, and in the second stage, it is further extended to 128K."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "openai/tiktoken — fast BPE tokeniser for use with OpenAI's models",
+    "url": "https://github.com/openai/tiktoken",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：openai/tiktoken 约 19,521 stars、1,661 forks，主语言 Python，最近 push 时间 2026-08-17（仅元数据，README 正文未读取成功）。",
+      "仓库简介自述为「a fast BPE tokeniser for use with OpenAI's models」，即面向 OpenAI 模型的快速 BPE 分词器实现。"
+    ],
+    "raw_excerpt": "openai/tiktoken (★19521, forks 1661) — desc: tiktoken is a fast BPE tokeniser for use with OpenAI's models. lang: Python | last push: 2026-08-17"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "dqbd/tiktokenizer — Online playground for OpenAI tokenizers",
+    "url": "https://github.com/dqbd/tiktokenizer",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：dqbd/tiktokenizer 约 1,714 stars、188 forks，TypeScript 实现，最近 push 2025-04-24。",
+      "定位为 OpenAI 分词器的在线 playground，可用于交互式观察文本被切分为 token 的结果（仅据简介，正文未读取）。"
+    ],
+    "raw_excerpt": "dqbd/tiktokenizer (★1714, forks 188) — desc: Online playground for OpenAPI tokenizers. lang: TypeScript | last push: 2025-04-24"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "niieani/gpt-tokenizer — JS BPE tokenizer for OpenAI GPT models",
+    "url": "https://github.com/niieani/gpt-tokenizer",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：niieani/gpt-tokenizer 约 856 stars、63 forks，TypeScript，最近 push 2026-10-18。",
+      "简介称其为 OpenAI tiktoken 的 JavaScript 移植，并声称支持 gpt-5、gpt-o*、gpt-4o 等模型（「fastest」为仓库自述营销性表述，未获第三方验证）。"
+    ],
+    "raw_excerpt": "niieani/gpt-tokenizer (★856, forks 63) — desc: The fastest JavaScript BPE Tokenizer Encoder Decoder for OpenAI's GPT models (gpt-5, gpt-o*, gpt-4o, etc.). Port of OpenAI's tiktoken with additional features."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "pkoukk/tiktoken-go / tiktoken-go/tokenizer / zurawiki/tiktoken-rs — 多语言 tiktoken 移植生态",
+    "url": "https://github.com/pkoukk/tiktoken-go",
+    "published_at": null,
+    "key_points": [
+      "pkoukk/tiktoken-go：约 956 stars、106 forks，Go 实现，最近 push 2026-05-12。",
+      "tiktoken-go/tokenizer：约 459 stars、39 forks，Go，最近 push 2026-10-21，自述为 tiktoken 的纯 Go 实现。",
+      "zurawiki/tiktoken-rs：约 408 stars、76 forks，Rust，最近 push 2026-09-24。",
+      "dmitry-brazhenko/SharpToken：约 263 stars、19 forks，C#，基于 tiktoken Python 库。",
+      "daulet/tokenizers：约 228 stars、43 forks，提供 HF Tokenizers 与 Tiktoken 的 Go/Wasm 绑定。",
+      "以上仅为搜索接口返回的元数据，各仓库 README 正文均未成功读取。"
+    ],
+    "raw_excerpt": "pkoukk/tiktoken-go (★956, forks 106) — desc: go version of tiktoken. lang: Go | last push: 2026-05-12; tiktoken-go/tokenizer (★459) — Pure Go implementation of OpenAI's tiktoken tokenizer; zurawiki/tiktoken-rs (★408) — Ready-made tokenizer library for working with GPT and tiktoken; dmitry-brazhenko/SharpToken (★263) — based on the tiktoken Python library; daulet/tokenizers (★228) — Go, Wasm bindings for HF Tokenizers and Tiktoken"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "M4THYOU/TokenDagger — High-Performance Implementation of OpenAI's TikToken",
+    "url": "https://github.com/M4THYOU/TokenDagger",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：M4THYOU/TokenDagger 约 474 stars、14 forks，C++ 实现，最近 push 2025-07-03，自述为 tiktoken 的高性能实现。"
+    ],
+    "raw_excerpt": "M4THYOU/TokenDagger (★474, forks 14) — desc: High-Performance Implementation of OpenAI's TikToken. lang: C++ | last push: 2025-07-03"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "NLPOptimize/flash-tokenizer — optimized tokenizer engine for LLM inference serving",
+    "url": "https://github.com/NLPOptimize/flash-tokenizer",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：NLPOptimize/flash-tokenizer 约 457 stars、11 forks，C++，最近 push 2026-02-02，自述为面向 LLM 推理服务的优化分词引擎（与推理侧 tokenizer 开销相关，但正文未读取）。"
+    ],
+    "raw_excerpt": "NLPOptimize/flash-tokenizer (★457, forks 11) — desc: EFFICIENT AND OPTIMIZED TOKENIZER ENGINE FOR LLM INFERENCE SERVING. lang: C++ | last push: 2026-02-02"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "RahulSChand/gpu_poor — token/s 与 GPU 显存需求估算器",
+    "url": "https://github.com/RahulSChand/gpu_poor",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：RahulSChand/gpu_poor 约 1,403 stars、88 forks，JavaScript，最近 push 2024-12-03。",
+      "简介称可计算任意 LLM 的 token/s 与 GPU 显存需求，支持 llama.cpp/ggml/bnb/QLoRA 量化（与「每 token 计算量/显存成本」量化相关，但正文未读取）。"
+    ],
+    "raw_excerpt": "RahulSChand/gpu_poor (★1403, forks 88) — desc: Calculate token/s & GPU memory requirement for any LLM. Supports llama.cpp/ggml/bnb/QLoRA quantization. lang: JavaScript | last push: 2024-12-03"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "shivnathtathe/zero-noise-bench — 暴露 tokenization 盲点的基准套件",
+    "url": "https://github.com/shivnathtathe/zero-noise-bench",
+    "published_at": null,
+    "key_points": [
+      "仓库元数据：shivnathtathe/zero-noise-bench 仅 0 stars、0 forks，Python，最近 push 2026-04-10。",
+      "简介称其针对字符串反转、字符计数、位置抽取等任务，用于暴露 tokenization 盲点（社区热度极低，不能作为热度证据）。"
+    ],
+    "raw_excerpt": "shivnathtathe/zero-noise-bench (★0, forks 0) — desc: ... Tasks include string reversal, character counting, positional extraction, numeric comparison gotchas, and logic traps — exposing tokenization blind spots."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "检索结果：未找到 tokenizer 对比 benchmark 类仓库（检索式 'tokenizer benchmark comparison token count'）",
+    "url": "https://github.com/search?q=tokenizer+benchmark+comparison+token+count",
+    "published_at": null,
+    "key_points": [
+      "以 'tokenizer benchmark comparison token count' 检索 GitHub 仅返回 4 个仓库，stars 分别为 4/1/0/0，且均非 tokenizer 对比 benchmark（分别为 Codex reasoning token 实验、agent 架构对比、通用 AI CLI 工具集、文本操作基准）。",
+      "以 'tokenizer comparison fertility multilingual benchmark' 检索 GitHub 返回 0 个仓库。",
+      "以 'huggingface tokenizers' 检索未返回 huggingface/tokenizers 官方仓库本身，返回的是 gpu_poor、flash-tokenizer 等间接相关仓库。"
+    ],
+    "raw_excerpt": "Found 4 repos for 'tokenizer benchmark comparison token count' (sorted by stars): johnmu/codex-reasoning-token-experiment (★4) ... leaalonzo/agent-benchmark (★1) ... nripankadas07/ai-toolkit (★0) ... shivnathtathe/zero-noise-bench (★0). No GitHub repos found for query: 'tokenizer comparison fertility multilingual benchmark'"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Tokenizer Choice For LLM Training: Negligible or Crucial?",
+    "url": "https://arxiv.org/abs/2310.08754",
+    "published_at": "2023-10-12 (v1); v4 2024-03-17",
+    "key_points": [
+      "该研究训练了 24 个 2.6B 参数规模的单语与多语言 LLM，对 tokenizer 算法与参数化做消融，以考察 tokenizer 选择对下游性能的影响。",
+      "作者结论称 tokenizer 选择可显著影响模型下游性能与训练成本。",
+      "作者明确指出常用的 tokenizer 评估指标 fertility 与 parity 并不总能预测模型下游性能，因此认为这些指标作为下游性能代理指标值得质疑。",
+      "作者报告：覆盖五种最高频欧洲语言的多语言 tokenizer 相比英语需要约 3 倍的词表规模扩张。",
+      "作者报告：将英语中心 tokenizer 用于多语言 LLM 训练会导致严重的下游性能退化，并因词表 tokenization 效率低下带来最高 68% 的额外训练成本。"
+    ],
+    "raw_excerpt": "we find that the common tokenizer evaluation metrics fertility and parity are not always predictive of model downstream performance, rendering these metrics a questionable proxy for the model's downstream performance. ... this approach results in a severe downstream performance degradation and additional training costs of up to 68%, due to an inefficient tokenization vocabulary."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Learning to Reduce: Optimal Representations of Structured Data in Prompting Large Language Models（经核实主题不符，仅记录排除理由）",
+    "url": "https://arxiv.org/abs/2402.14195",
+    "published_at": "2024-02-22",
+    "key_points": [
+      "该论文主题为用 on-policy 强化学习微调模型以压缩结构化数据（KG、表格、数据库）的 prompt 上下文，与 tokenizer 压缩率/fertility 和下游 benchmark 的关系无关。",
+      "因此本条不作为子问题 f1 的证据使用，仅记录检索排除过程。"
+    ],
+    "raw_excerpt": "we propose a framework, Learning to Reduce, that fine-tunes a language model to generate a reduced version of an input context, given a task description and context input."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies",
+    "url": "https://arxiv.org/abs/2407.13623",
+    "published_at": "2024-07-18 (v1), v3 2024-11-01, NeurIPS 2024",
+    "key_points": [
+      "论文将总参数量分解为非词表参数 N_nv 与词表参数 N_v，其中 N = N_nv + N_v，并用 N_v = V·d 表示词表参数（V 为词表大小，d 为 embedding 维度）。",
+      "作者用 V·d 而非 2V·d 表示词表参数，理由是实测主要计算负担（以 FLOPs 计）来自输出层而非词嵌入层。",
+      "实验规模：训练 33M 到 3B 参数的模型，训练数据最多 500B 字符，覆盖多种词表配置。",
+      "核心结论：最优词表大小随算力预算增长，更大模型需要更大词表；最优词表参数与非词表参数呈幂律关系 N_v^opt ∝ N_nv^γ，其中 γ ≈ 0.83 < 1，即词表参数应比非词表参数增长得更慢。",
+      "论文预测 Llama2-70B 的最优词表大小至少应为 216K，是其实际 32K 词表的 7 倍。",
+      "实证验证：在相同 2.3e21 FLOPs 预算下，把词表从常规 32K 增大到 43K，ARC-Challenge 分数从 29.1 提升到 32.0。",
+      "论文提出用 f(V) = a·log²(V) + b·log(V) + c 从词表大小 V 估计 tokenizer 压缩比（token 数 D 与字符数 H 之比 D/H），拟合 1K 到 1024K 词表的多个 tokenizer 得到 a=0.0064、b=−0.1581、c=1.2047。",
+      "论文指出词表增大的收益来自更好的 tokenization fertility（句子被切成更少 token）与覆盖更广概念，风险是稀有 token 欠拟合，尤其在数据受限情形下。",
+      "论文指出当前多数 LLM（如 Llama2-7B 用 32K、Gemma-7B 用 256K）词表参数低于预测最优值；StarCoder2-3B、OLMo-7B、InternLM2-20B、Gemma2-27B 的词表最接近其规模的最优配置。",
+      "论文提出三种预测最优词表大小的方法：IsoFLOPs 幂律拟合、对 FLOPs 关于词表大小求导取零的导数法、以及把词表项并入 Chinchilla 损失公式的参数化拟合（后者可处理过训练/欠训练的非最优分配）。"
+    ],
+    "raw_excerpt": "We use N_v = Vd to represent both the vocabulary parameters in the output layer ... This choice is predicated on empirical observations: the main computational burden, as measured in FLOPs, is associated with the output layer, but not the word embedding layer. ... N_v^opt ∝ N_nv^γ where γ ≈ 0.83 < 1 ... we predict that the optimal vocabulary size of Llama2-70B should have been at least 216K, 7 times larger than its vocabulary of 32K ... By increasing the vocabulary size from the conventional 32K to 43K, we improve performance on ARC-Challenge from 29.1 to 32.0 with the same 2.3e21 FLOPs."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Getting the most out of your tokenizer for pre-training and domain adaptation",
+    "url": "https://arxiv.org/abs/2402.01035",
+    "published_at": "2024-02-01 (v1), v2 2024-02-07",
+    "key_points": [
+      "论文主张 tokenizer 的 size（词表大小）、pre-tokenization 正则表达式与训练数据会显著影响模型的生成速度、有效上下文大小（effective context size）、内存占用与下游性能。",
+      "作者在代码生成任务（HumanEval、MBPP）上训练专用 BPE 代码 tokenizer，并对 tokenizer 设计做广泛消融，覆盖从零训练与基于预训练模型两类设置。",
+      "论文发现当微调超过 50B token 时，可以为预训练 LLM 专门化 tokenizer，从而在生成速度与有效上下文大小上获得大幅收益。"
+    ],
+    "raw_excerpt": "we show that the size, pre-tokenization regular expression, and training data of a tokenizer can significantly impact the model's generation speed, effective context size, memory usage, and downstream performance. ... We find that when fine-tuning on more than 50 billion tokens, we can specialize the tokenizer of a pre-trained LLM to obtain large gains in generation speed and effective context size."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "The Llama 3 Herd of Models (arXiv:2407.21783, v3)",
+    "url": "https://arxiv.org/html/2407.21783v3",
+    "published_at": "2024-07-31 (v1); v3 revised 2024-11-23",
+    "key_points": [
+      "Llama 3 预训练语料规模约为 15T multilingual tokens，相比 Llama 2 的 1.8T tokens 大幅提升（该 token 计数以 Llama 3 自身 tokenizer 口径统计，但论文该段未给出词表参数）。",
+      "旗舰模型为 405B 参数 dense Transformer，在 15.6T text tokens 上预训练，使用 8K 上下文窗口；随后经 continued pre-training 将上下文扩展到 128K tokens。",
+      "论文标题页与摘要确认该文覆盖 Llama 3 / Llama 3.1 全系（8B、70B、405B），是 tokenizer 参数的权威一手出处（tokenizer 章节位于正文 3.2 节，本次抓取未覆盖到）。"
+    ],
+    "raw_excerpt": "We pre-train Llama 3 on a corpus of about 15T multilingual tokens, compared to 1.8T tokens for Llama 2. ... we pre-trained a flagship model with 405B trainable parameters on 15.6T text tokens. ... pre-training is performed at massive scale: we pre-train a model with 405B parameters on 15.6T tokens using a context window of 8K tokens. This standard pre-training stage is followed by a continued pre-training stage that increases the supported context window to 128K tokens."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "The Llama 3 Herd of Models — metadata record (arXiv:2407.21783)",
+    "url": "https://arxiv.org/abs/2407.21783",
+    "published_at": "2024-07-31 (v1); last revised 2024-11-23 (v3)",
+    "key_points": [
+      "该论文提交于 2024-07-31，最新版本 v3 修订于 2024-11-23，归类 cs.AI，作者署名为 Llama Team, AI @ Meta。",
+      "仅获得元数据与作者列表，摘要页不含 tokenizer 参数，不能作为 f4 结论依据。"
+    ],
+    "raw_excerpt": "arXiv:2407.21783 (cs) [Submitted on 31 Jul 2024 (v1), last revised 23 Nov 2024 (this version, v3)] Title: The Llama 3 Herd of Models"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Qwen2.5 Technical Report (arXiv:2412.15115v2), Section 2 \"Architecture & Tokenizer\"",
+    "url": "https://arxiv.org/html/2412.15115v2",
+    "published_at": "2024-12-19 (v1); v2 2025-01-03",
+    "key_points": [
+      "Qwen2.5 使用 Qwen 的 tokenizer，实现的是 byte-level byte-pair encoding (BBPE)。",
+      "该 tokenizer 的词表规模为 151,643 个 regular tokens。",
+      "相比此前 Qwen 版本，控制 token 从 3 个扩展到 22 个，其中新增 2 个用于工具（tool）功能的 token，其余分配给其他模型能力。",
+      "这一扩展在所有 Qwen2.5 模型上建立了统一词表（unified vocabulary），以提升一致性并减少潜在兼容性问题。",
+      "Qwen2.5 开源权重模型覆盖 0.5B/1.5B/3B/7B/14B/32B/72B 七种尺寸，另有 MoE 的 Qwen2.5-Turbo 与 Qwen2.5-Plus 两个 API 模型。"
+    ],
+    "raw_excerpt": "For tokenization, we utilize Qwen's tokenizer (Bai et al., 2023), which implements byte-level byte-pair encoding (BBPE, Brown et al., 2020; Wang et al., 2020; Sennrich et al., 2016) with a vocabulary of 151,643 regular tokens. We have expanded the set of control tokens from 3 to 22 compared to previous Qwen versions, adding two new tokens for tool functionality and allocating the remainder for other model capabilities. This expansion establishes a unified vocabulary across all Qwen2.5 models, enhancing consistency and reducing potential compatibility issues."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V3 Technical Report (arXiv:2412.19437v2)",
+    "url": "https://arxiv.org/html/2412.19437v2",
+    "published_at": "2024-12-27 (v1); v2 2025-02-18",
+    "key_points": [
+      "DeepSeek-V3 是 671B 总参数、每 token 激活 37B 的 MoE 模型，采用 MLA 与 DeepSeekMoE 架构。",
+      "预训练语料为 14.8T tokens；上下文长度经两阶段扩展，先到 32K，再到 128K。",
+      "报告明确说明：对于未显式提及的其他细节，DeepSeek-V3 沿用 DeepSeek-V2 的设置（'For other minor details not explicitly mentioned, DeepSeek-V3 adheres to the settings of DeepSeek-V2'）。",
+      "本次抓取到的正文（摘要、引言、2.1 节架构）未包含 tokenizer 词表大小与分词算法类型的原文表述。"
+    ],
+    "raw_excerpt": "For other minor details not explicitly mentioned, DeepSeek-V3 adheres to the settings of DeepSeek-V2 (DeepSeek-AI, 2024c)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model (arXiv:2405.04434v5)",
+    "url": "https://arxiv.org/html/2405.04434v5",
+    "published_at": "2024-05-07 (v1); v5 后续修订",
+    "key_points": [
+      "DeepSeek-V2 为 236B 总参数、每 token 激活 21B 的 MoE 模型，支持 128K 上下文长度。",
+      "预训练语料为 8.1T tokens，相比 DeepSeek 67B 显著扩充了中文数据。",
+      "本次抓取到的正文（摘要、引言、2.1 节 MLA）未包含 tokenizer 词表大小与分词算法类型的原文表述；tokenizer 内容位于未抓取到的 2.2 节。"
+    ],
+    "raw_excerpt": "We pretrain DeepSeek-V2 on a high-quality and multi-source corpus consisting of 8.1T tokens, and further perform Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL) to fully unlock its potential."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Tokenization counts: the impact of tokenization on arithmetic in frontier LLMs",
+    "url": "https://arxiv.org/abs/2402.14903",
+    "published_at": "2024-02-22",
+    "key_points": [
+      "不同前沿 LLM 采用不同的数字 tokenization 方案：LLaMA 与 PaLM 选择单数字（single-digit）tokenization，而 GPT-3.5 与 GPT-4 对每个 1 位、2 位、3 位数字都有独立 token。",
+      "该文研究数字 tokenization 选择对数值推理（算术任务）的影响，发现对 GPT-3.5/GPT-4 而言，从右到左的 tokenization（推理时用逗号分隔数字强制实现）相比标准从左到右 tokenization 大幅提升性能。",
+      "使用标准从左到右 tokenization 时，模型错误呈现刻板的错误模式，说明模型计算是系统性的而非近似性的。",
+      "模型能够在不同 tokenization 之间转换，因此可用 chain-of-thought 式方法恢复从左到右 tokenized 输入上的性能。",
+      "tokenization 方向造成的性能差距随模型规模增大而缩小，可能表明更大模型更能覆盖这种 tokenization 依赖的归纳偏置。",
+      "该文自述为首个研究数字 tokenization 选择如何导致算术任务性能差异的工作（21 页，18 图）。"
+    ],
+    "raw_excerpt": "With the increased use of LLMs for reasoning, various number-specific tokenization schemes have been adopted, with popular models like LLaMa and PaLM opting for single-digit tokenization while GPT-3.5 and GPT-4 have separate tokens for each 1-, 2-, and 3-digit numbers. ... We consider left-to-right and right-to-left tokenization for GPT-3.5 and -4, finding that right-to-left tokenization (enforced by comma separating numbers at inference time) leads to largely improved performance."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "huggingface/tokenizers README (main branch, v1.0.0.rc.x)",
+    "url": "https://raw.githubusercontent.com/huggingface/tokenizers/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 自述定位为 \"The SOTA tokenization library on all languages, all models, all hardwares\"，目标是成为 \"the industry's standard tokenization engine\"（仓库自我营销表述，无第三方权威背书）。",
+      "明确列出四种模型实现：BPE、Unigram、WordPiece、WordLevel，并与 Normalizer、PreTokenizer、Model、PostProcessor、Decoder 共同构成完整 pipeline。",
+      "训练器按模型 feature 划分：tk-train 只训练 feature 打开的模型（bpe、unigram、wordpiece、wordlevel）；Unigram 训练需额外启用 esaxx_fast（C++ 后缀数组）。",
+      "当前处于 v1.0.0.rc.x 发布候选阶段，正从 0.23 迁移到 v1.0.0，README 称 \"the current library does not ship all features\"。",
+      "训练（train）与从 Hub 下载（http）在 v1 中改为 opt-in feature，默认关闭。",
+      "绑定状态：Rust 为参考实现、Python、Node.js 均可用；C/C++/Java/Go 等标记为 planned；Ruby 为社区外部仓库。",
+      "硬件适配：不强制要求 SIMD，每个 kernel 都有始终编译的可移植路径，并作为向量化版本的 byte-exact 测试基准。",
+      "aarch64 编译期选择 NEON（baseline）；x86_64 运行期通过 is_x86_feature_detected! 检测 AVX-512 VBMI → SSE4.1/SSSE3；wasm32 需 simd128 target feature。",
+      "预分词组件 bitcannon 声称 \"as far as we know, this implementation is the fastest for every single pretokenizer regex on CPU\"（仓库自述，无第三方验证）。",
+      "bitcannon 提供 byte-exact 语法覆盖 gpt2/ByteLevel、cl100k、o200k、tekken、deepseek 和 kimi-k2。",
+      "README 的 Performances 章节未给出文字数值，仅指向外部页面 https://huggingface-tokenizers-v1.static.hf.space/index.html。"
+    ],
+    "raw_excerpt": "The models (BPE, Unigram, WordPiece, WordLevel) and the full pipeline: `Normalizer`, `PreTokenizer`, `Model`, `PostProcessor`, `Decoder`. ... It trains only the models whose feature is on (`bpe`, `unigram`, `wordpiece`, `wordlevel`). Add `esaxx_fast` for the C++ suffix array behind Unigram training. ... As we are switching from 0.23 to v1.0.0, the current library does not ship all features. ... **No SIMD is required.** Every kernel has a portable path that is always compiled and is the byte-exact test oracle for its vectorised siblings"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "huggingface/tokenizers README (v0.21.0 tag)",
+    "url": "https://raw.githubusercontent.com/huggingface/tokenizers/v0.21.0/README.md",
+    "published_at": null,
+    "key_points": [
+      "自述 \"Provides an implementation of today's most used tokenizers, with a focus on performance and versatility.\"",
+      "速度表述为定性加一个吞吐数字：\"Extremely fast (both training and tokenization), thanks to the Rust implementation. Takes less than 20 seconds to tokenize a GB of text on a server's CPU.\"——该数字是分词吞吐，不是训练速度。",
+      "性能基准指向 bindings/python/benches/test_tiktoken.py，在 g6 AWS 实例上运行；README 中结果以图片呈现，无文字数值。",
+      "v0.21.0 README 正文只列举三种模型：\"Choose your model between Byte-Pair Encoding, WordPiece or Unigram\"，未在正文提及 WordLevel。",
+      "绑定：Rust（原始实现）、Python、Node.js、Ruby（由 @ankane 贡献，外部仓库）。",
+      "该版本 README 正文中未出现任何关于压缩率（compression rate / tokens per word）的量化表述。"
+    ],
+    "raw_excerpt": "Extremely fast (both training and tokenization), thanks to the Rust implementation. Takes less than 20 seconds to tokenize a GB of text on a server's CPU. ... Choose your model between Byte-Pair Encoding, WordPiece or Unigram and instantiate a tokenizer ... Performances can vary depending on hardware, but running the [~/bindings/python/benches/test_tiktoken.py] should give the following on a g6 aws instance"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "arxiv",
+    "title": "Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies",
+    "url": "https://arxiv.org/abs/2407.13623",
+    "published_at": "2024-07-18 (v1); v3 2024-11-01; NeurIPS 2024",
+    "key_points": [
+      "论文将总模型参数 N 分解为非词表参数 N_nv 与词表参数 N_v，满足 N = N_nv + N_v。",
+      "词表参数用 N_v = V·d 表示，其中 V 为词表大小、d 为 embedding 维度；该量同时涵盖词嵌入层与输出层。",
+      "作者明确说明：为分析与表述简洁，采用 V·d 而非 2·V·d 来代表词表参数，理由是主要计算负担（以 FLOPs 衡量）来自输出层而非词嵌入层。",
+      "最优词表参数与非词表参数之间服从幂律关系：N_v^opt ∝ N_nv^γ，其中 γ ≈ 0.83 < 1，即词表参数应比非词表参数增长得更慢。",
+      "实验覆盖 33M 至 3B 参数模型、最多 500B 字符训练数据、多种词表配置；提出三种预测 compute-optimal 词表大小的方法：IsoFLOPs 分析、导数估计、损失函数参数化拟合。",
+      "论文预测 Llama2-70B 的最优词表大小至少应为 216K，是其实际 32K 词表的 7 倍。",
+      "论文指出当前 LLM 词表规模差异巨大：Llama2-7B 用 32K，Gemma-7B 用 256K，而两者总参数量相近。",
+      "实证验证：在相同 2.3e21 FLOPs 预算下，将词表从常规 32K 增至 43K，ARC-Challenge 分数从 29.1 提升到 32.0。",
+      "论文提出用 f(V) = a·log²(V) + b·log(V) + c 从词表大小 V 估计 tokenizer 压缩比（字符数/词元数 D/H），拟合得 a=0.0064, b=-0.1581, c=1.2047，拟合所用 tokenizer 的 V 覆盖 1K 到 1024K。",
+      "论文指出更大的词表提升 tokenization fertility（切分出的 token 更少）从而提升 tokenization 效率，但稀有 token 欠拟合风险随词表增大而上升，尤其在数据受限情形。",
+      "论文指出 Kaplan et al. 的缩放公式中只考虑了非词表参数，忽略了词表大小的影响。"
+    ],
+    "raw_excerpt": "We break down the total model parameters (N) into non-vocabulary (N_nv) and vocabulary parameters (N_v) ... where N = N_nv + N_v. We use N_v = Vd to represent both the vocabulary parameters in the output layer ... Vocabulary parameters typically encompass both the word embedding layer and the output layer. ... we employ Vd rather than 2Vd to represent the vocabulary parameters. This choice is predicated on empirical observations: the main computational burden, as measured in FLOPs, is associated with the output layer, but not the word embedding layer. ... N_v^opt ∝ N_nv^γ where γ ≈ 0.83 < 1."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "sail-sg/scaling-with-vocab (official code for NeurIPS-2024 vocabulary scaling laws)",
+    "url": "https://raw.githubusercontent.com/sail-sg/scaling-with-vocab/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "仓库为论文 Scaling Laws with Vocabulary 的官方实现，标注 [NeurIPS-2024]。",
+      "仓库提供三个可运行脚本，分别复现三种预测最优词表参数与词表大小的方法：approach1_isoflops.py、approach2_derivative.py、approach3_isoloss.py。",
+      "仓库提供 optimal_Nv_predict.py，可直接用三种方法拟合出的系数预测最优词表参数 N_v 与词表大小 V。",
+      "README 复述核心结论：最优词表取决于计算预算；词表参数应比非词表参数增长更慢；当前 LLM 的词表参数被低估/分配不足。",
+      "README 说明可用预测的词表规模替代常规设置，在训练数据不足、按计算预算最优分配、数据过度充足三种情形下训练出更好的 3B 参数模型。"
+    ],
+    "raw_excerpt": "# [NeurIPS-2024] Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies ... We can directly use python to run the scripts for reproducing the fitting process of each apporach to predict the optimal vocabulary paramaeters and vocabulary size. ... python optimal_Nv_predict.py ... All approaches suggest that **vocabulary parameters should be scaled slower than non-vocabulary parameters**. Nonetheless, vocabulary parameters are critical for performance and under-allocated in current LLMs."
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "openai/tiktoken — README (fast BPE tokeniser for OpenAI models)",
+    "url": "https://raw.githubusercontent.com/openai/tiktoken/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "tiktoken 是用于 OpenAI 模型的快速 BPE tokeniser，可通过 encoding_for_model(\"gpt-4o\") 取得特定模型对应的编码器。",
+      "README 列出 BPE 的四条性质：可逆无损、可处理任意文本（含不在 tokeniser 训练数据中的文本）、压缩文本（token 序列短于原文对应字节）、让模型看到常见子词以帮助泛化。",
+      "README 给出压缩率的经验数值：实践中平均每个 token 约对应 4 个字节（\"On average, in practice, each token corresponds to about 4 bytes\"）。",
+      "README 以 \"encoding\" 被切分为 \"encod\" + \"ing\" 为例说明 BPE 倾向于保留常见子词。",
+      "README 指出 tiktoken 比同类开源 tokeniser 快 3-6 倍（在 1GB 文本、GPT-2 tokeniser 上测得）。"
+    ],
+    "raw_excerpt": "3) It compresses the text: the token sequence is shorter than the bytes corresponding to the original text. On average, in practice, each token corresponds to about 4 bytes."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "No Single Tokenizer Feature Reliably Predicts Downstream Language Model Performance (arXiv:2610.21679)",
+    "url": "https://arxiv.org/abs/2610.21679",
+    "published_at": "2026-10-15",
+    "key_points": [
+      "标题为 \"No Single Tokenizer Feature Reliably Predicts Downstream Language Model Performance\"，arXiv ID 2610.21679，主分类 Computation and Language (cs.CL)。",
+      "v1 提交于 2026-10-15（UTC 11:05:07，1,035 KB）；最新版本为 v2，2026-10-20（UTC 12:09:27，1,089 KB）。",
+      "作者共 6 人：Antonio Lopardo, Luis Frentzen Salim, Shikhar Srivastava, Kevin Jiang, Mridul Sharma, Catherine Arnett。",
+      "arXiv comments 字段写明 \"10 pages, accepted to Findings of EMNLP 2026\"，即篇幅 10 页、作者自述被 EMNLP 2026 Findings 接收。",
+      "摘要称分析约 200 个语言模型（approximately 200 language models），这些模型训练于 9 种不同语言（nine different languages）。",
+      "摘要结论：尽管已提出大量内在 tokenizer 指标，但没有一个能在不同模型族、任务和语言上稳定预测下游表现。",
+      "论文提出一个新的、以语言学为依据的 tokenizer 指标，称其能捕捉现有指标遗漏的 tokenizer 质量方面，但预测力可能随模型族、语言和任务而变化。",
+      "arXiv 颁发 DOI 为 10.48550/arXiv.2610.21679（DataCite）。"
+    ],
+    "raw_excerpt": "[Submitted on 15 Oct 2026 (v1), last revised 20 Oct 2026 (this version, v2)] Title: No Single Tokenizer Feature Reliably Predicts Downstream Language Model Performance ... Abstract: ... In this paper, we analyze approximately 200 language models trained on nine different languages. We evaluate both models and their tokenizers and test whether there is a relationship between any proposed intrinsic tokenizer evaluations and model performance, as measured by a wide variety of benchmarks. Despite the quantity and variety of proposed intrinsic tokenizer metrics, we find that none consistently predicts downstream performance across model families, tasks, and languages. ... Comments: 10 pages, accepted to Findings of EMNLP 2026 ... [v1] Thu, 15 Oct 2026 11:05:07 UTC (1,035 KB) [v2] Tue, 20 Oct 2026 12:09:27 UTC (1,089 KB)"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "ACL Anthology — The 2026 Conference on Empirical Methods in Natural Language Processing (event page)",
+    "url": "https://aclanthology.org/events/emnlp-2026/",
+    "published_at": null,
+    "key_points": [
+      "ACL Anthology 设有 EMNLP 2026 会议页，会议于 2026 年 10 月 24–29 日在匈牙利布达佩斯举行。",
+      "该会议页列出 \"Findings of the Association for Computational Linguistics: EMNLP 2026\" 卷，标注 2479 papers，说明 Findings 卷在 Anthology 中已存在且规模庞大。",
+      "该会议页同时列出主会 2705 papers、System Demonstrations 87 papers、Industry Track 267 papers、Tutorial Abstracts 7 papers 等分卷。",
+      "该页面未直接显示本子问题目标论文（No Single Tokenizer Feature...）的条目，因此不能据此确认其 Anthology 书目信息。"
+    ],
+    "raw_excerpt": "The 2026 Conference on Empirical Methods in Natural Language Processing ... Budapest, Hungary October 24–29, 2026 ... Findings of the Association for Computational Linguistics: EMNLP 2026 Findings 2479 papers ... Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing EMNLP 2705 papers"
+  }
+]

@@ -1,0 +1,838 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Quantization API Reference — torch.ao.quantization (PyTorch 2.14 docs)",
+    "url": "https://docs.pytorch.org/docs/2.14/quantization-support.html",
+    "published_at": "2026-05-11",
+    "key_points": [
+      "PyTorch 官方 API 参考中并列存在三条量化流程入口：quantize（post training static quantization）、quantize_dynamic（weights-only 量化）、quantize_qat（quantization aware training），说明 PTQ 与 QAT 在官方工具链中被区分为不同流程。",
+      "quantize_dynamic 被官方描述为将 float 模型转换为 dynamic（即 weights-only）量化模型，这是 weight-only 量化在官方文档中的直接对应表述。",
+      "官方提供 prepare / prepare_qat 用于为量化校准（calibration）或量化感知训练准备模型副本，convert 负责把子模块替换为量化模块，体现「准备—校准/训练—转换」的流程划分。",
+      "QuantStub / DeQuantStub 作为独立模块存在，convert 时分别被替换为 nnq.Quantize 与 nnq.DeQuantize，说明量化与反量化（dequant）在图中被显式建模为成对操作。",
+      "determine_qparams 的文档描述为「给定 min 和 max 值张量计算量化参数（quantization parameters）」，calculate_qmin_qmax 依据量化范围、observer 数据类型与是否缩减范围计算实际 qmin/qmax，指向 scale/zero-point 类参数的推导机制。",
+      "activation_is_statically_quantized / activation_is_dynamically_quantized 等工具函数按 qconfig 判定激活是否需要静态或动态量化，并列出 quint8、qint8、qint32、float16 等数据类型，说明激活量化与权重量化可分别配置。",
+      "DTypeWithConstraints 被描述为可为给定 dtype 指定额外约束，例如量化值范围、scale 值范围与固定量化参数，表明 scale 的取值范围本身是可约束对象。"
+    ],
+    "raw_excerpt": "quantize — Quantize the input float model with post training static quantization. / quantize_dynamic — Converts a float model to dynamic (i.e. weights-only) quantized model. / quantize_qat — Do quantization aware training and output a quantized model / DeQuantStub — Dequantize stub module, before calibration, this is same as identity, this will be swapped as nnq.DeQuantize in convert. / determine_qparams — Calculates the quantization parameters, given min and max value tensors."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Quantization — PyTorch 2.14 docs (migration notice to torchao)",
+    "url": "https://docs.pytorch.org/docs/2.14/quantization.html",
+    "published_at": "2026-05-11",
+    "key_points": [
+      "PyTorch 官方量化文档页已改为迁移公告，声明所有量化相关开发正集中到 torchao，原页面不再承载量化概念说明。",
+      "官方给出迁移路径：Eager mode quantization（quantize、quantize_dynamic）应迁移到 torchao 的 eager mode quantize_ API；FX graph mode quantization（prepare_fx、convert_fx）应迁移到 torchao pt2e quantization API（prepare_pt2e、convert_pt2e）。",
+      "官方计划在 PyTorch 2.10 删除 torch.ao.quantization（若无阻塞项），说明旧量化 API 处于弃用轨道。",
+      "该页仅保留 compute_sqnr、compute_normalized_l2_error、compute_cosine_similarity 等量化误差度量工具，未提供 PTQ/QAT、粒度、对称性等术语定义。"
+    ],
+    "raw_excerpt": "We are centralizing all quantization related development to torchao, please checkout our new doc page: https://docs.pytorch.org/ao/stable/index.html ... We plan to delete torch.ao.quantization in 2.10 if there are no blockers, or in the earliest PyTorch version until all the blockers are cleared."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "Welcome to the torchao Documentation (PyTorch-Native Training-to-Serving Model Optimization)",
+    "url": "https://docs.pytorch.org/ao/stable/index.html",
+    "published_at": "2026-03-25",
+    "key_points": [
+      "torchao 被官方定义为「用于自定义数据类型与优化的库」，可对权重、梯度、优化器状态与激活进行量化与稀疏化，覆盖推理与训练场景。",
+      "官方快速上手示例使用 Int4WeightOnlyConfig 将模型权重量化为 int4，配置项包含 group_size=32，说明 weight-only 量化与分组（per-group）粒度是官方库的一等配置参数。",
+      "同一示例中 int4_choose_qparams_algorithm 可取 \"hqq\"，表明量化参数（qparams）的选取算法是可插拔选项。",
+      "int4_packing_format 可取 \"tile_packed_to_4d\"（CUDA）或 \"plain_int32\"（XPU），说明 4-bit 权重需打包存储且打包格式依硬件后端而异。",
+      "官方首页给出量化收益口径示例：将 Llama-3-8B 量化为 int4 可获得 1.89x 推理加速与 58% 内存下降；并称 QAT 可在 Gemma3-4B 上恢复 67% 的量化精度损失。"
+    ],
+    "raw_excerpt": "torchao is a library for custom data types and optimizations. Quantize and sparsify weights, gradients, optimizers, and activations for inference and training using native PyTorch. ... quantize_(model, Int4WeightOnlyConfig(group_size=32, int4_packing_format=\"tile_packed_to_4d\", int4_choose_qparams_algorithm=\"hqq\")) ... Quantize Llama-3-8B to int4 for 1.89x faster inference with 58% less memory / Recover 67% of quantized accuracy degradation on Gemma3-4B with QAT"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+    "url": "https://arxiv.org/abs/2210.17323v2",
+    "published_at": "2022-10-31",
+    "key_points": [
+      "GPTQ 是一种 one-shot 权重量化方法，基于近似二阶（Hessian）信息进行逐层误差补偿。",
+      "可在约 4 GPU 小时内量化 175B 参数 GPT 模型，权重位宽降至 3 或 4 bit，相对未压缩基线精度退化可忽略。",
+      "相比此前 one-shot 量化方法，压缩收益提升一倍以上，首次使 175B 模型可在单 GPU 上做生成式推理。",
+      "在极端量化区间（2-bit 甚至三值量化）仍能保持合理精度。",
+      "端到端推理相对 FP16 加速约 3.25x（NVIDIA A100）与 4.5x（NVIDIA A6000）。"
+    ],
+    "raw_excerpt": "we propose GPTQ, a new one-shot weight quantization method based on approximate second-order information... GPTQ can quantize GPT models with 175 billion parameters in approximately four GPU hours, reducing the bitwidth down to 3 or 4 bits per weight, with negligible accuracy degradation... end-to-end inference speedups over FP16, of around 3.25x when using high-end GPUs (NVIDIA A100) and 4.5x when using more cost-effective ones (NVIDIA A6000)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+    "url": "https://arxiv.org/abs/2306.00978v6",
+    "published_at": "2023-06-01",
+    "key_points": [
+      "AWQ 是面向硬件的低比特 weight-only 量化方法（INT3/INT4）。",
+      "核心观察：LLM 中并非所有权重同等重要，仅保护约 1% 的显著权重（salient weights）即可大幅降低量化误差。",
+      "显著权重通道的识别应依据激活分布而非权重本身。",
+      "为避免硬件低效的混合精度量化，论文推导出「放大显著通道」可降低量化误差，并用等价变换缩放显著权重通道，缩放系数由离线收集的激活统计量确定。",
+      "AWQ 不依赖反向传播或重建，因此可泛化到不同领域与模态，不易过拟合校准集。",
+      "配套 TinyChat 推理框架，在桌面与移动 GPU 上相对 HuggingFace FP16 实现超过 3x 加速；可将 70B Llama-2 部署到移动 GPU。"
+    ],
+    "raw_excerpt": "AWQ finds that not all weights in an LLM are equally important. Protecting only 1% salient weights can greatly reduce quantization error. To identify salient weight channels, we should refer to the activation distribution, not weights... AWQ does not rely on any backpropagation or reconstruction, so it generalizes to different domains and modalities without overfitting the calibration set... TinyChat offers more than 3x speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "mit-han-lab/llm-awq — AWQ 官方开源仓库",
+    "url": "https://github.com/mit-han-lab/llm-awq",
+    "published_at": "2023-06-01",
+    "key_points": [
+      "仓库定位为面向 LLM 的低比特（INT3/INT4）权重量化，支持 instruction-tuned 模型与多模态 LM。",
+      "提供 AWQ 量化搜索（AWQ search）与预计算 AWQ model zoo，覆盖 Llama-1/2/3、OPT、CodeLlama、StarCoder、Vicuna、VILA、LLaVA。",
+      "提供 PyTorch 内存高效 4-bit Linear 实现，以及支持 prefill（context）与 decoding 两阶段的 CUDA kernel。",
+      "仓库热度：3654 stars、329 forks，最近一次 push 为 2025-07-17，采用 MIT 许可。"
+    ],
+    "raw_excerpt": "Efficient and accurate low-bit weight quantization (INT3/4) for LLMs, supporting instruction-tuned models and multi-modal LMs... Pre-computed AWQ model zoo for LLMs (Llama-1/2/3, OPT, CodeLlama, StarCoder, Vicuna, VILA, LLaVA)... Efficient CUDA kernel implementation for fast inference (support context and decoding stage)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+    "url": "https://arxiv.org/abs/2208.07339v2",
+    "published_at": "2022-08-15",
+    "key_points": [
+      "LLM.int8() 针对 transformer 的 feed-forward 与 attention projection 层实现 INT8 矩阵乘法，将推理显存减半，同时保持全精度性能。",
+      "方法依赖对 transformer 中「系统性涌现特征（emergent outliers）」的理解与规避，这些离群特征主导 attention 与预测性能。",
+      "采用两部分量化流程：先做 vector-wise 量化（每个内积使用独立归一化常数）量化大多数特征。",
+      "对涌现离群值采用混合精度分解（mixed-precision decomposition），将离群特征维度隔离到 16-bit 矩阵乘法，同时仍有超过 99.9% 的数值以 8-bit 相乘。",
+      "实证表明可在最高 175B 参数 LLM 上做推理而无性能退化，使 OPT-175B/BLOOM 可在消费级 GPU 单服务器上运行。"
+    ],
+    "raw_excerpt": "We develop a procedure for Int8 matrix multiplication for feed-forward and attention projection layers in transformers, which cut the memory needed for inference by half while retaining full precision performance... we also include a new mixed-precision decomposition scheme, which isolates the outlier feature dimensions into a 16-bit matrix multiplication while still more than 99.9% of values are multiplied in 8-bit."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs",
+    "url": "https://arxiv.org/abs/2404.00456v2",
+    "published_at": "2024-03-30",
+    "key_points": [
+      "QuaRot 基于旋转（rotation）实现端到端量化，将权重、激活与 KV cache 全部量化为 4 bit。",
+      "通过旋转在不改变输出的前提下从 hidden state 中移除离群值（利用计算不变性 computational invariance），使量化更容易。",
+      "旋转应用于 LLM 的 hidden state（残差）、feed-forward 激活、attention 机制部分以及 KV cache。",
+      "量化后所有矩阵乘法均以 4 bit 执行，无需保留任何通道于更高精度。",
+      "4-bit 量化的 LLaMa2-70B 在 WikiText-2 上 perplexity 损失最多 0.47，并保留 99% 的零样本性能。",
+      "QuaRot 还能在无任何校准数据、仅用 round-to-nearest 量化的情况下，给出无损的 6-bit 与 8-bit LLaMa2 模型。"
+    ],
+    "raw_excerpt": "We introduce QuaRot, a new Quantization scheme based on Rotations, which is able to quantize LLMs end-to-end, including all weights, activations, and KV cache in 4 bits... Our 4-bit quantized LLaMa2-70B model has losses of at most 0.47 WikiText-2 perplexity and retains 99% of the zero-shot performance. We also show that QuaRot can provide lossless 6 and 8 bit LLaMa2 models without any calibration data using round-to-nearest quantization."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration (MLSys 2024 Best Paper, v6)",
+    "url": "https://arxiv.org/abs/2306.00978v6",
+    "published_at": "2023-06-01",
+    "key_points": [
+      "AWQ 是 weight-only 低比特量化方法，仅保护约 0.1%-1% 的显著权重通道即可大幅降低量化误差。",
+      "论文实验使用 INT3-g128 配置（3-bit 权重、group size 128）测量 OPT-6.7B 的困惑度，说明 group size 128 是该系列方法的典型粒度。",
+      "TinyChat 框架将约 4x 的显存占用降低转化为实测加速：在桌面、笔记本与移动 GPU 上相对 HuggingFace FP16 实现平均 3.2-3.3x 加速。",
+      "13B 参数模型可在仅 8GB 显存的笔记本 RTX 4070 上以 30 tokens/s 的交互速度运行。",
+      "Llama-2-70B 模型可部署在单张 64GB 显存的 NVIDIA Jetson Orin 上；Falcon-180B 可部署在单张 H200 GPU 上。",
+      "论文指出 GPT-3 175B 在 FP16 下为 350GB，而 B200 GPU 仅 192GB 显存，作为量化动机的显存对比基准。"
+    ],
+    "raw_excerpt": "We measure the perplexity of OPT-6.7B under INT3-g128 quantization. ... TinyChat further translates the ~4x lower memory footprint to measured speedup. On desktop, laptop and mobile GPUs, we consistently observe a 3.2-3.3x average speedup compared to the FP16 implementation by Huggingface ... It also democratizes 13 billion parameter LLM at an interactive pace of 30 tokens/second on a laptop RTX 4070 GPU with only 8GB of memory."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+    "url": "https://arxiv.org/abs/2210.17323v2",
+    "published_at": "2022-10-31",
+    "key_points": [
+      "GPTQ 可将权重位宽降至 3 或 4 bit，相对未压缩基线精度损失可忽略。",
+      "GPTQ 能在约 4 个 GPU 小时内量化 175B 参数模型，并首次使 175B 模型可在单张 GPU 内完成生成式推理。",
+      "端到端推理相对 FP16 的加速比：高端 GPU（NVIDIA A100）约 3.25x，性价比 GPU（NVIDIA A6000）约 4.5x。",
+      "在 2-bit 甚至三值（ternary）极端量化区间仍能保持合理精度。"
+    ],
+    "raw_excerpt": "GPTQ can quantize GPT models with 175 billion parameters in approximately four GPU hours, reducing the bitwidth down to 3 or 4 bits per weight, with negligible accuracy degradation ... allowing us for the first time to execute an 175 billion-parameter model inside a single GPU for generative inference. ... end-to-end inference speedups over FP16, of around 3.25x when using high-end GPUs (NVIDIA A100) and 4.5x when using more cost-effective ones (NVIDIA A6000)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache",
+    "url": "https://arxiv.org/abs/2402.02750v2",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "KIVI 提出免调优的非对称 2-bit KV cache 量化：key cache 按 channel 维度分组量化，value cache 按 token 维度量化。",
+      "在 Llama、Falcon、Mistral 模型上，KIVI 在保持几乎相同质量的同时将峰值显存（含模型权重）降低 2.6x。",
+      "显存降低使 batch size 可扩大至 4x，在真实推理负载上带来 2.35x-3.47x 的吞吐提升。",
+      "论文指出随 batch size 与上下文长度增长，KV cache 成为速度与显存的新瓶颈。"
+    ],
+    "raw_excerpt": "we developed a tuning-free 2bit KV cache quantization algorithm named KIVI. With hardware-friendly implementation, KIVI can enable Llama, Falcon, and Mistral models to maintain almost the same quality while using 2.6x less peak memory (including model weight). This reduction in memory usage enables up to 4x larger batch size, bringing 2.35x ~ 3.47x throughput on real LLM inference workload."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "vLLM Documentation — Quantization (supported formats & hardware matrix)",
+    "url": "https://docs.vllm.ai/en/latest/features/quantization/",
+    "published_at": null,
+    "key_points": [
+      "vLLM 官方支持的量化格式包括 AutoAWQ、BitsAndBytes、GPTQModel、Intel Neural Compressor、LLM Compressor、FP8 W8A8、INT4 W4A16、INT8 W4A8、INT8 W8A8、NVIDIA Model Optimizer、AMD Quark、TorchAO 等。",
+      "vLLM 将 INT4 权重仅量化标注为 W4A16（4-bit 权重、16-bit 激活），INT8 标注为 W8A8（8-bit 权重与激活）。",
+      "硬件兼容矩阵显示 AWQ 支持 Turing/Ampere/Ada/Hopper 与 Intel GPU、x86 CPU，但不支持 Volta 与 AMD GPU；GPTQ 覆盖 Volta 至 Hopper。",
+      "Marlin 内核支持 GPTQ/AWQ/FP8/FP4，覆盖 Turing（不含 MXFP4）至 Hopper。",
+      "vLLM 推荐使用 LLM Compressor 作为面向 vLLM 部署的量化优化库，支持 FP8、INT8、INT4 等格式。"
+    ],
+    "raw_excerpt": "The following are the supported quantization formats for vLLM: AutoAWQ, BitsAndBytes, GPTQModel, Intel Neural Compressor, LLM Compressor, FP8 W8A8, INT4 W4A16, INT8 W4A8, INT8 W8A8 ... To get started with quantization, see LLM Compressor, a library for optimizing models for deployment with vLLM that supports FP8, INT8, INT4, and other quantization formats."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "vLLM Documentation — Quantized KV Cache (FP8 KV cache schemes)",
+    "url": "https://docs.vllm.ai/en/latest/features/quantization/quantized_kvcache.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 的 KV cache 量化以 FP8 为主：kv_cache_dtype 可选 auto、fp8_e4m3（CUDA 11.8+ 与 ROCm）、fp8_e5m2（CUDA 11.8+）。",
+      "FP8 KV cache 支持两种量化粒度：per-tensor（Q/K/V 各一个 scale）与 per-attention-head（q_scale=[num_heads]，k/v_scale=[num_kv_heads]）。",
+      "per-attention-head 量化目前仅在 Flash Attention 后端可用，且需要 llm-compressor 的校准流程。",
+      "默认无校准配置下所有量化 scale 设为 1.0；官方推荐用数据集校准以获得最高精度。",
+      "使用 Flash Attention 3 后端配合 FP8 KV cache 时，query 也会被量化为 FP8，注意力运算在量化域内执行。",
+      "提供 --kv-cache-dtype-skip-layers 参数，可将 sliding-window 等敏感层保留在模型原生 dtype。"
+    ],
+    "raw_excerpt": "Quantizing the KV (Key-Value) cache to FP8 format can significantly reduce its memory footprint. This optimization enables you to store more tokens in memory, leading to improved throughput and support for longer context windows. ... kv_cache_dtype=\"fp8_e4m3\": Supported on CUDA 11.8+ and ROCm (AMD GPUs) ... Per-attention-head quantization is currently available only with the Flash Attention backend and requires the calibration pathway provided by llm-compressor."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "casper-hansen/AutoAWQ — README (deprecation notice)",
+    "url": "https://github.com/casper-hansen/AutoAWQ",
+    "published_at": "2023-08-25",
+    "key_points": [
+      "AutoAWQ 仓库已官方标记为 deprecated，不再维护；最后测试配置为 Torch 2.6.0 与 Transformers 4.51.3。",
+      "AutoAWQ 累计 2M+ 下载量、HuggingFace 上 7000+ 个模型、2.1k stars，说明 AWQ 格式在开源模型生态中的实际部署规模。",
+      "AutoAWQ 的能力已被 vLLM 项目接管，迁移至 vllm-project/llm-compressor。",
+      "MLX-LM 已支持在 Mac 设备上使用 AWQ。"
+    ],
+    "raw_excerpt": "It is no secret that maintaining a project such as AutoAWQ that has 2+ million downloads, 7000+ models on Huggingface, and 2.1k stars is hard ... AutoAWQ is officially deprecated and will no longer be maintained. ... AutoAWQ has been adopted by the vLLM Project: https://github.com/vllm-project/llm-compressor"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "vllm-project/llm-compressor — README",
+    "url": "https://github.com/vllm-project/llm-compressor",
+    "published_at": "2024-06-20",
+    "key_points": [
+      "llm-compressor 是 vLLM 生态的量化压缩库，采用 Apache-2.0 许可，约 3.9k stars、712 forks，最近提交时间为 2026-10-24（活跃维护）。",
+      "该库定位为将模型优化为可在 vLLM 中部署的量化格式，是 AutoAWQ 等旧工具链的官方继任者。"
+    ],
+    "raw_excerpt": "stars: 3908 | forks: 712 | open issues: 124 | language: Python created: 2024-06-20 | last push: 2026-10-24 topics: compression, quantization license: Apache-2.0"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "web",
+    "title": "vLLM 官方文档：Quantization（支持格式清单与硬件兼容矩阵）",
+    "url": "https://docs.vllm.ai/en/latest/features/quantization/index.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 文档列出的受支持量化格式包括：AutoAWQ、BitsAndBytes、GPTQModel、Intel Neural Compressor、LLM Compressor、FP8 W8A8、INT4 W4A16、INT8 W4A8、INT8 W8A8、NVIDIA Model Optimizer、Online Quantization、AMD Quark、Quantized KV Cache、TorchAO。",
+      "文档推荐以 LLM Compressor 作为面向 vLLM 部署的量化优化库，支持 FP8、INT8、INT4 等格式。",
+      "硬件兼容矩阵中，AWQ 支持 Turing/Ampere/Ada/Hopper 与 Intel GPU、x86 CPU，但不支持 Volta、AMD GPU、Arm CPU。",
+      "GPTQ 在 Volta/Turing/Ampere/Ada/Hopper 及 Intel GPU、x86 CPU 上均标记为支持，AMD GPU 与 Arm CPU 不支持。",
+      "Marlin 内核（覆盖 GPTQ/AWQ/FP8/FP4）支持 Turing（但不支持 Marlin MXFP4）、Ampere、Ada、Hopper，不支持 Volta、AMD GPU、Intel GPU 与 CPU。",
+      "llm-compressor INT8 (W8A8) 支持 Turing/Ampere/Ada/Hopper 及 x86 CPU、Arm CPU，不支持 Volta、AMD GPU、Intel GPU。",
+      "llm-compressor INT8 (W4A8) 仅在 Arm CPU 上标记为支持，所有列出的 GPU 平台均为不支持。",
+      "bitsandbytes 在 Volta/Turing/Ampere/Ada/Hopper 上支持，不支持 AMD GPU、Intel GPU 与 CPU。",
+      "GGUF 在 Volta/Turing/Ampere/Ada/Hopper 及 AMD GPU 上支持，不支持 Intel GPU 与 CPU。",
+      "vLLM 提供 --linear-backend 与 linear_backend_per_quant 参数，可为不同量化方案分别指定线性层后端（如 NVFP4 W4A16 用 Humming、其余用 CUTLASS），说明其量化内核后端已细粒度可配置。",
+      "vLLM 支持通过 @register_quantization_config 装饰器注册 out-of-tree 自定义量化方法，无需修改代码库。",
+      "文档注明该兼容性表会随 vLLM 演进变化，最新支持情况应以 vllm/model_executor/layers/quantization 代码为准。"
+    ],
+    "raw_excerpt": "Quantization trades off model precision for smaller memory footprint, allowing large models to be run on a wider range of devices. ... To get started with quantization, see LLM Compressor, a library for optimizing models for deployment with vLLM that supports FP8, INT8, INT4, and other quantization formats. ... The following are the supported quantization formats for vLLM: AutoAWQ / BitsAndBytes / GPTQModel / Intel Neural Compressor / LLM Compressor / FP8 W8A8 / INT4 W4A16 / INT8 W4A8 / INT8 W8A8 ... llm-compressor INT8 (W4A8) ❌ ❌ ❌ ❌ ❌ ❌ ❌ ❌ ✅︎ ... This compatibility chart is subject to change as vLLM continues to evolve"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "vllm-project/vllm（仓库元数据）",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "vLLM 仓库 95286 stars、23880 forks、9381 open issues，语言 Python，Apache-2.0 许可。",
+      "创建于 2023-02-09，最近 push 时间为 2026-10-24。",
+      "仓库 topics 包含 cuda、amd、tpu、blackwell、moe、llm-serving、model-serving 等，显示其多硬件后端定位。"
+    ],
+    "raw_excerpt": "stars: 95286 | forks: 23880 | open issues: 9381 | language: Python ... created: 2023-02-09 | last push: 2026-10-24 ... license: Apache-2.0 ... A high-throughput and memory-efficient inference and serving engine for LLMs"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "ggml-org/llama.cpp（仓库元数据与 README 正文）",
+    "url": "https://github.com/ggml-org/llama.cpp",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "llama.cpp 仓库 132199 stars、24757 forks、2592 open issues，语言 C++，MIT 许可，创建于 2023-03-10，最近 push 2026-10-24。",
+      "README 自述支持 1.5-bit、2-bit、3-bit、4-bit、5-bit、6-bit 和 8-bit 整数量化，用于更快推理与更低内存占用。",
+      "README 自述提供用于在 NVIDIA GPU 上运行 LLM 的自定义 CUDA kernel，并通过 HIP 支持 AMD GPU、通过 MUSA 支持 Moore Threads GPU。",
+      "README 自述支持 CPU+GPU 混合推理，可部分加速超出总 VRAM 容量的模型。",
+      "README 列出的后端包括 BLAS、BLIS、CANN(Ascend NPU)、CUDA、HIP、Hexagon、IBM zDNN、MUSA、Metal、OpenCL、OpenVINO(进行中)、RPC、SYCL 等。",
+      "README 自述在 x86 上支持 AVX、AVX2、AVX512 和 AMX，在 Apple Silicon 上通过 ARM NEON、Accelerate 与 Metal 优化。"
+    ],
+    "raw_excerpt": "1.5-bit, 2-bit, 3-bit, 4-bit, 5-bit, 6-bit, and 8-bit integer quantization for faster inference and reduced memory use ... Custom CUDA kernels for running LLMs on NVIDIA GPUs (support for AMD GPUs via HIP and Moore Threads GPUs via MUSA) ... CPU+GPU hybrid inference to partially accelerate models larger than the total VRAM capacity"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "pytorch/ao（TorchAO 仓库元数据与 README 正文）",
+    "url": "https://github.com/pytorch/ao",
+    "published_at": "2026-10-22",
+    "key_points": [
+      "TorchAO 仓库 3014 stars、659 forks、823 open issues，语言 Python，创建于 2023-11-03，最近 push 2026-10-22。",
+      "README 声明 torchao 正在减少新特性开发，并将量化开发整合到其他仓库。",
+      "README 说明底层量化原语（dtypes、casts、gemms）将直接加入 torch，前提是稳定且基础，例如 torch.nn.functional.scaled_mm 与即将推出的 torch.nn.functional.quantize_tensor。",
+      "README 说明更高层的量化构建块与端到端工作流将直接内联到需要它们的仓库中（例如 torchtitan），以获得最大灵活性与控制力。",
+      "README 说明 TorchAO 的端到端量化工作流将继续获得必要更新以兼容未来 torch 版本。"
+    ],
+    "raw_excerpt": "We are minimizing new feature development in torchao, and consolidating quantization development in other repositories as follows: * low level quantization primitives (dtypes, casts and gemms) will be added directly to `torch`, as long as they are stable and foundational. Examples are `torch.nn.functional.scaled_mm` and the upcoming `torch.nn.functional.quantize_tensor`. * higher level quantization building blocks and e2e workflows will be inlined directly into the repositories that need them (for example, `torchtitan`), for maximum flexibility and control."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "ModelCloud/GPTQModel（仓库元数据与 README 正文）",
+    "url": "https://github.com/ModelCloud/GPTQModel",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "GPTQModel 仓库 1277 stars、213 forks、仅 12 open issues，语言 Python，创建于 2024-06-17，最近 push 2026-10-24。",
+      "README 自述为可扩展的 LLM 量化、验证与部署平台，支持 GPTQ、AWQ、ParoQuant、GGUF、FP8、EXL3、QQQ 等格式。",
+      "README 自述支持 NVIDIA CUDA、AMD ROCm、Huawei Ascend、Intel XPU 与 CPU 硬件后端。",
+      "README 自述可与 Transformers、vLLM 和 SGLang 集成部署。",
+      "仓库 topics 包含 gptq、optimum、peft、quantization、sglang、transformers、vllm。"
+    ],
+    "raw_excerpt": "An extensible platform for LLM quantization, validation, and deployment. GPTQ, AWQ, ParoQuant, GGUF, FP8, EXL3, QQQ, and more—across NVIDIA CUDA, AMD ROCm, Huawei Ascend, Intel XPU, and CPU, with Transformers, vLLM, and SGLang."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "bitsandbytes-foundation/bitsandbytes（仓库元数据）",
+    "url": "https://github.com/bitsandbytes-foundation/bitsandbytes",
+    "published_at": "2026-10-19",
+    "key_points": [
+      "bitsandbytes 仓库 8528 stars、937 forks、102 open issues，语言 Python，MIT 许可，创建于 2021-06-04，最近 push 2026-10-19。",
+      "仓库 topics 包含 llm、machine-learning、pytorch、qlora、quantization，显示其与 QLoRA 微调生态的关联。"
+    ],
+    "raw_excerpt": "stars: 8528 | forks: 937 | open issues: 102 | language: Python ... created: 2021-06-04 | last push: 2026-10-19 ... topics: llm, machine-learning, pytorch, qlora, quantization ... license: MIT"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "NVIDIA/TensorRT-LLM（仓库元数据）",
+    "url": "https://github.com/NVIDIA/TensorRT-LLM",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "TensorRT-LLM 仓库 14935 stars、2861 forks，语言 Python，最近 push 2026-10-24。",
+      "仓库简介自述提供易用的 Python API 定义 LLM，并支持在 NVIDIA GPU 上高效推理的优化，同时包含构建 Python 与 C++ runtime 的组件。"
+    ],
+    "raw_excerpt": "stars: 14935 | forks: 2861 ... TensorRT LLM provides users with an easy-to-use Python API to define Large Language Models (LLMs) and supports state-of-the-art optimizations to perform inference efficiently on NVIDIA GPUs. TensorRT LLM also contains components to create Python and C++ runtimes that orchestrate the inference execution in a performant way."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "sgl-project/sglang（仓库元数据）",
+    "url": "https://github.com/sgl-project/sglang",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "SGLang 仓库 37685 stars、9856 forks，语言 Python，最近 push 2026-10-24。",
+      "仓库简介自述为面向大语言模型与多模态模型的高性能 serving 框架。"
+    ],
+    "raw_excerpt": "stars: 37685 | forks: 9856 ... SGLang is a high-performance serving framework for large language models and multimodal models. ... last push: 2026-10-24"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "A White Paper on Neural Network Quantization (Nagel et al., 2021)",
+    "url": "https://arxiv.org/html/2106.08295v1",
+    "published_at": "2021-06-15",
+    "key_points": [
+      "论文将量化基本形式定义为浮点向量近似为标量 scale factor 乘整数向量：x̂ = s_x · x_int ≈ x，其中 s_x 为浮点 scale factor，x_int 为 INT8 等整数向量。",
+      "通用（非对称、uniform affine）量化公式为 x_int = clamp(⌊x/s⌉ + z, 0, 2^b − 1)，其中 ⌊·⌉ 为 round-to-nearest，clamp 截断到 [0, 2^b−1]。",
+      "反量化（de-quantization）公式为 x ≈ x̂ = s(x_int − z)，即先减去 zero-point 再乘 scale factor。",
+      "合并量化与反量化得到统一量化函数 q(x; s, z, b) = s[clamp(⌊x/s⌉ + z, 0, 2^b−1) − z]。",
+      "量化网格上下限由 q_min = −sz 与 q_max = s(2^b − 1 − z) 给出；超出该范围的值被裁剪，产生 clipping error；增大 scale factor 可减小 clipping error 但会增大 rounding error（rounding error 落在 [−s/2, s/2]）。",
+      "对称量化（symmetric uniform quantization）被定义为通用非对称情形的简化版本：将 zero-point 限制为 0，从而在累加运算中省去 zero-point 偏移带来的计算开销，但限制了整数域与浮点域之间的映射灵活性。",
+      "对称量化需区分有符号与无符号整数网格：无符号时 x_int = clamp(⌊x/s⌉, 0, 2^b−1)，有符号时 x_int = clamp(⌊x/s⌉, −2^(b−1), 2^(b−1)−1)；反量化为 x̂ = s·x_int。",
+      "无符号对称量化适合 ReLU 激活这类单尾分布，有符号对称量化适合近似关于零对称的分布。",
+      "power-of-two 量化是对称量化的特例，scale factor 被限制为 2 的幂 s = 2^(−k)，可用位移实现缩放，但限制了 scale 的表达能力，使 rounding/clipping 权衡更难。",
+      "权重与激活使用各自独立的 scale factor（s_w 与 s_x），可提供更大灵活性并降低量化误差；由于每个 scale factor 作用于整个张量，可将其提到求和号外，从而在定点格式下完成 MAC 运算。",
+      "bias 通常以更高位宽（32-bit）存储，其 scale factor 取决于权重与激活的 scale factor。"
+    ],
+    "raw_excerpt": "To approximate the real-valued input x we perfrom a de-quantization step: x ≈ x̂ = s(x_int − z) ... Combining the two steps above we can provide a general definition for the quantization function, q(·), as: x̂ = q(x; s, z, b) = s[clamp(⌊x/s⌉ + z, 0, 2^b−1) − z] ... Symmetric quantization is a simplified version of the general asymmetric case. The symmetric quantizer restricts the zero-point to 0. This reduces the computational overhead of dealing with zero-point offset during the accumulation operation in equation (3). But the lack of offset restricts the mapping between integer and floating-point domain."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "A Survey of Quantization Methods for Efficient Neural Network Inference (Gholami et al., 2021)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2103.13630",
+    "published_at": "2021-06-21",
+    "key_points": [
+      "该综述为书籍章节（Low-Power Computer Vision: Improving the Efficiency of Artificial Intelligence），arXiv 版本 v1 提交于 2021-03-25，v3 修订于 2021-06-21。",
+      "综述指出从浮点表示转向 4 bit 及以下的低精度定点整数，有潜力将内存占用与延迟降低 16 倍，实际应用中常实现 4x 到 8x 的缩减。",
+      "综述将量化定位为与架构设计（含 NAS、架构-硬件协同设计）、剪枝（非结构化/结构化）、知识蒸馏并列的模型效率技术之一。",
+      "综述指出量化与剪枝可在 INT8 及更低精度下以 ≥4× 压缩维持性能，而知识蒸馏在激进压缩下往往有不可忽略的精度下降。",
+      "综述强调其聚焦于推理阶段的量化，并指出半精度/混合精度训练是此前 AI 加速器吞吐量提升一个数量级的主要驱动因素，但进一步降低精度需要大量调优。"
+    ],
+    "raw_excerpt": "Moving from floating-point representations to low-precision fixed integer values represented in four bits or less holds the potential to reduce the memory footprint and latency by a factor of 16x; and, in fact, reductions of 4x to 8x are often realized in practice in these applications. ... Compared to quantization and pruning, which can maintain the performance with ≥ 4× compression (with INT8 and lower precision), knowledge distillation methods tend to have non-negligible accuracy degradation with aggressive compression."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale (Dettmers et al., NeurIPS 2022)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2208.07339",
+    "published_at": "2022-08-15 (v1); v2 2022-11-10",
+    "key_points": [
+      "在约 6.7B 参数处发生「相变」(phase shift)：所有 transformer 层与 75% 的序列维度都受到极端幅值特征影响。",
+      "这些 outlier 高度系统化：在 6.7B 规模下，每个序列出现 150,000 个 outlier，但整个 transformer 中它们只集中在 6 个 feature 维度上。",
+      "outlier 特征维度约占全部输入特征的 0.1%，但将其置零会使 top-1 attention softmax 概率质量下降超过 20%，验证集困惑度退化 600-1000%。",
+      "作为对照，移除同等数量的随机特征最多只使概率下降 0.3%、困惑度退化约 0.1%，说明 outlier 维度具有不成比例的重要性。",
+      "对于不超过 13B 参数的 transformer，outlier 特征维度数不超过 7（|O| ≤ 7），因此混合精度分解只额外消耗约 0.1% 内存。",
+      "混合精度分解把约 0.1% 的大幅值特征维度保留在 16-bit，其余 99.9% 以上的值以 8-bit 相乘；对 BLOOM-176B 内存占用降低 1.96 倍。",
+      "在 6.7B 以下（如 125M–6.7B）常规量化方法可用；一旦 6.7B 出现系统性 outlier，常规量化方法失效，而 LLM.int8() 保持 16-bit 精度。",
+      "作者将 outlier 描述为「highly systematic emergent features」，是驱动 attention 与 transformer 预测性能的主导因素。"
+    ],
+    "raw_excerpt": "At around 6.7B parameters, a phase shift occurs, and all transformer layers and 75% of all sequence dimensions are affected by extreme magnitude features. These outliers are highly systematic: at the 6.7B scale, 150,000 outliers occur per sequence, but they are concentrated in only 6 feature dimensions across the entire transformer. Setting these outlier feature dimensions to zero decreases top-1 attention softmax probability mass by more than 20% and degrades validation perplexity by 600-1000% despite them only making up about 0.1% of all input features. ... Since the number of outlier feature dimensions is not larger than 7 (|O| ≤ 7) for transformers up to 13B parameters, this decomposition operation only consumes about 0.1% additional memory."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "Massive Activations in Large Language Models (Sun, Chen, Kolter, Liu; COLM 2024)",
+    "url": "https://arxiv.org/html/2402.17762v2",
+    "published_at": "2024-02-27 (v1); v2 2024-08-14",
+    "key_points": [
+      "LLM 中存在极少数幅值远大于其他的激活（例如大 100,000 倍），作者称之为 massive activations；在 LLaMA2-70B 中绝对值可超过 15,000，尽管存在 normalization 层。",
+      "massive activations 极其稀少：在数千万个激活中通常少于 10 个；LLaMA2-7B 单个 hidden state 约 40,000 个激活中最多只有 4 个。",
+      "通道位置固定：LLaMA2-7B 位于 feature 维度 1415 与 2533；LLaMA2-13B 位于 2100 与 4743；Mixtral-8x7B 位于 2070 与 3398。",
+      "Table 1 幅值统计：LLaMA2-7B top-1 为 2622.0、median 0.2；LLaMA2-13B top-1 为 1264.0、median 0.4；Mixtral-8x7B top-1 为 7100.0、median 0.3。",
+      "massive activations 的数值基本与输入无关、近似常数，起到 LLM 中不可或缺的 bias 项作用。",
+      "它们出现在中间层的绝大多数层中，在初始层涌现、在最后几层减弱；LLaMA2-7B 从第 2 层出现并保持到第 30 层，LLaMA2-13B 从第 4 层出现，说明并非逐层累积而是由特定机制快速产生。",
+      "massive activations 会导致 attention 概率集中到其对应 token，并在 self-attention 输出中形成隐式 bias 项。",
+      "作者用 Dettmers et al.(2022) 的定义在 LLaMA2-7B/13B 中分别识别出 10 个和 25 个 outlier features，但其中没有一个对应 massive activations 的通道——说明 massive activations 与 LLM.int8() 的 outlier features 是两类不同现象。"
+    ],
+    "raw_excerpt": "We observe an empirical phenomenon in Large Language Models (LLMs)—very few activations exhibit significantly larger values than others (e.g., 100,000 times larger). We call them massive activations. ... Examining the hidden states in these models, we find that certain activations exhibit huge magnitudes, e.g., more than 4 orders of magnitude larger than the median, and could take on absolute values larger than 15,000 in LLaMA2-70B ... These activations are also extremely rare, often numbering fewer than 10 among tens of millions of total activations. ... We discover 10 and 25 outlier features in these two models respectively. However, none of them correspond to the feature dimensions of massive activations."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models (Xiao et al., ICML 2023)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2211.10438",
+    "published_at": "2022-11-18 (arXiv v1); ICML 2023",
+    "key_points": [
+      "核心观察：weights 容易量化而 activations 难以量化；当模型超过 6.7B 参数时，激活中会出现系统性大幅值 outlier，导致大量化误差与精度退化。",
+      "activation outlier 的幅值约为大多数激活值的 100 倍（~100× larger）。",
+      "机制解释：per-tensor 量化下 outlier 主导最大幅值测量，非 outlier 通道的有效量化级数降为 2-3 级，从而产生大量化误差；通道 i 的有效量化级数为 2^8 · m_i/m。",
+      "权重分布平坦均匀、易于量化；已有工作表明把 LLM 权重量化到 INT8 甚至 INT4 不会降低精度。",
+      "Table 1（OPT 6.7B–175B，WinoGrande/HellaSwag/PIQA/LAMBADA 平均）：FP16 为 64.9/65.6/67.9/69.5/71.6%；INT8 per-tensor 崩到 39.9/33.0/32.8/33.1/32.3%；INT8 per-token 为 42.5/33.0/33.1/32.9/31.7%；INT8 per-channel 为 64.8/65.6/68.0/69.4/71.4%。",
+      "per-channel 激活量化能恢复精度但无法映射到 INT8 GEMM kernel；per-token 量化帮助很小。",
+      "SmoothQuant 通过数学等价变换把量化难度从 activations 迁移到 weights（per-channel scaling），实现 W8A8，最高 1.56× 加速、2× 内存节省，可在单节点服务 530B 模型。",
+      "在 OPT-13B 的线性层可视化中，原始激活图有少数通道幅值极大（大于 70），单个激活通道内方差小，而原始权重分布平坦均匀。"
+    ],
+    "raw_excerpt": "Based on the fact that weights are easy to quantize while activations are not, SmoothQuant smooths the activation outliers by offline migrating the quantization difficulty from activations to weights with a mathematically equivalent transformation. ... 2. Outliers make activation quantization difficult. The scale of outliers in activations is ~100× larger than most of the activation values. ... For non-outlier channels, the effective quantization levels would be very small (2-3), leading to large quantization errors."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration (Lin et al., MLSys 2024 Best Paper)",
+    "url": "https://ar5iv.labs.arxiv.org/html/2306.00978",
+    "published_at": "2023-06-01 (arXiv v1); MLSys 2024",
+    "key_points": [
+      "并非所有权重同等重要：存在 0.1%–1% 的 salient weights，跳过这些权重的量化可显著降低量化损失。",
+      "识别 salient weight 通道应参考 activation 分布而非 weight 分布——即使做的是 weight-only 量化，对应更大激活幅值的权重通道更重要，因为它们处理更重要的特征。",
+      "Figure 2 定量对照（OPT-6.7B，INT3-g128）：RTN 基线 PPL 43.2；把 1% salient weights 保留在 FP16 后 PPL 降至 13.0；AWQ 用 per-channel scaling 达到接近效果且硬件友好。",
+      "AWQ 通过数学推导说明放大 salient 通道可降低其相对量化误差，从而避免硬件低效的混合精度实现。",
+      "AWQ 不依赖反向传播或重建，因此不会过拟合校准集；作者指出 GPTQ 的重建过程会过拟合校准集、在分布外领域扭曲已学特征。",
+      "TinyChat 在桌面/移动 GPU 上相对 HuggingFace FP16 实现获得 3.2–3.3× 平均加速，并可在单张 Jetson Orin（64GB）上部署 Llama-2-70B。"
+    ],
+    "raw_excerpt": "Our method is based on the observation that weights are not equally important for LLMs' performance. There is a small fraction (0.1%-1%) of salient weights; skipping the quantization of these salient weights will significantly reduce the quantization loss (Table 1). To find the salient weight channels, the insight is that we should refer to the activation distribution instead of the weight distribution, despite we are doing weight-only quantization: weight channels corresponding to larger activation magnitudes are more salient since they process more important features. ... Keeping the salient weights in FP16 can significantly improve the quantized performance (PPL from 43.2 (left) to 13.0 (middle)), but the mixed-precision format is not hardware-efficient."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models (arXiv:2211.10438, v7)",
+    "url": "https://arxiv.org/abs/2211.10438",
+    "published_at": "2022-11-18",
+    "key_points": [
+      "SmoothQuant 是 training-free、accuracy-preserving 的通用 PTQ 方案，目标是实现 LLM 的 W8A8（8-bit 权重 + 8-bit 激活）量化。",
+      "核心变换：基于「权重易量化、激活难量化」的观察，用数学等价变换把量化难度从激活离线迁移到权重，从而平滑激活离群值（per-channel smoothing factor）。",
+      "平滑因子可离线融合进前一层参数，不引入额外 kernel 调用开销；当输入来自 residual add 时，需在残差分支上加额外 scaling。",
+      "论文报告最高 1.56x 加速与 2x 内存降低，精度损失可忽略；可在单个节点内服务 530B 模型。",
+      "覆盖 OPT、BLOOM、GLM、MT-NLG、Llama-1/2、Falcon、Mistral、Mixtral 等模型的全部矩阵乘 INT8 量化。",
+      "动机证据（Table 1，OPT 系列平均精度，WinoGrande/HellaSwag/PIQA/LAMBADA）：FP16 在 6.7B/13B/30B/66B/175B 上为 64.9%/65.6%/67.9%/69.5%/71.6%；INT8 per-tensor 崩到 39.9%/33.0%/32.8%/33.1%/32.3%；INT8 per-token 为 42.5%/33.0%/33.1%/32.9%/31.7%；INT8 per-channel 为 64.8%/65.6%/68.0%/69.4%/71.4%。",
+      "论文指出 per-channel 激活量化虽能保住精度，但与 INT8 GEMM kernel 不兼容（Tensor Core MMA 序列不容忍低吞吐的转换/CUDA Core FMA 插入），因此 SmoothQuant 用等价变换绕开该限制。",
+      "论文指出 ZeroQuant 的动态 per-token 激活量化 + group-wise 权重量化在 GPT-3-350M 与 GPT-J-6B 上精度良好，但无法维持 175B OPT 的精度。",
+      "发表于 ICML 2023；代码 https://github.com/mit-han-lab/smoothquant。"
+    ],
+    "raw_excerpt": "Based on the fact that weights are easy to quantize while activations are not, SmoothQuant smooths the activation outliers by offline migrating the quantization difficulty from activations to weights with a mathematically equivalent transformation. ... We demonstrate up to 1.56x speedup and 2x memory reduction for LLMs with negligible loss in accuracy."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers (arXiv:2206.01861, v1)",
+    "url": "https://arxiv.org/abs/2206.01861",
+    "published_at": "2022-06-04",
+    "key_points": [
+      "ZeroQuant 是端到端 PTQ + 推理流水线，含三个组件：(1) 面向权重与激活的细粒度且硬件友好的量化方案；(2) 无需原始训练数据的逐层知识蒸馏 LKD（layer-by-layer knowledge distillation）；(3) 高度优化的量化系统后端以消除量化/反量化开销。",
+      "细粒度方案：权重用 group-wise 量化、激活用 token-wise（per-token）动态量化，以应对不同行/不同 token 数值范围差异巨大的问题。",
+      "W8A8 结果：BERT 与 GPT-3 风格模型可无损（cost-free）降到 INT8，相对 FP16 在 BERT-base / GPT-3-350M 上分别最高 5.19x / 4.16x 加速。",
+      "W8A8 精度（GPT-3 350M，Table 1，20 个 zero-shot 任务平均）：W16A16 38.9 → W8A8 37.8；Wikitext-2 perplexity 21.5 → 26.2。W8A16 为 38.5 / 22.1；W16A8 为 37.8 / 24.6。",
+      "论文明确指出 INT8 激活量化（W16A8）是主要精度损失来源；进一步把权重压到 INT8（W8A8）不改变 zero-shot 精度，但会让 Wikitext-2 困惑度变差，说明生成任务比 zero-shot 评测更敏感。",
+      "W4/8A16（MHSA 权重 INT8 + FFC 权重 INT4）在 GPT-3 350M 上严重失效：平均 28.9，Wikitext-2 PPL 1.76e5，Lambada 0.00，无法生成有意义的文本。",
+      "ZeroQuant + LKD 可做 INT4/INT8 混合精度（全连接模块权重 INT4、注意力模块权重 INT8、激活 INT8），相对 FP16 实现 3x 内存占用降低，精度损失很小；BERT-base/BERT-large 量化过程分别 33 秒/10 分钟。",
+      "可扩展到 GPT-J-6B 与 GPT-NeoX-20B：INT8 模型精度与 FP16 相近，GPT-J-6B 相对 FP16 加速 3.67x；GPT-NeoX-20B 推理 GPU 需求从 2 降到 1，延迟从 65ms 降到 25ms（合计 5.2x 系统效率提升）。",
+      "代码将作为 Microsoft DeepSpeed 的一部分发布。"
+    ],
+    "raw_excerpt": "ZeroQuant can reduce the precision for weights and activations to INT8 in a cost-free way for both BERT and GPT3-style models with minimal accuracy impact, which leads to up to 5.19x/4.16x speedup on those models compared to FP16 inference ... (2) ZeroQuant plus LKD affordably quantize the weights in the fully-connected module to INT4 along with INT8 weights in the attention module and INT8 activations, resulting in 3x memory footprint reduction"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models (arXiv:2308.13137, v3)",
+    "url": "https://arxiv.org/abs/2308.13137",
+    "published_at": "2023-08-25",
+    "key_points": [
+      "OmniQuant 的两个核心组件：Learnable Weight Clipping (LWC) 通过优化 clipping 阈值来调节权重极值；Learnable Equivalent Transformation (LET) 通过学习数学等价变换，把量化挑战从激活转移到权重，以处理激活离群值。",
+      "整体在可微分框架下做 block-wise 量化误差最小化，只引入少量可学习量化参数、冻结原始全精度权重；量化后所有可学习参数可被消除（不增加推理开销）。",
+      "与 SmoothQuant / Outlier Suppression+ 依赖手工设定的 migration strength 或网格搜索 scaling 不同，OmniQuant 用梯度优化学习这些参数，并把等价变换扩展到注意力机制，从而支持 K/V cache 量化。",
+      "覆盖的量化配置：W4A4、W6A6、W4A16、W3A16、W2A16，同时适用于 weight-only 与 weight-activation 量化。",
+      "效率：LLaMA-2 全家族（7B-70B）可在单张 A100-40G 上用 128 个样本在 1-16 小时内完成量化。",
+      "W2A16 结果：LLaMA-13B 量化后困惑度 13.21，而 GPTQ 升至 3832。",
+      "W4A4 通过部署友好的 per-token 量化实现（区别于 RPTQ 的 group-wise 激活量化与 LLM-QAT 的 QAT 路线），并保持 PTQ 的时间与数据效率。",
+      "实验覆盖 OPT、LLaMA、LLaMA-2、LLaMA-2-chat、Falcon，模型规模 125M-180B，并在真实设备上展示了加速与内存降低。",
+      "发表于 ICLR 2024；代码 https://github.com/OpenGVLab/OmniQuant。"
+    ],
+    "raw_excerpt": "OmniQuant comprises two innovative components including Learnable Weight Clipping (LWC) and Learnable Equivalent Transformation (LET). LWC modulates the extreme values of weights by optimizing the clipping threshold. Meanwhile, LET tackles activation outliers by shifting the challenge of quantization from activations to weights. Operating within a differentiable framework using block-wise error minimization ... when LLaMA-13B is quantized into W2A16, OmniQuant achieves a perplexity of 13.21, while GPTQ incurs a significant increase in perplexity to 3832"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "Atom: Low-bit Quantization for Efficient and Accurate LLM Serving (arXiv:2310.19102, v3)",
+    "url": "https://arxiv.org/abs/2310.19102",
+    "published_at": "2023-10-29",
+    "key_points": [
+      "Atom 定位是面向 LLM 服务（serving）的低比特 weight-activation 量化，重点是吃满现代 GPU 的低比特算子（如 INT4 Tensor Core），而非仅做 weight-only 量化。",
+      "三项保精度设计：(1) 混合精度量化，保留少量显著（salient）的激活与权重在高精度；(2) 对权重和激活都采用细粒度 group 量化；(3) 激活采用动态量化（而非预计算量化参数），以更好捕捉每个输入的分布。",
+      "为保硬件效率的配套设计：重排激活与权重以维持混合精度下的规则内存访问；把量化与重排融合进已有算子；把离群值进一步量化到 8-bit 以平衡精度与效率；并把 KV-cache 量化到低比特以减少内存搬运。",
+      "实现上为混合精度 + group 量化的特殊矩阵乘编写了定制 CUDA kernel，使用低比特 Tensor Core，并集成进端到端 serving 框架。",
+      "精度结果：量化到 4-bit（权重与激活均为 4-bit）时精度损失可忽略——平均 zero-shot 精度下降 1.4%，Llama-65B 的 WikiText2 困惑度仅增加 0.3。",
+      "吞吐结果：在相同延迟目标下，端到端吞吐（token/s）相对 FP16 最高 7.73x、相对 W4A16 最高 5.5x、相对 W8A8（INT8）最高 2.53x。",
+      "论文指出 OmniQuant、QLLM 等 4-bit weight-activation 方法相比 FP16 基线仍有明显的困惑度上升（其 Figure 2），Atom 借此论证自身精度优势。",
+      "硬件动机数据：A100 的 INT4 为 1248 TOPS、INT8 为 624 TOPS，而 FP16 Tensor Core 仅 312 TFLOPS。",
+      "发表于 MLSys 2024。"
+    ],
+    "raw_excerpt": "Atom incorporates three key quantization designs: (1) It adopts mixed-precision quantization, which retains a small but salient number of activations and weights in high precision to preserve accuracy. (2) It employs fine-grained group quantization on both weights and activations ... (3) Instead of pre-calculating quantization parameters for activations, Atom dynamically quantizes activations ... Atom improves end-to-end throughput (token/s) by up to 7.73x compared to the FP16 and by 2.53x compared to INT8 quantization"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+    "url": "https://arxiv.org/abs/2305.14314v1",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "QLoRA 通过冻结的 4-bit 量化预训练模型向 Low Rank Adapters (LoRA) 反向传播梯度，可在单张 48GB GPU 上微调 65B 参数模型，同时保持完整 16-bit 微调的任务性能。",
+      "论文提出三项节省显存的创新：(a) 4-bit NormalFloat (NF4)，一种对正态分布权重在信息论上最优的新数据类型；(b) double quantization，通过对量化常数本身再量化来降低平均显存占用；(c) paged optimizers，用于管理显存峰值。",
+      "作者用 QLoRA 微调了超过 1,000 个模型，覆盖 8 个指令数据集、多种模型类型（LLaMA、T5）以及 33B/65B 等常规微调难以运行的规模。",
+      "最佳模型族 Guanaco 在 Vicuna 基准上超过此前所有公开模型，达到 ChatGPT 性能水平的 99.3%，且仅需单 GPU 24 小时微调。",
+      "论文开源了全部模型与代码，包括用于 4-bit 训练的 CUDA kernel。"
+    ],
+    "raw_excerpt": "QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "QuIP#: Even Better LLM Quantization with Hadamard Incoherence and Lattice Codebooks",
+    "url": "https://arxiv.org/abs/2402.04396",
+    "published_at": "2024-02-06",
+    "key_points": [
+      "QuIP# 是一种 weight-only 后训练量化（PTQ）方法，定位在极端压缩区间（≤ 4 bits per weight）取得 state-of-the-art 结果。",
+      "QuIP# 相对 QuIP 的第一项改进：用 randomized Hadamard transform 替代 QuIP 的 incoherence processing，速度更快且理论性质更好。",
+      "第二项改进：使用向量量化（VQ）利用非相干权重所具有的球状 sub-Gaussian 分布，提出基于高度对称 E8 格（E8 lattice）的硬件友好 codebook，该格实现最优的 8 维单位球堆积。",
+      "第三项改进：使用 fine-tuning 提升对原始模型的保真度。",
+      "论文声称 QuIP# 是首个 3-bit 模型比 4-bit 模型扩展性更好的 PTQ 方法，并称这直接反驳了 Dettmers & Zettlemoyer (2023) 关于 4-bit 模型“最优”的论断。",
+      "QuIP# 的 CUDA 概念验证实现在 NVIDIA RTX 4090 上达到超过 50% 的峰值内存带宽。",
+      "论文给出 Llama 2 70B 在 16-bit 下需 140GB 显存、量化到 2 bits 后只需不到 20GB 的对比。"
+    ],
+    "raw_excerpt": "we introduce QuIP#, a weight-only PTQ method that achieves state-of-the-art results in extreme compression regimes (≤ 4 bits per weight) using three novel techniques. First, QuIP# improves QuIP's (Chee et al., 2023) incoherence processing by using the randomized Hadamard transform, which is faster and has better theoretical properties. Second, QuIP# uses vector quantization to take advantage of the ball-shaped sub-Gaussian distribution that incoherent weights possess: specifically, we introduce a set of hardware-efficient codebooks based on the highly symmetric E8 lattice, which achieves the optimal 8-dimension unit ball packing."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "QuIP#: Even Better LLM Quantization with Hadamard Incoherence and Lattice Codebooks (HTML 全文, Section 2-4)",
+    "url": "https://arxiv.org/html/2402.04396v2",
+    "published_at": "2024-06-04",
+    "key_points": [
+      "incoherence processing 被定义为一种有原则的离群值抑制形式，使权重矩阵近似服从高斯分布；其作用是让被量化的对象（权重）与重要的量化方向（Hessian）在任何坐标上都不至于过大，从而使量化误差可被证明有界。",
+      "论文转述 Chee et al. (2023) 的 Definition 2.1：Hessian H 为 μ-incoherent 当其特征分解 H = QΛQ^T 满足 max_{i,j}|Q_ij| ≤ μ/√n；权重矩阵 W 为 μ-incoherent 当 max_{i,j}|W_ij| ≤ μ‖W‖_F/√(mn)。",
+      "QuIP 的 incoherence processing 通过用结构化随机正交矩阵对 W 和 H 做共轭实现：以 Kronecker 积构造 U = U1⊗U2、V = V1⊗V2（U1,U2 尺寸约 √n，V1,V2 尺寸约 √m），令 H̃ ← VHV^T、W̃ ← UW V^T，则二者以高概率成为 Õ(1)-incoherent。",
+      "QuIP# 的推理流程为：先做 Hadamard 正交变换 Had(S_V ⊙ x)，再 decompress_multiply 与 codebook 相乘，最后再做一次 Hadamard 变换 Had(S_U ⊙ y)，即旋转在推理时以 Hadamard 变换形式实现。",
+      "QuIP# 使用 BlockLDLQ 块自适应舍入算法配合 E8 格 codebook；LDLQ 由 QuIP 命名，OPTQ 与 QuIP 独立提出了该舍入方法的等价形式，LDLQ 在线性反馈自适应舍入类中最优，误差率可证明优于 nearest 或 stochastic rounding。",
+      "论文指出分组保留 FP16 缩放因子会带来额外开销：每 64 个权重用一个 16-bit scale 相当于额外 0.25 bits/weight，在极端压缩区间这一开销显著，而非相干处理推理开销极小。",
+      "向量量化（VQ）将 d 个权重作为 d 维向量一起量化，k-bit VQ 的 codebook 含 2^(kd) 个 d 维向量；通过让 codebook 形状匹配权重分布，VQ 可比标量量化（SQ）取得更低失真。"
+    ],
+    "raw_excerpt": "Incoherence processing is a principled form of outlier suppression that produces approximately Gaussian distributed weight matrices (Chee et al., 2023). ... A Hessian H is μ-incoherent if its eigendecomposition H = QΛQ^T has max_{i,j}|Q_ij| = max_{i,j}|e_i^T Q e_j| ≤ μ/√n. A weight matrix W is μ-incoherent if max_{i,j}|W_ij| = max_{i,j}|e_i^T W e_j| ≤ μ‖W‖_F/√(mn)."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "QuaRot: Outlier-Free 4-Bit Inference in Rotated LLMs (arXiv:2404.00456v2)",
+    "url": "https://arxiv.org/abs/2404.00456v2",
+    "published_at": "2024-03-30",
+    "key_points": [
+      "QuaRot 使用 randomized Hadamard transformations（随机化 Hadamard 变换）旋转模型输入，并借助 computational invariance 把 Hadamard 变换融合进权重矩阵，得到无 outlier 特征的等价网络。",
+      "QuaRot 的旋转是固定的/随机的（randomized Hadamard，H̃ = H·diag(s)，s 为 {+1,-1} 随机抽取），不通过梯度或损失优化旋转矩阵。",
+      "QuaRot 将旋转扩展到 attention 模块的 online Hadamard 变换，以消除 keys/values 中的 outlier，从而使 KV cache 可量化。",
+      "QuaRot 实现端到端 4-bit 推理：所有权重、激活、KV cache 均为 4 bit，且不保留任何高精度通道。",
+      "在 Llama-2-70B 上，QuaRot 的 4-bit 量化模型 WikiText-2 perplexity 损失最多 0.47，并保留 99% 的零样本任务性能。",
+      "QuaRot 报告在 Llama-2-70B（batch size 64、序列长度 2048）上最高 3.33× prefill 加速，解码阶段 3.89× 显存节省。",
+      "QuaRot 的 6-bit 与 8-bit 量化在使用简单 round-to-nearest 量化、无需任何校准数据的情况下是无损的。",
+      "QuaRot 每个 transformer 层只需 1.5 个 Hadamard 变换（相比每个权重矩阵两次 Hadamard 的做法更省）。"
+    ],
+    "raw_excerpt": "In this work, we address the issue of outlier features by rotating the inputs of the model using randomized Hadamard transformations. We do this using the computational invariance idea (Ashkboos et al., 2024) and fuse Hadamard transformations into the weight matrices, resulting in an equivalent network without outlier features. ... Our 4-bit quantized Llama-2-70B model has losses of at most 0.47 WikiText-2 perplexity and retains 99% of the zero-shot performance."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "SpinQuant: LLM Quantization with Learned Rotations (arXiv:2405.16406v4, ICLR 2025)",
+    "url": "https://arxiv.org/html/2405.16406v4",
+    "published_at": "2025-02-20",
+    "key_points": [
+      "SpinQuant 的核心主张是：不同随机旋转矩阵导致的量化后性能差异很大，因此应「学习」旋转矩阵而非使用随机旋转。",
+      "在 LLaMA-2 7B 的 W4A4 设置下做 100 次随机旋转试验，最好的随机旋转比最差的在下游零样本推理平均准确率上高出 13 分。",
+      "随机 Hadamard 矩阵整体优于随机浮点旋转矩阵（与 QuIP# 关于 Hadamard 给出更紧权重最大值界的发现一致），但随机 Hadamard 旋转之间仍存在最高约 6 分的性能方差。",
+      "SpinQuant 用 Cayley SGD 在 Stiefel 流形上优化旋转矩阵，以最小化量化网络的最终损失，权重参数保持固定；该优化不改变全精度网络输出。",
+      "SpinQuant 定义两个可融合旋转矩阵（R1、R2）产生旋转不变的全精度网络，另加两个 online Hadamard 旋转（R3、R4）用于处理 MLP 块内部与 KV cache 的激活 outlier（即 SpinQuant_had 变体）。",
+      "SpinQuant_had 在 LLaMA-2 7B 的极端 W4A4KV4 设置下达到平均准确率 64.0，与全精度仅差 2.9 分；而 LLM-QAT 在相同精度条件下差距为 22.0 分。",
+      "SpinQuant_no had 在 Mistral-7B 的 W4A8KV8 零样本常识推理任务上，把量化性能差距从 12.1 缩小到 1.6。",
+      "SpinQuant_no had 的 W4A8 量化在 LLaMA-2 上达到与 QuIP#、OmniQuant 等 SOTA 权重-only 量化方法相当的性能。",
+      "SpinQuant 相对 QuaRot（随机旋转）在 LLaMA-3 8B 这类难量化模型上，把与全精度的差距最多缩小 45.1%（相对值）。",
+      "实验覆盖 7 个模型：LLaMA-2 7B/13B/70B、LLaMA-3 1B/3B/8B、Mistral 7B。"
+    ],
+    "raw_excerpt": "we find that some random rotations lead to much better quantization than others, with an up to 13 points difference in downstream zero-shot reasoning performance. ... Random Hadamard matrices outperform random rotation matrices ... However, even random Hadamard rotation matrices exhibit a non-negligible variance in final performance, as large as 6 points. ... SpinQuant_had attains an average accuracy of 64.0 in extreme W4A4KV4 quantization settings on LLaMA-2 7B. This represents a mere 2.9 point gap from the full-precision network, a substantial improvement over the previous LLM-QAT approach, which exhibited a 22.0 point gap under identical precision conditions."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers (arXiv:2210.17323v2, ICLR 2023)",
+    "url": "https://arxiv.org/html/2210.17323v2",
+    "published_at": "2023-03-22",
+    "key_points": [
+      "GPTQ 可将权重位宽降至 3 或 4 bit，相对未压缩基线精度退化可忽略（negligible accuracy degradation）。",
+      "论文明确声称在极端量化区间（2-bit 甚至 ternary 三值量化）下仍能提供 reasonable accuracy，即 2-bit 是作者认为仍可用的下界。",
+      "论文指出压缩会在语言建模精度（perplexity）、bit-width 与原始模型规模之间引入 non-trivial tradeoffs，即存在位宽-精度-模型大小的三方权衡。",
+      "方法为逐层（layer-wise）求解 argmin ||WX - ŴX||_2^2 的重建问题，量化粒度与 group 划分属于该框架下的可调设置。",
+      "实测端到端相对 FP16 加速约 3.25x（A100）与 4.5x（A6000）。",
+      "作者自陈局限：因主流硬件缺乏混合精度（FP16 x INT4）支持，方法本身不为实际乘法提供加速，加速来自访存带宽节省。"
+    ],
+    "raw_excerpt": "GPTQ can quantize GPT models with 175 billion parameters in approximately four GPU hours, reducing the bitwidth down to 3 or 4 bits per weight, with negligible accuracy degradation relative to the uncompressed baseline. ... we also show that our method can still provide reasonable accuracy in the extreme quantization regime, in which weights are quantized to 2-bit or even ternary quantization levels. ... compression induces non-trivial tradeoffs between the accuracy of the language modeling (perplexity), bit-width, and the size of the original model."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration (arXiv:2306.00978v1)",
+    "url": "https://arxiv.org/html/2306.00978v1",
+    "published_at": "2023-06-01",
+    "key_points": [
+      "AWQ 全文采用 group-wise 量化，默认 group size = 128（除特别说明外），并引用先前工作称 grouped quantization 总能改善性能/模型大小的权衡。",
+      "AWQ 聚焦 INT4/INT3 量化，理由是这两档「基本能保留 LLM 性能」，即 4-bit 与 3-bit 被视为实用区间。",
+      "在 INT3-g128 设置下，OPT-6.7B 的 WikiText perplexity：FP16 为 12.29，RTN 为 43.16，保留 1% 显著权重为 FP16 后降至 13.02（摘要图注处记为 13.0）。",
+      "同设置下 OPT-1.3B：FP16 16.41，RTN 206.5，保留 1% 显著权重后 18.51；OPT-13B：FP16 11.50，RTN 45.37，保留 1% 后 12.04。",
+      "LLaMA-7B 在 w3-g128 下：FP16 9.49，RTN 12.10，搜索缩放后 10.82。",
+      "作者观察到仅 0.1%-1% 的显著权重（按激活幅度而非权重幅度挑选）对量化损失起决定作用，按权重范数挑选几乎无改善（与随机选择相当）。",
+      "量化目标函数中明确以「INT3/INT4 quantization with group size 128」作为 Q(·) 的实例。",
+      "AWQ 报告相对 GPTQ 1.45x、相对带 reordering 的 GPTQ 2x 加速，比 cuBLAS FP16 快 1.85x。"
+    ],
+    "raw_excerpt": "We study group-wise quantization (with group size 128 [17]) since it helps to improve the accuracy-cost trade-off [13] at little overhead. ... We used a group size of 128 throughout the work, except otherwise specified. We focus on INT4/INT3 quantization since they are able to mostly preserve the LLMs' performance [13]. ... PPL is measured with OPT-6.7B under INT3-g128 quantization. ... (w3-g128) OPT-6.7B FP16 12.29 / RTN 43.16 / 1% 13.02"
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration (arXiv:2306.00978v6)",
+    "url": "https://arxiv.org/abs/2306.00978v6",
+    "published_at": "2023-06-01",
+    "key_points": [
+      "AWQ 是面向 LLM 的低比特「仅权重量化」(weight-only quantization) 方法，即对应 W4A16 这一类方案（权重 4bit、激活保持 16bit）。",
+      "AWQ 的机制是：只保护约 1% 的显著权重通道即可大幅降低量化误差，且显著通道依据激活分布而非权重本身来识别。",
+      "AWQ 通过等价变换按激活统计量对显著权重通道做缩放，从而避免硬件不友好的混合精度量化。",
+      "AWQ 不依赖反向传播或重建，因此对校准集过拟合风险低，可泛化到不同领域与模态。",
+      "配套推理框架 TinyChat 通过 kernel fusion 与平台感知的权重打包，在桌面与移动 GPU 上相对 HuggingFace FP16 实现超过 3x 加速。",
+      "论文声称 TinyChat 使 70B 级 Llama-2 模型可在移动 GPU 上部署（该主张出自论文作者，属自述性能主张）。"
+    ],
+    "raw_excerpt": "We propose Activation-aware Weight Quantization (AWQ), a hardware-friendly approach for LLM low-bit weight-only quantization. ... Protecting only 1% salient weights can greatly reduce quantization error. ... With kernel fusion and platform-aware weight packing, TinyChat offers more than 3x speedup over the Huggingface FP16 implementation on both desktop and mobile GPUs. It also democratizes the deployment of the 70B Llama-2 model on mobile GPUs."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "ModelCloud/GPTQModel — LLM quantization toolkit (README)",
+    "url": "https://github.com/ModelCloud/GPTQModel",
+    "published_at": "2024-06-17",
+    "key_points": [
+      "GPTQModel 自我定位为「可扩展的 LLM 量化、验证与部署平台」，仓库 1277 stars、213 forks，最近一次 push 为 2026-10-24。",
+      "README 列出的支持量化格式包括 GPTQ、AWQ、ParoQuant、GGUF、FP8、EXL3、QQQ 等，即 W4A16 类格式（GPTQ/AWQ）与 FP8 类格式同属其覆盖范围。",
+      "README 列出的硬件后端包括 NVIDIA CUDA、AMD ROCm、Huawei Ascend、Intel XPU 与 CPU；推理框架后端包括 Transformers、vLLM、SGLang。",
+      "本次仅取得仓库元数据与 README 开头段落，其中未出现任何针对 Llama-3.1 / Qwen2.5 / Mistral / DeepSeek 的显存占用 GB 数值、压缩倍数或单卡容量数据。"
+    ],
+    "raw_excerpt": "An extensible platform for LLM quantization, validation, and deployment. GPTQ, AWQ, ParoQuant, GGUF, FP8, EXL3, QQQ, and more—across NVIDIA CUDA, AMD ROCm, Huawei Ascend, Intel XPU, and CPU, with Transformers, vLLM, and SGLang."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "TensorRT-LLM Performance Overview (official docs)",
+    "url": "https://nvidia.github.io/TensorRT-LLM/performance/perf-overview.html",
+    "published_at": null,
+    "key_points": [
+      "官方性能页汇总 TensorRT-LLM 在多款 GPU（H100 SXM 80GB、H200 SXM 141GB、GH200 96GB、B200 180GB、GB200 192GB）上若干关键模型的性能测量值。",
+      "吞吐表的口径为：本地推理客户端以无限速率（请求间无延迟）灌入请求，即最大负载下的吞吐场景，报告指标为 Total Output Throughput (tokens/sec)。",
+      "该页列出的量化模型族为 FP4（nvidia/Llama-3.3-70B-Instruct-FP4、Llama-3.1-405B-Instruct-FP4）与 FP8（Llama-3.1-8B、Llama-3.3-70B、Llama-3.1-405B、Llama-4-Maverick-17B-128E），未列出 INT4/W4A16 模型，也未给出 BF16 基线列。",
+      "Llama 3.3 70B FP4 在 B200（TP=1）上：ISL/OSL 128/128 为 10,613.84 tokens/s，128/2048 为 9,445.51，128/4096 为 6,276.85，2048/128 为 1,330.35，2048/2048 为 4,528.48，20000/2000 为 636.36 tokens/s。",
+      "Llama 3.1 8B FP8 在 H100（TP=1）上：128/128 为 26,401.48 tokens/s，128/4096 为 13,541.54，2048/128 为 3,275.55，20000/2000 为 1,340.69 tokens/s。",
+      "Llama 3.3 70B FP8 在 H100（TP=2）上：128/128 为 6,092.28 tokens/s，2048/128 为 723.40，20000/2000 为 411.85 tokens/s。",
+      "Llama 3.1 405B FP8 在 H100（TP=8）上：128/128 为 3,705.18 tokens/s，2048/128 为 433.47，20000/2000 为 363.27 tokens/s。",
+      "官方声明这些数据仅作为验证观测性能的参考点，不应视为 TensorRT-LLM 可交付的峰值性能；调优 batch size、并行配置等选项可能带来更好性能。",
+      "自 v0.19 起测试使用 PyTorch backend，无需构建 engine；基准命令为 trtllm-bench --model $model_name throughput --dataset $dataset_file --backend pytorch。",
+      "测试所用权重由 ModelOpt 量化并在 NVIDIA Model Optimizer HuggingFace Collection 发布。"
+    ],
+    "raw_excerpt": "The below table shows performance data where a local inference client is fed requests at an infinite rate (no delay between messages), and shows the throughput scenario under maximum load. The reported metric is Total Output Throughput (tokens/sec). ... The data in the following tables is provided as a reference point to help users validate observed performance. It should not be considered as the peak performance that can be delivered by TensorRT-LLM."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "web",
+    "title": "vLLM Documentation — Quantization (supported formats & hardware matrix)",
+    "url": "https://docs.vllm.ai/en/latest/features/quantization/index.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 文档对量化的定位表述为：以模型精度换取更小的内存占用，使大模型能在更广泛的设备上运行。",
+      "vLLM 支持的量化格式清单包含 AutoAWQ、BitsAndBytes、GPTQModel、Intel Neural Compressor、LLM Compressor、FP8 W8A8、INT4 W4A16、INT8 W4A8、INT8 W8A8、NVIDIA Model Optimizer、Online Quantization、AMD Quark、Quantized KV Cache、TorchAO 等。",
+      "硬件兼容矩阵中 AWQ 支持 Turing/Ampere/Ada/Hopper 与 Intel GPU、x86 CPU，不支持 Volta、AMD GPU、Arm CPU；GPTQ 额外支持 Volta。",
+      "Marlin 内核（GPTQ/AWQ/FP8/FP4）支持 Turing（不支持 Marlin MXFP4）、Ampere、Ada、Hopper，不支持 Volta、AMD GPU、Intel GPU、x86 CPU。",
+      "llm-compressor INT8 (W8A8) 支持 Turing/Ampere/Ada/Hopper 与 x86 CPU、Arm CPU；llm-compressor INT8 (W4A8) 仅支持 Arm CPU。",
+      "llm-compressor FP8 (W8A8) 仅支持 Ada/Hopper 与 AMD GPU。",
+      "该页提供 --linear-backend 与 linear_backend_per_quant 参数，可为不同量化方案分别指定线性层后端（如 nvfp4_w4a16 使用 humming，其余使用 cutlass）。",
+      "该页未提供任何吞吐（tokens/s）或延迟（TTFT/TPOT）数值，也未给出量化相对 BF16 的加速比数据。"
+    ],
+    "raw_excerpt": "Quantization trades off model precision for smaller memory footprint, allowing large models to be run on a wider range of devices. ... The following are the supported quantization formats for vLLM: AutoAWQ, BitsAndBytes, GPTQModel, Intel Neural Compressor, LLM Compressor, FP8 W8A8, INT4 W4A16, INT8 W4A8, INT8 W8A8 ..."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "NVIDIA/TensorRT-LLM (GitHub repository)",
+    "url": "https://github.com/NVIDIA/TensorRT-LLM",
+    "published_at": null,
+    "key_points": [
+      "仓库定位：TensorRT LLM 通过针对常见操作的专用 kernel、高效 runtime 以及可定制扩展的 Pythonic 框架来优化 LLM 与视觉生成模型的推理。",
+      "仓库元数据：约 14,935 stars、2,861 forks、1,787 open issues，语言 Python，创建于 2023-08-16，最近推送 2026-10-24。",
+      "仓库 topics 包含 blackwell、cuda、llm-serving、moe、pytorch；license 标注为 NOASSERTION。",
+      "README 摘要中未包含任何 INT4/INT8 量化吞吐或延迟的基准数字。"
+    ],
+    "raw_excerpt": "TensorRT LLM optimizes inference for LLMs and Visual Gen models with specialized kernels for common operations, an efficient runtime, and a pythonic framework that enables you to customize and extend the system."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "vllm-project/vllm (GitHub repository)",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": null,
+    "key_points": [
+      "仓库定位：vLLM 是面向 LLM 的高吞吐、内存高效的推理与服务引擎。",
+      "仓库元数据：约 95,287 stars、23,880 forks，语言 Python，最近推送 2026-10-24。",
+      "本次仅取得仓库元数据与简介，未读取 README 正文，因此该来源不提供任何量化吞吐/延迟数值。"
+    ],
+    "raw_excerpt": "A high-throughput and memory-efficient inference and serving engine for LLMs"
+  },
+  {
+    "sub_question_id": "f9",
+    "source_type": "github",
+    "title": "IST-DASLab/marlin — Mixed Auto-Regressive Linear kernel (FP16xINT4 matmul kernel for LLM inference)",
+    "url": "https://github.com/IST-DASLab/marlin",
+    "published_at": "2024-01-17",
+    "key_points": [
+      "Marlin 是面向 LLM 推理的 FP16xINT4 matmul kernel，声称可在 batchsize 16-32 tokens 以内提供接近理想的 4x 加速，而此前同类工作只能在 1-2 tokens 的 batchsize 下达到可比加速。",
+      "带宽受限的定量论证：现代 GPU 的 FLOP-to-byte 比值约为 100-200，因此只要每个 4-bit 量化权重对应的 tensor core 乘加（MAC）次数少于 25-50 次，理论上就能维持相对 FP16 权重接近理想的 4x 加速。",
+      "由此推论：weight-only 量化的全部性能收益原则上可延伸到比现有 kernel 大 4-8 倍的 batchsize；但实际实现极具挑战，因为必须同时充分利用 global memory、L2 cache、shared memory、tensor core 与 vector core 全部资源。",
+      "dequant 开销与 tensor core 的流水线重叠是核心工程问题：README 明确要求「carefully order dequantization and tensor core instructions to ensure that both GPU pipelines are well saturated and do not bottleneck each other」。",
+      "kernel 融合的具体手段包括：激活始终从 L2 取并复用、权重全局加载异步化并对不复用数据采用立即驱逐的 cache 策略、shared memory 双缓冲、量化权重与 group scales 离线重排（reshuffle）成可直接 dequant 进 tensor core 组织的布局、多 warp 计算同一输出 tile 的部分结果、全局归约直接在 L2 中的输出缓冲完成（FP32 累加器临时降为 FP16）。",
+      "实测对比（A10 GPU、groupsize 128、大矩阵）：现有 kernel 在 batchsize 1 时接近最优的 3.87x 加速（3.87x 而非 4x 是因为 group scales 带来 0.125 bit 的存储开销），但随着输入数增加性能快速退化；Marlin 在 batchsize 约 16-32 以内基本保持理想的 3.87x 加速。",
+      "时钟频率实验：锁定 base GPU clock 后，降频会显著损害此前 kernel 的相对加速比，但对 Marlin 几乎最优的性能没有影响。",
+      "硬件与精度约束：需要 CUDA >= 11.8、compute capability >= 8.0（Ampere 或 Ada），README 注明 Marlin 尚未针对 Hopper 优化；ECC 开启时（如 A10）可达最大显存带宽比官方规格低 10-15%，因为每个内存请求都带校验开销。",
+      "仓库附带改进版 GPTQ 算法（更好的 group grid clipping 与非均匀校准样本长度），可产出 Marlin 兼容的 4-bit Llama2 模型。"
+    ],
+    "raw_excerpt": "Most modern GPUs feature FLOP to byte ratios of around 100-200. Hence, as long as we perform less than 25-50 (tensor core) multiply-accumulates per 4-bit quantized weight, it should (theoretically) be possible to maintain near ideal 4x speedup over FP16 weights. This means that the full performance benefits of weight-only quantization should, in principle, extend to batchsizes 4-8x larger than what is currently achieved by existing kernels. ... We carefully order dequantization and tensor core instructions to ensure that both GPU pipelines are well saturated and do not bottleneck each other. ... While existing kernels achieve relatively close to the optimal 3.87x (note the 0.125 bits storage overhead of the group scales) speedup at batchsize 1, their performance degrades quickly as the number of inputs is increased. In contrast, Marlin delivers essentially ideal speedups at all batchsizes, enabling the maximum possible 3.87x speedup up to batchsizes around 16-32."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "vLLM Docs — Quantized KV Cache (FP8 KV Cache)",
+    "url": "https://docs.vllm.ai/en/latest/features/quantization/quantized_kvcache.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 官方 Quantized KV Cache 文档整页只讨论 FP8 KV cache，标题即为 \"FP8 KV Cache Overview\"。",
+      "文档列出的 kv_cache_dtype 取值为 \"auto\"、\"fp8\"、\"fp8_e4m3\"、\"fp8_e5m2\"，未列出任何 INT8 或 2/4-bit KV cache 选项。",
+      "vLLM 支持两种 FP8 KV cache 量化粒度：per-tensor（q/k/v_scale=[1]）与 per-attention-head（q_scale=[num_heads], k/v_scale=[num_kv_heads]）。",
+      "per-attention-head 量化目前仅在 Flash Attention 后端可用，且需要 llm-compressor 提供的校准流程。",
+      "默认（无校准）时所有量化 scale 设为 1.0；推荐用 llm-compressor 在数据集上校准以提升精度。",
+      "使用 Flash Attention 3 后端 + FP8 KV cache 时，attention 运算本身也在 FP8 域进行，query 同样被量化为 FP8。",
+      "vLLM 提供 --kv-cache-dtype-skip-layers 参数，可让指定层（按索引或层类型名，如 sliding_window）保持模型原生 dtype 而其余层量化。"
+    ],
+    "raw_excerpt": "Quantizing the KV (Key-Value) cache to FP8 format can significantly reduce its memory footprint. ... kv_cache_dtype=\"auto\": Use the model's default data type; kv_cache_dtype=\"fp8_e4m3\": Supported on CUDA 11.8+ and ROCm (AMD GPUs); kv_cache_dtype=\"fp8_e5m2\": Supported on CUDA 11.8+"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "TensorRT-LLM Docs — Quantization (recipes, FP8 KV Cache, NVFP4 KV Cache, support matrices)",
+    "url": "https://nvidia.github.io/TensorRT-LLM/latest/features/quantization.html",
+    "published_at": null,
+    "key_points": [
+      "TensorRT-LLM 官方 Quantization 文档列出的量化 recipe 为：FP4、FP8 Per Tensor、FP8 Block Scaling、FP8 Rowwise、FP8 KV Cache、NVFP4 KV Cache、W4A16 GPTQ、W4A8 GPTQ、W4A16 AWQ、W4A8 AWQ。",
+      "KV cache 相关的 recipe 只有两项：FP8 KV Cache 与 NVFP4 KV Cache；文档未列出 INT8 KV cache recipe。",
+      "FP8 KV cache 可通过 KvCacheConfig(dtype='fp8') 手动开启，即使 checkpoint 默认未启用。",
+      "NVFP4 KV cache 需先用 ModelOpt 做离线量化，再设 KvCacheConfig(dtype='nvfp4')；当前 TRT-LLM 在启用 NVFP4 KV cache 时只支持 FP8 权重/激活量化（因此需 --quant fp8）。",
+      "文档提到可将 NVFP4 仅用于驻留 Host 或 Disk 的 Pages，而 active GPU KV cache 保持正常运行时类型（见 KV Cache Compression）。",
+      "模型支持矩阵中 FP8 KV Cache 列覆盖 BERT、DeepSeek-R1、EXAONE、Gemma 3、GPT-OSS、LLaMA 系列、Mistral、Mixtral、Phi、Qwen 系列、BLIP2、LLaVA、VILA、Nougat 等；NVFP4 KV Cache 列仅 LLaMA-v2、LLaMA 3、Qwen-3 标 Y。",
+      "硬件支持矩阵中 FP8 KV Cache 在 Blackwell(sm120)、Blackwell(sm100/103)、Rubin(sm107)、Hopper、Ada Lovelace、Ampere 均为 Y；NVFP4 KV Cache 仅 Blackwell(sm100/103) 为 Y。"
+    ],
+    "raw_excerpt": "TensorRT LLM offers a variety of quantization recipes ... FP4, FP8 Per Tensor, FP8 Block Scaling, FP8 Rowwise, FP8 KV Cache, NVFP4 KV Cache, W4A16 GPTQ, W4A8 GPTQ, W4A16 AWQ, W4A8 AWQ ... TensorRT LLM allows you to enable the FP8 KV cache manually, even for checkpoints that do not have it enabled by default."
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "web",
+    "title": "SGLang Docs — Quantization (platform compatibility table)",
+    "url": "https://docs.sglang.ai/advanced_features/quantization.html",
+    "published_at": null,
+    "key_points": [
+      "SGLang 官方 Quantization 文档区分离线量化（GPTQ、AWQ 等需校准统计）与在线动态量化（运行时计算 scale）。",
+      "该页的平台兼容性表列出的方法为 fp8、mxfp4、mxfp8、mxfp_w4a8、blockwise_int8、w8a8_int8、w8a8_fp8、awq、gptq、compressed-tensors、quark、auto-round、quark_int4fp8_moe、awq_marlin、gptq_marlin、gguf、modelopt/modelopt_fp8、modelopt_fp4、nvfp4_online、petit_nvfp4、bitsandbytes、modelslim 等。",
+      "上述表格中的 int8 相关条目（blockwise_int8、w8a8_int8）均为权重/激活量化方法，该页未列出任何 KV cache 量化方法（既无 FP8 KV cache 也无 INT8 KV cache 条目）。",
+      "文档建议优先使用离线量化而非在线量化，并提示使用预量化模型时不要同时加 --quantization 开启在线量化。",
+      "文档要求量化模型必须经基准测试验证，以防量化精度异常回退。"
+    ],
+    "raw_excerpt": "SGLang supports various quantization methods, including offline quantization and online dynamic quantization. ... blockwise_int8 Yes Yes No Triton-based, works on both platforms; w8a8_int8 Yes Yes No; w8a8_fp8 Yes Yes No"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "arxiv",
+    "title": "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache (ICML 2024)",
+    "url": "https://arxiv.org/abs/2402.02750",
+    "published_at": "2024-02-05",
+    "key_points": [
+      "KIVI 是免调优（tuning-free）的 2bit KV cache 量化算法，发表于 ICML 2024（arXiv v1 2024-02-05，v2 2024-07-25）。",
+      "论文的核心发现是：key cache 应按 per-channel（沿 channel 维分组）量化，而 value cache 应按 per-token 量化。",
+      "论文报告 KIVI 使 Llama、Falcon、Mistral 模型在几乎保持相同质量的同时，峰值内存（含模型权重）降低 2.6×。",
+      "内存降低使 batch size 最多可扩大 4×，在真实 LLM 推理负载上带来 2.35×–3.47× 吞吐提升。",
+      "论文将 KV cache 内存增长归因于大 batch 与长上下文，并指出 KV cache 加载会导致计算核心空闲、限制推理速度。"
+    ],
+    "raw_excerpt": "Our findings indicate that the key cache should be quantized per-channel, i.e., group elements along the channel dimension and quantize them together. In contrast, the value cache should be quantized per-token. From this analysis, we developed a tuning-free 2bit KV cache quantization algorithm named KIVI. ... KIVI can enable Llama, Falcon, and Mistral models to maintain almost the same quality while using 2.6× less peak memory ... bringing 2.35×∼3.47× throughput"
+  },
+  {
+    "sub_question_id": "f10",
+    "source_type": "github",
+    "title": "jy-yuan/KIVI — official implementation repository",
+    "url": "https://github.com/jy-yuan/KIVI",
+    "published_at": "2024-02-02",
+    "key_points": [
+      "KIVI 官方仓库为 jy-yuan/KIVI，MIT 许可，Python 实现，436 stars / 58 forks / 7 open issues。",
+      "仓库创建于 2024-02-02，最近一次 push 为 2025-11-20。",
+      "README 自述该工作\"largely inspires the HuggingFace Transformers KV Cache quantization\"（即对 HF Transformers 的 KV cache 量化有直接影响）。",
+      "2025-01-18 更新加入支持 GQA 的 KIVI 实现并兼容 transformers 4.43，支持 LLama3 系列。",
+      "2025-09-25 更新发布了测试数值精度影响、支持确定性 LLM 推理的工具包（面向 RL 训练-推理不匹配问题）。"
+    ],
+    "raw_excerpt": "- [2024.06.07]: 🎉 KIVI largely inspires the [HuggingFace Transformers KV Cache quantization](https://huggingfac... - [2025.01.18]: We add KIVI implementation with GQA and compatible with transformers 4.43. Now it supports the LLama3 family."
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 0.8888888888888888,
+  "mean_alignment": 0.9583333333333334,
+  "alignment_questions": 1,
+  "mean_coverage": 1.0,
+  "per_subdomain": {
+    "finance": {
+      "n": 1.0,
+      "citation_existence": 0.8888888888888888,
+      "alignment": 0.9583333333333334,
+      "coverage": 1.0
+    }
+  },
+  "scores": [
+    {
+      "question_id": "fb-01",
+      "subdomain": "finance",
+      "citation_existence_rate": 0.8888888888888888,
+      "citations_total": 9,
+      "citations_missing": [
+        "docs/架构文档与技术选型.md · 文档清单"
+      ],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    }
+  ]
+}

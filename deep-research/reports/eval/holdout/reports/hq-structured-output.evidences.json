@@ -1,0 +1,533 @@
+[
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "CRANE: Reasoning with constrained LLM generation",
+    "url": "https://arxiv.org/abs/2502.09061",
+    "published_at": "2025-02-13",
+    "key_points": [
+      "论文首次提交于 2025-02-13（v1），最新版本 v4 修订于 2025-09-05，被 ICML 2025 接收。",
+      "论文指出此前工作已实证观察到：严格强制形式约束（formal constraints）常常削弱 LLM 的推理能力。",
+      "论文给出了理论解释：把 LLM 输出约束到只允许语法合法最终答案的极强限制性文法，会降低模型的推理能力。",
+      "论文主张：通过在输出文法中增补精心设计的额外规则，总是可以在保证输出语法与语义正确的同时保留 LLM 的推理能力。",
+      "据此提出 reasoning-augmented constrained decoding 算法 CRANE，在约束生成的正确性与无约束生成的灵活性之间做平衡。",
+      "在多个开源 LLM 与基准上，CRANE 同时优于 SOTA 约束解码策略与标准无约束解码，在 GSM-symbolic 与 FOLIO 等困难符号推理基准上相对基线最高提升 10 个百分点准确率。"
+    ],
+    "raw_excerpt": "Constrained LLM generation is a promising direction to enforce adherence to formal grammar, but prior works have empirically observed that strict enforcement of formal constraints often diminishes the reasoning capabilities of LLMs. ... we propose a reasoning-augmented constrained decoding algorithm, CRANE ... showing up to 10% points accuracy improvement over baselines on challenging symbolic reasoning benchmarks GSM-symbolic and FOLIO."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Breaking the Space Barrier and its Application to Language Model Inference",
+    "url": "https://arxiv.org/abs/2610.09139",
+    "published_at": "2026-10-06",
+    "key_points": [
+      "论文描述结构化输出场景：模型被要求输出符合 schema 的 JSON 或带类型参数的工具调用，由一个自动机（automaton）通过禁止会破坏格式的 token 来强制格式。",
+      "论文观察到该自动机具有特殊性质：从任一状态出发，每个 token 只沿唯一一条路径前进。",
+      "理论结果：判定这类图是否连通两点并验证其路径确实很少，所需空间为 O(log^2 n / log log n)，低于 Savitch 定理经典的 O(log^2 n)；问题属于 ReachUL、LOGDCFL、C=L 与 SC^2 等复杂度类。",
+      "基于该证明构造的推理引擎：格式强制要求的文本不运行模型直接写出；mask 在 GPU 上重算而无需任何查表；递归格式使用小栈；在 token 上限下输出始终合法；独立字段并行解码并校验。",
+      "在单台 16 GB Apple M2 Pro 上，用 Qwen3.5-2B 与 4B 对比该硬件的标准方案 MLX + llguidance：schema 约束抽取完成时间快 1.2–1.3 倍且答案相同；一个文法占 3 MB 而非最多 1.5 GB；一台服务器可容纳 16 个文法而查表方案会内存耗尽；16 个工具调用 agent 完成时间快 2.5 倍。"
+    ],
+    "raw_excerpt": "A small machine, an automaton, enforces the format by forbidding the tokens that would break it. ... text the format forces is written without running the model, the mask is recomputed on the GPU without any table ... schema-constrained extraction finishes 1.2-1.3x sooner with the same answers, a grammar costs 3 MB instead of up to 1.5 GB"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Constraints Are Graphs, Not Chains: Exact Decoding for Diffusion Language Models",
+    "url": "https://arxiv.org/abs/2609.32900",
+    "published_at": "2026-09",
+    "key_points": [
+      "论文指出扩散语言模型（dLLM）按任意顺序预测被 mask 的位置，但其精确约束解码器仍把约束编码为序列语言，状态必须追踪位置之间所有未解决的依赖关系。",
+      "对于关系型约束，这种序列编码会指数级膨胀：对 same-order copy，任何有限自动机（确定或非确定）都需要 4^k 个状态，任何上下文无关文法的大小为 2^Ω(k)。",
+      "论文主张约束应建模为图（factor graph）而非链，以实现扩散语言模型的精确解码。"
+    ],
+    "raw_excerpt": "Diffusion language models (dLLMs) predict masked positions in arbitrary order, but their exact constrained decoders still encode constraints as sequential languages ... for same-order copy, every finite automaton needs $4^k$ states, deterministic or nondeterministic, and every context-free grammar has size $2^{\\Omega(k)}$"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "The Calibration Floor: Format Repair Can Masquerade as Self-Correction at Small-to-Mid Scale",
+    "url": "https://arxiv.org/abs/2608.04355",
+    "published_at": "2026-08-04",
+    "key_points": [
+      "论文在 Qwen3.5 (0.8B–9B)、Gemma-4-12B 及两个 API 前沿模型（Tencent Hy3、Nvidia Nemotron-3-Ultra-550B）上，用 29 个主实验单元加一个前沿实验组，把 always-revise 的准确率变化分解为 content margin（两个答案都可解析）与 format-recovery/loss margin（可解析性变化）。",
+      "在 12 个存在显著不可解析答案率的单元中，格式效应超过内容效应（Wilcoxon p=1.7e-3）。",
+      "为做因果检验，论文强制已生成的推理过程经过 grammar-constrained decoding，使每个答案按构造都可解析：在 14 个单元中，这弥合了朴素总效应与 content-margin 估计之间差距的中位数 71%。",
+      "聚类模型显示 floor-scale（0.8B/2B）模型发生内容层面改变与伤害的几率远高于 capable-scale 模型（p<1e-7）。",
+      "前沿模型检查显示格式主导性随规模增强：5 个单元中 content margin 精确为零，尽管总效应最高达 +0.275（该实验组统计功效较低）。"
+    ],
+    "raw_excerpt": "we force already-generated reasoning through grammar-constrained decoding so every answer is parseable by construction: across 14 cells this closes a median 71% of the gap between the naive total effect and the content-margin estimate ... content margin is exactly zero in all 5 cells despite total effects up to +0.275"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "PTC-Decoder: Towards Intelligent SLMs on Offline Resource-Constrained Edge Devices",
+    "url": "https://arxiv.org/abs/2609.30836",
+    "published_at": "2026-09-25",
+    "key_points": [
+      "论文报告：现有 plan-solve 范式依赖基于提示词的强制（prompt-based enforcement），实验显示 SLM 几乎完全无视这种约束——弱模型无法调用 plan。",
+      "提出 PTC-Decoder（Plan-Tool Constrained Decoder），一种免训练、即插即用的解码器框架，包含 Plan-to-Act 范式（把规划提升为原子工具并在首个推理步强制调用）与 TC-Decoder（一个确定性有限自动机，对工具名施加 token 级硬约束，同时保留参数生成的自由度）。",
+      "在 7 个 SLM、200 个真实遥感卫星任务上评估，PTC-Decoder 平均总分提升 +1.21（p<0.01，95% CI [+1.13, +1.29]），跨模型与其他数据集一致提升。",
+      "消融移除 TC-Decoder 后所有质量指标显著下降且计算成本未降低，确认 TC-Decoder 是主要驱动因素。",
+      "论文明确指出最终答案准确率仍是未解决问题。"
+    ],
+    "raw_excerpt": "Existing plan-solve paradigms rely on prompt-based enforcement, which our experiments show SLMs almost entirely disregard: weak models fail to invoke the plan. ... TC-Decoder, a deterministic finite automaton that imposes token-level hard constraints on tool names while preserving freedom over parameter generation"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Onboard Lightweight LLM Reasoning for Human-Aware Safe UAV Navigation",
+    "url": "https://arxiv.org/abs/2610.22092",
+    "published_at": "2026-10-15",
+    "key_points": [
+      "该工作用 grammar-constrained decoding 把轻量 LLM（Qwen-2.5-0.5B）的输出限制到规划器兼容的 JSON schema。",
+      "LLM 按物体类别而非按帧推理一次，判定结果按类别缓存，已见类别无需推理即可解析，新类别触发新的检索增强查询。",
+      "感知流水线在 Jetson Orin NX 上以 10 Hz 运行，回退的 LLM 查询约 0.8 s，且不在控制关键路径上。",
+      "在 Gazebo 中，低空城市场景下相比几何规划器碰撞事件约减少 3 倍；动态行人间的语义感知着陆成功率从 34% 提升到 96%。"
+    ],
+    "raw_excerpt": "Obstacle-specific risk is inferred by a lightweight LLM (Qwen-2.5-0.5B) stabilized with retrieval-augmented generation and grammar-constrained decoding that restricts its output to a planner-compatible JSON schema. ... semantics-aware landing among moving actors raises success from 34% to 96%."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "mlc-ai/xgrammar — Efficient, Flexible and Portable Structured Generation (README)",
+    "url": "https://github.com/mlc-ai/xgrammar",
+    "published_at": "2024-06-28",
+    "key_points": [
+      "XGrammar 采用 constrained decoding 保证输出「100% structural correctness」，支持通用上下文无关文法，覆盖 JSON、regex、自定义 CFG。",
+      "README 自述在 JSON 生成上达到「near-zero overhead」，并称是最快的结构化生成引擎之一（厂商自述，需交叉验证）。",
+      "部署面：Linux/macOS/Windows；CPU、NVIDIA GPU、AMD GPU、Apple Silicon、TPU；Python/C++/JavaScript/Swift API；支持 Qwen、Llama、DeepSeek、Phi、Gemma 等模型。",
+      "README 称其为多数 LLM 推理引擎的默认结构化生成后端，包括 vLLM、SGLang、TensorRT-LLM、MLC-LLM。",
+      "集成时间线（README News）：2024/11 SGLang 与 MLC-LLM；2024/12 vLLM；2025/01 TensorRT-LLM；2025/02 Modular MAX；2025/09 OpenVINO GenAI；2025/12 Mirai。",
+      "2026/5 发布 XGrammar-2（动态、可定制的结构化生成），对应论文《XGrammar-2: Dynamic and Efficient Structured Generation Engine for Agentic LLMs》(ACM Conference on AI and Agentic Systems, pp.1009-1022)。",
+      "仓库元数据：stars 1973、forks 246、open issues 136、Apache-2.0、创建于 2024-06-28、最近 push 2026-10-23。",
+      "提供 Rust 社区绑定 xgrammar-rs；README 列出 xAI、DeepSeek、NVIDIA、Databricks、Meta、Google、Perplexity、Modular 等为协作者/采用方（厂商自述）。"
+    ],
+    "raw_excerpt": "It leverages constrained decoding to ensure **100% structural correctness** of the output. It supports general context-free grammar to enable a broad range of structures, including **JSON**, **regex**, **custom context-free grammar**, etc. ... It has achieved **near-zero overhead** in JSON generation ... It is the default structured generation backend for most LLM inference engines, including vLLM, SGLang, TensorRT-LLM, and MLC-LLM"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models (arXiv:2411.15100v3)",
+    "url": "https://arxiv.org/abs/2411.15100v3",
+    "published_at": "2024-11-22",
+    "key_points": [
+      "问题动机：用上下文无关文法做约束解码时，需要在运行时对词表中所有 token 遍历多个栈状态，带来不可忽略的开销。",
+      "核心机制：把词表划分为 context-independent tokens（可预检查）与 context-dependent tokens（需运行时解释），并做文法变换以扩展上下文、减少 context-independent token 数量。",
+      "工程机制：使用高效 persistent stack 加速 context-dependent token 检查，并与推理引擎协同设计，把文法计算与 GPU 执行重叠（overlap）。",
+      "论文报告相对已有方案最高 100x 加速；与推理引擎结合后，端到端低并发 LLM serving 下可实现 near-zero overhead 的结构化生成。"
+    ],
+    "raw_excerpt": "XGrammar accelerates context-free grammar execution by dividing the vocabulary into context-independent tokens that can be prechecked and context-dependent tokens that need to be interpreted during runtime. ... Evaluation results show that XGrammar can achieve up to 100x speedup over existing solutions. Combined with an LLM inference engine, it can generate near-zero overhead structure generation in end-to-end low-LLM serving."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "dottxt-ai/outlines — Structured outputs for LLMs (README)",
+    "url": "https://github.com/dottxt-ai/outlines",
+    "published_at": "2023-03-17",
+    "key_points": [
+      "Outlines 的定位是在生成过程中（during generation）保证结构化输出，而非生成后再用解析/正则修补。",
+      "API 形态为 model(prompt, output_type)：直接传入 Python 类型（Literal、int、Pydantic 模型、Enum）作为输出约束。",
+      "README 称同一份代码可跨 OpenAI、Ollama、vLLM 等后端运行，强调 provider independence。",
+      "README 自述被 NVIDIA、Cohere、HuggingFace、vLLM 使用（厂商自述，未给第三方佐证）。",
+      "仓库元数据：stars 15973、forks 907、open issues 201、Apache-2.0、创建于 2023-03-17、最近 push 2026-09-21。",
+      "仓库 topics 包含 cfg、json、regex、structured-generation，表明其约束机制基于 CFG/正则/JSON Schema 编译。",
+      "生态中存在配套的 outlines-core（Rust 实现，stars 322，最近 push 2026-08-05），README 描述为 Faster structured generation。"
+    ],
+    "raw_excerpt": "Outlines guarantees structured outputs during generation — directly from any LLM. ... **Works with any model** - Same code runs across OpenAI, Ollama, vLLM, and more ... **Guaranteed valid structure** - No more parsing headaches or broken JSON"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "guidance-ai/guidance — efficient programming paradigm for steering language models",
+    "url": "https://github.com/guidance-ai/guidance",
+    "published_at": "2022-11-10",
+    "key_points": [
+      "Guidance 自述为「steering language models」的高效编程范式，用于控制输出结构。",
+      "仓库元数据：stars 21807、forks 1219、open issues 355、MIT 许可、创建于 2022-11-10、最近 push 2026-05-21。",
+      "维护方与 Microsoft 相关（README 联系邮箱为 guidanceai@microsoft.com）。",
+      "vLLM 官方文档将 guidance 列为 vLLM structured outputs 的可选后端之一，与 xgrammar 并列。"
+    ],
+    "raw_excerpt": "**Guidance is an efficient programming paradigm for steering language models.** With Guidance, you can control how output is"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "github",
+    "title": "eth-sri/lmql — A programming language for large language models",
+    "url": "https://github.com/eth-sri/lmql",
+    "published_at": "2022-11-24",
+    "key_points": [
+      "LMQL 定位为面向大语言模型的查询/编程语言（a programming language for large language models），出自 ETH Zurich Systems Group (eth-sri)。",
+      "仓库元数据：stars 4224、forks 222、open issues 121、Apache-2.0、创建于 2022-11-24、最近 push 2025-05-22。",
+      "相对其他实现，LMQL 最近提交时间（2025-05-22）明显早于 Outlines（2026-09）、XGrammar（2026-10）、Guidance（2026-05），活跃度偏低。"
+    ],
+    "raw_excerpt": "LMQL — A programming language for large language models. ... Documentation » ... Explore Examples · Playground IDE"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "web",
+    "title": "vLLM 官方文档 — Structured Outputs",
+    "url": "https://docs.vllm.ai/en/latest/features/structured_outputs.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 的 structured outputs 支持 xgrammar 或 guidance 作为后端。",
+      "支持的结构化参数：choice（枚举之一）、regex（正则）、json（JSON Schema）、grammar（上下文无关 EBNF 文法）、structural_tag（在指定标签内遵循 JSON Schema）。",
+      "后端选择通过 --structured-outputs-config.backend 配置，默认值为 auto，会依据请求细节自动选择合适后端。",
+      "v0.12.0 起移除旧字段 guided_json / guided_regex / guided_choice / guided_grammar / guided_whitespace_pattern / structural_tag / guided_decoding_backend，统一改为 structured_outputs 参数（StructuredOutputsParams）。",
+      "不同后端的正则语法不同：xgrammar、guidance、outlines 使用 Rust 风格正则，lm-format-enforcer 使用 Python re 模块。",
+      "文档建议即使有 schema 约束，也应在 prompt 中说明 JSON schema 与字段填充方式，可显著提升效果。"
+    ],
+    "raw_excerpt": "vLLM supports the generation of structured outputs using xgrammar or guidance as backends. ... The default backend is auto, which will try to choose an appropriate backend based on the details of the request. ... the supported regex syntax depends on the structured output backend. For example, xgrammar, guidance, and outlines use Rust-style regex, while lm-format-enforcer uses Python's re module."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "LLM structured-output conformance — 216 measured API calls, 2026-08-20 (YtinuMoc/llm-structured-output-conformance)",
+    "url": "https://github.com/YtinuMoc/llm-structured-output-conformance",
+    "published_at": "2026-08-27",
+    "key_points": [
+      "实验设计：216 次调用 = 4 个模型端点 × 6 个手写 schema × 3 种提问模式 × 3 次试验，单次运行于 2026-08-20，temperature 0、固定 Groq seed、max_tokens 2048，仅用免费额度。",
+      "三种模式定义为：plain（把 schema 粘贴进提示词）、native（把 schema 原样交给厂商的 structured-output 字段）、native_sanitised（按各厂商要求做机械改写后再交给 structured-output 字段）。",
+      "plain 模式（schema 粘贴进提示词）：72/72 返回 HTTP 200，52/72 能被严格解析为 JSON，70/72 在宽松提取后通过 schema 校验。",
+      "native 模式（schema 原样交给厂商 structured-output 字段）：仅 44/72 返回 HTTP 200，44/72 通过 schema 校验；28/72 的调用在模型运行之前就被厂商以 HTTP 400 拒绝（拒绝的是 schema 本身，而非模型输出）。",
+      "gemini-3.1-flash-lite 端点 18/18 全部返回 400，错误信息为 Invalid JSON payload received. Unknown name \"additionalProperties\"，即 draft 2020-12 的 additionalProperties: false 无法原样提交给该端点。",
+      "三个 Groq 端点（openai-gpt-oss-120b、openai-gpt-oss-20b、qwen3.6-27b）在 OpenAI 风格 strict 模式下拒绝含可选属性的 schema，错误信息为 `required` … must include every key in properties；s5_optional_and_null 这个 schema 被全部三个端点拒绝。",
+      "native_sanitised 模式达到 71/72 通过（唯一失败是一次 HTTP 503，与 schema 无关），但该清洗过程是减法式的：72 个 schema 中有 54 个被改动，删除了 minimum（36 行）、maximum（24 行）、pattern（24 行）、additionalProperties（18 行），并把 required 扩宽为包含全部属性（9 行）、把 type: [x, \"null\"] 改写为 nullable（3 行）。",
+      "作者据此指出：0.986 的 schema 接受率是真实的，但其背后的约束执行并不真实——bounds、正则、封闭对象在到达厂商之前就已被删除；若依赖 structured-output 模式强制执行 minimum/pattern，必须自行实测而不能假设。",
+      "plain 模式的失败主要是包装问题而非正确性问题：20 个严格解析失败中 18 个来自同一模型 groq/qwen3.6-27b（严格解析 0/18），但该模型 18/18 的响应在从代码围栏（11 次）或按 span 扫描（7 次）提取 JSON 后均通过 schema 校验；宽松提取器把 0.722 的严格解析率提升到 0.972 的 schema 通过率。",
+      "plain 模式按模型的 schema 通过率：gemini-3.1-flash-lite 18/18、gpt-oss-120b 18/18、gpt-oss-20b 16/18、qwen3.6-27b 18/18。",
+      "作者自陈的方法学局限：单日单次运行、4 个端点 2 家厂商、6 个手写 schema、每格 3 次试验（足以发现硬性 400，远不足以估计稀有失败率），厂商行为随时变化，所有数字应视为有日期的一次测量而非当前状态；并声明这不是排行榜、不是对模型质量的断言。",
+      "该仓库自述由机器运行的机构产出，无人类撰写或核查这些数字；gemini-2.5-flash 因免费额度中途耗尽被整体剔除而非按部分数据报告。"
+    ],
+    "raw_excerpt": "The dominant failure at this scale was not the model getting JSON wrong. It was the provider rejecting the schema before any model ran. … So the 0.986 acceptance rate is real and the constraint enforcement behind it is not: bounds, regexes and closed objects were gone by the time the provider saw the schema. If you rely on minimum / pattern to be enforced by structured-output mode, measure it — do not assume it. … Read plainly: a lenient extractor turned a 0.722 strict-parse rate into a 0.972 schema-valid rate. … Sample size, stated before the findings: 216 calls. … Small and dated. Not a leaderboard, not a claim about model quality."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Efficient Guided Generation for Large Language Models (Willard & Louf, 2023)",
+    "url": "https://arxiv.org/html/2307.09702v4",
+    "published_at": "2023-07-19",
+    "key_points": [
+      "论文将引导式生成（guided generation）重构为「有限状态机状态之间的转移」，从而用正则表达式和上下文无关文法约束文本生成，并允许在模型词表上构建索引。",
+      "token-level masking 的形式化：定义布尔掩码 m: P(V) → {0,1}^N，作用于 logits α，得到未归一化条件分布；掩码限制下一 token 随机变量 s_{t+1} 的支撑集（support）。",
+      "带掩码的采样算法（Algorithm 2）为：α ← LLM(s, θ)；构造掩码 m(s)；α̃ ← m ⊙ α；从 Categorical(α̃) 采样 s̃；若 s̃ = EOS 则停止。",
+      "论文指出常见且充分的朴素做法是对整个词表重复评估以判定哪些 token 合法，并把非法 token 概率置零，代价为每生成一个 token 固定 O(N)，N 为词表大小。",
+      "论文采用 Sipser《Introduction to Theory of Computation》Definition 1.5 的五元组有限自动机定义：(Q, Σ, δ, q0, F)，Q 为有限状态集，Σ 为有限字母表，δ: Q×Σ→Q 为转移函数，q0 为起始状态，F 为接受状态集。",
+      "FSM 状态可在采样过程中被跟踪，从而无需每次从已生成序列开头重新读取即可继续状态机；掩码由当前 FSM 状态决定。",
+      "论文给出具体掩码示例：正则表达式 ([0-9]*)?\\.?[0-9]*（浮点数），词表仅含 \"A\"、\".\"、\"42\"、\".2\"、\"1\"；初始状态 0 下 \"A\" 被掩码，只能采样 \".\"、\"42\"、\".2\"、\"1\"；采样 \".2\" 后进入状态 3，此时仅 \"42\" 与 \"1\" 为合法续接。",
+      "索引构造：先对词表中每个字符串 v 求出 FSM 接受它的所有状态子序列（Algorithm 3 find_sub_sequences），再构建映射 σ: Q → P(V)，把 FSM 状态与在该状态下会被接受的词表子集关联（Algorithm 4）；使用哈希表可使掩码步骤平均代价降为 O(1)。",
+      "索引的关键设计是「考虑从每一个可行的 FSM 状态出发」，因为词表字符串可能匹配正则表达式的任意片段，而这些片段隐含地就是 FSM 状态。",
+      "论文称该框架可推广到上下文无关文法（CFG），做法是对传统 LALR(1) 解析器组件与操作进行增强，从而复用既有解析器实现。",
+      "论文主张该方法与模型无关（model agnostic），可强制领域知识与约束，并通过保证生成文本的结构来构建可靠接口。",
+      "实现以开源 Python 库 Outlines 提供。"
+    ],
+    "raw_excerpt": "we can compute an un-normalized conditional distribution by applying a boolean mask m: P(V) → {0,1}^N that restricts ... The resulting conditional distribution implied by s̃_{t+1} encodes constraints on the support of s_{t+1}. ... A common and sufficient approach involves repeated evaluations over the entire vocabulary in order to determine which tokens are valid–according to the constraints and previously sampled tokens–and setting the probabilities of invalid tokens to zero. This approach entails a fixed O(N) cost for each token generated, where N is the size of the LLM's vocabulary."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "Grammar-Constrained Decoding for Structured NLP Tasks without Finetuning (Geng et al., EMNLP 2023)",
+    "url": "https://arxiv.org/html/2305.13971v6",
+    "published_at": "2023-05-23",
+    "key_points": [
+      "GCD 的机制定义：在解码过程中进行干预，剪枝（pruning）概率分布，使其只包含形式文法所允许的 token 子集。",
+      "允许的 token 子集由一个增量解析器（incremental parser）返回，其输入是部分已生成序列与形式文法，输出是下一步允许的 token 集合。",
+      "解析器的角色被抽象为「补全引擎」（completion engine，引 Poesia et al. 2022），从部分序列与文法 G 推导出补全候选；本文具体使用 Grammatical Framework 的增量解析器（Angelov, 2009）作为补全引擎。",
+      "该约束过程与任何解码算法兼容，包括贪心解码、beam search、top-k 采样等。",
+      "GCD 可应用于任何自回归语言模型，前提是能访问每一步解码时对词表的分布；由于 OpenAI 等 API 服务不提供词表分布访问，因此无法与 GCD 配合使用。",
+      "形式文法定义为四元组 G = (V, Σ, P, S)：V 为非终结符有限集，Σ 为终结符有限集，P 为产生式规则有限集，S ∈ V 为起始符号。",
+      "为可处理性（tractability），框架聚焦于上下文无关文法（context-free grammars）这一类。",
+      "论文指出 BPE 等分词方法允许同一字符串有多种切分（例如 \"[[[\" 可切为 \"[[ [\"、\"[[[\" 或 \"[ [ [\"），造成 token 级文法与字符级文法之间的一对多映射；作者用加空格并强制单括号为 token 的方式规避，但明确称该做法「不 principled、依赖特定 tokenizer」，并把 token 级文法的原则化定义列为未来工作。",
+      "论文采用 Grammatical Framework (GF) 区分抽象文法（字符级文法 G）与具体文法（针对不同 tokenizer 的 token 级文法 G_tok），类比抽象语法树到不同编程语言的一对多映射。",
+      "论文提出 input-dependent grammars（输入相关文法），使文法可依赖输入，从而对不同输入生成不同输出结构；在 Fig. 2 列出的 14 个结构化 NLP 任务中，有 13 个（带星号者）需要输入相关文法。",
+      "论文称形式语言为描述任何可计算对象集合的结构提供了严格且完备的框架（依 Church–Turing 论题），而形式文法可描述任何形式语言。",
+      "论文在信息抽取、实体消歧、成分句法分析三个任务上实验，报告文法约束的 LM 显著优于无约束 LM，甚至超过任务特定微调模型。"
+    ],
+    "raw_excerpt": "To enforce the formal grammar, we intervene during decoding by pruning the probability distribution to include only the subset of tokens that are allowed by the formal grammar. The subset of allowed tokens is returned by an incremental parser, which takes the partially generated sequence and the formal grammar as inputs and returns the set of next allowed tokens. ... GCD can also be applied to any autoregressive language model, provided that we have access to the distribution over the vocabulary at each decoding step. Since API-based services such as OpenAI do not provide access to the distribution over the vocabulary, they cannot be used with GCD."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "PICARD: Parsing Incrementally for Constrained Auto-Regressive Decoding from Language Models (Scholak et al., 2021)",
+    "url": "https://arxiv.org/html/2109.05093v1",
+    "published_at": "2021-09-10",
+    "key_points": [
+      "PICARD 通过增量解析（incremental parsing）约束自回归解码器，在每个解码步拒绝不可接受的 token（rejecting inadmissible tokens at each decoding step）。",
+      "PICARD 的输入是当前假设（hypothesis）的 token id，以及模型语言建模头对每个词表 token 预测的 log-softmax 分数；它对模型预测分数进行「扭曲」（warps），把被拒绝 token 的分数置为 −∞，被接受 token 保留原分数。",
+      "PICARD 在每个生成步先只保留 top-k 最高概率 token，再对被判定失败的 token 赋 −∞ 分数，因此与贪心与 beam search 均可直接集成。",
+      "PICARD 完全不出现在预训练或微调中，可在推理时可选地启用；它直接作用于语言模型输出的可读表层形式（对 text-to-SQL 即 SQL 代码文本）。",
+      "PICARD 提供四档模式控制检查的完备程度：off（不检查）、lexing（仅词法）、parsing without guards（语法解析）、parsing with guards（最高档）；通过更高档检查的预测必然通过更低档，反之不必然。",
+      "词法模式只做词法级检查：把部分去分词化的模型输出转换为以空白分隔的 SQL 关键字、标点、运算符、字面量与标识符序列，不敏感于出现顺序，可检出关键字拼写错误或不符合给定 schema 的表名/列名。",
+      "语法模式（parsing without guards）把去分词化输出解析为表示 SQL 抽象语法树（AST）的数据结构，此时关键字与子句的出现顺序开始起作用，可拒绝缺失 from 子句、子句顺序错误等非法结构。",
+      "最高档 parsing with guards 在组装 AST 时执行额外分析（guards），例如若匹配到 tid.cid 或 alias.cid，则要求该表/别名最终被 from 子句引入作用域，且该别名必须解析到含该列的表或子查询；guards 被急切（eagerly）执行以尽早失败并把非法假设从 beam 中剔除。",
+      "PICARD 的检查由基于 monadic combinators（Leijen & Meijer, 2001）的快速增量解析实现。",
+      "论文指出「使非法 SQL 不可表示」的既有做法（Yin & Neubig 2018；Lin et al. 2019；Wang et al. 2020）依赖自定义控制 token 词表或自定义模型架构，因而与通用预训练 LM 解码器不兼容；另一类做法是不约束生成而在事后按有效性过滤最终 beam 假设，但代价是需要非常大的 beam size。",
+      "论文将目标表述为：若目标是 SQL 这样的形式语言，希望模型「精确且可证明地」（exactly and provably）遵守 SQL 规范及其词法、语法、逻辑与语义约束。",
+      "实验在 Spider 与 CoSQL 上进行，报告 exact-set-match accuracy、execution accuracy、test-suite execution accuracy 等指标；论文称 T5-Base + PICARD 可超过 T5-Large 无 PICARD，T5-3B + PICARD 在 Spider 与 CoSQL 上达到 SOTA。"
+    ],
+    "raw_excerpt": "Picard helps to find valid output sequences by rejecting inadmissible tokens at each decoding step. ... Picard warps model prediction scores and integrates trivially with existing algorithms for greedy and beam search ... At each generation step, Picard first restricts prediction to the top-k highest probability tokens and then assigns a score of −∞ to those that fail Picard's numerous checks. ... If the target is a formal language like SQL, then we would like the model to adhere exactly and provably to the SQL specification with all its lexical, grammatical, logical, and semantical constraints."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "mlc-ai/xgrammar — README (Efficient, Flexible and Portable Structured Generation)",
+    "url": "https://raw.githubusercontent.com/mlc-ai/xgrammar/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "XGrammar 自述基于 constrained decoding 保证输出的 \"100% structural correctness\"，支持 JSON、regex 与自定义 context-free grammar。",
+      "README 声称在 JSON 生成上达到 \"near-zero overhead\"，并称其为 vLLM、SGLang、TensorRT-LLM、MLC-LLM 的默认结构化生成后端。",
+      "README 正文未包含 limitations 章节，未提及 tokenization 边界导致的不可达字符串、JSON Schema 属性顺序敏感性、或 UTF-8 多字节字符与正则约束冲突。",
+      "README 指向技术报告 arXiv:2411.15100（XGrammar: Flexible and Efficient Structured Generation Engine for LLMs）与 XGrammar-2 论文（ACM DOI 10.1145/3786335.3813124），可作为后续取证的入口。"
+    ],
+    "raw_excerpt": "It leverages constrained decoding to ensure **100% structural correctness** of the output. It supports general context-free grammar to enable a broad range of structures, including **JSON**, **regex**, **custom context-free grammar**, etc. ... It has achieved **near-zero overhead** in JSON generation, making it one of the fastest structured generation engines available."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "Guidance 官方文档首页（Install — Guidance latest documentation）",
+    "url": "https://guidance.readthedocs.io/en/latest/",
+    "published_at": null,
+    "key_points": [
+      "Guidance 文档目录中存在 \"Token healing\" 教程页与 \"Prompt Boundaries and Token Healing\" 文章，以及 \"Regular expression constraints\" 页，说明该库将 token 边界问题作为独立主题处理。",
+      "该首页仅为目录/安装页，未给出 token healing 的具体机制说明或示例正文，不能作为 f2 的实质证据。"
+    ],
+    "raw_excerpt": "Tutorials ... Token healing ... Regular expression constraints ... The Art of Prompt Design ... Prompt Boundaries and Token Healing"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "JSONSchemaBench: A Rigorous Benchmark of Structured Outputs for Language Models (arXiv:2501.10868v3)",
+    "url": "https://arxiv.org/abs/2501.10868",
+    "published_at": "2025-01-18",
+    "key_points": [
+      "论文提出一个评测框架，从三个关键维度评估约束解码方法：生成符合约束输出的效率（efficiency）、对多样约束类型的覆盖率（coverage）、以及生成输出的质量（quality）。",
+      "作者发布 JSONSchemaBench，包含 10K 个真实世界 JSON Schema，覆盖范围广泛、复杂度各异的约束。",
+      "基准与官方 JSON Schema Test Suite 配对使用，用于提取各框架对 JSON Schema 功能覆盖情况的细粒度洞察。",
+      "评测了六个 SOTA 约束解码框架：Guidance、Outlines、Llamacpp、XGrammar、OpenAI、Gemini。",
+      "论文版本为 v3，2025-02-27 最后修订（v1 提交于 2025-01-18）。",
+      "作者列表包含 Saibo Geng、Hudson Cooper、Michał Moskal、Samuel Jenkins、Julian Berman、Nathan Ranchin、Robert West、Eric Horvitz、Harsha Nori；Saibo Geng 标注工作完成于 Microsoft 实习期间，所属 EPFL。"
+    ],
+    "raw_excerpt": "We present an evaluation framework to assess constrained decoding approaches across three critical dimensions: efficiency in generating constraint-compliant outputs, coverage of diverse constraint types, and quality of the generated outputs. To facilitate this evaluation, we introduce JSONSchemaBench, a benchmark for constrained decoding comprising 10K real-world JSON schemas that encompass a wide range of constraints with varying complexity. We pair the benchmark with the existing official JSON Schema Test Suite and evaluate six state-of-the-art constrained decoding frameworks, including Guidance, Outlines, Llamacpp, XGrammar, OpenAI, and Gemini."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "arxiv",
+    "title": "JSONSchemaBench (arXiv:2501.10868v3) — 正文：数据收集、数据集构成与效率实验设置",
+    "url": "https://arxiv.org/html/2501.10868v3",
+    "published_at": "2025-02-27",
+    "key_points": [
+      "数据来源：以 Baazizi et al. [2021] 从公开 GitHub 仓库收集的 6K JSON Schema 与 JSON Schema Test Suite 为起点，另从 JSON Schema Store、GlaiveAI function calling dataset V2、Kubernetes 配置文件补充收集。",
+      "对 schema 做了无效过滤与标准化，确保符合各 schema 自身声明的 JSON Schema 版本（$schema 关键字）。",
+      "基准组织为 10 个复杂度与多样性不同的数据集，覆盖函数签名（function signatures）、服务 API（service APIs）、系统配置（system configurations）等领域。",
+      "Table 1 各数据集计数：GlaiveAI-2K（Function Call）1707、Github-Trivial 444、Github-Easy 1943、Snowplow（Operational API）403、Github-Medium 1976、Kubernetes（Kubernetes API）1064、Washington Post（Resource Access API）125、Github-Hard 1240、JSONSchemaStore 492、Github-Ultra 164，Table 1 标注 Total 为 9558。",
+      "GitHub schema 集合按 schema 规模被切分为 trivial / small / medium / large / ultra 五个子集以做更细粒度评测。",
+      "效率指标定义：GCT（Grammar Compilation Time，语法编译时间）、TTFT（Time to First Token，首 token 时间）、TPOT（Time Per Output Token，每输出 token 时间）；表中数值均为样本中位数。",
+      "实验配置：Llama-3.1-8B-Instruct 配合 Llamacpp 推理引擎作为 Outlines、Guidance、Llamacpp 的后端；因 XGrammar 不支持 Llamacpp 后端，额外增加 Hugging Face Transformers 后端的实验。",
+      "硬件：单张 NVIDIA A100-SXM4-80GB GPU，AMD EPYC 7543（12 核）CPU，所有实验 batch size 设为 1。",
+      "为保证公平，效率指标在所有引擎覆盖实例的交集（intersection of covered instances）上计算。",
+      "Table 2（LlamaCpp 后端，GCT/TTFT/TPOT）：GlaiveAI 上 LM only 为 NA/0.10s/15.40ms，Guidance 0.00/0.24/6.37，Llamacpp 0.05/0.20/29.98，Outlines 3.48/3.65/30.33；GitHub Easy 上 Guidance 0.00/0.34/7.44，Llamacpp 0.05/0.18/27.22，Outlines 3.71/3.97/39.78；Snowplow 上 Guidance 0.00/0.28/6.55，Llamacpp 0.05/0.20/28.90，Outlines 3.91/4.14/42.66；GitHub Medium 上 Guidance 0.01/0.54/7.57，Llamacpp 0.06/0.30/29.08，Outlines 8.05/8.38/46.57；Kubernetes 上 Guidance 0.01/0.45/9.47，Llamacpp 0.05/0.28/28.04，Outlines 5.29/5.55/46.10。",
+      "Table 3（HF Transformers 后端）：GlaiveAI 上 Guidance 0.01/0.36/36.92 对比 XGrammar 0.12/0.30/66.78；GitHub Easy 上 Guidance 0.01/0.37/42.03 对比 XGrammar 0.11/0.33/65.57；GitHub Medium 上 Guidance 0.01/0.55/44.21 对比 XGrammar 0.20/0.48/65.51；GitHub Hard 上 Guidance 0.01/0.73/35.88 对比 XGrammar 0.30/0.65/65.20。",
+      "论文指出 Outlines 与 Llamacpp 的吞吐显著低于 LM-only 方案，而 Guidance 通过 guidance acceleration 对部分生成步骤做 fast-forwarding，效率甚至更高；在 HF Transformers 后端下 Guidance 的 TPOT 显著优于 XGrammar。",
+      "论文指出约束解码开销可通过若干优化显著降低：mask 计算可与 LM 前向传播并行、语法编译可与 prefill 计算并发，以及语法缓存（grammar caching）与基于约束的投机解码（constraint-based speculative decoding）。",
+      "论文三条主要发现：(1) 约束解码相比无约束解码可将生成过程加速 50%；(2) 各框架对真实世界 JSON Schema 的实际支持差异显著，最佳框架支持的 schema 数量是最差框架的两倍；(3) 约束解码持续提升下游任务表现最多 4%，即使在 GSM8k 这类结构极少的任务上也是如此。",
+      "第 5 节 Coverage 开篇指出：每个约束解码框架在把 JSON Schema 翻译为能可靠保证 LM 输出有效性的约束集合时都存在局限；为系统评估，论文定义了三种 coverage 概念（three notions of coverage）。"
+    ],
+    "raw_excerpt": "We used Llama-3.1-8B-Instruct with the Llamacpp inference engine as backend for Outlines, Guidance, and Llamacpp. As XGrammar doesn't support Llamacpp as backend, we add an additional experiment with the Hugging Face Transformers inference engine for XGrammar. All experiments are conducted on a single NVIDIA A100-SXM4-80GB GPU with AMD EPYC 7543 (12 cores) CPU. The batch size is set to 1 for all experiments. ... (2) Frameworks demonstrate significant differences in their actual support for real-world JSON schemas, with the best framework supporting twice as many schemas as the worst. ... Each constrained decoding framework has limitations when it comes to translating JSON schemas into a set of constraints that can reliably guarantee the validity of LM outputs. To systematically evaluate the effectiveness of these frameworks, we define three notions of coverage:"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Berkeley Function Calling Leaderboard (BFCL) V4 — 官方排行榜页面",
+    "url": "https://gorilla.cs.berkeley.edu/leaderboard.html",
+    "published_at": "2026-04-12",
+    "key_points": [
+      "页面标题为 \"Berkeley Function Calling Leaderboard (BFCL) V4\"，副标题 \"BFCL: From Tool Use to Agentic Evaluation of Large Language Models\"，评估 LLM 准确调用函数（工具）的能力。",
+      "排行榜最后更新日期为 2026-04-12，并附有 Change Log 链接。",
+      "版本演进：BFCL-v1 引入 AST 作为评估指标，v2 引入企业级与开源社区贡献的函数，v3 引入多轮交互，v4 引入整体性 agentic 评估。",
+      "Overall Accuracy 定义为所有子类别的未加权平均（unweighted average）。",
+      "榜单区分两种模型接入方式：FC = 原生支持 function/tool calling；Prompt = 用模型普通文本生成能力绕过 function calling。",
+      "Format sensitivity 测试用例仅对 prompt（非 FC）模型提供支持。",
+      "榜单同时报告 cost（整个基准的估算成本，USD）与 latency（秒）。",
+      "模型使用 commit f7cf735 进行评估；可通过 pip install bfcl-eval==2025.12.17 复现。",
+      "引用信息显示该工作发表于 ICML 2025（Forty-second International Conference on Machine Learning），作者含 Shishir G. Patil、Huanzhi Mao、Charlie Cheng-Jie Ji、Fanjia Yan、Vishnu Suresh、Ion Stoica、Joseph E. Gonzalez。"
+    ],
+    "raw_excerpt": "The Berkeley Function Calling Leaderboard (BFCL) V4 evaluates the LLM's ability to call functions (aka tools) accurately. ... Last Updated: 2026-04-12 ... FC = native support for function/tool calling. Prompt = walk-around for function calling, using model's normal text generation capability. ... Overall Accuracy is the unweighted average of all the sub-categories. ... Format sensitivity test cases are only supported for prompt (non-FC) models. ... Models are evaluated using commit f7cf735."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "ShishirPatil/gorilla — berkeley-function-call-leaderboard README",
+    "url": "https://raw.githubusercontent.com/ShishirPatil/gorilla/main/berkeley-function-call-leaderboard/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 将 BFCL 定位为 \"the first comprehensive and executable function call evaluation\"，专门评估 LLM 调用函数的能力，并强调其覆盖多种函数调用形式、多样场景与可执行性。",
+      "README 列出 BFCL 各版本博客：v1（Simple/Parallel/Multiple + AST）、v2（企业与 OSS 贡献的 Live 数据）、v3（多轮多步）、V4 Part 1 Agentic Web Search、V4 Part 2 Agentic Memory Management、V4 Part 3 Agentic Format Sensitivity。",
+      "评测通过 PyPI 包 bfcl-eval 分发，README 特别提醒不要与 PyPI 上无关的 bfcl 项目混淆。",
+      "自托管模型支持 vllm 与 sglang 两种后端；README 称 sglang 在其多轮用例中比 vllm 快得多，但仅支持 SM 80+（Ampere 及更新）GPU，T4/V100 需用 vllm。",
+      "web_search 测试类别依赖 SerpAPI 进行网络搜索。",
+      "支持通过 --enable-lora / --lora-modules 评估带 LoRA 适配器的微调模型（仅 vllm 后端）。",
+      "测试类别与支持模型分别记录在 TEST_CATEGORIES.md 与 SUPPORTED_MODELS.md 中。"
+    ],
+    "raw_excerpt": "We introduce the Berkeley Function Calling Leaderboard (BFCL), the **first comprehensive and executable function call evaluation** dedicated to assessing Large Language Models' (LLMs) ability to invoke functions. ... - [BFCL V4 Part 1: Agentic Web Search](...) - [BFCL V4 Part 2: Agentic Memory Management](...) - [BFCL V4 Part 3: Agentic Format Sensitivity](...)"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "web",
+    "title": "Blog 8: Berkeley Function-Calling Leaderboard（BFCL v1 方法与失败模式）",
+    "url": "https://gorilla.cs.berkeley.edu/blogs/8_berkeley_function_calling_leaderboard.html",
+    "published_at": "2024-08-19",
+    "key_points": [
+      "BFCL 数据集规模为 2k 条 question-function-answer 对，覆盖 python、java、javascript、restAPI 多种语言与 40 个函数子领域。",
+      "数据构成细目：100 Java、50 JavaScript、70 REST API、100 SQL、1,680 Python。",
+      "评估分为 Python 类（Simple / Multiple / Parallel / Parallel Multiple Function）与非 Python 类（Chatting Capability、Function Relevance Detection、REST API、SQL、Java、JavaScript）。",
+      "每个 Python 类别同时有 AST 评估与可执行（executable）评估两种口径。",
+      "Function Relevance Detection 场景中所有提供的函数都不相关，期望模型不输出任何函数调用，用于检验模型是否会「幻觉」出函数与参数。",
+      "REST API 采用可执行评估，检查执行有效性、响应类型与响应 JSON key 的一致性；因复杂 API 的合法答案过多，REST 不做 AST 评估。",
+      "SQL 的 AST 评估不计入排行榜总分（构造等价 SQL 的方式过多），SQL 已从当期榜单中移除。",
+      "Chatting Capability 类别仅用于内部评估，其统计不计入线上排行榜。",
+      "博客称在 simple function calling 上开源与闭源模型表现相当，但在 multiple 与 parallel 调用上 GPT 系列明显优于开源对手。",
+      "博客设有 \"Common Mistakes\" 小节讨论常见失败模式（该小节正文在本次抓取中被截断，未取得逐类错误占比数字）。"
+    ],
+    "raw_excerpt": "BFCL aims to provide a thorough study of the function-calling capability of different LLMs. It consists of 2k question-function-answer pairs ... In more detail, BFCL includes 100 Java, 50 JavaScript, 70 REST API, 100 SQL, and 1,680 Python ... This scenario provides insight into whether a model will hallucinate on its function and parameter to generate function code despite lacking the function information or instructions from the users to do so. ... in simple function calling, both proprietary and open-source models exhibit comparable performance. However, when it comes to handling multiple and parallel function calls, the GPT-series models demonstrate superior performance over their open-source counterparts."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "openai/openai-cookbook — Introduction to Structured Outputs (notebook)",
+    "url": "https://raw.githubusercontent.com/openai/openai-cookbook/main/examples/Structured_Outputs_Intro.ipynb",
+    "published_at": null,
+    "key_points": [
+      "Structured Outputs 被描述为 Chat Completions API 与 Assistants API 中的能力，声称保证模型总是生成符合所提供 JSON Schema 的响应。",
+      "启用方式为在 API 调用中设置 strict: true，配合已定义的 response format 或 function definitions。",
+      "在此之前 response_format 参数只能用于指定模型应返回合法 JSON（即 JSON mode 的语义），新能力则用于指定输出应遵循哪个 JSON Schema。",
+      "示例 schema 中每个 object 层级都同时出现 \"required\": [...] 与 \"additionalProperties\": false，并与 \"strict\": True 一起放在 json_schema 定义内。",
+      "SDK 提供 client.beta.chat.completions.parse 与 Pydantic 模型（如 MathReasoning）作为替代手写 JSON Schema 的方式，官方推荐优先使用。",
+      "当模型因安全原因拒答时，输出不遵循所给 schema，API 通过新增的 refusal 字段指示，避免反序列化报错。",
+      "示例使用的模型为 gpt-4o-2024-08-06。"
+    ],
+    "raw_excerpt": "Structured Outputs is a new capability in the Chat Completions API and Assistants API that guarantees the model will always generate responses that adhere to your supplied JSON Schema. ... Structured Outputs can be enabled by setting the parameter `strict: true` in an API call with either a defined response format or function definitions. ... Previously, the `response_format` parameter was only available to specify that the model should return a valid JSON."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "Microsoft Learn — Azure OpenAI: How to use structured outputs",
+    "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs",
+    "published_at": null,
+    "key_points": [
+      "Azure OpenAI 的 structured outputs 用法与 OpenAI 一致：通过 response_format 传入 json_schema，并设置 strict 标志（.NET 中为 jsonSchemaIsStrict: true）。",
+      "官方示例 schema 在嵌套 object（steps 的 items）与顶层 object 上均显式写出 \"additionalProperties\": false，且 required 数组列出该层全部属性（如 [\"explanation\", \"output\"]、[\"steps\", \"final_answer\"]）。",
+      "示例代码使用 openai 1.42.0 与 pydantic 2.8.2，通过 client.beta.chat.completions.parse 传入 Pydantic 模型，结果从 message.parsed 读取。",
+      "Responses API 路径下，SDK 将 Pydantic 模型转换为 text.format 下的 JSON Schema，解析结果放在 output_parsed。",
+      "该页面为代码示例型文档，抓取到的正文未包含 JSON Schema 不支持关键字清单或遵循率评测说明。"
+    ],
+    "raw_excerpt": "\"required\": [\"explanation\", \"output\"],\n     \"additionalProperties\": false\n    }\n   },\n   \"final_answer\": { \"type\": \"string\" }\n  },\n  \"required\": [\"steps\", \"final_answer\"],\n  \"additionalProperties\": false\n  }\n  \"\"\"u8.ToArray()),\n\n  jsonSchemaIsStrict: true)"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "github",
+    "title": "openai/openai-node — README (官方 SDK 文档)",
+    "url": "https://raw.githubusercontent.com/openai/openai-node/master/README.md",
+    "published_at": null,
+    "key_points": [
+      "该 README 为 SDK 使用说明，抓取到的正文未涉及 structured outputs 的 schema 子集限制、strict 模式约束或 schema 遵循率评测。",
+      "README 指出 Responses API 是当前主要 API，Chat Completions API 为「previous standard (supported indefinitely)」，即 structured outputs 最初依托的 Chat Completions 仍被长期支持。"
+    ],
+    "raw_excerpt": "The primary API for interacting with OpenAI models is the Responses API ... The previous standard (supported indefinitely) for generating text is the Chat Completions API."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "github",
+    "title": "mlc-ai/xgrammar — README (XGrammar 官方仓库)",
+    "url": "https://raw.githubusercontent.com/mlc-ai/xgrammar/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 声称 XGrammar 在 JSON 生成上达到 \"near-zero overhead\"，并自称 \"one of the fastest structured generation engines available\"——属厂商自述，非独立评测。",
+      "README 称 XGrammar 是 vLLM、SGLang、TensorRT-LLM、MLC-LLM 的默认结构化生成后端，并已被集成进 OpenVINO GenAI、Modular MAX、Mirai 等。",
+      "README 支持平台为 Linux/macOS/Windows，硬件含 CPU、NVIDIA GPU、AMD GPU、Apple Silicon、TPU，语言绑定含 Python/C++/JavaScript/Swift。",
+      "README 引用两篇自家论文：XGrammar（MLSys 2025 / arXiv 2411.15100）与 XGrammar-2（ACM Conference on AI and Agentic Systems, 2026, pp.1009-1022）。",
+      "README 正文未提供与 Outlines、Guidance、llama.cpp GBNF 在相同模型/并发条件下的吞吐或首 token 开销对比数据。"
+    ],
+    "raw_excerpt": "XGrammar uses careful optimizations to achieve extremely low overhead in structured generation. It has achieved **near-zero overhead** in JSON generation, making it one of the fastest structured generation engines available."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "arxiv",
+    "title": "XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models (arXiv:2411.15100, MLSys '25)",
+    "url": "https://arxiv.org/abs/2411.15100",
+    "published_at": "2024-11-22",
+    "key_points": [
+      "该论文作者为 Yixin Dong, Charlie F. Ruan, Yaxing Cai, Ruihang Lai, Ziyi Xu, Yilong Zhao, Tianqi Chen，即 XGrammar 引擎的作者团队，属厂商/作者自述而非独立第三方评测。",
+      "摘要给出的量化主张为 \"up to 100x speedup over existing solutions\"，但摘要层面未指明被比较的具体引擎名称与测试条件。",
+      "方法要点：将词表划分为可预检的 context-independent tokens 与需运行时解释的 context-dependent tokens，并配合持久化栈与语法引擎/推理引擎协同设计以重叠 GPU 执行。",
+      "论文标注发表于 MLSys '25；v1 提交于 2024-11-22，v3 修订于 2025-05-12。",
+      "仅取得摘要页元数据，未读取正文结果表格，因此无法确认其对比基线是否包含 Outlines / Guidance / llama.cpp GBNF，也无法确认是否报告首 token 开销。"
+    ],
+    "raw_excerpt": "Evaluation results show that XGrammar can achieve up to 100x speedup over existing solutions. Combined with an LLM inference engine, it can generate near-zero overhead structure generation in end-to-end low-LLM serving."
+  },
+  {
+    "sub_question_id": "f7",
+    "source_type": "web",
+    "title": "Coalescence: making LLM inference 5x faster — .txt (Outlines) 官方博客",
+    "url": "https://blog.dottxt.co/coalescence.html",
+    "published_at": null,
+    "key_points": [
+      "该文由 Outlines 的开发方 .txt（Will Kurt）撰写，属厂商自述，不是独立第三方评测。",
+      "文中声称 Outlines 的结构化生成 \"comes at virtually no cost during inference\"、\"Generating structured text is free\"，即结构化生成不增加推理时间。",
+      "文中提出 \"coalescence\" 机制：利用输出中的确定性结构跳过对底层 LLM 的不必要调用，并声称带来 5x 加速。",
+      "Outlines 的实现路径为：JSON Schema → 正则表达式（interegular 库）→ 有限状态机（FSM）→ 基于 tokenizer 构建 token 级 FSM 索引，从而在采样时屏蔽非法 token。",
+      "文中指出并非所有合法 JSON Schema 都能用正则表达表示，多数情况下用正则近似即可。",
+      "该文未包含对 XGrammar、Guidance 或 llama.cpp GBNF 的横向吞吐/首 token 开销对比数字。"
+    ],
+    "raw_excerpt": "If you have tried Outlines , you already know that it is fast: the method we use for structured generation comes at virtually no cost during inference. Generating structured text is free, taking no more time than vanilla, unstructured generation from the model."
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "llama.cpp grammars/README.md — GBNF Guide（官方文法文档）",
+    "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/grammars/README.md",
+    "published_at": null,
+    "key_points": [
+      "GBNF（GGML BNF）是用于在 llama.cpp 中约束模型输出的形式文法格式，可用于强制模型生成合法 JSON；在 tools/cli、tools/completion、tools/server 中以多种方式支持。",
+      "GBNF 是 BNF 的扩展，主要增加了少量现代类正则（regex-like）特性；终结符支持完整 Unicode（可用 \\xXX、\\uXXXX、\\UXXXXXXXX 转义），字符范围可用 ^ 取反。",
+      "重复与可选语法包括 *、+、?、{m}、{m,}、{m,n}、{0,n}；root 规则定义整个输出必须匹配的起点。",
+      "文档设有 Troubleshooting 章节，明确说明「Grammars currently have performance gotchas」，并链接 issue https://github.com/ggml-org/llama.cpp/issues/4218。",
+      "已知性能陷阱的具体例子：允许模式 x 重复至多 N 次的写法 `x? x? x? ... x?`（N 个）语义正确但可能导致采样极慢，应改写为 `x{0,N}`（旧版本可用 N 层嵌套的 `(x (x ... (x)?...)?)?`）。",
+      "llama.cpp 只支持把 JSON Schema 的一个子集转换为 GBNF 文法；可在 llama-server 的 completion 端点用 json_schema 字段、在 /chat/completions 用 response_format 字段传入，或在 llama-cli/llama-completion 用 --json/-j。",
+      "JSON schema 仅用于约束模型输出，不会被注入 prompt；模型看不到 schema，若希望模型理解期望结构需在 prompt 中显式描述（工具调用场景例外，schema 会注入 prompt）。",
+      "已知限制：additionalProperties 默认为 false（更快且减少幻觉）；设为 true 时可能产生含未转义换行的 key；不支持的特性会被静默跳过，建议用命令行 Python 转换器查看警告并用 llama-gbnf-validator 校验。",
+      "已知限制：同一类型中不能混用 properties 与 anyOf/oneOf（issue #7703）；prefixItems 损坏（items 可用）；minimum/exclusiveMinimum/maximum/exclusiveMaximum 目前仅支持 integer 类型，不支持 number。",
+      "已知限制：嵌套 $ref 损坏（issue #8073）；pattern 必须以 ^ 开头并以 $ 结尾；C++ 版本不支持远程 $ref（Python 与 JavaScript 版本会抓取 https ref）；string format 缺少 uri、email；不支持 patternProperties。",
+      "文档另列出「不太可能实现」的不支持特性（因无状态文法难以/过慢支持）：uniqueItems、contains/minContains、$anchor、not、条件语句 if/then/else/dependentSchemas。",
+      "GBNF 支持按 token 而非字符匹配（token ID 或 token 字符串形式），并可用 ! 前缀取反；token 字符串形式要求该字符串在词表中恰好切分为单个 token，否则文法解析失败。",
+      "可用 test-gbnf-validator 工具针对字符串测试文法；示例调用为 ./llama-cli -m <model> --grammar-file grammars/some-grammar.gbnf -p 'Some prompt'。"
+    ],
+    "raw_excerpt": "GBNF (GGML BNF) is a format for defining formal grammars to constrain model outputs in `llama.cpp`. ... GBNF is an extension of BNF that primarily adds a few modern regex-like features. ... ## Troubleshooting\n\nGrammars currently have performance gotchas (see https://github.com/ggml-org/llama.cpp/issues/4218).\n\n### Efficient optional repetitions\n\n... the syntax `x? x? x?.... x?` (with N repetitions) may result in extremely slow sampling. Instead, you can write `x{0,N}` ...\n\n> [!NOTE]\n> The JSON schema is only used to constrain the model output and is not injected into the prompt. ... Here is also a list of known limitations (contributions welcome): ... `pattern`s must start with `^` and end with `$` ... Nested `$ref`s are broken ... No `patternProperties` ... [`uniqueItems`] ... [`not`] ... [Conditionals] `if` / `then` / `else` / `dependentSchemas`"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "llama.cpp tools/server/README.md — LLaMA.cpp HTTP Server 特性列表",
+    "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/tools/server/README.md",
+    "published_at": null,
+    "key_points": [
+      "llama.cpp HTTP server 的特性列表中同时包含「Schema-constrained JSON response format」与「Speculative decoding」，二者被并列为独立特性。",
+      "server 还列出 OpenAI API 兼容的 chat completions/responses/embeddings 路由、Anthropic Messages API 兼容、并行解码与连续批处理（continuous batching）、多模态、函数调用/工具使用等特性。",
+      "该 README 未在特性列表中说明 grammar/JSON schema 约束与 speculative decoding 同时启用时的行为或限制。"
+    ],
+    "raw_excerpt": "**Features:**\n * LLM inference of F16 and quantized models on GPU and CPU\n * [OpenAI API](https://github.com/openai/openai-openapi) compatible chat completions, responses, and embeddings routes\n ... * Schema-constrained JSON response format\n ... * Speculative decoding"
+  },
+  {
+    "sub_question_id": "f8",
+    "source_type": "github",
+    "title": "llama.cpp common/speculative.cpp — speculative decoding 实现（draft 词表约束）",
+    "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/common/speculative.cpp",
+    "published_at": null,
+    "key_points": [
+      "speculative decoding 实现中定义 SPEC_VOCAB_MAX_SIZE_DIFFERENCE 为 128，并要求 draft 模型词表与目标模型词表足够接近，否则拒绝使用投机解码。",
+      "代码中支持的投机类型包括 none、draft-simple、draft-eagle3、draft-mtp、draft-dflash、draft-dspark、ngram-simple、ngram-map-k、ngram-map-k4v、ngram-mod、ngram-cache。",
+      "draft 采样器会按目标模型的 temperature 与 seed 重建（rejection 采样需 q 与 p 采样方式一致），draft 保留自己的 top_k。",
+      "该文件正文未出现 grammar/GBNF 相关逻辑，未直接陈述文法约束与投机解码的兼容性。"
+    ],
+    "raw_excerpt": "#define SPEC_VOCAB_MAX_SIZE_DIFFERENCE 128\n...\n if (vocab_diff > SPEC_VOCAB_MAX_SIZE_DIFFERENCE) {\n SPC_DBG(\"draft model vocab must closely match target model to use speculation but \"\n \"target vocab size %d does not match draft vocab size %d - difference %d, max allowed %d\\n\", ...);\n return false;\n }\n...\n// Rebuild seq_id's draft sampler at the target's temperature: rejection weighs q against p, so\n// both have to sample alike. Only temp and seed carry over; the draft keeps its own top_k."
+  }
+]

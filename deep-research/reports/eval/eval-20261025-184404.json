@@ -1,0 +1,30 @@
+{
+  "n_questions": 1,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9090909090909091,
+  "alignment_questions": 1,
+  "mean_coverage": 0.75,
+  "per_subdomain": {
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9090909090909091,
+      "coverage": 0.75
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-hallucination",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 46,
+      "citations_missing": [],
+      "alignment_rate": 0.9090909090909091,
+      "coverage_rate": 0.75,
+      "missed_key_points": [
+        "训练侧手段（RLHF/事实性对齐）是一类手段"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

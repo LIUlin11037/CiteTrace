@@ -1,0 +1,61 @@
+{
+  "n_questions": 2,
+  "mean_citation_existence": 0.5,
+  "mean_alignment": 0.5,
+  "mean_coverage": 0.625,
+  "per_subdomain": {
+    "agent": {
+      "n": 1.0,
+      "citation_existence": 0.0,
+      "alignment": 0.0,
+      "coverage": 1.0
+    },
+    "llm": {
+      "n": 1.0,
+      "citation_existence": 1.0,
+      "alignment": 1.0,
+      "coverage": 0.25
+    }
+  },
+  "scores": [
+    {
+      "question_id": "gq-agent-memory",
+      "subdomain": "agent",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": 0.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "证据支持的方案可归为五类：(1) 加性抽取式记忆（Mem0），以 LLM 抽取事实、加性存储、检索排序为核心流程",
+        "综述认为此前记忆机制研究分散在不同论文中，缺乏从整体视角的系统总结与比较",
+        "论文还提出增强变体，利用基于图的记忆表示来捕捉对话元素之间复杂的关系结构",
+        "实验方面，论文声称在 Deep Memory Retrieval (DMR) 基准上超过 MemGPT（94.8% vs 93.4%）",
+        "SDK 与集成：官方 SDK 包括 Python、TypeScript/JavaScript、Go",
+        "论文在六个基础模型上做实证实验，报告相对现有 SOTA 基线取得更优提升",
+        "全状态持久化：Letta 中所有状态都持久化在数据库中，即使被逐出上下文窗口也不会丢失",
+        "letta-ai/letta-code 仓库 stars 为 3602、forks 438、语言 TypeScript，最近 push 2026-10-14",
+        "示例使用 semantic strategy，创建耗时约 2-3 分钟",
+        "Incognito chat 不进入对话历史、不保存到 memory，且对所有 Claude 用户可用",
+        "该来源为社区教学材料，可作为产业侧主流记忆方案被广泛采用的间接信号，但不提供官方产品配置事实",
+        "Agents，安装方式为 pip install memary；功能描述包含 Routing Agent、基于 Neo4j 的知识图谱创建与检索、Memory Stream、Entity Knowledge Store；页面说明 memary 默认使用本地 Ollama 模型，也支持 gpt-3.5-turbo 与 gpt-4-vision-preview"
+      ]
+    },
+    {
+      "question_id": "gq-distillation",
+      "subdomain": "llm",
+      "citation_existence_rate": 1.0,
+      "citations_total": 12,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 0.25,
+      "missed_key_points": [
+        "R1 蒸馏基于 Qwen/Llama 等开源底座",
+        "给出蒸馏模型在某基准上相对同尺寸模型的提升（须注明来源）",
+        "区分蒸馏与直接对小模型做 RL 的效果差异"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

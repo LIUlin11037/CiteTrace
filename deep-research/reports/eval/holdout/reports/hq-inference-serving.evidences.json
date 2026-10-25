@@ -1,0 +1,476 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention (Kwon et al., SOSP 2023)",
+    "url": "https://arxiv.org/abs/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "PagedAttention 的权威定义出处：该论文提出 PagedAttention，一种受操作系统经典虚拟内存与分页（paging）技术启发的 attention 算法。",
+      "论文同时构建了 vLLM 服务系统，声称实现两点：(1) KV cache 内存近乎零浪费（near-zero waste），(2) 支持请求内部与跨请求的 KV cache 灵活共享。",
+      "论文指出问题根源：现有系统把每个请求的 KV cache 存放在连续内存空间（因主流深度学习框架要求张量连续），而 KV cache 会随生成动态增长/收缩，且生命周期与长度无法预先知晓。",
+      "由此产生两类低效：一是内部与外部内存碎片（internal and external memory fragmentation），二是无法利用内存共享机会。",
+      "论文给出的性能主张：相比 FasterTransformer 与 Orca 等 SOTA 系统，在同等延迟下吞吐提升 2–4×；序列更长、模型更大、解码算法更复杂时提升更明显。",
+      "发表信息：SOSP 2023（ACM SIGOPS 29th Symposium on Operating Systems Principles），DOI 10.1145/3600006.3613165；作者含 Woosuk Kwon、Zhuohan Li、Ion Stoica 等，UC Berkeley 等机构。"
+    ],
+    "raw_excerpt": "To address this problem, we propose PagedAttention, an attention algorithm inspired by the classical virtual memory and paging techniques in operating systems. On top of it, we build vLLM, an LLM serving system that achieves (1) near-zero waste in KV cache memory and (2) flexible sharing of KV cache within and across requests to further reduce memory usage."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention — 正文（引言/背景章节，arXiv HTML）",
+    "url": "https://arxiv.org/html/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "内存浪费的量化证据：profiling 结果显示，现有系统中仅 20.4%–38.2% 的 KV cache 内存真正用于存储实际 token 状态（其余被碎片与预留浪费）。",
+      "碎片成因：为把 KV cache 存进连续空间，现有系统按请求最大长度（如 2048 tokens）预分配一整块连续内存。",
+      "共享机会来源：parallel sampling、beam search 等高级解码算法会为单个请求生成多个输出序列，这些序列可部分共享 KV cache。",
+      "共享收益的量化：parallel sampling 场景下 prompt 部分的 KV cache 约占总 KV cache 的 12%，可被共享；beam search 场景下不同 beam 可共享更大比例，最高节省 55% 内存，且共享模式随解码推进而变化。",
+      "KV cache 规模示例：OPT-13B 单个 token 的 KV cache 需 800 KB（2×(key,value)×5120 隐藏维×40 层×2 字节 FP16），2048 token 序列单请求可达 1.6 GB。",
+      "内存布局背景：13B 模型在 A100 40GB 上，约 65% 内存给模型权重，近 30% 用于请求的动态状态（即 KV cache）。",
+      "工作负载性质：自回归逐 token 生成使负载呈 memory-bound，GPU 算力未被充分利用，从而限制服务吞吐；提升吞吐需增大 batch，而这依赖对每请求内存的高效管理。"
+    ],
+    "raw_excerpt": "First, the existing systems (Yu et al., 2022; NVIDIA, 2023a) suffer from internal and external memory fragmentation. To store the KV cache of a request in contiguous space, they pre-allocate a contiguous chunk of memory with the request's maximum length (e.g., 2048 tokens). Indeed, our profiling results in Fig. 2 show that only 20.4% - 38.2% of the KV cache memory is used to store the actual token states in the existing systems."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "vLLM 官方设计文档：Paged Attention",
+    "url": "https://docs.vllm.ai/en/latest/design/paged_attention.html",
+    "published_at": null,
+    "key_points": [
+      "官方文档对 block 的定义：vLLM 中 key/value cache 数据被切分为 blocks，每个 block 存储固定数量（BLOCK_SIZE）个 token 在单个 head 上的数据；一个 block 可能只包含整个 context 的一部分。",
+      "block 容量示例：若 block size 为 16、head size 为 128，则单个 head 的一个 block 可存 16×128 = 2048 个元素。",
+      "术语区分：vLLM 的 paged attention block 与 GPU thread block 是两个不同概念，文档明确将前者称为 \"block\"、后者称为 \"thread block\"。",
+      "kernel 签名中的内存布局：k_cache 形状为 [num_blocks, num_kv_heads, head_size/x, block_size, x]，v_cache 形状为 [num_blocks, num_kv_heads, head_size, block_size]，即按 block 索引组织而非按序列连续组织。",
+      "文档时效性声明：该页是 \"historical document based on the original paper for vLLM\"，已不再描述当前 vLLM 代码；当前实现使用自研 multi-head query attention kernel（csrc/attention/attention_kernels.cu）。",
+      "文档中的相关概念定义：Sequence 表示一个客户端请求；Context 由该序列已生成的 token 组成；warp 一次处理一个 query token 与一个完整 block 的 key token 的计算。"
+    ],
+    "raw_excerpt": "Block: The key and value cache data in vLLM are split into blocks. Each block stores data for a fixed number (BLOCK_SIZE) of tokens at one head. Each block may contain only a portion of the whole context tokens. For example, if the block size is 16 and the head size is 128, then for one head, one block can store 16 * 128 = 2048 elements."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "web",
+    "title": "vLLM 官方设计文档：Automatic Prefix Caching",
+    "url": "https://docs.vllm.ai/en/latest/design/prefix_caching.html",
+    "published_at": null,
+    "key_points": [
+      "prefix sharing 的官方机制：vLLM 采用基于哈希的方法，对每个 KV cache block 用「块内 token」加上「该块之前的 prefix token」共同计算哈希，从而识别可复用的前缀块。",
+      "块哈希的组成：hash(tuple[components])，components 包括父块哈希值（parent hash）、块内 token 元组（用于降低哈希碰撞）、以及额外哈希（LoRA ID、多模态输入哈希、多租户隔离用的 cache salt）。",
+      "复用粒度限制：文档明确「We only cache full blocks」，即只缓存完整的块。",
+      "块数据结构 KVCacheBlock 的字段：block_id（不可变）、block_hash（块填满时赋值、被驱逐时重置）、ref_cnt（当前使用该块的请求数）、以及构成空闲队列双向链表的 prev_free_block / next_free_block 指针。",
+      "引用计数语义：分配已计算块时对其 ref_cnt 加一并将其移出空闲队列，以避免这些可复用块被驱逐——这是共享块的生命周期管理方式。",
+      "初始化时一次性分配全部 KVCacheBlock 构成 block pool，避免 Python 对象创建开销；管理器组件包括 Block Pool、Free Block Queue、Cache blocks（哈希→块 ID 映射）、Request blocks（请求 ID→已分配块 ID 映射）。",
+      "安全隔离：支持 per-request cache_salt 注入首块哈希，使只有相同 salt 的请求才能复用缓存块，用于防止基于时延的缓存内容推断攻击。",
+      "哈希算法：自 v0.11 起默认使用 sha256；可通过 --prefix-caching-hash-algo 选择 sha256 / sha256_cbor / xxhash / xxhash_cbor。"
+    ],
+    "raw_excerpt": "Prefix caching kv-cache blocks is a popular optimization in LLM inference to avoid redundant prompt computations. The core idea is simple – we cache the kv-cache blocks of processed requests, and reuse these blocks when a new request comes in with the same prefix as previous requests."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM)",
+    "url": "https://arxiv.org/abs/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "论文指出：高吞吐 LLM 服务需要一次批处理足够多的请求，但每个请求的 KV cache 内存巨大且动态增减，管理不当时会因碎片与冗余复制造成显著浪费，从而限制 batch size。",
+      "论文提出 PagedAttention（借鉴操作系统虚拟内存与分页），并在其上构建 vLLM 服务系统，实现 KV cache 近零浪费以及请求内/跨请求的灵活 KV cache 共享。",
+      "论文报告：在相同延迟水平下，vLLM 相比 FasterTransformer、Orca 等当时最先进系统将吞吐提升 2-4 倍；序列更长、模型更大、解码算法更复杂时提升更明显。",
+      "该摘要将 Orca 列为对比基线（state-of-the-art systems such as FasterTransformer and Orca），说明 Orca 是 vLLM 之前已具备较高吞吐的服务系统。",
+      "vLLM 源码公开于 https://github.com/vllm-project/vllm。"
+    ],
+    "raw_excerpt": "High throughput serving of large language models (LLMs) requires batching sufficiently many requests at a time. However, existing systems struggle because the key-value cache (KV cache) memory for each request is huge and grows and shrinks dynamically. ... Our evaluations show that vLLM improves the throughput of popular LLMs by 2-4x with the same level of latency compared to the state-of-the-art systems, such as FasterTransformer and Orca."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "github",
+    "title": "vllm-project/vllm — repository metadata and README header",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库 vllm-project/vllm：95,287 stars、23,880 forks、9,381 open issues，主语言 Python，许可证 Apache-2.0，创建于 2023-02-09，最近 push 于 2026-10-24。",
+      "仓库 topics 包含 llm-serving、model-serving、inference、pytorch、cuda、amd、tpu、moe 等，定位为通用 LLM 推理/服务引擎。",
+      "README 标语为 \"Easy, fast, and cheap LLM serving for everyone\"，并在显著位置链接论文 https://arxiv.org/abs/2309.06180 与文档 https://docs.vllm.ai。",
+      "本次抓取到的 README 片段仅含项目标识与链接，未包含调度器（continuous batching / chunked prefill / 抢占）相关正文，故不能据此得出调度语义结论。"
+    ],
+    "raw_excerpt": "<h3 align=\"center\">Easy, fast, and cheap LLM serving for everyone</h3> ... | <a href=\"https://docs.vllm.ai\"><b>Documentation</b></a> | <a href=\"https://blog.vllm.ai/\"><b>Blog</b></a> | <a href=\"https://arxiv.org/abs/2309.06180\"><b>Paper</b></a> |"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM, SOSP'23)",
+    "url": "https://arxiv.org/abs/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "摘要明确给出吞吐倍数：vLLM 在同等延迟水平下将主流 LLM 的吞吐提升 2–4×，对比基线为 FasterTransformer 和 Orca。",
+      "论文声称 vLLM 实现 KV cache 内存的 near-zero waste，并支持请求内与跨请求的 KV cache 灵活共享。",
+      "论文称改进在更长序列、更大模型、更复杂解码算法下更显著。",
+      "该工作发表于 SOSP 2023（ACM SIGOPS 29th Symposium on Operating Systems Principles）。"
+    ],
+    "raw_excerpt": "Our evaluations show that vLLM improves the throughput of popular LLMs by 2-4$\\times$ with the same level of latency compared to the state-of-the-art systems, such as FasterTransformer and Orca. The improvement is more pronounced with longer sequences, larger models, and more complex decoding algorithms."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention — 正文 §1 Introduction / §2 Background（HTML 全文）",
+    "url": "https://arxiv.org/html/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "KV cache 内存浪费率量化：profiling 结果显示现有系统（FasterTransformer、Orca）只有 20.4%–38.2% 的 KV cache 内存真正用于存储 token 状态，其余因内部/外部碎片被浪费。",
+      "浪费根因：现有系统按请求最大长度（如 2048 token）预分配连续显存，而 KV cache 长度与生命周期事先未知。",
+      "显存构成（13B 模型 / NVIDIA A100 40GB）：约 65% 为模型权重，接近 30% 为请求动态状态（即 KV cache）。",
+      "单 token KV cache 开销：OPT-13B 下为 800KB（2 × 5120 hidden × 40 layers × 2 bytes FP16）；单请求 2048 token 时 KV cache 可达 1.6GB。",
+      "共享收益量化：parallel sampling 场景中 prompt 部分占 KV cache 总量的 12%，可被共享；beam search 场景不同 beam 最多可节省 55% 内存。",
+      "论文指出 A100→H100 FLOPS 提升 2 倍以上但显存上限仍为 80GB，因此显存将成为日益严重的瓶颈。",
+      "论文将 iteration-level scheduling（Orca 提出）作为已有机制引用：每个 iteration 结束后移除已完成请求并加入新请求，新请求只需等待一个 iteration 而非整个 batch 完成。"
+    ],
+    "raw_excerpt": "Indeed, our profiling results in Fig. 2 show that only 20.4% - 38.2% of the KV cache memory is used to store the actual token states in the existing systems. ... the KV cache of a single token demands 800 KB of space, calculated as 2 (key and value vectors) × 5120 (hidden state size) × 40 (number of layers) × 2 (bytes per FP16). Since OPT can generate sequences up to 2048 tokens, the memory required to store the KV cache of one request can be as much as 1.6 GB."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving",
+    "url": "https://arxiv.org/abs/2401.09670v3",
+    "published_at": "2024-01-18",
+    "key_points": [
+      "DistServe 将 prefill 与 decode 计算拆分到不同 GPU 上执行，以消除 prefill-decoding 相互干扰。",
+      "论文指出共置（colocate）方案不仅带来强烈的 prefill-decode 干扰，还把两个阶段的资源分配与并行策略耦合在一起。",
+      "DistServe 以应用的 TTFT（首 token 时延）与 TPOT（每输出 token 时延）需求为输入，为每个阶段分别协同优化资源分配与并行策略。",
+      "DistServe 依据服务集群带宽决定两阶段的放置位置，以最小化拆分带来的通信开销。",
+      "作者报告：在多种 LLM、应用与延迟要求下，相比当时 SOTA 系统可服务 7.4 倍更多请求，或在同等条件下支持 12.6 倍更紧的 SLO，同时 >90% 请求满足延迟约束。"
+    ],
+    "raw_excerpt": "DistServe assigns prefill and decoding computation to different GPUs, hence eliminating prefill-decoding interferences. ... Our evaluations show that on various popular LLMs, applications, and latency requirements, DistServe can serve 7.4x more requests or 12.6x tighter SLO, compared to state-of-the-art systems, while staying within latency constraints for > 90% of requests."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Splitwise: Efficient generative LLM inference using phase splitting",
+    "url": "https://arxiv.org/abs/2311.18677v2",
+    "published_at": "2023-11-30",
+    "key_points": [
+      "Splitwise 基于实测刻画指出 LLM 推理请求包含两个阶段：计算密集的 prompt computation 与访存密集的 token generation，二者在延迟、吞吐、内存与功耗特征上各不相同。",
+      "论文指出 token generation 阶段即使采用 SOTA 的 batching 与调度，仍会低设计算资源利用率，且不需要最新 GPU 的算力，可用更低功耗与成本的硬件运行。",
+      "Splitwise 将两阶段拆分到不同机器上，从而为每个阶段选用适配的硬件并独立配置资源。",
+      "跨机器拆分需要把 prompt computation 机器的状态传输到 token generation 机器，论文利用 GPU 集群的高速背板互联实现并优化该状态传输。",
+      "作者报告：相比当时设计可实现 1.4 倍吞吐且成本低 20%；或在同等成本与功耗预算下实现 2.35 倍吞吐。"
+    ],
+    "raw_excerpt": "With Splitwise, we propose splitting the two phases of a LLM inference request on to separate machines. ... we show that we can achieve 1.4x higher throughput at 20% lower cost than current designs. Alternatively, we can achieve 2.35x more throughput with the same cost and power budgets."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve",
+    "url": "https://arxiv.org/abs/2403.02310",
+    "published_at": "2024-03-04",
+    "key_points": [
+      "Sarathi-Serve 提出 chunked-prefills：把一个 prefill 请求切分为大小近似相等的多个 chunk。",
+      "chunked-prefills 使调度器能构造 stall-free 调度，在不暂停进行中 decode 的前提下把新请求加入批次。",
+      "stall-free 调度使系统可用大 batch size 提升吞吐，同时把 batching 对延迟的影响降到最小。",
+      "论文指出均匀批次可缓解迭代间的不均衡，从而减少流水线气泡（pipeline bubbles）。",
+      "作者报告：Mistral-7B 单张 A100 上服务容量相比 vLLM 提升 2.6 倍；Yi-34B 双 A100 上最高 3.7 倍；Falcon-180B 配合流水线并行时端到端服务容量最高提升 5.6 倍。"
+    ],
+    "raw_excerpt": "Sarathi-Serve introduces chunked-prefills which splits a prefill request into near equal sized chunks and creates stall-free schedules that adds new requests in a batch without pausing ongoing decodes. ... For Mistral-7B on single A100 GPUs, we achieve 2.6x higher serving capacity and up to 3.7x higher serving capacity for the Yi-34B model on two A100 GPUs as compared to vLLM."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "arxiv",
+    "title": "SGLang: Efficient Execution of Structured Language Model Programs",
+    "url": "https://arxiv.org/abs/2312.07104v2",
+    "published_at": "2023-12-12",
+    "key_points": [
+      "SGLang 由前端语言与运行时两部分组成；前端提供生成与并行控制的原语，简化复杂 LM 程序的编写。",
+      "运行时通过 RadixAttention 实现 KV cache 复用，并通过压缩有限状态机（compressed FSM）加速结构化输出解码。",
+      "作者报告：在 agent control、逻辑推理、few-shot 学习基准、JSON 解码、RAG 流水线与多轮对话等任务上，SGLang 相比当时 SOTA 推理系统最高可达 6.4 倍吞吐。",
+      "论文给出的代码地址为 https://github.com/sgl-project/sglang。"
+    ],
+    "raw_excerpt": "The runtime accelerates execution with novel optimizations like RadixAttention for KV cache reuse and compressed finite state machines for faster structured output decoding. Experiments show that SGLang achieves up to 6.4x higher throughput compared to state-of-the-art inference systems"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "sgl-project/sglang (GitHub repository)",
+    "url": "https://github.com/sgl-project/sglang",
+    "published_at": "2024-01-08",
+    "key_points": [
+      "仓库热度：37,685 stars、9,856 forks、6,142 open issues；创建于 2024-01-08，最近一次 push 为 2026-10-24。",
+      "仓库共 20,856 次提交，采用 Apache-2.0 许可，主语言 Python。",
+      "README 自述定位为面向大语言、视觉语言与扩散模型的开源推理框架，针对 agentic workloads、大规模 serving 与 RL rollouts 优化。",
+      "README 列出支持的硬件平台：NVIDIA（B200/B300/GB200/GB300、H100/H200/H800/H20、A100、RTX 30/40/50 系列等）、AMD Instinct MI300X/MI325X/MI350X/MI355X、Google TPU（v6e、v7）、Intel GPU/CPU、Apple Silicon、华为 Ascend A2/A3/950PR/DT、摩尔线程 MTT S5000。",
+      "README 致谢中说明其设计与代码复用了 vLLM、LightLLM、FlashInfer、Guidance、Outlines、LMQL 等项目。",
+      "当前版本 README 未以 RadixAttention 作为主要卖点，也未给出 prefix caching 的机制描述或性能数字。"
+    ],
+    "raw_excerpt": "SGLang is an open-source inference framework for large language, vision-language, and diffusion models, optimized for agentic workloads, large-scale serving, and RL rollouts. ... We learned the design and reused code from the following projects: Guidance, vLLM, LightLLM, FlashInfer, Outlines, and LMQL."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "NVIDIA/TensorRT-LLM (GitHub repository)",
+    "url": "https://github.com/NVIDIA/TensorRT-LLM",
+    "published_at": "2023-08-16",
+    "key_points": [
+      "仓库热度：14,935 stars、2,861 forks、1,787 open issues；创建于 2023-08-16，最近一次 push 为 2026-10-24。",
+      "主语言 Python，许可为 NOASSERTION（非标准 SPDX 标识），topics 含 llm-serving、moe、cuda、blackwell、pytorch。",
+      "README 自述：TensorRT LLM 通过常见算子的专用 kernel、高效运行时以及可定制扩展的 pythonic 框架来优化 LLM 与视觉生成模型的推理。"
+    ],
+    "raw_excerpt": "TensorRT LLM optimizes inference for LLMs and Visual Gen models with specialized kernels for common operations, an efficient runtime, and a pythonic framework that enables you to customize and extend the system."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "vllm-project/vllm (GitHub repository)",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": null,
+    "key_points": [
+      "仓库热度：95,286 stars、23,880 forks；主语言 Python，最近一次 push 为 2026-10-24。",
+      "仓库自述为面向 LLM 的高吞吐、内存高效推理与服务引擎。"
+    ],
+    "raw_excerpt": "A high-throughput and memory-efficient inference and serving engine for LLMs"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "Orca: A Distributed Serving System for Transformer-Based Generative Models (OSDI '22 官方论文页)",
+    "url": "https://www.usenix.org/conference/osdi22/presentation/yu",
+    "published_at": "2022-07",
+    "key_points": [
+      "发表信息：16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)，2022 年 7 月，Carlsbad, CA，页码 521–538，ISBN 978-1-939133-28-1，USENIX Association 出版。",
+      "作者与单位：Gyeong-In Yu、Joo Seong Jeong（首尔国立大学）；Geon-Woo Kim（FriendliAI 与首尔国立大学）；Soojeong Kim（FriendliAI）；Byung-Gon Chun（FriendliAI 与首尔国立大学）。",
+      "问题动机：Transformer 生成模型以自回归方式逐 token 生成，一个推理请求需多次运行模型；现有推理服务系统因调度机制不灵活而表现不佳——批内已完成的请求无法返回客户端，新到达请求必须等当前批次完全结束。",
+      "iteration-level scheduling 的定义（摘要级）：以 iteration（而非 request）为粒度进行调度，调度器只让执行引擎在当前批次上运行模型的单次 iteration。",
+      "selective batching 的定义（摘要级）：为在 Transformer 模型上同时使用 batching 与 iteration-level scheduling，仅对选定的一组算子（a selected set of operations）应用 batching。",
+      "吞吐数据（摘要级）：在 GPT-3 175B 模型上评估，ORCA 在相同延迟水平下相对 NVIDIA FasterTransformer 取得 36.9× 吞吐提升。",
+      "系统实现：基于上述两项技术实现了分布式服务系统 ORCA，并针对数千亿参数模型的可扩展性做了额外设计。"
+    ],
+    "raw_excerpt": "In this paper, we propose iteration-level scheduling, a new scheduling mechanism that schedules execution at the granularity of iteration (instead of request) where the scheduler invokes the execution engine to run only a single iteration of the model on the batch. In addition, to apply batching and iteration-level scheduling to a Transformer model at the same time, we suggest selective batching, which applies batching only to a selected set of operations. ... Our evaluation on a GPT-3 175B model shows that ORCA can significantly outperform NVIDIA FasterTransformer in terms of both latency and throughput: 36:9× throughput improvement at the same level of latency."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "vLLM Documentation — Optimization and Tuning (Preemption / Chunked Prefill)",
+    "url": "https://docs.vllm.ai/en/latest/configuration/optimization.html",
+    "published_at": null,
+    "key_points": [
+      "由于 transformer 的自回归特性，有时 KV cache 空间不足以处理所有批内请求，此时 vLLM 会抢占（preempt）请求，为其他请求释放 KV cache 空间。",
+      "被抢占的请求在重新获得足够 KV cache 空间后会被 recompute（重算）。",
+      "文档给出的抢占告警示例为：'Sequence group 0 is preempted by PreemptionMode.RECOMPUTE mode because there is not enough KV cache space.'",
+      "在 vLLM V1 中，默认的抢占模式是 RECOMPUTE 而不是 SWAP，原因是 recompute 在 V1 架构下开销更低。",
+      "抢占与重算会损害端到端延迟；频繁抢占时的缓解手段包括：提高 gpu_memory_utilization、降低 max_num_seqs 或 max_num_batched_tokens、提高 tensor_parallel_size、提高 pipeline_parallel_size。",
+      "可通过 vLLM 暴露的 Prometheus 指标监控抢占次数，并可通过设置 disable_log_stats=False 记录累计抢占次数。",
+      "Chunked prefill 让 vLLM 把大的 prefill 拆成更小的 chunk，并与 decode 请求合批处理，从而同时改善吞吐与延迟，更好地平衡 compute-bound（prefill）与 memory-bound（decode）操作。",
+      "在 V1 中，chunked prefill 在可能的情况下默认启用（enabled by default whenever possible）。",
+      "启用 chunked prefill 时，调度策略优先处理 decode 请求：先批入所有待处理的 decode 请求，再在 max_num_batched_tokens 预算还有剩余 token 时调度待处理的 prefill；若某个待处理 prefill 放不进 max_num_batched_tokens，则自动对其进行切块（chunk）。",
+      "该策略的两点收益：优先 decode 可改善 inter-token latency (ITL)；把 compute-bound 的 prefill 与 memory-bound 的 decode 放进同一 batch 可提升 GPU 利用率。",
+      "调优 max_num_batched_tokens：较小值（如 2048）获得更好的 ITL，因为拖慢 decode 的 prefill 更少；较大值获得更好的 TTFT，因为单批可处理更多 prefill token。",
+      "为获得最优吞吐，文档建议设置 max_num_batched_tokens > 8192，尤其是在大 GPU 上跑较小模型时。",
+      "若 max_num_batched_tokens 等于 max_model_len，则几乎等价于 V0 的默认调度策略（区别是它仍然优先 decode）。",
+      "当 chunked prefill 被禁用时，max_num_batched_tokens 必须大于 max_model_len；否则 vLLM 可能在服务启动时崩溃。",
+      "文档给出启用/调优示例：llm = LLM(model=\"meta-llama/Llama-3.1-8B-Instruct\", max_num_batched_tokens=16384)。",
+      "文档将 chunked prefill 的更多细节指向两篇论文：arXiv 2401.08671 与 arXiv 2308.16369。"
+    ],
+    "raw_excerpt": "In vLLM V1, the default preemption mode is RECOMPUTE rather than SWAP, as recomputation has lower overhead in the V1 architecture. ... Chunked prefill allows vLLM to process large prefills in smaller chunks and batch them together with decode requests. ... In V1, chunked prefill is enabled by default whenever possible. With chunked prefill enabled, the scheduling policy prioritizes decode requests. It batches all pending decode requests before scheduling any prefill operations. When there are available tokens in the max_num_batched_tokens budget, it schedules pending prefills. If a pending prefill request cannot fit into max_num_batched_tokens, it automatically chunks it. ... For optimal throughput, we recommend setting max_num_batched_tokens > 8192 especially for smaller models on large GPUs. ... When chunked prefill is disabled, max_num_batched_tokens must be greater than max_model_len."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "web",
+    "title": "vLLM Documentation — Architecture Overview (V1 Process Architecture / LLM Engine)",
+    "url": "https://docs.vllm.ai/en/latest/design/arch_overview.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM V1 采用多进程架构，其中 engine core 进程负责运行 scheduler、管理 KV cache，并协调各 GPU worker 上的模型执行。",
+      "engine core 进程运行一个 busy loop，持续调度请求并把工作分发给 GPU worker。",
+      "每个 data parallel rank 对应 1 个 engine core 进程（例如 --data-parallel-size 4 时有 4 个 engine core 进程）。",
+      "LLMEngine 的职责包括 input processing、model execution、scheduling 与 output processing；其中 Scheduling 被描述为「选择每一步处理哪些请求」（Chooses which requests are processed in each step）。",
+      "每个 GPU 由一个专用 worker 进程管理，worker 负责加载模型权重、执行前向计算并管理 GPU 显存；每个 GPU 一个 worker 进程。"
+    ],
+    "raw_excerpt": "The engine core process runs the scheduler, manages KV cache, and coordinates model execution across GPU workers. It runs a busy loop that continuously schedules requests and dispatches work to the GPU workers. ... Scheduling: Chooses which requests are processed in each step."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "github",
+    "title": "vllm-project/vllm — GitHub repository metadata (README excerpt)",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2023-02-09",
+    "key_points": [
+      "仓库 vllm-project/vllm 采用 Apache-2.0 许可，主语言 Python，约 95,287 stars、23,880 forks，最近一次 push 时间为 2026-10-24。",
+      "README 将项目定位为 'Easy, fast, and cheap LLM serving for everyone'，并链接官方文档 docs.vllm.ai 与论文 arXiv:2309.06180。"
+    ],
+    "raw_excerpt": "Easy, fast, and cheap LLM serving for everyone ... | <a href=\"https://docs.vllm.ai\"><b>Documentation</b></a> | <a href=\"https://blog.vllm.ai/\"><b>Blog</b></a> | <a href=\"https://arxiv.org/abs/2309.06180\"><b>Paper</b></a>"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention (vLLM 官方首发博客)",
+    "url": "https://blog.vllm.ai/2023/06/20/vllm.html",
+    "published_at": "2023-06-20",
+    "key_points": [
+      "官方称 vLLM 相比 HuggingFace Transformers 最高可达 24x 吞吐提升，且无需修改模型架构。",
+      "实验设置为两个场景：LLaMA-7B 在单张 NVIDIA A10G GPU 上，LLaMA-13B 在 NVIDIA A100 (40GB) 上；请求的输入/输出长度从 ShareGPT 数据集采样。",
+      "官方称相对 HF 最高 24x、相对 TGI 最高 3.5x 吞吐提升。",
+      "单输出补全场景：vLLM 比 HF 高 14x–24x，比 TGI 高 2.2x–2.5x。",
+      "每请求三个并行输出补全场景：vLLM 比 HF 高 8.5x–15x，比 TGI 高 3.3x–3.5x。",
+      "PagedAttention 下内存浪费仅发生在序列最后一个 block，实际浪费低于 4%。",
+      "PagedAttention 的内存共享可将并行采样/beam search 的内存占用最多降低 55%，并转化为最高 2.2x 吞吐提升。",
+      "LMSYS 内部早期微基准中，vLLM 后端相比初始 HF 后端最高可达 30x 吞吐；上线后 LMSYS 将服务用 GPU 数量削减了 50%。"
+    ],
+    "raw_excerpt": "vLLM equipped with PagedAttention redefines the new state of the art in LLM serving: it delivers up to 24x higher throughput than HuggingFace Transformers, without requiring any model architecture changes. ... We evaluate in two settings: LLaMA-7B on an NVIDIA A10G GPU and LLaMA-13B on an NVIDIA A100 GPU (40GB). We sample the requests' input/output lengths from the ShareGPT dataset. In our experiments, vLLM achieves up to 24x higher throughput compared to HF and up to 3.5x higher throughput than TGI."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "vLLM Performance Update: v0.6.0 release (官方性能博客)",
+    "url": "https://blog.vllm.ai/2024/09/05/perf-update.html",
+    "published_at": "2024-09-05",
+    "key_points": [
+      "TL;DR：vLLM 在 Llama 8B 上实现 2.7x 吞吐提升与 5x 更快的 TPOT，在 Llama 70B 上实现 1.8x 吞吐提升与 2x 更低 TPOT。",
+      "上述对比是 vLLM v0.6.0 相对 vLLM v0.5.3，硬件为 Llama 8B 跑在 1xH100、Llama 70B 跑在 4xH100，数据集为 ShareGPT 500 prompts，TPOT 在 32 QPS 下测量。",
+      "v0.6.0 相对 v0.5.3 的整体吞吐提升区间为 1.8–2.7x。",
+      "对比的竞品引擎与版本：TensorRT-LLM r24.07、SGLang v0.3.0、LMDeploy v0.6.0a0；其他引擎使用默认设置，vLLM 开启 --num-scheduler-steps 10 的多步调度。",
+      "基准数据集三个：ShareGPT（500 prompts，平均输入 202 tokens、平均输出 179 tokens）；Prefill-heavy（约 462 输入 / 16 输出）；Decode-heavy（约 462 输入 / 256 输出）。",
+      "被测模型为 Llama 3 8B 与 Llama 3 70B；未用 Llama 3.1，原因是 TensorRT-LLM r24.07（TensorRT LLM backend v0.11）不支持。",
+      "硬件为 A100 与 H100 两种 GPU。",
+      "评估指标为 TTFT（ms，报告均值与标准误）、TPOT（ms，均值与标准误）、吞吐（request per second），吞吐在 QPS inf（所有请求同时到达）下测量。",
+      "在 H100 上服务 Llama-3 模型时，vLLM 在 ShareGPT 与 Decode-heavy 数据集上取得最高吞吐。",
+      "附录结论：Llama 3 8B 在 1xA100 上，vLLM 的 TTFT 与 TPOT 与 TensorRT-LLM、SGLang 相当；吞吐上 TensorRT-LLM 最高，vLLM 在 ShareGPT 与 decode-heavy 上第二。",
+      "附录结论：Llama 3 70B 在 4xA100 上，vLLM、SGLang、TensorRT-LLM 的 TTFT 与 TPOT 相近，vLLM 在 ShareGPT 上吞吐最高。",
+      "附录结论：Llama 3 8B 在 1xH100 上，vLLM 在 ShareGPT 与 Decode-heavy 上吞吐达 SOTA，但在 Prefill-heavy 上吞吐较低。",
+      "附录结论：Llama 3 70B 在 4xH100 上，vLLM 在 ShareGPT 与 Decode-heavy 上吞吐最高（仅略高于 TensorRT-LLM），但 Prefill-heavy 上吞吐较低。",
+      "多步调度使 Llama 70B 在 4xH100 上的吞吐提升 28%；异步输出处理使 TPOT 改善 8.7%；对象缓存使端到端吞吐提升 24%。",
+      "性能诊断：Llama 3 8B 在单张 H100 上，HTTP API server 占总执行时间 33%，调度占 29%，GPU 实际执行仅占 38%。",
+      "已知代价：多步调度会导致 inter-token 延迟不平滑（成批返回 token），且在低请求率下 TTFT 更高（--num-scheduler-steps 越大越明显）。"
+    ],
+    "raw_excerpt": "TL;DR: vLLM achieves 2.7x higher throughput and 5x faster TPOT (time per output token) on Llama 8B model, and 1.8x higher throughput and 2x less TPOT on Llama 70B model. Performance comparison between vLLM v0.5.3 and v0.6.0 for Llama 8B on 1xH100 and 70B on 4xH100 on ShareGPT dataset (500 prompts). TPOT measured at 32 QPS. ... We benchmark the vLLM v0.6.0 against TensorRT-LLM r24.07, SGLang v0.3.0, and lmdeploy v0.6.0a0. ... Hardware. We use A100 and H100 for benchmarking."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "web",
+    "title": "vLLM Blog 索引页（2026 年博文列表，用于确认 2024–2026 官方性能博客覆盖范围）",
+    "url": "https://blog.vllm.ai/",
+    "published_at": null,
+    "key_points": [
+      "索引页显示 2026 年官方博文以新硬件与新模型为主，例如 2026-10-09 的《vLLM Support for NVIDIA Vera Rubin NVL72: 7.8x Throughput over GB200 NVL72》。",
+      "2026-10-23《GLM-5.3 Optimizations, Part 2》称在 16 张 H200 上达到 1.7–3.2× 的 per-user 速度（相对 data-parallel P/D）。",
+      "2026-10-14《Push-Based KV Transfer to Improve TTFT and TPOT for Disaggregated Inference in vLLM》以 TTFT/TPOT 为核心指标讨论分离式推理。",
+      "2026-10-12《Improve TTFT for Multi-Turn Agentic Workloads with Bi-Directional KV Transfer in vLLM》称在多轮长 prompt 上 TTFT 最多降低 3.3x。",
+      "2026-10-07《DeepSeek-V4.1-Flash on vLLM: 5x Agentic Throughput Since Day 0》称在 SemiAnalysis AgentX 上吞吐提升 5x、低并发下快 1.9x。",
+      "索引页所列 2026 年博文的硬件平台为 Vera Rubin NVL72、GB200/GB300 NVL72、H200、MI355X、TPU 等，未出现以 H100/A100 对比 HF Transformers / TGI / TensorRT-LLM 的基准博文标题。"
+    ],
+    "raw_excerpt": "Featured vLLM Support for NVIDIA Vera Rubin NVL72: 7.8x Throughput over GB200 NVL72 Oct 9, 2026 ... GLM-5.3 Optimizations, Part 2: PCP, DCP, and Hybrid HiSparse on 16 H200s Oct 23, 2026 ... vLLM serves GLM-5.3 on 16 H200s with PCP and DCP prefill and Hybrid HiSparse decode, reaching 1M-token contexts and 1.7–3.2× the per-user speed of data-parallel P/D on the AgentX agentic benchmark."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM, SOSP 2023)",
+    "url": "https://arxiv.org/abs/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "论文摘要声称 vLLM 在同等延迟下相比 FasterTransformer、Orca 等 SOTA 系统把吞吐提升 2-4×，且提升在更长序列、更大模型、更复杂解码算法下更明显。",
+      "论文声称 vLLM 实现 KV cache 内存「near-zero waste」（近零浪费），并支持请求内与跨请求的 KV cache 灵活共享。",
+      "该 2-4× 与 near-zero waste 均为作者自评主张，发表于 SOSP 2023（DOI 10.1145/3600006.3613165），非第三方独立测量。"
+    ],
+    "raw_excerpt": "Our evaluations show that vLLM improves the throughput of popular LLMs by 2-4$\\times$ with the same level of latency compared to the state-of-the-art systems, such as FasterTransformer and Orca. ... an LLM serving system that achieves (1) near-zero waste in KV cache memory and (2) flexible sharing of KV cache within and across requests"
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Efficient Memory Management for LLM Serving with PagedAttention — 全文 HTML（引言与 §1 内存浪费剖析）",
+    "url": "https://arxiv.org/html/2309.06180v1",
+    "published_at": "2023-09-12",
+    "key_points": [
+      "论文对既有系统（FasterTransformer、Orca）的 profiling 显示：KV cache 内存中只有 20.4%–38.2% 被用于存放真实 token 状态，其余为内部/外部碎片与预留浪费（对应 Fig. 2，实验见 §6.2）。",
+      "既有系统按请求最大长度（例如 2048 tokens）预分配连续内存块，导致严重内部碎片；且整块在请求生命周期内被独占，短请求无法复用未用部分。",
+      "PagedAttention 通过较小 block 按需分配来缓解内部碎片，并因所有 block 等大而消除外部碎片；block 可非连续存放。",
+      "13B 模型在 A100 40GB 上的内存分布：约 65% 为模型权重，接近 30% 为请求动态状态（KV cache）。",
+      "论文将 block 类比为 OS 的 page、token 类比为 byte、请求类比为 process。"
+    ],
+    "raw_excerpt": "our profiling results in Fig. 2 show that only 20.4% - 38.2% of the KV cache memory is used to store the actual token states in the existing systems. ... This design alleviates internal fragmentation by using relatively small blocks and allocating them on demand. Moreover, it eliminates external fragmentation as all blocks have the same size."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "github",
+    "title": "vllm-project/vllm — 官方仓库（元数据与 README 片段）",
+    "url": "https://github.com/vllm-project/vllm",
+    "published_at": "2026-10-24",
+    "key_points": [
+      "仓库自述为高吞吐、内存高效的 LLM 推理与服务引擎（Apache-2.0），当前 stars 95287、forks 23880，最近 push 时间 2026-10-24。",
+      "README 直接链接到 PagedAttention 论文 arxiv.org/abs/2309.06180，确认该论文即本仓库的技术出处。",
+      "本次仅取到 README 头部片段与仓库元数据，未读到 README/文档正文中的 block size 默认值、KV cache 浪费率或最大并发序列数等实测配置与数字。"
+    ],
+    "raw_excerpt": "A high-throughput and memory-efficient inference and serving engine for LLMs ... | <a href=\"https://arxiv.org/abs/2309.06180\"><b>Paper</b></a> |"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "SGLang: Efficient Execution of Structured Language Model Programs (arXiv:2312.07104v2)",
+    "url": "https://arxiv.org/abs/2312.07104v2",
+    "published_at": "2023-12-12",
+    "key_points": [
+      "SGLang 由前端语言与运行时两部分组成；运行时通过 RadixAttention 实现 KV cache 复用，以及用压缩有限状态机加速结构化输出解码。",
+      "RadixAttention 被定位为一种 KV cache 复用优化，是 SGLang 运行时的核心加速手段之一。",
+      "论文报告在多种大语言与多模态模型、以及 agent control、逻辑推理、few-shot、JSON decoding、RAG、多轮对话等任务上，相比当时的 SOTA 推理系统吞吐最高提升 6.4 倍。",
+      "该 6.4x 数字的基线是 2023 年底的推理系统，并非 2025–2026 年的 vLLM 版本，不能直接用于当前版本的对比。"
+    ],
+    "raw_excerpt": "The runtime accelerates execution with novel optimizations like RadixAttention for KV cache reuse and compressed finite state machines for faster structured output decoding. Experiments show that SGLang achieves up to 6.4x higher throughput compared to state-of-the-art inference systems on various large language and multi-modal models..."
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "web",
+    "title": "vLLM Design Docs — Automatic Prefix Caching",
+    "url": "https://docs.vllm.ai/en/latest/design/prefix_caching.html",
+    "published_at": null,
+    "key_points": [
+      "vLLM 的自动前缀缓存采用基于哈希（hash-based）的方案，而非 radix tree：对每个 KV cache block 用「块内 token + 该块之前的 prefix token」共同计算哈希。",
+      "块哈希由三部分构成：父块哈希值（parent hash）、块内 token 元组（用于降低哈希碰撞）、以及额外哈希（如 LoRA ID、多模态输入哈希、多租户隔离用的 cache salt）。",
+      "vLLM 只缓存完整的块（only cache full blocks），不缓存部分填充的块。",
+      "自 v0.11 起默认哈希算法为 sha256，以解决此前版本哈希键不保证无碰撞的问题；可通过 --prefix-caching-hash-algo 选择 sha256 / sha256_cbor / xxhash / xxhash_cbor。",
+      "vLLM 文档明确说明前缀缓存被多数开源 LLM 推理框架采用，并点名 SGLang 为其中之一。",
+      "vLLM 支持通过请求级 cache_salt 注入首块哈希，实现多租户环境下的缓存隔离，以防御基于时延差异推断缓存内容的计时攻击。"
+    ],
+    "raw_excerpt": "While there are many ways to implement prefix caching, vLLM chooses a hash-based approach. Specifically, we hash each kv-cache block by the tokens in the block and the tokens in the prefix before the block... Note 1: We only cache full blocks. Note 2: In previous versions, the hash key was not guaranteed to be collision-free. As of v0.11, the default hashing algorithm is sha256, which addresses collision risks."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "github",
+    "title": "vllm-project/production-stack — vLLM 生产部署参考栈仓库",
+    "url": "https://github.com/vllm-project/production-stack",
+    "published_at": "2025-01-21",
+    "key_points": [
+      "仓库定位为 vLLM 的 K8S 原生集群级部署参考系统（reference system for K8S-native cluster-wide deployment），采用 Apache-2.0 许可。",
+      "仓库创建于 2025-01-21，最近一次 push 为 2026-10-23，说明该项目在 2025–2026 年持续活跃维护。",
+      "仓库 README 顶部同时链接 LMCache 博客（lmcache.github.io）与 LMCache Slack，表明 production-stack 与 LMCache 项目存在直接关联。",
+      "仓库提供指向官方文档 docs.vllm.ai/projects/production-stack 的入口，并列出 Lambda Labs、AWS EKS、Google GCP 的云部署教程。"
+    ],
+    "raw_excerpt": "vLLM Production Stack: reference stack for production vLLM deployment ... | [**Blog**](https://lmcache.github.io) | [**Docs**](https://docs.vllm.ai/projects/production-stack) ... desc: vLLM's reference system for K8S-native cluster-wide deployment with community-driven performance optimization"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "vLLM Production Stack 官方文档首页",
+    "url": "https://docs.vllm.ai/projects/production-stack/en/latest/",
+    "published_at": null,
+    "key_points": [
+      "production-stack 定位为在 vLLM 之上构建推理栈的参考实现，支持从单实例扩展到分布式 vLLM 部署而无需改动应用代码。",
+      "文档目录中列有独立的 \"Disaggregated Prefill\" 用例章节，证明 disaggregated prefill 已被纳入 production-stack 的正式文档化用例，而非仅存在于代码分支。",
+      "文档同时列出 \"Sharing KV Cache Across Instances\" 章节，其中包含 \"Benchmark the Performance Gain of Remote Shared Storage (Work in Progress)\" 小节，表明该路径的性能收益基准在文档撰写时仍标注为进行中。",
+      "文档列出的其他相关能力包括 KV Cache Aware Routing、Load Aware Routing、Prefix Aware Routing、Sleep and Wakeup Mode、Autoscaling with KEDA 与 Intelligent Semantic Routing。"
+    ],
+    "raw_excerpt": "vLLM Production Stack project provides a reference implementation on how to build an inference stack on top of vLLM ... 😄 Enjoy the performance benefits brought by request routing and KV cache offloading ... Disaggregated Prefill / Prerequisites / Kubernetes Deployment ... Sharing KV Cache Across Instances ... Benchmark the Performance Gain of Remote Shared Storage (Work in Progress)"
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "web",
+    "title": "Disaggregated Prefill — vLLM Production Stack 文档用例页",
+    "url": "https://docs.vllm.ai/projects/production-stack/en/latest/use_cases/disaggregated-prefill.html",
+    "published_at": null,
+    "key_points": [
+      "该文档页明确说明 disaggregated prefill 将模型执行拆分为 prefill 与 decode 两个阶段并分布到不同服务器上，目的是通过分离初始处理（prefill）与 token 生成（decode）来提升吞吐与资源利用率。",
+      "生产部署路径为 Kubernetes + Helm，使用配置文件 values-16-disagg-prefill.yaml 与命令 `helm install pd helm/ -f tutorials/assets/values-16-disagg-prefill.yaml` 一次性部署 prefill server、decode server 与协调二者的 router 三个组件。",
+      "prefill 与 decode 节点均使用 lmcache/vllm-openai 镜像（tag 2025-05-17-v1），模型为 meta-llama/Llama-3.1-8B-Instruct，各 1 副本、各 1 张 GPU，maxModelLen 32000。",
+      "prefill 节点通过 lmcacheConfig 配置为 kvRole: \"kv_producer\"、nixlRole: \"sender\"；decode 节点配置为 kvRole: \"kv_consumer\"、nixlRole: \"receiver\"，即 KV cache 由 prefill 侧生产、经 NIXL 传输至 decode 侧消费。",
+      "KV 传输使用 NIXL，参数包括 nixlPeerPort 55555、nixlBufferSize 1073741824（1GB）、nixlBufferDevice cuda、nixlEnableGc true，且两侧均设置 enablePD: true。",
+      "router 使用 lmcache/lmstack-router 镜像（tag pd-05-26），routingLogic 设为 \"disaggregated_prefill\"，并通过 extraArgs 传入 --prefill-model-labels llama-prefill 与 --decode-model-labels llama-decode 来区分两类后端。",
+      "该用例的前置条件要求具备 GPU 支持且启用 NVLink 的 Kubernetes 集群，并建议至少 2 张 GPU。",
+      "示例配置中 prefill 与 decode 节点均显式设置 enableChunkedPrefill: false 与 enablePrefixCaching: false。"
+    ],
+    "raw_excerpt": "This tutorial explains how to run the disaggregated prefill system, which splits the model execution into prefill and decode phases across different servers. This approach can improve throughput and resource utilization by separating the initial processing (prefill) from the token generation (decode) phases. ... lmcacheConfig: enabled: true / kvRole: \"kv_producer\" / enableNixl: true / nixlRole: \"sender\" ... routingLogic: \"disaggregated_prefill\" ... A Kubernetes cluster with GPU support and NVLink enabled / NVIDIA GPUs available (at least 2 GPUs recommended)"
+  }
+]

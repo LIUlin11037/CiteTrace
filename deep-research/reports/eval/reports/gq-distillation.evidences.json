@@ -1,0 +1,466 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Distilling the Knowledge in a Neural Network (Hinton, Vinyals, Dean)",
+    "url": "https://arxiv.org/abs/1503.02531",
+    "published_at": "2015-03-09",
+    "key_points": [
+      "该文是知识蒸馏（KD）被正式普及化的出处，作者为 Geoffrey Hinton、Oriol Vinyals、Jeff Dean。",
+      "发表信息：arXiv:1503.02531，Comments 标注为 NIPS 2014 Deep Learning Workshop；学科分类 stat.ML（交叉 cs.LG、cs.NE）。",
+      "论文动机是把集成（ensemble）或多个大模型中的「知识」压缩进单个更易部署的模型，以降低部署时的计算开销。",
+      "论文在 MNIST 上报告了「surprising results」，并把一个商用系统声学模型的集成知识蒸馏进单一模型，取得显著改进。",
+      "论文还提出一种由「一个或多个完整模型 + 多个 specialist 模型」组成的新型集成，specialist 模型学习区分完整模型易混淆的细粒度类别，且可并行快速训练（区别于 mixture of experts）。",
+      "论文将这一路线定位为对 Caruana 等人「把集成压缩为单一模型」工作的推进，但使用了不同的压缩技术。"
+    ],
+    "raw_excerpt": "A very simple way to improve the performance of almost any machine learning algorithm is to train many different models on the same data and then to average their predictions. Unfortunately, making predictions using a whole ensemble of models is cumbersome and may be too computationally expensive... Caruana and his collaborators have shown that it is possible to compress the knowledge in an ensemble into a single model which is much easier to deploy and we develop this approach further using a different compression technique."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Knowledge Distillation: A Survey (Gou, Yu, Maybank, Tao) — IJCV 2021",
+    "url": "https://arxiv.org/html/2006.05525v7",
+    "published_at": "2021-05-20",
+    "key_points": [
+      "该综述把 KD 定位为模型压缩与加速的代表性技术之一，与参数剪枝与共享、低秩分解、迁移紧凑卷积滤波器并列；其作用是「从一个大的教师模型有效地学习一个小学生模型」。",
+      "综述明确 KD 系统的三个关键组成部分：knowledge（知识）、distillation algorithm（蒸馏算法）、teacher-student architecture（师生架构）。",
+      "综述把教师知识分为三大类：response-based knowledge（基于响应）、feature-based knowledge（基于特征）、relation-based knowledge（基于关系）。",
+      "response-based knowledge 指教师模型最后一层输出层的神经响应，核心思想是让学生直接模仿教师的最终预测；综述称其「简单但有效」。",
+      "vanilla knowledge distillation 使用大模型的 logits 作为教师知识（引 Hinton et al. 2015；Kim et al. 2018；Ba and Caruana 2014；Mirzadeh et al. 2020）。",
+      "feature-based knowledge 指中间层的激活、神经元或特征，可用来指导学生模型学习（引 Romero et al. 2015；Huang and Wang 2017；Ahn et al. 2019；Heo et al. 2019c；Zagoruyko and Komodakis 2017）。",
+      "relation-based knowledge 指不同激活之间、神经元之间或样本对之间的关系，包含教师学到的丰富信息（引 Yim et al. 2017；Lee and Song 2019；Liu et al. 2019g；Tung and Mori 2019；Yu et al. 2019）。",
+      "综述还指出教师模型的参数（或层间连接）构成另一类知识。",
+      "综述把 KD 的思想来源追溯到 Bucilua et al. (2006) 的 model compression，以及 Urner et al. (2011) 用无标注数据做师生知识迁移（半监督），而「从小模型学大模型」被 Hinton et al. (2015) 正式普及化。",
+      "综述指出 KD 已从师生学习扩展到 mutual learning、assistant teaching、lifelong learning、self-learning，以及 dataset distillation（把大数据集知识迁移到小数据集）。",
+      "综述提到存在另一篇同类综述 Wang and Yoon (2020)，其视角侧重视觉领域的师生学习；本文的差异在于覆盖知识类型、蒸馏方案、蒸馏算法、性能比较与应用领域。",
+      "综述指出实证上「更大的模型未必是更好的教师」，原因是 model capacity gap（引 Mirzadeh et al. 2020；Cho and Hariharan 2019）。"
+    ],
+    "raw_excerpt": "Basically, a knowledge distillation system is composed of three key components: knowledge, distillation algorithm, and teacher-student architecture. ... A vanilla knowledge distillation uses the logits of a large deep model as the teacher knowledge (Hinton et al., 2015 ...). ... We discuss different forms of knowledge in the following categories: response-based knowledge, feature-based knowledge, and relation-based knowledge."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "Sequence-Level Knowledge Distillation (Kim & Rush) — EMNLP 2016",
+    "url": "https://arxiv.org/abs/1606.07947",
+    "published_at": "2016-09-22",
+    "key_points": [
+      "该文把此前在其它领域成功的知识蒸馏方法（引 Bucila et al., 2006；Hinton et al., 2015）应用到神经机器翻译（NMT）的模型压缩问题上。",
+      "论文证明「标准知识蒸馏」应用于词级预测（word-level prediction）对 NMT 有效。",
+      "论文进一步提出两种新的「序列级」知识蒸馏变体（sequence-level KD），性能进一步提升。",
+      "论文报告一个反直觉发现：序列级蒸馏似乎消除了对 beam search 的需求，即使应用在原始教师模型上也是如此。",
+      "最佳学生模型比其 SOTA 教师快 10 倍，性能损失很小。",
+      "相比不使用知识蒸馏训练的基线，学生模型在 greedy decoding / beam search 下分别提升 4.2 / 1.7 BLEU。",
+      "在知识蒸馏之上再做权重剪枝，可得到参数量比原教师少 13 倍的学生模型，BLEU 仅下降 0.4。"
+    ],
+    "raw_excerpt": "We demonstrate that standard knowledge distillation applied to word-level prediction can be effective for NMT, and also introduce two novel sequence-level versions of knowledge distillation that further improve performance, and somewhat surprisingly, seem to eliminate the need for beam search... Our best student model runs 10 times faster than its state-of-the-art teacher with little loss in performance."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (GKD) — ICLR 2024",
+    "url": "https://arxiv.org/abs/2306.13649",
+    "published_at": "2024-01-17",
+    "key_points": [
+      "论文指出当前针对自回归序列模型的 KD 方法存在分布不匹配（distribution mismatch）问题：训练时学生见到的输出序列与推理时学生自己生成的序列不一致。",
+      "为解决该问题，论文提出 Generalized Knowledge Distillation（GKD）：不再只依赖一组固定的输出序列，而是让学生在自生成的输出序列上训练，并利用教师对这些序列的反馈。",
+      "与监督式 KD 不同，GKD 允许在学生与教师之间采用替代的损失函数，这在学生表达能力不足以模仿教师分布时有用。",
+      "GKD 可以把蒸馏与 RL 微调（RLHF）无缝结合。",
+      "论文在摘要、翻译、算术推理任务上验证了 GKD 对自回归语言模型蒸馏的有效性，并做了面向指令微调的任务无关蒸馏。",
+      "发表信息：arXiv:2306.13649v3，被 ICLR 2024 接收。"
+    ],
+    "raw_excerpt": "However, current KD methods for auto-regressive sequence models suffer from distribution mismatch between output sequences seen during training and those generated by the student during inference. To address this issue, we introduce Generalized Knowledge Distillation (GKD). Instead of solely relying on a fixed set of output sequences, GKD trains the student on its self-generated output sequences by leveraging feedback from the teacher on such sequences."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "arxiv",
+    "title": "STaR: Bootstrapping Reasoning With Reasoning (Zelikman, Wu, Mu, Goodman)",
+    "url": "https://arxiv.org/abs/2203.14465",
+    "published_at": "2022-05-20",
+    "key_points": [
+      "论文确认生成逐步的「思维链」（chain-of-thought）理由（rationale）能提升语言模型在数学、常识问答等复杂推理任务上的表现。",
+      "论文指出诱导模型生成 rationale 目前要么需要构建大规模 rationale 数据集，要么只能用 few-shot 推理而牺牲准确率。",
+      "STaR 的做法是一个循环：用少量 rationale 示例提示模型为大量问题生成 rationale；若答案错误，则在给定正确答案的条件下重试生成 rationale；对所有最终得到正确答案的 rationale 做微调；重复该过程。",
+      "STaR 在多个数据集上显著优于直接预测最终答案的微调模型，在 CommonsenseQA 上与微调一个 30 倍大的 SOTA 语言模型表现相当。",
+      "STaR 的机制是模型从自己生成的推理中自我改进（self-training / rationale bootstrapping），并非从外部教师模型蒸馏。"
+    ],
+    "raw_excerpt": "We propose a technique to iteratively leverage a small number of rationale examples and a large dataset without rationales, to bootstrap the ability to perform successively more complex reasoning. This technique, the \"Self-Taught Reasoner\" (STaR), relies on a simple loop: generate rationales to answer many questions... fine-tune on all the rationales that ultimately yielded correct answers; repeat."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "MiniLLM: On-Policy Distillation of Large Language Models",
+    "url": "https://arxiv.org/abs/2306.08543",
+    "published_at": "2023-06-14 (v1); v6 2026-01-31",
+    "key_points": [
+      "该工作提出将标准 KD 中的 forward KL 散度目标替换为 reverse KL 散度，理由是 reverse KL 更适合生成式语言模型的蒸馏，可防止学生模型高估教师分布中的低概率区域。",
+      "作者为 reverse KL 目标推导了一种有效的 on-policy 优化方法，训练出的学生模型命名为 MiniLLM。",
+      "在 instruction-following 设定下的实验表明，MiniLLM 相比基线生成更精确的回复，整体质量更高、exposure bias 更低、校准（calibration）更好、长文本生成表现更强。",
+      "方法可扩展到 120M 至 13B 参数的不同模型家族。",
+      "论文发表于 ICLR 2024；arXiv 版本持续更新至 v6（2026-01-31），说明该工作到 2026 年仍在被维护/修订。"
+    ],
+    "raw_excerpt": "We first replace the forward Kullback-Leibler divergence (KLD) objective in the standard KD approaches with reverse KLD, which is more suitable for KD on generative language models, to prevent the student model from overestimating the low-probability regions of the teacher distribution. Then, we derive an effective on-policy optimization approach to learn this objective. The student models are named MiniLLM."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes (GKD)",
+    "url": "https://arxiv.org/abs/2306.13649",
+    "published_at": "2023-06-23 (v1); v3 2024-01-17",
+    "key_points": [
+      "论文指出自回归序列模型的现有 KD 方法存在训练时所见输出序列与推理时学生自生成序列之间的分布不匹配（distribution mismatch）问题。",
+      "提出 Generalized Knowledge Distillation (GKD)：不只用固定的输出序列集合，而是让学生在自己的自生成序列上训练，并利用教师对这些序列的反馈。",
+      "与监督式 KD 不同，GKD 允许在学生与教师之间灵活采用替代损失函数，在学生表达能力不足以模仿教师分布时有用。",
+      "GKD 可使蒸馏与 RL 微调（RLHF）无缝结合。",
+      "实验覆盖摘要、翻译、算术推理任务，以及面向 instruction-tuning 的 task-agnostic 蒸馏。",
+      "论文被 ICLR 2024 接收。"
+    ],
+    "raw_excerpt": "Instead of solely relying on a fixed set of output sequences, GKD trains the student on its self-generated output sequences by leveraging feedback from the teacher on such sequences. Unlike supervised KD approaches, GKD also offers the flexibility to employ alternative loss functions between the student and teacher... Furthermore, GKD facilitates the seamless integration of distillation with RL fine-tuning (RLHF)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DistiLLM: Towards Streamlined Distillation for Large Language Models",
+    "url": "https://arxiv.org/abs/2402.03898",
+    "published_at": "2024-02-06 (v1); v2 2024-07-03",
+    "key_points": [
+      "论文指出自回归序列模型（如 LLM）的现有 KD 方法缺少标准化目标函数，且近期使用学生自生成输出虽缓解训练-推理不匹配，却显著抬高了计算成本。",
+      "DistiLLM 由两部分组成：一是新的 skew Kullback-Leibler divergence 损失（论文揭示并利用了其理论性质），二是为提升学生自生成输出利用效率而设计的 adaptive off-policy 方法。",
+      "在包含 instruction-following 的大量实验中，DistiLLM 构建的学生模型表现更优，同时相比近期 KD 方法取得最高 4.3 倍加速。",
+      "论文发表于 ICML 2024。"
+    ],
+    "raw_excerpt": "DistiLLM comprises two components: (1) a novel skew Kullback-Leibler divergence loss, where we unveil and leverage its theoretical properties, and (2) an adaptive off-policy approach designed to enhance the efficiency in utilizing student-generated outputs... achieving up to 4.3x speedup compared to recent KD methods."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22 (v1); v2 2026-01-04",
+    "key_points": [
+      "论文表明 LLM 的推理能力可通过纯强化学习（pure RL）激发，无需人工标注的推理轨迹。",
+      "该 RL 框架使自我反思、验证、动态策略调整等高级推理模式自发涌现。",
+      "由此训练的模型在数学、编程竞赛、STEM 等可验证任务上取得更优表现。",
+      "该工作作为「纯 RL 路线」的代表，与蒸馏路线构成对照；arXiv 版本更新至 v2（2026-01-04）。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification, and dynamic strategy adaptation."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (v1, 2025-01-22)",
+    "url": "https://arxiv.org/html/2501.12948v1",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文开源了 6 个从 DeepSeek-R1 蒸馏得到的 dense 模型，规模为 1.5B、7B、8B、14B、32B、70B，底座分别基于 Qwen 与 Llama 系列。",
+      "蒸馏的教师模型是 DeepSeek-R1（完整版，含 cold-start + 多阶段训练），而非纯 RL 的 DeepSeek-R1-Zero。",
+      "DeepSeek-R1-Distill-Qwen-7B 在 AIME 2024 上达到 55.5%，超过开源模型 QwQ-32B-Preview。",
+      "DeepSeek-R1-Distill-Qwen-32B 在 AIME 2024 得 72.6%、MATH-500 得 94.3%、LiveCodeBench 得 57.2%，论文称其显著超越此前开源模型并与 o1-mini 相当。",
+      "以 Qwen2.5-32B 为底座时，从 DeepSeek-R1 直接蒸馏的效果优于在该底座上直接做 RL，作者据此认为大模型发现的推理模式对小模型推理能力提升至关重要。",
+      "蒸馏得到的 14B 模型大幅超过当时 SOTA 开源模型 QwQ-32B-Preview，蒸馏的 32B 与 70B 模型在 dense 模型范围内刷新了推理基准记录。",
+      "作为参照，教师模型 DeepSeek-R1 自身在 AIME 2024 为 79.8% Pass@1、MATH-500 为 97.3%、Codeforces Elo 2029、GPQA Diamond 71.5%、MMLU 90.8%、MMLU-Pro 84.0%。"
+    ],
+    "raw_excerpt": "To support the research community, we open-source DeepSeek-R1-Zero, DeepSeek-R1, and six dense models (1.5B, 7B, 8B, 14B, 32B, 70B) distilled from DeepSeek-R1 based on Qwen and Llama. ... Using Qwen2.5-32B as the base model, direct distillation from DeepSeek-R1 outperforms applying RL on it. ... DeepSeek-R1-Distill-Qwen-7B achieves 55.5% on AIME 2024, surpassing QwQ-32B-Preview. Additionally, DeepSeek-R1-Distill-Qwen-32B scores 72.6% on AIME 2024, 94.3% on MATH-500, and 57.2% on LiveCodeBench."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (v2, rev. 2026-01-04)",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文以 DeepSeek-V3-Base 为起点，采用 GRPO 作为 RL 框架，奖励信号仅基于最终预测答案的正确性，不约束推理过程。",
+      "DeepSeek-R1-Zero 完全依赖 RL、不含 SFT；其 AIME 2024 pass@1 从初始 15.6% 提升到 77.9%，配合自一致性解码可达 86.7%（v2 修订后的数值）。",
+      "R1-Zero 的 RL 配置：学习率 3e-6、KL 系数 0.001、采样温度 1，每题采样 16 个输出，8.2k step 前最大长度 32,768 token、之后 65,536 token，共训练 10,400 step（约 1.6 epoch），batch size 512，每 400 step 替换 reference model。",
+      "R1-Zero 存在可读性差与语言混杂问题，这正是引入 DeepSeek-R1（cold-start 数据 + 多阶段训练）的动机。",
+      "R1 的奖励模型训练使用了 66,000 条偏好数据对，由四个独立判断取平均，仅保留分差大于 1 的数据对。"
+    ],
+    "raw_excerpt": "To train DeepSeek-R1-Zero, we set the learning rate to 3e-6, the KL coefficient to 0.001, and the sampling temperature to 1 for rollout. For each question, we sample 16 outputs with a maximum length of 32,768 tokens before the 8.2k step and 65,536 tokens afterward. ... the average pass@1 score on AIME 2024 shows a significant increase, jumping from an initial 15.6% to 77.9%."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 arXiv abstract page (2501.12948v2 metadata)",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文首次提交于 2025-01-22（v1），v2 修订于 2026-01-04，作者署名为 DeepSeek-AI 团队。",
+      "摘要指出：大规模模型涌现的推理模式可被系统性地用于指导与增强更小模型的推理能力。"
+    ],
+    "raw_excerpt": "arXiv:2501.12948v2 (cs) [Submitted on 22 Jan 2025 (v1), last revised 4 Jan 2026 (this version, v2)] ... Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "deepseek-ai/DeepSeek-R1 — 官方仓库 README（蒸馏模型清单与蒸馏主张）",
+    "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+    "published_at": "2025-06-27",
+    "key_points": [
+      "官方仓库开源了 6 个从 DeepSeek-R1 蒸馏的 dense 模型：Qwen-1.5B、Qwen-7B、Llama-8B、Qwen-14B、Qwen-32B、Llama-70B。",
+      "蒸馏模型的学生底座分别为 Qwen2.5-Math-1.5B、Qwen2.5-Math-7B、Llama-3.1-8B、Qwen2.5-14B、Qwen2.5-32B、Llama-3.3-70B-Instruct。",
+      "蒸馏方式为：用 DeepSeek-R1 生成的样本对开源模型做微调（fine-tuned based on open-source models, using samples generated by DeepSeek-R1），并小幅修改了 config 与 tokenizer。",
+      "官方主张：大模型的推理模式可以被蒸馏进小模型，且效果优于在小模型上直接做 RL 所发现的推理模式。",
+      "蒸馏模型评测（pass@1）：Distill-Qwen-1.5B AIME2024 28.9 / MATH-500 83.9；Distill-Qwen-7B 55.5 / 92.8；Distill-Qwen-14B 69.7 / 93.9；Distill-Qwen-32B 72.6 / 94.3；Distill-Llama-8B 50.4 / 89.1；Distill-Llama-70B 70.0 / 94.5。",
+      "官方称 DeepSeek-R1-Distill-Qwen-32B 在多项基准上超过 OpenAI-o1-mini（o1-mini AIME2024 63.6、MATH-500 90.0、LiveCodeBench 53.8）。",
+      "R1 主模型为 671B 总参数 / 37B 激活参数的 MoE，基于 DeepSeek-V3-Base，上下文 128K；R1-Zero 为不做 SFT 前置、直接大规模 RL 的版本。",
+      "评测设置为最大生成长度 32768 tokens，采样类基准用 temperature 0.6、top-p 0.95、每 query 生成 64 条估计 pass@1。"
+    ],
+    "raw_excerpt": "We demonstrate that the reasoning patterns of larger models can be distilled into smaller models, resulting in better performance compared to the reasoning patterns discovered through RL on small models. ... DeepSeek-R1-Distill models are fine-tuned based on open-source models, using samples generated by DeepSeek-R1. We slightly change their configs and tokenizers."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "huggingface/open-r1 — 社区复现仓库 README（三步计划、蒸馏数据集与现状）",
+    "url": "https://github.com/huggingface/open-r1",
+    "published_at": "2026-10-02",
+    "key_points": [
+      "仓库定位为 DeepSeek-R1 的完全开源复现（A fully open reproduction of DeepSeek-R1），目标是补齐 R1 pipeline 缺失的部分以便社区复现与在其上构建。",
+      "README 明确三步计划：Step 1 用从 DeepSeek-R1 蒸馏的高质量语料复现 R1-Distill 模型；Step 2 复现 R1-Zero 的纯 RL pipeline；Step 3 打通 base model 经多阶段训练到 RL 调优。",
+      "2025/05/26 宣布 Step 1 完成：发布 Mixture-of-Thoughts，350k 条经校验的 R1 蒸馏推理轨迹，覆盖数学、代码、科学，并提供 OpenR1-Distill-7B 的训练配方，称其复现了 DeepSeek-R1-Distill-Qwen-7B 的推理能力。",
+      "2025/02/10 发布 OpenR1-Math-220k（220k 条基于新版 NuminaMath 的 R1 蒸馏轨迹），称在该数据上训练的模型达到 DeepSeek 蒸馏模型的表现。",
+      "2025/03/11 发布 CodeForces-CoTs（10k 竞赛编程题、100k 条 R1 蒸馏解法）与 IOI24 基准；称 7B Qwen 模型在 IOI24 上可超过 Claude 3.7 Sonnet，32B 模型可超过 R1 本身。",
+      "代码结构：src/open_r1 下 grpo.py（GRPO 训练）、sft.py（SFT）、generate.py（用 Distilabel 从模型生成合成数据）；Makefile 提供各步骤命令。",
+      "SFT 蒸馏配方示例：底座 open-r1/Qwen2.5-Math-7B-RoPE-300k，数据 Mixture-of-Thoughts，lr 4.0e-5，5 epochs，max_seq_length 32768，per_device_batch 2，bf16，Liger kernel，8×H100 配置。",
+      "README 顶部声明该项目已不再维护（no longer maintained），新 issue/PR 不再审阅；数据集、模型与文章仍保留在 open-r1 collections；GRPO、SFT 与蒸馏的训练侧能力已迁至 huggingface/trl。"
+    ],
+    "raw_excerpt": "> **This project is no longer maintained,** and new issues and PRs won't be reviewed. ... For GRPO, SFT and distillation today, use [TRL](https://github.com/huggingface/trl): that's where the training side of Open-R1 lives on. ... **🧑‍🍳 [2025/05/26] (Step 1 completed!)** We release **Mixture-of-Thoughts**--a curated reasoning dataset of 350k verified traces distilled from R1."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "github",
+    "title": "hkust-nlp/simpleRL-reason — 小模型纯 RL 复现 R1-Zero/R1 的 README",
+    "url": "https://github.com/hkust-nlp/simpleRL-reason",
+    "published_at": "2025-12-23",
+    "key_points": [
+      "提供仅用规则奖励的简单 RL 配方，称与 DeepSeek-R1 所用配方几乎相同，区别是代码当前用 PPO 而非 GRPO。",
+      "在 Qwen2.5-Math-7B base 上直接用 8K 条 MATH 数据做 RL（无 SFT、无奖励模型），得到 AIME 33.3%、AMC 62.5%、MATH 77.2%（pass@1）。",
+      "对比表：Qwen2.5-Math-7B-Base 平均 30.2；Qwen2.5-7B-SimpleRL-Zero 平均 48.8；Qwen2.5-7B-SimpleRL 平均 50.9；Qwen-2.5-Math-7B-Instruct 平均 43.8。",
+      "作者称该结果与 Eurus-2-7B-PRIME（48.9）、rStar-Math-7B 相当，而后者使用至少 50 倍以上数据与更复杂组件（奖励模型等）。",
+      "数据对比：SimpleRL-Zero 用 0 条 SFT 数据、0 奖励模型数据、8K queries × 8 samples 做 RL；对照 Qwen2.5-Math-7B-Instruct 用 2.5M SFT 数据 + 618K RM 数据 + 66K queries×32。",
+      "作者强调在 MATH（较易）上训练对 AIME/AMC 等更难基准有至少 10 个绝对点的泛化提升，并称这种 easy-to-hard 泛化在同等数据的标准 SFT 训练中未观察到。",
+      "训练资源：4 节点 × 8 张 H/A100-80G，8K MATH 数据训练 120 步约 1.5 天收敛；约 60 步即可获得满意性能（不到 1 天）；最低硬件要求 6 张 A100-80G（该配置未测试）。",
+      "代码基于 OpenRLHF，训练用 PPO + Ray + vLLM 加速；2025/01/25 放出训练/评测代码与博客，2025/02/19 放出 Qwen-2.5-Math-7B-SimpleRL-Zero 与 SimpleRL 两个 checkpoint。"
+    ],
+    "raw_excerpt": "It is simple because only rule-based reward is used, the recipe is almost the same as the one used in [DeepSeek-R1], except that the code currently uses PPO rather than GRPO. ... starting from Qwen2.5-Math-7B (base model), we perform RL on it directly. No SFT, no reward model, just 8K MATH examples for verification, the resultant model achieves (pass@1) 33.3% on AIME, 62.5% on AMC, and 77.2% on MATH"
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948, v2)",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22 (v1); v2 revised 2026-01-04",
+    "key_points": [
+      "论文标识为 arXiv:2501.12948 [cs.CL]，v1 提交于 2025-01-22，v2 修订于 2026-01-04；期刊版本见 Nature 645, 633-638 (2025)。",
+      "作者署名为 DeepSeek-AI 及约 200 位作者。",
+      "摘要主张：推理能力可通过纯强化学习（无需人工标注推理轨迹）激励产生，且大模型涌现的推理模式可被系统性地用于指导与增强更小模型的推理能力（即蒸馏路线）。"
+    ],
+    "raw_excerpt": "Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labeled reasoning trajectories. ... Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 (arXiv:2501.12948v2) — 第 2 节 DeepSeek-R1-Zero 与第 3 节 DeepSeek-R1 正文",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2026-01-04",
+    "key_points": [
+      "R1-Zero 完全依赖 RL、不做 SFT；R1 则采用多阶段流水线（cold-start SFT → 面向推理的 RL → rejection sampling + SFT → 全场景 RL）。",
+      "cold-start 阶段的数据规模被描述为「thousands of cold-start data」，即千条量级，而非 80 万量级。",
+      "第二阶段 rejection sampling + SFT 同时纳入 reasoning 数据集与 non-reasoning 数据集，目的是让模型既擅长推理也具备写作等通用能力。",
+      "R1-Zero 的 RL 配置：学习率 3e-6、KL 系数 0.001、采样温度 1，每题采样 16 条输出，最大长度 8.2k step 前为 32,768 tokens、之后为 65,536 tokens，共训练 10,400 步（约 1.6 epochs），每步 32 个问题、batch size 512。",
+      "奖励模型训练使用了 66,000 条偏好数据对（用于通用数据的 model-based reward）。"
+    ],
+    "raw_excerpt": "In the initial stage, we collect thousands of cold-start data that exhibit a conversational, human-aligned thinking process ... Subsequently, we apply rejection sampling and SFT once more. This stage incorporates both reasoning and non-reasoning datasets into the SFT process, as detailed in Supplementary Information, section 2.3.3, enabling the model to not only excel in reasoning tasks but also demonstrate advanced writing capabilities."
+  },
+  {
+    "sub_question_id": "f1",
+    "source_type": "web",
+    "title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning (Nature 645, 633-638)",
+    "url": "https://www.nature.com/articles/s41586-025-09422-z",
+    "published_at": "2025 (Nature, volume 645, pages 633-638)",
+    "key_points": [
+      "Nature 版本确认 R1 为多阶段学习框架，整合 rejection sampling、RL 与 supervised fine-tuning。",
+      "cold-start 数据在 Nature 正文中同样表述为「thousands of cold-start data」，并指向 Supplementary Information section 2.3.2 获取细节。",
+      "论文自述 cold-start 数据集规模有限（limited size of the cold-start dataset），导致 Dev1 在 AIME 等推理基准上相对 R1-Zero 出现部分性能退化。",
+      "Dev3 阶段因纳入大规模 non-reasoning 语料与代码工程数据集，在 AlpacaEval 2.0 与 Aider-Polyglot 上较 Dev2 明显提升。",
+      "最终 RL 阶段混合推理与通用数据，AlpacaEval 2.0 提升 25%、Arena-Hard 提升 17%。"
+    ],
+    "raw_excerpt": "In the initial stage, we collect thousands of cold-start data that exhibit a conversational, human-aligned thinking process, as detailed in Supplementary Information, section 2.3.2. ... However, owing to the limited size of the cold-start dataset, Dev1 exhibits a partial degradation in reasoning performance compared with DeepSeek-R1-Zero, most notably on the AIME benchmark."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (arXiv:2501.12948v2)",
+    "url": "https://arxiv.org/abs/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "论文由 DeepSeek-AI 于 2025-01-22 提交 v1，v2 修订于 2026-01-04（arXiv 摘要页标注 \"[Submitted on 22 Jan 2025 (v1), last revised 4 Jan 2026 (this version, v2)]\"）。",
+      "论文摘要称其 RL 框架使模型在数学、编程竞赛、STEM 等可验证任务上超过用人类示范做常规监督学习的对照模型，并称大模型涌现的推理模式可被系统性地用于指导与增强小模型——这是蒸馏小模型工作的定位表述，但摘要不含任何具体基准分数。",
+      "摘要与引言均未给出 GPQA Diamond 或 Codeforces 的任何数值，也未列出各蒸馏尺寸模型。"
+    ],
+    "raw_excerpt": "Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models."
+  },
+  {
+    "sub_question_id": "f2",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1 论文正文（HTML 全文，第 1–3.1 节）",
+    "url": "https://arxiv.org/html/2501.12948v2",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "引言明确说明作者蒸馏了若干更小的模型并公开，且这些蒸馏模型的表现超过它们原本的 instruction-tuned 对应版本（定性表述，无具体分数）。",
+      "论文说明蒸馏模型发布在 https://huggingface.co/deepseek-ai。",
+      "R1-Zero 基于 DeepSeek-V3-Base，采用 GRPO，奖励仅基于最终答案正确性（规则奖励：accuracy reward + format reward），未使用神经奖励模型。",
+      "R1-Zero 训练配置：学习率 3e-6、KL 系数 0.001、采样温度 1，每题采样 16 个输出，最大长度 8.2k step 前 32768 token、之后 65536 token，共训练 10400 步（约 1.6 epoch），每步 32 道题、batch size 512，每 400 步替换 reference model。",
+      "R1-Zero 在 AIME 2024 上 pass@1 从初始 15.6% 升至 77.9%，配合 self-consistency 达 86.7%。",
+      "抓取到的正文覆盖第 1 节至第 3.1 节（模型奖励），未包含第 4 节蒸馏实验结果表，因此本来源未提供 GPQA Diamond / Codeforces 的任何蒸馏模型分数。"
+    ],
+    "raw_excerpt": "To enable broader access to powerful AI at a lower energy cost, we have distilled several smaller models and made them publicly available. These distilled models exhibit strong reasoning capabilities, surpassing the performance of their original instruction-tuned counterparts."
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "deepseek-ai/DeepSeek-R1 — 仓库元数据（stars / forks / last push）",
+    "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+    "published_at": null,
+    "key_points": [
+      "deepseek-ai/DeepSeek-R1 当前 stars 数为 91954。",
+      "deepseek-ai/DeepSeek-R1 当前 forks 数为 11660。",
+      "该仓库元数据显示 last push 日期为 2025-06-27（作为最近一次 commit 日期的近似代理，非 API 口径的默认分支 HEAD commit 日期）。",
+      "该仓库在元数据中未提供 description 与主语言（desc: none, lang: n/a）。"
+    ],
+    "raw_excerpt": "- deepseek-ai/DeepSeek-R1 (★91954, forks 11660)\n  desc: (none)\n  lang: n/a | last push: 2025-06-27\n  url: https://github.com/deepseek-ai/DeepSeek-R1"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "huggingface/open-r1 — 仓库元数据（stars / forks / last push）",
+    "url": "https://github.com/huggingface/open-r1",
+    "published_at": null,
+    "key_points": [
+      "huggingface/open-r1 当前 stars 数为 26481。",
+      "huggingface/open-r1 当前 forks 数为 2452。",
+      "该仓库元数据显示 last push 日期为 2026-10-02（作为最近一次 commit 日期的近似代理）。",
+      "仓库描述为 \"Fully open reproduction of DeepSeek-R1\"，主语言 Python。"
+    ],
+    "raw_excerpt": "- huggingface/open-r1 (★26481, forks 2452)\n  desc: Fully open reproduction of DeepSeek-R1\n  lang: Python | last push: 2026-10-02\n  url: https://github.com/huggingface/open-r1"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "hkust-nlp/simpleRL-reason — 仓库元数据（stars / forks / last push）",
+    "url": "https://github.com/hkust-nlp/simpleRL-reason",
+    "published_at": null,
+    "key_points": [
+      "hkust-nlp/simpleRL-reason 当前 stars 数为 3881。",
+      "hkust-nlp/simpleRL-reason 当前 forks 数为 286。",
+      "该仓库元数据显示 last push 日期为 2025-12-23（作为最近一次 commit 日期的近似代理）。",
+      "仓库描述为 \"Simple RL training for reasoning\"，主语言 Python。"
+    ],
+    "raw_excerpt": "- hkust-nlp/simpleRL-reason (★3881, forks 286)\n  desc: Simple RL training for reasoning\n  lang: Python | last push: 2025-12-23\n  url: https://github.com/hkust-nlp/simpleRL-reason"
+  },
+  {
+    "sub_question_id": "f3",
+    "source_type": "github",
+    "title": "Open R1 README — 停止维护公告与迁移至 TRL 的说明",
+    "url": "https://raw.githubusercontent.com/huggingface/open-r1/main/README.md",
+    "published_at": null,
+    "key_points": [
+      "README 顶部 IMPORTANT 提示块明确声明该项目已不再维护（\"This project is no longer maintained\"）。",
+      "公告说明新的 issue 与 PR 将不再被审阅（\"new issues and PRs won't be reviewed\"）。",
+      "公告说明项目已交付的全部产物（datasets、models、write-ups）仍可在 open-r1 collections 与 blog updates 中获取。",
+      "公告明确指引：如今做 GRPO、SFT 与 distillation 应使用 TRL，并称 Open-R1 的训练部分延续在 TRL 中（\"that's where the training side of Open-R1 lives on\"）。",
+      "README 的 News 区最后一条更新日期为 2025/05/26（Step 1 完成，发布 Mixture-of-Thoughts 数据集与 OpenR1-Distill-7B 训练配方）；IMPORTANT 公告块本身未标注日期。",
+      "README 描述项目目标为对 DeepSeek-R1 的完全开放复现，分三步：复现 R1-Distill 模型、复现 R1-Zero 的纯 RL 流程、实现从 base model 到 RL-tuned 的多阶段训练。",
+      "README 记载 Mixture-of-Thoughts 为从 R1 蒸馏的 350k 条已验证推理轨迹，覆盖数学、代码与科学任务。"
+    ],
+    "raw_excerpt": "> [!IMPORTANT]\n> **This project is no longer maintained,** and new issues and PRs won't be reviewed. Everything it shipped (datasets, models and write-ups) is still available in the [open-r1 collections](https://huggingface.co/collections/open-r1) and the [blog updates](https://huggingface.co/blog/open-r1/update-1).\n> For GRPO, SFT and distillation today, use [TRL](https://github.com/huggingface/trl): that's where the training side of Open-R1 lives on."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "Reflective Recovery: A Self-Supervised Method for Reasoning by Learning from Mistakes",
+    "url": "https://arxiv.org/abs/2609.19156",
+    "published_at": "2026-09",
+    "key_points": [
+      "该文摘要指出，仅依赖完美推理轨迹的主流模仿学习（imitation learning）方法存在「Scaling Collapse」：当问题集有限时，增加正例无法带来持续提升。",
+      "该文报告 DeepSeek-R1-Distill-Qwen-7B 的基线准确率为 AIME 2025 30.0%、Minerva 37.6%，其方法将其提升至 37.5% 与 47.8%。",
+      "该文将自身定位为从失败轨迹中学习的自监督方法，主张从「结果导向的记忆」转向「过程导向的反思推理」；它并非专门批判 R1 蒸馏的论文。"
+    ],
+    "raw_excerpt": "mainstream imitation learning methods that rely exclusively on perfect reasoning trajectories suffer from a Scaling Collapse: when the problem set is limited, increasing positive examples fails to yield continuous improvement. ... On DeepSeek-R1-Distill-Qwen-7B, it boosts accuracy from 30.0% to 37.5% on AIME 2025 and from 37.6% to 47.8% on Minerva."
+  },
+  {
+    "sub_question_id": "f4",
+    "source_type": "arxiv",
+    "title": "MADA-RL: Multi-Agent Debate-Aware Reinforcement Learning for Parameter-Efficient Reasoning in Compact Models",
+    "url": "https://arxiv.org/abs/2607.18006",
+    "published_at": "2026-07",
+    "key_points": [
+      "该文报告 DeepSeek-R1-Distill-Qwen-1.5B 在五个数学推理基准上的基线准确率为 39.9%，其方法提升至 41.9%（+2.0 点，p<0.001）。",
+      "该文指出其方法接近但未超过 DeepScaleR、STILL-3 等在大规模数据集上训练的强基线。",
+      "该文的核心主张是反事实 critic 优势使 critic 学会纠正而非模仿生成器错误；未涉及 R1 蒸馏是否仅学到表层 CoT 风格的问题。"
+    ],
+    "raw_excerpt": "MADA-RL raises the accuracy of the DeepSeek-R1-Distill-Qwen-1.5B model from 39.9% to 41.9% (+2.0 points, p < 0.001) ... It approaches, but does not surpass, the strongest baselines (DeepScaleR, STILL-3), which are trained on substantially larger datasets"
+  },
+  {
+    "sub_question_id": "f5",
+    "source_type": "arxiv",
+    "title": "Making Small Language Models Efficient Reasoners: Intervention, Supervision, Reinforcement (arXiv:2505.07961)",
+    "url": "https://arxiv.org/abs/2505.07961",
+    "published_at": "2025-05-12",
+    "key_points": [
+      "该文研究对象是「用 SFT 蒸馏得到的小模型」在推理时输出冗长、无法判断最优停止点的问题，而非比较「从 R1 蒸馏」与「直接 RL」两条训练路线的优劣。",
+      "作者提出两种改进：(1) Temperature scaling (TS) 控制 thinking 阶段的停止点与 trace 长度；(2) TLDR，一种基于 GRPO 的长度正则化强化学习方法，支持多级 trace 长度控制（短/中/长推理）。",
+      "实验在 MATH500、AMC、AIME24、OlympiadBench 四个推理基准上进行。",
+      "报告结论：TS 相比 s1 的 budget forcing 更有效；TLDR 在相对 SFT 基线几乎不损失精度的情况下将 token 效率提升约 50%，并提供响应长度的灵活控制。",
+      "该文将「纯 SFT」定位为存在缺陷的基线（stopping time 控制缺失），但未在相同底座与相同基准上把「R1 蒸馏」与「小模型直接 RL」作为两条平行路线做直接对照，因此不构成对 R1 论文「蒸馏优于小模型 RL」主张的独立验证或反驳。"
+    ],
+    "raw_excerpt": "Recent research enhances language model reasoning by scaling test-time compute via longer chain-of-thought traces. This often improves accuracy but also introduces redundancy and high computational cost, especially for small language models distilled with supervised fine-tuning (SFT). ... we propose two solutions: (1) Temperature scaling (TS) to control the stopping point for the thinking phase and thereby trace length, and (2) TLDR: a length-regularized reinforcement learning method based on GRPO that facilitates multi-level trace length control ... Experiments on four reasoning benchmarks, MATH500, AMC, AIME24 and OlympiadBench, demonstrate that TS is highly effective compared to s1's budget forcing approach and TLDR significantly improves token efficiency by about 50% with minimal to no accuracy loss over the SFT baseline."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes",
+    "url": "https://arxiv.org/abs/2305.02301v2",
+    "published_at": "2023-05-03",
+    "key_points": [
+      "论文提出 Distilling step-by-step 机制：从 LLM 中抽取 rationale 作为额外监督信号，在多任务框架下训练小模型。",
+      "方法分两步：先用 CoT prompting 让 LLM 对无标注数据生成标签及为其辩护的自然语言 rationale；再用这些 rationale 连同任务标签一起训练下游小模型。",
+      "训练采用多任务学习设置，在输入前加 task prefix，让模型根据给定 task prefix 输出不同内容，即同时承担标签预测任务与 rationale 预测任务。",
+      "作者明确将自身与常规蒸馏区分：常规蒸馏把 LLM 视为噪声标签来源，本文改为把 LLM 视为能推理的 agent，蒸馏的不只是标签还有教师的 rationale。",
+      "论文指出知识蒸馏的一个常见局限是依赖大量无标注数据来构造有用的噪声训练集，而蒸馏 rationale 可降低这一数据需求。",
+      "实验覆盖 4 个 NLP benchmark；相比 finetuning 与 distillation，平均减少 50% 以上训练样本（最多减少 85% 以上）仍取得更好性能。",
+      "770M T5 模型仅用某 benchmark 80% 的数据即超过 few-shot prompted 540B PaLM，而标准 finetuning 用满 100% 数据仍难以匹敌。",
+      "仅有未标注数据时，11B T5 模型即可达到或超过 540B PaLM 的表现。",
+      "论文将 Zelikman et al. (2022)（即 STaR）归入「把推理步骤作为额外微调数据以 self-improve LLM」的一类工作，并指出这类工作改进的仍是 LLM 本身，受其庞大体积限制。",
+      "论文将 Hinton et al. (2015)、Buciluǎ et al. (2006) 等列为知识蒸馏把大教师模型知识迁移到小学生模型的基础工作。",
+      "论文列出同期类似思路的工作：Wang et al. 2022a (PINTO)、Ho et al. 2022、Magister et al. 2022、Li et al. 2023，并指出 PINTO 在测试时仍需 LLM 生成 rationale，未完全解决部署问题。",
+      "论文发表于 Findings of ACL 2023，代码开源于 github.com/google-research/distilling-step-by-step。"
+    ],
+    "raw_excerpt": "Core to our mechanism is changing our perspective from viewing LLMs as a source of noisy labels to viewing them as agents that can reason: LLMs can produce natural language rationales justifying their predicted labels... We thus utilize these extracted rationales as additional, richer information to train small models through a multi-task training setup, with both label prediction and rationale prediction tasks... First, given an LLM and an unlabeled dataset, we prompt the LLM to generate output labels along with rationales to justify the labels... Second, we leverage these rationales in addition to the task labels to train smaller downstream models."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.12948",
+    "published_at": "2025-01-22",
+    "key_points": [
+      "DeepSeek-R1 论文摘要明确表述：大规模模型展现的涌现推理模式可被系统性地利用，以引导和增强更小模型的推理能力。",
+      "论文主张纯强化学习即可激励 LLM 的推理能力，无需人工标注的推理轨迹，并称其在数学、编程竞赛、STEM 等可验证任务上优于基于人类示范的常规监督学习训练的对照模型。",
+      "该工作发表于 Nature 第 645 卷 633-638 页（2025）。",
+      "论文 v1 提交于 2025-01-22，v2 修订于 2026-01-04。"
+    ],
+    "raw_excerpt": "Moreover, the emergent reasoning patterns exhibited by these large-scale models can be systematically harnessed to guide and enhance the reasoning capabilities of smaller models."
+  },
+  {
+    "sub_question_id": "f6",
+    "source_type": "arxiv",
+    "title": "Automatic Prompt Augmentation and Selection with Chain-of-Thought from Labeled Data (Automate-CoT)",
+    "url": "https://arxiv.org/abs/2302.12822",
+    "published_at": "2023-02-24",
+    "key_points": [
+      "检索纠错记录：arXiv:2302.12822 并非 SCoTD，而是 Automate-CoT（Shum, Diao, Zhang），发表于 EMNLP 2023。",
+      "该文关注的是从少量标注数据自动增广并筛选 rationale chains 以构造 CoT prompt，属于 prompt 工程侧工作，而非把教师 rationale 蒸馏进学生模型参数。",
+      "其方法用方差缩减的策略梯度估计每个样本的重要性，从候选池中选出若干 rationale chain 的最优组合用于 CoT prompting。"
+    ],
+    "raw_excerpt": "This paper proposes a new strategy, Automate-CoT (Automatic Prompt Augmentation and Selection with Chain-of-Thought), that can bypass human engineering of CoT by automatically augmenting rational chains from a small labeled dataset, and then pruning low-quality chains to construct a candidate pool of machine-generated rationale chains based on the labels."
+  }
+]
