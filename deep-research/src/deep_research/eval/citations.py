@@ -17,6 +17,7 @@ from __future__ import annotations
 import asyncio
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Awaitable, Callable, Literal
 
 import httpx
@@ -27,6 +28,10 @@ _REF_LINE = re.compile(r"^\[\^?(\d+)\]:\s*(.+)$", re.MULTILINE)
 _URL = re.compile(r"https?://[^\s）)>\]（(]+")
 _ARXIV_ID = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})(?:v\d+)?")
 _GITHUB_REPO = re.compile(r"github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/?")
+# 本地文件绝对路径（Windows 盘符或 POSIX 根路径），用于离线模式的知识库引用
+# 注意 `(?<![A-Za-z0-9])`：否则 "https:/" 里的 "s:/" 会被当成 Windows 盘符，
+# 所有 http 引用都会被误判成本地文件（实测 smoke_eval 全变 kb）。
+_LOCAL_PATH = re.compile(r"(?<![A-Za-z0-9])(?:[A-Za-z]:[\\/]|(?<![:/\w])/)[^\s（）()<>|\"']+")
 
 
 @dataclass
@@ -34,7 +39,7 @@ class Citation:
     index: int
     line: str
     url: str
-    kind: Literal["arxiv", "github", "web"]
+    kind: Literal["arxiv", "github", "web", "kb"]
     target: str  # arxiv id / owner/repo / url
 
 
@@ -57,6 +62,18 @@ def extract_citations(report: str) -> list[Citation]:
     out: list[Citation] = []
     for m in _REF_LINE.finditer(report):
         line = m.group(2).strip()
+        # 离线模式的引用目标是本地文件；这类行可能完全没有 http 链接，
+        # 旧实现会直接 `continue` 把它漏掉（实测：本地引用一条都没被统计）。
+        local_m = _LOCAL_PATH.search(line)
+        if local_m:
+            path_part = local_m.group(0).rstrip(".,;，。")
+            # 路径后面紧跟的「· 锚点」要一起保留，否则核验只能判断文件存在，
+            # 判断不了"引用的是不是文件里的那一节"。
+            rest = line[local_m.end() :].strip(" ·—-，,;")
+            rest = re.split(r"[（(]", rest, maxsplit=1)[0].strip()
+            target = f"{path_part} · {rest}" if rest else path_part
+            out.append(Citation(int(m.group(1)), line, target, "kb", target))
+            continue
         url_m = _URL.search(line)
         if not url_m:
             continue
@@ -93,6 +110,42 @@ async def _default_verify_github(client: httpx.AsyncClient, repo: str) -> Verdic
     return "unverifiable"  # 403 rate-limit etc.
 
 
+async def _default_verify_kb(_client: httpx.AsyncClient, target: str) -> Verdict:
+    """Verify a knowledge-base citation by reading the file, not by network.
+
+    Stronger than the URL check: "file exists" AND "the cited section actually
+    appears in it". target format: ``<path> · <anchor>``.
+    """
+    path_part, _, anchor = target.partition(" · ")
+    path = Path(path_part.strip())
+    if not path.exists():
+        return "missing"
+    heading = anchor.split(" · ")[0].strip().lstrip("#").strip()
+    if not heading:
+        return "exists"
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return "unverifiable"
+
+    # 模型抄锚点时经常截断或换标点（实测：`…默认 overlap` 少了后半句就会
+    # 逐字匹配失败，把一条真引用判成 missing）。先规范化再比前缀，能容忍
+    # 截断/标点差异，又不会放过"根本不存在的章节"。
+    def _norm(s: str) -> str:
+        return re.sub(r"[\s#：:，,。.、\-—_·]+", "", s)
+
+    if _norm(heading)[:20] in _norm(text):
+        return "exists"
+
+    # 兜底：锚点带行号且文件确实有那么多行 → 位置可定位
+    m = re.search(r" · L(\d+)-(\d+)$", target)
+    if m:
+        start, end = int(m.group(1)), int(m.group(2))
+        if 0 < start <= end <= len(text.splitlines()):
+            return "exists"
+    return "missing"
+
+
 async def _default_verify_web(client: httpx.AsyncClient, url: str) -> Verdict:
     resp = await client.get(url, follow_redirects=True)
     if resp.status_code < 400:
@@ -110,11 +163,13 @@ async def verify_citations(
     verify_arxiv: Callable[[httpx.AsyncClient, str], Awaitable[Verdict]] | None = None,
     verify_github: Callable[[httpx.AsyncClient, str], Awaitable[Verdict]] | None = None,
     verify_web: Callable[[httpx.AsyncClient, str], Awaitable[Verdict]] | None = None,
+    verify_kb: Callable[[httpx.AsyncClient, str], Awaitable[Verdict]] | None = None,
 ) -> CitationReport:
     va = verify_arxiv or _default_verify_arxiv
     vg = verify_github or _default_verify_github
     vw = verify_web or _default_verify_web
-    verifiers = {"arxiv": va, "github": vg, "web": vw}
+    vk = verify_kb or _default_verify_kb
+    verifiers = {"arxiv": va, "github": vg, "web": vw, "kb": vk}
 
     citations = extract_citations(report)
     result = CitationReport(total=len(citations))
