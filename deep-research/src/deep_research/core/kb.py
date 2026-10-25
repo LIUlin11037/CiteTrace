@@ -166,6 +166,48 @@ def split_document(text: str, source_path: str, title: str = "") -> list[Chunk]:
     return chunks
 
 
+def split_pdf_pages(
+    pages: list[str], source_path: str, title: str = "", page_chars: int = 4000
+) -> list[Chunk]:
+    """Chunk a PDF page by page, with the page number as the anchor.
+
+    页码锚点是 PDF 语料的引用单位：私有公文（年报/合同/问询函）里"第 59 页"
+    才是人话，"某个 600 字符片段"不是。``pages`` 必须按 PDF 顺序传入（1-indexed
+    的编号在 anchor 里），调用方负责用 pypdf 抽文本。
+
+    注意：FinanceBench 这类数据集的页码常是 **0-indexed**（标注 55 → PDF 第 56 页），
+    评分时必须先对齐，否则会全判错。
+    """
+    chunks: list[Chunk] = []
+    idx = 0
+    # 默认「一页一块」：财报的关键信息是一张表，切成 600 字符会把表头和数字分开，
+    # 结果是"命中了同一页却不是同一块"（实测：页面命中 38%、evidence 文本命中仅 5%）。
+    # 只有超长页（> page_chars）才二次切分。
+    step = max(page_chars, 500)
+    for page_no, text in enumerate(pages, start=1):
+        # PDF 抽取常带 NUL 与控制字符：Postgres 的 text 类型直接拒收 0x00
+        # （实测入 three 份 10-K 时报 "cannot contain NUL (0x00) bytes"）。
+        body = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", text or "").strip()
+        if not body:
+            continue
+        for start in range(0, len(body), step):
+            piece = body[start : start + step]
+            if not piece.strip():
+                continue
+            chunks.append(
+                Chunk(
+                    doc_id=source_path,
+                    source_path=source_path,
+                    title=title or source_path.rsplit("/", 1)[-1],
+                    anchor=f"p{page_no}",
+                    chunk_idx=idx,
+                    text=piece,
+                )
+            )
+            idx += 1
+    return chunks
+
+
 class KBStore:
     """Chunk store + hybrid search over local documents."""
 
@@ -173,6 +215,10 @@ class KBStore:
         settings = get_settings()
         self._url = database_url or settings.database_url
         self._dim = dim or settings.memory_embedding_dim
+        table = settings.kb_table
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", table):
+            raise ValueError(f"非法 kb 表名: {table!r}")
+        self._table = table
         self._sparse_ok: bool | None = None
 
     async def _connect(self) -> Any:
@@ -189,7 +235,7 @@ class KBStore:
             await conn.execute(
                 sql.SQL(
                     """
-                    CREATE TABLE IF NOT EXISTS kb_chunks (
+                    CREATE TABLE IF NOT EXISTS {table} (
                         id BIGSERIAL PRIMARY KEY,
                         doc_id TEXT NOT NULL,
                         source_path TEXT NOT NULL,
@@ -203,16 +249,21 @@ class KBStore:
                         UNIQUE (doc_id, chunk_idx)
                     )
                     """
-                ).format(dim=sql.Literal(self._dim))
+                ).format(dim=sql.Literal(self._dim), table=sql.Identifier(self._table))
             )
             await conn.execute(
-                """
-                CREATE INDEX IF NOT EXISTS kb_chunks_embedding_hnsw
-                ON kb_chunks USING hnsw (embedding vector_cosine_ops)
-                """
+                sql.SQL(
+                    "CREATE INDEX IF NOT EXISTS {idx} ON {table} "
+                    "USING hnsw (embedding vector_cosine_ops)"
+                ).format(
+                    idx=sql.Literal(f"{self._table}_embedding_hnsw"),
+                    table=sql.Identifier(self._table),
+                )
             )
             await conn.execute(
-                "CREATE INDEX IF NOT EXISTS kb_chunks_tsv ON kb_chunks USING gin (tsv)"
+                "CREATE INDEX IF NOT EXISTS kb_chunks_tsv ON "
+                + self._table
+                + " USING gin (tsv)"
             )
             await conn.commit()
 
@@ -256,7 +307,7 @@ class KBStore:
             async with conn.cursor() as cur:
                 await cur.executemany(
                     """
-                    INSERT INTO kb_chunks
+                    INSERT INTO {table}
                         (doc_id, source_path, title, anchor, chunk_idx, text, embedding, tsv)
                     VALUES (%s, %s, %s, %s, %s, %s, %s::vector,
                             to_tsvector('simple', %s))
@@ -265,7 +316,7 @@ class KBStore:
                            embedding = EXCLUDED.embedding,
                            tsv = EXCLUDED.tsv,
                            anchor = EXCLUDED.anchor
-                    """,
+                    """.format(table=self._table),
                     rows,
                 )
             await conn.commit()
@@ -285,8 +336,10 @@ class KBStore:
         vec = embed_query(query)
         dense = await self._dense(vec, top_k * 4)
         sparse: list[tuple[str, float]] = []
-        if await self._has_cjk_config() and not _CJK.search(query):
-            # 英文查询才走 Postgres FTS：中文在没有分词配置时 fts 几乎没有意义
+        # 英文查询不需要分词配置（'simple' 配置按空格切词就够）；中文才依赖
+        # zhparser。原来的条件是「有 zhparser 且 query 无中文」——zhparser 没装时
+        # 英文全文检索也被一起关掉了（实测：FinanceBench 页面命中率被拖到 14%）。
+        if not _CJK.search(query) or await self._has_cjk_config():
             sparse = await self._sparse(query, top_k * 4)
 
         # 词法通道：中文字符二元组 + ASCII 词，解决"专有名词/术语"匹配
@@ -329,10 +382,10 @@ class KBStore:
                 """
                 SELECT source_path, title, anchor, text,
                        1 - (embedding <=> %s::vector) AS score
-                FROM kb_chunks
+                FROM {table}
                 ORDER BY embedding <=> %s::vector
                 LIMIT %s
-                """,
+                """.format(table=self._table),
                 (_pgvec(vec), _pgvec(vec), limit),
             )
             rows = await cur.fetchall()
@@ -347,11 +400,11 @@ class KBStore:
                 """
                 SELECT source_path, anchor,
                        ts_rank(tsv, plainto_tsquery('simple', %s)) AS rank
-                FROM kb_chunks
+                FROM {table}
                 WHERE tsv @@ plainto_tsquery('simple', %s)
                 ORDER BY rank DESC
                 LIMIT %s
-                """,
+                """.format(table=self._table),
                 (query, query, limit),
             )
             rows = await cur.fetchall()
@@ -360,7 +413,7 @@ class KBStore:
     async def stats(self) -> dict[str, int]:
         async with await self._connect() as conn:
             cur = await conn.execute(
-                "SELECT count(*) AS chunks, count(DISTINCT doc_id) AS docs FROM kb_chunks"
+                f"SELECT count(*) AS chunks, count(DISTINCT doc_id) AS docs FROM {self._table}"
             )
             row = await cur.fetchone()
         return {"chunks": int(row[0]), "docs": int(row[1])}

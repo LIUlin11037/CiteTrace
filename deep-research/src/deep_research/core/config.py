@@ -111,6 +111,9 @@ class Settings(BaseSettings):
     # 知识库文件根目录：kb 里存的是相对路径（可移植），解析时拼到这里。
     # 宿主机与容器用不同的绝对路径也能工作（容器挂载 reports 到 /app/reports）。
     kb_root: str = "."
+    # 知识库表名：不同 embedding 维度必须分表（zh=512 / en=384 / m3=1024），
+    # A/B 对比模型时靠它切换，不改代码。
+    kb_table: str = "kb_chunks"
 
     # ---- persistence ----
     checkpoint_db_path: str = "checkpoints.sqlite3"  # 仅当 backend=sqlite 时使用
