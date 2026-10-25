@@ -39,19 +39,6 @@ DR_MCP_SERVERS='{"kb": {"transport": "stdio", "command": "python", "args": ["-m"
 uv run python -m deep_research.cli run "ReAct 与 Chain-of-Thought 的关键区别"
 ```
 
-离线部署的三个坑（都已在容器里实测并修掉，记录在此避免重犯）：
-
-| 坑 | 现象 | 修法 |
-|---|---|---|
-| fastembed 只认 `<cache>/fast-<name>/` | HF 的 `models--...` 目录在离线模式下被判「缓存不完整」 | 构建期把快照复制成 `fast-` 布局（Dockerfile） |
-| MCP 子进程的环境被整体替换 | `stdio_client` 用 `get_default_environment()`，`HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 全丢 → 去 huggingface.co（不可达） | 代码注入 HF 变量（`_child_env`） |
-| 同上，**`DR_*` 配置也会丢** | 子进程退回 `localhost:5432`，容器里连不上数据库 → `Connection closed` | 继承 `DR_*` 前缀变量 |
-| 知识库存了宿主机**绝对路径** | 容器里同一文件不存在 → 离线证据全被丢弃（cite/cover 归零） | 入库存相对路径，解析时拼 `DR_KB_ROOT`（默认当前目录） |
-| 引用行是相对路径 | 提取器只认绝对路径/URL → 正文 121 个脚注被判"没有引用" | 增加 `kb` 相对路径解析（按 `（kb` 标记结构化取 target） |
-
-验证方式：清空父进程的 `HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 后，
-容器内 `search_knowledge_base` 仍能返回带出处的片段（不发起任何外网请求）。
-
 **一个容易混淆的点**：`offline` 约束的是**信源**（不联网抓取），不是**算力**。
 编排（Planner/Researcher/Critic/Writer）、审校、embedding 该调模型还是要调——只是
 不联网找资料。两者是两个独立维度：
@@ -148,6 +135,7 @@ rag（7 题）100% / 97.0% / 100%。26 题全部出分，无缺测；
 | 引用存在率报 100%，但正文一条引用都没有 | Writer 某次改用 `[1][2]` 而不是 `[^1][^2]`；参考列表由代码生成所以看着完整，判定器抽不到论断 | 代码层格式归一化（`[n]`→`[^n]`，跳过代码块/链接/越界编号），实测 26 份里 1 份中招 |
 | 某题对齐率 0%，但真实值 86% | 抽不到论断时返回 `0.0` 而不是"无数据"，一个假 0 把三题均值从 90% 拉到 61% | 无判论断记 N/A 并从聚合排除，渲染与 Langfuse 都不再发假 0 |
 | 容器里离线模式 `cite/cover` 归零 | 知识库存的是**宿主机绝对路径**，容器内同一文件不存在 → 证据全被丢弃 | 入库存相对路径 + `DR_KB_ROOT` 解析；引用提取器也补了相对路径识别 |
+| 容器里离线模式加载不到本地模型 | fastembed 只认 `<cache>/fast-<name>/` 布局，HF 的 `models--...` 目录在 `local_files_only` 下被判「缓存不完整」 | 构建期把快照复制成 `fast-` 布局（Dockerfile） |
 | 容器内 `McpError: Connection closed`（报错指向"模型加载失败"） | MCP 子进程环境被 `get_default_environment()` 裁剪，`DR_*` 与 HF 变量全丢 → 子进程连 `localhost:5432` 失败 | `_child_env()`：默认环境 + `DR_*` + HF 变量三层合并 |
 
 定位这些问题的过程本身也是方法：例如"服务端静默钳制 8192"这条，是通过  
