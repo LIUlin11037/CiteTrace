@@ -28,6 +28,9 @@ _REF_LINE = re.compile(r"^\[\^?(\d+)\]:\s*(.+)$", re.MULTILINE)
 _URL = re.compile(r"https?://[^\s）)>\]（(]+")
 _ARXIV_ID = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})(?:v\d+)?")
 _GITHUB_REPO = re.compile(r"github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/?")
+# API 形态的链接（api.github.com/repos/o/r）：旧的仓库正则会把 "repos/o" 当成仓库名，
+# 核验必然失败（实测 gq-rag-eval 因此少算一条真引用）。先单独识别。
+_GITHUB_API = re.compile(r"api\.github\.com/repos/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)")
 # 本地文件绝对路径（Windows 盘符或 POSIX 根路径），用于离线模式的知识库引用
 # 注意 `(?<![A-Za-z0-9])`：否则 "https:/" 里的 "s:/" 会被当成 Windows 盘符，
 # 所有 http 引用都会被误判成本地文件（实测 smoke_eval 全变 kb）。
@@ -83,6 +86,12 @@ def extract_citations(report: str) -> list[Citation]:
         # 离线模式的引用目标是本地文件；这类行可能完全没有 http 链接，
         # 旧实现会直接 `continue` 把它漏掉（实测：本地引用一条都没被统计）。
         local_m = _LOCAL_PATH.search(line)
+        # 只认"像文件名"的路径：标题里出现 "Graph-/Agentic" 这类斜杠会被误判成本地
+        # 文件（实测 gq-graph-rag 因此把一条真 arXiv 引用判成 missing）。
+        if local_m and not re.search(
+            r"\.(md|markdown|txt|pdf)$", local_m.group(0).split(" · ")[0], re.I
+        ):
+            local_m = None
         if local_m:
             path_part = local_m.group(0).rstrip(".,;，。")
             # 路径后面紧跟的「· 锚点」要一起保留，否则核验只能判断文件存在，
@@ -100,7 +109,9 @@ def extract_citations(report: str) -> list[Citation]:
         if not url_m:
             continue
         url = url_m.group(0).rstrip(".,;")
-        if am := _ARXIV_ID.search(url):
+        if api_m := _GITHUB_API.search(url):
+            out.append(Citation(int(m.group(1)), line, url, "github", api_m.group(1)))
+        elif am := _ARXIV_ID.search(url):
             out.append(Citation(int(m.group(1)), line, url, "arxiv", am.group(1)))
         elif gm := _GITHUB_REPO.search(url):
             repo = gm.group(1).removesuffix(".git")
@@ -120,7 +131,20 @@ async def _default_verify_arxiv(client: httpx.AsyncClient, arxiv_id: str) -> Ver
     resp = await client.get("https://export.arxiv.org/api/query", params=params)
     if resp.status_code != 200:
         return "unverifiable"
-    return "exists" if "<entry>" in resp.text and "<title>" in resp.text else "missing"
+    if "<entry>" in resp.text and "<title>" in resp.text:
+        return "exists"
+    # API 偶发返回空 feed（不是 404）。实测：arXiv 2606.25656 在一次评测里被判
+    # missing，几分钟后同样请求却能返回 entry —— 这种抖动不能算成"引用不存在"，
+    # 否则会把真实引用记成幻觉。用 abs 页面二次确认：200 存在 / 404 缺失 / 其它不可核验。
+    try:
+        abs_resp = await client.get(f"https://arxiv.org/abs/{arxiv_id}")
+    except httpx.HTTPError:
+        return "unverifiable"
+    if abs_resp.status_code == 200:
+        return "exists"
+    if abs_resp.status_code == 404:
+        return "missing"
+    return "unverifiable"
 
 
 async def _default_verify_github(client: httpx.AsyncClient, repo: str) -> Verdict:
