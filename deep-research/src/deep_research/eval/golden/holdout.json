@@ -1,0 +1,73 @@
+{
+  "name": "holdout-tech-ai",
+  "version": "1.0.0",
+  "note": "留出题（holdout）：只用于「改动前后对照」，禁止用于调试、调参、入库或反复迭代。规则：每次评估同一改动时，改动前跑一次、改动后跑一次，中间不得用这些题做任何设计决策；一旦用它们调过参数，这批题就作废并需要换新题。选题原则：与 tech_ai.json 的 26 题不重叠，且要点为机制级事实（长期稳定、可核验），避免易腐数字。",
+  "questions": [
+    {
+      "id": "hq-inference-serving",
+      "topic": "vLLM 等 LLM 推理引擎如何提升服务吞吐？PagedAttention 与 continuous batching 分别解决什么问题？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "PagedAttention 用分页块（block）管理 KV cache，减少显存碎片并支持按需分配",
+        "continuous batching（连续批处理）按请求粒度动态进出批次，避免整批等待最长序列完成",
+        "二者针对的问题不同：前者是 KV cache 的存储与碎片，后者是批调度与利用率",
+        "提到 prefix caching / 前缀复用可减少相同前缀的重复计算（可选但常见）"
+      ]
+    },
+    {
+      "id": "hq-quantization",
+      "topic": "LLM 量化（INT8/INT4）的主流方法有哪些？精度损失与吞吐收益如何权衡？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "区分训练后量化（PTQ）与量化感知训练（QAT）两类路线",
+        "提到 GPTQ 或 AWQ 等代表性 PTQ 方法（AWQ 通过保护显著权重通道降低误差）",
+        "低比特量化的主要收益是降低显存占用与内存带宽需求，解码（decode）阶段收益通常大于预填充",
+        "指出 KV cache 可单独量化，但比特过低时更易损伤长上下文精度"
+      ]
+    },
+    {
+      "id": "hq-structured-output",
+      "topic": "如何让 LLM 稳定输出符合 schema 的 JSON？约束解码与提示词约束的差别是什么？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "提示词约束是概率性的，不能保证输出符合 schema",
+        "约束解码（语法/FSM/grammar-based decoding）在采样阶段屏蔽不合法 token，从而保证结构合法",
+        "借助 tool/function calling 的 schema 强制调用（tool_choice）可获得结构化输出，但部分模型不支持强制调用",
+        "即使结构合法，仍需业务层校验与重试（结构正确不等于语义正确）"
+      ]
+    },
+    {
+      "id": "hq-judge-bias",
+      "topic": "LLM-as-a-judge 有哪些已知偏差？实践中如何校准评测结果？",
+      "subdomain": "llm",
+      "expected_key_points": [
+        "位置偏差：倾向于偏好先出现或被交换顺序的答案，需对称交换位置消除",
+        "长度/格式偏差：更长、排版更规范的答案更容易得高分",
+        "自我偏好：judge 倾向偏好同族模型生成的答案",
+        "校准手段包括与人工标注对齐、成对比较替代绝对打分、多次采样取一致"
+      ]
+    },
+    {
+      "id": "hq-pdf-parsing",
+      "topic": "用 PDF/表格类文档构建 RAG 时，解析环节的难点是什么？主流处理流程是怎样的？",
+      "subdomain": "rag",
+      "expected_key_points": [
+        "需要版面分析（layout analysis）区分标题、正文、表格、页眉页脚，避免把噪声当正文",
+        "扫描版需 OCR，OCR 错误会直接污染后续检索与引用",
+        "表格需结构化抽取（如转 Markdown/HTML）以保留行列关系，否则语义丢失",
+        "解析质量往往比 embedding 模型选型更影响最终效果"
+      ]
+    },
+    {
+      "id": "hq-agent-observability",
+      "topic": "生产环境中的 LLM Agent 如何做可观测性？一条 trace 应该记录哪些信息？",
+      "subdomain": "agent",
+      "expected_key_points": [
+        "一次任务对应一条 trace，节点/LLM 调用/工具调用作为嵌套 span 组织",
+        "记录每次调用的 token 用量与成本，才能定位成本热点",
+        "记录工具的入参与返回，才能复现失败（仅记录成功日志不够）",
+        "质量指标可作为 score 挂到 trace 上，实现「指标—轨迹」对齐与下钻"
+      ]
+    }
+  ]
+}
