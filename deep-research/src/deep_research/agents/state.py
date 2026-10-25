@@ -16,7 +16,7 @@ from typing import Annotated, Any, Literal, Required, TypedDict
 from langgraph.graph.message import add_messages
 from pydantic import BaseModel, Field
 
-SourceType = Literal["arxiv", "github", "web"]
+SourceType = Literal["arxiv", "github", "web", "kb"]  # kb = 本地知识库文档
 
 
 class SubQuestion(BaseModel):

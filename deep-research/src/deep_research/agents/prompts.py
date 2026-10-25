@@ -75,3 +75,28 @@ WRITER_SYSTEM = f"""\
 
 def render(template: str, **kwargs: object) -> str:
     return template.format(today=date.today().isoformat(), **kwargs)
+
+
+# ---- 离线模式（source_mode=offline）：附加在 Critic / Writer 系统提示之后 ----
+
+OFFLINE_CRITIC_NOTE = """
+【离线模式约束】本次只有本地知识库，没有网络兜底，因此：
+- 若某子问题在库内没有任何证据，**不要**生成 follow_up 去追问——离线模式下追问
+  不可能被满足，只会空转；请在 issues 里记一条 blocking（problem 写明「库内无覆盖」）
+- 只审「库内证据是否支撑结论」，不要以「缺少最新信息」为由判不通过
+"""
+
+OFFLINE_WRITER_NOTE = """
+【离线模式写作】证据全部来自本地知识库，没有联网补充：
+- 证据覆盖不到的地方，必须写「当前知识库未收录该信息」，不要写「资料不足」或
+  「检索失败」——前者是事实（库的边界），后两者会误导读者以为是系统故障
+- 引用只能指向知识库内的文档（含文件名与位置），不要编造外部 URL
+"""
+
+
+OFFLINE_RESEARCHER_NOTE = """
+【离线模式取证】你的工具只有一个：本地知识库检索（返回「来源：文件路径」「位置：锚点」）。
+- 证据的 url 字段**必须**填知识库返回的文件路径（可写成 `路径 · 锚点`），source_type 填 `kb`
+- 正文里出现的任何外部 URL（arxiv.org / http…）都不是你读过的来源，**不得**写进 url
+- 库里没有的内容，如实写进 gap_notes，不要用记忆补全
+"""

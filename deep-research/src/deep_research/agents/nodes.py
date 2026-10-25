@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import logging
 import re
+from pathlib import Path
 from typing import Any
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
@@ -18,6 +19,7 @@ from langgraph.types import interrupt
 
 from deep_research.agents import prompts
 from deep_research.agents.state import (
+    CritiqueIssue,
     CritiqueResult,
     Evidence,
     EvidenceBundle,
@@ -242,6 +244,11 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
             prompts.render(
                 prompts.RESEARCHER_SYSTEM, max_steps=settings.max_researcher_steps
             )
+            + (
+                prompts.OFFLINE_RESEARCHER_NOTE
+                if settings.source_mode == "offline"
+                else ""
+            )
         ),
         HumanMessage(f"课题背景：{input_['topic']}\n你负责的子问题（{sq.id}）：{sq.question}"),
     ]
@@ -283,6 +290,27 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
 
     for ev in bundle.evidences:
         ev.sub_question_id = sq.id
+
+    # 离线模式：只保留"能在本地找到文件"的来源。模型常把知识库文本里的
+    # arxiv 链接当自己的 url 抄回来，那等于声称读过一篇没读过的论文 ——
+    # 在离线模式下这种证据无法核验，必须丢弃（保留会让引用存在率虚高）。
+    if settings.source_mode == "offline":
+        kept: list[Evidence] = []
+        dropped = 0
+        for ev in bundle.evidences:
+            local_path = ev.url.split(" · ")[0].strip()
+            if Path(local_path).exists():
+                ev.source_type = "kb"
+                kept.append(ev)
+            else:
+                dropped += 1
+        if dropped:
+            logger.warning(
+                "researcher %s: 离线模式丢弃 %d 条无法定位到本地文件的证据",
+                sq.id,
+                dropped,
+            )
+        bundle.evidences = kept
 
     # 注入痕迹检测：只留痕、不改内容。评测集里就有讨论"提示注入"的正常题目，
     # 静默删改会污染报告，所以这里只告警，供 trace / 日志审计。
@@ -346,7 +374,14 @@ async def critic_node(state: ResearchState) -> dict[str, Any]:
         runnable,
         {
             "messages": [
-                SystemMessage(prompts.render(prompts.CRITIC_SYSTEM)),
+                SystemMessage(
+                    prompts.render(prompts.CRITIC_SYSTEM)
+                    + (
+                        prompts.OFFLINE_CRITIC_NOTE
+                        if settings.source_mode == "offline"
+                        else ""
+                    )
+                ),
                 HumanMessage(
                     f"课题：{state['topic']}\n\n计划子问题：\n{plan_digest}\n\n"
                     f"已收集证据（{len(evidences)} 条）：\n{evidence_digest}\n\n"
@@ -355,6 +390,23 @@ async def critic_node(state: ResearchState) -> dict[str, Any]:
             ]
         },
     )
+
+    # Offline: follow-ups cannot be satisfied (no network), so a rejection would
+    # only spin. Convert them into blocking issues so the writer must declare the
+    # gap, instead of retrying a search that is impossible by construction.
+    if settings.source_mode == "offline" and critique.follow_ups:
+        converted = len(critique.follow_ups)
+        critique.issues.extend(
+            CritiqueIssue(
+                claim=fu.question,
+                problem="库内无覆盖：离线模式无法补充取证",
+                severity="blocking",
+            )
+            for fu in critique.follow_ups
+        )
+        critique.follow_ups = []
+        critique.passed = True
+        logger.info("offline 模式：%d 个 follow_up 转为存疑项，不再追问", converted)
 
     # Hard stop: never loop beyond budget regardless of what the LLM wants.
     if rounds >= settings.max_critique_rounds:
@@ -392,6 +444,7 @@ def route_after_critic(state: ResearchState) -> Any:
 
 async def writer_node(state: ResearchState) -> dict[str, Any]:
     """Compose the final cited report from deduped evidence only."""
+    settings = get_settings()
     evidences = dedup_evidences(state.get("evidences", []))
 
     source_list = "\n".join(
@@ -422,7 +475,14 @@ async def writer_node(state: ResearchState) -> dict[str, Any]:
     # code, so the model never has to spend budget reproducing it.
     model = get_chat_model("writer", streaming=True)
     base_messages = [
-        SystemMessage(prompts.render(prompts.WRITER_SYSTEM)),
+        SystemMessage(
+            prompts.render(prompts.WRITER_SYSTEM)
+            + (
+                prompts.OFFLINE_WRITER_NOTE
+                if settings.source_mode == "offline"
+                else ""
+            )
+        ),
         HumanMessage(
             f"课题：{state['topic']}\n\n"
             f"可用证据（编号即引用编号，共 {len(evidences)} 条）：\n{evidence_body}\n\n"

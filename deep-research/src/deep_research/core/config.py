@@ -39,6 +39,9 @@ class MCPServerConfig(BaseModel):
     """
 
     transport: Literal["stdio", "sse"] = "stdio"
+    # network=False 的 server 只读本地资源（如 kb），离线模式仍会装载。
+    # 默认 True：不显式声明就按"需要联网"处理（宁严不宽）。
+    network: bool = True
     command: str | None = None
     args: list[str] = Field(default_factory=list)
     env: dict[str, str] = Field(default_factory=dict)
@@ -98,6 +101,12 @@ class Settings(BaseSettings):
     # DR_MCP_SERVERS={"arxiv": {"transport": "stdio", "command": "python",
     #                          "args": ["-m", "deep_research_mcp.arxiv"]}}
     mcp_servers: str = "{}"
+
+    # ---- 信源模式 ----
+    # online ：联网取证（arxiv/github/web），现状
+    # offline：只读本地知识库（kb_chunks），可断网运行、用于内网/保密场景
+    # 模式只决定"装载哪些 MCP server"，编排/审校/引用核验完全共用。
+    source_mode: Literal["online", "offline"] = "online"
 
     # ---- persistence ----
     checkpoint_db_path: str = "checkpoints.sqlite3"  # 仅当 backend=sqlite 时使用
