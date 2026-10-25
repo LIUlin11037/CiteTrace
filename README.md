@@ -113,6 +113,12 @@ rag（7 题）100% / 97.0% / 100%。26 题全部出分，无缺测；
 | 对齐率被「报告在说明自己的取舍」拉低（gq-long-context 87.5%、gq-reranker 83.3%）              | judge 把「本次未引用 X」「来源与主题无关」这类**方法性说明**也当成事实论断去核对齐                                             | judge 新增 `meta` 判定并从对齐率分母中排除；离线复判后两题分别回到 **95% / 100%**                                                            |
 | 某题覆盖率卡在 50%，反复重跑不变                                                       | 单条抓取正文被截断到 4000 字符，**论文结果表格在长文后段从未进入上下文**，Writer 只能如实写「无量化证据」                               | 抓取上限提到 12000（`DR_EVIDENCE_CONTENT_LIMIT`），同题覆盖率 50% → **100%**，长文题输入 token 约 +60%                                  |
 
+| 上下文裁剪后覆盖率 100% → 25% | 按空行切块，而 HTML 抓取的正文**没有空行**，整篇被当成一个块，只保留了头部 35% 预算（6000 预算只用了 2131 字符） | 改为按行切块 + 单行超长按句号切，预算必须用满；覆盖率回到 100%，同时输入 token −22% |
+| 引用存在率报 100%，但正文一条引用都没有 | Writer 某次改用 `[1][2]` 而不是 `[^1][^2]`；参考列表由代码生成所以看着完整，判定器抽不到论断 | 代码层格式归一化（`[n]`→`[^n]`，跳过代码块/链接/越界编号），实测 26 份里 1 份中招 |
+| 某题对齐率 0%，但真实值 86% | 抽不到论断时返回 `0.0` 而不是"无数据"，一个假 0 把三题均值从 90% 拉到 61% | 无判论断记 N/A 并从聚合排除，渲染与 Langfuse 都不再发假 0 |
+| 容器里离线模式 `cite/cover` 归零 | 知识库存的是**宿主机绝对路径**，容器内同一文件不存在 → 证据全被丢弃 | 入库存相对路径 + `DR_KB_ROOT` 解析；引用提取器也补了相对路径识别 |
+| 容器内 `McpError: Connection closed`（报错指向"模型加载失败"） | MCP 子进程环境被 `get_default_environment()` 裁剪，`DR_*` 与 HF 变量全丢 → 子进程连 `localhost:5432` 失败 | `_child_env()`：默认环境 + `DR_*` + HF 变量三层合并 |
+
 定位这些问题的过程本身也是方法：例如"服务端静默钳制 8192"这条，是通过  
 **Langfuse trace 反查**发现的——同一轮 3011 次调用里，被截断样本的输出 token  
 **精确等于 8192**，而正常样本只有 2～4k，由此锁定上限；失败报告会写入  
@@ -176,17 +182,18 @@ Postgres、长期记忆写入 pgvector（512 维）、MCP 工具在容器内正�
 ```
 deep-research/
   src/deep_research/
-  core/        # config（按角色模型）/ llm（唯一 LLM 入口）/ persistence（检查点工厂）
-               # memory（pgvector 长期记忆）/ tracing（Langfuse）/ usage（token 与成本）
+  core/        # config（按角色模型 + 信源模式）/ llm（唯一 LLM 入口）/ persistence（检查点工厂）
+               # memory（pgvector 长期记忆）/ kb（本地知识库：切块 + 三路融合检索）
+               # tracing（Langfuse）/ usage（token 与成本）
                # compat（平台与依赖兼容垫片）/ serve（API 启动入口）
   agents/      # state / prompts / nodes（四角色实现）/ graph（图装配 + Send 扇出）
   tools/       # MCP 客户端加载与降级
   eval/        # citations（程序核验）/ judge（LLM judge，含 meta 判定）/ metrics / runner
-               # scores（分数回挂 Langfuse）/ golden 数据集
+               # scores（分数回挂 Langfuse）/ golden 数据集（tech_ai 26 题 + holdout 6 题）
   cli.py       # Typer CLI
   api.py       # FastAPI + SSE（含 HITL 恢复）
   static/      # 单文件演示页（零构建）
-mcp_servers/   # arxiv_server / github_server / web_server
+mcp_servers/   # arxiv_server / github_server / web_server / kb_server（离线模式唯一工具）
 scripts/       # 见下表
 docs/          # 架构文档与技术选型
 ```
@@ -205,3 +212,9 @@ docs/          # 架构文档与技术选型
 | `deep-research/scripts/verify_web_e2e.py`    | 按页面逻辑走完整 API 时序（中断 → 恢复 → 重连 SSE）             | 是           |
 | `deep-research/scripts/rejudge_alignment.py` | 用已落盘证据库离线复判，不重跑研究                             | 是           |
 | `deep-research/scripts/refresh_alignment.py` | 修正 judge 后对全部题目离线复判并刷新聚合口径（仅花 judge 调用，不重跑研究） | 是           |
+| `deep-research/scripts/verify_injection.py`  | 注入护栏 5 条：围栏不可伪造、中英检测、不误伤讨论类文本、工具输出加围栏、真实模型抗注入 | 否（`--live` 时是） |
+| `deep-research/scripts/verify_context.py`    | 上下文压缩：结果表格存活、短文档不动、头部必留、压缩比 | 否 |
+| `deep-research/scripts/verify_citations.py`  | 引用格式归一化：`[n]`→`[^n]`、代码块与链接不动、越界编号不转 | 否 |
+| `deep-research/scripts/verify_metrics.py`    | 指标 N/A 语义：无判论断不进均值、渲染 N/A、全空不崩 | 否 |
+| `deep-research/scripts/verify_kb.py`         | 知识库检索质量（recall@1 / MRR）+ 已知查询回归（含"测试饱和"告警） | 否 |
+| `deep-research/scripts/verify_offline_mode.py` | 离线模式：只装载本地 server、无本地 server 时显式失败、默认仍 online、kb 引用核验 | 否 |
