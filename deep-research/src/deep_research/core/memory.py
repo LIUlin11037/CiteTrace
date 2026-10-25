@@ -133,7 +133,13 @@ class MemoryStore:
         settings = get_settings()
         self._url = database_url or settings.database_url
         self._namespace = settings.memory_namespace
-        self._dim = settings.memory_embedding_dim
+        # 维度必须跟着实际用的 embedding 后端走：API 模式返回 embedding_api_dim
+        # （如 1024），若仍按 memory_embedding_dim（512）建表，写入会维度不匹配。
+        self._dim = (
+            settings.embedding_api_dim
+            if settings.embedding_provider == "api"
+            else settings.memory_embedding_dim
+        )
 
     async def setup(self) -> None:
         import psycopg
