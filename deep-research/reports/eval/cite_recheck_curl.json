@@ -1,0 +1,22 @@
+{
+  "citations": 880,
+  "exists": 633,
+  "missing": 0,
+  "unverifiable": 247,
+  "existence_rate": 1.0,
+  "by_kind": {
+    "web": {
+      "exists": 354,
+      "unverifiable": 59
+    },
+    "github": {
+      "unverifiable": 188,
+      "exists": 25
+    },
+    "arxiv": {
+      "exists": 254
+    }
+  },
+  "missing_detail": [],
+  "method": "curl HEAD, 16 threads; arxiv→abs page, github→repo page"
+}

@@ -1,0 +1,37 @@
+{
+  "scope": "26 题在线报告的全部引用（gq-*.md）",
+  "citations": 880,
+  "exists": 821,
+  "missing": 0,
+  "unverifiable": 59,
+  "existence_rate": 1.0,
+  "coverage": "821/880 = 93.3%",
+  "by_source": {
+    "arxiv": {
+      "citations": 254,
+      "exists": 254,
+      "missing": 0,
+      "unverifiable": 0
+    },
+    "github": {
+      "citations": 213,
+      "exists": 213,
+      "missing": 0,
+      "unverifiable": 0,
+      "note": "169 个去重仓库，低并发(4)下全部 200"
+    },
+    "web": {
+      "citations": 413,
+      "exists": 354,
+      "missing": 0,
+      "unverifiable": 59,
+      "note": "去重 387 个 URL；反爬 403/超时归为不可核验"
+    }
+  },
+  "method": "curl HEAD + 低并发(4) + 重试；arxiv 走 abs 页、github 走仓库页、web 原样",
+  "why": [
+    "上一轮用 httpx 高并发，github.com 全部 ConnectTimeout，309 条被记为不可核验",
+    "降并发到 4 后 github 169 个仓库全部 200——原来的‘不可核验’主要是并发压测导致的限流",
+    "剩下的 59 条是 web 站点反爬（403）或超时，属外部限制，不是引用造假"
+  ]
+}
