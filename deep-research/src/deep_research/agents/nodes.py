@@ -298,8 +298,9 @@ async def researcher_node(input_: ResearcherInput) -> dict[str, Any]:
         kept: list[Evidence] = []
         dropped = 0
         for ev in bundle.evidences:
-            local_path = ev.url.split(" · ")[0].strip()
-            if Path(local_path).exists():
+            from deep_research.core.kb import resolve_kb_path
+
+            if resolve_kb_path(ev.url.split(" · ")[0].strip()).exists():
                 ev.source_type = "kb"
                 kept.append(ev)
             else:

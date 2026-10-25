@@ -108,6 +108,10 @@ class Settings(BaseSettings):
     # 模式只决定"装载哪些 MCP server"，编排/审校/引用核验完全共用。
     source_mode: Literal["online", "offline"] = "online"
 
+    # 知识库文件根目录：kb 里存的是相对路径（可移植），解析时拼到这里。
+    # 宿主机与容器用不同的绝对路径也能工作（容器挂载 reports 到 /app/reports）。
+    kb_root: str = "."
+
     # ---- persistence ----
     checkpoint_db_path: str = "checkpoints.sqlite3"  # 仅当 backend=sqlite 时使用
     # 统一走 PostgreSQL：检查点与 pgvector 长期记忆同库（见 docker-compose.yml）。

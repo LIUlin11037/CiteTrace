@@ -32,6 +32,24 @@ _GITHUB_REPO = re.compile(r"github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)/?")
 # 注意 `(?<![A-Za-z0-9])`：否则 "https:/" 里的 "s:/" 会被当成 Windows 盘符，
 # 所有 http 引用都会被误判成本地文件（实测 smoke_eval 全变 kb）。
 _LOCAL_PATH = re.compile(r"(?<![A-Za-z0-9])(?:[A-Za-z]:[\\/]|(?<![:/\w])/)[^\s（）()<>|\"']+")
+# 知识库引用用的是**相对路径**（可移植）：`标题 — reports/x.md · 锚点（kb, 日期）`。
+# 只有绝对路径的正则匹配不到它，实测会把正文 121 个脚注全判成"没有引用"。
+
+
+def _kb_target(line: str) -> str:
+    """Extract ``<path> · <anchor>`` from a knowledge-base reference line.
+
+    结构化解析而不是纯正则：标题里常带全角括号（``标题（1.2 节）``），
+    正则会把标题也吞进 target（实测 28 条全判 missing）。
+    """
+    idx = line.find("（kb")
+    if idx < 0:
+        idx = line.find("(kb")
+    if idx < 0:
+        return ""
+    left = line[:idx].rstrip("）) ").strip()
+    target = left.rsplit("—", 1)[-1].strip(" —")
+    return target if "/" in target or "\\" in target else ""
 
 
 @dataclass
@@ -73,6 +91,10 @@ def extract_citations(report: str) -> list[Citation]:
             rest = re.split(r"[（(]", rest, maxsplit=1)[0].strip()
             target = f"{path_part} · {rest}" if rest else path_part
             out.append(Citation(int(m.group(1)), line, target, "kb", target))
+            continue
+        kb_target = _kb_target(line)
+        if kb_target:
+            out.append(Citation(int(m.group(1)), line, kb_target, "kb", kb_target))
             continue
         url_m = _URL.search(line)
         if not url_m:
@@ -117,10 +139,15 @@ async def _default_verify_kb(_client: httpx.AsyncClient, target: str) -> Verdict
     appears in it". target format: ``<path> · <anchor>``.
     """
     path_part, _, anchor = target.partition(" · ")
-    path = Path(path_part.strip())
+    from deep_research.core.kb import resolve_kb_path
+
+    path = resolve_kb_path(path_part.strip())
     if not path.exists():
         return "missing"
-    heading = anchor.split(" · ")[0].strip().lstrip("#").strip()
+    # 模型写锚点很不规矩：`## 摘要 · L3-5`、`## 摘要 L3-8`、甚至用 `；`
+    # 串起多段（实测 9/38 因此被误判 missing）。这里只取第一段、剥掉行号再比。
+    anchor = anchor.split("；")[0].split(";")[0].strip()
+    heading = re.split(r"\s*L\d+-\d+\s*$", anchor)[0].strip().lstrip("#").strip()
     if not heading:
         return "exists"
     try:
@@ -138,7 +165,7 @@ async def _default_verify_kb(_client: httpx.AsyncClient, target: str) -> Verdict
         return "exists"
 
     # 兜底：锚点带行号且文件确实有那么多行 → 位置可定位
-    m = re.search(r" · L(\d+)-(\d+)$", target)
+    m = re.search(r"L(\d+)-(\d+)", anchor)
     if m:
         start, end = int(m.group(1)), int(m.group(2))
         if 0 < start <= end <= len(text.splitlines()):

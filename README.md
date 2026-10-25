@@ -46,6 +46,8 @@ uv run python -m deep_research.cli run "ReAct 与 Chain-of-Thought 的关键区�
 | fastembed 只认 `<cache>/fast-<name>/` | HF 的 `models--...` 目录在离线模式下被判「缓存不完整」 | 构建期把快照复制成 `fast-` 布局（Dockerfile） |
 | MCP 子进程的环境被整体替换 | `stdio_client` 用 `get_default_environment()`，`HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 全丢 → 去 huggingface.co（不可达） | 代码注入 HF 变量（`_child_env`） |
 | 同上，**`DR_*` 配置也会丢** | 子进程退回 `localhost:5432`，容器里连不上数据库 → `Connection closed` | 继承 `DR_*` 前缀变量 |
+| 知识库存了宿主机**绝对路径** | 容器里同一文件不存在 → 离线证据全被丢弃（cite/cover 归零） | 入库存相对路径，解析时拼 `DR_KB_ROOT`（默认当前目录） |
+| 引用行是相对路径 | 提取器只认绝对路径/URL → 正文 121 个脚注被判"没有引用" | 增加 `kb` 相对路径解析（按 `（kb` 标记结构化取 target） |
 
 验证方式：清空父进程的 `HF_ENDPOINT`/`FASTEMBED_CACHE_PATH` 后，
 容器内 `search_knowledge_base` 仍能返回带出处的片段（不发起任何外网请求）。

@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import logging
 import math
+from pathlib import Path
 import re
 from dataclasses import dataclass
 from typing import Any
@@ -54,6 +55,19 @@ class Hit:
     anchor: str
     text: str
     score: float
+
+
+def resolve_kb_path(raw: str) -> Path:
+    """Resolve a stored kb path to a real file, tolerating absolute or relative.
+
+    知识库里存的是**相对路径**（相对 ``DR_KB_ROOT``），这样同一份库在宿主机和
+    容器里都能用——实测踩过：入库时存了宿主机的绝对路径，容器里那个文件不存在，
+    离线证据被全部丢弃（cite/cover 归零）。
+    """
+    p = Path(raw)
+    if p.is_absolute():
+        return p
+    return Path(get_settings().kb_root).resolve() / p
 
 
 def _pgvec(vec: list[float]) -> str:
