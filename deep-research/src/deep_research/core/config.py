@@ -114,6 +114,11 @@ class Settings(BaseSettings):
     # 知识库表名：不同 embedding 维度必须分表（zh=512 / en=384 / m3=1024），
     # A/B 对比模型时靠它切换，不改代码。
     kb_table: str = "kb_chunks"
+    # 查询扩展：把问题改写成 2-3 条术语查询再融合检索。
+    # 实测（FinanceBench 21 题）把召回@50 从 76% 提到 90%——失败主因是"问题用自然语言、
+    # 页面上只有科目名"，没有共同词向量也匹配不上。代价：每次检索多 1 次 LLM 调用（约 +1-2s）。
+    query_expansion: bool = False
+    query_expansion_n: int = 3
 
     # ---- persistence ----
     checkpoint_db_path: str = "checkpoints.sqlite3"  # 仅当 backend=sqlite 时使用

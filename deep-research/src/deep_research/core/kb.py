@@ -17,6 +17,7 @@ Design notes
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import math
@@ -332,8 +333,50 @@ class KBStore:
             await conn.commit()
         return len(rows)
 
+    async def _expand(self, query: str) -> list[str]:
+        """Rewrite the query into several term-level variants (query expansion).
+
+        为什么不放在 embed 阶段做：这不是"换个更好的向量"，而是**换问法**。
+        实测失败的典型形态是"问题问『流动性是否健康』、页面上只有 Current ratio"——
+        两者没有共同词，任何 embedding 都救不了；把问题改写成财务术语才行。
+        """
+        from deep_research.core.llm import get_chat_model
+
+        prompt = (
+            "把下面这道检索问题改写成 3 条检索用查询，要求：\n"
+            "- 每条都要包含可能出现在原文里的具体术语/指标名（不要照抄原句）\n"
+            "- 覆盖不同的可能表述（同义词、上位词、英文术语）\n"
+            "- 每行一条，不要编号，不要解释\n\n"
+            f"问题：{query}"
+        )
+        try:
+            model = get_chat_model("planner")
+            resp = await model.ainvoke(prompt)
+        except Exception as exc:  # noqa: BLE001 - 扩展失败就退回原查询
+            logger.warning("query 扩展失败，退回单查询: %s", exc)
+            return []
+        lines = [ln.strip(" -•\t") for ln in str(resp.content).splitlines() if ln.strip()]
+        return [ln for ln in lines if len(ln) > 6][: get_settings().query_expansion_n]
+
+    @staticmethod
+    def _merge_hits(groups: list[list[Hit]], k: int = RRF_K) -> list[Hit]:
+        """RRF-fuse several result lists (dedup by source_path#anchor)."""
+        scores: dict[str, float] = {}
+        first: dict[str, Hit] = {}
+        for hits in groups:
+            for rank, h in enumerate(hits, 1):
+                key = f"{h.source_path}#{h.anchor}"
+                scores[key] = scores.get(key, 0.0) + 1.0 / (k + rank)
+                first.setdefault(key, h)
+        ordered = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
+        return [first[key] for key, _ in ordered]
+
     async def search(
-        self, query: str, top_k: int = 8, rerank: bool | None = None
+        self,
+        query: str,
+        top_k: int = 8,
+        rerank: bool | None = None,
+        expand: bool | None = None,
     ) -> list[Hit]:
         """Hybrid search: dense + lexical, fused by RRF.
 
@@ -345,6 +388,27 @@ class KBStore:
         """
         if not query.strip():
             return []
+        want_expand = get_settings().query_expansion if expand is None else expand
+        if want_expand:
+            variants = await self._expand(query)
+            if variants:
+                # 多路检索时每路多取一些候选，融合后再截断/精排。
+                # 四路彼此独立，必须并发：串行会把单次检索从 0.6s 拖到 4.5s。
+                groups = list(
+                    await asyncio.gather(
+                        *[
+                            self.search(q, top_k=top_k * 2, rerank=False, expand=False)
+                            for q in [query, *variants]
+                        ]
+                    )
+                )
+                merged = self._merge_hits(groups)[: max(top_k, get_settings().rerank_candidates)]
+                if (rerank is None and self._rerank_enabled()) or rerank:
+                    try:
+                        return await self._rerank(query, merged, top_k)
+                    except Exception as exc:  # noqa: BLE001
+                        logger.warning("rerank 失败，退回融合结果: %s", exc)
+                return merged[:top_k]
         vec = embed_query(query)
         dense = await self._dense(vec, top_k * 4)
         sparse: list[tuple[str, float]] = []

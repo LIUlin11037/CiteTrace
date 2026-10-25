@@ -14,7 +14,7 @@
 | Human-in-the-loop | Planner 产出计划后中断，人工批准才继续；支持编辑计划后恢复（CLI / Web 双入口）                                                                                          |
 | MCP 工具生态          | arXiv / GitHub / Web / 本地 KB 四类 stdio server，经 `langchain-mcp-adapters` 加载，**单 server 故障不影响整体**                                                 |
 | 双信源（online / offline） | 同一套编排与核验，只换「Researcher 手上有哪些工具」：联网取证，或只读本地知识库（网络类 server **装载前就被过滤**）                                                            |
-| 知识库 RAG           | 页级切块（PDF 带页码锚点）→ 向量 / 全文 / 中文字符二元组**三路 RRF 融合** → 可选精排；embedding 与 rerank 均可切本地或 API；引用核验到**文件 + 页码/章节** |
+| 知识库 RAG           | 页级切块（PDF 带页码锚点）→ 向量 / 全文 / 中文字符二元组**三路 RRF 融合** → 可选 **query 扩展**与精排；embedding / rerank 均可切本地或 API；引用核验到**文件 + 页码/章节** |
 | 按角色模型路由           | 每个角色独立配置 model / base_url / api_key，可跨厂商：把贵模型用在"调用少、质量敏感"的环节（如 Critic 审校），把便宜模型用在"费 token 的跑量"环节（如 Researcher）                            |
 | 长期记忆              | PostgreSQL + pgvector（HNSW），Writer 落库摘要与来源清单，Planner 下次召回（embedding 默认本地 fastembed，也可切 API，见配置示例）                                                   |
 | 可观测性              | Langfuse：一次调研一条 trace（node / LLM / MCP 工具三层 span，含 token 与成本），session 归并中断恢复产生的多段执行，tags 标注入口与题目；**评测指标自动回挂为 trace score**，可按分数排序并下钻到该次运行 |
