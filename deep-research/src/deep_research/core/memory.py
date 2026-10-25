@@ -50,7 +50,45 @@ def _get_embedder() -> Any:
     return _embedder
 
 
+def _embed_api(texts: list[str], text_type: str = "document") -> list[list[float]]:
+    """Embed via an OpenAI-compatible /embeddings endpoint (DashScope 等).
+
+    ``text_type``: DashScope 的 v3/v4 支持 query/document 区分，比"查询加前缀"
+    更干净；不支持该参数的服务会忽略它（多余字段不会报错的服务居多，报错的
+    情况下把 DR_EMBEDDING_API_STRICT 关掉即可）。
+    """
+    import httpx
+
+    s = get_settings()
+    if not s.embedding_api_key:
+        raise RuntimeError(
+            "DR_EMBEDDING_PROVIDER=api 但 DR_EMBEDDING_API_KEY 为空："
+            "请在 .env 里配置（如 DashScope 的 sk-...）"
+        )
+    url = s.embedding_api_base.rstrip("/") + "/embeddings"
+    headers = {"Authorization": f"Bearer {s.embedding_api_key}"}
+    out: list[list[float]] = []
+    step = max(1, s.embedding_api_batch)
+    with httpx.Client(timeout=60.0) as client:
+        for i in range(0, len(texts), step):
+            batch = texts[i : i + step]
+            payload = {
+                "model": s.embedding_api_model,
+                "input": batch,
+                "dimensions": s.embedding_api_dim,
+                "encoding_format": "float",
+                "text_type": text_type,
+            }
+            resp = client.post(url, json=payload, headers=headers)
+            resp.raise_for_status()
+            data = sorted(resp.json()["data"], key=lambda d: d.get("index", 0))
+            out.extend([[float(x) for x in d["embedding"]] for d in data])
+    return out
+
+
 def embed_texts(texts: list[str]) -> list[list[float]]:
+    if get_settings().embedding_provider == "api":
+        return _embed_api(texts, text_type="document")
     return [list(map(float, v)) for v in _get_embedder().embed(texts)]
 
 
@@ -61,7 +99,13 @@ _QUERY_PREFIX = "为这个句子生成表示以用于检索相关文章："
 
 
 def embed_query(text: str) -> list[float]:
-    """Embed a search query with the retriever-side instruction prefix."""
+    """Embed a search query.
+
+    local：BGE 系列需要检索指令前缀；api：用 text_type=query，不要再加前缀
+    （加了反而偏离该模型的查询分布）。
+    """
+    if get_settings().embedding_provider == "api":
+        return _embed_api([text], text_type="query")[0]
     return embed_texts([_QUERY_PREFIX + text])[0]
 
 

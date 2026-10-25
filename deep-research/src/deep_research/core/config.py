@@ -128,6 +128,23 @@ class Settings(BaseSettings):
     # Off by default: everything runs without PG. Flip on once PG is up.
     enable_long_term_memory: bool = False
     memory_namespace: str = "research"
+    # embedding 走本地还是 API：与信源模式**正交**（offline 只约束信源，
+    # 不约束算力）。本地小模型在英文财报上明显不足，API 可用 Qwen3-Embedding 系。
+    embedding_provider: Literal["local", "api"] = "local"
+    embedding_api_base: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    embedding_api_key: str = ""
+    embedding_api_model: str = "text-embedding-v4"
+    embedding_api_dim: int = 1024
+    embedding_api_batch: int = 10  # DashScope 单次上限 10 条
+
+    # ---- rerank（可选）----
+    # 检索失败常常不是"没找到"，而是"正确的页排在 30 位"。rerank 直接治这个。
+    # 默认关闭：没有 rerank 服务时检索行为完全不变。
+    rerank_provider: Literal["none", "api"] = "none"
+    rerank_api_base: str = ""
+    rerank_api_key: str = ""
+    rerank_api_model: str = ""
+    rerank_candidates: int = 50  # 先取多少条候选送去精排
     memory_embedding_model: str = "BAAI/bge-small-zh-v1.5"  # fastembed, 512d
     memory_embedding_dim: int = 512
     memory_recall_limit: int = 5
