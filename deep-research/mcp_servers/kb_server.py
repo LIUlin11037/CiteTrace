@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 
 from mcp.server.fastmcp import FastMCP
 
@@ -34,7 +35,9 @@ from deep_research.core.kb import get_kb_store
 # Windows 默认的 ProactorEventLoop 上（子进程里同样如此）。
 use_compatible_event_loop()
 
-logging.basicConfig(level=logging.INFO)
+# 默认只输出警告：这个 server 的 INFO 日志（每次工具调用都会打）会淹没
+# 调用方的正常输出。排查时用 DR_KB_LOG_LEVEL=INFO 打开。
+logging.basicConfig(level=os.environ.get("DR_KB_LOG_LEVEL", "WARNING").upper())
 logger = logging.getLogger("kb_server")
 
 mcp = FastMCP("kb")
