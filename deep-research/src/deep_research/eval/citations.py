@@ -168,6 +168,23 @@ async def _default_verify_kb(_client: httpx.AsyncClient, target: str) -> Verdict
     path = resolve_kb_path(path_part.strip())
     if not path.exists():
         return "missing"
+
+    # PDF 的锚点是页码（p12 / p12#2），不是章节标题：标题匹配在 PDF 上必然失败
+    # （实测端到端 21 题 cite 只有 0–21%，全是这个原因）。改为校验页码是否存在。
+    page_nums = re.findall(r"p(\d+)", anchor)
+    if page_nums or path.suffix.lower() == ".pdf":
+        if not page_nums:
+            return "unverifiable"  # 指向 PDF 却没有页码，无法定位
+        try:
+            from pypdf import PdfReader
+
+            total = len(PdfReader(str(path)).pages)
+        except Exception:  # noqa: BLE001
+            return "unverifiable"
+        # 模型常写 "p58 / p49" 或 "p67 (NOTE 4 …)"：把出现的页码全部校验
+        return (
+            "exists" if all(0 < int(n) <= total for n in page_nums) else "missing"
+        )
     # 模型写锚点很不规矩：`## 摘要 · L3-5`、`## 摘要 L3-8`、甚至用 `；`
     # 串起多段（实测 9/38 因此被误判 missing）。这里只取第一段、剥掉行号再比。
     anchor = anchor.split("；")[0].split(";")[0].strip()

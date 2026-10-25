@@ -1,0 +1,256 @@
+{
+  "questions": [
+    {
+      "id": "fb-01",
+      "topic": "Does AMD have a reasonably healthy liquidity profile based on its quick ratio for FY22? If the quick ratio is not relevant to measure liquidity, please state that and explain why.",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Consolidated Balance Sheets   December 31, 2022 December 25, 2021   (In millions, except par value amounts) ASSETS Curre）"
+      ],
+      "_gold_answer": "Yes. The quick ratio is 1.57, calculated as (cash and cash equivalents+Short term investments+Accounts receivable, net+receivables from related parties)/ (current liabilities).",
+      "_doc": "AMD_2022_10K",
+      "_page": 55
+    },
+    {
+      "id": "fb-02",
+      "topic": "What are the major products and services that AMD sells as of FY22?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「AMD sells server microprocessors (CPUs) and graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive System-on-Chip (SoC) products for data centers; CPUs, accelerated processing units (APUs) that integrate CPUs and GPUs, and chipsets for desktop and notebook personal computers; discrete GPUs, and semi-custom SoC products and development services; and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Overview We are a global semiconductor company primarily offering:  server microprocessors (CPUs) and graphics processin）"
+      ],
+      "_gold_answer": "AMD sells server microprocessors (CPUs) and graphics processing units (GPUs), data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive System-on-Chip (SoC) products for data centers; CPUs, accelerated processing units (APUs) that integrate CPUs and GPUs, and chipsets for desktop and notebook personal computers; discrete GPUs, and semi-custom SoC products and development services; and embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products.",
+      "_doc": "AMD_2022_10K",
+      "_page": 3
+    },
+    {
+      "id": "fb-03",
+      "topic": "What drove revenue change as of the FY22 for AMD?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「In 2022, AMD reported Higher sales of their EPYC server processors, higher semi-custom product sales, and the inclusion of Xilinx embedded product sales」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase i）"
+      ],
+      "_gold_answer": "In 2022, AMD reported Higher sales of their EPYC server processors, higher semi-custom product sales, and the inclusion of Xilinx embedded product sales",
+      "_doc": "AMD_2022_10K",
+      "_page": 42
+    },
+    {
+      "id": "fb-04",
+      "topic": "What drove operating margin change as of the FY22 for AMD? If operating margin is not a useful metric for a company like this, then please state that and explain why.",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「The decrease in AMD's operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operat）"
+      ],
+      "_gold_answer": "The decrease in AMD's operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition",
+      "_doc": "AMD_2022_10K",
+      "_page": 42
+    },
+    {
+      "id": "fb-05",
+      "topic": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for AMD in FY22?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「In 2022, AMD brought in the most cashflow from Operations」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Advanced Micro Devices, Inc. Consolidated Statements of Cash Flows Year Ended December 31, 2022 December 25, 2021 Decemb）"
+      ],
+      "_gold_answer": "In 2022, AMD brought in the most cashflow from Operations",
+      "_doc": "AMD_2022_10K",
+      "_page": 57
+    },
+    {
+      "id": "fb-06",
+      "topic": "From FY21 to FY22, excluding Embedded, in which AMD reporting segment did sales proportionally increase the most?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Data Center」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：Year Ended December 31, 2022 December 25, 2021 (In millions) Net revenue: Data Center $ 6,043  $ 3,694  Client 6,201  6,）"
+      ],
+      "_gold_answer": "Data Center",
+      "_doc": "AMD_2022_10K",
+      "_page": 47
+    },
+    {
+      "id": "fb-07",
+      "topic": "Did AMD report customer concentration in FY22?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes, one customer accounted for 16% of consolidated net revenue」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMD_2022_10K（原文线索：One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this custo）"
+      ],
+      "_gold_answer": "Yes, one customer accounted for 16% of consolidated net revenue",
+      "_doc": "AMD_2022_10K",
+      "_page": 11
+    },
+    {
+      "id": "fb-08",
+      "topic": "Which debt securities are registered to trade on a national securities exchange under American Express' name as of 2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「There are none」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：Registrants telephone number, including area code: (212) 640-2000 Securities registered pursuant to Section 12(b) of the）"
+      ],
+      "_gold_answer": "There are none",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 0
+    },
+    {
+      "id": "fb-09",
+      "topic": "What are the geographies that American Express primarily operates in as of 2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「United States, EMEA, APAC, and LACC」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：(Millions) United States EMEA APAC LACC Other Unallocated Consolidated 2022 Total revenues net of interest expense $ 41,）"
+      ],
+      "_gold_answer": "United States, EMEA, APAC, and LACC",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 154
+    },
+    {
+      "id": "fb-10",
+      "topic": "Does AMEX have an improving operating margin profile as of 2022? If operating margin is not a useful metric for a company like this, then state that and explain why.",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Performance is not measured through operating margin」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：CONSOLIDATED STATEMENTS OF INCOME Year Ended December 31 (Millions, except per share amounts) 2022 2021 2020 Revenues No）"
+      ],
+      "_gold_answer": "Performance is not measured through operating margin",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 95
+    },
+    {
+      "id": "fb-11",
+      "topic": "What drove gross margin change as of the FY2022 for American Express? If gross margin is not a useful metric for a company like this, then please state that and explain why.",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Performance is not measured through gross margin」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：CONSOLIDATED STATEMENTS OF INCOME Year Ended December 31 (Millions, except per share amounts) 2022 2021 2020 Revenues No）"
+      ],
+      "_gold_answer": "Performance is not measured through gross margin",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 95
+    },
+    {
+      "id": "fb-12",
+      "topic": "How much has the effective tax rate of American Express changed between FY2021 and FY2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「The effective tax rate for American Express has changed/dropped from 24.6% in FY 2021 to 21.6% in FY 2022.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE Years Ended December 31, Change Change (Millions, except percentages, per shar）"
+      ],
+      "_gold_answer": "The effective tax rate for American Express has changed/dropped from 24.6% in FY 2021 to 21.6% in FY 2022.",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 43
+    },
+    {
+      "id": "fb-13",
+      "topic": "What was the largest liability in American Express's Balance Sheet in 2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Customer deposits」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：CONSOLIDATED BALANCE SHEETS December 31 (Millions, except share data) 2022 2021 Assets Cash and cash equivalents Cash an）"
+      ],
+      "_gold_answer": "Customer deposits",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 97
+    },
+    {
+      "id": "fb-14",
+      "topic": "Was American Express able to retain card members during 2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Membe）"
+      ],
+      "_gold_answer": "Yes",
+      "_doc": "AMERICANEXPRESS_2022_10K",
+      "_page": 44
+    },
+    {
+      "id": "fb-15",
+      "topic": "Are there any product categories / service categories that represent more than 20% of Boeing's revenue for FY2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes. Boeing has product and service categories that represent more than 20% of Boeing's revenue for FY2022. These categories are Commercial Airplanes which comprises 39% of total revenue, Defence which comprises 35% of total revenue and Services which comprises 26% of total revenue.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：The Boeing Company and Subsidiaries Notes to the Consolidated Financial Statements Summary of Business Segment Data (Dol）"
+      ],
+      "_gold_answer": "Yes. Boeing has product and service categories that represent more than 20% of Boeing's revenue for FY2022. These categories are Commercial Airplanes which comprises 39% of total revenue, Defence which comprises 35% of total revenue and Services which comprises 26% of total revenue.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 61
+    },
+    {
+      "id": "fb-16",
+      "topic": "Has Boeing reported any materially important ongoing legal battles from FY2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 an）"
+      ],
+      "_gold_answer": "Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 112
+    },
+    {
+      "id": "fb-17",
+      "topic": "Does Boeing have an improving gross margin profile as of FY2022? If gross margin is not a useful metric for a company like this, then state that and explain why.",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：The Boeing Company and Subsidiaries Consolidated Statements of Operations (Dollars in millions, except per share data)  ）"
+      ],
+      "_gold_answer": "Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 54
+    },
+    {
+      "id": "fb-18",
+      "topic": "Who are the primary customers of Boeing as of FY2022?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Boeing's primary customers as of FY2022 are a limited number of commercial airlines and the US government. The US government accounted for 40% of Boeing's total revenues in FY2022.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：We derive a significant portion of our revenues from a limited number of commercial airlines.）"
+      ],
+      "_gold_answer": "Boeing's primary customers as of FY2022 are a limited number of commercial airlines and the US government. The US government accounted for 40% of Boeing's total revenues in FY2022.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 7
+    },
+    {
+      "id": "fb-19",
+      "topic": "Is Boeing's business subject to cyclicality?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Yes, Boeing's business is subject to cyclicality due to its exposure to the airline industry which is a cyclical industry.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：Historically, the airline industry has been cyclical and very competitive and has experienced significant profit swings ）"
+      ],
+      "_gold_answer": "Yes, Boeing's business is subject to cyclicality due to its exposure to the airline industry which is a cyclical industry.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 7
+    },
+    {
+      "id": "fb-20",
+      "topic": "What production rate changes is Boeing forecasting for FY2023?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：We must minimize disruption caused by production changes, achieve operational stability and implement productivity impro）"
+      ],
+      "_gold_answer": "Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 8
+    },
+    {
+      "id": "fb-21",
+      "topic": "How does Boeing's effective tax rate in FY2022 compare to FY2021?",
+      "subdomain": "finance",
+      "expected_key_points": [
+        "最终答案与「Effective tax rate in FY2022 was 0.62%, compared to  -14.76% in FY2021.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：The Boeing Company and Subsidiaries Consolidated Statements of Operations (Dollars in millions, except per share data)  ）"
+      ],
+      "_gold_answer": "Effective tax rate in FY2022 was 0.62%, compared to  -14.76% in FY2021.",
+      "_doc": "BOEING_2022_10K",
+      "_page": 54
+    }
+  ]
+}
