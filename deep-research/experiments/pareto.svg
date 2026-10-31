@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420">
+<rect width="680" height="420" fill="#FFFFFF"/>
+<text x="64" y="22" font-size="15" font-weight="500" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">Retrieval configs: latency vs hit@10 (n=21 questions)</text>
+<line x1="64" y1="372.0" x2="548" y2="372.0" stroke="#E8E6E0" stroke-width="0.5"/>
+<text x="54" y="376.0" font-size="11" fill="#888780" text-anchor="end" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">0%</text>
+<line x1="64" y1="282.5" x2="548" y2="282.5" stroke="#E8E6E0" stroke-width="0.5"/>
+<text x="54" y="286.5" font-size="11" fill="#888780" text-anchor="end" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">20%</text>
+<line x1="64" y1="193.0" x2="548" y2="193.0" stroke="#E8E6E0" stroke-width="0.5"/>
+<text x="54" y="197.0" font-size="11" fill="#888780" text-anchor="end" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">40%</text>
+<line x1="64" y1="103.5" x2="548" y2="103.5" stroke="#E8E6E0" stroke-width="0.5"/>
+<text x="54" y="107.5" font-size="11" fill="#888780" text-anchor="end" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">60%</text>
+<line x1="64" y1="372" x2="548" y2="372" stroke="#B4B2A9" stroke-width="0.8"/>
+<line x1="64" y1="34" x2="64" y2="372" stroke="#B4B2A9" stroke-width="0.8"/>
+<text x="64.0" y="390" font-size="11" fill="#888780" text-anchor="middle" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">0s</text>
+<text x="188.3" y="390" font-size="11" fill="#888780" text-anchor="middle" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">1s</text>
+<text x="312.5" y="390" font-size="11" fill="#888780" text-anchor="middle" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">2s</text>
+<text x="436.8" y="390" font-size="11" fill="#888780" text-anchor="middle" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">3s</text>
+<text x="306" y="410" font-size="12" fill="#5F5E5A" text-anchor="middle" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">latency per question (s)</text>
+<path d="M77.1,308.1 L115.9,201.5 L189.0,137.6 L262.2,95.0" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="5 3"/>
+<circle cx="77.1" cy="308.1" r="6" fill="#1D9E75" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="217.5" cy="265.4" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="144.9" cy="244.1" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="292.3" cy="158.9" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="189.0" cy="137.6" r="6" fill="#1D9E75" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="345.1" cy="137.6" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="115.9" cy="201.5" r="6" fill="#1D9E75" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="382.4" cy="137.6" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="202.7" cy="137.6" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="496.1" cy="95.0" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="262.2" cy="95.0" r="6" fill="#1D9E75" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="477.3" cy="95.0" r="4.5" fill="#85B7EB" fill-opacity="0.9" stroke="#FFFFFF" stroke-width="1"/>
+<text x="86.1" y="312.1" font-size="10.5" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">local/off/exp0</text>
+<text x="198.0" y="141.6" font-size="10.5" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">local/p100/exp0</text>
+<text x="124.9" y="205.5" font-size="10.5" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">api/off/exp0</text>
+<text x="271.2" y="99.0" font-size="10.5" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">api/p100/exp0</text>
+<text x="505.1" y="99.0" font-size="10.5" fill="#2C2C2A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">api/p50/exp3</text>
+<circle cx="564" cy="40" r="4.5" fill="#1D9E75"/><text x="576" y="44" font-size="11" fill="#444441" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">Pareto front</text>
+<circle cx="564" cy="62" r="4.5" fill="#85B7EB"/><text x="576" y="66" font-size="11" fill="#444441" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">dominated</text>
+<text x="560" y="96" font-size="10.5" fill="#5F5E5A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">n=21 questions</text><text x="560" y="112" font-size="10.5" fill="#5F5E5A" style="font-family:system-ui,-apple-system,Segoe UI,sans-serif">3 FinanceBench 10-K</text>
+</svg>
