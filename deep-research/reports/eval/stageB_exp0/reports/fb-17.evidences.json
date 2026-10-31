@@ -1,0 +1,600 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company and Subsidiaries — Consolidated Statements of Operations (FY2022 10-K, p.53)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55",
+    "published_at": null,
+    "key_points": [
+      "Total revenues: FY2022 $66,608M; FY2021 $62,286M; FY2020 $58,158M",
+      "Total costs and expenses: FY2022 $63,106M; FY2021 $59,269M; FY2020 $63,843M",
+      "Loss from operations: FY2022 ($3,547)M; FY2021 ($2,902)M; FY2020 ($12,767)M",
+      "The consolidated statement of operations contains no gross profit or gross margin line item; it goes from Total costs and expenses directly to Loss from operations",
+      "Total costs and expenses includes 'Boeing Capital interest expense' ($28M/$32M/$43M), i.e. a financing cost is embedded in the cost block",
+      "Cost of products: FY2022 ($53,969)M; FY2021 ($49,954)M; FY2020 ($54,568)M; Cost of services: FY2022 ($9,109)M; FY2021 ($9,283)M; FY2020 ($9,232)M"
+    ],
+    "raw_excerpt": "Total revenues 66,608 62,286 58,158 / Cost of products (53,969) (49,954) (54,568) / Cost of services (9,109) (9,283) (9,232) / Boeing Capital interest expense (28) (32) (43) / Total costs and expenses (63,106) (59,269) (63,843) / 3,502 3,017 (5,685) / (Loss)/income from operating investments, net (16) 210 9 / General and administrative expense (4,187) (4,157) (4,817) / Research and development expense, net (2,852) (2,249) (2,476) / Gain on dispositions, net 6 277 202 / Loss from operations (3,547) (2,902) (12,767)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Cost of sales as a % of Revenues (MD&A, p.26)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p28",
+    "published_at": null,
+    "key_points": [
+      "Cost of sales as a % of Revenues: FY2022 94.7%; FY2021 95.2%; FY2020 109.8%",
+      "Implied '1 minus cost of sales %' (closest available proxy for a company-level gross margin): FY2022 5.3%; FY2021 4.8%; FY2020 -9.8%",
+      "Year-over-year direction: FY2022 improved 0.5pp vs FY2021; FY2021 improved 14.6pp vs FY2020",
+      "Cost of sales dollars: FY2022 $63,106M; FY2021 $59,269M; FY2020 $63,843M",
+      "The 10-K itself characterizes FY2022 as 'remained largely consistent in 2022 compared to 2021'",
+      "The 10-K attributes the FY2021 improvement vs FY2020 primarily to higher earnings charges at BCA and BGS in 2020 and higher revenues in 2021"
+    ],
+    "raw_excerpt": "Cost of sales $63,106 $59,269 $3,837 $59,269 $63,843 ($4,574) / Cost of sales as a % of Revenues 94.7 % 95.2 % (0.5)% 95.2 % 109.8 % (14.6)% ... Cost of sales as a percentage of Revenues remained largely consistent in 2022 compared to 2021. ... Cost of sales as a percentage of Revenues decreased in 2021 compared to 2020 primarily due to higher earnings charges at BCA and BGS in 2020 and higher revenues in 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Consolidated Results of Operations: GAAP and Core operating margins (p.22)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": null,
+    "key_points": [
+      "GAAP operating margins: FY2022 (5.3)%; FY2021 (4.7)%; FY2020 (22.0)%",
+      "Core operating margins (non-GAAP): FY2022 (7.0)%; FY2021 (6.5)%; FY2020 (24.3)%",
+      "Year-over-year direction: FY2022 deteriorated vs FY2021 by 0.6pp on a GAAP basis and 0.5pp on a core basis",
+      "Year-over-year direction: FY2021 improved sharply vs FY2020 (17.3pp GAAP; 17.8pp core)",
+      "Core operating loss: FY2022 ($4,690)M; FY2021 ($4,075)M; FY2020 ($14,150)M",
+      "Core measures exclude certain components of pension and other postretirement benefit expense"
+    ],
+    "raw_excerpt": "GAAP / Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % ... Non-GAAP / Core operating loss ($4,690) ($4,075) ($14,150) / Core operating margins (7.0 %) (6.5 %) (24.3 %) ... These measures exclude certain components of pension and other postretirement benefit expense."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note: Summary of Business Segment Data (p.58)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": null,
+    "key_points": [
+      "Segment revenues (FY2022 / FY2021 / FY2020): Commercial Airplanes $25,867M / $19,493M / $16,162M; Defense, Space & Security $23,162M / $26,540M / $26,257M; Global Services $17,611M / $16,328M / $15,543M",
+      "Segment operating earnings (FY2022 / FY2021 / FY2020): Commercial Airplanes ($2,370)M / ($6,475)M / ($13,847)M; Defense, Space & Security ($3,544)M / $1,544M / $1,539M; Global Services $2,727M / $2,017M / $450M",
+      "Boeing Capital operating earnings: $29M / $106M / $63M",
+      "Segment operating loss total: ($3,158)M / ($2,808)M / ($11,795)M",
+      "Unallocated items, eliminations and other: ($1,532)M / ($1,267)M / ($2,355)M",
+      "FAS/CAS service cost adjustment: $1,143M / $1,173M / $1,383M"
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total revenues $66,608 $62,286 $58,158 / (Loss)/earnings from operations: Commercial Airplanes ($2,370) ($6,475) ($13,847) / Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450 / Boeing Capital 29 106 63 / Segment operating loss (3,158) (2,808) (11,795)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Commercial Airplanes segment Results of Operations (p.29)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": null,
+    "key_points": [
+      "BCA operating margins: FY2022 (9.2)%; FY2021 (33.2)%; FY2020 (85.7)%",
+      "Year-over-year direction: FY2022 improved 24.0pp vs FY2021; FY2021 improved 52.5pp vs FY2020; margins remain negative in all three years",
+      "BCA revenues: FY2022 $25,867M (39% of total company revenues); FY2021 $19,493M (31%); FY2020 $16,162M (28%)",
+      "BCA loss from operations: FY2022 $2,370M; FY2021 $6,475M; FY2020 $13,847M",
+      "FY2022 abnormal production costs were $1,753M, including $1,240M for the 787 program, $325M for the 777X program and $188M for the 737 program",
+      "FY2021 loss reflects a $3,460M reach-forward loss on the 787 program plus abnormal production costs of $1,887M (737) and $468M (787)",
+      "FY2020 loss reflects a $6,493M reach-forward loss on the 777X program, lower deliveries and lower program margins from COVID-19",
+      "BCA deliveries: 480 in FY2022; 340 in FY2021; 157 in FY2020"
+    ],
+    "raw_excerpt": "Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % / Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)% ... Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Global Services segment Results of Operations (p.38)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p40",
+    "published_at": null,
+    "key_points": [
+      "BGS operating margins: FY2022 15.5%; FY2021 12.4%; FY2020 2.9%",
+      "Year-over-year direction: FY2022 improved 3.1pp vs FY2021; FY2021 improved 9.5pp vs FY2020; improving in both years",
+      "BGS revenues: FY2022 $17,611M (26% of total company revenues); FY2021 $16,328M (26%); FY2020 $15,543M (27%)",
+      "BGS earnings from operations: FY2022 $2,727M; FY2021 $2,017M; FY2020 $450M",
+      "BGS earnings increased $710M in FY2022 vs FY2021, primarily on higher commercial services volume and favorable mix, partly offset by lower government services performance",
+      "BGS FY2021 increase of $1,567M vs FY2020 was primarily due to charges incurred in 2020 from COVID-19 impacts plus higher commercial services volume"
+    ],
+    "raw_excerpt": "Revenues $17,611 $16,328 $15,543 / % of total company revenues 26 % 26 % 27 % / Earnings from operations $2,727 $2,017 $450 / Operating margins 15.5 % 12.4 % 2.9 % ... BGS earnings from operations in 2022 increased by $710 million compared with 2021, primarily due to higher commercial services volume and favorable mix, partially offset by lower government services performance."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Defense, Space & Security segment Results of Operations (p.36)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p38",
+    "published_at": null,
+    "key_points": [
+      "BDS loss from operations in FY2022 was $3,544M, a decrease of $5,088M versus FY2021 earnings from operations of $1,544M",
+      "The FY2022 BDS decline is primarily due to cumulative contract catch-up adjustments being $4,284M more unfavorable in 2022 than 2021",
+      "FY2022 BDS development program charges include VC-25B $1,452M, KC-46A Tanker $1,374M, MQ-25 $579M, T-7A Red Hawk Production Options $552M, T-7A Red Hawk EMD $203M, Commercial Crew $288M",
+      "During FY2020 BDS recorded charges on KC-46A Tanker ($1,320M) and VC-25B ($168M)",
+      "BDS revenues decreased $3,378M in FY2022 vs FY2021 primarily due to charges on development programs, unfavorable performance across other defense programs, and lower P-8 and weapons volume",
+      "BDS revenues increased $283M in FY2021 vs FY2020 primarily on higher KC-46A Tanker revenue (27 aircraft ordered in Q1 2021) and lower charges",
+      "Computed (not disclosed as a percentage line in this section) BDS operating margin: FY2022 approx. -15.3% (-3,544/23,162); FY2021 approx. +5.8% (1,544/26,540); FY2020 approx. +5.9% (1,539/26,257) — direction: sharp deterioration in FY2022, roughly flat FY2021 vs FY2020"
+    ],
+    "raw_excerpt": "BDS loss from operations in 2022 of $3,544 million decreased by $5,088 million compared with earnings from operations of $1,544 million in 2021 primarily due to unfavorable impacts of cumulative contract catch-up adjustments ($4,284 million more unfavorable in 2022 than 2021). ... development programs in 2022 included VC-25B ($1,452 million), KC-46A Tanker ($1,374 million), MQ-25 ($579 million), T-7A Red Hawk Production Options ($552 million), T-7A Red Hawk Engineering, Manufacturing and Development (EMD) ($203 million), and Commercial Crew ($288 million)."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — 777X program 'gross margins' disclosure (p.33) and Note 7 inventory (p.77)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": null,
+    "key_points": [
+      "The only use of the term 'gross margins' in the 10-K is at the individual aircraft program level, not as a company or segment income-statement metric",
+      "The 777X program had 'near break-even gross margins' at December 31, 2022",
+      "The 777X program had 'near break-even margins' at December 31, 2022 per the inventory note",
+      "Boeing expensed abnormal production costs of $325M on 777X during FY2022 because of the 777X-9 production pause",
+      "Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion, with the total estimate adjusted up to $2.8 billion in Q4 2022"
+    ],
+    "raw_excerpt": "The 777X program had near break-even gross margins at December 31, 2022. The level of profitability on the 777X program will be subject to a number of factors. ... The 777X program has near break-even margins at December 31, 2022. ... Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion. During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Reconciliation of Non-GAAP Measures to GAAP Measures (p.47)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Reconciliation starts from Revenues $66,608M / $62,286M / $58,158M and Loss from operations as reported ($3,547)M / ($2,902)M / ($12,767)M",
+      "Operating margins as reported: (5.3)% / (4.7)% / (22.0)%",
+      "Pension FAS/CAS service cost adjustment: ($849)M / ($882)M / ($1,024)M; Postretirement FAS/CAS service cost adjustment: ($294)M / ($291)M / ($359)M",
+      "Core operating loss (non-GAAP): ($4,690)M / ($4,075)M / ($14,150)M; Core operating margins: (7.0)% / (6.5)% / (24.3)%",
+      "The reconciliation table contains no gross profit or gross margin line, confirming gross margin is not a reported Boeing metric"
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 / Loss from operations, as reported ($3,547) ($2,902) ($12,767) / Operating margins (5.3)% (4.7)% (22.0)% / Pension FAS/CAS service cost adjustment ($849) ($882) ($1,024) / Postretirement FAS/CAS service cost adjustment (294) (291) (359) / FAS/CAS service cost adjustment ($1,143) ($1,173) ($1,383) / Core operating loss (non-GAAP) ($4,690) ($4,075) ($14,150) / Core operating margins (non-GAAP) (7.0)% (6.5)% (24.3)%"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Consolidated Statements of Operations (no gross profit line; top cost caption is \"Total costs and expenses\")",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55",
+    "published_at": "2023",
+    "key_points": [
+      "The Consolidated Statements of Operations presents Sales of products, Sales of services, Total revenues, then Cost of products, Cost of services and Boeing Capital interest expense, summing to \"Total costs and expenses\" of $(63,106)M in 2022, $(59,269)M in 2021 and $(63,843)M in 2020.",
+      "After Total costs and expenses the statement shows a $3,502M subtotal (2022), then (Loss)/income from operating investments, General and administrative expense, Research and development expense, and Gain on dispositions, arriving at Loss from operations of $(3,547)M in 2022.",
+      "No \"gross profit\" or \"gross margin\" line item appears anywhere in the Consolidated Statements of Operations.",
+      "Cost of products was $(53,969)M in 2022, $(49,954)M in 2021 and $(54,568)M in 2020; Cost of services was $(9,109)M, $(9,283)M and $(9,232)M respectively.",
+      "Boeing Capital interest expense of $(28)M in 2022 is included inside \"Total costs and expenses\"."
+    ],
+    "raw_excerpt": "Sales of products $55,893 $51,386 $47,142 / Sales of services 10,715 10,900 11,016 / Total revenues 66,608 62,286 58,158 / Cost of products (53,969) (49,954) (54,568) / Cost of services (9,109) (9,283) (9,232) / Boeing Capital interest expense (28) (32) (43) / Total costs and expenses (63,106) (59,269) (63,843) / 3,502 3,017 (5,685) / (Loss)/income from operating investments, net (16) 210 9 / General and administrative expense (4,187) (4,157) (4,817) / Research and development expense, net (2,852) (2,249) (2,476) / Gain on dispositions, net 6 277 202 / Loss from operations (3,547) (2,902) (12,767)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — MD&A \"cost of sales\" table: defined as total costs and expenses over revenues (a cost ratio, not a gross margin)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p28",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's MD&A \"cost of sales\" table reports $63,106M for 2022, $59,269M for 2021 and $63,843M for 2020 — dollar amounts identical to \"Total costs and expenses\" in the Consolidated Statements of Operations.",
+      "Boeing expresses this as \"Cost of sales as a % of Revenues\": 94.7% in 2022, 95.2% in 2021 and 109.8% in 2020.",
+      "The 2022 increase of $3,837M in cost of sales is attributed primarily to charges recorded at BDS and higher revenues at BCA; the ratio was described as \"largely consistent\" year over year.",
+      "The 2021 decrease of $4,574M versus 2020 is attributed primarily to higher earnings charges at BCA, BDS and BGS in 2020, partially offset by higher costs from higher revenues in 2021 and the reach-forward loss on the 787 program.",
+      "Research and development expense is disclosed separately in the same MD&A section: $2,852M (2022), $2,249M (2021), $2,476M (2020), broken out by segment (BCA $1,510M, BDS $945M, BGS $119M, Other $278M in 2022)."
+    ],
+    "raw_excerpt": "The following table summarizes cost of sales: (Dollars in millions) Years ended December 31 2022 2021 Change 2021 2020 Change / Cost of sales $63,106 $59,269 $3,837 $59,269 $63,843 ($4,574) / Cost of sales as a % of Revenues 94.7 % 95.2 % (0.5)% 95.2 % 109.8 % (14.6)% ... Cost of sales increased by $3,837 million in 2022 compared with 2021, primarily due to charges recorded at BDS and higher revenues at BCA. Cost of sales as a percentage of Revenues remained largely consistent in 2022 compared to 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Critical Accounting Policies: Program Accounting requires estimating \"gross profit margin\" for a defined program accounting quantity",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p50",
+    "published_at": "2023",
+    "key_points": [
+      "Program accounting \"requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity.\"",
+      "A program is defined as the estimated number of units (the accounting quantity), so gross margin is an estimate spread across a multi-unit, multi-year block rather than a period-level revenue-minus-COGS residual.",
+      "Revenue and cost estimates for all significant long-term contract performance obligations are reviewed and reassessed quarterly.",
+      "Changes in estimates can result in cumulative catch-up adjustments to the performance obligation's inception-to-date revenues, cost of sales and profits.",
+      "Cumulative catch-up adjustments increased Loss from operations by $5,253M in 2022, $880M in 2021 and $942M in 2020, driven primarily in 2022 by losses on VC-25B, KC-46A Tanker, MQ-25, Commercial Crew and T-7A Red Hawk — all described as fixed-price development programs.",
+      "A 1% change in combined estimated gross margins on profitable long-term contracts would have changed 2022 pre-tax income by approximately $300M."
+    ],
+    "raw_excerpt": "Program Accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity. A program consists of the estimated number of units (accountin[g quantity])... Changes in these estimates could result in recognition of cumulative catch-up adjustments to the performance obligation's inception to date revenues, cost of sales and prof[its] ... increased Loss from operations by $5,253 million, $880 million and $942 million in 2022, 2021 and 2020, respectively. The cumulative catch-up adjustments in 2022 were primarily due to losses recognized on the VC-25B, KC-46A Tanker, MQ-25, Commercial Crew and T-7A Red Hawk programs. These are all fixed-price development programs ... combined gross margins for our profitable long-term contracts had been estimated to be higher or lower by 1% during 2022, it would have increased or decreased pre-tax income for the year by approximately $300 million."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Program-level margin disclosures: 777X \"near break-even gross margins\"; 787 accounting-quantity increase \"improved the program's profit margin\"",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023",
+    "key_points": [
+      "\"The 777X program had near break-even gross margins at December 31, 2022.\"",
+      "Boeing states that one or more factors (production disruption, customer negotiations, production rate adjustments, contraction of the accounting quantity, certification timing) could result in additional reach-forward losses on the 777X program in future periods.",
+      "In Q4 2022 Boeing increased the 787 accounting quantity by 100 units, and states that \"the increase in the accounting quantity improved the program's profit margin\" — i.e., program margin is a function of the assumed unit block, not of period volume.",
+      "Boeing determined in Q3 2021 that 787 production rates below 5 per month were abnormally low and that excessive inspection and rework costs on inventoried aircraft must be accounted for as abnormal production costs expensed as incurred.",
+      "Cumulative 787 abnormal costs recorded through December 31, 2022 totaled $1.7 billion; in Q4 2022 Boeing raised the total estimate of abnormal production costs to $2.8 billion, most to be incurred by end of 2023 (prior expectation at Dec 31, 2021 was approximately $2 billion).",
+      "Boeing recorded a $3.5 billion loss on the 787 program in Q4 2021 primarily due to additional rework and other actions required to resume deliveries taking longer than expected."
+    ],
+    "raw_excerpt": "The 777X program had near break-even gross margins at December 31, 2022. ... 787 Program During the fourth quarter of 2022, we increased the accounting quantity for the 787 program by 100 units due to the program's normal progress of obtaining additional orders and delivering aircraft. The increase in the accounting quantity improved the program's profit margin. ... In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs. We also determined that the inspections and rework costs on inventoried aircraft are excessive and should also be accounted for as abnormal production costs that are required to be expensed as incurred. Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion. During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Reach-forward losses recorded as a reduction to deferred production costs (787 $3,460M; 777X $6,493M)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p81",
+    "published_at": "2023",
+    "key_points": [
+      "In Q4 2021 Boeing determined that estimated costs to complete the 787 program plus costs already in 787 inventory exceeded estimated revenues, and \"the resulting reach-forward loss of $3,460 was recorded as a reduction to deferred production costs.\"",
+      "At December 31, 2022 the 787 program carried deferred production costs of $12,689M (vs $11,693M at Dec 31, 2021), supplier advances of $1,831M and unamortized tooling and other non-recurring costs of $1,722M.",
+      "Of the 787 deferred production costs and unamortized tooling/non-recurring costs, $9,881M is expected to be recovered from units in the program accounting quantity with firm orders and $4,530M from units representing expected future orders.",
+      "787 abnormal production costs expensed were $1,240M in 2022 and $468M in 2021, because Boeing is producing at abnormally low rates.",
+      "The April 2022 decision to pause 777X-9 production during 2022 and 2023 results in abnormal production costs expensed as incurred; $325M was expensed in 2022.",
+      "\"The 777X program has near break-even margins at December 31, 2022.\"",
+      "Commercial aircraft programs inventory included early issue sales consideration credited to airline customers of $3,586M (2022) and $3,290M (2021)."
+    ],
+    "raw_excerpt": "During the fourth quarter of 2021, we determined that estimated costs to complete the 787 program plus costs already included in 787 inventory exceed estimated revenues from the program. The resulting reach-forward loss of $3,460 was recorded as a reduction to deferred production costs. ... At December 31, 2022, $9,881 of 787 deferred production costs, unamortized tooling and other non-recurring costs are expected to be recovered from units included in the program accounting quantity that have firm orders, and $4,530 is expected to be recovered from units included in the program accounting quantity that represent expected future orders. ... We expensed abnormal production costs of $1,240 and $468 during the years ended December 31, 2022 and 2021. ... The production pause is resulting in abnormal production costs that are being expensed as incurred until 777X-9 production resumes. We expensed abnormal production costs of $325 during the year ended December 31, 2022."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Cash flow statement: 787 and 777X reach-forward losses as non-cash reconciling items",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p56",
+    "published_at": "2023",
+    "key_points": [
+      "The Consolidated Statements of Cash Flows lists \"787 and 777X reach-forward losses\" of $3,460M in 2022 and $6,493M in 2021 as non-cash adjustments reconciling net loss to operating cash flow.",
+      "Net loss was $(5,053)M in 2022, $(4,290)M in 2021 and $(11,941)M in 2020.",
+      "Net cash provided/(used) by operating activities was $3,512M in 2022, $(3,416)M in 2021 and $(18,410)M in 2020.",
+      "Other non-cash items include share-based plans expense $725M, depreciation and amortization $1,979M, and pension and other postretirement plans $(1,378)M in 2022."
+    ],
+    "raw_excerpt": "Adjustments to reconcile net loss to net cash used by operating activities: Non-cash items – Share-based plans expense 725 833 250 ... Depreciation and amortization 1,979 2,144 2,246 ... 787 and 777X reach-forward losses 3,460 6,493 / Other charges and credits, net 364 360 1,462 ... Pension and other postretirement plans (1,378) (972) (794)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Segment disclosure: FAS/CAS service cost adjustment sits between segment operating result and GAAP loss from operations",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p117",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing states: \"We generally allocate costs to business segments based on the U.S. federal cost accounting standards\" (CAS).",
+      "The FAS/CAS service cost adjustment was $1,143M in 2022, $1,173M in 2021 and $1,383M in 2020, comprising Pension FAS/CAS of $849M/$882M/$1,024M and Postretirement FAS/CAS of $294M/$291M/$359M.",
+      "Components of net periodic benefit cost other than service cost \"are included in Other income, net\" — i.e., outside operating costs and outside cost of sales.",
+      "Unallocated items, eliminations and other totaled $(1,532)M in 2022, $(1,267)M in 2021 and $(2,355)M in 2020, comprising share-based plans $(114)M, deferred compensation $117M, amortization of previously capitalized interest $(95)M, research and development expense net $(278)M, and eliminations and other unallocated items $(1,162)M.",
+      "Unallocated items include common internal services supporting global operations, intercompany guarantees to BCC, and eliminations of certain inter-segment sales."
+    ],
+    "raw_excerpt": "We generally allocate costs to business segments based on the U.S. federal cost accounting standards. Components of Unallocated items, eliminations and other (expense)/income are shown in the following table. ... Share-based plans ($114) ($174) ($120) / Deferred compensation 117 (126) (93) / Amortization of previously capitalized interest (95) (107) (95) / Research and development expense, net (278) (184) (240) / Eliminations and other unallocated items (1,162) (676) (1,807) / Unallocated items, eliminations and other ($1,532) ($1,267) ($2,355) / Pension FAS/CAS service cost adjustment $849 $882 $1,024 / Postretirement FAS/CAS service cost adjustment 294 291 359 / FAS/CAS service cost adjustment $1,143 $1,173 $1,383 ... components of net periodic benefit costs other than service cost. These expenses are included in Other income, net."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — MD&A non-GAAP reconciliation: FAS/CAS adjustment definition and non-operating pension in Other income, net",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p25",
+    "published_at": "2023",
+    "key_points": [
+      "\"The FAS/CAS service cost adjustment represents the difference between the FAS pension and postretirement service costs calculated under GAAP and costs allocated to the business segments.\"",
+      "The reconciliation runs: Segment operating loss $(3,158)M + Pension FAS/CAS $849M + Postretirement FAS/CAS $294M + Unallocated items $(1,532)M = Loss from operations (GAAP) $(3,547)M for 2022.",
+      "Core operating loss (non-GAAP, excluding the FAS/CAS adjustment) was $(4,690)M in 2022, $(4,075)M in 2021 and $(14,150)M in 2020.",
+      "BCA loss from operations decreased by $4,105M in 2022 primarily due to the absence in 2022 of the $3,460M reach-forward loss taken on the 787 program in 2021, higher 737 deliveries and lower abnormal production costs.",
+      "BCA loss from operations decreased by $7,372M in 2021 primarily due to the absence of a $6,493M reach-forward loss on the 777X program recorded in 2020, partially offset by a $3,460M reach-forward loss on the 787 program in 2021.",
+      "BDS had a loss from operations of $3,544M in 2022 versus earnings of $1,544M in 2021, primarily due to charges on development programs."
+    ],
+    "raw_excerpt": "Segment operating loss (3,158) (2,808) (11,795) / Pension FAS/CAS service cost adjustment 849 882 1,024 / Postretirement FAS/CAS service cost adjustment 294 291 359 / Unallocated items, eliminations and other (1,532) (1,267) (2,355) / Loss from operations (GAAP) ($3,547) ($2,902) ($12,767) / FAS/CAS service cost adjustment * (1,143) (1,173) (1,383) / Core operating loss (Non-GAAP) ** ($4,690) ($4,075) ($14,150) / * The FAS/CAS service cost adjustment represents the difference between the FAS pension and postretirement service costs calculated under GAAP and costs allocated to the business segments."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Note 16: non-service pension/OPEB components reported in Other income, net (outside operating costs)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p95",
+    "published_at": "2023",
+    "key_points": [
+      "Net periodic benefit cost included in Loss from operations was only $3M for pension and $79M/$90M/$91M for other postretirement benefits in 2022/2021/2020 — i.e., only the service cost element remains in operating costs.",
+      "Net periodic benefit (income)/cost included in Other income, net was $(881)M for pension and $(58)M for OPEB in 2022, versus $(528)M and $(1)M in 2021 and $(340)M and $16M in 2020.",
+      "Components of net periodic benefit cost include service cost, interest cost, expected return on plan assets, amortization of prior service credits, and recognized net actuarial loss/(gain).",
+      "Pension service cost was $3M in each of 2022, 2021 and 2020; OPEB service cost was $72M, $87M and $89M respectively.",
+      "Recognized net actuarial loss was $913M for pension in 2022 versus $1,219M in 2021; expected return on plan assets was $(3,789)M in 2022."
+    ],
+    "raw_excerpt": "Service cost $3 $3 $3 $72 $87 $89 / Interest cost 2,080 1,988 2,455 98 97 130 / Expected return on plan assets (3,789) (3,848) (3,756) (10) (7) (9) / Amortization of prior service credits (81) (80) (80) (35) (35) (38) / Recognized net actuarial loss/(gain) 913 1,219 1,032 (111) (56) (63) ... Net periodic benefit cost included in Loss from operations $3 $3 $3 $79 $90 $91 / Net periodic benefit (income)/cost included in Other income, net (881) (528) (340) (58) (1) 16"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — BDS MD&A: fixed-price development program charges quantified (VC-25B, KC-46A, MQ-25, T-7A, Commercial Crew)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p38",
+    "published_at": "2023",
+    "key_points": [
+      "BDS loss from operations of $3,544M in 2022 versus earnings of $1,544M in 2021, a $5,088M decline, primarily due to cumulative contract catch-up adjustments that were $4,284M more unfavorable in 2022 than 2021.",
+      "2022 fixed-price development program charges: VC-25B $1,452M, KC-46A Tanker $1,374M, MQ-25 $579M, T-7A Red Hawk Production Options $552M, T-7A Red Hawk EMD $203M, Commercial Crew $288M.",
+      "These were partially offset by charges recognized in 2021 on KC-46A Tanker ($402M), VC-25B ($318M) and Commercial Crew ($214M).",
+      "BDS revenues decreased $3,378M in 2022 versus 2021 primarily due to charges on development programs, with cumulative contract catch-up adjustments $1,858M more unfavorable than the prior year.",
+      "During 2020, BDS recorded charges on KC-46A Tanker ($1,320M) and VC-25B ($168M)."
+    ],
+    "raw_excerpt": "BDS loss from operations in 2022 of $3,544 million decreased by $5,088 million compared with earnings from operations of $1,544 million in 2021 primarily due to unfavorable impacts of cumulative contract catch-up adjustments ($4,284 million more unfavorable in 2022 than 2021). ... Charges of fixed price development programs in 2022 included VC-25B ($1,452 million), KC-46A Tanker ($1,374 million), MQ-25 ($579 million), T-7A Red Hawk Production Options ($552 million), T-7A Red Hawk Engineering, Manufacturing and Development (EMD) ($203 million), and Commercial Crew ($288 million). These were partially offset by charges on the KC-46A Tanker ($402 million), VC-25B ($318 million), and Commercial Crew ($214 million) recognized in 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Summary of Business Segment Data: segment profitability reported as \"(Loss)/earnings from operations\", no segment gross margin",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2023",
+    "key_points": [
+      "Segment reporting discloses Revenues and \"(Loss)/earnings from operations\" by segment: BCA $(2,370)M, BDS $(3,544)M, BGS $2,727M, Boeing Capital $29M in 2022.",
+      "Segment operating loss was $(3,158)M in 2022, $(2,808)M in 2021 and $(11,795)M in 2020.",
+      "The reconciliation to consolidated Loss from operations $(3,547)M runs through Unallocated items $(1,532)M and the FAS/CAS service cost adjustment $1,143M.",
+      "No segment-level gross profit or gross margin measure is presented in the segment disclosure.",
+      "Segment revenues for 2022: BCA $25,867M, BDS $23,162M, BGS $17,611M, Boeing Capital $199M, Unallocated items/eliminations $(231)M, total $66,608M."
+    ],
+    "raw_excerpt": "(Loss)/earnings from operations: Commercial Airplanes ($2,370) ($6,475) ($13,847) / Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450 / Boeing Capital 29 106 63 / Segment operating loss (3,158) (2,808) (11,795) / Unallocated items, eliminations and other (1,532) (1,267) (2,355) / FAS/CAS service cost adjustment 1,143 1,173 1,383 / Loss from operations (3,547) (2,902) (12,767)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — 737 Program: abnormal production costs expensed as incurred ($188M in 2022, $1,887M in 2021) and program accounting quantities",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing expensed 737 abnormal production costs of $188M in 2022 and $1,887M in 2021.",
+      "The 737 accounting quantity increased by 400 units during 2022 to 10,800 units; 787 accounting quantity was 1,600 units and 777X 400 units at December 31, 2022.",
+      "Program accounting quantities are disclosed per program (737 10,800; 747 1,574; 767 1,267; 777 1,790; 777X 400; 787 1,600 at Dec 31, 2022).",
+      "All revenues and costs associated with military derivative aircraft production are reported in the BDS segment rather than in the commercial program accounting quantity.",
+      "Boeing had approximately 250 737 aircraft in inventory at December 31, 2022, including approximately 140 designated for customers in China."
+    ],
+    "raw_excerpt": "Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 ... All revenues and costs associated with military derivative aircraft production are reported in the BDS segment. ... We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — MD&A: 2020 cost drivers including 737 abnormal production costs, severance, 737 MAX customer considerations, 737NG repair costs",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p32",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing cites $2,567M of abnormal production costs related to the 737 program, $623M of severance cost, $498M of 737 MAX customer considerations, $336M related to 737NG frame fitting component repair costs, and $270M of abnormal production costs in the first half of 2020 from the temporary suspension of operations in response to COVID-19.",
+      "These items are described as partially offset by lower research and development spending.",
+      "BCA total backlog was $329,824M at December 31, 2022, up from $296,882M at December 31, 2021.",
+      "Aircraft order cancellations during 2022 totaled $11,251M and related to 737 and 787 aircraft.",
+      "Net ASC 606 adjustments for 2022 decreased backlog by $4,675M, primarily due to a net increase of 777X aircraft in the ASC 606 reserve."
+    ],
+    "raw_excerpt": "$2,567 million of abnormal production costs related to the 737 program, $623 million of severance cost, $498 million of 737 MAX customer considerations, $336 million related to 737NG frame fitting component repair costs and $270 million of abnormal production costs in the first half of 2020 from the temporary suspension of operations in response to COVID-19, partially offset by lower research and development spending."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — MD&A consolidated results: operating margins reported, not gross margins",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's \"key indicators of consolidated results of operations\" table reports GAAP Loss from operations and Operating margins of (5.3)% in 2022, (4.7)% in 2021 and (22.0)% in 2020 — operating margin, not gross margin, is the headline profitability ratio.",
+      "Non-GAAP Core operating loss was $(4,690)M in 2022, $(4,075)M in 2021 and $(14,150)M in 2020, with Core operating margins of (7.0)%, (6.5)% and (24.3)%.",
+      "Boeing states these non-GAAP measures \"exclude certain components of pension and other postretirement benefit expense.\"",
+      "Total revenues were $66,608M in 2022, $62,286M in 2021 and $58,158M in 2020.",
+      "Net loss attributable to Boeing Shareholders was $(4,935)M in 2022, $(4,202)M in 2021 and $(11,873)M in 2020."
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 / GAAP Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % ... Non-GAAP Core operating loss ($4,690) ($4,075) ($14,150) / Core operating margins (7.0 %) (6.5 %) (24.3 %) ... These measures exclude certain components of pension and other postretirement benefit expense."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Note 13 program notes: MQ-25 and T-7A reach-forward losses on fixed-price development contracts",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p91",
+    "published_at": "2023",
+    "key_points": [
+      "The KC-46A Tanker EMD contract is a fixed-price incentive fee contract; the EMD contract and authorized LRIP lots total approximately $21 billion as of December 31, 2022, with approximately $209M of capitalized precontract costs and $292M of potential termination liabilities to suppliers.",
+      "The MQ-25 contract is a fixed-price contract covering development and delivery of seven aircraft and test articles at a contract price of $890M; Boeing recognized a reach-forward loss of $291M in Q3 2018 and increased the MQ-25 reach-forward loss during 2022.",
+      "The T-7A Red Hawk EMD portion is an $860M fixed-price contract; Boeing recorded 2022 earnings charges of $203M related to it, and the contract \"has a reach-forward loss at December 31, 2022.\"",
+      "Boeing states risk remains that additional losses may be recorded in future periods on these programs."
+    ],
+    "raw_excerpt": "This EMD contract is a fixed-price incentive fee contract and involves highly complex designs and systems integration. ... As of December 31, 2022, we had approximately $209 of capitalized precontract costs and $292 of potential termination liabilities to suppliers related to unexercised future [lots] ... The contract is a fixed-price contract that now includes development and delivery of seven aircraft and test articles at a contract price of $890. In connection with winning the competition, we recognized a reach-forward loss of $291 in the third quarter of 2018. During the year ended December 31, 2022, we increased the MQ-25 reach-[forward loss] ... The EMD portion of the contract is a $860 fixed-price contract ... During the year ended December 31, 2022, we recorded earnings charges of $203 related to the T-7A Red Hawk fixed-price EMD contract, which has a reach-forward loss at December 31, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Program Accounting policy & accounting quantities (Critical Accounting Policies; Note 1; Program Highlights)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p50 / p35 / p33 / p32",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "Program accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity; a program consists of the estimated number of units (accounting quantity).",
+      "The accounting quantity includes delivered units, undelivered units under contract, and units anticipated to be under contract in the reasonable future (anticipated orders); all of these must be considered in developing total program estimates.",
+      "Program accounting quantities at December 31, 2022: 737 = 10,800 units; 747 = 1,574; 767 = 1,267; 777 = 1,790; 777X = 400; 787 = 1,600.",
+      "During Q4 2022 Boeing increased the 787 accounting quantity by 100 units due to normal progress in obtaining orders and delivering aircraft, and the increase improved the program's profit margin.",
+      "The determination of the accounting quantity is limited by the ability to make reasonably dependable estimates."
+    ],
+    "raw_excerpt": "Program accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity. A program consists of the estimated number of units (accounting quantity)... During the fourth quarter of 2022, we increased the accounting quantity for the 787 program by 100 units due to the program's normal progress of obtaining additional orders and delivering aircraft. The increase in the accounting quantity improved the program's profit margin."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Reach-forward loss mechanics and cumulative catch-up adjustments (Critical Accounting Policies; BDS results)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p51 / p50 / p38 / p64",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "Reductions to an estimated program loss are included in the gross profit margin for undelivered units in the accounting quantity, whereas increases to the estimated loss are recorded as an earnings charge in the period in which the loss is determined.",
+      "Net cumulative catch-up adjustments for changes in estimated revenues and costs at completion across all long-term contracts, including the impact of increases in estimated losses on unexercised options, increased Loss from operations by $5,253 million in 2022, $880 million in 2021 and $942 million in 2020.",
+      "Fixed-price development program charges recorded in 2022 at BDS: VC-25B $1,452 million, KC-46A Tanker $1,374 million, MQ-25 $579 million, T-7A Red Hawk Production Options $552 million, T-7A Red Hawk EMD $203 million, Commercial Crew $288 million.",
+      "BDS cumulative contract catch-up adjustments in 2022 were $4,284 million more unfavorable than 2021; BDS recorded a loss from operations of $3,544 million in 2022 versus earnings of $1,544 million in 2021.",
+      "Significant adjustments during the three years ended December 31, 2022 included losses on VC-25B, KC-46A Tanker, MQ-25, Commercial Crew and T-7A Red Hawk programs.",
+      "If the combined gross margins for profitable long-term contracts had been estimated higher or lower by 1% during 2022, pre-tax income would have changed by approximately $300 million."
+    ],
+    "raw_excerpt": "Reductions to the estimated loss are included in the gross profit margin for undelivered units in the accounting quantity whereas increases to the estimated loss are recorded as an earnings charge in the period in which the loss is determined. ... Charges of fixed price development programs in 2022 included VC-25B ($1,452 million), KC-46A Tanker ($1,374 million), MQ-25 ($579 million), T-7A Red Hawk Production Options ($552 million), T-7A Red Hawk Engineering, Manufacturing and Development (EMD) ($203 million), and Commercial Crew ($288 million)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — 777X and 787 program status, abnormal production costs, near break-even margins",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p51 / p81 / p35",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "The 767, 777X and 787 programs had near break-even or single digit margins at December 31, 2022; adverse changes to revenue and/or cost estimates could result in earnings charges in future periods.",
+      "The 777X program had near break-even gross margins at December 31, 2022, and one or more factors (production disruption, customer negotiations, rate adjustments, contraction of the accounting quantity, certification timing) could result in additional reach-forward losses that may be material.",
+      "In April 2022 Boeing decided to pause 777X-9 production during 2022 and 2023; the pause results in abnormal production costs expensed as incurred, with $325 million expensed in 2022.",
+      "In Q4 2021 Boeing recorded a $3,460 million reach-forward loss on the 787 program, recorded as a reduction to deferred production costs.",
+      "787 abnormal production costs expensed were $1,240 million in 2022 and $468 million in 2021; cumulative abnormal costs through December 31, 2022 totaled $1.7 billion, and in Q4 2022 the total estimate of abnormal production costs was raised to $2.8 billion."
+    ],
+    "raw_excerpt": "The 767, 777X, and 787 programs had near break-even or single digit margins at December 31, 2022. Adverse changes to the revenue and/or cost estimates for these programs could result in earnings charges in future periods. ... The 777X program has near break-even margins at December 31, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Note 7 Inventories: deferred production costs and commercial aircraft programs inventory",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p80 / p81",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "Inventories at December 31, 2022 totaled $78,151 million, of which commercial aircraft programs inventory was $67,702 million (2021: $68,106 million).",
+      "787 program inventory at December 31, 2022 included deferred production costs of $12,689 million (2021: $11,693 million), supplier advances of $1,831 million and unamortized tooling/other non-recurring costs of $1,722 million.",
+      "Of 787 deferred production costs and unamortized tooling, $9,881 million is expected to be recovered from units in the accounting quantity that have firm orders, and $4,530 million is expected to be recovered from units representing expected future orders.",
+      "737 program inventory included deferred production costs of $2,955 million (2021: $1,296 million) and unamortized tooling/other non-recurring costs of $626 million; $3,555 million expected to be recovered from firm-order units and $26 million from expected future orders.",
+      "777X program inventory at December 31, 2022 included work in process of $4,059 million (2021: $3,363 million), deferred production costs of $1,330 million (2021: $652 million) and unamortized tooling/other non-recurring costs of $3,774 million (2021: $3,521 million)."
+    ],
+    "raw_excerpt": "At December 31, 2022, $9,881 of 787 deferred production costs, unamortized tooling and other non-recurring costs are expected to be recovered from units included in the program accounting quantity that have firm orders, and $4,530 is expected to be recovered from units included in the program accounting quantity that represent expected future orders."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Pension/OPEB FAS vs CAS service cost adjustment and core operating margin reconciliation",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p25 / p48 / p49 / p95 / p96 / p97",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "The FAS/CAS service cost adjustment represents the difference between the FAS pension and postretirement service costs calculated under GAAP and costs allocated to the business segments (allocated based on U.S. federal cost accounting standards, generally based on benefits paid).",
+      "Pension FAS/CAS service cost adjustment was $849 million in 2022 ($882M in 2021, $1,024M in 2020); postretirement adjustment was $294 million ($291M, $359M), for a total FAS/CAS adjustment of $1,143 million ($1,173M, $1,383M).",
+      "GAAP operating margins were (5.3)% in 2022, (4.7)% in 2021 and (22.0)% in 2020, versus core operating margins (non-GAAP) of (7.0)%, (6.5)% and (24.3)% respectively.",
+      "Core operating loss (non-GAAP) was $4,690 million in 2022, $4,075 million in 2021 and $14,150 million in 2020; core loss per share was ($11.06), ($9.44) and ($23.25) versus GAAP diluted loss per share of ($8.30), ($7.15) and ($20.88).",
+      "Boeing states these non-GAAP measures exclude certain components of pension and other postretirement benefit expense, because unallocated pension and other postretirement benefit cost primarily represent costs driven by market factors and costs not allocable to U.S. government contracts.",
+      "Pension discount rate rose from 2.80% at December 31, 2021 to 5.40% at December 31, 2022; actual return on plan assets was ($13,141) million in 2022 versus $4,477 million in 2021; actuarial loss of $17,605 million reduced the pension benefit obligation from $75,635 million to $55,117 million."
+    ],
+    "raw_excerpt": "The FAS/CAS service cost adjustment represents the difference between the FAS pension and postretirement service costs calculated under GAAP and costs allocated to the business segments. ... Core operating margins (non-GAAP) (7.0)% (6.5)% (24.3)% ... unallocated pension and other postretirement benefit cost primarily represent costs driven by market factors and costs not allocable to U.S. government contracts."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Cost of sales ratio and Research and Development expense (excluded from gross margin)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p28 / p117",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "Cost of sales was $63,106 million in 2022 and cost of sales as a percentage of revenues was 94.7% in 2022, 95.2% in 2021 and 109.8% in 2020; Boeing stated the ratio remained largely consistent in 2022 compared with 2021.",
+      "Total research and development expense was $2,852 million in 2022, $2,249 million in 2021 and $2,476 million in 2020, broken out as Commercial Airplanes $1,510M, BDS $945M, Global Services $119M and Other $278M.",
+      "R&D expense increased $603 million in 2022 versus 2021 primarily due to higher expenditures on 777X, 737 MAX, and BCA and enterprise investments in product development.",
+      "Research and development expense, net of ($278) million also appears within Unallocated items, eliminations and other, i.e. outside segment operating results."
+    ],
+    "raw_excerpt": "Cost of sales as a % of Revenues 94.7 % 95.2 % (0.5)% 95.2 % 109.8 % (14.6)% ... Research and development expense increased by $603 million in 2022 compared with 2021 primarily due to higher research and development expenditures on 777X, 737 MAX, as well as BCA and enterprise investments in product development."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Segment operating results, core operating loss reconciliation, and operating cash flow",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24 / p25 / p42 / p43 / p59",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "Segment results 2022: Commercial Airplanes ($2,370)M, Defense Space & Security ($3,544)M, Global Services $2,727M, Boeing Capital $29M, for a segment operating loss of ($3,158)M; after FAS/CAS adjustments of +$1,143M and Unallocated items of ($1,532)M, GAAP loss from operations was ($3,547)M.",
+      "Boeing presents core operating loss and core operating margins as non-GAAP measures that exclude the FAS/CAS service cost adjustment, with a full reconciliation table to the most directly comparable GAAP measures.",
+      "Net cash provided/(used) by operating activities was $3,512 million in 2022, ($3,416) million in 2021 and ($18,410) million in 2020.",
+      "The $6.9 billion improvement in 2022 operating cash flow was primarily driven by improved changes in assets and liabilities of $11.1 billion (Accrued liabilities +$6.6B, Accounts payable +$4.6B, Inventories +$1.5B), partially offset by lower non-cash items of $3.4 billion and a higher net loss of $0.8 billion.",
+      "Payments to acquire property, plant and equipment were $1,222 million in 2022, $980 million in 2021 and $1,303 million in 2020.",
+      "The consolidated statement of cash flows lists '787 and 777X reach-forward losses' as a non-cash add-back of $3,460 million in 2021 and $6,493 million in 2020, showing these charges did not affect cash in those periods."
+    ],
+    "raw_excerpt": "Segment operating loss (3,158) (2,808) (11,795) ... Loss from operations (GAAP) ($3,547) ($2,902) ($12,767) ... Core operating loss is a non-GAAP measure that excludes the FAS/CAS service cost adjustment. ... 787 and 777X reach-forward losses 3,460 6,493"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Critical Audit Matters on fixed-price development cost estimates and 787 program revenue estimates",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p120 / p121 / p122",
+    "published_at": "2023 (FY2022 Form 10-K)",
+    "key_points": [
+      "The auditor identified 'Cost Estimates for Fixed-Price Development Contracts' as a Critical Audit Matter, referencing Notes 1 and 13 to the financial statements.",
+      "The auditor identified 'Program Accounting Revenue Estimates for the 787 Program' as a Critical Audit Matter, referencing Notes 1, 7 and 22, citing increased risk in forecasted revenue estimates due to difficulty assessing the value of consideration expected to be provided to customers.",
+      "Audit procedures included developing independent expectations of reasonable outcomes using the program's data, retrospective reviews comparing actual outcomes to previous estimates, and evaluating the appropriateness and consistency of management's cost estimation methods."
+    ],
+    "raw_excerpt": "Cost Estimates for Fixed-Price Development Contracts — Refer to Notes 1 and 13 to the financial statements / Critical Audit Matter Description ... Program Accounting Revenue Estimates for the 787 Program — Refer to Notes 1, 7, and 22 to the financial statements"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Consolidated Results of Operations (key indicators, FY2020–FY2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": null,
+    "key_points": [
+      "Boeing FY2022 revenues were $66,608M, versus $62,286M in FY2021 and $58,158M in FY2020.",
+      "GAAP loss from operations was $3,547M in FY2022, $2,902M in FY2021, and $12,767M in FY2020.",
+      "GAAP operating margins were (5.3)% in FY2022, (4.7)% in FY2021, and (22.0)% in FY2020 — i.e. FY2022 operating margin deteriorated versus FY2021 despite the large two-year improvement versus FY2020.",
+      "Non-GAAP core operating loss was $4,690M in FY2022, $4,075M in FY2021, $14,150M in FY2020; core operating margins were (7.0)%, (6.5)%, (24.3)% respectively.",
+      "Net loss attributable to Boeing shareholders was $4,935M in FY2022 ($8.30 diluted loss per share), $4,202M in FY2021 ($7.15), $11,873M in FY2020 ($20.88).",
+      "FY2022 BDS revenues decreased $3,378M versus FY2021, primarily due to charges on development programs, unfavorable performance across other defense programs, and lower P-8 and weapons volume."
+    ],
+    "raw_excerpt": "Years ended December 31, 2022 2021 2020 / Revenues $66,608 $62,286 $58,158 / GAAP / Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % … Non-GAAP / Core operating loss ($4,690) ($4,075) ($14,150) / Core operating margins (7.0 %) (6.5 %) (24.3 %)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Consolidated Statements of Operations (line-item structure)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55",
+    "published_at": null,
+    "key_points": [
+      "Boeing's consolidated statement of operations contains no \"Gross profit\" or \"Gross margin\" line item.",
+      "The statement runs Total revenues → Cost of products / Cost of services / Boeing Capital interest expense → Total costs and expenses → an unlabeled intermediate figure (3,502 in FY2022, 3,017 in FY2021, (5,685) in FY2020) → then G&A, R&D, gain on dispositions → Loss from operations.",
+      "FY2022: Total revenues $66,608M; Cost of products $53,969M; Cost of services $9,109M; Total costs and expenses $63,106M.",
+      "The unlabeled revenue-minus-total-costs figure was positive $3,502M in FY2022 but was more than absorbed by G&A ($4,187M) and R&D ($2,852M), producing a $3,547M operating loss.",
+      "Sales of products were $55,893M and sales of services $10,715M in FY2022."
+    ],
+    "raw_excerpt": "Total revenues 66,608 62,286 58,158 / Cost of products (53,969) (49,954) (54,568) / Cost of services (9,109) (9,283) (9,232) / Boeing Capital interest expense (28) (32) (43) / Total costs and expenses (63,106) (59,269) (63,843) / 3,502 3,017 (5,685) / (Loss)/income from operating investments, net (16) 210 9 / General and administrative expense (4,187) (4,157) (4,817) / Research and development expense, net (2,852) (2,249) (2,476) / Gain on dispositions, net 6 277 202 / Loss from operations (3,547) (2,902) (12,767)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Cost of sales as a percentage of revenues",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p28",
+    "published_at": null,
+    "key_points": [
+      "Cost of sales as a % of revenues was 94.7% in FY2022, 95.2% in FY2021, and 109.8% in FY2020.",
+      "The year-over-year improvement in the cost-of-sales ratio was only 0.5 percentage points in FY2022, versus 14.6 percentage points in FY2021 — the rate of margin improvement decelerated sharply.",
+      "Cost of sales was $63,106M in FY2022 versus $59,269M in FY2021 (an increase of $3,837M) and $63,843M in FY2020 (a decrease of $4,574M).",
+      "The 10-K attributes the FY2021 decrease in the cost-of-sales ratio versus FY2020 primarily to higher earnings charges at BCA and BGS in 2020 and higher revenues in 2021."
+    ],
+    "raw_excerpt": "Cost of sales $63,106 $59,269 $3,837 $59,269 $63,843 ($4,574) / Cost of sales as a % of Revenues 94.7 % 95.2 % (0.5)% 95.2 % 109.8 % (14.6)%"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Segment operating margins: BCA, BGS, BDS (FY2020–FY2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62 (segment summary); p31 (BCA); p40 (BGS)",
+    "published_at": null,
+    "key_points": [
+      "BCA operating margins were (9.2)% in FY2022, (33.2)% in FY2021, and (85.7)% in FY2020; BCA loss from operations was $2,370M, $6,475M, and $13,847M respectively.",
+      "BGS operating margins were 15.5% in FY2022, 12.4% in FY2021, and 2.9% in FY2020; BGS earnings from operations were $2,727M, $2,017M, and $450M respectively.",
+      "BDS swung from earnings from operations of $1,544M in FY2021 and $1,539M in FY2020 to a loss of $3,544M in FY2022.",
+      "Total segment operating loss was $3,158M in FY2022, $2,808M in FY2021, and $11,795M in FY2020.",
+      "BCA revenues were $25,867M in FY2022 (39% of total company revenues), $19,493M in FY2021 (31%), and $16,162M in FY2020 (28%).",
+      "BCA deliveries totaled 480 aircraft in FY2022, 340 in FY2021, and 157 in FY2020."
+    ],
+    "raw_excerpt": "BCA (p31): \"Revenues $25,867 $19,493 $16,162 … Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)%\" — BGS (p40): \"Earnings from operations $2,727 $2,017 $450 / Operating margins 15.5 % 12.4 % 2.9 %\" — Segment summary (p62): \"Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450 / Segment operating loss (3,158) (2,808) (11,795)\""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Abnormal production costs and reach-forward losses (program accounting)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31; p81; p35",
+    "published_at": null,
+    "key_points": [
+      "FY2022 abnormal production costs totaled $1,753M, comprising $1,240M related to the 787 program, $325M related to the 777X program, and $188M related to the 737 program.",
+      "FY2021 abnormal production costs included $1,887M related to the 737 program and $468M related to the 787 program.",
+      "A reach-forward loss of $3,460M on the 787 program was recorded in Q4 FY2021 as a reduction to deferred production costs.",
+      "The FY2020 loss reflected a reach-forward loss of $6,493M on the 777X program.",
+      "The 777X program had \"near break-even gross margins\" at December 31, 2022 — here \"gross margins\" refers to the program's estimated lifetime margin, not a period gross margin.",
+      "In April 2022 Boeing decided to pause 777X-9 production during 2022 and 2023, resulting in abnormal production costs expensed as incurred ($325M in FY2022).",
+      "At December 31, 2022 and 2021, 787 program inventory included deferred production costs of $12,689M and $11,693M respectively."
+    ],
+    "raw_excerpt": "(p31) \"Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program. … The 2021 loss reflects the reach-forward loss on the 787 program of $3,460 million, abnormal production costs related to the 737 program of $1,887 million … The 2020 loss reflects the reach-forward loss on the 777X program of $6,493 million\" — (p81) \"We expensed abnormal production costs of $325 during the year ended December 31, 2022. The 777X program has near break-even margins at December 31, 2022.\" — (p35) \"The 777X program had near break-even gross margins at December 31, 2022.\""
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BDS loss composition and equity-method income",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p39",
+    "published_at": null,
+    "key_points": [
+      "BDS (loss)/earnings from operations includes Boeing's share of income from equity method investments of $13M in FY2022, $53M in FY2021, and $141M in FY2020, primarily from ULA and non-U.S. joint ventures.",
+      "Earnings from the ULA joint venture increased in FY2022, partially offset by losses on other operating investments.",
+      "Total backlog was $54,373M at December 31, 2022, $5,455M lower than December 31, 2021, due to the timing of awards and revenue recognized on contracts awarded in prior years."
+    ],
+    "raw_excerpt": "BDS (loss)/earnings from operations includes our share of income from equity method investments of $13 million, $53 million and $141 million primarily from our ULA and non-U.S. joint ventures in 2022, 2021 and 2020, respectively. Earnings from our ULA joint venture increased in 2022, partially offset by losses on other operating investments."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Industry demand backdrop (IATA airline profitability, 2020–2023)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": null,
+    "key_points": [
+      "According to IATA, net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021.",
+      "IATA forecast $6.9 billion of industry losses globally in 2022, with approximately $9.9 billion of profits in North America offset by losses in other regions.",
+      "For 2023, IATA forecast $4.6 billion in profits for the airline industry globally.",
+      "Boeing states that airline financial performance influences demand for new capacity and has been adversely impacted by the COVID-19 pandemic."
+    ],
+    "raw_excerpt": "According to the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally."
+  }
+]

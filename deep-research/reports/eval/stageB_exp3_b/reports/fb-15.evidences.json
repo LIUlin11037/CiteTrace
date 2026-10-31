@@ -1,0 +1,497 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1. Business: four reportable segments",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3 (Item 1. Business)",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing states it is organized based on the products and services it offers.",
+      "Boeing states it operates in four reportable segments.",
+      "The first listed reportable segment is Commercial Airplanes (BCA).",
+      "Defense, Space & Security segment engages in research, development, production and modification of manned and unmanned military aircraft and weapons systems for strike, surveillance and mobility, including fighter and trainer aircraft; vertical lift, including rotorcraft and tilt-rotor aircraft.",
+      "BCA produces the 737 narrow-body model and the 767, 777 and 787 wide-body models; 747 wide-body production ended in 2022; development continues on the 777X and 737-7/737-10 derivatives."
+    ],
+    "raw_excerpt": "We are organized based on the products and services we offer. We operate in four reportable segments: • Commercial Airplanes (BCA); ... Defense, Space & Security Segment — This segment engages in the research, development, production and modification of manned and unmanned military aircraft and weapons systems for strike, surveillance and mobility, including fighter and trainer aircraft; vertical lift, including rotorcraft and tilt-rotor aircraft ... receivables, assets held for sale or re-lease and investments."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Notes: Summary of Business Segment Data (revenue taxonomy and FY2022 amounts)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62 (Notes to Consolidated Financial Statements, Summary of Business Segment Data)",
+    "published_at": "2023",
+    "key_points": [
+      "The segment revenue taxonomy has five lines: Commercial Airplanes, Defense, Space & Security, Global Services, Boeing Capital, and Unallocated items, eliminations and other.",
+      "FY2022 revenues: Commercial Airplanes $25,867M.",
+      "FY2022 revenues: Defense, Space & Security $23,162M.",
+      "FY2022 revenues: Global Services $17,611M.",
+      "FY2022 revenues: Boeing Capital $199M.",
+      "FY2022 Unallocated items, eliminations and other: $(231)M.",
+      "FY2022 total revenues: $66,608M (FY2021 $62,286M; FY2020 $58,158M).",
+      "The page explicitly cross-references Note 22 for further segment results."
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total revenues $66,608 $62,286 $58,158 ... This information is an integral part of the Notes to the Consolidated Financial Statements. See Note 22 for further segment results."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: Consolidated Results of Operations, Revenues table",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24 (Item 7, Revenues)",
+    "published_at": "2023",
+    "key_points": [
+      "MD&A repeats the identical five-line revenue table for 2022/2021/2020, confirming the taxonomy is consistent between MD&A and the notes.",
+      "FY2022 total revenues $66,608M; FY2021 $62,286M; FY2020 $58,158M.",
+      "Revenues increased $4,322M in 2022 vs 2021, driven by higher revenues at BCA and BGS, partially offset by lower revenues at BDS."
+    ],
+    "raw_excerpt": "The following table summarizes Revenues: (Dollars in millions) Years ended December 31, 2022 2021 2020 / Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Commercial Airplanes segment results (% of total company revenues)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31 (BCA Results of Operations)",
+    "published_at": "2023",
+    "key_points": [
+      "BCA revenues were 39% of total company revenues in 2022.",
+      "BCA revenues were 31% of total company revenues in 2021 and 28% in 2020.",
+      "BCA FY2022 revenues $25,867M; loss from operations $(2,370)M; operating margin (9.2)%.",
+      "BCA FY2022 deliveries totaled 480 aircraft (387 737s, 5 767s, 33 777s, 24 787s, plus intercompany)."
+    ],
+    "raw_excerpt": "Results of Operations (Dollars in millions) Years ended December 31, 2022 2021 2020 / Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % / Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)%"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Global Services segment results (% of total company revenues)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p40 (BGS Results of Operations)",
+    "published_at": "2023",
+    "key_points": [
+      "BGS revenues were 26% of total company revenues in 2022.",
+      "BGS revenues were 26% of total company revenues in 2021 and 27% in 2020.",
+      "BGS FY2022 revenues $17,611M; earnings from operations $2,727M; operating margin 15.5%.",
+      "BGS 2022 revenue growth was driven by higher commercial services volume, partially offset by lower government services volume and performance."
+    ],
+    "raw_excerpt": "Results of Operations (Dollars in millions) Years ended December 31, 2022 2021 2020 / Revenues $17,611 $16,328 $15,543 / % of total company revenues 26 % 26 % 27 % / Earnings from operations $2,727 $2,017 $450 / Operating margins 15.5 % 12.4 % 2.9 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Statements of Operations: Sales of products vs. Sales of services",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p53 (Consolidated Statements of Operations)",
+    "published_at": "2023",
+    "key_points": [
+      "At the consolidated level Boeing reports revenue as two lines: Sales of products and Sales of services.",
+      "FY2022 Sales of products $55,893M; Sales of services $10,715M; Total revenues $66,608M.",
+      "FY2021 Sales of products $51,386M; Sales of services $10,900M.",
+      "FY2020 Sales of products $47,142M; Sales of services $11,016M.",
+      "Costs are likewise split into Cost of products and Cost of services."
+    ],
+    "raw_excerpt": "Consolidated Statements of Operations (Dollars in millions, except per share data) Years ended December 31, 2022 2021 2020 / Sales of products $55,893 $51,386 $47,142 / Sales of services 10,715 10,900 11,016 / Total revenues 66,608 62,286 58,158 / Cost of products (53,969) (49,954) (54,568) / Cost of services (9,109) (9,283) (9,232)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenue disaggregation: BCA by customer location, contract type and timing",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115 (Revenue from contracts with customers, disaggregation)",
+    "published_at": "2023",
+    "key_points": [
+      "BCA revenue is disaggregated by customer location, not by product vs. service.",
+      "BCA FY2022 revenue from contracts with customers $25,750M; intersegment revenues eliminated on consolidation $117M; total segment revenues $25,867M.",
+      "BCA revenue was 100% recognized on fixed-price contracts in 2022 (also 100% in 2021 and 2020).",
+      "BCA revenue was 100% recognized at a point in time in 2022 (also 100% in 2021 and 2020).",
+      "BCA FY2022 U.S. revenues $12,167M; total non-U.S. revenues $13,567M."
+    ],
+    "raw_excerpt": "BCA revenues by customer location consisted of the following: ... Total revenues from contracts with customers 25,750 19,391 16,112 / Intersegment revenues, eliminated on consolidation 117 102 50 / Total segment revenues $25,867 $19,493 $16,162 / Revenue recognized on fixed-price contracts 100 % 100 % 100 % / Revenue recognized at a point in time 100 % 100 % 100 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenue disaggregation: BDS by customer location, timing, contract type, government share",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115 (Revenue from contracts with customers, disaggregation)",
+    "published_at": "2023",
+    "key_points": [
+      "BDS revenue is disaggregated by customer location (U.S. vs. non-U.S.).",
+      "BDS FY2022 U.S. customer revenue $17,144M; non-U.S. customer revenue $6,018M; total segment revenue from contracts with customers $23,162M.",
+      "BDS revenue was 99% recognized over time in 2022 (99% in 2021, 98% in 2020).",
+      "BDS revenue was 60% on fixed-price contracts in 2022 (68% in 2021, 69% in 2020).",
+      "BDS revenue from the U.S. government was 89% in 2022 (89% in 2021 and 2020), including foreign military sales through the U.S. government."
+    ],
+    "raw_excerpt": "BDS revenues on contracts with customers, based on the customer's location, consisted of the following: ... U.S. customers $17,144 $19,869 $19,662 / Non-U.S. customers 6,018 6,671 6,595 / Total segment revenue from contracts with customers $23,162 $26,540 $26,257 / Revenue recognized over time 99 % 99 % 98 % / Revenue recognized on fixed-price contracts 60 % 68 % 69 % / Revenue from the U.S. government 89 % 89 % 89 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenue disaggregation: BGS Commercial vs. Government sub-lines",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116 (BGS revenues disaggregation)",
+    "published_at": "2023",
+    "key_points": [
+      "BGS revenue is disaggregated into two customer-type sub-lines: Commercial and Government.",
+      "BGS FY2022 Commercial revenue $9,560M; Government revenue $7,681M.",
+      "BGS FY2022 total revenues from contracts with customers $17,241M; intersegment revenues eliminated on consolidation $370M; total segment revenues $17,611M.",
+      "BGS revenue was 50% recognized at a point in time in 2022 (45% in 2021, 47% in 2020).",
+      "BGS revenue was 88% on fixed-price contracts in 2022 (86% in 2021, 87% in 2020).",
+      "BGS revenue from the U.S. government was 33% in 2022 (40% in 2021, 41% in 2020)."
+    ],
+    "raw_excerpt": "BGS revenues consisted of the following: ... Revenue from contracts with customers: Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 / Total revenues from contracts with customers 17,241 16,080 15,304 / Intersegment revenues eliminated on consolidation 370 248 239 / Total segment revenues $17,611 $16,328 $15,543 / Revenue recognized at a point in time 50 % 45 % 47 % / Revenue recognized on fixed-price contracts 88 % 86 % 87 % / Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Boeing Capital (BCC) segment revenue composition",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p41 (Boeing Capital Results of Operations)",
+    "published_at": "2023",
+    "key_points": [
+      "BCC segment revenues consist principally of lease income from equipment under operating lease, interest income from financing receivables and notes, and other income.",
+      "BCC FY2022 revenues $199M; earnings from operations $29M; operating margin 15%.",
+      "BCC FY2021 revenues $272M; FY2020 revenues $261M.",
+      "BCC's gross customer financing and investment portfolio at December 31, 2022 totaled $1,549M."
+    ],
+    "raw_excerpt": "Results of Operations (Dollars in millions) Years ended December 31, 2022 2021 2020 / Revenues $199 $272 $261 / Earnings from operations $29 $106 $63 / Operating margins 15 % 39 % 24 % / Revenues — BCC segment revenues consist principally of lease income from equipment under operating lease, interest income from financing receivables and notes, and other income."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Components of Unallocated items, eliminations and other",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p117 (Unallocated items, eliminations and other)",
+    "published_at": "2023",
+    "key_points": [
+      "The reconciling line 'Unallocated items, eliminations and other' is composed of share-based plans, deferred compensation, amortization of previously capitalized interest, research and development expense net, and eliminations and other unallocated items.",
+      "FY2022 components: share-based plans $(114)M; deferred compensation $117M; amortization of previously capitalized interest $(95)M; R&D expense net $(278)M; eliminations and other unallocated items $(1,162)M.",
+      "FY2022 total Unallocated items, eliminations and other: $(1,532)M.",
+      "Pension and postretirement FAS/CAS service cost adjustments are reported separately from the unallocated line ($849M and $294M respectively in 2022)."
+    ],
+    "raw_excerpt": "Components of Unallocated items, eliminations and other (expense)/income are shown in the following table. ... Share-based plans ($114) ($174) ($120) / Deferred compensation 117 (126) (93) / Amortization of previously capitalized interest (95) (107) (95) / Research and development expense, net (278) (184) (240) / Eliminations and other unallocated items (1,162) (676) (1,807) / Unallocated items, eliminations and other ($1,532) ($1,267) ($2,355)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Segment assets, capital expenditures and depreciation & amortization by segment",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p118 (Segment assets, capex, D&A)",
+    "published_at": "2023",
+    "key_points": [
+      "Segment assets are reported for the same four segments plus unallocated items.",
+      "December 31, 2022 segment assets: Commercial Airplanes $75,212M; Defense, Space & Security $14,426M; Global Services $16,149M; Boeing Capital $1,510M; Unallocated items, eliminations and other $29,803M; Total $137,100M.",
+      "The filing refers to 'the four principal business segments'.",
+      "FY2022 capital expenditures: BCA $218M; BDS $202M; BGS $130M; Unallocated $672M; Total $1,222M."
+    ],
+    "raw_excerpt": "Segment assets are summarized in the table below. December 31, 2022 2021 / Commercial Airplanes $75,212 $75,863 / Defense, Space & Security 14,426 14,974 / Global Services 16,149 16,397 / Boeing Capital 1,510 1,735 / Unallocated items, eliminations and other 29,803 29,583 / Total $137,100 $138,552 ... assets managed centrally on behalf of the four principal business segments"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog by segment",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29 (Backlog)",
+    "published_at": "2023",
+    "key_points": [
+      "Backlog is disclosed on the same segment taxonomy (BCA, BDS, BGS, unallocated).",
+      "Backlog at December 31, 2022: Commercial Airplanes $329,824M; Defense, Space & Security $54,373M; Global Services $19,338M; Unallocated items, eliminations and other $846M.",
+      "Total backlog at December 31, 2022 was $404,381M, of which contractual backlog $381,977M and unobligated backlog $22,404M."
+    ],
+    "raw_excerpt": "Our backlog at December 31 was as follows: ... Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499 / Contractual backlog $381,977 $356,362 / Unobligated backlog 22,404 21,137"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenues by customer location and U.S. government share",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114 (Revenues by customer location)",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing also disaggregates total revenue by customer location as an alternative cut to the segment taxonomy.",
+      "FY2022 revenue by location: Asia $8,393M; Europe $7,916M; Middle East $5,047M; Canada $1,612M; Oceania $1,576M; Africa $418M; Latin America, Caribbean and other $2,412M.",
+      "FY2022 total non-U.S. revenues $27,374M; United States $39,218M; total revenues $66,608M.",
+      "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40% of consolidated revenues in 2022 (49% in 2021, 51% in 2020)."
+    ],
+    "raw_excerpt": "Revenues, including foreign military sales, are reported by customer location and consisted of the following: ... Asia $8,393 $5,845 $5,931 / Europe 7,916 8,967 7,961 / Middle East 5,047 4,653 5,308 ... Total non-U.S. revenues 27,374 23,196 21,677 / United States 39,218 39,076 36,979 ... Total revenues $66,608 $62,286 $58,158 ... Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note: Summary of Business Segment Data (p.58) / MD&A Consolidated Results of Operations — Revenues (p.22)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62 (Summary of Business Segment Data); 同文件 p24 (MD&A Revenues 表)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "FY2022 total revenues were $66,608 million (FY2021: $62,286M; FY2020: $58,158M).",
+      "Commercial Airplanes (BCA) FY2022 revenues were $25,867 million.",
+      "Defense, Space & Security (BDS) FY2022 revenues were $23,162 million.",
+      "Global Services (BGS) FY2022 revenues were $17,611 million.",
+      "Boeing Capital (BCC) FY2022 revenues were $199 million.",
+      "Unallocated items, eliminations and other were $(231) million in FY2022.",
+      "The five revenue lines sum exactly to the $66,608 million total (25,867 + 23,162 + 17,611 + 199 − 231 = 66,608).",
+      "FY2022 revenues increased $4,322 million vs FY2021, driven by higher BCA and BGS revenues, partially offset by lower BDS revenues.",
+      "BCA revenues rose $6,374 million in 2022 primarily on higher 737 and 787 deliveries; BDS revenues fell $3,378 million primarily due to charges on development programs, unfavorable performance across other defense programs, and lower P-8 and weapons volume."
+    ],
+    "raw_excerpt": "Summary of Business Segment Data (Dollars in millions) Years ended December 31, 2022 2021 2020 — Revenues: Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total revenues $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Commercial Airplanes Segment, Results of Operations (p.29)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31 (BCA segment Results of Operations)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "BCA revenues were 39% of total company revenues in FY2022 (31% in FY2021, 28% in FY2020) — this is the 10-K's own stated percentage.",
+      "BCA FY2022 revenues were $25,867 million, with operating margin of (9.2)% and a loss from operations of $2,370 million.",
+      "BCA FY2022 deliveries totaled 480 aircraft (2021: 340; 2020: 157), including 387 737s and 31 787s.",
+      "BCA FY2022 abnormal production costs were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program."
+    ],
+    "raw_excerpt": "Results of Operations (Dollars in millions) Years ended December 31, 2022 2021 2020 — Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % / Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)%"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Global Services Segment, BGS revenues consisted of the following (p.112)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116 (BGS revenues breakdown)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "BGS FY2022 revenue from contracts with customers: Commercial $9,560 million; Government $7,681 million.",
+      "Total BGS revenues from contracts with customers were $17,241 million in FY2022.",
+      "Intersegment revenues eliminated on consolidation were $370 million, bringing total BGS segment revenues to $17,611 million.",
+      "50% of BGS FY2022 revenue was recognized at a point in time; 88% was recognized on fixed-price contracts; 33% came from the U.S. government.",
+      "BGS backlog at December 31, 2022 was $19,338 million (per backlog table)."
+    ],
+    "raw_excerpt": "BGS revenues consisted of the following: Years ended December 31, 2022 2021 2020 — Revenue from contracts with customers: Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 / Total revenues from contracts with customers 17,241 16,080 15,304 / Intersegment revenues eliminated on consolidation 370 248 239 / Total segment revenues $17,611 $16,328 $15,543 / Revenue recognized at a point in time 50 % 45 % 47 % / Revenue recognized on fixed-price contracts 88 % 86 % 87 % / Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BCA and BDS revenues by customer location (p.111)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115 (BCA / BDS revenues by customer location)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "BCA FY2022 revenue from contracts with customers was $25,750 million: non-U.S. $13,567 million (Asia $4,484M, Europe $4,038M, Middle East $2,003M, Other non-U.S. $3,042M) and United States $12,167 million, plus $16 million of estimated potential 737 MAX concessions/considerations.",
+      "BCA intersegment revenues eliminated on consolidation were $117 million, giving total BCA segment revenues of $25,867 million.",
+      "BDS FY2022 total segment revenue from contracts with customers was $23,162 million: U.S. customers $17,144 million and non-U.S. customers $6,018 million.",
+      "99% of BDS FY2022 revenue was recognized over time; 60% was on fixed-price contracts; 89% came from the U.S. government.",
+      "100% of BCA FY2022 revenue was recognized at a point in time and 100% on fixed-price contracts."
+    ],
+    "raw_excerpt": "BCA revenues by customer location consisted of the following: … Total non-U.S. revenues 13,567 9,905 8,711 / United States 12,167 9,472 7,899 / … Total revenues from contracts with customers 25,750 19,391 16,112 / Intersegment revenues, eliminated on consolidation 117 102 50 / Total segment revenues $25,867 $19,493 $16,162 … BDS revenues on contracts with customers, based on the customer's location consisted of the following: U.S. customers $17,144 $19,869 $19,662 / Non-U.S. customers 6,018 6,671 6,595 / Total segment revenue from contracts with customers $23,162 $26,540 $26,257 / Revenue recognized over time 99 % 99 % 98 % / Revenue recognized on fixed-price contracts 60 % 68 % 69 % / Revenue from the U.S. government 89 % 89 % 89 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Part I, Item 1. Business: reportable segments (p.1)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3 (Item 1. Business — segment structure)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "Boeing is organized by the products and services it offers and operates in four reportable segments: Commercial Airplanes (BCA), Defense, Space & Security (BDS), Global Services (BGS), and Boeing Capital (BCC).",
+      "BCA develops, produces and markets commercial jet aircraft; its in-production family includes the 737 narrow-body and the 767, 777 and 787 wide-body models, and production of the 747 wide-body ended in 2022.",
+      "BDS covers research, development, production and modification of manned and unmanned military aircraft and weapons systems, plus C4ISR, cyber/information solutions, satellites and space exploration.",
+      "BGS provides services to commercial and defense customers worldwide, sustaining aerospace platforms and systems.",
+      "BCC provides selective financing solutions for Boeing customers (operating leases, sales-type/finance leases, notes and other receivables)."
+    ],
+    "raw_excerpt": "We are organized based on the products and services we offer. We operate in four reportable segments: • Commercial Airplanes (BCA); • Defense, Space & Security (BDS); • Global Services (BGS); • Boeing Capital (BCC)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Backlog by segment (p.27)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29 (Backlog table)",
+    "published_at": "2023 (FY2022 Form 10-K, year ended December 31, 2022)",
+    "key_points": [
+      "Total backlog at December 31, 2022 was $404,381 million (2021: $377,499 million).",
+      "Backlog by segment at December 31, 2022: Commercial Airplanes $329,824M; Defense, Space & Security $54,373M; Global Services $19,338M; Unallocated items, eliminations and other $846M.",
+      "Contractual backlog was $381,977 million and unobligated backlog $22,404 million.",
+      "Boeing expects approximately 17% of backlog to convert to revenue through 2023 and approximately 71% through 2026."
+    ],
+    "raw_excerpt": "Our backlog at December 31 was as follows: (Dollars in millions) Years ended December 31, 2022 2021 — Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499 / Contractual backlog $381,977 $356,362 / Unobligated backlog 22,404 21,137"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Results of Operations / Consolidated Statements of Operations (total revenue denominator)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24, p55",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Boeing FY2022 total revenues were $66,608 million (FY2021: $62,286M; FY2020: $58,158M).",
+      "A 20% threshold on FY2022 total revenue equals approximately $13,321.6 million.",
+      "The Consolidated Statements of Operations splits total revenue into Sales of products $55,893M and Sales of services $10,715M for FY2022."
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 ... Total revenues 66,608 62,286 58,158 / Sales of products $55,893 $51,386 $47,142 / Sales of services 10,715 10,900 11,016"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenues by reportable segment (MD&A table)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "FY2022 revenue by segment: Commercial Airplanes $25,867M; Defense, Space & Security $23,162M; Global Services $17,611M; Boeing Capital $199M.",
+      "Unallocated items, eliminations and other was ($231M) in FY2022.",
+      "The four segment lines plus unallocated items reconcile to total revenues of $66,608M.",
+      "Computed shares of FY2022 total revenue: BCA 38.8%, BDS 34.8%, BGS 26.4%, BCC 0.3%."
+    ],
+    "raw_excerpt": "Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note: Summary of Business Segment Data",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "The notes' Summary of Business Segment Data reports the same FY2022 segment revenues: BCA $25,867M, BDS $23,162M, BGS $17,611M, Boeing Capital $199M, unallocated/eliminations ($231M), total $66,608M.",
+      "The same note reports segment operating results: BCA ($2,370M), BDS ($3,544M), BGS $2,727M, Boeing Capital $29M, segment operating loss ($3,158M).",
+      "The note cross-references Note 22 for further segment results."
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 ... Defense, Space & Security 23,162 ... Global Services 17,611 ... Boeing Capital 199 ... Unallocated items, eliminations and other (231) ... Total revenues $66,608 ... This information is an integral part of the Notes to the Consolidated Financial Statements. See Note 22 for further segment results."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA segment Results of Operations (company-disclosed % of total revenue)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Boeing discloses BCA revenues as 39% of total company revenues in FY2022 (31% in FY2021, 28% in FY2020).",
+      "BCA FY2022 revenues were $25,867M with an operating loss of $2,370M and operating margin of (9.2)%.",
+      "BCA FY2022 deliveries by model: 737 = 387, 747 = 5, 767 = 33, 777 = 24, 787 = 31, total = 480 (intercompany deliveries shown in parentheses).",
+      "FY2022 abnormal production costs were $1,753M, including $1,240M related to the 787 program, $325M related to the 777X program, and $188M related to the 737 program."
+    ],
+    "raw_excerpt": "Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % ... Deliveries 387 (13) 5 33 (15) 24 31 480 ... Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BGS segment Results of Operations (company-disclosed % of total revenue)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Boeing discloses BGS revenues as 26% of total company revenues in FY2022 (26% in FY2021, 27% in FY2020).",
+      "BGS FY2022 revenues were $17,611M with earnings from operations of $2,727M and operating margin of 15.5%.",
+      "BGS FY2022 revenue growth of $1,283M was driven by higher commercial services volume, partially offset by lower government services volume and performance."
+    ],
+    "raw_excerpt": "Revenues $17,611 $16,328 $15,543 / % of total company revenues 26 % 26 % 27 % / Earnings from operations $2,727 $2,017 $450 / Operating margins 15.5 % 12.4 % 2.9 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BGS revenues disaggregated: Commercial vs. Government",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "BGS FY2022 revenue from contracts with customers: Commercial $9,560M and Government $7,681M, totaling $17,241M.",
+      "BGS intersegment revenues eliminated on consolidation were $370M in FY2022, bringing total segment revenues to $17,611M.",
+      "Computed shares of FY2022 total company revenue: BGS Commercial 14.4%, BGS Government 11.5% — neither sub-category exceeds 20%.",
+      "BGS FY2022 revenue was 50% recognized at a point in time, 88% on fixed-price contracts, and 33% from the U.S. government."
+    ],
+    "raw_excerpt": "BGS revenues consisted of the following: ... Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 / Total revenues from contracts with customers 17,241 16,080 15,304 / Intersegment revenues eliminated on consolidation 370 248 239 / Total segment revenues $17,611 $16,328 $15,543"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program accounting quantities and program highlights (program-level disclosure scope)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Program-level disclosure in the 10-K is in units, not revenue: FY2022 program accounting quantities were 737 = 10,800, 747 = 1,574, 767 = 1,267, 777 = 1,790, 777X = 400, 787 = 1,600.",
+      "FY2022 undelivered units under firm orders: 737 = 3,653, 747 = 1, 767 = 106, 777 = 69, 777X = 244, 787 = 505.",
+      "The 737 accounting quantity increased by 400 units during 2022; production rate was increased to 31 per month in 2022.",
+      "The 10-K reports program-level units, accounting quantities and cost charges, but does not report revenue by individual aircraft program."
+    ],
+    "raw_excerpt": "Program 737 747 767 777 777X 787 † / 2022 / Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 / Undelivered units under firm orders 3,653 1 106 69 244 505 (8) / Cumulative firm orders 11,785 1,573 1,377 1,770 244 1,542 ... The accounting quantity for the 737 program increased by 400 units during 2022 ... We increased the production rate to 31 per month in 2022"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1. Business: segment structure and product families",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Boeing states it operates in four reportable segments, organized based on the products and services offered.",
+      "The commercial jet family in production includes the 737 narrow-body model and the 767, 777 and 787 wide-body models.",
+      "Boeing ended production of the 747 wide-body model in 2022; development continues on the 777X program and the 737-7 and 737-10 derivatives."
+    ],
+    "raw_excerpt": "We are organized based on the products and services we offer. We operate in four reportable segments ... This family of commercial jet aircraft in production includes the 737 narrow-body model and the 767, 777 and 787 wide-body models. We ended production of the 747 wide-body model in 2022. Development continues on the 777X program and the 737-7 and 737-10 derivatives."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year 2022 — MD&A Consolidated Results of Operations, Revenues table",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24（页脚标注 22）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "FY2022 revenues by reportable segment: Commercial Airplanes $25,867 million; Defense, Space & Security $23,162 million; Global Services $17,611 million; Boeing Capital $199 million.",
+      "FY2022 'Unallocated items, eliminations and other' revenue was $(231) million, and total company revenues were $66,608 million.",
+      "FY2021 comparatives in the same table: BCA $19,493M, BDS $26,540M, BGS $16,328M, Boeing Capital $272M, unallocated $(347)M, total $62,286M.",
+      "The filing attributes the $4,322 million year-over-year revenue increase to higher BCA and BGS revenues, partially offset by lower BDS revenues."
+    ],
+    "raw_excerpt": "Revenues\n(Dollars in millions)\nYears ended December 31, 2022 2021 2020\nCommercial Airplanes $25,867 $19,493 $16,162\nDefense, Space & Security 23,162 26,540 26,257\nGlobal Services 17,611 16,328 15,543\nBoeing Capital 199 272 261\nUnallocated items, eliminations and other (231) (347) (65)\nTotal $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Notes to the Consolidated Financial Statements, 'Summary of Business Segment Data'",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62（页脚标注 58）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The notes reproduce the identical segment revenue figures as the MD&A table: BCA $25,867M, BDS $23,162M, BGS $17,611M, Boeing Capital $199M, unallocated $(231)M, total revenues $66,608M for FY2022.",
+      "The same note presents segment operating results: BCA $(2,370)M, BDS $(3,544)M, BGS $2,727M, Boeing Capital $29M, segment operating loss $(3,158)M.",
+      "This constitutes an intra-document cross-check between MD&A and the audited notes, not an independent-source corroboration."
+    ],
+    "raw_excerpt": "Summary of Business Segment Data\n(Dollars in millions)\nYears ended December 31, 2022 2021 2020\nRevenues:\nCommercial Airplanes $25,867 $19,493 $16,162\nDefense, Space & Security 23,162 26,540 26,257\nGlobal Services 17,611 16,328 15,543\nBoeing Capital 199 272 261\nUnallocated items, eliminations and other (231) (347) (65)\nTotal revenues $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — BCA segment Results of Operations, '% of total company revenues'",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31（页脚标注 29）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Commercial Airplanes revenues represented 39% of total company revenues in 2022, versus 31% in 2021 and 28% in 2020.",
+      "BCA FY2022 revenues were $25,867 million with a loss from operations of $(2,370) million and operating margin of (9.2)%.",
+      "BCA FY2022 research and development expense was $1,510 million."
+    ],
+    "raw_excerpt": "Results of Operations\n(Dollars in millions)\nYears ended December 31, 2022 2021 2020\nRevenues $25,867 $19,493 $16,162\n% of total company revenues 39 % 31 % 28 %\nLoss from operations ($2,370) ($6,475) ($13,847)\nOperating margins (9.2)% (33.2)% (85.7)%"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — BGS segment Results of Operations, '% of total company revenues'",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p40（页脚标注 38）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Global Services revenues represented 26% of total company revenues in 2022, versus 26% in 2021 and 27% in 2020.",
+      "BGS FY2022 revenues were $17,611 million with earnings from operations of $2,727 million and operating margin of 15.5%.",
+      "BGS FY2022 revenues increased $1,283 million year over year, primarily on higher commercial services volume, partially offset by lower government services volume and performance."
+    ],
+    "raw_excerpt": "Results of Operations\n(Dollars in millions)\nYears ended December 31, 2022 2021 2020\nRevenues $17,611 $16,328 $15,543\n% of total company revenues 26 % 26 % 27 %\nEarnings from operations $2,727 $2,017 $450\nOperating margins 15.5 % 12.4 % 2.9 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Consolidated Statements of Operations (products vs. services disaggregation)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55（页脚标注 53）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "On a products-versus-services axis, FY2022 sales of products were $55,893 million and sales of services were $10,715 million, totaling $66,608 million.",
+      "FY2021 comparatives: sales of products $51,386M, sales of services $10,900M, total $62,286M.",
+      "This products/services cut is a different disaggregation axis from the reportable-segment cut; the 'sales of services' line is not equivalent to the Global Services segment."
+    ],
+    "raw_excerpt": "Consolidated Statements of Operations\n(Dollars in millions, except per share data)\nYears ended December 31, 2022 2021 2020\nSales of products $55,893 $51,386 $47,142\nSales of services 10,715 10,900 11,016\nTotal revenues 66,608 62,286 58,158"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — revenue disaggregation by customer location and U.S. government share",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114（页脚标注 110）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "FY2022 revenues by customer location: United States $39,218 million; total non-U.S. revenues $27,374 million; total revenues $66,608 million.",
+      "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40% of consolidated revenues in 2022, versus 49% in 2021 and 51% in 2020.",
+      "Non-U.S. revenue detail for FY2022 includes Asia $8,393M, Europe $7,916M, Middle East $5,047M, Canada $1,612M, Oceania $1,576M, Africa $418M, Latin America/Caribbean and other $2,412M."
+    ],
+    "raw_excerpt": "Total non-U.S. revenues 27,374 23,196 21,677\nUnited States 39,218 39,076 36,979\nEstimated potential concessions and other considerations to 737 MAX customers 16 14 (498)\nTotal revenues $66,608 $62,286 $58,158\n\nRevenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Exhibit 32.2 CFO certification (filing date evidence)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p190",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The 10-K covers the period ending December 31, 2022 and was certified by Executive Vice President and CFO Brian J. West on January 27, 2023.",
+      "The certification states the Report fully complies with Section 13(a) or 15(d) of the Securities Exchange Act of 1934 and fairly presents, in all material respects, the financial condition and results of operations of the Company."
+    ],
+    "raw_excerpt": "In connection with the Annual Report of The Boeing Company (the \"Company\") on Form 10-K for the period ending December 31, 2022, as filed with the Securities and Exchange Commission on the date hereof (the \"Report\"), I, Brian J. West, Executive Vice President and Chief Financial Officer of the Company, certify ... /s/ Brian J. West ... January 27, 2023"
+  }
+]

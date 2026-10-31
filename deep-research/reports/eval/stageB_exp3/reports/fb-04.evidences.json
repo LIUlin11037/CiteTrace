@@ -1,0 +1,682 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations (FY2022, FY2021, FY2020)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 net revenue $23,601M vs FY2021 $16,434M (FY2020 $9,763M).",
+      "FY2022 cost of sales $11,550M vs FY2021 $8,505M; FY2022 additionally reports amortization of acquisition-related intangibles of $1,448M in cost of sales, versus $0 in FY2021.",
+      "FY2022 total cost of sales $12,998M vs FY2021 $8,505M.",
+      "FY2022 gross profit $10,603M vs FY2021 $7,929M (FY2020 $4,347M).",
+      "FY2022 research and development $5,005M vs FY2021 $2,845M.",
+      "FY2022 marketing, general and administrative $2,336M vs FY2021 $1,448M.",
+      "FY2022 operating expense amortization of acquisition-related intangibles $2,100M vs $0 in FY2021.",
+      "FY2022 licensing gain $(102)M vs FY2021 $(12)M.",
+      "FY2022 GAAP operating income $1,264M vs FY2021 $3,648M (FY2020 $1,369M).",
+      "FY2022 net income $1,320M vs FY2021 $3,162M; diluted EPS $0.84 vs $2.57."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347 / Research and development 5,005 2,845 1,983 / Marketing, general and administrative 2,336 1,448 995 / Amortization of acquisition-related intangibles 2,100 — — / Licensing gain (102) (12) — / Operating income 1,264 3,648 1,369"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A summary of gross margin, expenses, licensing gain (FY2022 vs FY2021)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023",
+    "key_points": [
+      "Company-disclosed gross margin was 45% in FY2022 versus 48% in FY2021.",
+      "The company attributes the gross margin decrease primarily to amortization of intangible assets associated with the Xilinx acquisition.",
+      "The summary table repeats: net revenue $23,601M/$16,434M; gross profit $10,603M/$7,929M; R&D $5,005M/$2,845M; MG&A $2,336M/$1,448M; OpEx amortization $2,100M/$0; licensing gain $(102)M/$(12)M.",
+      "Gaming operating income was $953M in FY2022 versus $934M in FY2021.",
+      "Embedded operating income was $2.3B in FY2022 versus $44M in FY2021, attributed primarily to inclusion of Xilinx embedded product revenue.",
+      "All Other operating loss of $5.0B in FY2022 primarily consisted of $3.5B amortization of acquisition-related intangibles and $1.1B stock-based compensation."
+    ],
+    "raw_excerpt": "Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note: net revenue and operating income (loss) by segment, FY2022/FY2021/FY2020, plus All Other composition",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023",
+    "key_points": [
+      "Segment net revenue FY2022 vs FY2021: Data Center $6,043M vs $3,694M; Client $6,201M vs $6,887M; Gaming $6,805M vs $5,607M; Embedded $4,552M vs $246M; total $23,601M vs $16,434M.",
+      "Segment operating income FY2022 vs FY2021: Data Center $1,848M vs $991M; Client $1,190M vs $2,088M; Gaming $953M vs $934M; Embedded $2,252M vs $44M.",
+      "All Other operating loss was $(4,979)M in FY2022 versus $(409)M in FY2021.",
+      "Total operating income was $1,264M in FY2022 versus $3,648M in FY2021.",
+      "All Other FY2022 items: stock-based compensation $1,081M (FY2021 $379M); acquisition-related costs $452M (FY2021 $42M); amortization of acquisition-related intangibles $3,548M (FY2021 $0); licensing gain $(102)M (FY2021 $(12)M); total operating loss $4,979M (FY2021 $409M).",
+      "The company states it does not discretely allocate assets to operating segments nor evaluate segments using discrete asset information."
+    ],
+    "raw_excerpt": "Operating income (loss): Data Center $ 1,848 $ 991 $ 198 / Client 1,190 2,088 1,608 / Gaming 953 934 (138) / Embedded 2,252 44 (11) / All Other (4,979) (409) (288) / Total operating income (loss) $ 1,264 $ 3,648 $ 1,369 ... Stock-based compensation expense $ 1,081 $ 379 $ 274 / Acquisition-related costs 452 42 14 / Amortization of acquisition-related intangibles 3,548 — — / Licensing gain (102) (12) — / Total operating loss $ 4,979 $ 409 $ 288"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Expenses: R&D, MG&A, amortization of acquisition-related intangibles, licensing gain",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50",
+    "published_at": "2023",
+    "key_points": [
+      "R&D expense was $5.0B in FY2022, up $2.2B or 76%, versus $2.8B in FY2021.",
+      "The R&D increase is attributed primarily to strategic investments across all segments, including headcount increase through acquisitions and organic growth.",
+      "MG&A expense was $2.3B in FY2022, up $888M or 61%, versus $1.4B in FY2021.",
+      "The MG&A increase is attributed primarily to headcount increase through acquisitions and organic growth, go-to-market activities, and acquisition-related costs.",
+      "In FY2022, cost of sales included $1.4B and operating expense included $2.1B of amortization expense from intangible assets acquired via the Xilinx and Pensando acquisitions.",
+      "FY2022 licensing gain of $102M came from milestone achievement and royalty income on IP licensed to the THATIC JV; FY2021 licensing gain from royalty income was $12M.",
+      "Interest expense was $88M in FY2022 versus $34M in FY2021, attributed to the assumed Xilinx notes and 2022 notes."
+    ],
+    "raw_excerpt": "Research and development expenses of $5.0 billion in 2022 increased by $2.2 billion, or 76%, compared to $2.8 billion in 2021. The increase was primarily driven by strategic investments across all of our segments, including an increase in headcount through acquisitions and organic growth. Marketing, general and administrative expenses of $2.3 billion in 2022 increased by $888 million, or 61%, compared to $1.4 billion in 2021. ... In 2022, cost of sales and operating expense included $1.4 billion and $2.1 billion, respectively, of amortization expense from intangible assets acquired as a result of the acquisitions of Xilinx and Pensando."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A Overview (FY2022 vs FY2021 results narrative)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 net revenue was $23.6B, up 44% versus FY2021 net revenue of $16.4B.",
+      "Revenue growth drivers cited: 64% increase in Data Center revenue (EPYC), 21% increase in Gaming revenue (semi-custom), significant Embedded increase from Xilinx embedded product sales; partially offset by 10% decrease in Client revenue on lower processor shipments amid a weak PC market and PC supply-chain inventory correction.",
+      "Gross margin was 45% in FY2022 versus 48% in FY2021, with the decrease attributed primarily to amortization of intangible assets associated with the Xilinx acquisition.",
+      "Operating income was $1.3B in FY2022 versus $3.6B in FY2021; the decrease is attributed primarily to amortization of intangible assets associated with the Xilinx acquisition.",
+      "Net income was $1.3B in FY2022 versus $3.2B in FY2021, attributed primarily to lower operating income.",
+      "The Xilinx acquisition was completed in February 2022."
+    ],
+    "raw_excerpt": "Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition. Net income for 2022 was $1.3 billion compared to $3.2 billion in the prior year. The decrease in net income was primarily driven by lower operating income."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations: segment operating income narratives (Data Center, Client)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "Data Center net revenue of $6B in FY2022 increased 64%, primarily on higher EPYC server processor sales.",
+      "Data Center operating income was $1.8B in FY2022 versus $991M in FY2021, attributed to higher revenue partially offset by higher operating expenses.",
+      "Client net revenue of $6.2B in FY2022 decreased 10%, driven by a 24% decrease in unit shipments partially offset by a 19% increase in average selling price.",
+      "Client operating income was $1.2B in FY2022 versus $2.1B in FY2021, attributed to lower revenue and higher operating expenses.",
+      "Segment table repeated on this page: Data Center $6,043M/$3,694M revenue and $1,848M/$991M operating income; Client $6,201M/$6,887M and $1,190M/$2,088M; Gaming $6,805M/$5,607M and $953M/$934M; Embedded $4,552M/$246M and $2,252M/$44M; All Other $(4,979)M/$(409)M."
+    ],
+    "raw_excerpt": "Client operating income was $1.2 billion in 2022, compared to operating income of $2.1 billion in 2021. The decrease in operating income was primarily driven by lower revenue and higher operating expenses. ... Data Center operating income was $1.8 billion in 2022, compared to operating income of $991 million in 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 1/Note 2: acquisition closing dates and fiscal calendar",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023",
+    "key_points": [
+      "The Xilinx acquisition closed on February 14, 2022 (the Xilinx Acquisition Date).",
+      "The Pensando Systems acquisition closed on May 26, 2022 (the Pensando Acquisition Date).",
+      "AMD uses a 52- or 53-week fiscal year ending on the last Saturday in December; FY2022 ended December 31, 2022 and FY2021 ended December 25, 2021.",
+      "FY2022 consisted of 53 weeks, while FY2021 and FY2020 each consisted of 52 weeks."
+    ],
+    "raw_excerpt": "On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. (Pensando). ... Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows (depreciation & amortization, stock-based compensation)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023",
+    "key_points": [
+      "Depreciation and amortization was $4,174M in FY2022 versus $407M in FY2021 and $312M in FY2020.",
+      "Stock-based compensation was $1,081M in FY2022 versus $379M in FY2021 and $274M in FY2020.",
+      "Amortization of inventory fair value adjustment was $189M in FY2022 versus $0 in FY2021.",
+      "Net cash provided by operating activities was $3,565M in FY2022 versus $3,521M in FY2021.",
+      "Cash received from acquisition of Xilinx was $2,366M in FY2022; acquisition of Pensando, net of cash acquired, was $1,544M."
+    ],
+    "raw_excerpt": "Depreciation and amortization 4,174 407 312 / Stock-based compensation 1,081 379 274 / Amortization of inventory fair value adjustment 189 — — ... Net cash provided by operating activities 3,565 3,521 1,071"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Statements of Operations (p54)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 net revenue $23,601M vs FY2021 $16,434M; FY2020 $9,763M.",
+      "FY2022 operating income $1,264M vs FY2021 $3,648M vs FY2020 $1,369M — operating income fell despite revenue rising 44%.",
+      "FY2022 cost of sales included a separate line 'Amortization of acquisition-related intangibles' of $1,448M; FY2021 and FY2020 were zero.",
+      "FY2022 operating expense included a separate line 'Amortization of acquisition-related intangibles' of $2,100M; FY2021 and FY2020 were zero.",
+      "FY2022 gross profit $10,603M vs FY2021 $7,929M; R&D $5,005M vs $2,845M; MG&A $2,336M vs $1,448M.",
+      "FY2022 licensing gain $102M vs $12M in FY2021."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347 / Research and development 5,005 2,845 1,983 / Marketing, general and administrative 2,336 1,448 995 / Amortization of acquisition-related intangibles 2,100 — — / Licensing gain (102) (12) — / Operating income 1,264 3,648 1,369"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A: Amortization of Acquisition-Related Intangibles and gross margin (p49–p50)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "In FY2022, cost of sales included $1.4 billion and operating expense included $2.1 billion of amortization expense from intangible assets acquired as a result of the acquisitions of Xilinx and Pensando.",
+      "The amortization is attributed to both the Xilinx and Pensando acquisitions, not Xilinx alone.",
+      "R&D expense rose $2.2 billion, or 76%, to $5.0 billion, driven by strategic investments across all segments including headcount increases through acquisitions and organic growth.",
+      "MG&A expense rose $888 million, or 61%, to $2.3 billion, driven by headcount increases through acquisitions and organic growth, go-to-market activities, and acquisition-related costs."
+    ],
+    "raw_excerpt": "Amortization of Acquisition-Related Intangibles — In 2022, cost of sales and operating expense included $1.4 billion and $2.1 billion, respectively, of amortization expense from intangible assets acquired as a result of the acquisitions of Xilinx and Pensando."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A: gross margin decline attributed to Xilinx amortization (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Gross margin was 45% in FY2022 versus 48% in FY2021.",
+      "The company states the gross margin decrease was primarily due to amortization of intangible assets associated with the Xilinx acquisition.",
+      "FY2022 cost of sales $11,550M vs FY2021 $8,505M; gross profit $10,603M vs $7,929M."
+    ],
+    "raw_excerpt": "Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 6: Acquisition-related Intangible Assets, total amortization and forward schedule (p74)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p74",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022.",
+      "Accumulated amortization on identified intangibles subject to amortization was $3,548M as of December 31, 2022, against gross carrying amount $26,472M and net carrying amount $22,924M.",
+      "Total acquisition-related intangible assets were $27,666M gross, $3,548M accumulated amortization, $24,118M net, including $1,194M of IPR&D not subject to amortization.",
+      "Estimated annual amortization is expected to decline to $2,804M in 2023 and $2,286M in 2024, then $2,061M (2025), $1,951M (2026), $1,844M (2027), and $11,978M for 2028 and thereafter.",
+      "Acquisition-related intangible asset balance as of December 25, 2021 was not material — i.e., essentially zero amortization in FY2021.",
+      "Pro forma note states there was amortization expense of acquired Xilinx inventory fair value step-up of $184 million in fiscal year 2021 and no Xilinx inventory fair value step-up expense in fiscal year 2022."
+    ],
+    "raw_excerpt": "Identified intangible assets subject to amortization 26,472 (3,548) 22,924 … Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022. … 2023 $ 2,804 / 2024 2,286 / 2025 2,061 / 2026 1,951 / 2027 1,844 / 2028 and thereafter 11,978 / Total $ 22,924"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 5: Xilinx purchase price allocation and intangible fair values (p72)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p72",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Total purchase consideration for Xilinx was $48,793M; goodwill recorded was $22,784M; fair value of net assets acquired $26,009M.",
+      "Acquisition-related intangibles recorded in the Xilinx PPA were $27,308M.",
+      "Intangible breakdown: developed technology $12,295M over 16 years; customer relationships $12,290M over 14 years; customer backlog $793M over 1 year; corporate trade name $65M over 1 year; product trademarks $895M over 12 years; identified intangibles subject to amortization $26,338M; IPR&D not subject to amortization $970M.",
+      "Deferred tax liabilities assumed were $4,346M; long-term debt assumed $1,474M.",
+      "Goodwill is not expected to be deductible for income tax purposes."
+    ],
+    "raw_excerpt": "Developed technology $ 12,295 16 years / Customer relationships 12,290 14 years / Customer backlog 793 1 year / Corporate trade name 65 1 year / Product trademarks 895 12 years / Identified intangible assets subject to amortization 26,338 / In-process research and development (IPR&D) not subject to amortization 970 N/A / Total identified intangible assets acquired $ 27,308"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 12: Segment results and All Other composition (p68)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Segment operating income FY2022 vs FY2021: Data Center $1,848M vs $991M; Client $1,190M vs $2,088M; Gaming $953M vs $934M; Embedded $2,252M vs $44M; All Other $(4,979)M vs $(409)M.",
+      "Total operating income FY2022 $1,264M vs FY2021 $3,648M.",
+      "All Other FY2022 items: stock-based compensation expense $1,081M (FY2021 $379M), acquisition-related costs $452M (FY2021 $42M), amortization of acquisition-related intangibles $3,548M (FY2021 $0), licensing gain $(102)M (FY2021 $(12)M), totaling $4,979M (FY2021 $409M).",
+      "Embedded segment revenue FY2022 $4,552M vs FY2021 $246M; Data Center $6,043M vs $3,694M; Client $6,201M vs $6,887M; Gaming $6,805M vs $5,607M."
+    ],
+    "raw_excerpt": "Operating income (loss): Data Center $ 1,848 $ 991 $ 198 / Client 1,190 2,088 1,608 / Gaming 953 934 (138) / Embedded 2,252 44 (11) / All Other (4,979) (409) (288) / Total operating income (loss) $ 1,264 $ 3,648 $ 1,369 … Stock-based compensation expense $ 1,081 $ 379 $ 274 / Acquisition-related costs 452 42 14 / Amortization of acquisition-related intangibles 3,548 — — / Licensing gain (102) (12) — / Total operating loss $ 4,979 $ 409 $ 288"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A: All Other operating loss composition and acquisition-related costs definition (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "All Other operating loss of $5.0 billion in FY2022 primarily consisted of $3.5 billion amortization of acquisition-related intangibles, $1.1 billion stock-based compensation expense, and $452 million acquisition-related costs.",
+      "Acquisition-related costs primarily include transaction costs, amortization of Xilinx inventory fair value step-up adjustment, depreciation related to the Xilinx fixed assets fair value step-up adjustment, certain compensation charges related to the acquisitions of Xilinx and Pensando, and licensing gain.",
+      "All Other operating loss of $409 million in FY2021 primarily consisted of $379 million stock-based compensation expense and $42 million acquisition-related costs.",
+      "Embedded net revenue increase was primarily driven by inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022; Embedded operating income rose to $2.3 billion from $44 million for the same reason."
+    ],
+    "raw_excerpt": "All Other operating loss of $5.0 billion in 2022 primarily consisted of $3.5 billion of amortization of acquisition-related intangibles, $1.1 billion of stock-based compensation expense, and $452 million of acquisition-related costs, which primarily include transaction costs, amortization of Xilinx inventory fair value step-up adjustment, and depreciation related to the Xilinx fixed assets fair value step-up adjustment, certain compensation charges related to the acquisitions of Xilinx and Pensando, and licensing gain."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 5: Xilinx revenue/operating income and $350M Xilinx acquisition-related costs (p73)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p73",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx contributed FY2022 net revenue of $4,612M and operating income of $2,247M.",
+      "Operating income attributable to Xilinx recorded under the Embedded and Data Center segments does not include $4.2 billion of amortization of acquisition-related intangibles, employee stock-based compensation expense and acquisition-related costs, which are recorded under the All Other segment.",
+      "In 2022, Xilinx acquisition-related costs of $350 million were recorded under Cost of sales, Research and development, and Marketing, general and administrative.",
+      "Unaudited pro forma: FY2022 net revenue $24,117M and net income $2,311M; FY2021 net revenue $20,150M and net income $8M, as if the acquisitions had been consummated at the beginning of fiscal 2021 (December 27, 2020)."
+    ],
+    "raw_excerpt": "Net revenue $ 4,612 / Operating income $ 2,247 / Operating income attributable to Xilinx recorded under the Embedded and Data Center segments does not include $4.2 billion of amortization of acquisition-related intangibles, employee stock-based compensation expense and acquisition-related costs, which are recorded under the \"All Other\" segment. / In 2022, Xilinx acquisition-related costs of $350 million were recorded under Cost of sales, Research and development, and Marketing, general and [administrative]"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 11: Stock-based compensation expense allocation (p82)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p82",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Total stock-based compensation expense before income taxes was $1,081M in FY2022, $379M in FY2021, $274M in FY2020 — an increase of $702M year over year.",
+      "FY2022 SBC allocation: cost of sales $29M, R&D $697M, MG&A $355M (FY2021: $5M, $246M, $128M).",
+      "Income tax benefit on SBC was $179M in FY2022; net of tax SBC was $902M.",
+      "With the acquisition of Xilinx, the Company assumed the Xilinx, Inc. 2007 Equity Incentive Plan and may grant stock options and awards under this plan; 18 million shares remained available for future grants under the 2007 Plan as of December 31, 2022."
+    ],
+    "raw_excerpt": "Cost of sales $ 29 $ 5 $ 6 / Research and development 697 246 173 / Marketing, general, and administrative 355 128 95 / Total stock-based compensation expense before income taxes 1,081 379 274 / Income tax benefit (179) (58) (42) / Total stock-based compensation expense, net of income taxes $ 902 $ 321 $ 232"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Statements of Cash Flows: non-cash add-backs (p58–p59)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Depreciation and amortization add-back rose to $4,174M in FY2022 from $407M in FY2021.",
+      "Stock-based compensation add-back was $1,081M in FY2022 vs $379M in FY2021.",
+      "Amortization of inventory fair value adjustment was $189M in FY2022 vs zero in FY2021.",
+      "Net cash provided by operating activities was $3,565M in FY2022 vs $3,521M in FY2021 — essentially flat despite the $2,384M drop in operating income.",
+      "Non-cash financing/investing disclosure: issuance of common stock and treasury stock for the acquisition of Xilinx $48,514M; fair value of replacement share-based awards related to acquisition of Xilinx $275M."
+    ],
+    "raw_excerpt": "Depreciation and amortization 4,174 407 312 / Stock-based compensation 1,081 379 274 … Amortization of inventory fair value adjustment 189 — — … Net cash provided by operating activities 3,565 3,521 1,071 … Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 $ — $ — / Fair value of replacement share-based awards related to acquisition of Xilinx $ 275 $ — $ —"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 1: Xilinx and Pensando acquisition closing dates (p60)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The Xilinx acquisition closed on February 14, 2022 (the Xilinx Acquisition Date).",
+      "The Pensando acquisition closed on May 26, 2022 (the Pensando Acquisition Date).",
+      "Fiscal 2022 consisted of 53 weeks; fiscal 2021 and 2020 each consisted of 52 weeks.",
+      "Fiscal 2022 ended December 31, 2022; fiscal 2021 ended December 25, 2021."
+    ],
+    "raw_excerpt": "On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. (Pensando). … Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 5: Pensando purchase price allocation (p70–p71)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p70",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Pensando total purchase consideration was $1,655M, with goodwill of $1,098M and acquisition-related intangibles of $349M.",
+      "Pensando intangible breakdown: developed technology $60M over 4 years; customer relationships $34M over 3 years; customer backlog $16M over 1 year; product trademarks $19M over 5 years; identified intangibles subject to amortization $129M.",
+      "Pensando intangibles are an order of magnitude smaller than Xilinx's $27,308M, so Xilinx dominates FY2022 acquisition-related amortization."
+    ],
+    "raw_excerpt": "Total purchase consideration $ 1,655 … Acquisition-related intangibles 349 … Developed technology $ 60 4 years / Customer relationships 34 3 years / Customer backlog 16 1 year / Product trademarks 19 5 years / Identified intangible assets subject to amortization 129"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Critical audit matter: Xilinx business combination valuation (p95)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p95",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Ernst & Young identified the Xilinx business combination as a critical audit matter.",
+      "During fiscal year 2022 the Company completed the acquisition of Xilinx for consideration of $48.8 billion, accounted for as a business combination.",
+      "The audit report is dated February 27, 2023, San Jose, California."
+    ],
+    "raw_excerpt": "Business Combination — Description of the Matter During fiscal year 2022, the Company completed the acquisition of Xilinx, Inc. (\"Xilinx\") for consideration of $48.8 billion, as disclosed in Note 5 to the consolidated financial statements. The transaction was accounted for as a business combination."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations: Client segment (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Client net revenue was $6.2 billion in FY2022, a 10% decrease from $6.9 billion in FY2021.",
+      "The Client revenue decline was primarily driven by a 24% decrease in unit shipments, partially offset by a 19% increase in average selling price.",
+      "The unit shipment decrease was attributed to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022.",
+      "The increase in average selling price was primarily driven by a richer mix of Ryzen mobile processor sales.",
+      "Client operating income was $1.2 billion in FY2022 versus $2.1 billion in FY2021; the decrease was primarily driven by lower revenue and higher operating expenses.",
+      "Data Center net revenue was $6 billion in FY2022, up 64% from $3.7 billion in FY2021, primarily driven by higher sales of EPYC server processors.",
+      "Data Center operating income was $1.8 billion in FY2022 versus $991 million in FY2021, driven by higher revenue partially offset by higher operating expenses.",
+      "Segment operating income FY2022 vs FY2021: Data Center $1,848M vs $991M; Client $1,190M vs $2,088M; Gaming $953M vs $934M; Embedded $2,252M vs $44M; All Other $(4,979)M vs $(409)M; Total $1,264M vs $3,648M.",
+      "Segment net revenue FY2022 vs FY2021: Data Center $6,043M vs $3,694M; Client $6,201M vs $6,887M; Gaming $6,805M vs $5,607M; Embedded $4,552M vs $246M; Total $23,601M vs $16,434M.",
+      "AMD changed its reporting segments in Q2 fiscal 2022 to four reportable segments: Data Center, Client, Gaming, and Embedded."
+    ],
+    "raw_excerpt": "Client net revenue of $6.2 billion in 2022 decreased by 10%, compared to net revenue of $6.9 billion in 2021, primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. The decrease in unit shipments was due to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022. The increase in average selling price was primarily driven by a richer mix of Ryzen mobile processor sales. Client operating income was $1.2 billion in 2022, compared to operating income of $2.1 billion in 2021. The decrease in operating income was primarily driven by lower revenue and higher operating expenses."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Risk Factors: Client segment decline and PC inventory correction (p19)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD states it experienced a decline in Client segment revenue as a result of weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022.",
+      "The inventory correction is explicitly time-bounded to the second half of 2022, not the full year."
+    ],
+    "raw_excerpt": "We experienced a decline in our Client segment revenue as a result of weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022. Uncertain global economic conditions have and may in the future adversely impact our business."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: Gross Margin discussion and consolidated results summary (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Gross margin as a percentage of net revenue was 45% in FY2022 compared to 48% in FY2021.",
+      "AMD attributes the gross margin decrease primarily to amortization of intangible assets associated with the Xilinx acquisition.",
+      "Cost of sales was $11,550M in FY2022 vs $8,505M in FY2021; a new line 'Amortization of acquisition-related intangibles' of $1,448M appears in cost of sales in FY2022 (zero in FY2021), making total cost of sales $12,998M.",
+      "Gross profit was $10,603M in FY2022 vs $7,929M in FY2021.",
+      "Embedded net revenue of $4.6 billion in FY2022 vs $246 million in FY2021, and Embedded operating income of $2.3 billion vs $44 million, were both primarily driven by the inclusion of Xilinx embedded product revenue following the February 2022 Xilinx acquisition.",
+      "Gaming net revenue rose 21% to $6.8 billion driven by higher semi-custom product sales, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand in the second half of 2022.",
+      "Gaming operating income was $953 million in FY2022 vs $934 million in FY2021."
+    ],
+    "raw_excerpt": "Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition. ... Cost of sales 11,550 8,505 / Amortization of acquisition-related intangibles 1,448 — / Gross profit 10,603 7,929 / Gross margin 45 % 48 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A Overview: FY2022 revenue and operating income drivers (p43)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 net revenue was $23.6 billion, up 44% from $16.4 billion in FY2021.",
+      "Revenue growth drivers cited: 64% increase in Data Center segment revenue (EPYC server processors), 21% increase in Gaming segment revenue (semi-custom product sales), and a significant increase in Embedded segment revenue from inclusion of Xilinx embedded product sales.",
+      "Growth was partially offset by a 10% decrease in Client segment revenue due to lower processor shipments driven by a weak PC market and significant inventory correction actions across the PC supply chain.",
+      "Operating income was $1.3 billion in FY2022 compared to $3.6 billion in FY2021; the decrease was primarily driven by amortization of intangible assets associated with the Xilinx acquisition.",
+      "Net income was $1.3 billion in FY2022 vs $3.2 billion in FY2021, driven by lower operating income."
+    ],
+    "raw_excerpt": "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the prior year period driven by the inclusion of Xilinx embedded product sales. This growth was partially offset by a 10% decrease in Client segment revenue primarily due to lower processor shipments driven by a weak PC market and significant inventory correction actions across the PC supply chain. ... Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 Segment Reporting: 'All Other' operating loss composition (p68)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The All Other operating loss widened to $4,979M in FY2022 from $409M in FY2021.",
+      "All Other FY2022 components: stock-based compensation expense $1,081M (vs $379M), acquisition-related costs $452M (vs $42M), amortization of acquisition-related intangibles $3,548M (vs $0), licensing gain $(102)M (vs $(12)M).",
+      "The $3,548M amortization of acquisition-related intangibles in All Other exceeds total consolidated operating income of $1,264M for FY2022.",
+      "Three-year segment table confirms FY2020 comparatives: Data Center $1,685M revenue / $198M op income; Client $5,189M / $1,608M; Gaming $2,746M / $(138)M; Embedded $143M / $(11)M; All Other $(288)M."
+    ],
+    "raw_excerpt": "Operating loss: Stock-based compensation expense $ 1,081 $ 379 $ 274 / Acquisition-related costs 452 42 14 / Amortization of acquisition-related intangibles 3,548 — — / Licensing gain (102) (12) — / Total operating loss $ 4,979 $ 409 $ 288"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: R&D and Marketing/General/Administrative expense drivers (p50)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "R&D expenses were $5.0 billion in FY2022, up $2.2 billion or 76%, from $2.8 billion in FY2021, primarily driven by strategic investments across all segments including headcount increases through acquisitions and organic growth.",
+      "Marketing, general and administrative expenses were $2.3 billion in FY2022, up $888 million or 61%, from $1.4 billion in FY2021, primarily due to headcount increases through acquisitions and organic growth, go-to-market activities, and acquisition-related costs.",
+      "In FY2022, cost of sales and operating expense included $1.4 billion and $2.1 billion respectively of amortization expense from acquired intangible assets.",
+      "Interest expense was $88 million in FY2022 vs $34 million in FY2021, primarily due to the Assumed Xilinx Notes and the 3.924% Notes and 4.393% Notes issued in 2022."
+    ],
+    "raw_excerpt": "Research and development expenses of $5.0 billion in 2022 increased by $2.2 billion, or 76%, compared to $2.8 billion in 2021. The increase was primarily driven by strategic investments across all of our segments, including an increase in headcount through acquisitions and organic growth. Marketing, General and Administrative Expenses of $2.3 billion in 2022 increased by $888 million, or 61%, compared to $1.4 billion in 2021. The increase was primarily due to an increase in headcount through acquisitions and organic growth, go-to-market activities, and acquisition-related costs."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: Liquidity — inventory build at advanced process nodes and supply prepayments (p52)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Net cash provided by operating activities was $3.6 billion in FY2022, from net income of $1.3 billion adjusted for $4.1 billion of non-cash adjustments and $1.8 billion of net cash outflows from operating asset/liability changes.",
+      "Inventories increased $1.4 billion, driven primarily by build of advanced process nodes to support the ramp of new products.",
+      "Accounts receivable increased $1.1 billion, driven primarily by higher revenue in Q4 2022 compared to Q4 2021.",
+      "Prepaid expenses and other assets increased $1.2 billion, due primarily to prepayments under long-term supply agreements in 2022.",
+      "Accounts payable increased $931 million primarily due to timing of payments to suppliers; accrued liabilities increased $546 million driven mainly by higher customer-related accruals."
+    ],
+    "raw_excerpt": "The primary drivers of the changes in operating assets and liabilities included a $1.4 billion increase in inventories driven primarily by build of advanced process nodes to support the ramp of new products, a $1.1 billion increase in accounts receivable driven primarily by higher revenue in the fourth quarter of 2022 compared to the fourth quarter of 2021, and a $1.2 billion increase in prepaid expenses and other assets due primarily to prepayments under long-term supply agreements in 2022, offset by an $931 million increase in accounts payable primarily due to timing of payments to our suppliers, and a $546 million increase in accrued liabilities and other driven mainly by higher customer-related accruals."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Manufacturing and foundry dependence: TSMC, GLOBALFOUNDRIES WSA, UMC, Samsung (p13–p14)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p13",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD has arrangements with Taiwan Semiconductor Manufacturing Company Limited (TSMC) for production of wafers for its HPC, FPGA and Adaptive SoC products.",
+      "AMD is party to a Wafer Supply Agreement (WSA) with GLOBALFOUNDRIES Inc. for wafer purchases for HPC products at the 12nm and 14nm technology nodes.",
+      "AMD also purchases wafers from United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd."
+    ],
+    "raw_excerpt": "gements with Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of wafers for our HPC, FPGA and Adaptive SoC products. We are also a party to a Wafer Supply Agreement (WSA) with GLOBALFOUNDRIES Inc. (GF), with respect to wafer purchases for our HPC products at the 12 nm and 14 nm technology nodes. ... Additionally, we purchase wafers from United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note: Unconditional purchase commitments schedule (p89)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p89",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Total future unconditional purchase commitments as of December 31, 2022 were $8,610 million.",
+      "Of that total, $6,489 million falls due in 2023, $1,434 million in 2024, $271 million in 2025, $129 million in 2026, $85 million in 2027, and $202 million in 2028 and thereafter.",
+      "Purchase commitments include obligations under non-cancellable purchase orders and contractual obligations requiring minimum purchases or where cancellation would lead to significant penalties."
+    ],
+    "raw_excerpt": "Total future unconditional purchase commitments as of December 31, 2022 were as follows: 2023 $ 6,489 / 2024 1,434 / 2025 271 / 2026 129 / 2027 85 / 2028 and thereafter 202 / Total unconditional purchase commitments $ 8,610"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Critical accounting policy: Inventory valuation at lower of cost or NRV (p46)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p46",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD values inventory at standard cost, adjusted to approximate the lower of actual cost or estimated net realizable value, using assumptions about future demand and market conditions.",
+      "Material assumptions used to estimate necessary inventory carrying value adjustments can be unique to each product and require judgment about future demand."
+    ],
+    "raw_excerpt": "Inventory Valuation. We value inventory at standard cost, adjusted to approximate the lower of actual cost or estimated net realizable value using assumptions about future demand and market conditions. Material assumptions we use to estimate necessary inventory carrying value adjustments can be unique to each"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows: inventory fair value adjustment and D&A (p58)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 cash flow statement includes a $189 million non-cash 'Amortization of inventory fair value adjustment' (zero in FY2021 and FY2020), a purchase-accounting item arising from the Xilinx acquisition.",
+      "Depreciation and amortization rose to $4,174 million in FY2022 from $407 million in FY2021.",
+      "Stock-based compensation rose to $1,081 million in FY2022 from $379 million in FY2021.",
+      "Net income was $1,320 million in FY2022 vs $3,162 million in FY2021."
+    ],
+    "raw_excerpt": "Depreciation and amortization 4,174 407 312 / Stock-based compensation 1,081 379 274 / ... Amortization of inventory fair value adjustment 189 — —"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations (p54)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 consolidated income statement: Net revenue $23,601M; Cost of sales $11,550M; Amortization of acquisition-related intangibles $1,448M; Total cost of sales $12,998M; Gross profit $10,603M.",
+      "FY2022 operating expenses: R&D $5,005M; Marketing, general and administrative $2,336M; Amortization of acquisition-related intangibles $2,100M; Licensing gain $(102)M.",
+      "FY2022 operating income was $1,264M, versus $3,648M in FY2021 and $1,369M in FY2020.",
+      "FY2022 net income was $1,320M; diluted EPS $0.84."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347 / Research and development 5,005 2,845 1,983 / Marketing, general and administrative 2,336 1,448 995 / Amortization of acquisition-related intangibles 2,100 — — / Licensing gain (102) (12) — / Operating income 1,264 3,648 1,369"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations (FY2022 vs FY2021 vs FY2020)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 net revenue was $23,601M versus $16,434M in FY2021, an increase of 44%.",
+      "FY2022 operating income was $1,264M versus $3,648M in FY2021, a decline of about 65%.",
+      "A discrete line 'Amortization of acquisition-related intangibles' of $1,448M appears within cost of sales in FY2022, with zero in FY2021 and FY2020.",
+      "A second 'Amortization of acquisition-related intangibles' line of $2,100M appears in operating expense in FY2022, also zero in the two prior years.",
+      "Total cost of sales was $12,998M in FY2022 versus $8,505M in FY2021; gross profit was $10,603M versus $7,929M.",
+      "FY2022 also includes a licensing gain of $102M versus $12M in FY2021.",
+      "Diluted shares used in per-share calculation rose from 1,229M in FY2021 to 1,571M in FY2022."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347 … Amortization of acquisition-related intangibles 2,100 — — / Licensing gain (102) (12) — / Operating income 1,264 3,648 1,369"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview (operating income explanation)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Management states FY2022 operating income was $1.3 billion versus $3.6 billion in FY2021.",
+      "Management attributes the decrease in operating income primarily to acquisition-related items (amortization of acquisition-related intangibles and acquisition-related costs).",
+      "Net revenue growth of 44% to $23.6 billion is described as reflecting a diversified business model despite challenging PC market conditions in the second half of 2022.",
+      "The filing notes the increase in net revenue was driven by a 64% increase in one segment (Data Center)."
+    ],
+    "raw_excerpt": "Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operating income was primarily driven by [amortization of acquisition-related intangibles / acquisition-related costs] … Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Amortization of Acquisition-Related Intangibles",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "In FY2022, cost of sales included $1.4 billion and operating expense included $2.1 billion of amortization expense from intangible assets acquired via the Xilinx and Pensando acquisitions.",
+      "The amortization is presented as a separately identified line item rather than being embedded in ordinary cost of sales or R&D.",
+      "R&D expense rose 76% to $5.0 billion, attributed to strategic investments across all segments including headcount added through acquisitions.",
+      "Marketing, general and administrative expense rose 61% to $2.3 billion, attributed to acquisition-related headcount growth, go-to-market activities, and acquisition-related costs."
+    ],
+    "raw_excerpt": "In 2022, cost of sales and operating expense included $1.4 billion and $2.1 billion, respectively, of amortization expense from intangible assets acquired as a result of the acquisitions of Xilinx and Pensando."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 6: Acquisition-related Intangible Assets and Goodwill",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p74",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Identified intangible assets subject to amortization total $26,472M gross carrying amount with $3,548M accumulated amortization and $22,924M net carrying amount.",
+      "Developed technology is $12,360M gross over a 15-year weighted-average remaining useful life; customer relationships are $12,324M gross over 13 years.",
+      "IPR&D not subject to amortization totals $1,194M; total acquisition-related intangible assets are $27,666M gross.",
+      "Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022.",
+      "Estimated future annual amortization: 2023 $2,804M; 2024 $2,286M; 2025 $2,061M; 2026 $1,951M; 2027 $1,844M; 2028 and thereafter $11,978M.",
+      "The acquisition-related intangible asset balance as of December 25, 2021 was not material."
+    ],
+    "raw_excerpt": "Identified intangible assets subject to amortization 26,472 (3,548) 22,924 … Acquisition-related intangible amortization expense was $3.5 billion in fiscal year 2022. … 2023 $ 2,804 / 2024 2,286 / 2025 2,061 / 2026 1,951 / 2027 1,844 / 2028 and thereafter 11,978 / Total $ 22,924"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Gross Margin discussion",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "GAAP gross margin as a percentage of net revenue was 45% in FY2022 versus 48% in FY2021.",
+      "Management explicitly attributes the gross margin decrease primarily to amortization of intangible assets associated with the Xilinx acquisition.",
+      "The consolidated statement of operations summary in this section shows cost of sales of $11,550M plus a separate $1,448M amortization line, yielding gross profit of $10,603M."
+    ],
+    "raw_excerpt": "Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Segment net revenue and operating income, and composition of 'All Other'",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 segment operating income: Data Center $1,848M (FY21 $991M), Client $1,190M (FY21 $2,088M), Gaming $953M (FY21 $934M), Embedded $2,252M (FY21 $44M).",
+      "The 'All Other' category recorded an operating loss of $4,979M in FY2022 versus $409M in FY2021.",
+      "The All Other operating loss is composed of stock-based compensation expense $1,081M, acquisition-related costs $452M, amortization of acquisition-related intangibles $3,548M, offset by a licensing gain of $102M.",
+      "FY2022 segment net revenue: Data Center $6,043M, Client $6,201M, Gaming $6,805M, Embedded $4,552M, totaling $23,601M.",
+      "Stock-based compensation expense rose from $379M in FY2021 and $274M in FY2020 to $1,081M in FY2022.",
+      "Acquisition-related costs rose from $42M in FY2021 to $452M in FY2022.",
+      "The company states it does not discretely allocate assets to operating segments nor evaluate segments using discrete asset information."
+    ],
+    "raw_excerpt": "Operating income (loss): Data Center $ 1,848 $ 991 $ 198 / Client 1,190 2,088 1,608 / Gaming 953 934 (138) / Embedded 2,252 44 (11) / All Other (4,979) (409) (288) / Total operating income (loss) $ 1,264 $ 3,648 $ 1,369 … Stock-based compensation expense $ 1,081 $ 379 $ 274 / Acquisition-related costs 452 42 14 / Amortization of acquisition-related intangibles 3,548 — — / Licensing gain (102) (12) — / Total operating loss $ 4,979 $ 409 $ 288"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Net cash provided by operating activities was $3,565M in FY2022 versus $3,521M in FY2021 and $1,071M in FY2020.",
+      "Depreciation and amortization added back in the cash flow statement was $4,174M in FY2022 versus $407M in FY2021.",
+      "Stock-based compensation added back was $1,081M in FY2022 versus $379M in FY2021 and $274M in FY2020.",
+      "Amortization of inventory fair value adjustment was $189M in FY2022, zero in prior years.",
+      "Purchases of property and equipment were $450M in FY2022 versus $301M in FY2021 and $294M in FY2020.",
+      "Common stock repurchases were $3,702M in FY2022, and repurchases for tax withholding on employee equity plans were $406M."
+    ],
+    "raw_excerpt": "Depreciation and amortization 4,174 407 312 / Stock-based compensation 1,081 379 274 … Net cash provided by operating activities 3,565 3,521 1,071 … Purchases of property and equipment (450) (301) (294) … Common stock repurchases for tax withholding on employee equity plans (406) (237) (78)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Liquidity and Capital Resources (operating cash flow drivers)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Net cash provided by operating activities was $3.6 billion in FY2022, described as net income of $1.3 billion adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in operating assets and liabilities.",
+      "Operating asset/liability drivers included a $1.4 billion inventory increase, a $1.1 billion accounts receivable increase, and a $1.2 billion increase in prepaid expenses and other assets from prepayments under long-term supply agreements.",
+      "Net cash provided by operating activities was $3.5 billion in FY2021, from net income of $3.2 billion adjusted for non-cash adjustments of $1.1 billion and net outflows of $774 million from working capital."
+    ],
+    "raw_excerpt": "Net cash provided by operating activities was $3.6 billion in 2022, primarily due to our net income of $1.3 billion in 2022, adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in our operating assets and liabilities."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: third-party foundry and ATMP suppliers (fabless model)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p13–p14",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD has agreements with Taiwan Semiconductor Manufacturing Company Limited (TSMC) for production of wafers for its HPC, FPGA and Adaptive SoC products.",
+      "AMD is party to a Wafer Supply Agreement with GLOBALFOUNDRIES Inc. for wafer purchases for HPC products at the 12nm and 14nm technology nodes.",
+      "AMD also purchases wafers from United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd.",
+      "Assembly, test, mark and pack (ATMP) services are provided by joint ventures with Tongfu Microelectronics, Siliconware Precision Industries Ltd. (SPIL) and King Yuan Electronics Company (KYEC).",
+      "AMD reports approximately 25,000 employees as of December 31, 2022."
+    ],
+    "raw_excerpt": "…agreements with Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of wafers for our HPC, FPGA and Adaptive SoC products. We are also a party to a Wafer Supply Agreement (WSA) with GLOBALFOUNDRIES Inc. (GF), with respect to wafer purchases for our HPC products at the 12 nm and 14 nm technology nodes. … Additionally, we purchase wafers from United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Results of Operations by segment (revenue drivers and mix)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48–p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Data Center net revenue of $6.0 billion in FY2022 increased 64% versus $3.7 billion in FY2021, primarily driven by higher sales of EPYC server processors.",
+      "Client net revenue of $6.2 billion decreased 10% versus $6.9 billion, driven by a 24% decrease in unit shipments, partially offset by a 19% increase in average selling price.",
+      "Gaming net revenue of $6.8 billion increased 21% versus $5.6 billion, driven by higher semi-custom product sales for gaming console SoCs, partially offset by lower gaming graphics sales.",
+      "Embedded net revenue of $4.6 billion increased significantly versus $246 million in FY2021, primarily driven by inclusion of Xilinx embedded product revenue following the February 2022 acquisition.",
+      "Embedded operating income was $2.3 billion versus $44 million in FY2021, primarily driven by inclusion of Xilinx embedded product revenue.",
+      "During the second quarter of fiscal 2022 the company changed its reporting segments to align with how the Chief Operating Decision Maker assesses performance and allocates resources."
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors. … Client net revenue of $6.2 billion in 2022 decreased by 10% … primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. … Embedded net revenue of $4.6 billion in 2022 increased significantly … primarily driven by the inclusion of Xilinx embedded product revenue"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Non-cash investing/financing activities and unaudited pro forma information",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59, p73",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD issued $48,514M of common stock and treasury stock as consideration for the acquisition of Xilinx.",
+      "The fair value of replacement share-based awards related to the Xilinx acquisition was $275M.",
+      "Cash received from acquisition of Xilinx was $2,366M; acquisition of Pensando net of cash acquired was $1,544M.",
+      "Unaudited pro forma net revenue was $24,117M for FY2022 and $20,150M for FY2021, as if the acquisitions had closed at the beginning of fiscal 2021.",
+      "Unaudited pro forma net income was $2,311M for FY2022 and $8M for FY2021."
+    ],
+    "raw_excerpt": "Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 $ — $ — / Fair value of replacement share-based awards related to acquisition of Xilinx $ 275 $ — $ — … Net revenue $ 24,117 $ 20,150 / Net income $ 2,311 $ 8"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 2: Basis of Presentation (fiscal year length)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD uses a 52- or 53-week fiscal year ending on the last Saturday in December.",
+      "Fiscal 2022 consisted of 53 weeks, while fiscal 2021 and fiscal 2020 each consisted of 52 weeks.",
+      "The Xilinx acquisition closed on February 14, 2022 and the Pensando acquisition closed on May 26, 2022."
+    ],
+    "raw_excerpt": "Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks. … On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. (Pensando)."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — Reconciliation of Non-GAAP Measures to GAAP Measures (peer precedent for non-GAAP operating margin)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Boeing presents a reconciliation table of core operating loss and core operating margins (non-GAAP) to GAAP loss from operations and operating margins.",
+      "Boeing's GAAP operating margin was (5.3)% in 2022, (4.7)% in 2021 and (22.0)% in 2020; core operating margin (non-GAAP) was (7.0)%, (6.5)% and (24.3)% respectively.",
+      "The reconciling items are pension FAS/CAS service cost adjustments and postretirement FAS/CAS service cost adjustments.",
+      "This demonstrates that a large US industrial issuer presents an adjusted operating margin alongside GAAP, with an explicit reconciliation table."
+    ],
+    "raw_excerpt": "The table below reconciles the non-GAAP financial measures of core operating loss, core operating margins and core loss per share with the most directly comparable GAAP financial measures of loss from operations, operating margins and diluted loss per share. … Loss from operations, as reported ($3,547) ($2,902) ($12,767) / Operating margins (5.3)% (4.7)% (22.0)% … Core operating loss (non-GAAP) ($4,690) ($4,075) ($14,150) / Core operating margins (non-GAAP) (7.0)% (6.5)% (24.3)%"
+  }
+]

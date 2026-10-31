@@ -1,0 +1,537 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Balance Sheets (December 31, 2022 and 2021)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p98 (Consolidated Balance Sheets, printed page 95)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total liabilities reported on the consolidated balance sheet at December 31, 2022 were $203,643 million (2021: $166,371 million).",
+      "The consolidated balance sheet liability line items for 2022 were: Customer deposits $110,239 million; Accounts payable $12,133 million; Short-term borrowings $1,348 million; Long-term debt $42,573 million; Other liabilities $37,350 million.",
+      "Customer deposits of $110,239 million is the largest single liability line item, exceeding the next-largest item (Long-term debt, $42,573 million) by about $67.7 billion.",
+      "Total assets were $228,354 million and total shareholders' equity was $24,711 million at December 31, 2022, so total liabilities plus equity equals total assets ($203,643 + $24,711 = $228,354).",
+      "Long-term debt of $42,573 million includes $12,662 million of debt issued by consolidated variable interest entities."
+    ],
+    "raw_excerpt": "Liabilities / Customer deposits $ 110,239 $ 84,382 / Accounts payable 12,133 10,574 / Short-term borrowings 1,348 2,243 / Long-term debt (includes debt issued by consolidated variable interest entities: 2022, $12,662; 2021, $13,803) 42,573 38,675 / Other liabilities 37,350 30,497 / Total liabilities $ 203,643 $ 166,371"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 7, Customer Deposits",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123 (Note 7 – Customer Deposits, printed page 120)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total customer deposits at December 31, 2022 were $110,239 million, split into U.S. interest-bearing $109,119 million, U.S. non-interest-bearing $663 million, non-U.S. interest-bearing $15 million, and non-U.S. non-interest-bearing $442 million.",
+      "By deposit type at December 31, 2022: savings and transaction accounts $76,731 million; direct certificates of deposit $2,765 million; third-party (brokered) certificates of deposit $13,331 million; third-party (brokered) sweep accounts $16,297 million; other deposits $71 million; Card Member credit balances $1,044 million.",
+      "Scheduled maturities of certificates of deposit as of December 31, 2022 totaled $16,096 million."
+    ],
+    "raw_excerpt": "Total customer deposits $ 110,239 $ 84,382 ... Savings and transaction accounts $ 76,731 $ 66,142 ... Certificates of deposit: Direct 2,765 1,415 / Third-party (brokered) 13,331 3,095 / Sweep accounts ―Third-party (brokered) 16,297 12,658 ... Card Member credit balances 1,044 1,030"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 9, Other Liabilities",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p127 (Note 9 – Other Liabilities, printed page 124)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Other liabilities totaled $37,350 million at December 31, 2022 (2021: $30,497 million).",
+      "Components of Other liabilities at December 31, 2022: Membership Rewards liability $12,789 million; deferred card and other fees, net $3,027 million; employee-related liabilities $2,530 million; Card Member rebate and reward accruals $2,126 million; income tax liability $1,651 million; Other $15,227 million.",
+      "The Membership Rewards liability of $12,789 million is the largest identified component within Other liabilities."
+    ],
+    "raw_excerpt": "Membership Rewards liability $ 12,789 $ 11,398 / Deferred card and other fees, net 3,027 2,516 / Employee-related liabilities 2,530 2,528 / Card Member rebate and reward accruals 2,126 1,809 / Income tax liability 1,651 1,576 / Other 15,227 10,670 / Total $ 37,350 $ 30,497"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Average Balance Sheet / Interest-bearing Liabilities (page A-3)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p170 (average balance sheet, interest-bearing liabilities, page A-3)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Average customer deposit balances for 2022 included U.S. savings $85,198 million, U.S. time deposits $9,356 million, and U.S. demand deposits $1,300 million.",
+      "Total average liabilities for 2022 were $182,099 million (2021: $165,683 million; 2020: $168,077 million).",
+      "Total average interest-bearing liabilities for 2022 were $137,368 million, with interest expense of $2,763 million at an average rate of 2.0%."
+    ],
+    "raw_excerpt": "Total interest-bearing liabilities $ 137,368 $ 2,763 2.0 % $ 125,356 $ 1,283 1.0 % $ 132,280 $ 2,098 1.6 % ... Total liabilities 182,099 165,683 168,077"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Statements of Cash Flows",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p99 (Consolidated Statements of Cash Flows, printed page 96)",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Net increase in customer deposits for 2022 was $25,902 million (2021: net decrease of $2,468 million), consistent with the year-over-year rise in the customer deposits liability from $84,382 million to $110,239 million.",
+      "Net cash provided by operating activities was $21,079 million in 2022."
+    ],
+    "raw_excerpt": "Net increase (decrease) in customer deposits 25,902 (2,468) 13,542 / Net (decrease) increase in short-term borrowings (706) 461 (4,627)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Balance Sheets (Liabilities section)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p98（Consolidated Balance Sheets，页码标注 95）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年 12 月 31 日合并资产负债表负债方按五个科目列示：Customer deposits、Accounts payable、Short-term borrowings、Long-term debt、Other liabilities。",
+      "2022 年 Customer deposits $110,239M（2021: $84,382M）。",
+      "2022 年 Accounts payable $12,133M（2021: $10,574M）。",
+      "2022 年 Short-term borrowings $1,348M（2021: $2,243M）。",
+      "2022 年 Long-term debt $42,573M（2021: $38,675M），其中含合并 VIE 发行的债务 $12,662M（2021: $13,803M）。",
+      "2022 年 Other liabilities $37,350M（2021: $30,497M）。",
+      "2022 年 Total liabilities $203,643M（2021: $166,371M）。",
+      "资产负债表负债方不存在名为 \"Accrued expenses\" 的科目。"
+    ],
+    "raw_excerpt": "Liabilities / Customer deposits $ 110,239 $ 84,382 / Accounts payable 12,133 10,574 / Short-term borrowings 1,348 2,243 / Long-term debt (includes debt issued by consolidated variable interest entities: 2022, $12,662; 2021, $13,803) 42,573 38,675 / Other liabilities 37,350 30,497 / Total liabilities $ 203,643 $ 166,371"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 9 Other Liabilities",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p127（NOTE 9 OTHER LIABILITIES，页码标注 136）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Other liabilities 2022 年合计 $37,350M（2021: $30,497M）。",
+      "构成明细：Membership Rewards liability $12,789M（2021: $11,398M）。",
+      "Deferred card and other fees, net $3,027M（2021: $2,516M）。",
+      "Employee-related liabilities $2,530M（2021: $2,528M），脚注说明包含 employee benefit plan obligations 与 incentive compensation。",
+      "Card Member rebate and reward accruals $2,126M（2021: $1,809M），脚注说明包含对第三方奖励合作方的付款与现金返还奖励。",
+      "Income tax liability $1,651M（2021: $1,576M）。",
+      "Other $15,227M（2021: $10,670M），脚注说明包含 repatriation tax liability $1,012M（2022 与 2021 均为该金额），系 Tax Cuts and Jobs Act 下的剩余义务。",
+      "Deferred card and other fees, net 由 Deferred card and other fees $3,380M 减去 Deferred direct acquisition costs $(173)M 与 Reserves for membership cancellations $(180)M 得出。"
+    ],
+    "raw_excerpt": "The following is a summary of Other liabilities as of December 31: (Millions) 2022 2021 / Membership Rewards liability $ 12,789 $ 11,398 / Deferred card and other fees, net 3,027 2,516 / Employee-related liabilities 2,530 2,528 / Card Member rebate and reward accruals 2,126 1,809 / Income tax liability 1,651 1,576 / Other 15,227 10,670 / Total $ 37,350 $ 30,497"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 7 Customer Deposits",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123（NOTE 7 CUSTOMER DEPOSITS，页码标注 120）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "客户存款按计息/不计息分类：美国计息 $109,119M（2021: $83,304M）；美国不计息 $663M（2021: $553M），其中含 Card Member credit balances $605M（2021: $527M）。",
+      "非美国计息 $15M（2021: $18M）；非美国不计息 $442M（2021: $507M），其中含 Card Member credit balances $439M（2021: $503M）。",
+      "Total customer deposits $110,239M（2021: $84,382M）。",
+      "按存款类型：Savings and transaction accounts $76,731M（2021: $66,142M）。",
+      "Certificates of deposit—Direct $2,765M（2021: $1,415M）；Certificates of deposit—Third-party (brokered) $13,331M（2021: $3,095M）。",
+      "Sweep accounts—Third-party (brokered) $16,297M（2021: $12,658M）。",
+      "Other deposits $71M（2021: $42M）；Card Member credit balances $1,044M（2021: $1,030M）。",
+      "Certificates of deposit 2022 年末按到期日：2023 $5,790M、2024 $6,554M、2025 $2,939M、2026 $27M、2027 $786M、5 年后 $0，合计 $16,096M。",
+      "面额 $250,000 及以上的存单合计 $999M（2021: $522M），其中美国 $998M、非美国 $1M。"
+    ],
+    "raw_excerpt": "As of December 31, customer deposits were categorized as interest-bearing or non-interest-bearing as follows: … Total customer deposits $ 110,239 $ 84,382 / Customer deposits by deposit type as of December 31 were as follows: Savings and transaction accounts $ 76,731 $ 66,142 / Certificates of deposit: Direct 2,765 1,415 / Third-party (brokered) 13,331 3,095 / Sweep accounts ―Third-party (brokered) 16,297 12,658 / Other deposits 71 42 / Card Member credit balances 1,044 1,030"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — MD&A Deposit Programs",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p68（DEPOSIT PROGRAMS，页码标注 65）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "存款由美国银行子公司 American Express National Bank (AENB) 吸收，受 FDIC 保险，每账户持有人至少 $250,000。",
+      "AENB 直接零售存款（FDIC 保险的高收益储蓄账户与 CDs）是主要存款产品渠道，直接面向消费者。",
+      "AENB 亦提供支票账户产品，并按需通过第三方分销渠道吸收存款以满足整体融资目标。",
+      "截至 2022 年 12 月 31 日存款为 $110.2 billion。",
+      "2022 年任何时点均无商业票据（commercial paper）在外流通。",
+      "未来短期借款规模取决于融资策略、需求与市场状况。"
+    ],
+    "raw_excerpt": "We offer deposits within our U.S. bank subsidiary, AENB. These funds are currently insured up to an amount that is at least $250,000 per account holder through the FDIC. … Direct retail deposits offered by AENB is our primary deposit product channel, which makes FDIC-insured high-yield savings account and certificates of deposit (CDs) products available directly to consumers. AENB also offers checking account products and sources deposits through third-party distribution channels as needed to meet our overall funding objectives. As of December 31, 2022, we had $110.2 billion in deposits. … We had no commercial paper outstanding at any point during 2022."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — MD&A Table 18: Summary of Customer Deposits and Consolidated Debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p67（TABLE 18: SUMMARY OF CUSTOMER DEPOSITS AND CONSOLIDATED DEBT，页码标注 64）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "公司将 Customer deposits、Short-term borrowings、Long-term debt 合并列示为 \"Total customer deposits and debt\"。",
+      "2022 年：Customer deposits $110.2B、Short-term borrowings $1.3B、Long-term debt $42.6B，合计 $154.1B。",
+      "2021 年：Customer deposits $84.4B、Short-term borrowings $2.2B、Long-term debt $38.7B，合计 $125.3B。",
+      "公司可能按可选赎回条款不时提前赎回某些债务证券。"
+    ],
+    "raw_excerpt": "TABLE 18: SUMMARY OF CUSTOMER DEPOSITS AND CONSOLIDATED DEBT (Billions) 2022 2021 / Customer deposits $ 110.2 $ 84.4 / Short-term borrowings 1.3 2.2 / Long-term debt 42.6 38.7 / Total customer deposits and debt $ 154.1 $ 125.3"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 8 Debt: Short-Term Borrowings",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p124（NOTE 8 DEBT — SHORT-TERM BORROWINGS，页码标注 121）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "短期借款的会计定义：\"borrowings with original contractual maturity dates of less than one year\"（原始合同到期日不足一年的借款）。",
+      "2022 年末短期借款余额 $1,348M，年末票面利率 0.94%；2021 年 $2,243M，0.58%。",
+      "脚注说明该科目包含向银行的借款以及因日常经营时点差异产生的银行账面透支（book overdrafts）。",
+      "公司维持一项三年期承诺性循环担保借款便利，可在 2024 年 9 月 16 日前出售最多 $2.0 billion 面额的 Lending Trust 合格存单；2022 与 2021 年末均未提取。",
+      "子公司维持的承诺性授信额度合计 $186M（2021: $145M），2022 年末已提取 $20.9M（2021: $7.2M）。",
+      "为维持该担保借款便利，2022 与 2021 年均支付 $7.8M 费用；该便利不含重大不利变化条款，也不依赖公司信用评级。"
+    ],
+    "raw_excerpt": "Our short-term borrowings outstanding, defined as borrowings with original contractual maturity dates of less than one year, as of December 31 were as follows: … Short-term borrowings $ 1,348 0.94 % $ 2,243 0.58 % … (b) Includes borrowings from banks and book overdrafts with banks due to timing differences arising in the ordinary course of business."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 8 Debt: Long-Term Debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125（LONG-TERM DEBT，页码标注 122）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "长期债务的会计定义：\"debt with original contractual maturity dates of one year or greater\"（原始合同到期日为一年或以上的债务）。",
+      "Total Long-Term Debt 2022 年 $42,573M，年末债务利率 3.42%（含掉期）；2021 年 $38,675M，2.22%。",
+      "American Express Company（仅母公司）构成：Fixed Rate Senior Notes（2023-2042）$23,813M、Floating Rate Senior Notes（2023-2026）$3,000M、Fixed-to-Floating Rate Senior Notes（2033）$1,250M、Fixed Rate Subordinated Notes（2024）$574M、Fixed-to-Floating Rate Subordinated Notes（2033）$750M。",
+      "American Express Credit Corporation：Fixed Rate Senior Notes（2027）$328M；2021 年另有 Floating Rate Senior Notes $300M，2022 年为 0。",
+      "Lending Trust：Fixed Rate Senior Notes（2023-2025）$10,499M、Floating Rate Senior Notes（2023）$2,125M、Floating Rate Subordinated Notes（2023）$61M；2021 年另有 Fixed Rate Subordinated Notes $212M。",
+      "Charge Trust：Floating Rate Conduit Borrowings 2022 年为 0（2021: $2,000M）。",
+      "Other：Finance Leases（2023-2024）$3M、Floating Rate Borrowings（2023-2025）$254M；Unamortized Underwriting Fees $(84)M（2021: $(52)M）。",
+      "脚注说明未偿余额包含未摊销折价、外币计价债务的汇率变动影响，以及公允价值套期的影响。"
+    ],
+    "raw_excerpt": "Our long-term debt outstanding, defined as debt with original contractual maturity dates of one year or greater, as of December 31 was as follows: … Total Long-Term Debt $ 42,573 3.42 % $ 38,675 2.22 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Long-Term Debt Aggregate Annual Maturities and Reconciliation",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p126（页码标注 123）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "按合同到期或预计赎回日的长期债务年度到期额：2023 $8,511M、2024 $10,364M、2025 $12,567M、2026 $2,450M、2027 $5,250M、此后 $4,273M，合计 $43,415M。",
+      "按主体：American Express Company（仅母公司）$30,134M、American Express Credit Corporation $339M、Lending Trust $12,685M、Other $257M。",
+      "从到期总额调节至账面值：扣减 Unamortized Underwriting Fees $(84)M、Unamortized Discount and Premium $(522)M、Impacts due to Fair Value Hedge Accounting $(236)M，得 Total Long-Term Debt $42,573M。",
+      "2022 与 2021 年末均维持 $3.5 billion 承诺性银团授信额度，且均未提取；到期日 2024 年 10 月 15 日，可用性受 CET1 风险加权资本比率不低于 4.5% 等契约约束。",
+      "公司维持三年期承诺性循环担保借款便利，可在 2024 年 7 月 15 日前出售最多 $3.0 billion 面额的 Charge Trust 合格票据；2022 年末未提取，2021 年末有 $2.0 billion 在外。",
+      "2022 与 2021 年分别为维持上述额度支付费用 $14.1M 与 $15.7M。",
+      "2022、2021、2020 年支付的利息（主要与短期和长期债务、相关利率掉期及客户存款有关）分别为 $2.2B、$1.1B、$2.0B。"
+    ],
+    "raw_excerpt": "$ 8,511 $ 10,364 $ 12,567 $ 2,450 $ 5,250 $ 4,273 $ 43,415 / Unamortized Underwriting Fees (84) / Unamortized Discount and Premium (522) / Impacts due to Fair Value Hedge Accounting (236) / Total Long-Term Debt $ 42,573"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Consolidated Statements of Cash Flows (accounts payable presentation)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p99（CONSOLIDATED STATEMENTS OF CASH FLOWS，页码标注 96）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "现金流量表将 Accounts payable 与 Other liabilities 合并为一行 \"Accounts payable & other liabilities\" 列示于经营活动项下。",
+      "该行 2022 年为 $8,815M，2021 年 $5,389M，2020 年 $(2,025)M。",
+      "融资活动项下分别列示：Net increase (decrease) in customer deposits 2022 年 $25,902M（2021: $(2,468)M）；Net (decrease) increase in short-term borrowings 2022 年 $(706)M（2021: $461M）。",
+      "融资活动项下：Proceeds from long-term debt 2022 年 $23,230M（2021: $7,788M）；Payments of long-term debt 2022 年 $(18,906)M（2021: $(11,662)M）。"
+    ],
+    "raw_excerpt": "Changes in operating assets and liabilities, net of effects of acquisitions and dispositions: / Other assets 1,391 1,068 (1,785) / Accounts payable & other liabilities 8,815 5,389 (2,025) … Net increase (decrease) in customer deposits 25,902 (2,468) 13,542 / Net (decrease) increase in short-term borrowings (706) 461 (4,627) / Proceeds from long-term debt 23,230 7,788 69 / Payments of long-term debt (18,906) (11,662) (15,593)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 1 Classification of Various Items (reclassification statement)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p105（CLASSIFICATION OF VARIOUS ITEMS，页码标注 102）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "附注 1 中 \"CLASSIFICATION OF VARIOUS ITEMS\" 载明：为使上期金额与当期列报方式一致，已对某些上期金额作出重分类。",
+      "该重分类声明未量化金额，也未指明涉及哪些具体科目。",
+      "同一附注索引列出 Note 14 Fair Values、Note 15 Guarantees、Note 20 Income Taxes 等。"
+    ],
+    "raw_excerpt": "CLASSIFICATION OF VARIOUS ITEMS / Certain reclassifications of prior period amounts have been made to conform to the current period presentation."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — MD&A Consolidated Results of Operations (2022 Q1 presentation changes)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47（CONSOLIDATED RESULTS OF OPERATIONS）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "自 2022 年第一季度起，公司对合并利润表作出列报变更，以单独列示特定收入项目。",
+      "该变更按当期列报方式重述了上期金额，且对 Total non-interest revenues 与 Total expenses 均无影响。",
+      "该列报变更针对合并利润表（收入侧），未提及对负债科目的影响。",
+      "2022 年 Total interest expense $2,763M（2021: $1,283M；2020: $2,098M）。",
+      "2022 年 Total non-interest revenues $42,967M（2021: $34,630M）。"
+    ],
+    "raw_excerpt": "Beginning in the first quarter of 2022, we made reporting presentation changes to our Consolidated Statements of Income to separately present revenues earned … to the current period presentation; there was no impact to Total non-interest revenues or Total expenses."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Average Balances and Interest (Table A-3, liability classification)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p170（页码标注 A-3）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "平均余额表将负债分为计息与不计息两类，与资产负债表科目口径一致。",
+      "计息负债细分：Customer deposits（U.S. Savings/Time/Demand、Non-U.S. Time/Other deposits）、Short-term borrowings（U.S./Non-U.S.）、Long-term debt and other（U.S./Non-U.S.）。",
+      "2022 年 Total interest-bearing liabilities 平均余额 $137,368M，利息支出 $2,763M，平均利率 2.0%（2021: $125,356M / $1,283M / 1.0%）。",
+      "不计息负债细分：Accounts payable、Customer deposits、Other liabilities，各按 U.S./Non-U.S. 拆分。",
+      "2022 年 Accounts payable 平均余额：美国 $4,982M、非美国 $5,796M（2021: $4,289M / $5,107M）。",
+      "2022 年 Total non-interest-bearing liabilities 平均余额 $44,731M（2021: $40,327M）。",
+      "2022 年 Total liabilities 平均余额 $182,099M（2021: $165,683M；2020: $168,077M）。",
+      "脚注说明美国不计息 Customer deposits 含 Card Member credit balances 平均 $502M（2021: $470M；2020: $742M）。",
+      "脚注说明平均余额基于月末余额计算。"
+    ],
+    "raw_excerpt": "Total interest-bearing liabilities $ 137,368 $ 2,763 2.0 % $ 125,356 $ 1,283 1.0 % … Non-interest-bearing liabilities / Accounts payable / U.S. $ 4,982 $ 4,289 $ 4,642 / Non-U.S. 5,796 5,107 4,737 … Total non-interest-bearing liabilities 44,731 40,327 35,797 … Total liabilities 182,099 165,683 168,077 … (c) U.S. non-interest-bearing Customer deposits include average Card Member credit balances of $502 million, $470 million and $742 million for 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 10-K — Note 14 Fair Values of Financial Liabilities",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p139（FINANCIAL ASSETS AND FINANCIAL LIABILITIES CARRIED AT OTHER THAN FAIR VALUE，页码标注 136）",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年金融负债中，\"Financial liabilities for which carrying values equal or approximate fair value\" 账面值 $123B、公允价值 $123B（Level 2）。",
+      "Certificates of deposit 按非公允价值计量：2022 年账面值 $16B、公允价值 $16B（Level 2）；2021 年账面值 $5B、公允价值 $5B。",
+      "Long-term debt 按非公允价值计量：2022 年账面值 $43B、公允价值 $42B（Level 2）；2021 年账面值未在该片段给出、公允价值见脚注。",
+      "脚注说明合并 VIE 持有的 Long-term debt 公允价值 2022 年为 $12.3B、2021 年为 $13.9B。",
+      "脚注说明某些余额作为 Customer deposits 的组成部分在合并资产负债表上列示。"
+    ],
+    "raw_excerpt": "Financial Liabilities: / Financial liabilities for which carrying values equal or approximate fair value 123 123 — 123 — / Financial liabilities carried at other than fair value / Certificates of deposit 16 16 — 16 — / Long-term debt $ 43 $ 42 $ — $ 42 $ — … the fair values of Long-term debt were $12.3 billion and $13.9 billion as of December 31, 2022 and 2021, respectively."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Balance Sheets (December 31, 2022 and 2021)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p98",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Customer deposits were $110,239 million at December 31, 2022, versus $84,382 million at December 31, 2021 (an increase of $25,857 million, or ~30.6%).",
+      "Long-term debt was $42,573 million at December 31, 2022, versus $38,675 million at December 31, 2021 (an increase of $3,898 million, or ~10.1%).",
+      "Short-term borrowings were $1,348 million at December 31, 2022, versus $2,243 million at December 31, 2021 (a decrease of $895 million, or ~39.9%).",
+      "Accounts payable was $12,133 million at December 31, 2022, versus $10,574 million at December 31, 2021 (an increase of $1,559 million, or ~14.7%).",
+      "Other liabilities were $37,350 million in 2022 versus $30,497 million in 2021; total liabilities were $203,643 million versus $166,371 million.",
+      "Total assets were $228,354 million in 2022 versus $188,548 million in 2021; total shareholders' equity was $24,711 million versus $22,177 million.",
+      "Long-term debt in 2022 includes $12,662 million of debt issued by consolidated variable interest entities (2021: $13,803 million)."
+    ],
+    "raw_excerpt": "Liabilities and Shareholders’ Equity\nLiabilities\nCustomer deposits $ 110,239 $ 84,382 \nAccounts payable 12,133 10,574 \nShort-term borrowings 1,348 2,243 \nLong-term debt (includes debt issued by consolidated variable interest entities: 2022, $12,662; 2021, $13,803) 42,573 38,675 \nOther liabilities 37,350 30,497 \n\nTotal liabilities $ 203,643 $ 166,371"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 7 Customer Deposits",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Note 7 independently confirms total customer deposits of $110,239 million (2022) and $84,382 million (2021).",
+      "By deposit type at December 31, 2022 vs 2021: savings and transaction accounts $76,731M vs $66,142M; direct certificates of deposit $2,765M vs $1,415M; third-party (brokered) CDs $13,331M vs $3,095M; third-party (brokered) sweep accounts $16,297M vs $12,658M; other deposits $71M vs $42M; Card Member credit balances $1,044M vs $1,030M.",
+      "U.S. interest-bearing customer deposits were $109,119 million in 2022 versus $83,304 million in 2021; U.S. non-interest-bearing deposits were $663 million versus $553 million.",
+      "Non-U.S. interest-bearing customer deposits were $15 million in 2022 versus $18 million in 2021; non-U.S. non-interest-bearing deposits were $442 million versus $507 million.",
+      "Scheduled maturities of certificates of deposit at December 31, 2022 totaled $16,096 million, of which $5,790 million matures in 2023."
+    ],
+    "raw_excerpt": "Total customer deposits $ 110,239 $ 84,382 \nCustomer deposits by deposit type as of December 31 were as follows:\n(Millions) 2022 2021\nSavings and transaction accounts $ 76,731 $ 66,142 \nCertificates of deposit:\nDirect 2,765 1,415 \nThird-party (brokered) 13,331 3,095 \nSweep accounts ―Third-party (brokered) 16,297 12,658 \nOther deposits 71 42 \nCard Member credit balances 1,044 1,030 \nTotal customer deposits $ 110,239 $ 84,382"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 Debt: Short-Term Borrowings",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p124",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Short-term borrowings are defined in the filing as borrowings with original contractual maturity dates of less than one year.",
+      "Short-term borrowings outstanding were $1,348 million at December 31, 2022 (year-end stated interest rate 0.94%) versus $2,243 million at December 31, 2021 (0.58%).",
+      "Short-term borrowings include borrowings from banks and book overdrafts with banks due to timing differences arising in the ordinary course of business.",
+      "A three-year committed, revolving, secured borrowing facility permitting sale of up to $2.0 billion face amount of eligible Lending Trust certificates through September 16, 2024 was undrawn at both December 31, 2022 and 2021.",
+      "Subsidiaries maintained committed lines of credit of $186 million (2022) and $145 million (2021), of which $20.9 million and $7.2 million were drawn, respectively."
+    ],
+    "raw_excerpt": "Our short-term borrowings outstanding, defined as borrowings with original contractual maturity dates of less than one year, as of December 31 were as follows:\n2022 2021\n(Millions, except percentages) Outstanding Balance\nYear-End Stated\nInterest Rate on\n\nDebt Outstanding Balance\nYear-End Stated\nInterest Rate on\nDebt \nShort-term borrowings $ 1,348 0.94 % $ 2,243 0.58 % \nTotal $ 1,348 0.94 % $ 2,243 0.58 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 Debt: Long-Term Debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Long-term debt is defined in the filing as debt with original contractual maturity dates of one year or greater.",
+      "Total long-term debt was $42,573 million at December 31, 2022 (year-end interest rate on debt 3.42%) versus $38,675 million at December 31, 2021 (2.22%).",
+      "Parent Company fixed rate senior notes outstanding were $23,813 million in 2022 versus $18,324 million in 2021; floating rate senior notes were $3,000 million versus $3,300 million.",
+      "Lending Trust fixed rate senior notes were $10,499 million in 2022 versus $8,199 million in 2021; Lending Trust floating rate senior notes were $2,125 million versus $3,325 million.",
+      "Charge Trust floating rate conduit borrowings were nil in 2022 versus $2,000 million in 2021.",
+      "Unamortized underwriting fees reduced long-term debt by $84 million in 2022 and $52 million in 2021."
+    ],
+    "raw_excerpt": "Our long-term debt outstanding, defined as debt with original contractual maturity dates of one year or greater, as of December 31 was as follows:\n...\nUnamortized Underwriting Fees (84) (52)\nTotal Long-Term Debt $ 42,573 3.42 % $ 38,675 2.22 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A: Long-Term Debt and Asset Securitization Programs",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p69",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "MD&A states that as of December 31, 2022 the company had $42.6 billion in long-term debt outstanding, including unsecured debt and asset-backed securities.",
+      "2022 debt issuances totaled $20.5 billion, including $10.2 billion of American Express Company fixed rate senior notes (weighted-average coupon 3.60%) and $7.3 billion of American Express Credit Account Master Trust fixed rate Class A certificates (weighted-average coupon 3.51%)."
+    ],
+    "raw_excerpt": "As of December 31, 2022, we had $42.6 billion in long-term debt outstanding, including unsecured debt and asset-backed securities. Refer to Note 8 to the\n“Consolidated Financial Statements” for a further description of these borrowings and scheduled maturities of long-term debt obligations."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8: Aggregate annual maturities of long-term debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p126",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Aggregate annual maturities of long-term debt at December 31, 2022 were $8,511 million (2023), $10,364 million (2024), $12,567 million (2025), $2,450 million (2026), $5,250 million (2027) and $4,273 million thereafter, totaling $43,415 million before adjustments.",
+      "Reconciling the $43,415 million contractual total to the $42,573 million carrying value: unamortized underwriting fees $(84) million, unamortized discount and premium $(522) million, and fair value hedge accounting impacts $(236) million.",
+      "A committed syndicated bank credit facility of $3.5 billion was undrawn at both December 31, 2022 and 2021, maturing October 15, 2024.",
+      "A three-year committed, revolving, secured borrowing facility for up to $3.0 billion face amount of eligible Charge Trust notes had nil outstanding in 2022 versus $2.0 billion in 2021."
+    ],
+    "raw_excerpt": "$ 8,511 $ 10,364 $ 12,567 $ 2,450 $ 5,250 $ 4,273 $ 43,415 \nUnamortized Underwriting Fees (84)\nUnamortized Discount and Premium (522)\nImpacts due to Fair Value Hedge Accounting (236)\nTotal Long-Term Debt $ 42,573"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Consolidated Statements of Cash Flows",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p99",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "The cash flow statement reports a combined line 'Accounts payable & other liabilities' contributing $8,815 million in 2022 versus $5,389 million in 2021 and $(2,025) million in 2020 to operating cash flow.",
+      "Net cash provided by operating activities was $21,079 million in 2022 versus $14,645 million in 2021.",
+      "Net income was $7,514 million in 2022 versus $8,060 million in 2021."
+    ],
+    "raw_excerpt": "Changes in operating assets and liabilities, net of effects of acquisitions and dispositions:\nOther assets 1,391 1,068 (1,785)\n\nAccounts payable & other liabilities 8,815 5,389 (2,025)\nNet cash provided by operating activities 21,079 14,645 5,591"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 25 Parent Company condensed balance sheets",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p156",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "On a parent-company-only basis (not consolidated), long-term debt was $29,432 million at December 31, 2022 versus $22,314 million at December 31, 2021.",
+      "Parent-company accounts payable and other liabilities were $2,271 million in 2022 versus $2,107 million in 2021.",
+      "Parent-company total liabilities were $32,335 million in 2022 versus $25,000 million in 2021."
+    ],
+    "raw_excerpt": "Liabilities\nAccounts payable and other liabilities 2,271 2,107 \nDue to subsidiaries and affiliates 632 443 \nDebt with subsidiaries and affiliates — 136 \nLong-term debt 29,432 22,314 \nTotal liabilities 32,335 25,000"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Balance Sheets",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p98",
+    "published_at": null,
+    "key_points": [
+      "Customer deposits were $110,239 million at December 31, 2022 versus $84,382 million at December 31, 2021, an increase of $25,857 million (about 30.7%).",
+      "Total liabilities were $203,643 million in 2022 versus $166,371 million in 2021.",
+      "Customer deposits were the largest single liability line on the balance sheet in 2022, exceeding long-term debt of $42,573 million and other liabilities of $37,350 million.",
+      "Short-term borrowings declined to $1,348 million in 2022 from $2,243 million in 2021."
+    ],
+    "raw_excerpt": "Liabilities\nCustomer deposits $ 110,239 $ 84,382 \nAccounts payable 12,133 10,574 \nShort-term borrowings 1,348 2,243 \nLong-term debt ... 42,573 38,675 \nOther liabilities 37,350 30,497 \nTotal liabilities $ 203,643 $ 166,371"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 7 Customer Deposits (interest-bearing vs non-interest-bearing, by geography)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123",
+    "published_at": null,
+    "key_points": [
+      "U.S. interest-bearing deposits rose to $109,119 million in 2022 from $83,304 million in 2021, an increase of $25,815 million.",
+      "That U.S. interest-bearing increase accounts for approximately 99.8% of the total $25,857 million increase in customer deposits.",
+      "Non-U.S. deposits were essentially flat to down: non-U.S. interest-bearing fell to $15 million from $18 million; non-U.S. non-interest-bearing fell to $442 million from $507 million.",
+      "U.S. non-interest-bearing deposits rose to $663 million from $553 million.",
+      "Total customer deposits were $110,239 million in 2022 versus $84,382 million in 2021."
+    ],
+    "raw_excerpt": "U.S.:\nInterest-bearing $ 109,119 $ 83,304 \nNon-interest-bearing (includes Card Member credit balances of: 2022, $605; 2021, $527) 663 553 \nNon-U.S.:\nInterest-bearing 15 18 \nNon-interest-bearing (includes Card Member credit balances of: 2022, $439; 2021, $503) 442 507 \nTotal customer deposits $ 110,239 $ 84,382"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 7 Customer Deposits (breakdown by deposit type)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123",
+    "published_at": null,
+    "key_points": [
+      "Savings and transaction accounts rose to $76,731 million in 2022 from $66,142 million in 2021, an increase of $10,589 million.",
+      "Third-party (brokered) certificates of deposit rose to $13,331 million from $3,095 million, an increase of $10,236 million — roughly a 4.3x increase and the single largest percentage gain among deposit types.",
+      "Sweep accounts — third-party (brokered) rose to $16,297 million from $12,658 million, an increase of $3,639 million.",
+      "Direct certificates of deposit rose to $2,765 million from $1,415 million, an increase of $1,350 million.",
+      "Card Member credit balances were roughly flat at $1,044 million versus $1,030 million; other deposits were $71 million versus $42 million.",
+      "Combined brokered deposits (third-party CDs plus brokered sweep accounts) totaled $29,628 million in 2022 versus $15,753 million in 2021."
+    ],
+    "raw_excerpt": "Savings and transaction accounts $ 76,731 $ 66,142 \nCertificates of deposit:\nDirect 2,765 1,415 \nThird-party (brokered) 13,331 3,095 \nSweep accounts ―Third-party (brokered) 16,297 12,658 \nOther deposits 71 42 \nCard Member credit balances 1,044 1,030 \nTotal customer deposits $ 110,239 $ 84,382"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Funding Programs and Activities (AENB deposit sourcing)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "Deposits are offered within the U.S. bank subsidiary American Express National Bank (AENB) through savings and certificate of deposit (CD) products available directly to consumers.",
+      "AENB also offers checking account products and sources deposits through third-party distribution channels as needed to meet overall funding objectives.",
+      "As of December 31, 2022 the company had $110.2 billion in deposits.",
+      "The 10-K directs readers to Note 7 for further description of deposits and scheduled CD maturities."
+    ],
+    "raw_excerpt": "deposit (CDs) products available directly to consumers. AENB also offers checking account products and sources deposits through third-party distribution channels as needed to meet our overall funding objectives. As of December 31, 2022, we had $110.2 billion in deposits. Refer to Note 7 to the \"Consolidated Financial Statements\" for a further description of these deposits and scheduled maturities of certificates of deposits."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Table 18: Summary of Customer Deposits and Consolidated Debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p67",
+    "published_at": null,
+    "key_points": [
+      "Customer deposits were $110.2 billion in 2022 versus $84.4 billion in 2021.",
+      "Short-term borrowings were $1.3 billion versus $2.2 billion; long-term debt was $42.6 billion versus $38.7 billion.",
+      "Total customer deposits and debt was $154.1 billion in 2022 versus $125.3 billion in 2021.",
+      "Deposits represented approximately 71.5% of the customer deposits plus debt total in 2022, versus approximately 67.4% in 2021, indicating a shift toward deposit funding within the mix."
+    ],
+    "raw_excerpt": "TABLE 18: SUMMARY OF CUSTOMER DEPOSITS AND CONSOLIDATED DEBT\n(Billions) 2022 2021\nCustomer deposits $ 110.2 $ 84.4 \nShort-term borrowings 1.3 2.2 \nLong-term debt 42.6 38.7 \nTotal customer deposits and debt $ 154.1 $ 125.3"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Funding Strategy",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p67",
+    "published_at": null,
+    "key_points": [
+      "The stated principal funding objective is to maintain broad and well-diversified funding sources to finance global businesses and maintain a strong liquidity profile.",
+      "Funding strategy and activities are integrated into the company's asset-liability management activities.",
+      "The company aims to maintain a balanced debt maturity profile with an appropriate mix of short-term and long-term refinancing requirements."
+    ],
+    "raw_excerpt": "Our principal funding objective is to maintain broad and well-diversified funding sources to allow us to finance our global businesses and to maintain a strong liquidity profile. Our funding strategy and activities are integrated into our asset-liability management activities."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Appendix: Distribution of Assets and Liabilities, and Volume/Rate Analysis of Interest Expense",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p170 (Distribution of Assets, Liabilities and Shareholders' Equity); p171 (Changes in Net Interest Income — Volume and Rate Analysis)",
+    "published_at": null,
+    "key_points": [
+      "U.S. savings deposits: average balance $85,198 million in 2022 versus $78,084 million in 2021; average rate paid 1.5% versus 0.4%; interest expense $1,245 million versus $314 million.",
+      "U.S. time deposits: average balance $9,356 million versus $6,092 million; average rate 2.7% versus 2.3%; interest expense $254 million versus $139 million.",
+      "U.S. demand deposits: average balance $1,300 million versus $692 million; average rate 1.8% versus 0.3%.",
+      "Volume/rate decomposition of the $931 million increase in U.S. savings deposit interest expense: only $29 million attributable to average volume, $902 million attributable to average rate.",
+      "Total interest expense rose to $2,763 million in 2022 from $1,283 million in 2021; total interest-bearing liabilities averaged $137,368 million at a 2.0% average rate versus $125,356 million at 1.0%.",
+      "Total average non-interest-bearing customer deposits were $534 million (U.S.) and $474 million (non-U.S.) in 2022."
+    ],
+    "raw_excerpt": "Customer deposits\nU.S.\nSavings $ 85,198 $ 1,245 1.5 % $ 78,084 $ 314 0.4 % $ 69,796 $ 697 1.0 %\nTime 9,356 254 2.7 6,092 139 2.3 9,898 237 2.4 \nDemand 1,300 23 1.8 692 2 0.3 752 5 0.7 \n...\nTotal interest-bearing liabilities $ 137,368 $ 2,763 2.0 % $ 125,356 $ 1,283 1.0 % ...\n[Volume/Rate table] Customer deposits U.S. Savings $ 29 $ 902 $ 931 $ 83 $ (466) $ (383)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A: 2023 funding plan",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p67",
+    "published_at": null,
+    "key_points": [
+      "The funding plan for full-year 2023 includes approximately $6.0 billion to $10.0 billion of unsecured term debt issuance and approximately $5.0 billion to $9.0 billion of secured term debt issuance.",
+      "The 10-K states actual funding activities can vary due to future business growth and the impact of global economic, political and other events on market capacity and funding needs.",
+      "The 2023 plan as disclosed does not specify a deposit growth target."
+    ],
+    "raw_excerpt": "Our funding plan for the full year 2023 includes, among other sources, approximately $6.0 billion to $10.0 billion of unsecured term debt issuance and approximately $5.0 billion to $9.0 billion of secured term debt issuance. Actual funding activities can vary from our plans due to various factors, such as future business growth, the impact of global economic, political and other events on market capacity and funding needs"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 7: Scheduled CD maturities and large-denomination CDs",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123",
+    "published_at": null,
+    "key_points": [
+      "Scheduled certificate of deposit maturities as of December 31, 2022: $5,790 million in 2023, $6,554 million in 2024, $2,939 million in 2025, $27 million in 2026, $786 million in 2027, none after 5 years; total $16,096 million.",
+      "Certificates of deposit in denominations of $250,000 or more totaled $999 million in 2022 versus $522 million in 2021, of which U.S. was $998 million versus $521 million."
+    ],
+    "raw_excerpt": "The scheduled maturities of certificates of deposit as of December 31, 2022 were as follows:\n2023 2024 2025 2026 2027 After 5 years Total\nCertificates of deposit $ 5,790 $ 6,554 $ 2,939 $ 27 $ 786 $ — $ 16,096 \n...\nU.S. $ 998 $ 521 \nNon-U.S. 1 1 \nTotal $ 999 $ 522"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Business Environment (2022 volume and loan growth context)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": null,
+    "key_points": [
+      "Worldwide network volumes increased 21 percent in 2022 versus the prior year (24 percent on an FX-adjusted basis).",
+      "Billed business increased 23 percent year-over-year (25 percent FX-adjusted) and represented 86 percent of total network volumes.",
+      "Card Member loans increased 22 percent year-over-year, with the majority of growth coming from existing Card Members.",
+      "Net interest income increased 28 percent versus the prior year, primarily driven by growth in Card Member loans.",
+      "The rising interest rate environment had a fairly neutral impact on full-year 2022 results, but rising rates had a modest negative impact on net interest income toward the end of the year."
+    ],
+    "raw_excerpt": "Worldwide network volumes for the year increased 21 percent compared to the prior year (24 percent on an FX-adjusted basis ). Billed business ... increased 23 percent year-over-year ... Card Member loans increased 22 percent year-over-year, with the majority of growth coming from existing Card Members ... Net interest income increased 28 percent versus the prior year, primarily driven by growth in Card Member loans. While the rising interest rate environment had a fairly neutral impact on our results for the full year, rising rates did have a modest negative impact on net interest income towards the end of the year."
+  }
+]

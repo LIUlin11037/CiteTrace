@@ -1,0 +1,512 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for fiscal year ended December 31, 2022 — cover page (Section 12(b)/12(g) disclosure blocks)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "10-K 封面设有专项栏位 'Securities registered pursuant to Section 12(b) of the Act:'，其下三列表头为 '(Title of each class) (Trading symbol) (Name of each exchange on which registered)'。",
+      "封面另设独立栏位 'Securities registered pursuant to Section 12(g) of the Act:'，与 12(b) 栏位分列。",
+      "封面载明 Commission File No. 1-7657，注册人 American Express Company，注册地 New York。",
+      "检索返回的该页片段在 12(b) 栏位表头处被截断，未显示 AmEx 该栏位下具体填列的项目。"
+    ],
+    "raw_excerpt": "Securities registered pursuant to Section 12(b) of the Act: … (Title of each class) (Trading symbol) (Name of each exchange on which registered)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Advanced Micro Devices, Inc. Form 10-K for fiscal year ended December 31, 2022 — cover page",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p1",
+    "published_at": null,
+    "key_points": [
+      "AMD 在 12(b) 栏位仅填列 'Common Stock, $0.01 par value per share / AMD / The NASDAQ Global Select Market'，未列示任何债务证券。",
+      "该 10-K 封面同时设有 'Securities registered pursuant to Section 12(g) of the Act:' 栏位。",
+      "该来源只能证明 12(b) 栏位可仅列股权，不能推出债务证券无需登记或无需列示。"
+    ],
+    "raw_excerpt": "Securities registered pursuant to Section 12(b) of the Act: (Title of each class) (Trading symbol) (Name of each exchange on which registered) Common Stock, $0.01 par value per share AMD The NASDAQ Global Select Market"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year ended December 31, 2022 — cover page and Exhibit 4.1 index",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p1",
+    "published_at": null,
+    "key_points": [
+      "Boeing 在 12(b) 栏位仅填列 'Common Stock, $5.00 Par Value / BA / New York Stock Exchange'，未列示任何债务证券。",
+      "Boeing 10-K 附件索引载有 Exhibit 4.1 'Description of The Boeing Company Securities Registered under Section 12 of the Exchange Act'，并以引用方式并入 2019 年度 10-K 的 Exhibit 4.1。",
+      "该 Exhibit 4.1 正文不在知识库内。"
+    ],
+    "raw_excerpt": "4.1 Description of The Boeing Company Securities Registered under Section 12 of the Exchange Act (Exhibit 4.1 to the Company's Form 10-K for the year ended December 31, 2019)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit Index, items 4.1 and 4.2",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Exhibit 4.1 声明：界定公司及其子公司长期债务证券持有人权利的契约文书，依 Regulation S-K Item 601 第 (b)(4)(iii)(A) 条被省略，公司承诺应 SEC 要求提供副本。",
+      "Exhibit 4.2 标题为 'Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended'，以引用方式并入公司 2020 年度 10-K 的 Exhibit 4.2。",
+      "该 Exhibit 4.2 正文本身不在知识库内，无法读到其中是否列有债务证券。"
+    ],
+    "raw_excerpt": "4.1 The instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K. The Company hereby agrees to furnish copies of these instruments to the SEC upon request. 4.2 Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended (incorporated by reference to Exhibit 4.2 of the Company's Annual Report on Form 10-K (Commission File No. 1-7657) for the year ended December 31, 2020)."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 Long-Term Debt table (debt by legal entity)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "长期债务表按法律主体分行列示：'American Express Company (Parent Company only)'、'American Express Credit Corporation'、'Lending Trust'、'Charge Trust'、'Other'。",
+      "母公司自身债务项下包括 Fixed Rate Senior Notes（2023–2042，$23,813M）、Floating Rate Senior Notes（2023–2026，$3,000M）、Fixed-to-Floating Rate Senior Notes（2033，$1,250M）、Fixed Rate Subordinated Notes（2024，$574M）、Fixed-to-Floating Rate Subordinated Notes（2033，$750M）。",
+      "American Express Credit Corporation 项下为 Fixed Rate Senior Notes 2027，$328M。",
+      "Lending Trust 项下为 Fixed Rate Senior Notes（2023–2025，$10,499M）、Floating Rate Senior Notes（2023，$2,125M）、Floating Rate Subordinated Notes（2023，$61M）。",
+      "2022 年末长期债务合计 $42,573M。"
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) Fixed Rate Senior Notes 2023 - 2042 $ 23,813 3.34 % 4.00 % … American Express Credit Corporation Fixed Rate Senior Notes 2027 328 3.30 … Lending Trust Fixed Rate Senior Notes 2023 - 2025 10,499 2.81 … Total Long-Term Debt $ 42,573"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — aggregate annual maturities of long-term debt by entity",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p126",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "到期表以 'American Express Company (Parent Company only)' 单列，2023–Thereafter 合计 $30,134M。",
+      "American Express Credit Corporation 到期额 $339M（2027），Lending Trust $12,685M，Other $257M，总计 $43,415M。",
+      "该表按主体区分母公司债务与子公司/信托债务的偿付义务。"
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) $ 5,750 $ 7,500 $ 5,250 $ 2,450 $ 4,911 $ 4,273 $ 30,134 ; American Express Credit Corporation — — — — 339 — 339 ; Lending Trust 2,685 2,750 7,250 — — — 12,685"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 2 variable interest entities / Trust debt securities",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p120",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "公司持有 Lending Trust 与 Charge Trust 的全部可变利益，但发行给第三方投资者的债务证券除外。",
+      "各信托的长期债务仅以其各自基础证券化资产的收款偿付（'payable only out of collections on their respective underlying securitized assets'）。",
+      "信托资产在信托层面受限，仅可用于偿付该证券化交易中发行或产生的债务证券或其他义务。"
+    ],
+    "raw_excerpt": "we hold all of the variable interests in both Trusts, with the exception of the debt securities issued to third-party investors … The long-term debt of each Trust is payable only out of collections on their respective underlying securitized assets"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit 23 (PwC consent, listing of Form S-3 registration statements)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p256",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "PwC 同意书提及以引用方式并入 AmEx 的 Form S-8 注册声明（No. 33-53801、333-142710、333-211159、333-240077）与 Form S-3 注册声明（No. 2-89469、333-32525、333-253057）。",
+      "该来源仅证明存在 Form S-3 货架注册声明及其编号，未包含任何 S-3 或 424B2 正文，无法据此说明债务证券的注册生效机制。"
+    ],
+    "raw_excerpt": "the Registration Statements on Form S-8 (No. 33-53801, 333-142710, 333-211159, and 333-240077) and Form S-3 (No. 2-89469, 333-32525 and 333-253057) of American Express Company"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Item 5 Market for Registrant's Common Equity (trading symbol AXP)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p41",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "公司普通股主要在纽约证券交易所交易，交易代码 AXP。",
+      "该 Item 5 披露仅涉及普通股，未涉及债务证券的上市或交易场所。"
+    ],
+    "raw_excerpt": "Our common stock trades principally on The New York Stock Exchange under the trading symbol AXP."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 19 Unsecured Debt Ratings by entity",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p68",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "无担保债务评级按法律主体分别列示：American Express Company（Moody's A2 / S&P BBB+ / Fitch A）、American Express Travel Related Services Company, Inc.（A2 / A- / A）、American Express National Bank（A3 / A- / A）、American Express Credit Corporation（A2 / A- / A）。",
+      "该表说明母公司与各子公司在债务层面被作为不同信用主体披露。"
+    ],
+    "raw_excerpt": "American Express Entity Moody's S&P Fitch ; American Express Company Long Term A2 BBB+ A ; American Express Travel Related Services Company, Inc. Long Term A2 A- A ; American Express National Bank Long Term A3 A- A ; American Express Credit Corporation Long Term A2 A- A"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 20 Debt Issuances 2022",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p69",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "2022 年发行明细按发行主体分列：'American Express Company:' 项下 Fixed Rate Senior Notes（加权平均票息 3.60%）$10.2B、Floating Rate Senior Notes $1.0B、Fixed-to-Floating Rate Senior Notes $1.2B、Fixed-to-Floating Rate Subordinated Notes $0.8B。",
+      "'American Express Credit Account Master Trust:' 项下 Fixed Rate Class A Certificates（加权平均票息 3.51%）$7.3B。",
+      "2022 年发行合计 $20.5B。"
+    ],
+    "raw_excerpt": "American Express Company: Fixed Rate Senior Notes (weighted-average coupon rate of 3.60%) $ 10.2 ; Floating Rate Senior Notes (compounded SOFR plus weighted-average spread of 83 basis points) 1.0 ; … American Express Credit Account Master Trust: Fixed Rate Class A Certificates (weighted-average coupon rate of 3.51%) 7.3 ; Total $ 20.5"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit 21 Subsidiaries of American Express Company",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p252",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Exhibit 21 列示截至 2022 年 12 月 31 日的子公司清单，除标注星号者外，全部有表决权证券由注册人直接或间接持有。",
+      "清单按 'Name / Country Name / Jurisdiction' 三列组织，缩进反映各子公司的主要母公司。"
+    ],
+    "raw_excerpt": "EXHIBIT 21 SUBSIDIARIES OF AMERICAN EXPRESS COMPANY as of December 31, 2022 … Unless otherwise indicated by an asterisk (*), all of the voting securities of these subsidiaries are directly or indirectly owned by the registrant. The indentation reflects the principal parent of each subsidiary."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K, fiscal year ended December 31, 2022 — cover page (registrant identity, fiscal year, file number)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The document is American Express Company's Form 10-K, an annual report pursuant to Section 13 or 15(d) of the Securities Exchange Act of 1934.",
+      "The fiscal year covered is the year ended December 31, 2022.",
+      "Commission File No. is 1-7657; registrant is incorporated in New York; principal offices at 200 Vesey Street, New York, New York 10285.",
+      "As of June 30, 2022, aggregate market value of voting shares held by non-affiliates was approximately $104.0 billion, based on the closing sale price as reported on the New York Stock Exchange.",
+      "As of February 2, 2023, there were 744,192,702 common shares outstanding."
+    ],
+    "raw_excerpt": "Form 10-K ☑ ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934 / For the fiscal year ended December 31, 2022 … Commission File No. 1-7657 / American Express Company … As of June 30, 2022, the aggregate market value of the registrant's voting shares held by non-affiliates of the registrant was approximately $104.0 billion based on the closing sale price as reported on the New York Stock Exchange."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — cover page: Section 12(b) registered-securities table not present in retrieved chunk",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The retrieved cover-page chunk contains several check-box items (not a shell company; Section 404(b) attestation filed) and the June 30, 2022 non-affiliate market value sentence.",
+      "The retrieved chunk does NOT contain the 'Securities registered pursuant to Section 12(b) of the Act' table rows (Title of each class / Trading Symbol / Name of each exchange on which registered).",
+      "The retrieved chunk does NOT contain any 'Securities registered pursuant to Section 12(g) of the Act: None' line.",
+      "Therefore this source alone cannot establish whether any debt securities are listed as registered on an exchange on the cover page."
+    ],
+    "raw_excerpt": "Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Act). Yes ☐ No þ / As of June 30, 2022, the aggregate market value of the registrant's voting shares held by non-affiliates of the registrant was approximately $104.0 billion based on the closing sale price as reported on the New York Stock Exchange."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Part II, Item 5: Market for Registrant's Common Equity",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p41",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Item 5 states that the company's common stock trades principally on The New York Stock Exchange under the trading symbol AXP.",
+      "As of December 31, 2022, there were 18,060 common shareholders of record.",
+      "Item 5 discusses only common equity; it makes no reference to any debt securities being listed or traded on any exchange."
+    ],
+    "raw_excerpt": "(a) Our common stock trades principally on The New York Stock Exchange under the trading symbol AXP. As of December 31, 2022, we had 18,060 common shareholders of record."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit Index, Exhibit 4.1 (long-term debt instruments omitted under Reg S-K Item 601(b)(4)(iii)(A))",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Exhibit 4.1 states that the instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K.",
+      "The Company agrees to furnish copies of these instruments to the SEC upon request.",
+      "No indenture, supplemental indenture, officer's certificate or note form is filed as an exhibit under item 4.1."
+    ],
+    "raw_excerpt": "4.1 The instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K. The Company hereby agrees to furnish copies of these instruments to the SEC upon request."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit Index, Exhibit 4.2 (Description of securities registered pursuant to Section 12, incorporated by reference to the 2020 Form 10-K)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Exhibit 4.2 is titled 'Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended'.",
+      "That description is incorporated by reference to Exhibit 4.2 of the Company's Annual Report on Form 10-K for the year ended December 31, 2020.",
+      "The 2022 Form 10-K therefore does not reproduce the text of the Section 12 securities description in its own exhibit."
+    ],
+    "raw_excerpt": "4.2 Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended (incorporated by reference to Exhibit 4.2 of the Company's Annual Report on Form 10-K (Commission File No. 1-7657) for the year ended December 31, 2020)."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit Index: no 4.3+ indenture exhibits appear between 4.2 and 10.1",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "In the retrieved Exhibit Index chunk, item 4.2 is immediately followed by item '* 10.1 American Express Company Deferred Compensation Plan for Directors and Advisors'.",
+      "No exhibit numbered 4.3 or higher (indenture, supplemental indenture, officer's certificate, form of note) appears in the retrieved chunk.",
+      "The retrieved chunk also lists items 3.1 (Amended and Restated Certificate of Incorporation, as amended through April 20, 2022) and 3.2 (By-Laws, as amended through October 19, 2022)."
+    ],
+    "raw_excerpt": "4.2 Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended (incorporated by reference to Exhibit 4.2 … for the year ended December 31, 2020). * 10.1 American Express Company Deferred Compensation Plan for Directors and Advisors, as amended and restated effective January 1, 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 Long-Term Debt table (parent-company instrument categories)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Long-term debt is defined in the note as debt with original contractual maturity dates of one year or greater.",
+      "American Express Company (Parent Company only) at December 31, 2022: Fixed Rate Senior Notes with original contractual maturities 2023–2042, outstanding $23,813 million, year-end interest rate on debt 3.34% (4.00% with swaps).",
+      "Parent Company only: Floating Rate Senior Notes maturities 2023–2026, $3,000 million, 4.78%.",
+      "Parent Company only: Fixed-to-Floating Rate Senior Notes due 2033, $1,250 million, 4.42%.",
+      "Parent Company only: Fixed Rate Subordinated Notes due 2024, $574 million, 3.63% (5.46% with swaps).",
+      "Parent Company only: Fixed-to-Floating Rate Subordinated Notes due 2033, $750 million, 4.99%.",
+      "Other issuers in the table include American Express Credit Corporation, Lending Trust and Charge Trust; total long-term debt at December 31, 2022 was $42,573 million (3.42%), versus $38,675 million (2.22%) at December 31, 2021."
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) Fixed Rate Senior Notes 2023 - 2042 $ 23,813 3.34 % 4.00 % $ 18,324 3.02 % 2.03 % / Floating Rate Senior Notes 2023 - 2026 3,000 4.78 — 3,300 0.69 — / Fixed-to-Floating Rate Senior Notes 2033 1,250 4.42 — — — — / Fixed Rate Subordinated Notes 2024 574 3.63 5.46 599 3.63 1.38 / Fixed-to-Floating Rate Subordinated Notes 2033 750 4.99 — — — — … Total Long-Term Debt $ 42,573 3.42 % $ 38,675 2.22 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A 'Long-Term Debt and Asset Securitization Programs' / Table 20 Debt Issuances",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p69",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "As of December 31, 2022, the company had $42.6 billion in long-term debt outstanding, including unsecured debt and asset-backed securities.",
+      "2022 issuances by American Express Company: Fixed Rate Senior Notes $10.2 billion (weighted-average coupon 3.60%).",
+      "2022 issuances by American Express Company: Floating Rate Senior Notes $1.0 billion (compounded SOFR plus weighted-average spread of 83 basis points).",
+      "2022 issuances by American Express Company: Fixed-to-Floating Rate Senior Notes $1.2 billion (4.42% during fixed-rate period; compounded SOFR plus 1.76% during floating-rate period).",
+      "2022 issuances by American Express Company: Fixed-to-Floating Rate Subordinated Notes $0.8 billion (4.989% during fixed-rate period; compounded SOFR plus 2.255% during floating-rate period).",
+      "American Express Credit Account Master Trust issued Fixed Rate Class A Certificates of $7.3 billion (weighted-average coupon 3.51%).",
+      "Total 2022 debt issuances shown in Table 20 were $20.5 billion."
+    ],
+    "raw_excerpt": "As of December 31, 2022, we had $42.6 billion in long-term debt outstanding, including unsecured debt and asset-backed securities. … TABLE 20: DEBT ISSUANCES (Billions) 2022 American Express Company: Fixed Rate Senior Notes (weighted-average coupon rate of 3.60%) $ 10.2 … Fixed-to-Floating Rate Subordinated Notes (4.989% coupon during the fixed rate period and compounded SOFR plus 2.255% during the floating rate period) 0.8 … Total $ 20.5"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 aggregate annual maturities of long-term debt",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p126",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Aggregate annual maturities of long-term debt obligations as of December 31, 2022 for American Express Company (Parent Company only) total $30,134 million: 2023 $5,750M; 2024 $7,500M; 2025 $5,250M; 2026 $2,450M; 2027 $4,911M; Thereafter $4,273M.",
+      "Other obligors: American Express Credit Corporation $339M (2027); Lending Trust $12,685M; Other $257M; aggregate $43,415M before unamortized underwriting fees, unamortized discount/premium and fair value hedge accounting impacts.",
+      "The company maintained a committed syndicated bank credit facility of $3.5 billion as of December 31, 2022 and 2021, all undrawn."
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) $ 5,750 $ 7,500 $ 5,250 $ 2,450 $ 4,911 $ 4,273 $ 30,134 … $ 8,511 $ 10,364 $ 12,567 $ 2,450 $ 5,250 $ 4,273 $ 43,415 … Total Long-Term Debt $ 42,573"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — variable interests in Lending Trust and Charge Trust (debt securities issued to third-party investors)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · 检索片段锚点 'variable interests in both Trusts'（页码未在返回片段中标出）",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The company holds all variable interests in both Trusts, with the exception of the debt securities issued to third-party investors.",
+      "Ownership of variable interests in the Lending Trust was $16.0 billion (2022) and $15.0 billion (2021); in the Charge Trust $5.2 billion (2022) and $3.2 billion (2021).",
+      "No triggering events occurred during the years ended December 31, 2022 and 2021."
+    ],
+    "raw_excerpt": "we hold all of the variable interests in both Trusts, with the exception of the debt securities issued to third-party investors. Our ownership of variable interests in the Lending Trust was $16.0 billion and $15.0 billion as of December 31, 2022 and 2021, respectively, and in the Charge Trust was $5.2 billion and $3.2 billion"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Signatures page (filing date)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p167",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The report is signed on behalf of American Express Company by Jeffrey C. Campbell, Vice Chairman and Chief Financial Officer, dated February 10, 2023.",
+      "Stephen J. Squeri signs as Chairman, Chief Executive Officer and Director."
+    ],
+    "raw_excerpt": "AMERICAN EXPRESS COMPANY /s/ JEFFREY C. CAMPBELL Jeffrey C. Campbell Vice Chairman and Chief Financial Officer February 10, 2023"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for fiscal year ended December 31, 2022 — cover page, Securities registered pursuant to Section 12(b)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1",
+    "published_at": "2023",
+    "key_points": [
+      "AXP 依 Exchange Act Section 12(b) 注册的证券仅有一类：Common Shares (par value $0.20 per Share)，交易代码 AXP，注册交易所为 New York Stock Exchange。",
+      "封面 Section 12(b) 表中未列出任何债务证券（debt securities）。",
+      "依 Section 12(g) 注册的证券为 None。",
+      "Commission File No. 1-7657；注册人州为 New York。"
+    ],
+    "raw_excerpt": "Securities registered pursuant to Section 12(b) of the Act: Title of each class Trading Symbol(s) Name of each exchange on which registered — Common Shares (par value $0.20 per Share) AXP New York Stock Exchange … Securities registered pursuant to section 12(g) of the Act: None"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Exhibit Index (Items 4.1 and 4.2)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023",
+    "key_points": [
+      "Exhibit 4.1 声明：公司及子公司长期债务证券的权利文书依 Regulation S-K Item 601(b)(4)(iii)(A) 予以省略，公司仅承诺按 SEC 要求提供副本——即 10-K 本身不含债务工具条款。",
+      "Exhibit 4.2 为「Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934」，且系以引用方式并入公司 2020 年 10-K 的 Exhibit 4.2，2022 年报告未重述该说明正文。"
+    ],
+    "raw_excerpt": "4.1 The instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K. The Company hereby agrees to furnish copies of these instruments to the SEC upon request. 4.2 Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended (incorporated by reference to Exhibit 4.2 of the Company's Annual Report on Form 10-K (Commission File No. 1-7657) for the year ended December 31, 2020)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 20: Debt Issuances (2022)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "2022 年 American Express Company 发行 Fixed Rate Senior Notes，加权平均票息 3.60%，金额 $10.2 billion。",
+      "2022 年发行 Floating Rate Senior Notes，利率为 compounded SOFR 加加权平均利差 83 个基点，金额 $1.0 billion。",
+      "2022 年发行 Fixed-to-Floating Rate Senior Notes，固定期票息 4.42%，浮动期为 compounded SOFR 加 1.76%，金额 $1.2 billion。",
+      "2022 年发行 Fixed-to-Floating Rate Subordinated Notes，固定期票息 4.989%，浮动期为 compounded SOFR 加 2.255%，金额 $0.8 billion。",
+      "American Express Credit Account Master Trust 发行 Fixed Rate Class A Certificates，加权平均票息 3.51%，金额 $7.3 billion。",
+      "2022 年上述发行合计 $20.5 billion。",
+      "该表仅按债务类别与加权平均票息汇总，未给出任何单只债券的系列名称、CUSIP、单笔本金或具体到期日。"
+    ],
+    "raw_excerpt": "TABLE 20: DEBT ISSUANCES (Billions) 2022 — American Express Company: Fixed Rate Senior Notes (weighted-average coupon rate of 3.60%) $ 10.2 / Floating Rate Senior Notes (compounded SOFR plus weighted-average spread of 83 basis points) 1.0 / Fixed-to-Floating Rate Senior Notes (4.42% coupon during the fixed rate period and compounded SOFR plus 1.76% during the floating rate period) 1.2 / Fixed-to-Floating Rate Subordinated Notes (4.989% coupon during the fixed rate period and compounded SOFR plus 2.255% during the floating rate period) 0.8 / American Express Credit Account Master Trust: Fixed Rate Class A Certificates (weighted-average coupon of 3.51%) 7.3 / Total $ 20.5"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 8 Debt: Long-Term Debt outstanding by category (Parent Company only)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125",
+    "published_at": "2023",
+    "key_points": [
+      "截至 2022-12-31，American Express Company（仅母公司）Fixed Rate Senior Notes 原始合同到期区间为 2023–2042，未偿余额 $23,813 million，年末债务利率 3.34%（含掉期 4.00%）。",
+      "母公司 Floating Rate Senior Notes 到期区间 2023–2026，余额 $3,000 million，年末利率 4.78%。",
+      "母公司 Fixed-to-Floating Rate Senior Notes 到期 2033，余额 $1,250 million，利率 4.42%。",
+      "母公司 Fixed Rate Subordinated Notes 到期 2024，余额 $574 million，利率 3.63%（含掉期 5.46%）。",
+      "母公司 Fixed-to-Floating Rate Subordinated Notes 到期 2033，余额 $750 million，利率 4.99%。",
+      "合并长期债务合计 $42,573 million，整体年末利率 3.42%。",
+      "该表按债务类别与到期区间列示，未提供系列级 CUSIP、单笔本金或交易所上市信息。"
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) Fixed Rate Senior Notes 2023 - 2042 $ 23,813 3.34 % 4.00 % … Floating Rate Senior Notes 2023 - 2026 3,000 4.78 — … Fixed-to-Floating Rate Senior Notes 2033 1,250 4.42 — … Fixed Rate Subordinated Notes 2024 574 3.63 5.46 … Fixed-to-Floating Rate Subordinated Notes 2033 750 4.99 — … Total Long-Term Debt $ 42,573 3.42 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Aggregate annual maturities on long-term debt obligations",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p126",
+    "published_at": "2023",
+    "key_points": [
+      "截至 2022-12-31，American Express Company（仅母公司）按合同到期或预计赎回日的年度到期额：2023 年 $5,750M、2024 年 $7,500M、2025 年 $5,250M、2026 年 $2,450M、2027 年 $4,911M、其后 $4,273M，合计 $30,134M。",
+      "American Express Credit Corporation 仅 2027 年有 $339M 到期；Lending Trust 2023–2025 分别 $2,685M / $2,750M / $7,250M，合计 $12,685M。",
+      "全部主体合计年度到期 $43,415M，扣除未摊销承销费 $84M、折溢价 $522M、公允价值套期会计影响 $236M 后，长期债务合计 $42,573M。",
+      "该表为期限结构汇总，不含系列级 CUSIP 或单只债券到期日。"
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) $ 5,750 $ 7,500 $ 5,250 $ 2,450 $ 4,911 $ 4,273 $ 30,134 … American Express Credit Corporation — — — — 339 — 339 / Lending Trust 2,685 2,750 7,250 — — — 12,685 / Other 76 114 67 — — — 257 / $ 8,511 $ 10,364 $ 12,567 $ 2,450 $ 5,250 $ 4,273 $ 43,415"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Item 5. Market for Registrant's Common Equity",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p41",
+    "published_at": "2023",
+    "key_points": [
+      "公司普通股主要在 The New York Stock Exchange 交易，交易代码 AXP。",
+      "截至 2022-12-31，登记在册普通股股东为 18,060 名。",
+      "该章节仅涉及普通股（股权）市场信息，未提及任何债务证券的上市或交易场所。"
+    ],
+    "raw_excerpt": "(a) Our common stock trades principally on The New York Stock Exchange under the trading symbol AXP. As of December 31, 2022, we had 18,060 common shareholders of record."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for fiscal year ended December 31, 2022 — cover page (Securities registered pursuant to Section 12)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "FY2022 Form 10-K filed under Commission File No. 1-7657 for the fiscal year ended December 31, 2022.",
+      "The 'Securities registered pursuant to Section 12(b) of the Act' table lists exactly one class: Common Shares (par value $0.20 per Share), trading symbol AXP, registered on the New York Stock Exchange.",
+      "The cover page states 'Securities registered pursuant to section 12(g) of the Act: None.'",
+      "No debt security of American Express Company or of any funding subsidiary appears in either the Section 12(b) or Section 12(g) registration table."
+    ],
+    "raw_excerpt": "Securities registered pursuant to Section 12(b) of the Act: Title of each class | Trading Symbol(s) | Name of each exchange on which registered — Common Shares (par value $0.20 per Share) | AXP | New York Stock Exchange. Securities registered pursuant to section 12(g) of the Act: None"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Exhibit index (Items 4.1 and 4.2)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p162",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Exhibit 4.1 states that the instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K, with an undertaking to furnish copies to the SEC upon request.",
+      "Exhibit 4.2 is a single 'Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended', incorporated by reference to Exhibit 4.2 of the FY2020 Form 10-K.",
+      "The filing contains no separate item-by-item description exhibit for individual debt series, which is the disclosure pattern used when registered long-term debt is not listed on an exchange."
+    ],
+    "raw_excerpt": "4.1 The instruments defining the rights of holders of long-term debt securities of the Company and its subsidiaries are omitted pursuant to Section (b)(4)(iii)(A) of Item 601 of Regulation S-K. The Company hereby agrees to furnish copies of these instruments to the SEC upon request. 4.2 Description of American Express Company's securities registered pursuant to Section 12 of the Securities Exchange Act of 1934, as amended (incorporated by reference to Exhibit 4.2 of the Company's Annual Report on Form 10-K (Commission File No. 1-7657) for the year ended December 31, 2020)."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Part II, Item 5 (Market for Registrant's Common Equity)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p41",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Item 5 discloses an exchange trading market only for the common stock: it trades principally on The New York Stock Exchange under the symbol AXP.",
+      "As of December 31, 2022 the Company had 18,060 common shareholders of record.",
+      "The 10-K contains no statement of any exchange listing, trading market or market maker for its senior notes, subordinated notes, or securitization trust certificates."
+    ],
+    "raw_excerpt": "(a) Our common stock trades principally on The New York Stock Exchange under the trading symbol AXP. As of December 31, 2022, we had 18,060 common shareholders of record."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Long-Term Debt and Asset Securitization Programs, Table 20: Debt Issuances",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p69",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "2022 debt issuances by American Express Company (parent) comprised $10.2B fixed-rate senior notes (weighted-average coupon 3.60%), $1.0B floating-rate senior notes (compounded SOFR plus weighted-average spread of 83 bps), $1.2B fixed-to-floating rate senior notes (4.42% fixed period, then compounded SOFR plus 1.76%), and $0.8B fixed-to-floating rate subordinated notes (4.989% fixed period, then compounded SOFR plus 2.255%).",
+      "American Express Credit Account Master Trust issued $7.3B of fixed-rate Class A certificates (weighted-average coupon 3.51%) in 2022.",
+      "Total 2022 debt issuances were $20.5B.",
+      "The disclosure describes coupon structures and amounts only; it makes no exchange-listing, market-maker or trading-market representation for any of these securities.",
+      "As of December 31, 2022 the Company had $42.6 billion in long-term debt outstanding, including unsecured debt and asset-backed securities."
+    ],
+    "raw_excerpt": "American Express Company: Fixed Rate Senior Notes (weighted-average coupon rate of 3.60%) $ 10.2 ... Fixed-to-Floating Rate Subordinated Notes (4.989% coupon during the fixed rate period and compounded SOFR plus 2.255% during the floating rate period) 0.8 ... American Express Credit Account Master Trust: Fixed Rate Class A Certificates (weighted-average coupon of 3.51%) 7.3 ... Total $ 20.5"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Note 8, Long-Term Debt table (by issuing entity)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p125",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Total long-term debt outstanding at December 31, 2022 was $42,573 million (2021: $38,675 million).",
+      "American Express Company (Parent Company only) held $30,134 million: fixed-rate senior notes maturing 2023–2042 of $23,813M, floating-rate senior notes 2023–2026 of $3,000M, fixed-to-floating rate senior notes 2033 of $1,250M, fixed-rate subordinated notes 2024 of $574M, and fixed-to-floating rate subordinated notes 2033 of $750M.",
+      "American Express Credit Corporation held $328 million of fixed-rate senior notes maturing 2027 (down from $2,078 million in 2021); its floating-rate senior notes were nil in 2022 versus $300 million in 2021.",
+      "Lending Trust debt outstanding was $12,685 million, comprising fixed-rate senior notes 2023–2025 of $10,499M, floating-rate senior notes 2023 of $2,125M, and floating-rate subordinated notes 2023 of $61M.",
+      "Charge Trust floating-rate conduit borrowings were nil at year-end 2022 versus $2,000 million in 2021."
+    ],
+    "raw_excerpt": "American Express Company (Parent Company only) Fixed Rate Senior Notes 2023 - 2042 $ 23,813 ... Fixed Rate Subordinated Notes 2024 $ 574 ... Fixed-to-Floating Rate Subordinated Notes 2033 $ 750 ... American Express Credit Corporation Fixed Rate Senior Notes 2027 $ 328 ... Lending Trust Fixed Rate Senior Notes 2023 - 2025 $ 10,499 ... Total Long-Term Debt $ 42,573"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 19: Unsecured Debt Ratings and Deposit Programs",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p68",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Unsecured debt ratings at year-end 2022: American Express Company A2/BBB+/A (Moody's/S&P/Fitch), short-term N/A, A-2, F1, outlook Stable at all three agencies.",
+      "American Express Credit Corporation carried long-term ratings A2/A-/A but short-term ratings 'N/A / N/A / N/A' at all three agencies, indicating it was not an active short-term (commercial paper) issuer.",
+      "American Express National Bank carried long-term A3/A-/A and short-term Prime-1/A-2/F1.",
+      "Deposits are offered within U.S. bank subsidiary AENB, FDIC-insured up to at least $250,000 per account holder; direct retail deposits are the primary deposit product channel, offering high-yield savings accounts and certificates of deposit (CDs) directly to consumers, with third-party distribution channels used as needed.",
+      "Total deposits were $110.2 billion as of December 31, 2022.",
+      "The Company had no commercial paper outstanding at any point during 2022."
+    ],
+    "raw_excerpt": "American Express Credit Corporation Long Term A2 A- A / Short Term N/A N/A N/A / Outlook Stable Stable Stable ... We offer deposits within our U.S. bank subsidiary, AENB. These funds are currently insured up to an amount that is at least $250,000 per account holder through the FDIC ... Direct retail deposits offered by AENB is our primary deposit product channel, which makes FDIC-insured high-yield savings account and certificates of deposit (CDs) products available directly to consumers ... We had no commercial paper outstanding at any point during 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Note 7, Customer Deposits",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p123",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Total customer deposits at December 31, 2022 were $110,239 million (2021: $84,382 million).",
+      "Deposit composition at year-end 2022: savings and transaction accounts $76,731M; direct certificates of deposit $2,765M; third-party (brokered) certificates of deposit $13,331M; third-party (brokered) sweep accounts $16,297M; other deposits $71M; Card Member credit balances $1,044M.",
+      "Scheduled maturities of certificates of deposit at December 31, 2022 totalled $16,096 million (2023: $5,790M; 2024: $6,554M; 2025: $2,939M; 2026: $27M; 2027: $786M).",
+      "Certificates of deposit in denominations of $250,000 or more totalled $999 million (U.S. $998M; non-U.S. $1M).",
+      "These bank funding instruments are deposit liabilities of AENB rather than exchange-listed debt securities."
+    ],
+    "raw_excerpt": "Savings and transaction accounts $ 76,731 ... Certificates of deposit: Direct 2,765 / Third-party (brokered) 13,331 / Sweep accounts — Third-party (brokered) 16,297 ... Total customer deposits $ 110,239 ... Certificates of deposit $ 5,790 $ 6,554 $ 2,939 $ 27 $ 786 $ — $ 16,096"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Funding Strategy and Funding Programs and Activities",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p67",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The stated principal funding objective is to maintain broad and well-diversified funding sources, with funding strategy and activities integrated into asset-liability management under a funding policy.",
+      "Customer deposits were $110.2B, short-term borrowings $1.3B and long-term debt $42.6B at December 31, 2022, for total customer deposits and debt of $154.1B (2021: $125.3B).",
+      "The Company may redeem certain debt securities prior to original contractual maturity in accordance with optional redemption provisions of those debt securities.",
+      "The 2023 funding plan includes approximately $6.0–$10.0 billion of unsecured term debt issuance and approximately $5.0–$9.0 billion of secured term debt issuance."
+    ],
+    "raw_excerpt": "Our principal funding objective is to maintain broad and well-diversified funding sources ... Customer deposits $ 110.2 / Short-term borrowings 1.3 / Long-term debt 42.6 / Total customer deposits and debt $ 154.1 ... Our funding plan for the full year 2023 includes, among other sources, approximately $6.0 billion to $10.0 billion of unsecured term debt issuance and approximately $5.0 billion to $9.0 billion of secured term debt issuance."
+  }
+]

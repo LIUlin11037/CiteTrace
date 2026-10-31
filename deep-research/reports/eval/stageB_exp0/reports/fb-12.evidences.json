@@ -1,0 +1,268 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 1: Summary of Financial Performance (p.44)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44",
+    "published_at": null,
+    "key_points": [
+      "American Express reported an effective tax rate of 21.6% for the year ended December 31, 2022.",
+      "American Express reported an effective tax rate of 24.6% for the year ended December 31, 2021.",
+      "For comparison, the reported effective tax rate for 2020 was 27.0%.",
+      "In the same summary table, pretax income was $9,585 million in 2022 versus $10,689 million in 2021.",
+      "In the same summary table, the income tax provision was $2,071 million in 2022 versus $2,629 million in 2021.",
+      "The summary table's effective tax rate row carries no printed 'Change' column value, so no percentage-point change is stated by the filing in this table."
+    ],
+    "raw_excerpt": "Effective tax rate 21.6 % 24.6 % 27.0 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Note 20, Income Taxes: statutory-to-actual rate reconciliation (p.146)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146",
+    "published_at": null,
+    "key_points": [
+      "The Note 20 rate reconciliation ends at 'Actual tax rates' of 21.6% (2022), 24.6% (2021) and 27.0% (2020), matching the summary table.",
+      "The reconciliation starts from a U.S. statutory federal income tax rate of 21.0% in each of 2022, 2021 and 2020.",
+      "Total income tax expense per Note 20 was $2,071 million (2022), $2,629 million (2021) and $1,161 million (2020).",
+      "The 'Tax settlements and lapse of statute of limitations' reconciling item was (2.1)% in 2022 versus (0.3)% in 2021.",
+      "The 'Tax credits and tax-exempt income' reconciling item was (0.9)% in 2022 versus (0.1)% in 2021.",
+      "The 'State and local income taxes, net of federal benefit' item was 3.1% in 2022 versus 3.0% in 2021."
+    ],
+    "raw_excerpt": "U.S. statutory federal income tax rate 21.0 % 21.0 % 21.0 % … Tax settlements and lapse of statute of limitations (2.1) (0.3) (1.6) … Actual tax rates 21.6 % 24.6 % 27.0 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Consolidated Statements of Income (p.96) and Table 1 (p.44): pretax income and income tax provision",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": null,
+    "key_points": [
+      "The Consolidated Statements of Income show pretax income of $9,585 million for 2022, $10,689 million for 2021 and $4,296 million for 2020.",
+      "The Consolidated Statements of Income show an income tax provision of $2,071 million for 2022, $2,629 million for 2021 and $1,161 million for 2020.",
+      "Net income was $7,514 million (2022), $8,060 million (2021) and $3,135 million (2020).",
+      "Dividing the reported income tax provision by reported pretax income yields 21.6% for 2022 (2,071/9,585) and 24.6% for 2021 (2,629/10,689), consistent with the rates the filing states."
+    ],
+    "raw_excerpt": "Pretax income 9,585 10,689 4,296 … Income tax provision 2,071 2,629 1,161 … Net income $ 7,514 $ 8,060 $ 3,135"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20 Income Taxes: rate reconciliation table (statutory 21% to actual rate, 2022/2021/2020)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146 (Note 20, printed page 143)",
+    "published_at": "2023",
+    "key_points": [
+      "Rate reconciliation runs from U.S. statutory federal rate of 21.0% in all three years to actual tax rates of 21.6% (2022), 24.6% (2021) and 27.0% (2020), i.e. a 3.0 percentage-point year-over-year decline from FY2021 to FY2022.",
+      "Line 'Tax settlements and lapse of statute of limitations': (2.1)% in 2022 vs (0.3)% in 2021 vs (1.6)% in 2020 — a 1.8 pt swing toward favorable, the largest single-line movement between FY2021 and FY2022.",
+      "Line 'Non-U.S. subsidiaries' earnings': (0.1)% in 2022 vs 1.1% in 2021 vs 2.4% in 2020 — a 1.2 pt swing from a detriment to a small benefit.",
+      "Line 'Tax credits and tax-exempt income': (0.9)% in 2022 vs (0.1)% in 2021 vs (4.1)% in 2020 — a 0.8 pt increase in benefit.",
+      "Line 'State and local income taxes, net of federal benefit': 3.1% in 2022 vs 3.0% in 2021 vs 3.7% in 2020 — essentially flat year over year (+0.1 pt).",
+      "Line 'Valuation allowances': (0.1)% in 2022 vs —% in 2021 vs 4.0% in 2020 — FY2021 had no valuation-allowance effect on the ETR.",
+      "Line 'Other': 0.7% in 2022 vs (0.1)% in 2021 vs 1.6% in 2020 — a 0.8 pt unfavorable movement.",
+      "Footnote (a) on the reconciliation states it 'Includes the implementation of PAM related to investments in QAH projects for the year ended December 31, 2021' without identifying which reconciliation line it attaches to."
+    ],
+    "raw_excerpt": "A reconciliation of the U.S. federal statutory rate of 21 percent as of December 31, 2022, 2021 and 2020, to our actual income tax rate was as follows: 2022 2021 2020 / U.S. statutory federal income tax rate 21.0 % 21.0 % 21.0 % / (Decrease) increase in taxes resulting from: Tax credits and tax-exempt income (0.9) (0.1) (4.1); State and local income taxes, net of federal benefit 3.1 3.0 3.7; Non-U.S. subsidiaries' earnings (0.1) 1.1 2.4; Tax settlements and lapse of statute of limitations (2.1) (0.3) (1.6); Valuation allowances (0.1) — 4.0; Other 0.7 (0.1) 1.6; Actual tax rates 21.6 % 24.6 % 27.0 % ... (a) Includes the implementation of PAM related to investments in QAH projects for the year ended December 31, 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20: changes in unrecognized tax benefits (settlements, statute lapse, interest and penalties)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p148 (Note 20, printed page 145)",
+    "published_at": "2023",
+    "key_points": [
+      "Decreases from 'Settlements with tax authorities' were $74 million in 2022, versus $15 million in 2021 and $15 million in 2020.",
+      "Decreases from 'Lapse of statute of limitations' were $104 million in 2022, versus $17 million in 2021 and $58 million in 2020.",
+      "Combined settlements plus statute lapses reduced unrecognized tax benefits by $178 million in 2022 versus $32 million in 2021.",
+      "Unrecognized tax benefit balance was $962 million at December 31, 2022, down from $1,024 million at December 31, 2021 and up from $790 million at December 31, 2020.",
+      "Expense recognized for interest and penalties was approximately $10 million in 2022, $40 million in 2021 and $260 million in 2020.",
+      "Of the unrecognized tax benefits, approximately $750 million (2022), $780 million (2021) and $580 million (2020) would, if recognized, favorably affect the effective tax rate in a future period.",
+      "Accrual for payment of interest and penalties was approximately $380 million at both December 31, 2022 and December 31, 2021."
+    ],
+    "raw_excerpt": "The following table presents changes in unrecognized tax benefits: (Millions) 2022 2021 2020 / Balance, January 1 $ 1,024 $ 790 $ 726 / Increases: Current year tax positions 119 64 57; Tax positions related to prior years 30 225 105 / Decreases: Tax positions related to prior years (30) (14) (24); Settlements with tax authorities (74) (15) (15); Lapse of statute of limitations (104) (17) (58); Effects of foreign currency translations (3) (9) (1) / Balance, December 31 $ 962 $ 1,024 $ 790 ... we recognized approximately $10 million, $40 million and $260 million, respectively, in expenses for interest and penalties. We had approximately $380 million accrued for the payment of interest and penalties as of both December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20: significant components of deferred tax assets and liabilities (valuation allowance balance)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p147 (Note 20, printed page 144)",
+    "published_at": "2023",
+    "key_points": [
+      "Valuation allowance against gross deferred tax assets was $537 million at December 31, 2022 versus $472 million at December 31, 2021 (an increase of $65 million).",
+      "Gross deferred tax assets were $5,592 million (2022) and $5,203 million (2021); deferred tax assets after valuation allowance were $5,055 million and $4,731 million respectively.",
+      "Net deferred tax assets were $3,505 million at December 31, 2022 versus $2,385 million at December 31, 2021.",
+      "Net operating loss and tax credit carryforward balance of $411 million (2022) and $398 million (2021) relates to pre-tax U.S. federal NOL carryforwards of $27 million, non-U.S. NOL carryforwards of $1.0 billion, and foreign tax credit carryforwards of $121 million.",
+      "Net income taxes paid were approximately $3.0 billion in 2022, $1.6 billion in 2021 and $2.2 billion in 2020, including estimated tax payments and cash settlements relating to prior tax years.",
+      "The company was under IRS examination for the 2017 and 2018 tax years as of the FY2022 filing."
+    ],
+    "raw_excerpt": "The significant components of deferred tax assets and liabilities as of December 31 are reflected in the following table: (Millions) 2022 2021 / Deferred tax assets: Reserves not yet deducted for tax purposes $ 4,052 $ 3,637 ... Gross deferred tax assets 5,592 5,203 / Valuation allowance (537) (472) / Deferred tax assets after valuation allowance 5,055 4,731 ... Net deferred tax assets $ 3,505 $ 2,385 ... Net income taxes paid by us during 2022, 2021 and 2020, were approximately $3.0 billion, $1.6 billion and $2.2 billion, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 1: Summary of Financial Performance (pretax income, income tax provision, effective tax rate)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44 (Table 1, printed page 41)",
+    "published_at": "2023",
+    "key_points": [
+      "Pretax income was $9,585 million in 2022 versus $10,689 million in 2021, a decrease of $1,104 million or 10%.",
+      "Income tax provision was $2,071 million in 2022 versus $2,629 million in 2021, a decrease of $558 million or 21%.",
+      "Effective tax rate was 21.6% in 2022, 24.6% in 2021 and 27.0% in 2020.",
+      "Net income was $7,514 million in 2022 versus $8,060 million in 2021, a decrease of $546 million or 7%.",
+      "Total revenues net of interest expense were $52,862 million in 2022 versus $42,380 million in 2021, an increase of 25%."
+    ],
+    "raw_excerpt": "TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE ... Pretax income 9,585 10,689 4,296 (1,104) (10) 6,393 # / Income tax provision 2,071 2,629 1,161 (558) (21) 1,468 # / Net income 7,514 8,060 3,135 (546) (7) 4,925 # ... Effective tax rate 21.6 % 24.6 % 27.0 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20: components of income tax expense (current vs deferred, by jurisdiction)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146 (Note 20, printed page 143)",
+    "published_at": "2023",
+    "key_points": [
+      "Total current income tax expense was $3,260 million in 2022 versus $2,335 million in 2021 and $2,100 million in 2020.",
+      "Total deferred income tax (benefit) expense was $(1,189) million in 2022 versus $294 million in 2021 and $(939) million in 2020 — a swing of $1,483 million between 2021 and 2022.",
+      "U.S. federal deferred tax moved from $231 million expense in 2021 to $(763) million benefit in 2022; non-U.S. deferred moved from $41 million expense to $(309) million benefit.",
+      "U.S. state and local current tax was $339 million in 2022 versus $351 million in 2021; U.S. state and local deferred moved from $22 million expense in 2021 to $(117) million benefit in 2022.",
+      "Non-U.S. current income tax expense was $476 million in 2022 versus $328 million in 2021.",
+      "Total income tax expense was $2,071 million in 2022, $2,629 million in 2021 and $1,161 million in 2020."
+    ],
+    "raw_excerpt": "The components of income tax expense for the years ended December 31 included in the Consolidated Statements of Income were as follows: (Millions) 2022 2021 2020 / Current income tax expense: U.S. federal $ 2,445 $ 1,656 $ 1,122; U.S. state and local 339 351 339; Non-U.S. 476 328 639; Total current income tax expense 3,260 2,335 2,100 / Deferred income tax (benefit) expense: U.S. federal (763) 231 (931); U.S. state and local (117) 22 (119); Non-U.S. (309) 41 111; Total deferred income tax (benefit) expense (1,189) 294 (939) / Total income tax expense $ 2,071 $ 2,629 $ 1,161"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Consolidated Statements of Income (pretax income and income tax provision)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96 (Consolidated Statements of Income, printed page 93)",
+    "published_at": "2023",
+    "key_points": [
+      "Consolidated Statements of Income report pretax income of $9,585 million (2022), $10,689 million (2021) and $4,296 million (2020).",
+      "Consolidated Statements of Income report income tax provision of $2,071 million (2022), $2,629 million (2021) and $1,161 million (2020).",
+      "Net income was $7,514 million (2022), $8,060 million (2021) and $3,135 million (2020).",
+      "Total revenues net of interest expense were $52,862 million (2022), $42,380 million (2021) and $36,087 million (2020)."
+    ],
+    "raw_excerpt": "CONSOLIDATED STATEMENTS OF INCOME Year Ended December 31 (Millions, except per share amounts) 2022 2021 2020 ... Total revenues net of interest expense 52,862 42,380 36,087 ... Pretax income 9,585 10,689 4,296 / Income tax provision 2,071 2,629 1,161 / Net income $ 7,514 $ 8,060 $ 3,135"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 1: Summary of Financial Performance (effective tax rate)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44",
+    "published_at": null,
+    "key_points": [
+      "American Express's effective tax rate was 21.6% for FY2022, 24.6% for FY2021 and 27.0% for FY2020.",
+      "The FY2021→FY2022 change in AmEx's effective tax rate is a decline of 3.0 percentage points (24.6% → 21.6%).",
+      "AmEx's income tax provision fell from $2,629 million in FY2021 to $2,071 million in FY2022, a decrease of $558 million or 21%.",
+      "AmEx's pretax income fell from $10,689 million in FY2021 to $9,585 million in FY2022, a decrease of $1,104 million or 10%."
+    ],
+    "raw_excerpt": "Effective tax rate 21.6 % 24.6 % 27.0 %  [columns: 2022 / 2021 / 2020] ... Income tax provision 2,071 2,629 1,161 (558) (21) 1,468 # ... Pretax income 9,585 10,689 4,296 (1,104) (10) 6,393 #"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 20 Income Taxes: statutory-to-actual rate reconciliation",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146",
+    "published_at": null,
+    "key_points": [
+      "AmEx's rate reconciliation shows a U.S. statutory federal income tax rate of 21.0% in each of FY2022, FY2021 and FY2020 — i.e., the statutory rate was unchanged across the comparison period.",
+      "AmEx's actual tax rate was 21.6% in FY2022, which is 0.6 percentage points above the 21.0% statutory rate.",
+      "AmEx's actual tax rate was 24.6% in FY2021, which is 3.6 percentage points above the 21.0% statutory rate.",
+      "Tax settlements and lapse of statute of limitations reduced AmEx's rate by 2.1 points in FY2022 versus 0.3 points in FY2021.",
+      "Non-U.S. subsidiaries' earnings reduced AmEx's rate by 0.1 points in FY2022 versus increasing it by 1.1 points in FY2021.",
+      "Tax credits and tax-exempt income reduced AmEx's rate by 0.9 points in FY2022 versus 0.1 points in FY2021.",
+      "State and local income taxes, net of federal benefit, added 3.1 points in FY2022 versus 3.0 points in FY2021.",
+      "Total income tax expense was $2,071 million in FY2022 versus $2,629 million in FY2021; total current income tax expense was $3,260 million versus $2,335 million; total deferred income tax was a $(1,189) million benefit versus $294 million of expense."
+    ],
+    "raw_excerpt": "A reconciliation of the U.S. federal statutory rate of 21 percent as of December 31, 2022, 2021 and 2020, to our actual income tax rate was as follows: 2022 2021 2020 / U.S. statutory federal income tax rate 21.0 % 21.0 % 21.0 % / (Decrease) increase in taxes resulting from: Tax credits and tax-exempt income (0.9) (0.1) (4.1) / State and local income taxes, net of federal benefit 3.1 3.0 3.7 / Non-U.S. subsidiaries' earnings (0.1) 1.1 2.4 / Tax settlements and lapse of statute of limitations (2.1) (0.3) (1.6) / Valuation allowances (0.1) — 4.0 / Other 0.7 (0.1) 1.6 / Actual tax rates 21.6 % 24.6 % 27.0 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — income tax provision and statutory reconciliation (NOT a card-issuer peer; scope check only)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p85-86",
+    "published_at": null,
+    "key_points": [
+      "AMD reported effective tax rates of (10)% in FY2022 and 14% in FY2021.",
+      "AMD's reconciliation starts from statutory federal income tax expense at 21% in both FY2022 and FY2021.",
+      "AMD's FY2022 reduction in income tax expense was attributed to lower pre-tax income plus a $261 million FDII tax benefit and $241 million of R&D tax credits.",
+      "AMD is a semiconductor company, not a card issuer or consumer lender, so it does not serve as a peer for the AmEx comparison."
+    ],
+    "raw_excerpt": "The Company recorded an income tax benefit of $122 million in 2022 and an income tax provision of $513 million in 2021, representing effective tax rates of (10%) and 14%, respectively. The reduction in income tax expense in 2022 was primarily due to the lower pre-tax income coupled with a $261 million FDII tax benefit and $241 million of research and development (R&D) tax credits."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — Note 4 Income Taxes: statutory-to-actual rate reconciliation (NOT a card-issuer peer; scope check only)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77",
+    "published_at": null,
+    "key_points": [
+      "Boeing's reconciliation shows a U.S. federal statutory tax rate of 21.0% in each of FY2022, FY2021 and FY2020.",
+      "Boeing's income tax expense/(benefit) represented an effective rate of (0.6)% in FY2022 versus 14.7% in FY2021.",
+      "Boeing is an aerospace manufacturer, not a card issuer or consumer lender, so it does not serve as a peer for the AmEx comparison."
+    ],
+    "raw_excerpt": "U.S. federal statutory tax ($1,054) 21.0 % ($1,057) 21.0 % ($3,039) 21.0 % ... Income tax expense/(benefit) $31 (0.6)% ($743) 14.7 % ($2,535) 17.5 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for fiscal year ended December 31, 2022 — MD&A, INCOME TAXES (p49)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p49 (TABLE 4 / INCOME TAXES)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "FY2022 effective tax rate was 21.6 percent; FY2021 was 24.6 percent.",
+      "The reduction in the effective tax rate primarily reflected discrete tax benefits in the current year related to the resolution of prior-year tax items.",
+      "The tax rates in both years reflected the level of pretax income in relation to recurring permanent tax benefits and the geographic mix of business."
+    ],
+    "raw_excerpt": "The effective tax rate was 21.6 percent and 24.6 percent for 2022 and 2021, respectively. The reduction in the effective tax rate primarily reflected discrete tax benefits in the current year related to the resolution of prior-year tax items. The tax rates in both years reflected the level of pretax income in relation to recurring permanent tax benefits and the geographic mix of business."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20 Income Taxes, rate reconciliation (p146)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146 (NOTE 20 INCOME TAXES)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "U.S. statutory federal income tax rate was 21.0% in each of 2022, 2021 and 2020.",
+      "FY2022 reconciling items: state and local income taxes net of federal benefit +3.1pp; tax settlements and lapse of statute of limitations -2.1pp; tax credits and tax-exempt income -0.9pp; non-U.S. subsidiaries' earnings -0.1pp; valuation allowances -0.1pp; other +0.7pp.",
+      "Actual tax rates were 21.6% (2022), 24.6% (2021) and 27.0% (2020)."
+    ],
+    "raw_excerpt": "U.S. statutory federal income tax rate 21.0 % 21.0 % 21.0 % ... State and local income taxes, net of federal benefit 3.1 3.0 3.7 ... Tax settlements and lapse of statute of limitations (2.1) (0.3) (1.6) ... Actual tax rates 21.6 % 24.6 % 27.0 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 20 Income Taxes, components of income tax expense (p146)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p146 (NOTE 20 INCOME TAXES)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Total income tax expense was $2,071 million in FY2022, $2,629 million in FY2021 and $1,161 million in FY2020.",
+      "FY2022 total current income tax expense was $3,260 million and total deferred income tax benefit was $(1,189) million.",
+      "FY2022 current tax components: U.S. federal $2,445M, U.S. state and local $339M, non-U.S. $476M."
+    ],
+    "raw_excerpt": "Total current income tax expense 3,260 2,335 2,100 ... Total deferred income tax (benefit) expense (1,189) 294 (939) ... Total income tax expense $ 2,071 $ 2,629 $ 1,161"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — unrecognized tax benefits and future effective tax rate impact (p148)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p148 (unrecognized tax benefits)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Unrecognized tax benefits were $962 million at December 31, 2022 ($1,024M at 2021 year-end, $790M at 2020 year-end).",
+      "Of the $1.0 billion of unrecognized tax benefits at December 31, 2022, approximately $750 million, if recognized, would favorably affect the effective tax rate in a future period.",
+      "The company believes it is reasonably possible that unrecognized tax benefits could decrease within the next twelve months by as much as $150 million; approximately $118 million of that relates to amounts that, if recognized, would impact the effective tax rate in a future period.",
+      "Interest and penalties on unrecognized tax benefits were approximately $10 million in 2022, $40 million in 2021 and $260 million in 2020."
+    ],
+    "raw_excerpt": "Included in the unrecognized tax benefits of $1.0 billion, $1.0 billion and $0.8 billion for December 31, 2022, 2021 and 2020, respectively, are approximately $750 million, $780 million and $580 million, respectively, that, if recognized, would favorably affect the effective tax rate in a future period. We believe it is reasonably possible that our unrecognized tax benefits could decrease within the next twelve months by as much as $150 million ... Of the $150 million of unrecognized tax benefits, approximately $118 million relates to amounts that, if recognized, would impact the effective tax rate in a future period."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Cautionary Note Regarding Forward-Looking Statements (p3)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p3 (forward-looking statements)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The 10-K and its MD&A contain forward-looking statements subject to risks and uncertainties.",
+      "The tax-related sections retrieved from this filing (p49 MD&A, p146 Note 20, p148 unrecognized tax benefits) contain historical results and accounting disclosures only; no quantified effective tax rate guidance for FY2023 or later was found in the retrieved text."
+    ],
+    "raw_excerpt": "This Annual Report on Form 10-K, including the \"Management's Discussion and Analysis of Financial Condition and Results of Operations,\" contains forward-looking statements within the meaning of the Private Securities Litigation Reform Act of 1995 that are subject to risks and uncertainties."
+  }
+]

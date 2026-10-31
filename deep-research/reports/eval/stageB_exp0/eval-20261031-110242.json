@@ -1,0 +1,298 @@
+{
+  "n_questions": 21,
+  "mean_citation_existence": 0.8571428571428571,
+  "mean_alignment": 0.84834455667789,
+  "alignment_questions": 18,
+  "mean_coverage": 0.7380952380952381,
+  "per_subdomain": {
+    "finance": {
+      "n": 21.0,
+      "citation_existence": 0.8571428571428571,
+      "alignment": 0.84834455667789,
+      "coverage": 0.7380952380952381
+    }
+  },
+  "scores": [
+    {
+      "question_id": "fb-01",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 12,
+      "citations_missing": [],
+      "alignment_rate": 0.8636363636363636,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-02",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "芯片组：AM5 平台的 X670 / B650，AM4 平台的 X570 / B550 / A520 / B450 / A320，以及 HEDT 与工作站的 WRX80",
+        "描述，并提到其 DPU 用于 Aruba CX 10000 交换机"
+      ]
+    },
+    {
+      "question_id": "fb-03",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 31,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "Xilinx 收购完成日 2022-02-14，总对价 488 亿美元（扣现金后 464 亿），由 485 亿普通股（4.29 亿股，$113.18/股）加 2.75 亿替换股权激励构成"
+      ]
+    },
+    {
+      "question_id": "fb-04",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 21,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-05",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 12,
+      "citations_missing": [],
+      "alignment_rate": 0.9583333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-06",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 15,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-07",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 13,
+      "citations_missing": [],
+      "alignment_rate": 0.9545454545454546,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-09",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 37,
+      "citations_missing": [],
+      "alignment_rate": 0.6666666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "区域定义必须完整写出，因为其中包含反直觉的归并",
+        "公司在评估报告分部构成时考虑的因素包括首席运营决策者审阅的业绩、经济特征、产品与服务、客户类别、分销渠道、地理考量（主要是美国 vs 美国以外）、以及监管环境考量",
+        "CS 面向美国企业发行公司卡与小型企业卡，但同时向部分全球企业客户发卡并提供服务，因此并非纯美国分部",
+        "报告分部为 USCS/CS/ICS/GMNS"
+      ]
+    },
+    {
+      "question_id": "fb-10",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.6363636363636364,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Performance is not measured through operating margin」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "2022 年收入增长 25%（+104.82 亿美元），费用增长 24%（+79.85 亿美元），费用增速几乎追平收入增速。",
+        "扣除信贷准备后的收入为 2022 年 506.80 亿美元、2021 年 437.99 亿美元。",
+        "AMEX 的 MD&A 改用 ROE、CET1 资本、Card Member 贷款的净利息收益率、billed business/网络交易量与分部税前利润来框定业绩。",
+        "2022 年税前利润下降 10%（−11.04 亿美元）而收入增长 25%，正是这一行造成的。"
+      ]
+    },
+    {
+      "question_id": "fb-11",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 0.9545454545454546,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-12",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 14,
+      "citations_missing": [],
+      "alignment_rate": 0.5,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "同期总收入（净利息费用后）反而增长 25% 至 $52,862M",
+        "与 MD&A「当年离散税收利益主要来自以前年度税务事项的解决」的表述方向一致",
+        "「诉讼时效届满」减少额：2022 年 $104M，2021 年 $17M",
+        "利息与罚款费用由 2021 年约 $40M 降至 2022 年约 $10M",
+        "调节表脚注 (a) 提到 PAM 相关内容，但未指明该脚注附着于哪一调节行项"
+      ]
+    },
+    {
+      "question_id": "fb-13",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 30,
+      "citations_missing": [],
+      "alignment_rate": 0.5,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "客户存款110,239百万美元按产品类型拆分如下",
+        "25万美元及以上大额存单仅999百万美元",
+        "会员奖励负债计量依赖URR与WAC两个关键假设，URR每升25个基点约增加负债与奖励费用157百万美元，WAC每升1个基点约增加190百万美元",
+        "短期借款1,348百万美元定义为原始合同期限不足一年的借款，年末票面利率0.94%",
+        "净卡费在12个月会员期内直线确认，未摊销余额列于其他负债"
+      ]
+    },
+    {
+      "question_id": "fb-14",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 13,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-15",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "BCC 为客户采购与接收波音产品提供融资，管理整体融资风险敞口，组合包括经营租赁设备、销售型/融资租赁、票据及其他应收款、持有待售或再租赁资产与投资"
+      ]
+    },
+    {
+      "question_id": "fb-16",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 15,
+      "citations_missing": [],
+      "alignment_rate": 0.7777777777777778,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "Note 21 - Legal Proceedings，列于财务报表索引第 108 页"
+      ]
+    },
+    {
+      "question_id": "fb-17",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-18",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 22,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-19",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 25,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes, Boeing's business is subject to cyclicality due to its exposure to the airline industry which is a cyclical industry.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-20",
+      "subdomain": "finance",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": null,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "最终答案与「Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：We must minimize disruption caused by production changes, achieve operational stability and implement productivity impro）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-21",
+      "subdomain": "finance",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": null,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "最终答案与「Effective tax rate in FY2022 was 0.62%, compared to -14.76% in FY2021.」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 BOEING_2022_10K（原文线索：The Boeing Company and Subsidiaries Consolidated Statements of Operations (Dollars in millions, except per share data)）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-08",
+      "subdomain": "finance",
+      "citation_existence_rate": 0.0,
+      "citations_total": 0,
+      "citations_missing": [],
+      "alignment_rate": null,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "最终答案与「There are none」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：Registrants telephone number, including area code: (212) 640-2000 Securities registered pursuant to Section 12(b) of the）"
+      ],
+      "unsupported_claims": []
+    }
+  ]
+}

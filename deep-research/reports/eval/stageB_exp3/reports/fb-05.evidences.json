@@ -1,0 +1,311 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 10-K — Consolidated Statements of Cash Flows (Year Ended December 31, 2022)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": null,
+    "key_points": [
+      "FY2022 (year ended December 31, 2022) net cash provided by operating activities was $3,565 million (FY2021: $3,521 million; FY2020: $1,071 million).",
+      "FY2022 net cash provided by (used in) investing activities was +$1,999 million (FY2021: -$686 million; FY2020: -$952 million).",
+      "FY2022 net cash (used in) provided by financing activities was -$3,264 million (FY2021: -$1,895 million; FY2020: +$6 million).",
+      "FY2022 net increase in cash and cash equivalents was $2,300 million; cash and cash equivalents at end of year was $4,835 million.",
+      "Investing activities line items for FY2022 include: purchases of property and equipment $(450) million, purchases of short-term investments $(2,667) million, proceeds from maturity of short-term investments $4,310 million, cash received from acquisition of Xilinx $2,366 million, acquisition of Pensando net of cash acquired $(1,544) million.",
+      "Financing activities line items for FY2022 include: proceeds from debt net of issuance costs $991 million, repayment of debt $(312) million, proceeds from sales of common stock through employee equity plans $167 million, repurchases of common stock $(3,702) million, common stock repurchases for tax withholding on employee equity plans $(406) million.",
+      "Operating activities for FY2022 start from net income of $1,320 million, with depreciation and amortization of $4,174 million and deferred income taxes of $(1,505) million among the adjustments."
+    ],
+    "raw_excerpt": "Net cash provided by operating activities 3,565 3,521 1,071 ... Net cash provided by (used in) investing activities 1,999 (686) (952) ... Net cash (used in) provided by financing activities (3,264) (1,895) 6 ... Net increase in cash and cash equivalents 2,300 940 125 ... Cash and cash equivalents at end of year $ 4,835 $ 2,535 $ 1,595"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 10-K — MD&A Liquidity and Capital Resources: operating/investing/financing cash flow summary table",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51",
+    "published_at": null,
+    "key_points": [
+      "The MD&A summary table repeats the same FY2022 figures as the consolidated statement of cash flows: operating activities $3,565 million, investing activities $1,999 million, financing activities $(3,264) million, net increase in cash and cash equivalents $2,300 million.",
+      "The same table gives FY2021 comparatives: operating $3,521 million, investing $(686) million, financing $(1,895) million, net increase $940 million.",
+      "As of December 31, 2022, AMD's cash, cash equivalents and short-term investments were $5.9 billion versus $3.6 billion as of December 25, 2021.",
+      "The increase in cash, cash equivalents and short-term investments was attributed primarily to $2.4 billion of cash and $1.6 billion of short-term investments acquired from the Xilinx acquisition, $1.0 billion from the debt issuance of the 3.924% Notes and 4.393% Notes, and cash flows from operations, partially offset by stock repurchases and cash paid for the acquisition of Pensando."
+    ],
+    "raw_excerpt": "Our operating, investing and financing cash flow activities for 2022 and 2021 were as follows: ... Net cash provided by (used in): Operating activities $ 3,565 $ 3,521 / Investing activities 1,999 (686) / Financing activities (3,264) (1,895) / Net increase in cash and cash equivalents $ 2,300 $ 940"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 10-K — MD&A narrative discussion of Operating, Investing and Financing Activities",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52",
+    "published_at": null,
+    "key_points": [
+      "Operating: net cash provided by operating activities was $3.6 billion in 2022, primarily due to net income of $1.3 billion, adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in operating assets and liabilities.",
+      "Operating asset/liability drivers in 2022: $1.4 billion increase in inventories, $1.1 billion increase in accounts receivable, $1.2 billion increase in prepaid expenses and other assets, offset by $931 million increase in accounts payable and $546 million increase in accrued liabilities and other.",
+      "Investing: net cash provided by investing activities was $2 billion in 2022, primarily from $4.3 billion of maturities of short-term investments and $2.4 billion of cash acquired in the Xilinx acquisition, partially offset by $2.7 billion of purchases of short-term investments, $1.5 billion used for the Pensando acquisition and $450 million of property and equipment purchases.",
+      "Financing: net cash used in financing activities was $3.3 billion in 2022, primarily common stock repurchases of $3.7 billion under the Repurchase Program, $406 million of tax-withholding repurchases and $312 million of debt repayment, partially offset by $991 million of debt issuance proceeds and $167 million from employee equity plans.",
+      "FY2021 comparatives in the same narrative: operating $3.5 billion provided, investing $686 million used, financing $1.9 billion used."
+    ],
+    "raw_excerpt": "Net cash provided by operating activities was $3.6 billion in 2022, primarily due to our net income of $1.3 billion in 2022, adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in our operating assets and liabilities. ... Net cash provided by investing activities was $2 billion in 2022, which primarily consisted of higher cash provided by maturities of short-term investments of $4.3 billion and cash acquired as part of the acquisition of Xilinx of $2.4 billion ... Net cash used in financing activities was $3.3 billion in 2022, which primarily consisted of common stock repurchases of $3.7 billion under the Repurchase Program"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows (三大活动分段与正负号列报)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": null,
+    "key_points": [
+      "AMD FY22 现金流量表按 \"Cash flows from operating activities\"、\"Cash flows from investing activities\"、\"Cash flows from financing activities\" 三段列示。",
+      "现金流出项以括号负数表示，例如 Purchases of property and equipment (450)、Repurchases of common stock (3,702)、Repayment of debt (312)。",
+      "现金流入项以正数表示，例如 Proceeds from maturity of short-term investments 4,310、Proceeds from debt, net of issuance costs 991、Proceeds from sales of common stock through employee equity plans 167。",
+      "三大活动各自给出净额小计：经营活动 3,565、投资活动 1,999、筹资活动 (3,264)（单位：百万美元，FY2022）。"
+    ],
+    "raw_excerpt": "Cash flows from investing activities: Purchases of property and equipment (450) (301) (294) … Proceeds from maturity of short-term investments 4,310 1,678 192 … Net cash provided by (used in) investing activities 1,999 (686) (952)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 小计行命名规则（provided by / used in 随净额方向变化）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": null,
+    "key_points": [
+      "小计行标题随净额方向改写：净流入用 \"Net cash provided by …\"，净流出用 \"Net cash (used in) …\"。",
+      "同一张表内不同活动段的小计措辞顺序不同，如 \"Net cash provided by (used in) investing activities\" 与 \"Net cash (used in) provided by financing activities\"，括号内为备选措辞而非金额。",
+      "净流出以括号金额表示，如筹资活动 (3,264)、(1,895)，而 2020 年筹资活动为净流入 6（无括号）。"
+    ],
+    "raw_excerpt": "Net cash provided by operating activities 3,565 3,521 1,071 … Net cash provided by (used in) investing activities 1,999 (686) (952) … Net cash (used in) provided by financing activities (3,264) (1,895) 6"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 三类活动的典型项目归属（分类边界示例）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": null,
+    "key_points": [
+      "经营活动段以净利润为起点，经非现金项目调节（折旧摊销 4,174、股权激励 1,081、递延所得税 (1,505)）及营运资本变动（应收账款 (1,091)、存货 (1,401)、应付账款 931）。",
+      "投资活动段包含资本支出 Purchases of property and equipment (450)、短期投资购买 (2,667) 与到期收回 4,310、收购相关现金流（Cash received from acquisition of Xilinx 2,366；Acquisition of Pensando, net of cash acquired (1,544)）。",
+      "筹资活动段包含债务发行 991 与偿还 (312)、员工股权计划发行股票 167、库存股回购 (3,702)、代扣税回购 (406)。",
+      "报表以 \"Net increase in cash and cash equivalents 2,300\" 汇总三大活动净额与汇率影响，并衔接期初 2,535 与期末 4,835。"
+    ],
+    "raw_excerpt": "Adjustments to reconcile net income to net cash provided by operating activities: Depreciation and amortization 4,174 … Changes in operating assets and liabilities: Accounts receivable, net (1,091) Inventories (1,401) … Cash flows from financing activities: Proceeds from debt, net of issuance costs 991 Repayment of debt (312) … Repurchases of common stock (3,702)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 非现金投融资活动的表外补充披露",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59",
+    "published_at": null,
+    "key_points": [
+      "现金流量表下方设 \"Non-cash investing and financing activities\" 补充披露区，与三大活动现金流小计分开列示。",
+      "该区列示项目包括：已计提未支付的物业设备采购 157、以普通股及库存股支付 Xilinx 收购对价 48,514、与收购相关的替代股权激励公允价值 275。",
+      "同页另设 \"Supplemental cash flow information\" 披露年内实付利息 85 与所得税净额 685。"
+    ],
+    "raw_excerpt": "Non-cash investing and financing activities: Purchases of property and equipment, accrued but not paid $ 157 … Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 … Fair value of replacement share-based awards related to acquisition of Xilinx $ 275"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — 汇率变动影响单列于三大活动之外",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p99",
+    "published_at": null,
+    "key_points": [
+      "三大活动小计之后单列 \"Effect of foreign currency exchange rates on cash and cash equivalents\"，不并入经营/投资/筹资任一段。",
+      "汇率影响项同样遵循括号为负的约定，如 (13)、(120)，2020 年为 364。",
+      "三大活动净额加汇率影响后得出 \"Net increase (decrease) in cash and cash equivalents\"，再衔接期初与期末现金余额。",
+      "该公司将客户存款净变动 25,902 归入筹资活动，说明具体项目的活动归属存在公司间差异。"
+    ],
+    "raw_excerpt": "Net cash provided by (used in) financing activities 24,509 (14,933) (9,068) Effect of foreign currency exchange rates on cash and cash equivalents (13) (120) 364 Net increase (decrease) in cash and cash equivalents 11,886 (10,937) 8,519"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Operating Activities（经营活动现金流驱动因素）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52",
+    "published_at": null,
+    "key_points": [
+      "2022 年经营活动提供的净现金为 36 亿美元，主要来自净利润 13 亿美元，经 41 亿美元非现金调整，以及营运资产与负债变动带来的 18 亿美元净现金流出。",
+      "营运资产与负债变动的主要驱动之一是存货增加 14 亿美元，主要因先进制程节点备货以支持新产品放量。",
+      "同一段落还列出应收账款增加 10.91 亿美元、预付费用及其他资产增加 11.97 亿美元作为营运资本变动驱动（该段文字在返回结果中与 2021 年对比段落拼接，需注意归属）。"
+    ],
+    "raw_excerpt": "Net cash provided by operating activities was $3.6 billion in 2022, primarily due to our net income of $1.3 billion in 2022, adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in our operating assets and liabilities. The primary drivers of the changes in operating assets and liabilities included a $1.4 billion increase in inventories driven primarily by build of advanced process nodes to support the ramp of new products, a"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Cash Flows（三大活动逐行明细）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": null,
+    "key_points": [
+      "经营活动（2022 / 2021，百万美元）：净利润 1,320 / 3,162；折旧与摊销 4,174 / 407；股权激励 1,081 / 379；经营租赁使用权资产摊销 88 / 56；存货公允价值调整摊销 189 / —；递延所得税 (1,505) / 308；权益投资（收益）损失净额 62 / (56)；设备处置损失 16 / 34；其他 (14) / (7)。",
+      "营运资本变动（2022 / 2021）：应收账款净额 (1,091) / (640)；存货 (1,401) / (556)；应收关联方 (13) / 8；预付费用及其他资产 (1,197) / (920)；应付关联方 379 / 7；应付账款 931 / 801；应计负债及其他 546 / 526。",
+      "经营活动净现金 3,565 / 3,521。",
+      "投资活动（2022 / 2021）：购置不动产及设备 (450) / (301)；购买短期投资 (2,667) / (2,056)；短期投资到期回款 4,310 / 1,678；收购 Xilinx 收到的现金 2,366 / —；收购 Pensando（扣除取得现金）(1,544) / —；其他 (16) / (7)；投资活动净现金 1,999 / (686)。",
+      "筹资活动（2022 / 2021）：债务发行所得（扣除发行成本）991 / —；债务偿还 (312) / —；员工股权计划下出售普通股所得 167 / 104；回购普通股 (3,702) / (1,762)；员工股权计划代扣税款的普通股回购 (406) / (237)；其他 (2) / —；筹资活动净现金 (3,264) / (1,895)。",
+      "现金及等价物净增 2,300 / 940；期初 2,535 / 1,595；期末 4,835 / 1,595（2020 期末 1,595）。"
+    ],
+    "raw_excerpt": "Net income $ 1,320 $ 3,162 $ 2,490 ... Depreciation and amortization 4,174 407 312 ... Stock-based compensation 1,081 379 274 ... Deferred income taxes (1,505) 308 (1,223) ... Inventories (1,401) (556) (417) ... Net cash provided by operating activities 3,565 3,521 1,071 ... Purchases of short-term investments (2,667) (2,056) (850) / Proceeds from maturity of short-term investments 4,310 1,678 192 / Cash received from acquisition of Xilinx 2,366 — — / Acquisition of Pensando, net of cash acquired (1,544) — — / Net cash provided by (used in) investing activities 1,999 (686) (952) ... Proceeds from debt, net of issuance costs 991 — 200 / Repayment of debt (312) — (200) / Repurchases of common stock (3,702) (1,762) — / Net cash (used in) provided by financing activities (3,264) (1,895) 6"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Liquidity and Capital Resources（三大活动净额汇总与债务背景）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51",
+    "published_at": null,
+    "key_points": [
+      "三大活动净额（2022 / 2021，百万美元）：经营 3,565 / 3,521；投资 1,999 / (686)；筹资 (3,264) / (1,895)；现金及等价物净增 2,300 / 940。",
+      "现金、现金等价物及短期投资合计 59 亿美元（2021 年末 36 亿美元），增长主要来自 Xilinx 收购取得的 24 亿美元现金与 16 亿美元短期投资、10 亿美元债务发行（3.924% 与 4.393% Notes）以及经营现金流，部分被股票回购与 Pensando 收购现金支出抵消。",
+      "2022 年末债务本金合计 25 亿美元，含承接的 15 亿美元 Xilinx Notes 与年内发行的 10 亿美元 Notes；2021 年末为 3.13 亿美元。",
+      "年内偿还 2022 年 8 月到期的 7.50% Senior Notes 3.12 亿美元。",
+      "30 亿美元五年期无担保循环信贷额度（2022-04-29 签订）年内未提款；2022-11-03 设立最高 30 亿美元商业票据计划，年末无余额。",
+      "2022 年末无条件采购承诺约 86 亿美元，其中 65 亿美元在 2023 财年。"
+    ],
+    "raw_excerpt": "Net cash provided by (used in): Operating activities $ 3,565 $ 3,521 / Investing activities 1,999 (686) / Financing activities (3,264) (1,895) / Net increase in cash and cash equivalents $ 2,300 $ 940 ... The increase in cash, cash equivalents and short-term investments was primarily driven by the $2.4 billion of cash and $1.6 billion of short-term investments acquired from the Xilinx acquisition, $1.0 billion from the debt issuance of our 3.924% Notes and 4.393% Notes, and cash flows from operations, partially offset by stock repurchases and cash paid for the acquisition of Pensando."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Expenses（收购无形资产摊销）与 NOTE 12 股票回购计划",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p50 / p81",
+    "published_at": null,
+    "key_points": [
+      "2022 年销售成本与经营费用中分别包含 14 亿美元与 21 亿美元来自 Xilinx、Pensando 收购无形资产的摊销费用（对应现金流量表中折旧摊销 4,174 的激增）。",
+      "2022 年公司按回购计划以 37 亿美元回购 3,630 万股普通股；截至 2022-12-31 该计划剩余 65 亿美元额度。",
+      "2021 年 5 月董事会批准最高 40 亿美元回购计划，2022 年 2 月新增批准最高 80 亿美元回购计划。"
+    ],
+    "raw_excerpt": "In 2022, cost of sales and operating expense included $1.4 billion and $2.1 billion, respectively, of amortization expense from intangible assets acquired as a result of the acquisitions of Xilinx and Pensando. ... During the year ended December 31, 2022, the Company repurchased 36.3 million shares of its common stock under the Repurchase Program for $3.7 billion."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Supplemental Cash Flow Information（利息与所得税现金支出、非现金投融资）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59",
+    "published_at": null,
+    "key_points": [
+      "2022 年支付利息 85（2021：25）；所得税净额 685（2021：35）。",
+      "已计提未支付的设备采购 157（2021：72）。",
+      "Xilinx 收购以普通股及库存股支付 48,514（非现金投融资活动，2021：—）。",
+      "Xilinx 收购相关替换股权激励公允价值 275（非现金）。"
+    ],
+    "raw_excerpt": "Cash paid during the year for: Interest $ 85 $ 25 $ 31 / Income taxes, net of refund $ 685 $ 35 $ 8 ... Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 $ — $ — / Fair value of replacement share-based awards related to acquisition of Xilinx $ 275 $ — $ —"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Consolidated Statements of Cash Flows (FY2020–FY2022)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p58",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "经营活动净现金：FY2022 $3,565M，FY2021 $3,521M，FY2020 $1,071M。",
+      "投资活动净现金：FY2022 +$1,999M（净流入），FY2021 −$686M，FY2020 −$952M。",
+      "筹资活动净现金：FY2022 −$3,264M，FY2021 −$1,895M，FY2020 +$6M。",
+      "现金及现金等价物净增加：FY2022 $2,300M，FY2021 $940M，FY2020 $125M。",
+      "折旧与摊销：FY2022 $4,174M，FY2021 $407M，FY2020 $312M。",
+      "递延所得税：FY2022 −$1,505M，FY2021 +$308M，FY2020 −$1,223M。",
+      "股票薪酬：FY2022 $1,081M，FY2021 $379M，FY2020 $274M。",
+      "存货公允价值调整摊销：FY2022 $189M，FY2021 与 FY2020 均为 0。",
+      "回购普通股：FY2022 $3,702M，FY2021 $1,762M，FY2020 为 0。"
+    ],
+    "raw_excerpt": "Net cash provided by operating activities 3,565 3,521 1,071 … Net cash provided by (used in) investing activities 1,999 (686) (952) … Net cash (used in) provided by financing activities (3,264) (1,895) 6 … Net increase in cash and cash equivalents 2,300 940 125"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A Liquidity and Capital Resources 汇总表",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p51",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "MD&A 汇总表与现金流量表一致：FY2022 经营 $3,565M、投资 $1,999M、筹资 $(3,264)M、现金净增 $2,300M；FY2021 分别为 $3,521M、$(686)M、$(1,895)M、$940M。",
+      "截至 2022-12-31 现金、现金等价物及短期投资合计 $5.9B，2021-12-25 为 $3.6B。",
+      "现金及短期投资增长主因：Xilinx 收购带入 $2.4B 现金与 $1.6B 短期投资、发行 3.924% 与 4.393% 票据募得 $1.0B、以及经营现金流，部分被股票回购与 Pensando 收购支出抵消。",
+      "截至 2022-12-31 无条件采购承诺约 $8.6B，其中 $6.5B 落在 FY2023。",
+      "2022-04-29 签订 $3.0B 五年期无担保循环信贷，FY2022 未提款；2022-11-03 设立 $3.0B 商业票据计划，年末无余额。",
+      "年末债务本金合计 $2.5B（含承接的 Xilinx Notes $1.5B 与新发 $1.0B），2021 年末为 $313M。"
+    ],
+    "raw_excerpt": "Our operating, investing and financing cash flow activities for 2022 and 2021 were as follows: … Operating activities $ 3,565 $ 3,521 … Investing activities 1,999 (686) … Financing activities (3,264) (1,895) … Net increase in cash and cash equivalents $ 2,300 $ 940 … As of December 31, 2022, we had unconditional purchase commitments of approximately $8.6 billion, of which $6.5 billion are in fiscal year 2023."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — MD&A Investing Activities 说明",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p52",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 投资活动净流入 $2B，主要来自短期投资到期 $4.3B 与收购 Xilinx 取得的现金 $2.4B。",
+      "上述流入被购买短期投资 $2.7B、收购 Pensando 支出 $1.5B、购置物业设备 $450M 部分抵消。",
+      "FY2021 投资活动净流出 $686M，主因购买短期投资 $2.1B 与购置物业设备 $301M，部分被短期投资到期 $1.7B 抵消。",
+      "FY2022 经营现金流 $3.6B = 净利润 $1.3B + 非现金调整 $4.1B − 营运资本净流出 $1.8B。",
+      "FY2021 经营现金流 $3.5B = 净利润 $3.2B + 非现金调整 $1.1B − 营运资本净流出 $774M。",
+      "FY2022 营运资本流出主因：存货增加 $1.4B（先进制程备货）、应收账款增加 $1.1B、预付费用及其他资产增加 $1.2B（长期供货协议预付款），部分被应付账款增加 $931M 与应计负债增加 $546M 抵消。",
+      "FY2022 筹资净流出 $3.3B，主因回购普通股 $3.7B、代扣税回购 $406M、偿债 $312M，部分被发债 $991M 与员工购股 $167M 抵消；FY2021 筹资净流出 $1.9B，主因回购 $1.8B 与代扣税回购 $237M。"
+    ],
+    "raw_excerpt": "Net cash provided by investing activities was $2 billion in 2022, which primarily consisted of higher cash provided b[y] … $4.3 billion and cash acquired as part of the acquisition of Xilinx of $2.4 billion, partially offset by higher cash used for purchases of short-term investments of $2.7 billion, cash used in the acquisition of Pensando of $1.5 billion and $450 million for purchases of property and equipment. … Net cash provided by operating activities was $3.6 billion in 2022, primarily due to our net income of $1.3 billion in 2022, adjusted for non-cash adjustments of $4.1 billion and net cash outflows of $1.8 billion from changes in our operating assets and liabilities."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note: Xilinx 收购对价分摊与无形资产明细",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p72",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx 收购总对价 $48,793M。",
+      "对价分摊：商誉 $22,784M；可辨认无形资产合计 $26,338M（developed technology $12,295M / 加权平均 16 年，customer relationships $12,290M / 14 年，customer backlog $793M / 1 年，product trademarks $895M / 12 年，corporate trade name $65M / 1 年）；另有不摊销的 IPR&D $970M。",
+      "取得资产中含现金及现金等价物 $2,366M、短期投资 $1,582M、存货 $539M、物业设备 $692M。",
+      "承担负债中含长期债务 $1,474M、递延所得税负债 $4,346M。"
+    ],
+    "raw_excerpt": "Total purchase consideration $ 48,793 … Goodwill 22,784 … Identified intangible assets subject to amortization 26,338 … Developed technology $ 12,295 16 years … Customer relationships 12,290 14 years"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — 现金流量表附注：非现金投资与筹资活动",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p59",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx 收购对价中 $48,514M 以发行普通股及库存股支付，属非现金交易，未计入筹资活动现金流。",
+      "与 Xilinx 收购相关的替代股份支付奖励公允价值 $275M。",
+      "FY2022 已计提未支付的物业设备采购 $157M（FY2021 $72M，FY2020 $31M）。",
+      "FY2022 实付利息 $85M（FY2021 $25M），实付所得税净额 $685M（FY2021 $35M）。"
+    ],
+    "raw_excerpt": "Issuance of common stock and treasury stock for the acquisition of Xilinx $ 48,514 $ — $ — … Fair value of replacement share-based awards related to acquisition of Xilinx $ 275 $ — $ — … Cash paid during the year for: Interest $ 85 $ 25 $ 31 … Income taxes, net of refund $ 685 $ 35 $ 8"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 7 MD&A Overview（2022 为转型之年）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "公司自述 2022 为「transformative year」，2022 年 2 月完成对 Xilinx 的战略收购。",
+      "FY2022 净收入 $23.6B，同比 +44%（FY2021 $16.4B）。",
+      "FY2022 毛利率 45%，FY2021 为 48%，下降主因 Xilinx 收购相关无形资产摊销。",
+      "FY2022 营业利润 $1.3B，FY2021 为 $3.6B；净利润 $1.3B，FY2021 为 $3.2B，下降主因营业利润下降。"
+    ],
+    "raw_excerpt": "2022 was a transformative year for AMD as we took several major steps that scaled and reshaped our business. In February 2022, we completed our strategic acquisition of Xilinx, Inc. … Operating income for 2022 was $1.3 billion compared to operating income of $3.6 billion for 2021. The decrease in operating income was primarily driven by amortization of intangible assets associated with the Xilinx acquisition."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — 合并经营表与分部数据（FY2020–FY2022）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "净收入：FY2022 $23,601M，FY2021 $16,434M，FY2020 $9,763M。",
+      "净利润：FY2022 $1,320M，FY2021 $3,162M，FY2020 $2,490M。",
+      "营业利润：FY2022 $1,264M，FY2021 $3,648M，FY2020 $1,369M。",
+      "FY2022 收购相关无形资产摊销合计 $3,548M（计入销售成本 $1,448M + 营业费用 $2,100M），FY2021 与 FY2020 均为 0。",
+      "所得税（收益）准备：FY2022 −$122M，FY2021 $513M，FY2020 −$1,210M。"
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 … Operating income 1,264 3,648 1,369 … Net income $ 1,320 $ 3,162 $ 2,490 … Amortization of acquisition-related intangibles 1,448 — — … Amortization of acquisition-related intangibles 2,100 — —"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — 分部收入与 All Other 构成（解释经营现金流与净利润背离）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 分部净收入：Data Center $6,043M、Client $6,201M、Gaming $6,805M、Embedded $4,552M；FY2021 Embedded 仅 $246M。",
+      "FY2022 分部营业利润：Data Center $1,848M、Client $1,190M、Gaming $953M、Embedded $2,252M，All Other 亏损 $(4,979)M；FY2021 All Other 亏损 $(409)M。",
+      "All Other 亏损构成：收购相关无形资产摊销 $3,548M、股票薪酬 $1,081M、收购相关成本 $452M、许可收益 $(102)M。",
+      "FY2022 美国以外最大单一市场为中国（含香港）$5,207M，美国 $8,049M。"
+    ],
+    "raw_excerpt": "Total operating income (loss) $ 1,264 $ 3,648 $ 1,369 … Operating loss: Stock-based compensation expense $ 1,081 $ 379 $ 274 … Acquisition-related costs 452 42 14 … Amortization of acquisition-related intangibles 3,548 — — … Total operating loss $ 4,979 $ 409 $ 288"
+  }
+]

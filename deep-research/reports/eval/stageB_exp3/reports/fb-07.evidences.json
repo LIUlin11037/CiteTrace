@@ -1,0 +1,297 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business（客户集中度定性披露，16% 客户）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": null,
+    "key_points": [
+      "截至 2022 年 12 月 31 日止年度，一家客户占 AMD 合并净收入的 16%。",
+      "对该客户的销售由产品销售构成（原文在 \"sales of products\" 处被知识库片段截断）。"
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 附注（Note 4 Segment Reporting 区域）：占合并净收入至少 10% 的主要客户表",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": null,
+    "key_points": [
+      "10-K 含一张表格，汇总「占公司合并净收入至少 10%」的主要客户在各年度的销售占比。",
+      "Customer A：FY2022 占合并净收入 16%，FY2021 为 14%，FY2020 为 *（低于 10%）。",
+      "Customer B：FY2022 为 *（低于 10%），FY2021 为 11%，FY2020 为 *（低于 10%）。",
+      "表下脚注将 * 定义为「Less than 10%」。",
+      "Customer A 与 Customer B 的销售分别来自 Gaming 与 Client 分部（原文 \"respectively\" 对应 A、B 顺序）。",
+      "按 ≥10% 口径，FY2022 仅有 1 家客户（Customer A）达到披露门槛。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company’s consolidated net revenue for the respective years: ... Customer A 16 % 14 % * / Customer B * 11 % * / Less than 10% / Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 10 Concentrations of Credit Risk（应收账款集中度）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": null,
+    "key_points": [
+      "截至 2022 年 12 月 31 日，一家客户约占合并应收账款余额的 18%。",
+      "截至 2021 年 12 月 25 日，两家客户分别约占合并应收账款余额的 20% 和 15%。",
+      "该披露为应收账款口径的信用风险集中度，与净收入占比口径不同。",
+      "公司称基于过往收款经验与当前信用质量评估，不认为这些客户的应收余额构成重大信用风险。"
+    ],
+    "raw_excerpt": "One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors Summary（失去重要客户风险）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p17",
+    "published_at": null,
+    "key_points": [
+      "风险因素摘要中列有「失去重要客户可能对公司产生重大不利影响」这一风险项。"
+    ],
+    "raw_excerpt": "• The loss of a significant customer may have a material adverse effect on us."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Cautionary Statement Regarding Forward-Looking Statements",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p4",
+    "published_at": null,
+    "key_points": [
+      "前瞻性声明部分称，未来少数客户将继续占 AMD 收入的相当大一部分。"
+    ],
+    "raw_excerpt": "a small number of customers will continue to account for a substantial part of AMD’s revenue in the future"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations（净收入规模，用于换算占比）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": null,
+    "key_points": [
+      "FY2022 净收入为 23,601 百万美元。",
+      "FY2021 净收入为 16,434 百万美元，FY2020 为 9,763 百万美元。"
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 4 Segment Reporting: sales to major customers ≥10% of consolidated net revenue (FY22/FY21/FY20)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69（页码 66）",
+    "published_at": "2023",
+    "key_points": [
+      "FY22 有 1 家客户达到 ≥10% 门槛：Customer A 占合并净收入 16%；Customer B 标记为 *（<10%）。",
+      "FY21 有 2 家客户达到 ≥10%：Customer A 14%，Customer B 11%。",
+      "FY20 两家客户均为 *（<10%），即无 ≥10% 客户。",
+      "客户以 Customer A / Customer B 匿名代号披露，未点名任何具体客户名称。",
+      "Customer A 与 Customer B 的销售分别来自 Gaming 与 Client 分部（\"Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively.\"）。",
+      "该表口径为「至少占合并净收入 10% 的主要客户」，按财年（2022-12-31、2021-12-25、2020-12-26）列示。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; Less than 10% ; Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 1 Business: one customer 16% of consolidated net revenue (Gaming segment)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12（页码 9）",
+    "published_at": "2023",
+    "key_points": [
+      "FY22 单一客户占合并净收入 16%，销售来自 Gaming 分部。",
+      "10-K 明确表述失去该客户将对业务产生重大不利影响（material adverse effect）。",
+      "该段落位于 Item 1 Business 的客户描述部分，与财务报表附注中的表格互为呼应，但同样未点名客户。"
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 10 Concentrations of Credit Risk: accounts receivable concentration",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80（页码 77）",
+    "published_at": "2023",
+    "key_points": [
+      "FY22：1 家客户约占合并应收账款余额的 18%。",
+      "FY21：2 家客户分别约占合并应收账款余额的 20% 与 15%。",
+      "公司称应收账款信用风险因客户群数量多且地域分散而「有限」（limited）。",
+      "该披露为应收账款集中度口径，与净收入集中度口径并列存在，两者客户家数变化方向一致（2 家→1 家）。"
+    ],
+    "raw_excerpt": "The Company believes that concentrations of credit risk with respect to trade receivables are limited because a large number of geographically diverse customers make up the Company's customer base, thus diluting the trade credit risk. One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — third-party wafer foundries and ATMP suppliers (TSMC, GLOBALFOUNDRIES, UMC, Samsung)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p13–p14（页码 10）、p37（页码 34）、p25（页码 22）",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 依赖位于美国、欧洲、亚洲的第三方晶圆代工厂；几乎所有产品封装与最终测试由位于中国、马来西亚、台湾的第三方工厂完成。",
+      "点名披露的代工厂包括 TSMC（7nm 及以下产品聚焦 TSMC 工艺）、GLOBALFOUNDRIES（12nm/14nm 的 Wafer Supply Agreement）、UMC、Samsung。",
+      "这些属于供应端（供应商）集中度披露，10-K 未将代工厂列为客户，也未纳入 ≥10% 客户表。",
+      "FY22 国际销售额占净收入 66%。"
+    ],
+    "raw_excerpt": "We rely on third-party wafer foundries in the United States, Europe and Asia. Nearly all product assembly and final testing of our products is performed at manufacturing facilities, operated by third-party manufacturing facilities, in China, Malaysia and Taiwan. ... we are presently focusing our 7 nm and lower product microprocessor and GPU portfolio on TSMC's processes. ... we rely on TSMC, UMC and our other foundries to produce wafers with competitive performance attributes for our IC products."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — 检索「云服务商/超大规模客户/间接客户」相关表述的覆盖结果",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · 全文检索命中段落 p6、p12、p43、p69、p80",
+    "published_at": "2023",
+    "key_points": [
+      "10-K 中出现的 cloud 相关表述均为战略/市场叙述（如投资 cloud infrastructure 用高性能 CPU、Pensando 收购「expands the Company's ability to offer leadership solutions for cloud, enterprise, and edge customers」），不构成客户集中度披露。",
+      "未检索到将云服务商（cloud service providers）或超大规模数据中心运营商（hyperscalers）列为集中度客户的量化披露。",
+      "客户侧披露仅覆盖 OEM 伙伴类型（multi-nationals、selected regional accounts、global/local system integrators）与分销渠道，无间接客户集中度数字。"
+    ],
+    "raw_excerpt": "We invest in high-performance CPUs for cloud infrastructure, enterprise, edge, supercomputing, and PCs. ... The acquisition of Pensando and its leading distributed services platform expands the Company's ability to offer leadership solutions for cloud, enterprise, and edge customers. ... We focus on three types of OEM partners: multi-nationals, selected regional accounts and selected global and local system integrators"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business（客户集中度段落）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": null,
+    "key_points": [
+      "2022 财年有一个客户占 AMD 合并净收入的 16%。",
+      "该客户的销售由 Gaming 分部的产品构成。",
+      "公司表述：失去该客户将对业务产生重大不利影响（material adverse effect）。"
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 分部报告：≥10% 收入客户表",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": null,
+    "key_points": [
+      "Customer A 占合并净收入：2022 年 16%、2021 年 14%、2020 年低于 10%。",
+      "Customer B 占合并净收入：2021 年 11%，2022 年与 2020 年均低于 10%。",
+      "表下注释明确：Customer A 与 Customer B 的销售分别来自 Gaming 分部与 Client 分部。",
+      "因此 FY22 仅有一个达到 10% 门槛的客户，且归属 Gaming 分部；Client 大客户 FY22 已降至 10% 以下。"
+    ],
+    "raw_excerpt": "Customer A 16 % 14 % * / Customer B * 11 % * / Less than 10% / Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A：Gaming 分部业绩",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Gaming 分部 2022 年净收入 68.05 亿美元，同比增长 21%（2021 年为 56.07 亿美元）。",
+      "增长由半定制（semi-custom）产品销售增加驱动，原因是游戏主机 SoC（gaming console SoCs）需求上升。",
+      "该增长部分被游戏显卡销售下滑抵消，下滑源于 2022 年下半年宏观环境走弱导致消费需求疲软、单位出货减少。",
+      "Gaming 分部 2022 年经营利润 9.53 亿美元，2021 年为 9.34 亿美元。"
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 分部报告：分部净收入与经营利润表",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "FY22 分部净收入：Data Center 60.43 亿美元、Client 62.01 亿美元、Gaming 68.05 亿美元、Embedded 45.52 亿美元，合计 236.01 亿美元。",
+      "FY21 分部净收入：Data Center 36.94 亿、Client 68.87 亿、Gaming 56.07 亿、Embedded 2.46 亿，合计 164.34 亿美元。",
+      "FY20 分部净收入：Data Center 16.85 亿、Client 51.89 亿、Gaming 27.46 亿、Embedded 1.43 亿，合计 97.63 亿美元。",
+      "FY22 分部经营利润：Data Center 18.48 亿、Client 11.90 亿、Gaming 9.53 亿、Embedded 22.52 亿、All Other -49.79 亿，合计 12.64 亿美元。",
+      "Gaming 是 FY22 四个分部中净收入最大的分部（68.05 亿美元）。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A：Data Center 分部业绩",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "Data Center 分部 2022 年净收入约 60 亿美元，同比增长 64%（2021 年 37 亿美元）。",
+      "增长主要由 EPYC 服务器处理器销售增加驱动。",
+      "Data Center 2022 年经营利润 18.48 亿美元，2021 年为 9.91 亿美元。",
+      "该分部讨论段落未提及任何具名客户或客户收入占比，即 10-K 未量化披露 Data Center 大客户贡献。"
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors（客户集中度风险表述）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p17, p19",
+    "published_at": null,
+    "key_points": [
+      "风险因素摘要将「失去重要客户可能对公司产生重大不利影响」列为主要风险之一。",
+      "风险正文表述：公司预期少数客户将继续占其收入的很大一部分（a small number of customers will continue to account for a substantial part of our revenue）。",
+      "该集中度被公司表述为加大客户违约或延迟付款的风险。"
+    ],
+    "raw_excerpt": "• The loss of a significant customer may have a material adverse effect on us. … The risk related to our customers potentially defaulting on or delaying payments to us is increased because we expect that a small number of customers will continue to account for a substantial part of our revenue."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 10 Concentrations of Credit Risk（应收账款集中度）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": null,
+    "key_points": [
+      "截至 2022 年 12 月 31 日，一个客户约占合并应收账款余额的 18%。",
+      "截至 2021 年 12 月 25 日，两个客户分别约占合并应收账款余额的 20% 与 15%。",
+      "公司认为应收账款信用风险有限，理由是客户群数量众多且地域分散；并称基于过往回款经验与当前信用质量评估，这些客户的应收余额不构成重大信用风险。"
+    ],
+    "raw_excerpt": "One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021. However, the Company does not believe the receivable balance from these customers represents a significant credit risk based on past collection experience and review of their current credit quality."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A：报告分部结构变更（四分部）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "2022 财年第二季度起，AMD 变更报告分部以对齐其战略终端市场的管理方式。",
+      "变更后按四个报告分部披露：Data Center、Client、Gaming、Embedded。",
+      "该变更与首席经营决策者（CODM）评估业绩与分配资源的方式一致。"
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. … we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 Segment Reporting：按年度列示占合并净收入 10% 以上的主要客户（p69）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 在 10-K 附注中以表格形式披露“占公司合并净收入至少 10% 的主要客户”的销售占比，覆盖 2022、2021、2020 三个年度。",
+      "FY2022：Customer A 占合并净收入 16%；Customer B 标注为“*”（即低于 10%）。",
+      "FY2021：Customer A 占 14%；Customer B 占 11%。",
+      "FY2020：Customer A 与 Customer B 均标注为“*”（低于 10%）。",
+      "Customer A 与 Customer B 的销售分别来自 Gaming 与 Client 两个报告分部。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; * Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business 正文：单一客户占 2022 年合并净收入 16%（p12）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 在 Business 章节正文中说明：有一家客户占公司截至 2022 年 12 月 31 日止年度合并净收入的 16%。",
+      "该客户的销售由产品销售构成（原文句子在摘录处被截断，未显示完整品类描述）。"
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business / Competition：将 Intel 与 NVIDIA 列为竞争对手（p13、p19）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p13, p19",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 在 Competition in Gaming Segment 中称，独立显卡市场的主要竞争对手是 NVIDIA，且 NVIDIA 是市场份额领先者。",
+      "AMD 在风险因素中称 Intel 多年来一直是微处理器市场份额领先者，并拥有显著财务资源。",
+      "以上内容仅确立 AMD 与 NVIDIA、Intel 的同业竞争关系，不包含这两家公司任何客户集中度披露内容。"
+    ],
+    "raw_excerpt": "In the graphics market, our principal competitor in the supply of discrete graphics is NVIDIA who is the market share leader. … Intel Corporation (Intel) has been the market share leader for microprocessors for many years."
+  }
+]

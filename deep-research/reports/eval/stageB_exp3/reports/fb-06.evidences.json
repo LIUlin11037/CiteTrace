@@ -1,0 +1,430 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations: net revenue and operating income by segment (2022 vs 2021)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "During the second quarter of fiscal year 2022, AMD changed its reporting segments; it reports financial performance based on four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "FY2022 net revenue by segment (in millions): Data Center $6,043; Client $6,201; Gaming $6,805; Embedded $4,552; Total net revenue $23,601.",
+      "FY2021 net revenue by segment (in millions): Data Center $3,694; Client $6,887; Gaming $5,607; Embedded $246; Total net revenue $16,434.",
+      "FY2022 operating income (loss) by segment (in millions): Data Center $1,848; Client $1,190; Gaming $953; Embedded $2,252; All Other $(4,979); Total $1,264.",
+      "FY2021 operating income (loss) by segment (in millions): Data Center $991; Client $2,088; Gaming $934; Embedded $44; All Other $(409); Total $3,648.",
+      "Data Center net revenue increased 64% in 2022 vs 2021, primarily driven by higher sales of EPYC server processors.",
+      "Client net revenue decreased 10% in 2022 vs 2021, driven by a 24% decrease in unit shipments partially offset by a 19% increase in average selling price.",
+      "Gaming net revenue increased 21% in 2022 vs 2021, driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales.",
+      "Embedded net revenue increased significantly in 2022 vs 2021, primarily driven by the inclusion of Xilinx embedded product revenue following the February 2022 Xilinx acquisition."
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. ... As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded. The following table provides a summary of net revenue and operating income (loss) by segment for 2022 and 2021: ... Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Segment note table: net revenue and operating income by segment for 2022, 2021 and 2020",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "The segment note presents net revenue and operating income (loss) by segment for 2022, 2021 and 2020, and its 2022/2021 figures match the MD&A table exactly.",
+      "FY2020 net revenue by segment (in millions): Data Center $1,685; Client $5,189; Gaming $2,746; Embedded $143; Total net revenue $9,763.",
+      "FY2020 operating income (loss) by segment (in millions): Data Center $198; Client $1,608; Gaming $(138); Embedded $(11); All Other $(288); Total $1,369.",
+      "Items in All Other operating loss for FY2022 (in millions): stock-based compensation $1,081; acquisition-related costs $452; amortization of acquisition-related intangibles $3,548; licensing gain $(102); total $4,979.",
+      "The Company does not discretely allocate assets to its operating segments, nor does management evaluate operating segments using discrete asset information."
+    ],
+    "raw_excerpt": "The following table provides a summary of net revenue and operating income (loss) by segment for 2022, 2021 and 2020. ... Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview: consolidated net revenue growth drivers by segment",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": null,
+    "key_points": [
+      "FY2022 net revenue was $23.6 billion, an increase of 44% compared to FY2021 net revenue of $16.4 billion.",
+      "The increase was driven by a 64% increase in Data Center segment revenue, a 21% increase in Gaming segment revenue, and a significant increase in Embedded segment revenue from Xilinx embedded product sales.",
+      "Growth was partially offset by a 10% decrease in Client segment revenue due to lower processor shipments amid a weak PC market and inventory correction."
+    ],
+    "raw_excerpt": "revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the prior year period driven by the inclusion of Xilinx embedded product sales. This growth was partially offset by a 10% decrease in Client segment revenue"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Goodwill note: reportable segments before and after the 2022 segment change",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p75",
+    "published_at": null,
+    "key_points": [
+      "In Q2 fiscal 2022 the Company reassigned goodwill balances among the updated reportable segments to reflect changes in its segment reporting structure.",
+      "Reportable segments before the segment change included 'Enterprise, Embedded and Semi-Custom' (goodwill of $289 million at December 25, 2021) and Xilinx ($22,794 million acquired).",
+      "Reportable segments after the segment change: Data Center $2,884 million, Gaming $238 million, Embedded $21,055 million; total goodwill $24,177 million at December 31, 2022.",
+      "Total goodwill was $24.2 billion at December 31, 2022 versus $289 million at December 25, 2021."
+    ],
+    "raw_excerpt": "In the second quarter of fiscal year 2022, the Company reassigned goodwill balances among the updated reportable segments to reflect changes in its segment reporting structure. ... Reportable segments before segment change: Enterprise, Embedded and Semi-Custom $ 289 $ — $ (289) $ — / Xilinx — 22,794 (22,794) — / Reportable segments after segment change: Data Center — 1,094 1,790 2,884 / Gaming — — 238 238 / Embedded — — 21,055 21,055 / Total $ 289 $ 23,888 $ — $ 24,177"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations: Xilinx results reported under Embedded and Data Center segments",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": null,
+    "key_points": [
+      "Results of Xilinx are included in AMD's consolidated financial statements from the Xilinx Acquisition Date (February 14, 2022) to December 31, 2022.",
+      "Xilinx results are reported under the Embedded and Data Center segments."
+    ],
+    "raw_excerpt": "results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations: segment change in Q2 FY2022 and new four reportable segments",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD changed its reporting segments during the second quarter of fiscal year 2022.",
+      "The stated rationale was to align financial reporting with how AMD manages its business in strategic end markets, consistent with how the Chief Operating Decision Maker (CODM) assesses performance and allocates resources.",
+      "After the change, AMD reports financial performance based on four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "The 10-K points readers to Note 4 – Segment Reporting for additional segment information."
+    ],
+    "raw_excerpt": "\"During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. This is consistent with how our Chief Operating Decision Maker (CODM) assesses our financial performance and allocates resources. As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded.\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A segment table: FY2021 comparatives presented under the new four-segment structure",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The MD&A segment table presents net revenue and operating income (loss) for both FY2022 (ended December 31, 2022) and FY2021 (ended December 25, 2021) under the new four-segment structure, i.e. FY2021 is shown on the recast basis.",
+      "Recast FY2021 net revenue by segment (in millions): Data Center $3,694; Client $6,887; Gaming $5,607; Embedded $246; Total $16,434.",
+      "Recast FY2021 operating income (loss) by segment (in millions): Data Center $991; Client $2,088; Gaming $934; Embedded $44; All Other $(409); Total $3,648.",
+      "FY2022 net revenue by segment (in millions): Data Center $6,043; Client $6,201; Gaming $6,805; Embedded $4,552; Total $23,601.",
+      "FY2022 operating income (loss) by segment (in millions): Data Center $1,848; Client $1,190; Gaming $953; Embedded $2,252; All Other $(4,979); Total $1,264."
+    ],
+    "raw_excerpt": "\"The following table provides a summary of net revenue and operating income (loss) by segment for 2022 and 2021: … Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434 … Operating income (loss): Data Center $ 1,848 $ 991 / Client 1,190 2,088 / Gaming 953 934 / Embedded 2,252 44 / All Other (4,979) (409) / Total operating income (loss) $ 1,264 $ 3,648\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — three-year segment summary (FY2022 / FY2021 / FY2020) on the new basis",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The segment summary table covers three years — 2022, 2021 and 2020 — all presented under the new four-segment structure, so FY2020 comparatives were also recast.",
+      "Recast net revenue (in millions): Data Center $6,043 / $3,694 / $1,685; Client $6,201 / $6,887 / $5,189; Gaming $6,805 / $5,607 / $2,746; Embedded $4,552 / $246 / $143; Total $23,601 / $16,434 / $9,763.",
+      "Recast operating income (loss) (in millions): Data Center $1,848 / $991 / $198; Client $1,190 / $2,088 / $1,608; Gaming $953 / $934 / $(138); Embedded $2,252 / $44 / $(11); All Other $(4,979) / $(409) / $(288); Total $1,264 / $3,648 / $1,369.",
+      "The All Other category items for FY2021 were $379M stock-based compensation and $42M acquisition-related costs, totaling a $409M operating loss."
+    ],
+    "raw_excerpt": "\"The following table provides a summary of net revenue and operating income (loss) by segment for 2022, 2021 and 2020. … Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Goodwill note: pre-change segment names and reassignment due to segment change",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p75",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "In Q2 FY2022 AMD reassigned goodwill balances among the updated reportable segments to reflect changes in its segment reporting structure.",
+      "The pre-change reportable segment was named \"Enterprise, Embedded and Semi-Custom\" (carrying $289M of goodwill at December 25, 2021), with Xilinx shown as a separate line ($22,794M acquired).",
+      "Post-change reportable segments are Data Center, Gaming and Embedded, with goodwill of $2,884M, $238M and $21,055M respectively at December 31, 2022.",
+      "AMD performed a goodwill impairment test immediately before and after the segment change and concluded no indicators of impairment existed."
+    ],
+    "raw_excerpt": "\"In the second quarter of fiscal year 2022, the Company reassigned goodwill balances among the updated reportable segments to reflect changes in its segment reporting structure. … Reportable segments before segment change: Enterprise, Embedded and Semi-Custom $ 289 $ — $ (289) $ — / Xilinx — 22,794 (22,794) — / Reportable segments after segment change: Data Center — 1,094 1,790 2,884 / Gaming — — 238 238 / Embedded — — 21,055 21,055\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 2 Basis of Presentation: reclassification of prior period amounts",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "The accounting-policy note states that certain prior period amounts have been reclassified to conform to current period presentation.",
+      "The note also confirms fiscal 2022 consisted of 53 weeks while fiscal 2021 and 2020 each consisted of 52 weeks (a comparability caveat for FY21 vs FY22 growth rates)."
+    ],
+    "raw_excerpt": "\"Reclassification. Certain prior period amounts have been reclassified to conform to current period presentation.\" / \"Fiscal 2022 consisted of 53 weeks, and fiscal 2021 and 2020 each consisted of 52 weeks.\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A segment commentary: FY2022 vs recast FY2021 growth drivers",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48-p49",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Data Center FY2022 net revenue of $6B increased 64% versus $3.7B in FY2021, driven primarily by higher sales of EPYC server processors.",
+      "Client FY2022 net revenue of $6.2B decreased 10% versus $6.9B in FY2021, driven by a 24% decrease in unit shipments partially offset by a 19% increase in average selling price.",
+      "Gaming FY2022 net revenue of $6.8B increased 21% versus $5.6B in FY2021, driven by higher semi-custom product sales (console SoCs) partially offset by lower gaming graphics sales.",
+      "Embedded FY2022 net revenue of $4.6B rose from $246M in FY2021, primarily due to inclusion of Xilinx embedded product revenue following the February 2022 Xilinx acquisition.",
+      "Embedded FY2022 operating income was $2.3B versus $44M in FY2021, again attributed to inclusion of Xilinx embedded product revenue.",
+      "All Other operating loss of $5.0B in FY2022 consisted mainly of $3.5B amortization of acquisition-related intangibles, $1.1B stock-based compensation and $452M acquisition-related costs."
+    ],
+    "raw_excerpt": "\"Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors.\" / \"Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022.\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Business Combinations note: Xilinx results reported under Embedded and Data Center segments",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Xilinx results are included in AMD's consolidated financial statements from the Xilinx Acquisition Date (February 14, 2022) to December 31, 2022.",
+      "Xilinx results are reported under the Embedded and Data Center segments."
+    ],
+    "raw_excerpt": "\"results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments.\""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations: net revenue and operating income (loss) by segment, FY2022 vs FY2021 (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "FY2022 segment net revenue: Data Center $6,043M, Client $6,201M, Gaming $6,805M, Embedded $4,552M; total net revenue $23,601M.",
+      "FY2021 segment net revenue (as presented in the FY2022 10-K): Data Center $3,694M, Client $6,887M, Gaming $5,607M, Embedded $246M; total net revenue $16,434M.",
+      "Computed FY22 vs FY21 growth from these figures: Data Center +63.6% (6,043/3,694-1), Client -9.96% (6,201/6,887-1), Gaming +21.4% (6,805/5,607-1), Embedded +1,750% (4,552/246-1).",
+      "Computed share of total net revenue: FY2021 Data Center 22.48%, Client 41.91%, Gaming 34.12%, Embedded 1.50%; FY2022 Data Center 25.60%, Client 26.27%, Gaming 28.83%, Embedded 19.29%.",
+      "Computed change in revenue mix (pp): Data Center +3.13, Client -15.64, Gaming -5.29, Embedded +17.79.",
+      "Excluding Embedded, Data Center shows both the highest revenue growth (+63.6%) and the largest positive mix shift (+3.13 pp) among the three remaining segments; Client and Gaming both lost share.",
+      "Segment operating income FY2022 vs FY2021: Data Center $1,848M vs $991M; Client $1,190M vs $2,088M; Gaming $953M vs $934M; Embedded $2,252M vs $44M; All Other -$4,979M vs -$409M."
+    ],
+    "raw_excerpt": "The following table provides a summary of net revenue and operating income (loss) by segment for 2022 and 2021: Year Ended December 31, 2022 / December 25, 2021 (In millions) Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 Segment Reporting: net revenue by segment for 2022, 2021 and 2020 (p68)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "The same FY2022/FY2021 segment net revenue figures appear in the audited financial statement notes, cross-confirming the MD&A table: Data Center $6,043M/$3,694M, Client $6,201M/$6,887M, Gaming $6,805M/$5,607M, Embedded $4,552M/$246M, total $23,601M/$16,434M.",
+      "FY2020 segment net revenue for reference: Data Center $1,685M, Client $5,189M, Gaming $2,746M, Embedded $143M, total $9,763M.",
+      "The Company does not discretely allocate assets to its operating segments, nor does management evaluate operating segments using discrete asset information."
+    ],
+    "raw_excerpt": "The following table provides a summary of net revenue and operating income (loss) by segment for 2022, 2021 and 2020. Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 (In millions) Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Data Center segment net revenue growth (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "Data Center net revenue was approximately $6 billion in 2022, an increase of 64% versus $3.7 billion in 2021.",
+      "The increase was primarily driven by higher sales of EPYC server processors.",
+      "Data Center operating income was $1.8 billion in 2022 versus $991 million in 2021, driven by higher revenue partially offset by higher operating expenses."
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Client segment net revenue decline (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "Client net revenue was $6.2 billion in 2022, a decrease of 10% versus $6.9 billion in 2021.",
+      "The decline was driven by a 24% decrease in unit shipments, partially offset by a 19% increase in average selling price.",
+      "Unit shipment decline attributed to challenging PC market conditions and significant inventory correction across the PC supply chain in the second half of 2022; ASP increase driven by richer mix of Ryzen mobile processor sales.",
+      "Client operating income was $1.2 billion in 2022 versus $2.1 billion in 2021."
+    ],
+    "raw_excerpt": "Client net revenue of $6.2 billion in 2022 decreased by 10%, compared to net revenue of $6.9 billion in 2021, primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Gaming segment net revenue growth (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Gaming net revenue was $6.8 billion in 2022, an increase of 21% versus $5.6 billion in 2021.",
+      "Growth was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales from reduced unit shipments amid soft consumer demand in the second half of 2022.",
+      "Gaming operating income was $953 million in 2022 versus $934 million in 2021."
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Embedded segment net revenue growth driven by Xilinx acquisition (p49)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Embedded net revenue was $4.6 billion in 2022, described as having increased significantly versus $246 million in 2021.",
+      "The increase was primarily driven by the inclusion of Xilinx embedded product revenue following the February 2022 Xilinx acquisition — i.e., largely inorganic, which is why the question excludes Embedded.",
+      "Embedded operating income was $2.3 billion in 2022 versus $44 million in 2021, also driven by inclusion of Xilinx embedded product revenue."
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: change in reporting segments effective Q2 FY2022 (p48)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "During the second quarter of fiscal year 2022, AMD changed its reporting segments to align financial reporting with how it manages the business in strategic end markets.",
+      "AMD reports financial performance based on four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "Because the FY2021 segment figures in this 10-K are presented under the new four-segment structure, FY2021 and FY2022 segment revenue are directly comparable for growth and mix calculations."
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. This is consistent with how our Chief Operating Decision Maker (CODM) assesses our financial performance and allocates resources. As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview: total net revenue +44% and segment drivers (p43)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": null,
+    "key_points": [
+      "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion.",
+      "The increase was driven by a 64% increase in Data Center segment revenue (higher EPYC server processor sales) and a 21% increase in Gaming segment revenue.",
+      "Gross margin was 45% in 2022 versus 48% in 2021, the decrease primarily due to amortization of intangible assets associated with the Xilinx acquisition.",
+      "Operating income was $1.3 billion in 2022 versus $3.6 billion in 2021; net income $1.3 billion versus $3.2 billion."
+    ],
+    "raw_excerpt": "Net revenue for 2022 was $23.6 billion, an increase of 44% compared to 2021 net revenue of $16.4 billion. The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations: Xilinx results reported under Embedded and Data Center segments (p71)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": null,
+    "key_points": [
+      "Xilinx results are included in AMD's consolidated financial statements from the Xilinx Acquisition Date (February 14, 2022) to December 31, 2022.",
+      "Xilinx revenue is reported under both the Embedded and the Data Center segments, so part of Data Center's FY2022 growth reflects acquired Xilinx revenue rather than purely organic growth.",
+      "The 10-K does not disclose a separate dollar breakdown of Xilinx's contribution to the Data Center segment."
+    ],
+    "raw_excerpt": "results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Data Center segment product scope (p6)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p6",
+    "published_at": null,
+    "key_points": [
+      "The Data Center segment primarily includes server CPUs, GPUs, DPUs, FPGAs, and Adaptive SoC products.",
+      "In addition to the reportable segments, AMD has an All Other category, which is not a reportable segment.",
+      "With the February 2022 Xilinx acquisition the product portfolio includes FPGAs and Adaptive SoCs used in the data center and embedded markets; the May 2022 Pensando acquisition added DPUs and data center solutions."
+    ],
+    "raw_excerpt": "The Data Center segment primarily includes server CPUs, GPUs, DPUs, FPGAs, and Adaptive SoC products. … In addition to these reportable segments, we have an All Other category, which is not a reportable segment."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4 / Segment Reporting: net revenue and operating income by segment, FY2022 vs FY2021 vs FY2020",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "FY2022 net revenue by segment (USD millions): Data Center 6,043; Client 6,201; Gaming 6,805; Embedded 4,552; total 23,601.",
+      "FY2021 comparative net revenue by segment: Data Center 3,694; Client 6,887; Gaming 5,607; Embedded 246; total 16,434.",
+      "FY2020 net revenue by segment: Data Center 1,685; Client 5,189; Gaming 2,746; Embedded 143; total 9,763.",
+      "FY2022 operating income by segment: Data Center 1,848; Client 1,190; Gaming 953; Embedded 2,252; All Other (4,979); total 1,264.",
+      "FY2021 operating income by segment: Data Center 991; Client 2,088; Gaming 934; Embedded 44; All Other (409); total 3,648."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations: Data Center segment attribution",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "Data Center net revenue was $6 billion in 2022, up 64% from $3.7 billion in 2021.",
+      "Management attributes the Data Center increase primarily to higher sales of EPYC server processors.",
+      "Data Center operating income rose to $1.8 billion from $991 million, driven primarily by higher revenue, partially offset by higher operating expenses."
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations: Client segment attribution",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "Client net revenue was $6.2 billion in 2022, down 10% from $6.9 billion in 2021.",
+      "The Client decline was driven primarily by a 24% decrease in unit shipments, partially offset by a 19% increase in average selling price.",
+      "Lower unit shipments are attributed to challenging PC market conditions and significant inventory correction across the PC supply chain in the second half of 2022.",
+      "The ASP increase was primarily driven by a richer mix of Ryzen mobile processor sales.",
+      "Client operating income fell to $1.2 billion from $2.1 billion, driven by lower revenue and higher operating expenses."
+    ],
+    "raw_excerpt": "primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. The decrease in unit shipments was due to challenging PC market conditions and significant inventory correction across the PC supply chain experienced during the second half of 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations: Embedded segment attribution (Xilinx acquisition timing)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Embedded net revenue was $4.6 billion in 2022 versus $246 million in 2021.",
+      "Management attributes the significant Embedded increase primarily to the inclusion of Xilinx embedded product revenue following the February 2022 Xilinx acquisition.",
+      "Embedded operating income rose to $2.3 billion from $44 million, also primarily due to inclusion of Xilinx embedded product revenue."
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Results of Operations: Gaming segment attribution",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": null,
+    "key_points": [
+      "Gaming net revenue was $6.8 billion in 2022, up 21% from $5.6 billion in 2021.",
+      "The Gaming increase was driven by higher semi-custom product sales on higher demand for gaming console SoCs.",
+      "This was partially offset by lower gaming graphics sales due to decreased unit shipments amid soft consumer demand from weakened macroeconomic conditions in the second half of 2022.",
+      "Gaming operating income was $953 million versus $934 million in 2021."
+    ],
+    "raw_excerpt": "The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A, Overview: consolidated revenue drivers by segment",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": null,
+    "key_points": [
+      "FY2022 net revenue was $23.6 billion, up 44% from $16.4 billion in 2021.",
+      "Management lists the growth drivers as: Data Center +64% (higher EPYC server processor sales), Gaming +21% (higher semi-custom product sales), and a significant Embedded increase (inclusion of Xilinx embedded product sales).",
+      "This growth was partially offset by a 10% decrease in Client segment revenue due to lower processor shipments from a weak PC market and significant inventory correction across the PC supply chain.",
+      "FY2022 gross margin was 45% versus 48% in 2021, with the decrease primarily due to amortization of intangibles associated with the Xilinx acquisition.",
+      "FY2022 operating income was $1.3 billion versus $3.6 billion in 2021, with the decrease primarily driven by amortization of intangibles associated with the Xilinx acquisition."
+    ],
+    "raw_excerpt": "The increase in net revenue was driven by a 64% increase in Data Center segment revenue primarily due to higher sales of our EPYC™ server processors, a 21% increase in Gaming segment revenue primarily due to higher semi-custom product sales, and a significant increase in Embedded segment revenue from the prior year period driven by the inclusion of Xilinx embedded product sales. This growth was partially offset by a 10% decrease in Client segment revenue primarily due to lower processor shipments driven by a weak PC market and significant inventory correction actions across the PC supply chain."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: segment reporting change effective Q2 FY2022",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "In the second quarter of fiscal 2022 AMD changed its reporting segments to align financial reporting with how it manages the business in strategic end markets.",
+      "AMD now reports four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "The change is described as consistent with how the Chief Operating Decision Maker assesses performance and allocates resources.",
+      "The FY2021 segment comparatives presented in the 10-K are therefore on the new four-segment basis."
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets... we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations: Xilinx results reported under Embedded and Data Center",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": null,
+    "key_points": [
+      "Xilinx results are included in AMD's consolidated financial statements from the Xilinx Acquisition Date (February 14, 2022) through December 31, 2022.",
+      "Xilinx results are reported under the Embedded and Data Center segments, not solely Embedded."
+    ],
+    "raw_excerpt": "results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors: Client revenue decline attribution",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19",
+    "published_at": null,
+    "key_points": [
+      "AMD states it experienced a decline in Client segment revenue as a result of weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022."
+    ],
+    "raw_excerpt": "We experienced a decline in our Client segment revenue as a result of weak PC market macroeconomic conditions and inventory correction actions across the PC supply chain in the second half of 2022."
+  }
+]

@@ -1,0 +1,549 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for Fiscal Year Ended December 31, 2022 — Item 1. Business: four reportable segments",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Boeing 按产品与服务组织业务，运营四个报告分部（four reportable segments）。",
+      "分部列表以 Commercial Airplanes (BCA) 起始；该页分块在列表处被截断，BDS/BGS/BCC 的完整列举需由其他页佐证。"
+    ],
+    "raw_excerpt": "We are organized based on the products and services we offer. We operate in four reportable segments: • Commercial Airplanes (BCA);"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Summary of Business Segment Data (revenues and segment operating result by segment)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "FY2022 收入：Commercial Airplanes 25,867 百万美元；Defense, Space & Security 23,162；Global Services 17,611；Boeing Capital 199；Unallocated items, eliminations and other -231；合计 66,608。",
+      "FY2021 对应收入为 19,493 / 26,540 / 16,328 / 272 / -347，合计 62,286；FY2020 合计 58,158。",
+      "FY2022 分部经营损益：BCA -2,370；BDS -3,544；BGS +2,727；Boeing Capital +29；分部经营亏损合计 -3,158。"
+    ],
+    "raw_excerpt": "Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total revenues $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 22: revenues by customer location and U.S. government revenue concentration",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "来自美国政府的收入（含通过美国政府实现的对外军售）主要记于 BDS 与 BGS，占合并收入 2022 年 40%、2021 年 49%、2020 年 51%。",
+      "FY2022 按客户所在地收入：亚洲 8,393；欧洲 7,916；中东 5,047；加拿大 1,612；大洋洲 1,576；非洲 418；拉美/加勒比及其他 2,412；非美国合计 27,374；美国 39,218。",
+      "约 4% 的经营资产位于美国境外（2022 与 2021 年末）。"
+    ],
+    "raw_excerpt": "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — BDS and BCA revenues disaggregated by customer location / customer type",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "BDS FY2022 客户合同收入：美国客户 17,144 百万美元，非美国客户 6,018 百万美元，合计 23,162。",
+      "BDS 收入中来自美国政府的比例为 89%（2022、2021、2020 三年均为 89%）；99% 按时段确认收入；固定价格合同占 60%（2021 为 68%，2020 为 69%）。",
+      "BCA FY2022 客户合同收入按客户所在地：亚洲 4,484；欧洲 4,038；中东 2,003；其他非美国 3,042；非美国合计 13,567；美国 12,167；合计 25,750（加分部间收入 117 后为 25,867）。",
+      "BCA 收入 100% 按固定价格合同、100% 在某一时点确认。"
+    ],
+    "raw_excerpt": "U.S. customers $17,144 $19,869 $19,662 / Non-U.S. customers 6,018 6,671 6,595 ... Revenue from the U.S. government 89 % 89 % 89 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — BGS revenues split commercial vs government",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "BGS FY2022 客户合同收入：Commercial 9,560 百万美元；Government 7,681 百万美元；合计 17,241（加分部间收入 370 后为 17,611）。",
+      "BGS 收入中来自美国政府的比例为 33%（2021 年 40%，2020 年 41%）。",
+      "BGS 收入 50% 在某一时点确认（2021 年 45%），固定价格合同占 88%（2021 年 86%）。"
+    ],
+    "raw_excerpt": "Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 ... Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — BDS business environment: backlog attributable to non-U.S. customers",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年末 BDS 积压订单（backlog）中 28% 归属于非美国客户。",
+      "BDS 占公司总收入比例：2022 年 35%，2021 年 43%，2020 年 45%；FY2022 BDS 收入 23,162 百万美元，经营利润率 -15.3%。",
+      "FY2023 拨款法案为美国国防部提供 8,170 亿美元、NASA 254 亿美元，涵盖 F/A-18、F-15EX、CH-47、AH-64、V-22、KC-46A、MQ-25 与 Space Launch System 等项目。"
+    ],
+    "raw_excerpt": "At the end of 2022, 28% of BDS backlog was attributable to non-U.S. customers. ... Revenues $23,162 $26,540 $26,257 / % of total company revenues 35 % 43 % 45 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Backlog by segment at December 31, 2022",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年末积压订单：Commercial Airplanes 329,824 百万美元；Defense, Space & Security 54,373；Global Services 19,338；Unallocated 846；合计 404,381（2021 年末为 377,499）。",
+      "其中合同性积压（contractual backlog）381,977 百万美元，未拨付积压（unobligated backlog）22,404 百万美元。",
+      "合同性积压不含购买选择权、未签订最终合同的已宣布订单、客户可单方面终止的订单，以及未拨付的美国政府/非美国政府合同资金。"
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Boeing Capital (BCC) business environment and customer financing portfolio",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p41",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "BCC 2022 年末客户融资与投资组合总额（gross）为 1,549 百万美元。",
+      "BCC 组合中相当大一部分由信用评级低于投资级的客户构成。",
+      "BCC 组合按机型存在不同程度集中，最集中于 717 与 747-8 飞机。",
+      "BCC 2022 年提供客户融资 96 百万美元，2021 年为零；BCC FY2022 收入 199 百万美元、经营利润 29 百万美元、经营利润率 15%。"
+    ],
+    "raw_excerpt": "BCC's gross customer financing and investment portfolio at December 31, 2022 totaled $1,549 million. A substantial portion of BCC's portfolio is composed of customers that have less than investment-grade credit. BCC's portfolio is also concentrated by varying degrees across Boeing aircraft product types, most notably 717 and 747-8 aircraft."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Note 9: customer financing exposure concentrated by aircraft model",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p83",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年末客户融资敞口按机型：717 飞机 563 百万美元；747-8 飞机 394；777 飞机 209；737 飞机 186；757 飞机 107；MD-80 飞机 96；747-400 飞机 46。",
+      "2022 年末融资应收款按内部信用评级：BBB 68；BB 479；B 253；CCC 389，账面价值合计 1,189 百万美元。",
+      "2022 年客户融资经营租赁资产减值：Boeing Capital 2 百万美元，其他 Boeing 5 百万美元，合计 7 百万美元。"
+    ],
+    "raw_excerpt": "717 Aircraft ($45 and $62 accounted for as operating leases) $563 $603 / 747-8 Aircraft (Accounted for as sales-type/finance leases) 394 435 / 737 Aircraft ($174 and $145 accounted for as operating leases) 186 163 / 777 Aircraft ($209 and $225 accounted for as operating leases) 209 233"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Item 1A Risk Factors: dependence on major commercial airline customers",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p8",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "10-K 风险因素承认公司依赖主要商用航空客户（major commercial airline customers），但该段落未点名任何具体客户。",
+      "机队决策、航空公司整合或主要商用航空客户的财务困境可能显著减少公司收入。"
+    ],
+    "raw_excerpt": "fleet decisions, airline consolidations or financial challenges involving any of our major commercial airline customers could significantly reduce our revenues and limit our opportunity to generate profits from those customers."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Boeing FY2022 10-K — Consolidated revenues by customer location (United States vs non-U.S.)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "FY2022 合并收入按客户所在地：美国 39,218 百万美元，非美国合计 27,374 百万美元，合计 66,608。",
+      "非美国分地区：亚洲 8,393；欧洲 7,916；中东 5,047；加拿大 1,612；大洋洲 1,576；非洲 418；拉美/加勒比及其他 2,412。"
+    ],
+    "raw_excerpt": "Total non-U.S. revenues 27,374 23,196 21,677 / United States 39,218 39,076 36,979 / Estimated potential concessions and other considerations to 737 MAX customers 16 14 (498) / Total revenues $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year ended December 31, 2022 — BCA deliveries by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BCA delivered 480 commercial aircraft in 2022, compared with 340 in 2021 and 157 in 2020.",
+      "2022 deliveries by program: 737 387 gross (13 intercompany), 747 5, 767 33 gross (15 intercompany), 777 24, 787 31.",
+      "Deliveries are disclosed only by aircraft program, not by named customer.",
+      "BCA 2022 revenues were $25,867 million (39% of total company revenues), up $6,374 million year over year primarily on higher 737 and 787 deliveries."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: 737 * 747 767 * 777 787 Total / 2022 / Cumulative deliveries 8,132 1,572 1,271 1,701 1,037 / Deliveries 387 (13) 5 33 (15) 24 31 480 / * Intercompany deliveries identified by parentheses"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — accounting quantities and firm orders by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "At December 31, 2022, undelivered units under firm orders were: 737 3,653; 747 1; 767 106; 777 69; 777X 244; 787 505 (of which 8 ordered by Boeing Capital Corporation).",
+      "Cumulative firm orders at December 31, 2022 were: 737 11,785; 747 1,573; 767 1,377; 777 1,770; 777X 244; 787 1,542.",
+      "Program accounting quantities at December 31, 2022 were: 737 10,800; 747 1,574; 767 1,267; 777 1,790; 777X 400; 787 1,600.",
+      "The 737 accounting quantity increased by 400 units during 2022 due to additional orders and deliveries; 737 production rate was increased to 31 per month in 2022.",
+      "Firm-order backlog is reported only at program level; no customer-level breakdown is provided."
+    ],
+    "raw_excerpt": "Program 737 747 767 777 777X 787 † / 2022 / Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 / Undelivered units under firm orders 3,653 1 106 69 244 505 (8) / Cumulative firm orders 11,785 1,573 1,377 1,770 244 1,542 … † Aircraft ordered by BCC are identified in parentheses."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — backlog by segment",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Commercial Airplanes backlog was $329,824 million at December 31, 2022, up from $296,882 million at December 31, 2021.",
+      "Total company backlog was $404,381 million at December 31, 2022 (contractual backlog $381,977 million; unobligated $22,404 million).",
+      "Contractual backlog of unfilled orders excludes purchase options, announced orders for which definitive contracts have not been executed, and orders where customers have the unilateral right to terminate.",
+      "The increase in contractual backlog during 2022 was primarily due to an increase in BCA backlog, partially offset by a decrease in BDS backlog."
+    ],
+    "raw_excerpt": "Our backlog at December 31 was as follows: (Dollars in millions) / Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Total Backlog $404,381 $377,499"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — BCA revenues by customer location",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 BCA revenue from contracts with customers by customer location: Asia $4,484M; Europe $4,038M; Middle East $2,003M; other non-U.S. $3,042M; United States $12,167M.",
+      "Total 2022 BCA revenues from contracts with customers were $25,750M, with total segment revenues of $25,867M.",
+      "BCA total non-U.S. revenues were $13,567M in 2022 versus $9,905M in 2021.",
+      "Customer disaggregation is by geographic region only; no individual airline or lessor is named."
+    ],
+    "raw_excerpt": "BCA revenues by customer location consisted of the following: … Revenue from contracts with customers: Asia $4,484 $2,792 $2,679 / Europe 4,038 4,334 3,872 / Middle East 2,003 1,098 1,647 / Other non-U.S. 3,042 1,681 513 / Total non-U.S. revenues 13,567 9,905 8,711 / United States 12,167 9,472 7,899"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Boeing Capital customer financing concentration",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p41",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing Capital Corporation's gross customer financing and investment portfolio totaled $1,549 million at December 31, 2022.",
+      "A substantial portion of BCC's portfolio is composed of customers that have less than investment-grade credit.",
+      "BCC's portfolio is concentrated by varying degrees across Boeing aircraft product types, most notably 717 and 747-8 aircraft.",
+      "BCC provided customer financing of $96 million during 2022 and none during 2021.",
+      "The 10-K states the portfolio is concentrated among certain customers but does not name any of them."
+    ],
+    "raw_excerpt": "BCC's gross customer financing and investment portfolio at December 31, 2022 totaled $1,549 million. A substantial portion of BCC's portfolio is composed of customers that have less than investment-grade credit. BCC's portfolio is also concentrated by varying degrees across Boeing aircraft product types, most notably 717 and 747-8 aircraft."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — risk factor on customer financing concentration",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p19",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The 10-K risk factors state that a significant portion of the customer financing portfolio is concentrated among certain customers and in certain types of Boeing products.",
+      "No customer names or concentration percentages are disclosed in this risk factor."
+    ],
+    "raw_excerpt": "A significant portion of our customer financing portfolio is concentrated among certain customers and in certain types of Boeing products, which could strain relationships with customers and result in lower revenues."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — 737 MAX customer concessions liability",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "737 MAX grounding customer concessions and other considerations liability was $1,864 million at December 31, 2022, down from $2,940 million at December 31, 2021.",
+      "The $1.9 billion balance includes $1.6 billion of contracted customer concessions and other liabilities and $0.3 billion still subject to negotiation with customers.",
+      "Reductions for payments made against the 737 MAX concessions liability were $1,031 million in 2022 and $2,535 million in 2021.",
+      "Concessions paid to 737 MAX customers totaled $1.0 billion in 2022 and $2.5 billion in 2021.",
+      "Concessions are reported in aggregate; the recipient airlines are not named."
+    ],
+    "raw_excerpt": "737 MAX grounding customer concessions and other considerations 1,864 2,940 … Beginning balance – January 1 $2,940 $5,537 / Reductions for payments made (1,031) (2,535) … Ending balance – December 31 $1,864 $2,940 / The liability balance of $1.9 billion at December 31, 2022 includes $1.6 billion of contracted customer concessions and other liabilities and $0.3 billion that remains subject to negotiation with customers."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — legal proceedings naming Lion Air and Ethiopian Airlines",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p113",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Lion Air and Ethiopian Airlines are named in the 10-K only in connection with litigation over the October 29, 2018 (Lion Air Flight 610) and March 10, 2019 (Ethiopian Airlines Flight 302) accidents.",
+      "These two carriers are not identified anywhere in the filing as order, delivery, or backlog customers.",
+      "This is the only passage found in the knowledge base that names specific commercial airlines in a Boeing document."
+    ],
+    "raw_excerpt": "Multiple legal actions have been filed against us as a result of the October 29, 2018 accident of Lion Air Flight 610 and the March 10, 2019 accident of Ethiopian Airlines Flight 302."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BDS revenue disaggregation by customer location and U.S. government share",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115",
+    "published_at": "2023",
+    "key_points": [
+      "BDS revenue from the U.S. government was 89% of segment revenue in 2022, and also 89% in 2021 and 2020.",
+      "BDS revenue from contracts with customers based on customer location: U.S. customers $17,144M, non-U.S. customers $6,018M, total segment contract revenue $23,162M in 2022.",
+      "The 89% U.S. government figure includes revenues earned from foreign military sales through the U.S. government.",
+      "BDS revenue recognized over time was 99% in 2022; revenue on fixed-price contracts was 60% in 2022 (68% in 2021, 69% in 2020)."
+    ],
+    "raw_excerpt": "BDS revenues on contracts with customers, based on the customer's location, consisted of the following: … U.S. customers $17,144 $19,869 $19,662 / Non-U.S. customers 6,018 6,671 6,595 / Total segment revenue from contracts with customers $23,162 $26,540 $26,257 … Revenue from the U.S. government 89 % 89 % 89 % (1) Includes revenues earned from foreign military sales through the U.S. government."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Consolidated revenue by customer location and U.S. government share of total revenue",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114",
+    "published_at": "2023",
+    "key_points": [
+      "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40% of consolidated revenues in 2022, versus 49% in 2021 and 51% in 2020.",
+      "Total consolidated revenues were $66,608M in 2022; revenue reported at U.S. customer location was $39,218M and total non-U.S. revenues were $27,374M.",
+      "Approximately 4% of operating assets were located outside the United States as of December 31, 2022."
+    ],
+    "raw_excerpt": "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively. Approximately 4% of operating assets were located outside the United States as of December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BDS segment results and share of total company revenues",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2023",
+    "key_points": [
+      "BDS revenues were $23,162M in 2022, $26,540M in 2021 and $26,257M in 2020.",
+      "BDS represented 35% of total company revenues in 2022, down from 43% in 2021 and 45% in 2020.",
+      "BDS recorded a loss from operations of $(3,544)M in 2022 versus earnings of $1,544M in 2021 and $1,539M in 2020; operating margin was (15.3)% in 2022.",
+      "BDS revenues in 2022 decreased by $3,378M versus 2021, driven by charges on development programs, unfavorable performance across other defense programs, and lower P-8 and weapons volume."
+    ],
+    "raw_excerpt": "Revenues $23,162 $26,540 $26,257 / % of total company revenues 35 % 43 % 45 % / (Loss)/earnings from operations ($3,544) $1,544 $1,539 / Operating margins (15.3)% 5.8 % 5.9 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — U.S. Government Defense Environment Overview (DoD and NASA appropriations, funded programs)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2023",
+    "key_points": [
+      "The Consolidated Appropriations Act, 2023 provided FY2023 appropriations including $817 billion for the U.S. DoD and $25.4 billion for NASA.",
+      "FY23 appropriations included funding for Boeing's major programs: F/A-18 Super Hornet, F-15EX, CH-47 Chinook, AH-64 Apache, V-22 Osprey, KC-46A Tanker, MQ-25, and the Space Launch System.",
+      "FY23 appropriations support F/A-18 production further into calendar year 2025 and did not include funding for additional P-8 aircraft.",
+      "There is ongoing uncertainty regarding program-level appropriations for the U.S. DoD, NASA and other government agencies for fiscal year 2024 and beyond."
+    ],
+    "raw_excerpt": "The Consolidated Appropriations Act, 2023, enacted in December 2022, provided fiscal year 2023 (FY23) appropriations for government departments and agencies, including $817 billion for the U.S. DoD and $25.4 billion for NASA. The enacted FY23 appropriations included funding for Boeing's major programs, including the F/A-18 Super Hornet, F-15EX, CH-47 Chinook, AH-64 Apache, V-22 Osprey, KC-46A Tanker, MQ-25, and the Space Launch System."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BDS backlog and non-U.S. customer share of backlog",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37 / p39 / p29",
+    "published_at": "2023",
+    "key_points": [
+      "At the end of 2022, 28% of BDS backlog was attributable to non-U.S. customers.",
+      "BDS total backlog was $54,373M at December 31, 2022, $5,455M lower than December 31, 2021 due to the timing of awards and revenue recognized on contracts awarded in prior years.",
+      "Total company backlog was $404,381M at December 31, 2022, of which $381,977M was contractual backlog and $22,404M unobligated backlog.",
+      "Contractual backlog excludes unobligated U.S. and non-U.S. government contract funding."
+    ],
+    "raw_excerpt": "At the end of 2022, 28% of BDS backlog was attributable to non-U.S. customers. … Total backlog of $54,373 million at December 31, 2022 was $5,455 million lower than December 31, 2021 due to the timing of awards and revenue recognized on contracts awarded in prior years."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note: KC-46A Tanker and T-7A Red Hawk contracts with the U.S. Air Force",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p91",
+    "published_at": "2023",
+    "key_points": [
+      "In 2011 Boeing was awarded a contract from the USAF to design, develop, manufacture and deliver four next-generation aerial refueling tankers, plus priced options for 13 annual production lots totaling 179 aircraft.",
+      "Since 2016 the USAF has authorized eight low rate initial production (LRIP) lots for a total of 109 aircraft; the EMD contract and authorized LRIP lots total approximately $21 billion as of December 31, 2022.",
+      "Boeing increased the reach-forward loss on the KC-46A Tanker program by $1,374M during 2022, reflecting higher production and supply chain costs.",
+      "In 2018 Boeing was awarded the T-7A Red Hawk program; the EMD portion is an $860M fixed-price contract covering five aircraft and seven simulators, with 11 production lots for 346 aircraft in the production portion.",
+      "Boeing recorded 2022 earnings charges of $203M on T-7A EMD and $552M on T-7A production options."
+    ],
+    "raw_excerpt": "In 2011, we were awarded a contract from the USAF to design, develop, manufacture, and deliver four next generation aerial refueling tankers as well as priced options for 13 annual production lots totaling 179 aircraft. … Since 2016, the USAF has authorized eight low rate initial production (LRIP) lots for a total of 109 aircraft. The EMD contract and authorized LRIP lots total approximately $21 billion as of December 31, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note: Commercial Crew (CST-100 Starliner) contract with NASA",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p92",
+    "published_at": "2023",
+    "key_points": [
+      "NASA contracted Boeing to design and build the CST-100 Starliner spacecraft to transport crews to the International Space Station.",
+      "Boeing completed the uncrewed Orbital Flight Test in the second quarter of 2022; a crewed flight test was expected in 2023.",
+      "Boeing increased the Commercial Crew reach-forward loss by $288M during 2022, reflecting higher estimated costs to complete crewed flight tests and revised schedules for the crewed flight test and three post-certification missions."
+    ],
+    "raw_excerpt": "NASA has contracted us to design and build the CST-100 Starliner spacecraft to transport crews to the International Space Station. During the second quarter of 2022 we successfully completed the uncrewed Orbital Flight Test. A crewed flight test is now expected to be completed in 2023. During the year ended December 31, 2022, we increased the reach-forward loss by $288 primarily reflecting increases to estimated costs related to completing the crewed flight tests and revised schedules for both the crewed flight test and three post certification missions."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BDS deliveries of new-build production units by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p38",
+    "published_at": "2023",
+    "key_points": [
+      "2022 BDS deliveries: F/A-18 Models 14, F-15 Models 12, CH-47 Chinook (New) 19, CH-47 Chinook (Renewed) 9, AH-64 Apache (New) 25, AH-64 Apache (Remanufactured) 50, MH-139 Grey Wolf 4, KC-46 Tanker 15, P-8 Models 12, Military Satellites 1.",
+      "Total BDS deliveries were 165 units in 2022, versus 169 in 2021 and 154 in 2020.",
+      "2022 fixed-price development program charges included VC-25B ($1,452M), KC-46A Tanker ($1,374M), MQ-25 ($579M), T-7A Red Hawk Production Options ($552M), T-7A Red Hawk EMD ($203M), and Commercial Crew ($288M)."
+    ],
+    "raw_excerpt": "F/A-18 Models 14 21 20 / F-15 Models 12 16 4 / CH-47 Chinook (New) 19 15 27 / CH-47 Chinook (Renewed) 9 5 3 / AH-64 Apache (New) 25 27 19 / AH-64 Apache (Remanufactured) 50 56 52 / MH-139 Grey Wolf 4 / KC-46 Tanker 15 13 14 / P-8 Models 12 16 15 / Commercial Satellites 4 / Military Satellites 1 / Total 165 169 154"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — BGS revenue split between commercial and government customers",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023",
+    "key_points": [
+      "BGS revenue from contracts with customers in 2022: Commercial $9,560M and Government $7,681M, total $17,241M.",
+      "Revenue from the U.S. government was 33% of BGS revenue in 2022, versus 40% in 2021 and 41% in 2020.",
+      "BGS total segment revenues were $17,611M in 2022, including $370M of intersegment revenues eliminated on consolidation."
+    ],
+    "raw_excerpt": "BGS revenues consisted of the following: Revenue from contracts with customers: Commercial $9,560 $7,527 $6,936 / Government 7,681 8,553 8,368 / Total revenues from contracts with customers 17,241 16,080 15,304 / Intersegment revenues eliminated on consolidation 370 248 239 / Total segment revenues $17,611 $16,328 $15,543 … Revenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Risk factor: non-U.S. customers including foreign military sales",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "In 2022, non-U.S. customers, which includes foreign military sales (FMS), accounted for approximately 41% of Boeing's revenues.",
+      "Boeing states it expects non-U.S. sales to continue to account for a significant portion of revenues for the foreseeable future."
+    ],
+    "raw_excerpt": "In 2022, non-U.S. customers, which includes foreign military sales (FMS), accounted for approximately 41% of our revenues. We expect that non-U.S. sales will continue to account for a significant portion of our revenues for the foreseeable future."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year ended December 31, 2022 — Note 22 Segment and Revenue Information, revenues by customer location",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114",
+    "published_at": "2023",
+    "key_points": [
+      "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively.",
+      "Consolidated revenues by customer location (USD millions, 2022/2021/2020): Asia 8,393 / 5,845 / 5,931; Europe 7,916 / 8,967 / 7,961; Middle East 5,047 / 4,653 / 5,308; Canada 1,612 / 969 / 1,302; Oceania 1,576 / 1,147 / 832; Africa 418 / 239 / 114; Latin America, Caribbean and other 2,412 / 1,376 / 229.",
+      "Total non-U.S. revenues were 27,374 / 23,196 / 21,677 and United States revenues were 39,218 / 39,076 / 36,979 for 2022 / 2021 / 2020; total revenues were 66,608 / 62,286 / 58,158.",
+      "Approximately 4% of operating assets were located outside the United States as of December 31, 2022 and 2021."
+    ],
+    "raw_excerpt": "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively. ... Total non-U.S. revenues 27,374 23,196 21,677 / United States 39,218 39,076 36,979 ... Total revenues $66,608 $62,286 $58,158"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Item 1A Risk Factors: non-U.S. sales exposure",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "In 2022, non-U.S. customers, which includes foreign military sales (FMS), accounted for approximately 41% of Boeing's revenues.",
+      "Boeing states that future potential deterioration in trade relations between the U.S. and one or more other countries could have a material adverse impact on its financial position, results of operations and/or cash flows (no specific country named in this passage)."
+    ],
+    "raw_excerpt": "In 2022, non-U.S. customers, which includes foreign military sales (FMS), accounted for approximately 41% of our revenues. ... Impacts from future potential deterioration in trade relations between the U.S. and one or more other countries, could have a material adverse impact on our financial position, results of operations and/or cash flows."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Note 22: BCA revenues by customer location",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115",
+    "published_at": "2023",
+    "key_points": [
+      "BCA revenues by customer location (USD millions, 2022/2021/2020): Asia 4,484 / 2,792 / 2,679; Europe 4,038 / 4,334 / 3,872; Middle East 2,003 / 1,098 / 1,647; Other non-U.S. 3,042 / 1,681 / 513.",
+      "BCA total non-U.S. revenues were 13,567 / 9,905 / 8,711 and BCA United States revenues were 12,167 / 9,472 / 7,899 for 2022 / 2021 / 2020.",
+      "BCA total revenues from contracts with customers were 25,750 / 19,391 / 16,112 for 2022 / 2021 / 2020.",
+      "BCA Asia revenue grew from 2,792 in 2021 to 4,484 in 2022, while BCA Europe revenue declined from 4,334 to 4,038 over the same period."
+    ],
+    "raw_excerpt": "BCA revenues by customer location consisted of the following: ... Asia $4,484 $2,792 $2,679 / Europe 4,038 4,334 3,872 / Middle East 2,003 1,098 1,647 / Other non-U.S. 3,042 1,681 513 / Total non-U.S. revenues 13,567 9,905 8,711 / United States 12,167 9,472 7,899 ... Total revenues from contracts with customers 25,750 19,391 16,112"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Note 22: BDS revenues by customer location and U.S. government share",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p115",
+    "published_at": "2023",
+    "key_points": [
+      "BDS revenues from U.S. customers were 17,144 / 19,869 / 19,662 and from non-U.S. customers 6,018 / 6,671 / 6,595 for 2022 / 2021 / 2020.",
+      "Revenue from the U.S. government represented 89% of BDS revenue in each of 2022, 2021 and 2020.",
+      "BDS revenue recognized on fixed-price contracts fell to 60% in 2022 from 68% in 2021 and 69% in 2020."
+    ],
+    "raw_excerpt": "BDS revenues on contracts with customers, based on the customer's location, consisted of the following: ... U.S. customers $17,144 $19,869 $19,662 / Non-U.S. customers 6,018 6,671 6,595 ... Revenue from the U.S. government 89 % 89 % 89 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Item 1A Risk Factors: customer financing concentration",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p19",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing discloses that a significant portion of its customer financing portfolio is concentrated among certain customers and in distinct geographic regions.",
+      "The portfolio is also concentrated across Boeing aircraft product types, most notably 717 and 747-8 aircraft, and among customers Boeing believes have less than investment-grade credit."
+    ],
+    "raw_excerpt": "A significant portion of our customer financing portfolio is concentrated among certain customers and in distinct geographic regions. Our portfolio is also concentrated by varying degrees across Boeing aircraft product types, most notably 717 and 747-8 aircraft, and among customers that we believe have less than investment-grade credit."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Boeing Capital segment: portfolio size and credit profile",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p41",
+    "published_at": "2023",
+    "key_points": [
+      "BCC's gross customer financing and investment portfolio at December 31, 2022 totaled $1,549 million.",
+      "A substantial portion of BCC's portfolio is composed of customers that have less than investment-grade credit.",
+      "BCC provided customer financing of $96 million during 2022 and none during 2021.",
+      "Approximately 4,950 western-built commercial jet aircraft (18.3% of the current world fleet) were parked at the end of 2022, versus 20.5% at end-2021 and 29.4% at end-2020."
+    ],
+    "raw_excerpt": "BCC's gross customer financing and investment portfolio at December 31, 2022 totaled $1,549 million. A substantial portion of BCC's portfolio is composed of customers that have less than investment-grade credit. ... BCC provided customer financing of $96 million during 2022 and none during 2021."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — 737 Program: China delivery status and China-designated inventory",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Over 190 countries have approved resumption of 737 MAX operations; the first 737 MAX passenger flight in China since 2019 occurred on January 13, 2023 (after the FY2022 reporting period).",
+      "There is uncertainty regarding timing of resumption of deliveries in China, which remain subject to final regulatory approvals.",
+      "Boeing had approximately 250 aircraft in inventory as of December 31, 2022, including approximately 140 aircraft designated for customers in China.",
+      "Boeing is remarketing some of the China-designated aircraft to other customers and anticipates delivering most inventory aircraft by the end of 2024.",
+      "Boeing continues to work with a small number of customers who have requested to defer deliveries or cancel 737 MAX orders."
+    ],
+    "raw_excerpt": "The first 737 MAX passenger flight in China since 2019 occurred on January 13, 2023. There is uncertainty regarding timing of resumption of deliveries in China, which are still subject to final regulatory approvals. ... We have approximately 250 aircraft in inventory as of December 31, 2022, including approximately 140 aircraft in inventory that are designated for customers in China. We are remarketing some of these aircraft to other customers."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Liquidity: 737 MAX customer concessions and compensation payments",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023",
+    "key_points": [
+      "Concessions paid to 737 MAX customers totaled $1.0 billion in 2022 and $2.5 billion in 2021.",
+      "Compensation payments to 737 MAX customers totaled $2.5 billion in 2021 and $2.2 billion in 2020.",
+      "Cash provided by Advances and progress billings was $0.1 billion in 2022 versus $2.5 billion in 2021."
+    ],
+    "raw_excerpt": "Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021. ... Compensation payments to 737 MAX customers totaled $2.5 billion in 2021 and $2.2 billion in 2020."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — BCA segment results and deliveries by program",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "BCA deliveries totaled 480 aircraft in 2022, 340 in 2021 and 157 in 2020.",
+      "737 deliveries were 387 in 2022, 263 in 2021 and 43 in 2020; 787 deliveries were 31 in 2022, 14 in 2021 and 53 in 2020.",
+      "BCA revenues were $25,867M / $19,493M / $16,162M and BCA represented 39% / 31% / 28% of total company revenues for 2022 / 2021 / 2020.",
+      "BCA loss from operations was $2,370M in 2022 versus $6,475M in 2021 and $13,847M in 2020."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: ... 2022 ... Deliveries 387 (13) 5 33 (15) 24 31 480 / 2021 ... 263 (16) 7 32 (13) 24 14 340 / 2020 ... 43 (14) 5 30 (11) 26 53 157 ... % of total company revenues 39 % 31 % 28 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — BDS and BGS segment share of total revenues",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37, p40",
+    "published_at": "2023",
+    "key_points": [
+      "BDS revenues were $23,162M / $26,540M / $26,257M and represented 35% / 43% / 45% of total company revenues for 2022 / 2021 / 2020.",
+      "BGS revenues were $17,611M / $16,328M / $15,543M and represented 26% / 26% / 27% of total company revenues for 2022 / 2021 / 2020.",
+      "BGS revenue growth in 2022 was partly offset by the discontinuation of an engine distribution agreement in Q2 2022."
+    ],
+    "raw_excerpt": "BDS ... Revenues $23,162 $26,540 $26,257 / % of total company revenues 35 % 43 % 45 % ... BGS ... Revenues $17,611 $16,328 $15,543 / % of total company revenues 26 % 26 % 27 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Backlog by segment and China delivery dependency",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023",
+    "key_points": [
+      "Total backlog was $404,381M at December 31, 2022 versus $377,499M at December 31, 2021.",
+      "Commercial Airplanes backlog was $329,824M at end-2022 versus $296,882M at end-2021; BDS backlog fell to $54,373M from $59,828M.",
+      "Boeing states that remaining unable to deliver 737 MAX aircraft in China for an extended period is a risk to its backlog/delivery assumptions."
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 ... Total Backlog $404,381 $377,499 ... If we remain unable to deliver 737 MAX aircraft in China for an extended period of time, and/or entry into service of the 777X, 737-7 and/or 737-10 is"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "Boeing FY2022 Form 10-K — Russia sanctions and export restrictions monitoring",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29–p30",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing states it continues to monitor and evaluate additional sanctions and export restrictions that may be imposed by the U.S. Government or other governments, as well as any responses from Russia, for additional impacts on its supply chain, business partners or customers."
+    ],
+    "raw_excerpt": "We continue to monitor and evaluate additional sanctions and export restrictions that may be imposed by the U.S. Government or other governments, as well as any responses from Russia that could affect our supply chain, business partners or customers, for any additional impacts"
+  }
+]

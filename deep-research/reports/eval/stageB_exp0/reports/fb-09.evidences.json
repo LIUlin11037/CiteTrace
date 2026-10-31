@@ -1,0 +1,626 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 Reportable Operating Segments and Geographic Operations (p153): segment composition factors",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p153 (Note 24, REPORTABLE OPERATING SEGMENTS)",
+    "published_at": "2023",
+    "key_points": [
+      "公司在评估报告分部构成时考虑的因素包括：首席运营决策者审阅的业绩、经济特征、提供的产品与服务、客户类别、产品分销渠道、地理考量（主要是美国 vs 美国以外）、以及监管环境考量。",
+      "因此「United States versus outside the United States」是分部划分的地理主轴，而非地理运营表的列结构。"
+    ],
+    "raw_excerpt": "We consider a combination of factors when evaluating the composition of our reportable operating segments, including the results reviewed by the chief operating decision maker, economic characteristics, products and services offered, classes of customers, product distribution channels, geographic considerations (primarily United States versus outside the United States), and regulatory environment considerations."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 (p153): 2022 segment realignment into USCS/CS/ICS/GMNS + Corporate & Other",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p153 (Note 24, segment realignment)",
+    "published_at": "2023",
+    "key_points": [
+      "自 2022 年第三季度起，为反映 2022 年第二季度宣布的组织架构调整，公司重新划分报告分部；前期金额已重述以符合新分部口径。",
+      "四个新报告分部为 U.S. Consumer Services (USCS)、Commercial Services (CS)、International Card Services (ICS)、Global Merchant and Network Services (GMNS)。",
+      "公司职能及某些其他业务与运营计入 Corporate & Other。",
+      "自 2022 年第一季度起，公司更新了某些收入的分摊方法，前期金额已重述。"
+    ],
+    "raw_excerpt": "Effective for the third quarter of 2022, we realigned our reportable segments to reflect organizational changes announced during the second quarter of 2022. Prior periods have been recast to conform to the new reportable operating segments. The following is a brief description of the primary business activities of our four new reportable operating segments: … Corporate functions and certain other businesses and operations are included in Corporate & Other."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 (p153): USCS segment definition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p153 (Note 24, USCS description)",
+    "published_at": "2023",
+    "key_points": [
+      "USCS 面向美国消费者发行范围广泛的自营消费卡。",
+      "USCS 还向美国消费者提供旅行与生活方式服务，以及银行与非卡类融资产品。"
+    ],
+    "raw_excerpt": "U.S. Consumer Services (USCS), which issues a wide range of proprietary consumer cards and provides services to U.S. consumers, including travel and lifestyle services as well as banking and non-card financing products."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — MD&A Table 11 preceding text (p57): Commercial Services segment definition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p57 (MD&A, COMMERCIAL SERVICES, Table 11)",
+    "published_at": "2023",
+    "key_points": [
+      "CS 面向美国企业发行范围广泛的自营公司卡与小型企业卡，并提供支付与费用管理、银行及非卡类融资产品等服务。",
+      "CS 同时向部分全球企业客户（select global corporate clients）发行自营公司卡并提供服务，因此 CS 并非纯美国分部。"
+    ],
+    "raw_excerpt": "CS issues a wide range of proprietary corporate and small business cards and provides services to U.S. businesses, including payment and expense management, banking and non-card financing products. CS also issues proprietary corporate cards and provides services to select global corporate clients."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — MD&A Table 13 preceding text (p60): International Card Services segment definition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p60 (MD&A, INTERNATIONAL CARD SERVICES, Table 13)",
+    "published_at": "2023",
+    "key_points": [
+      "ICS 在美国以外发行范围广泛的自营消费卡、小企业卡与公司卡。",
+      "ICS 为国际客户提供服务，包括旅行与生活方式服务。",
+      "ICS 管理部分国际合资企业（international joint ventures）及公司的忠诚度联盟业务（loyalty coalition businesses）。",
+      "2022 年 ICS 税前利润为 5.78 亿美元，上年为 9.29 亿美元；业绩显著受美元走强影响。"
+    ],
+    "raw_excerpt": "ICS issues a wide range of proprietary consumer, small business and corporate cards outside the United States. ICS also provides services to our international customers, including travel and lifestyle services, and manages certain international joint ventures and our loyalty coalition businesses."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — MD&A Table 15 preceding text (p63): Global Merchant and Network Services segment definition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p63 (MD&A, GLOBAL MERCHANT AND NETWORK SERVICES, Table 15)",
+    "published_at": "2023",
+    "key_points": [
+      "GMNS 运营一个全球支付网络，负责处理与清算卡交易、拓展商户收单，并提供多渠道营销项目。",
+      "GMNS 的分部描述不含美国/美国以外的地理限定，属全球性分部。",
+      "2022 年 GMNS 网络交易量（network volumes）为 1,552.8 亿美元量级（表列 1,552.8 billions），较 2021 年 1,284.2 增长 21%。"
+    ],
+    "raw_excerpt": "GMNS operates a global payments network that processes and settles card transactions, acquires merchants and provides multi-channel marketing programs…"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 GEOGRAPHIC OPERATIONS table (p155): five-column geography structure",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155 (Note 24, GEOGRAPHIC OPERATIONS)",
+    "published_at": "2023",
+    "key_points": [
+      "地理运营表按 United States、EMEA、APAC、LACC、Other Unallocated 五列列示总收入（扣除利息费用）与持续经营税前利润（亏损）。",
+      "该表数据部分基于内部分摊，必然涉及管理层判断。",
+      "2022 年总收入（净利息费用后）：United States $41,396M；EMEA $4,871M；APAC $3,835M；LACC $2,917M；Other Unallocated $(157)M；合计 $52,862M。",
+      "2022 年持续经营税前利润（亏损）：United States $10,383M；EMEA $550M；APAC $376M；LACC $500M；Other Unallocated $(2,224)M；合计 $9,585M。"
+    ],
+    "raw_excerpt": "The following table presents our total revenues net of interest expense and pretax income (loss) from continuing operations in different geographic regions based, in part, upon internal allocations, which necessarily involve management's judgment. (Millions) United States EMEA APAC LACC Other Unallocated Consolidated … 2022 Total revenues net of interest expense $ 41,396 $ 4,871 $ 3,835 $ 2,917 $ (157) $ 52,862 / Pretax income (loss) from continuing operations 10,383 550 376 500 (2,224) 9,585"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 GEOGRAPHIC OPERATIONS footnote (a) (p155): verbatim EMEA / APAC / LACC definitions",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155 (Note 24, GEOGRAPHIC OPERATIONS, footnote (a))",
+    "published_at": "2023",
+    "key_points": [
+      "EMEA 代表 Europe, the Middle East and Africa（欧洲、中东与非洲）。",
+      "APAC 代表 Asia Pacific, Australia and New Zealand（亚太、澳大利亚与新西兰）。",
+      "LACC 代表 Latin America, Canada and the Caribbean（拉丁美洲、加拿大与加勒比地区）。",
+      "因此 Canada 不是独立的地理列，被并入 LACC。"
+    ],
+    "raw_excerpt": "(a) EMEA represents Europe, the Middle East and Africa; APAC represents Asia Pacific, Australia and New Zealand; and LACC represents Latin America, Canada and the Caribbean."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 GEOGRAPHIC OPERATIONS footnote (b) (p155): Other Unallocated definition",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155 (Note 24, GEOGRAPHIC OPERATIONS, footnote (b))",
+    "published_at": "2023",
+    "key_points": [
+      "Other Unallocated 包含未直接分摊至具体地理区域的净成本。",
+      "其具体包括超额流动性资金（excess liquidity funding）的净负利息差相关成本，以及执行办公室运营费用。"
+    ],
+    "raw_excerpt": "(b) Other Unallocated includes net costs which are not directly allocated to specific geographic regions, including costs related to the net negative interest spread on excess liquidity funding and executive office operations expenses."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24 (p155): 2022 change in geographic overhead allocation methodology",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155 (Note 24, GEOGRAPHIC OPERATIONS, methodology change)",
+    "published_at": "2023",
+    "key_points": [
+      "自 2022 年第一季度起，公司改变了按地理区域分摊某些管理费用（overhead expenses）的方式。",
+      "因此前期按地理的持续经营税前利润（亏损）已重述以符合当期列示口径。",
+      "该变更在合并层面无影响。"
+    ],
+    "raw_excerpt": "Effective for the first quarter of 2022, we changed the way in which we allocate certain overhead expenses by geographic region. As a result, prior period pretax income (loss) from continuing operations by geography has been recast to conform to current period presentation; there was no impact at a consolidated level."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Item 1. Business (p5): significant non-U.S. jurisdictions by billed business",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p5 (Part I, Item 1. Business)",
+    "published_at": "2023",
+    "key_points": [
+      "占美国以外计费业务（billed business）重要份额的司法辖区包括：英国（UK）、欧盟（EU）、澳大利亚、日本、加拿大和墨西哥。",
+      "该列举是官方点名的「美国以外重要辖区」，但不构成独立报告地理单元。",
+      "2022 年全球计费业务（billed business）为 1,338 亿美元量级（表列 $1,338 billion）；截至 2022 年 12 月 31 日全球自营卡流通量为 7,670 万张。"
+    ],
+    "raw_excerpt": "Jurisdictions that represent a significant portion of our billed business outside of the United States include the United Kingdom (UK), the European Union (EU), Australia, Japan, Canada and Mexico. For the year ended December 31, 2022, worldwide billed business (spending on American Express cards issued by us) was $1,338 billion and at December 31, 2022, we had 76.7 million proprietary cards-in-force worldwide."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 23 Significant Credit Concentrations (p152): U.S. vs. outside U.S. split",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p152 (Note 23, SIGNIFICANT CREDIT CONCENTRATIONS)",
+    "published_at": "2023",
+    "key_points": [
+      "Note 23 信用集中度表中，个人（Individuals）信用敞口按 United States / Outside the United States 二分列示。",
+      "2022 年个人信用敞口：United States $129B，Outside the United States $27B；2021 年分别为 $108B 与 $23B。",
+      "该表印证「美国 vs 美国以外」二分在财务披露中的另一处应用。"
+    ],
+    "raw_excerpt": "Individuals: $ 156 $ 131 / United States 129 108 / Outside the United States 27 23"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — document location index for segment/geography definitions (p4, p43, p53, p153, p155)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p4 / p43 / p53 / p153 / p155",
+    "published_at": "2023",
+    "key_points": [
+      "分部清单出现在 Part I, Item 1. Business（p4）与 MD&A Business Introduction（p43）：四个报告分部为 USCS、CS、ICS、GMNS，公司职能及某些其他业务计入 Corporate & Other。",
+      "分部划分因素与分部间收入/费用分摊方法记载于 MD&A「Business Segment Results of Operations」（p53）。",
+      "权威的分部定义与地理区域定义记载于 Note 24「Reportable Operating Segments and Geographic Operations」（p153 为分部定义，p155 为地理运营表及脚注）。",
+      "MD&A（p53）明确指引读者参阅 Note 24 与 Part I, Item 1. Business 以获取各分部产品与服务的进一步说明。"
+    ],
+    "raw_excerpt": "NOTE 24 REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS … ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS (MD&A) EXECUTIVE OVERVIEW BUSINESS INTRODUCTION We are a globally integrated payments company with four reportable operating segments: U.S. Consumer Services (USCS), Commercial Services (CS), International Card Services (ICS) and Global Merchant and Network Services (GMNS). Corporate functions and certain other businesses and operations are included in Corporate & Other."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 24 Geographic Operations (total revenues net of interest expense by region)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155 (printed page 152), Note 24 Geographic Operations",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 total revenues net of interest expense by geography: United States $41,396 million; EMEA $4,871 million; APAC $3,835 million; LACC $2,917 million; Other Unallocated $(157) million; consolidated $52,862 million.",
+      "FY2022 pretax income (loss) from continuing operations by geography: United States $10,383 million; EMEA $550 million; APAC $376 million; LACC $500 million; Other Unallocated $(2,224) million; consolidated $9,585 million.",
+      "FY2021 comparatives: total revenues net of interest expense United States $33,103 million; EMEA $3,643 million; APAC $3,418 million; LACC $2,238 million; Other Unallocated $(22) million; consolidated $42,380 million.",
+      "FY2020 comparatives: total revenues net of interest expense United States $28,263 million; EMEA $3,087 million; APAC $3,271 million; LACC $2,019 million; Other Unallocated $(553) million; consolidated $36,087 million.",
+      "The table presents revenues and pretax income by geographic region based in part on internal allocations that involve management's judgment.",
+      "Effective for Q1 2022 the company changed how it allocates certain overhead expenses by geographic region; prior-period pretax income by geography was recast, with no impact at the consolidated level.",
+      "Other Unallocated comprises net costs not directly allocated to specific geographic regions, including costs related to the net negative interest spread on excess liquidity funding and executive office operations expenses."
+    ],
+    "raw_excerpt": "GEOGRAPHIC OPERATIONS\nThe following table presents our total revenues net of interest expense and pretax income (loss) from continuing operations in different geographic regions based, in part, upon internal allocations, which necessarily involve management's judgment.\n...\n(Millions) United States EMEA APAC LACC Other Unallocated Consolidated\n2022\nTotal revenues net of interest expense $ 41,396 $ 4,871 $ 3,835 $ 2,917 $ (157) $ 52,862\nPretax income (loss) from continuing operations 10,383 550 376 500 (2,224) 9,585\n2021\nTotal revenues net of interest expense $ 33,103 $ 3,643 $ 3,418 $ 2,238 $ (22) $ 42,380\n...\n2020\nTotal revenues net of interest expense $ 28,263 $ 3,087 $ 3,271 $ 2,019 $ (553) $ 36,087"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 24 Geographic Operations, footnote (a) region definitions",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155, footnote (a)",
+    "published_at": "2023",
+    "key_points": [
+      "EMEA is defined as Europe, the Middle East and Africa.",
+      "APAC is defined as Asia Pacific, Australia and New Zealand.",
+      "LACC is defined as Latin America, Canada and the Caribbean — Canada is reported inside LACC, not as a separate geographic line.",
+      "The geographic table therefore has no standalone 'Canada' column."
+    ],
+    "raw_excerpt": "(a) EMEA represents Europe, the Middle East and Africa; APAC represents Asia Pacific, Australia and New Zealand; and LACC represents Latin America, Canada and the Caribbean."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 5: Selected Card-Related Statistical Information (billed business and cards-in-force, consolidated)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (printed page 47), Table 5",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 total billed business was $1,338.3 billion, versus $1,089.8 billion in 2021 and $870.7 billion in 2020.",
+      "Total billed business grew 23% year over year in 2022 (25% in 2021 vs. 2020).",
+      "FY2022 network volumes were $1,552.8 billion (2021: $1,284.2 billion; 2020: $1,037.8 billion), up 21% year over year.",
+      "FY2022 processed volumes were $214.5 billion (2021: $194.4 billion; 2020: $167.1 billion), up 10%.",
+      "Total cards-in-force were 133.3 million at year-end 2022 (2021: 121.7 million; 2020: 112.0 million), up 10%.",
+      "Proprietary cards-in-force were 76.7 million at year-end 2022 (2021: 71.4 million; 2020: 68.9 million), up 7%.",
+      "Basic cards-in-force were 111.5 million at year-end 2022 (2021: 100.7 million; 2020: 91.3 million), up 11%.",
+      "Proprietary basic cards-in-force were 59.1 million at year-end 2022 (2021: 54.7 million; 2020: 52.7 million), up 8%.",
+      "Average proprietary basic Card Member spending was $23,496 in 2022 (2021: $20,392; 2020: $16,352), up 15%.",
+      "Average discount rate was 2.34% in 2022 (2021: 2.30%; 2020: 2.28%); average fee per card was $82 (2021: $74; 2020: $67).",
+      "These billed business and cards-in-force figures are presented only as consolidated/global totals — the table contains no U.S. vs. non-U.S. or regional breakdown."
+    ],
+    "raw_excerpt": "TABLE 5: SELECTED CARD-RELATED STATISTICAL INFORMATION\nYears Ended December 31, 2022 2021 2020 Change 2022 vs. 2021 Change 2021 vs. 2020\nNetwork volumes (billions) $ 1,552.8 $ 1,284.2 $ 1,037.8 21 % 24 %\nBilled business $ 1,338.3 $ 1,089.8 $ 870.7 23 25\nProcessed volumes $ 214.5 $ 194.4 $ 167.1 10 16\nCards-in-force (millions) 133.3 121.7 112.0 10 9\nProprietary cards-in-force 76.7 71.4 68.9 7 4\nBasic cards-in-force (millions) 111.5 100.7 91.3 11 10\nProprietary basic cards-in-force 59.1 54.7 52.7 8 4\nAverage proprietary basic Card Member spending (dollars) $ 23,496 $ 20,392 $ 16,352 15 25"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 6: Network Volumes-Related Statistical Information (billed business growth by segment)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50 (printed page 47), Table 6",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 total billed business grew 23% year over year, or 25% assuming no changes in FX rates.",
+      "FY2022 billed business growth by segment: U.S. Consumer Services +24% (+32% FX-adjusted); Commercial Services +21% (+22% FX-adjusted); International Card Services +23% (+36% FX-adjusted).",
+      "FY2021 billed business growth by segment: U.S. Consumer Services +25%; Commercial Services +21% (+20% FX-adjusted); International Card Services +22% (+18% FX-adjusted).",
+      "G&S-related spending was 75% of 2022 billed business (81% in 2021) and grew 13%; T&E-related was 25% of 2022 billed business (19% in 2021) and grew 64%.",
+      "Billed business is disaggregated by reportable segment (USCS / CS / ICS), not by geographic region."
+    ],
+    "raw_excerpt": "TABLE 6: NETWORK VOLUMES-RELATED STATISTICAL INFORMATION\nNetwork volumes 21 % 24 % 24 % 23 %\nTotal billed business 23 25 25 24\nU.S. Consumer Services 24 32\nCommercial Services 21 22 21 20\nInternational Card Services 23 36 22 18\nProcessed volumes 10 18 16 14\nMerchant industry billed business metrics\nG&S-related (75% and 81% of billed business for 2022 and 2021, respectively) 13 16 19 18\nT&E-related (25% and 19% of billed business for 2022 and 2021, respectively) 64 67 59 58"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 10: USCS Selected Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p56 (printed page 53), Table 10",
+    "published_at": "2023",
+    "key_points": [
+      "U.S. Consumer Services billed business was $553.0 billion in 2022 (2021: $444.2 billion; 2020: $337.6 billion), up 24%.",
+      "USCS proprietary cards-in-force were 41.7 million at year-end 2022 (2021: 39.0 million; 2020: 37.7 million), up 7%.",
+      "USCS proprietary basic cards-in-force were 29.2 million at year-end 2022 (2021: 27.3 million; 2020: 26.6 million), up 7%.",
+      "USCS average proprietary basic Card Member spending was $19,514 in 2022 (2021: $16,498; 2020: $12,641), up 18%.",
+      "USCS total segment assets were $94.4 billion at year-end 2022; total Card Member loans $72.7 billion."
+    ],
+    "raw_excerpt": "TABLE 10: USCS SELECTED STATISTICAL INFORMATION\nAs of or for the Years Ended December 31, 2022 2021 2020\nBilled business (billions) $ 553.0 $ 444.2 $ 337.6 24 % 32 %\nProprietary cards-in-force 41.7 39.0 37.7 7 3\nProprietary basic cards-in-force 29.2 27.3 26.6 7 3\nAverage proprietary basic Card Member spending (dollars) $ 19,514 $ 16,498 $ 12,641 18 31"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 12: CS Selected Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p59 (printed page 56), Table 12",
+    "published_at": "2023",
+    "key_points": [
+      "Commercial Services billed business was $499.5 billion in 2022 (2021: $411.6 billion; 2020: $340.0 billion), up 21%.",
+      "CS proprietary cards-in-force were 14.9 million at year-end 2022 (2021: 13.4 million; 2020: 12.5 million), up 11%.",
+      "CS average Card Member spending was $35,202 in 2022 (2021: $32,042; 2020: $27,045), up 10%.",
+      "CS total segment assets were $51.4 billion at year-end 2022; total Card Member loans $21.4 billion."
+    ],
+    "raw_excerpt": "TABLE 12: CS SELECTED STATISTICAL INFORMATION\nBilled business (billions) $ 499.5 $ 411.6 $ 340.0 21 % 21 %\nProprietary cards-in-force 14.9 13.4 12.5 11 7\nAverage Card Member spending (dollars) $ 35,202 $ 32,042 $ 27,045 10 18"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 14: ICS Selected Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p62 (printed page 59), Table 14",
+    "published_at": "2023",
+    "key_points": [
+      "International Card Services billed business was $281.6 billion in 2022 (2021: $228.2 billion; 2020: $187.5 billion), up 23%.",
+      "ICS proprietary cards-in-force were 20.1 million at year-end 2022 (2021: 19.0 million; 2020: 18.7 million), up 6%.",
+      "ICS proprietary basic cards-in-force were 14.9 million at year-end 2022 (2021: 13.9 million; 2020: 13.6 million), up 7%.",
+      "ICS average proprietary basic Card Member spending was $19,519 in 2022 (2021: $16,689; 2020: $13,429), up 17%.",
+      "ICS total segment assets were $36.9 billion at year-end 2022; consumer and small business Card Member loans $13.8 billion."
+    ],
+    "raw_excerpt": "TABLE 14: ICS SELECTED STATISTICAL INFORMATION\nBilled business (billions) $ 281.6 $ 228.2 $ 187.5 23 % 22 %\nProprietary cards-in-force 20.1 19.0 18.7 6 2\nProprietary basic cards-in-force 14.9 13.9 13.6 7 2\nAverage proprietary basic Card Member spending (dollars) $ 19,519 $ 16,689 $ 13,429 17 24"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Table 13: ICS Selected Income Statement Data (scope of International Card Services)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p60 (printed page 57), Table 13",
+    "published_at": "2023",
+    "key_points": [
+      "ICS issues proprietary consumer, small business and corporate cards outside the United States.",
+      "ICS also provides services to international customers including travel and lifestyle services, and manages certain international joint ventures and loyalty coalition businesses.",
+      "ICS total revenues net of interest expense were $9,061 million in 2022 (2021: $7,435 million; 2020: $6,742 million), up 22%.",
+      "ICS pretax segment income was $578 million in 2022 versus $929 million in 2021, down 38%."
+    ],
+    "raw_excerpt": "ICS issues a wide range of proprietary consumer, small business and corporate cards outside the United States. ICS also provides services to our international customers, including travel and lifestyle services, and manages certain international joint ventures and our loyalty coalition businesses.\n...\nTotal revenues net of interest expense 9,061 7,435 6,742 1,626 22 693 10\nPretax segment income $ 578 $ 929 $ 521 $ (351) (38)% $ 408 78 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — MD&A Business Environment (international billed business growth)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45, Item 7 MD&A Business Environment",
+    "published_at": "2023",
+    "key_points": [
+      "International billed business grew 23% year over year in 2022, or 36% on an FX-adjusted basis.",
+      "The international growth was attributed to a strong recovery in spend across both consumer and commercial customers.",
+      "Total revenues net of interest expense increased 25% year over year in 2022 (27% FX-adjusted).",
+      "Discount revenue, the largest revenue line, increased 25% year over year, driven primarily by Card Member spending volumes.",
+      "Net card fees increased 17% year over year; service fees and other revenues increased 36%; net interest income increased 28%.",
+      "The company reported 2022 net income of $7.5 billion, or $9.85 per share, versus $8.1 billion, or $10.02 per share, in 2021."
+    ],
+    "raw_excerpt": "International billed business grew by 23 percent year-over-year (36 percent on an FX-adjusted basis ), driven by a strong recovery in spend across both consumer and commercial customers.\n...\nTotal revenues net of interest expense increased 25 percent year-over-year (27 percent on an FX-adjusted basis ), reflecting strong growth in all our revenue lines."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Item 1 Business, Card Network Business (third-party cards-in-force and country coverage)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p6, Item 1 Business — Card Network Business",
+    "published_at": "2023",
+    "key_points": [
+      "Amex operates a payments network with relationships with third-party banks and institutions in approximately 103 countries and territories.",
+      "For the year ended December 31, 2022, worldwide network services processed volume (spending on Amex cards issued by third parties) was $214.5 billion.",
+      "At December 31, 2022, there were 56.5 million cards-in-force issued by third parties worldwide.",
+      "Network partners are licensed to issue local currency American Express-branded cards in their countries and/or serve as merchant acquirer for local merchants."
+    ],
+    "raw_excerpt": "We operate a payments network through which we establish and maintain relationships with third-party banks and other institutions in approximately 103 countries and territories, licensing the American Express brand and extending the reach of our global network. These network partners are licensed to issue local currency American Express-branded cards in their countries and/or serve as the merchant acquirer for local merchants on our network.\nFor the year ended December 31, 2022, worldwide network services processed volume (spending on American Express cards issued by third parties) was $214.5 billion and at December 31, 2022, we had 56.5 million cards-in-force issued by third parties worldwide."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 23 Significant Credit Concentrations (U.S. vs. outside U.S. exposure)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p152 (printed page 149), Note 23",
+    "published_at": "2023",
+    "key_points": [
+      "Maximum on-balance-sheet credit exposure to individuals was $156 billion at year-end 2022 (2021: $131 billion).",
+      "Of that individual exposure, $129 billion was United States and $27 billion was outside the United States at year-end 2022 (2021: $108 billion U.S. and $23 billion outside the U.S.).",
+      "The geographic regions with the largest concentration outside the United States include the United Kingdom, Japan, the European Union, Australia, Canada and Mexico.",
+      "Total on-balance-sheet credit exposure was $213 billion at year-end 2022 versus $172 billion at year-end 2021.",
+      "Unused credit was approximately $350 billion at year-end 2022 (2021: $327 billion), of which approximately 80 percent related to customers within the United States in both periods."
+    ],
+    "raw_excerpt": "(Billions) 2022 2021\nIndividuals: $ 156 $ 131\nUnited States 129 108\nOutside the United States 27 23\nInstitutions:\nFinancial services 36 24\nOther 17 15\nU.S. Government and agencies 4 2\nTotal on-balance sheet $ 213 $ 172\n...\n(b) The geographic regions with the largest concentration outside the United States include the United Kingdom, Japan, the European Union, Australia, Canada and Mexico."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — cover page (filing identity and period)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p1, Form 10-K cover page",
+    "published_at": "2023",
+    "key_points": [
+      "The document is American Express Company's Form 10-K annual report for the fiscal year ended December 31, 2022.",
+      "Commission File No. 1-7657; incorporated in New York; principal executive offices at 200 Vesey Street, New York, New York 10285.",
+      "Common Shares (par value $0.20 per share) trade on the New York Stock Exchange under the symbol AXP.",
+      "As of February 2, 2023, there were 744,192,702 common shares outstanding, consistent with a filing in early 2023.",
+      "Aggregate market value of voting shares held by non-affiliates was approximately $104.0 billion as of June 30, 2022."
+    ],
+    "raw_excerpt": "Form 10-K\n☑ ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934\nFor the fiscal year ended December 31, 2022\n...\nAmerican Express Company\n...\nCommon Shares (par value $0.20 per Share) AXP New York Stock Exchange\n...\nAs of February 2, 2023, there were 744,192,702 common shares of t"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Exhibit 21: Subsidiaries of American Express Company as of December 31, 2022 (p.252)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p252",
+    "published_at": "2023",
+    "key_points": [
+      "Exhibit 21 is titled \"SUBSIDIARIES OF AMERICAN EXPRESS COMPANY as of December 31, 2022\" and tabulates each entity under three columns: Name, Country Name, Jurisdiction.",
+      "The exhibit states that unless indicated by an asterisk (*), all voting securities of the listed subsidiaries are directly or indirectly owned by the registrant, and that indentation reflects the principal parent of each subsidiary.",
+      "Countries/territories appearing on Exhibit 21 page 1 include: United States, Russian Federation, Ireland, Mexico, Jersey, Netherlands Antilles, Netherlands, Malaysia, Japan, India.",
+      "Named entities on page 1 include American Express Company (United States / New York), American Express Bank LLC (Russian Federation), American Express Banking Corp. (United States / New York), American Express Travel Related Services Company, Inc. (United States / New York), American Express Bank (Mexico) S.A. Institucion de Banca Multiple (Mexico), American Express Overseas Credit Corporation N.V. (Netherlands Antilles), American Express (Malaysia) SDN. BHD. (Malaysia), American Express Holdings G.K. (Japan), American Express (India) Private Limited (India).",
+      "Page 1 also lists American Express Kabbage Inc. and Kabbage Payments, LLC, both United States / Delaware."
+    ],
+    "raw_excerpt": "EXHIBIT 21\nSUBSIDIARIES OF AMERICAN EXPRESS COMPANY\nas of December 31, 2022\nUnless otherwise indicated by an asterisk (*), all of the voting securities of these subsidiaries are directly or indirectly owned by the registrant. The indentation reflects the principal parent of each subsidiary.\nName Country Name Jurisdiction\nAmerican Express Company United States New York\n  56th Street AXP Campus LLC United States Arizona\n  American Express Bank LLC Russian Federation Russian Federation\n  American Express Banking Corp. United States New York\n  American Express Travel Related Services Company, Inc. United States New York\n  Accertify, Inc. United States Delaware\n  AE Innovation Labs Holdings, LLC United States Delaware\nAmerican Express Innovation Laboratories Limited Ireland Ireland\n  American Express Bank (Mexico) S.A. Institucion de Banca Multiple Mexico Mexico\n  ...\n  American Express Overseas Credit Corporation N.V. Netherlands Antilles Netherlands Antilles\n  ...\n  American Express (Malaysia) SDN. BHD. Malaysia Malaysia\n  ...\n  American Express Holdings G.K. Japan Japan\n  ...\n  American Express (India) Private Limited India India"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Exhibit 21, page 2 (p.253)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p253",
+    "published_at": "2023",
+    "key_points": [
+      "Exhibit 21 page 2 adds these countries/territories: Thailand, China, Australia, New Zealand, United Kingdom, Spain, Saudi Arabia, Oman, Qatar, Bahrain, Egypt (plus further India and Netherlands entities).",
+      "Named entities on page 2 include American Express (Thai) Company Limited (Thailand), American Express Asia Network Consulting (Beijing) Limited Company (China), American Express Australia Limited (Australia / Victoria), Centurion Finance Limited (New Zealand), American Express Services Europe Limited (United Kingdom / England and Wales), American Express de Espana, S.A. (Sociedad Unipersonal) (Spain).",
+      "Middle East and Egypt entities are marked with an asterisk (*), i.e., not wholly owned directly or indirectly by the registrant: Amex (Middle East) B.S.C. (closed) — Bahrain; American Express Saudi Arabia (C) JSC — Saudi Arabia; Amex Al Omania LLC — Oman; AMEX (Middle East) QFC LLC — Qatar; Amex Egypt Company Limited Liability Company — Egypt."
+    ],
+    "raw_excerpt": "American Express Business Solutions (India) Private Limited India India\n  American Express (Thai) Company Limited Thailand Thailand\n  American Express Asia Network Consulting (Beijing) Limited Company China China\n  American Express Continental, LLC United States Delaware\n  American Express Australia Limited Australia Victoria\n  Centurion Finance Limited New Zealand New Zealand\n  ...\n  American Express Services Europe Limited United Kingdom England and Wales\n  American Express de Espana, S.A. (Sociedad Unipersonal) Sp\n  Amex (Middle East) B.S.C. (closed)* Bahrain Bahrain\n  American Express Saudi Arabia (C) JSC* Saudi Arabia Saudi Arabia\n  Amex Al Omania LLC* Oman Oman\n  AMEX (Middle East) QFC LLC * Qatar Qatar\n  Amex Egypt Company Limited Liability Company* Egypt Egypt"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Exhibit 21, page 3 (p.254)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p254",
+    "published_at": "2023",
+    "key_points": [
+      "Exhibit 21 page 3 adds these countries/territories: Taiwan (listed with Country Name \"China\" and Jurisdiction \"Taiwan\"), Hong Kong (Country Name \"China\", Jurisdiction \"Hong Kong\"), Argentina, France, Sweden, Italy, Canada, Switzerland, Brazil, Indonesia (plus further Japan, Spain, India, Netherlands and United States entities).",
+      "Named entities on page 3 include American Express International (Taiwan), Inc. (China / Taiwan), American Express TLS HK Limited (China / Hong Kong), American Express Argentina S.A. (Argentina), American Express Holdings (France) SAS and American Express France SAS and American Express Carte France SA (France), American Express Holding AB (Sweden), Amex Agenzia Assicurativa S.r.l. (Italy), Amex Bank of Canada and Amex Canada Inc. (Canada / Ontario), American Express Swiss Holdings GmbH and Swisscard AECS GmbH* (Switzerland), American Express Brasil Assessoria Empresarial Ltda. (Brazil), PT American Express Indonesia (Indonesia).",
+      "American Express National Bank is listed with Country Name \"United States\" and Jurisdiction \"United States\".",
+      "Swisscard AECS GmbH is marked with an asterisk (*), indicating it is not wholly owned directly or indirectly by the registrant."
+    ],
+    "raw_excerpt": "American Express Holdings 2 Limited United Kingdom England and Wales\nAmerican Express Europe LLC United States Delaware\n  American Express International (Taiwan), Inc. China Taiwan\n  ...\n  American Express Argentina S.A. Argentina Argentina\n  American Express Holdings (France) SAS France France\n  American Express France SAS France France\n  ...\n  American Express Holding AB Sweden Sweden\n  Amex Agenzia Assicurativa S.r.l. Italy Italy\n  Amex Canada Inc. Canada Ontario\n  American Express Carte France SA France France\n  American Express Japan Co., Ltd. Japan Japan\n  ...\n  American Express Swiss Holdings GmbH Switzerland Switzerland\n  Swisscard AECS GmbH* Switzerland Switzerland\n  American Express TLS HK Limited China Hong Kong\n  ...\n  American Express Brasil Assessoria Empresarial Ltda. Brazil Brazil\n  PT American Express Indonesia Indonesia Indonesia\n  ...\n  American Express National Bank United States United States"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Exhibit 21, page 4 (p.255)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p255",
+    "published_at": "2023",
+    "key_points": [
+      "Exhibit 21 page 4 lists Express (Hangzhou) Technology Services Company Limited (China / China, asterisked) and Resy Network Pty Ltd (Australia / Australia).",
+      "Page 4 lists acquired-brand subsidiaries: LoungeBuddy, Inc., Mez Mobile, Inc., Resy Network, Inc. (all United States / Delaware), Resy Network Limited (United Kingdom / England and Wales), Travellers Cheque Associates Limited (United Kingdom / England and Wales).",
+      "Page 4 lists U.S. insurance entities: AMEX Assurance Company (United States / Illinois), Amexco Insurance Company (United States / Vermont), AAC Statutory Trust (United States / Delaware), Rexport, Inc. (United States / Delaware)."
+    ],
+    "raw_excerpt": "Express (Hangzhou) Technology Services Company Limited * China China\n  LoungeBuddy, Inc. United States Delaware\n  Mez Mobile, Inc. United States Delaware\n  Resy Network, Inc. United States Delaware\n  Resy Network Limited United Kingdom England and Wales\n  Resy Network Pty Ltd Australia Australia\n  Travellers Cheque Associates Limited United Kingdom England and Wales\n  AMEX Assurance Company United States Illinois\n  AAC Statutory Trust United States Delaware\n  Amexco Insurance Company United States Vermont\n  Rexport, Inc. United States Delaware"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Item 1. Business: bank holding company status and segments (p.4)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p4",
+    "published_at": "2023",
+    "key_points": [
+      "American Express Company and its principal operating subsidiary, American Express Travel Related Services Company, Inc. (TRS), are bank holding companies under the Bank Holding Company Act of 1956, as amended (the BHC Act).",
+      "As bank holding companies they are subject to supervision and examination by the Board of Governors of the Federal Reserve System.",
+      "The company reports four reportable operating segments: U.S. Consumer Services (USCS), Commercial Services (CS), International Card Services (ICS) and Global Merchant and Network Services (GMNS), plus Corporate & Other.",
+      "American Express Company was incorporated in 1965 as a New York corporation."
+    ],
+    "raw_excerpt": "We were founded in 1850 as a joint stock association and were incorporated in 1965 as a New York corporation. American Express Company and its principal operating subsidiary, American Express Travel Related Services Company, Inc. (TRS), are bank holding companies under the Bank Holding Company Act of 1956, as amended (the BHC Act), subject to supervision and examination by the Board of Governors of the Federal Reserve System (the Federal Reserve).\nWe principally engage in businesses comprising four reportable operating segments: U.S. Consumer Services (USCS), Commercial Services (CS), International Card Services (ICS) and Global Merchant and Network Services (GMNS)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 22 Regulatory Matters and Capital Adequacy (p.150)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p150",
+    "published_at": "2023",
+    "key_points": [
+      "The company's U.S. bank subsidiary, American Express National Bank (AENB), is subject to supervision and regulation, including regulatory capital and leverage requirements, by the OCC.",
+      "American Express Company is supervised and regulated by the Federal Reserve and subject to its risk-based capital and leverage ratio requirements.",
+      "As of December 31, 2022 and 2021, the company and AENB met all capital requirements and maintained ratios in excess of those required to qualify as well capitalized.",
+      "At December 31, 2022, the aggregate amount of net assets of subsidiaries restricted from transfer was approximately $12.0 billion."
+    ],
+    "raw_excerpt": "We are supervised and regulated by the Board of Governors of the Federal Reserve System (the Federal Reserve) and are subject to the Federal Reserve's requirements for risk-based capital and leverage ratios. Our U.S. bank subsidiary, American Express National Bank (AENB), is subject to supervision and regulation, including regulatory capital and leverage requirements, by the OCC.\n...\nAs of December 31, 2022, the aggregate amount of net assets of subsidiaries that are restricted to be transferred was approximately $12.0 billion."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Deposit Programs / funding (p.68)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p68",
+    "published_at": "2023",
+    "key_points": [
+      "Deposits are offered within the U.S. bank subsidiary AENB and are FDIC-insured up to at least $250,000 per account holder.",
+      "AENB offers FDIC-insured high-yield savings accounts and certificates of deposit directly to consumers, and also offers checking account products.",
+      "As of December 31, 2022, the company had $110.2 billion in deposits.",
+      "The company had no commercial paper outstanding at any point during 2022."
+    ],
+    "raw_excerpt": "We offer deposits within our U.S. bank subsidiary, AENB. These funds are currently insured up to an amount that is at least $250,000 per account holder through the FDIC. ... Direct retail deposits offered by AENB is our primary deposit product channel, which makes FDIC-insured high-yield savings account and certificates of deposit (CDs) products available directly to consumers. ... As of December 31, 2022, we had $110.2 billion in deposits."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Item 1. Business: Card Network Business (p.6)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p6",
+    "published_at": "2023",
+    "key_points": [
+      "The company operates a payments network through which it maintains relationships with third-party banks and other institutions in approximately 103 countries and territories, licensing the American Express brand.",
+      "Network partners are licensed to issue local-currency American Express-branded cards in their countries and/or serve as merchant acquirer for local merchants on the network.",
+      "For the year ended December 31, 2022, worldwide network services processed volume (spending on American Express cards issued by third parties) was $214.5 billion.",
+      "At December 31, 2022, there were 56.5 million cards-in-force issued by third parties worldwide."
+    ],
+    "raw_excerpt": "We operate a payments network through which we establish and maintain relationships with third-party banks and other institutions in approximately 103 countries and territories, licensing the American Express brand and extending the reach of our global network. These network partners are licensed to issue local currency American Express-branded cards in their countries and/or serve as the merchant acquirer for local merchants on our network.\nFor the year ended December 31, 2022, worldwide network services processed volume (spending on American Express cards issued by third parties) was $214.5 billion and at December 31, 2022, we had 56.5 million cards-in-force issued by third parties worldwide."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Note 23 Significant Credit Concentrations (p.152)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p152",
+    "published_at": "2023",
+    "key_points": [
+      "The geographic regions with the largest concentration outside the United States are the United Kingdom, Japan, the European Union, Australia, Canada and Mexico.",
+      "On-balance-sheet credit exposure to individuals was $156 billion in 2022 ($129 billion United States, $27 billion outside the United States) versus $131 billion in 2021 ($108 billion United States, $23 billion outside the United States).",
+      "Approximately 80 percent of the roughly $350 billion of unused credit at December 31, 2022 was related to customers within the United States."
+    ],
+    "raw_excerpt": "The following table details our maximum credit exposure of the on-balance sheet assets by category as of December 31:\n(Billions) 2022 2021\nIndividuals: $ 156 $ 131 \nUnited States 129 108 \nOutside the United States 27 23 \n...\n(b) The geographic regions with the largest concentration outside the United States include the United Kingdom, Japan, the European Union, Australia, Canada and Mexico."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Item 2. Properties (p.40)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p40",
+    "published_at": "2023",
+    "key_points": [
+      "Principal executive offices are in a 2.2 million square foot building in lower Manhattan, on land leased from the Battery Park City Authority for a term expiring in 2069.",
+      "Other owned or leased principal locations include American Express offices in Phoenix, Arizona; Sunrise, Florida; Gurgaon, India; Brighton, England; Manila, Philippines; Tokyo, Japan; Kuala Lumpur, Malaysia; and Sydney, Australia.",
+      "American Express data centers are located in Phoenix, Arizona and Greensboro, North Carolina.",
+      "Regulated-entity headquarters named: AENB in Sandy, Utah; American Express Services Europe Limited in London, England; American Express Europe, S.A. in Madrid, Spain; Amex Bank of Canada and Amex Canada Inc. in Toronto, Ontario, Canada; American Express Bank (Mexico) S.A. Institucion de Banca Multiple and American Express Company (Mexico) S.A. de C.V. in Mexico City, Mexico."
+    ],
+    "raw_excerpt": "Other owned or leased principal locations include American Express offices in Phoenix, Arizona, Sunrise, Florida, Gurgaon, India, Brighton, England, Manila, Philippines, Tokyo, Japan, Kuala Lumpur, Malaysia and Sydney, Australia; the American Express data centers in Phoenix, Arizona and Greensboro, North Carolina; the headquarters for AENB in Sandy, Utah; the headquarters for American Express Services Europe Limited in London, England; the headquarters for American Express Europe, S.A. in Madrid, Spain; the headquarters for Amex Bank of Canada and Amex Canada Inc. in Toronto, Ontario, Canada; and the headquarters for American Express Bank (Mexico) S.A. Institucion de Banca Multiple and American Express Company (Mexico) S.A. de C.V. in Mexico City, Mexico."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Risk Factors: Russia/Belarus operations suspension (p.26)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p26",
+    "published_at": "2023",
+    "key_points": [
+      "Following the Russian invasion of Ukraine, the company announced that it suspended all business operations in Russia and Belarus.",
+      "The filing attributes to the conflict economic uncertainty and market disruptions, including heightened energy prices, and the imposition of financial and economic sanctions and export controls."
+    ],
+    "raw_excerpt": "Following the Russian invasion of Ukraine, we announced that we suspended all business operations in Russia and Belarus and this conflict has led to economic uncertainty and market disruptions, including heightened energy prices, and the imposition of financial and economic sanctions and export controls"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Schedule E: American Express Global Business Travel Divestiture (p.244)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p244",
+    "published_at": "2023",
+    "key_points": [
+      "The filing contains a \"Schedule E — American Express Global Business Travel Divestiture\" governing plan participation for Business Employees.",
+      "The schedule takes effect upon the establishment of the proposed joint venture involving the Global Business Travel business."
+    ],
+    "raw_excerpt": "SCHEDULE E\nAmerican Express Global Business Travel Divestiture\n    Effective upon the establishment of the proposed joint venture involving the Global Business Travel business (as it may be defined in one or more documents governing the joint venture) (the \"Business\"), this Schedule shall govern Plan participation by ... Business Employees"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K FY2022 — Exhibit Index entry for Exhibit 21 (p.164)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p164",
+    "published_at": "2023",
+    "key_points": [
+      "The 10-K's exhibit index lists \"21 Subsidiaries of the Company\" as a filed exhibit.",
+      "The filing is SEC Form 10-K, Commission File No. 1-7657, for the fiscal year ended December 31, 2022."
+    ],
+    "raw_excerpt": "* 21 Subsidiaries of the Company.\n161"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 24, Geographic Operations (revenue and pretax income by region)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p155",
+    "published_at": "2023",
+    "key_points": [
+      "2022 total revenues net of interest expense by region: United States $41,396M; EMEA $4,871M; APAC $3,835M; LACC $2,917M; Other Unallocated $(157)M; consolidated $52,862M.",
+      "2022 pretax income (loss) from continuing operations by region: United States $10,383M; EMEA $550M; APAC $376M; LACC $500M; Other Unallocated $(2,224)M; consolidated $9,585M.",
+      "2021 comparatives: United States $33,103M; EMEA $3,643M; APAC $3,418M; LACC $2,238M in revenues; pretax income United States $10,325M, EMEA $460M, APAC $420M, LACC $494M.",
+      "Region definitions: EMEA = Europe, Middle East and Africa; APAC = Asia Pacific, Australia and New Zealand; LACC = Latin America, Canada and the Caribbean.",
+      "Effective Q1 2022 the company changed how certain overhead expenses are allocated by geographic region; prior-period pretax income by geography was recast with no consolidated-level impact."
+    ],
+    "raw_excerpt": "Total revenues net of interest expense $ 41,396 $ 4,871 $ 3,835 $ 2,917 $ (157) $ 52,862 … Pretax income (loss) from continuing operations 10,383 550 376 500 (2,224) 9,585 … (a) EMEA represents Europe, the Middle East and Africa; APAC represents Asia Pacific, Australia and New Zealand; and LACC represents Latin America, Canada and the Caribbean."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Business Environment (international billed business growth and FX headwind)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2023",
+    "key_points": [
+      "International billed business grew 23 percent year-over-year in 2022.",
+      "The strengthening U.S. dollar relative to the prior year against most major currencies had a negative impact on international billings.",
+      "U.S. Consumer billed business grew 24 percent year-over-year; Commercial Services billed business grew 21 percent year-over-year.",
+      "Worldwide network volumes increased 21 percent (24 percent FX-adjusted); billed business was 86 percent of total network volumes and increased 23 percent (25 percent FX-adjusted)."
+    ],
+    "raw_excerpt": "International billed business grew by 23 percent … continuing strengthening of the U.S. dollar, relative to the prior year, against most major currencies in which we operate, had a negative impact on our international billings."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — International Card Services (ICS) segment results, Table 13",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p60",
+    "published_at": "2023",
+    "key_points": [
+      "ICS issues proprietary consumer, small business and corporate cards outside the United States, and manages certain international joint ventures and loyalty coalition businesses.",
+      "ICS 2022 total revenues net of interest expense were $9,061M, up 22 percent from $7,435M in 2021.",
+      "ICS 2022 pretax segment income was $578M versus $929M in 2021, a decline of 38 percent.",
+      "The 10-K attributes the ICS result decline to significant impact from the strengthening of the U.S. dollar.",
+      "ICS 2022 discount revenue rose 25 percent (37 percent FX-adjusted) on billed business growth of 23 percent (36 percent FX-adjusted); net card fees rose 3 percent (14 percent FX-adjusted)."
+    ],
+    "raw_excerpt": "ICS issues a wide range of proprietary consumer, small business and corporate cards outside the United States. ICS also provides services to our international customers, including travel and lifestyle services, and manages certain international joint ventures and our loyalty coalition businesses. … For 2022, ICS reported pretax income of $578 million, compared with $929 million a year ago. Results for this segment were significantly impacted by the strengthening of the U.S. dollar."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Our Business Strategies (four strategic imperatives)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p8",
+    "published_at": "2023",
+    "key_points": [
+      "The company states it seeks to grow by focusing on four strategic imperatives.",
+      "The first imperative is to expand leadership in the premium consumer space, with wording that includes expanding the roster of business partners around the globe.",
+      "No separate strategic imperative dedicated to international/non-U.S. expansion is listed among the four imperatives in this section."
+    ],
+    "raw_excerpt": "We seek to grow our business by focusing on four strategic imperatives: First, we aim to expand our leadership in the premium consumer space by continuing to deliver membership benefits that span our customers' everyday spending, borrowing, travel and lifestyle needs, expanding our roster of business partners around the globe and developing a range of experiences that attract"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Card Network Business (global network reach and third-party issuance)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p6",
+    "published_at": "2023",
+    "key_points": [
+      "The company operates a payments network with relationships with third-party banks and institutions in approximately 103 countries and territories.",
+      "For full-year 2022, worldwide network services processed volume (spending on Amex cards issued by third parties) was $214.5 billion.",
+      "At December 31, 2022, there were 56.5 million cards-in-force issued by third parties worldwide."
+    ],
+    "raw_excerpt": "We operate a payments network through which we establish and maintain relationships with third-party banks and other institutions in approximately 103 countries and territories, licensing the American Express brand and extending the reach of our global network. … worldwide network services processed volume … was $214.5 billion and at December 31, 2022, we had 56.5 million cards-in-force issued by third parties worldwide."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Note 23, Significant Credit Concentrations (non-U.S. exposure)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p152",
+    "published_at": "2023",
+    "key_points": [
+      "2022 on-balance-sheet credit exposure to individuals was $156B, of which $129B was United States and $27B outside the United States (2021: $108B U.S. / $23B outside).",
+      "The largest non-U.S. geographic concentrations are the United Kingdom, Japan, the European Union, Australia, Canada and Mexico.",
+      "Of approximately $350B of unused credit at year-end 2022, roughly 80 percent related to customers within the United States."
+    ],
+    "raw_excerpt": "Individuals: $ 156 $ 131 … United States 129 108 … Outside the United States 27 23 … The geographic regions with the largest concentration outside the United States include the United Kingdom, Japan, the European Union, Australia, Canada and Mexico. … approximately 80 percent was related to customers within the United States in both periods."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Risk Factors / Cautionary Note (ability to grow internationally)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p90",
+    "published_at": "2023",
+    "key_points": [
+      "The 10-K frames the ability to grow internationally as a risk factor rather than as a stated strategic priority.",
+      "The stated risk is that international growth could be impacted by regulation and business practices such as caps on interchange or other fees."
+    ],
+    "raw_excerpt": "our ability to grow internationally, which could be impacted by regulation and business practices, such as those capping interchange or other fees"
+  }
+]

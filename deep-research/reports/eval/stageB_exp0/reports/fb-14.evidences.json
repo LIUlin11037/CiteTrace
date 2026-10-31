@@ -1,0 +1,267 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Table 5: Selected Card-Related Statistical Information (cards-in-force)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total cards-in-force at December 31, 2022 were 133.3 million, versus 121.7 million at December 31, 2021 and 112.0 million at December 31, 2020, a year-over-year increase of 10% in 2022 (9% in 2021).",
+      "Proprietary cards-in-force were 76.7 million at year-end 2022, versus 71.4 million at year-end 2021, a year-over-year increase of 7%.",
+      "Basic cards-in-force were 111.5 million in 2022 versus 100.7 million in 2021 (+11%); proprietary basic cards-in-force were 59.1 million versus 54.7 million (+8%).",
+      "Average fee per card was $82 in 2022 versus $74 in 2021 (+11%) and $67 in 2020; footnote (a) defines it as annualized proprietary Net card fees divided by average proprietary total cards-in-force."
+    ],
+    "raw_excerpt": "Cards-in-force (millions) 133.3 121.7 112.0 10 9 / Proprietary cards-in-force 76.7 71.4 68.9 7 4 / Basic cards-in-force (millions) 111.5 100.7 91.3 11 10 / Proprietary basic cards-in-force 59.1 54.7 52.7 8 4 ... Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 % (a) Average fee per card is computed on an annualized basis based on proprietary Net card fees divided by average proprietary total cards-in-force."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Business Environment (net card fees growth and retention commentary)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Net card fees increased 17 percent year over year in 2022.",
+      "The company attributed the net card fee increase to new card acquisitions reaching record levels in 2022 and to Card Member retention remaining high.",
+      "The 10-K states retention \"remained high\" without disclosing a specific retention rate percentage.",
+      "Billed business increased 23 percent year over year (25 percent on an FX-adjusted basis), which the company described as demonstrating its ability to acquire, engage and retain high-spending, premium Card Members."
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions. ... Billed business ... increased 23 percent year-over-year (25 percent on an FX-adjusted basis), demonstrating our continued ability to acquire, engage and retain high-spending, premium Card Members."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Consolidated Statements of Income (Net card fees line item)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Net card fees were $6,070 million for the year ended December 31, 2022, compared with $5,195 million in 2021 and $4,664 million in 2020.",
+      "The dollar increase in net card fees from 2021 to 2022 was $875 million, consistent with the 17 percent growth rate cited in the Business Environment section."
+    ],
+    "raw_excerpt": "Revenues / Non-interest revenues / Discount revenue $ 30,739 $ 24,563 $ 19,435 / Net card fees 6,070 5,195 4,664 / Service fees and other revenue 4,521 3,316 2,702"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — U.S. Consumer Services segment discussion (net card fees +24%)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p54",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "In the U.S. Consumer Services segment, net card fees increased 24 percent in 2022, primarily driven by growth in premium card portfolios.",
+      "USCS non-interest revenues increased across all revenue categories, primarily driven by higher discount revenue and net card fees."
+    ],
+    "raw_excerpt": "Non-interest revenues increased across all revenue categories, primarily driven by higher Discount revenue and Net card fees. ... Net card fees increased 24 percent, primarily driven by growth in our premium card portfolios."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Commercial Services segment discussion (net card fees +22%)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p57",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "In the Commercial Services segment, net card fees increased 22 percent in 2022, primarily driven by growth in premium card portfolios."
+    ],
+    "raw_excerpt": "Net card fees increased 22 percent, primarily driven by growth in our premium card portfolios."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Segment proprietary cards-in-force (USCS Table 10, CS Table 12, ICS Table 14)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p56, p59, p62",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "U.S. Consumer Services proprietary cards-in-force were 41.7 million at year-end 2022 versus 39.0 million in 2021 (+7%).",
+      "Commercial Services proprietary cards-in-force were 14.9 million at year-end 2022 versus 13.4 million in 2021 (+11%).",
+      "International Card Services proprietary cards-in-force were 20.1 million at year-end 2022 versus 19.0 million in 2021 (+6%)."
+    ],
+    "raw_excerpt": "TABLE 10: USCS ... Proprietary cards-in-force 41.7 39.0 37.7 7 3 ... TABLE 12: CS ... Proprietary cards-in-force 14.9 13.4 12.5 11 7 ... TABLE 14: ICS ... Proprietary cards-in-force 20.1 19.0 18.7 6 2"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — MD&A, Business Environment (retention 仅定性表述)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "2022 年 MD&A 在解释净卡费（net card fees）同比增长 17% 时，将 \"Card Member retention remained high\" 作为定性归因之一，未给出任何百分比数值或指标定义。",
+      "同一段落称 2022 年 new card acquisitions 达到 record levels。",
+      "该段落未出现 \"retention rate\" 这一指标名称，也未指向任何统计表格。"
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 5: Selected Card-Related Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "全公司层面卡片统计表列示的行项目为：network volumes、billed business、processed volumes、cards-in-force、proprietary cards-in-force、basic cards-in-force、proprietary basic cards-in-force、average proprietary basic Card Member spending、average discount rate、average fee per card —— 表中没有 retention rate 行。",
+      "该表仅覆盖 2022、2021、2020 三个年度，不含 2019 年。",
+      "proprietary cards-in-force：2022 年 76.7 百万、2021 年 71.4 百万、2020 年 68.9 百万（同比 +7%、+4%）。",
+      "proprietary basic cards-in-force：2022 年 59.1 百万、2021 年 54.7 百万、2020 年 52.7 百万（同比 +8%、+4%）。",
+      "average fee per card：2022 年 82 美元、2021 年 74 美元、2020 年 67 美元（同比 +11%、+10%）。"
+    ],
+    "raw_excerpt": "TABLE 5: SELECTED CARD-RELATED STATISTICAL INFORMATION … Years Ended December 31, 2022 2021 2020 … Cards-in-force (millions) 133.3 121.7 112.0 … Proprietary cards-in-force 76.7 71.4 68.9 7 4 … Proprietary basic cards-in-force 59.1 54.7 52.7 8 4 … Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 10 (USCS) / Table 12 (CS) / Table 14 (ICS) Selected Statistical Information",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p56, p59, p62",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "USCS、CS、ICS 三个分部的 \"Selected Statistical Information\" 表均只含 billed business、cards-in-force、spending、segment assets、loans、net write-off rate、30+ days past due、net interest yield 等项目，均无 retention rate 行。",
+      "三张分部表同样只列 2022、2021、2020 三年，不含 2019 年。",
+      "USCS proprietary cards-in-force：2022 年 41.7 百万、2021 年 39.0 百万、2020 年 37.7 百万（+7%、+3%）。",
+      "CS proprietary cards-in-force：2022 年 14.9 百万、2021 年 13.4 百万、2020 年 12.5 百万（+11%、+7%）。",
+      "ICS proprietary cards-in-force：2022 年 20.1 百万、2021 年 19.0 百万、2020 年 18.7 百万（+6%、+2%）。"
+    ],
+    "raw_excerpt": "TABLE 10: USCS SELECTED STATISTICAL INFORMATION … Proprietary cards-in-force 41.7 39.0 37.7 7 3 … Average proprietary basic Card Member spending (dollars) $ 19,514 $ 16,498 $ 12,641 18 31"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Glossary of Selected Terminology",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p85–p86",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "10-K 的 \"Glossary of Selected Terminology\" 收录条目包括 Adjusted net interest income、Cobrand cards、Net write-off rate — principal only 等，检索到的条目中没有 \"Card Member retention rate\" 的定义。",
+      "因此 10-K 未提供该指标的计算口径（分子、分母、是否含自愿销户、按 accounts 还是 basic cards 计）。",
+      "术语表对 net write-off rate — principal only 的定义为：以 proprietary consumer 或 small business Card Member loans/receivables 的核销额（本金减回收）除以期间平均余额。"
+    ],
+    "raw_excerpt": "GLOSSARY OF SELECTED TERMINOLOGY … Adjusted net interest income — A non-GAAP measure that represents net interest income attributable to our Card Member loans … Net write-off rate — principal only — Represents the amount of proprietary consumer or small business Card Member loans or receivables written off, consisting of principal (resulting from authorized transactions), less recoveries, as a percentage of the average loan or receivable balance during the period."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Table 7: Selected Credit-Related Statistical Information (脚注中的双口径说明，用于对照)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p51",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "10-K 对 net write-off rate 同时列示 principal-only 与 principal+interest+fees 两种口径，并在脚注中说明 principal-only 口径是为与行业惯例保持一致。",
+      "该双口径说明仅适用于 net write-off rate，不涉及 retention rate。",
+      "Table 7 覆盖 2022、2021、2020 三年，不含 2019 年。"
+    ],
+    "raw_excerpt": "We present a net write-off rate based on principal losses only (i.e., excluding interest and/or fees) to be consistent with industry convention."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMERICANEXPRESS_2022_10K（第一方发行人披露，非第三方来源；仅作边界说明）",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45 / p27 / p7",
+    "published_at": "2023",
+    "key_points": [
+      "净卡费（net card fees）2022 年同比增长 17%，公司将其归因于 2022 年新卡获取达到纪录水平且 Card Member retention remained high。",
+      "公司自述 2022 年全球网络额（worldwide network volumes）同比增长 21%（按不变汇率 24%），billed business 增长 23%（不变汇率 25%）。",
+      "全部联名（cobrand）组合合计约占 2022 年全球网络额的 18%，约占 2022 年 12 月 31 日全球 Card Member 贷款的 36%。",
+      "Delta 联名组合约占全球网络额的 10%、全球 Card Member 贷款的 21%（截至 2022 年 12 月 31 日）；当前 Delta 联名协议有效期至 2029 年底。",
+      "联名协议期限一般为 5 至 10 年，期满除非双方选择续约否则终止；公司自述若一个或多个联名合作关系终止，网络额可能下降且 Card Member 流失（attrition）可能显著上升——此为前瞻性风险因素表述，非已发生的流失事实。",
+      "公司自述美国市场联名合作竞争加剧，向联名伙伴支付的金额已上升，且可能因发卡行与卡组织之间对联名伙伴的竞争加剧而在重新谈判时继续上升。",
+      "该来源为 Amex 自身 10-K，属第一方披露；按子问题定义（third-party and industry sources）不适用，不含任何第三方分析师、行业媒体或竞对（Chase Sapphire / Capital One）数据。"
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions. … All of our cobrand portfolios in the aggregate accounted for approximately 18 percent of our worldwide network volumes for the year ended December 31, 2022. Card Member loans related to our cobrand portfolios accounted for approximately 36 percent of our worldwide Card Member loans as of December 31, 2022. … Network volumes could decline and Card Member attrition could increase, in each case, significantly as a result of the termination of one or more cobrand partnership relationships. … The current Delta cobrand agreement runs through the end of 2029"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — MD&A, Business Environment (p45)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2023",
+    "key_points": [
+      "2022 年净卡费（Net card fees）同比增长 17%。",
+      "公司将净卡费增长归因于 2022 年创纪录的新卡获取（record new card acquisitions）以及 Card Member retention remained high。",
+      "公司将高留存表述为「demonstrating the impact of investments we have made in our premium value propositions」——这是本文件中唯一一处把留存与具体投资方向挂钩的因果表述。",
+      "该表述未点名任何具体产品、权益刷新项目或挽留优惠计划。",
+      "文件未披露任何量化留存率数字。"
+    ],
+    "raw_excerpt": "Net card fees increased 17 percent year over-year, as new card acquisitions reached record levels in 2022 and Card Member retention remained high, demonstrating the impact of investments we have made in our premium value propositions."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — U.S. Consumer Services segment MD&A (p54)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p54",
+    "published_at": "2023",
+    "key_points": [
+      "USCS 分部 2022 年净卡费同比增长 24%。",
+      "该增长被归因于「growth in our premium card portfolios」（高端卡组合的增长）。",
+      "USCS 分部 2022 年非息收入增长 27%，其中折扣收入 +25%、服务费及其他收入 +50%。",
+      "该段未描述任何 2022 年发生的产品权益刷新事件。"
+    ],
+    "raw_excerpt": "Net card fees increased 24 percent, primarily driven by growth in our premium card portfolios."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Table 5: Selected Card-Related Statistical Information (p50)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50",
+    "published_at": "2023",
+    "key_points": [
+      "Cards-in-force 2022 年为 133.3 百万张，2021 年 121.7 百万张，同比 +10%。",
+      "Proprietary cards-in-force 2022 年为 76.7 百万张，2021 年 71.4 百万张，同比 +7%。",
+      "Average fee per card 2022 年为 82 美元，2021 年 74 美元，同比 +11%。",
+      "Average proprietary basic Card Member spending 2022 年为 23,496 美元，同比 +15%。",
+      "该统计表未包含任何留存率（retention/attrition）指标。"
+    ],
+    "raw_excerpt": "Cards-in-force (millions) 133.3 121.7 112.0 10 9 … Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Partners and Relationships (p7)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p7",
+    "published_at": "2023",
+    "key_points": [
+      "Delta 被描述为 Amex 最大的战略合作伙伴（largest strategic partner）。",
+      "Delta 联名组合约占 2022 年全球网络交易量的 10%、约占全球 Card Member 贷款的 21%。",
+      "文件写明「The current Delta cobrand agreement runs through the end of 2029」——即协议期限已覆盖至 2029 年底，未披露 2022 年发生续约签署。",
+      "联名伙伴名单包括 Delta Air Lines、Marriott International、Hilton Worldwide Holdings 和 British Airways。",
+      "文件未描述 2022 年针对 Marriott 或 Hilton 的任何续约、扩展或权益变更动作。",
+      "Delta 同时是 Membership Rewards 项目的重要参与方，并为特定 Amex 卡会员提供包括机场贵宾厅在内的旅行权益。"
+    ],
+    "raw_excerpt": "The current Delta cobrand agreement runs through the end of 2029 and we expect to continue to make significant investments in this partnership. … issuing cards under cobrand arrangements with other corporations and institutions (e.g., Delta Air Lines (Delta), Marriott International, Hilton Worldwide Holdings and British Airways)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Table 4: Expenses Summary (p49) and MD&A expense discussion (p46)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p49",
+    "published_at": "2023",
+    "key_points": [
+      "Card Member rewards 费用 2022 年为 14,002 百万美元，2021 年 11,007 百万美元，同比 +27%。",
+      "Card Member services 费用 2022 年为 2,959 百万美元，2021 年 1,993 百万美元，同比 +48%。",
+      "Business development 费用 2022 年为 4,943 百万美元，同比 +31%，主要因 partner payments 与 client incentives 增加。",
+      "Marketing 费用 2022 年为 5,458 百万美元，同比 +3%。",
+      "Card Member services 费用增长被归因于「higher usage of travel-related benefits」（旅行类权益使用量上升）。",
+      "Membership Rewards 当前参与者的 Ultimate Redemption Rate (URR) 在 2022 与 2021 年末均为 96%（向下取整）。",
+      "文件未将这些费用科目与留存结果建立因果联系。"
+    ],
+    "raw_excerpt": "Card Member services 2,959 1,993 1,230 966 48 763 62 … Card Member services expense increased, primarily driven by higher usage of travel-related benefits."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Cautionary Note Regarding Forward-Looking Statements (p89)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p89",
+    "published_at": "2023",
+    "key_points": [
+      "公司在前瞻性风险提示中列举了「further enhancements to product benefits to make it attractive to Card Members and prospective customers」这一成本驱动因素。",
+      "公司同时提示此类权益增强可能「in a manner that is not cost-effective」（以不具成本效益的方式实施）。",
+      "该表述表明公司自身并未把权益刷新视为无风险的正面留存杠杆。"
+    ],
+    "raw_excerpt": "further enhancements to product benefits to make them attractive to Card Members and prospective customers, potentially in a manner that is not cost-effective"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company 2022 Form 10-K — Note 12 Commitments: cobrand partner minimum payments (p133)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p133",
+    "published_at": "2023",
+    "key_points": [
+      "截至 2022 年 12 月 31 日，公司对若干联名伙伴存在约 20 亿美元的财务承诺（financial commitments）。",
+      "这些承诺要求在协议期内（一般 5 至 10 年）支付最低金额。",
+      "该承诺体现为联名合作的成本侧义务，文件未将其与留存成效挂钩。"
+    ],
+    "raw_excerpt": "As of December 31, 2022, we had approximately $2.0 billion in financial commitments outstanding related to agreements with certain cobrand partners under which we are required to make a certain level of minimum payments over the life of the agreement, generally ranging from five to ten years."
+  }
+]

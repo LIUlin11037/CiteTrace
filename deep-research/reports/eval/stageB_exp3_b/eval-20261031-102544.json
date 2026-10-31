@@ -1,0 +1,165 @@
+{
+  "n_questions": 10,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.7375,
+  "alignment_questions": 10,
+  "mean_coverage": 0.8,
+  "per_subdomain": {
+    "finance": {
+      "n": 10.0,
+      "citation_existence": 1.0,
+      "alignment": 0.7375,
+      "coverage": 0.8
+    }
+  },
+  "scores": [
+    {
+      "question_id": "fb-12",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 11,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-13",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 0.6666666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "其他负债中最大可识别成分为Membership Rewards负债127.89亿美元，其他152.27亿美元为未拆分汇总项",
+        "2022年平均负债总额1,820.99亿美元，其中平均计息负债1,373.68亿、平均不计息负债447.31亿",
+        "2022年一季度列报变更仅针对合并利润表收入侧，不影响总收入与总费用，未提及负债科目"
+      ]
+    },
+    {
+      "question_id": "fb-14",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 28,
+      "citations_missing": [],
+      "alignment_rate": 0.5833333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "cards-in-force 指期末在册有效卡片数量，是存量概念；其同比变动=新发卡+换卡/升级−销户−到期未续，10-K 未对该变动做拆分",
+        "三个自营分部全部正增长，且 2021 年同样全部正增长（USCS +3%、CS +7%、ICS +2%）",
+        "在卡量仅 +7% 的情况下净卡费 +17%，说明单卡年费贡献在上升",
+        "cards-in-force 的同比增量（如 USCS +2.7M）不能等同于净新增卡量，因其含换卡/升级与销户的净额，且 10-K 未做拆分"
+      ]
+    },
+    {
+      "question_id": "fb-15",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 33,
+      "citations_missing": [],
+      "alignment_rate": 0.7083333333333334,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "BDS 覆盖有人/无人军用飞机与武器系统、C4ISR、卫星与空间探索等",
+        "2022 年末订单储备合计 404,381 百万美元（2021 年 377,499），合同性储备 381,977、未义务储备 22,404，按分部 BCA 329,824、BDS 54,373、BGS 19,338、未分配 846",
+        "FY2022 收入同比增加 4,322 百万美元，BCA 增 6,374、BDS 减 3,378 及其归因"
+      ]
+    },
+    {
+      "question_id": "fb-16",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 0.5,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes. Multiple lawsuits have been filed against Boeing resulting from a 2018 Lion Air crash and a 2019 Ethiopian Airlines crash.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "2021 年 Boeing 与 DOJ 签订 DPA，该协议在附注中列为第 (i) 项。",
+        "环境修复负债：2022-12-31 为 7.52 亿美元，2021-12-31 为 6.05 亿美元。",
+        "产品保证负债：2022 年末 22.75 亿美元，2021 年末 19.00 亿美元；当年估计变更 +5.76 亿 / +4.98 亿。",
+        "公司可能无法为某些风险维持保险，并在某些情况下从美国政府获得赔偿；保险金额可能无法覆盖全部索赔，公司可能被迫承担巨额成本。",
+        "债务总额 570 亿美元，其中约 145 亿美元本金将在未来三年到期。",
+        "事故诉讼的和解金额、判决、开庭日期均未披露，公司称保险未覆盖部分不可估计。"
+      ]
+    },
+    {
+      "question_id": "fb-17",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 24,
+      "citations_missing": [],
+      "alignment_rate": 0.8333333333333334,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Yes. Boeing has an improving gross margin profile as of FY2022. Gross profit improved from $3,017 million in FY2021 to $3,502 million in FY2022. Gross margin % improved from 4.8% in FY2021 to 5.3% in FY2022.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "2022 年所得税退税 1.5B、应付账款转为现金来源、存货贡献 420M 现金、客户预收款现金从 2.5B 降至 0.1B"
+      ]
+    },
+    {
+      "question_id": "fb-18",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 22,
+      "citations_missing": [],
+      "alignment_rate": 0.9166666666666666,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-19",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 26,
+      "citations_missing": [],
+      "alignment_rate": 0.875,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-20",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 16,
+      "citations_missing": [],
+      "alignment_rate": 0.7083333333333334,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "波音当时正推进型号检验授权（TIA）以启动 FAA 取证试飞，TIA 与取证时点最终由监管机构决定",
+        "737-7 与 737-10 当时正在接受 FAA 型号合格证审定；《2023 年综合拨款法》修订 ACSAA 第 116 条，使 2020 年 12 月 27 日之前提交的原始或修订型号合格证申请（含 737-7 与 737-10）不再受第 116 条机组告警系统规格约束",
+        "777X、737-7、737-10 等新机型与衍生机型的推出在满足开发、测试、取证与生产进度方面风险上升，原因包括 737 MAX 事故后全球对开发机型的监管审查加强"
+      ]
+    },
+    {
+      "question_id": "fb-21",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 22,
+      "citations_missing": [],
+      "alignment_rate": 0.6666666666666666,
+      "coverage_rate": 0.5,
+      "missed_key_points": [
+        "最终答案与「Effective tax rate in FY2022 was 0.62%, compared to -14.76% in FY2021.」一致（数值相同，允许适当四舍五入与单位换算）"
+      ],
+      "unsupported_claims": [
+        "联邦 NOL、抵免、利息及其他结转形成的递延资产为 $2,082M（2021 年 $1,522M），其中 $742M 于 2042 年 12 月 31 日或之前到期、$1,340M 可无限期结转",
+        "Note 4 口径的净所得税（退税）/缴纳额 FY2022 为 $(1,317)M、FY2021 为 $(1,480)M、FY2020 为 $37M",
+        "OCI 中设定受益养老金及其他退休后福利计划相关金额 FY2022 为税后 $2,202M、FY2021 为 $5,500M，其中当期产生的净精算利得税后分别为 $1,533M 与 $4,262M"
+      ]
+    }
+  ]
+}

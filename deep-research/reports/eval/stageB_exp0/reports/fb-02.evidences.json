@@ -1,0 +1,631 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: 四个报告分部的确立（Q2 FY2022 变更）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 第二季度起，AMD 变更报告分部，以使其财务报告与公司按战略终端市场管理业务的方式一致。",
+      "该变更与首席运营决策者（CODM）评估财务业绩和分配资源的方式一致。",
+      "变更后 AMD 按四个报告分部报告财务业绩：Data Center、Client、Gaming、Embedded。",
+      "10-K 指出分部的补充信息载于财务报表附注 Note 4 – Segment Reporting（Part II, Item 8）。"
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. This is consistent with how our Chief Operating Decision Maker (CODM) assesses our financial performance and allocates resources. As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: 四个报告分部的官方定义（各分部覆盖的产品类别）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p6",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 自述其四个报告分部为 Data Center、Client、Gaming、Embedded。",
+      "Data Center 分部主要包含面向数据中心的服务器 CPU 与 GPU、DPU、FPGA 以及 Adaptive SoC 产品。",
+      "Client 分部主要包含用于台式机和笔记本电脑的 CPU、APU 与芯片组。",
+      "Gaming 分部主要包含独立 GPU（discrete GPU）、半定制 SoC 产品与开发服务。",
+      "Embedded 分部主要包含嵌入式 CPU、GPU、APU、FPGA 与 Adaptive SoC 产品。",
+      "除报告分部外，AMD 另设 All Other 类别，该类别不属于报告分部。",
+      "Data Center 分部章节重申其范围，并说明通过 CPU/GPU/DPU/FPGA/Adaptive SoC 的不同组合来针对多样化工作负载优化性能与功耗。"
+    ],
+    "raw_excerpt": "Our four reportable segments are: • the Data Center segment, which primarily includes server CPUs and GPUs, DPUs, FPGAs, and Adaptive SoC products for data centers; • the Client segment, which primarily includes CPUs, APUs, and chipsets for desktop and notebook personal computers; • the Gaming segment, which primarily includes discrete GPUs, semi-custom SoC products and development services; and • the Embedded segment, which primarily includes embedded CPUs, GPUs, APUs, FPGAs and Adaptive SoC products. ... In addition to these reportable segments, we have an All Other category, which is not a reportable segment. ... The Data Center segment primarily includes server CPUs, GPUs, DPUs, FPGAs, and Adaptive SoC products."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Gaming 分部范围（图形处理、RDNA、游戏主机、半定制）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p8",
+    "published_at": "2023",
+    "key_points": [
+      "图形处理是 AMD 多类产品的核心组件，可存在于 APU、GPU、SoC 或独立 GPU 的组合中。",
+      "AMD 的图形产品覆盖台式 PC、笔记本 PC、一体机（AIO）、专业工作站与数据中心等平台。",
+      "AMD 开发了 RDNA 3 图形架构，作为下一代 PC 游戏图形的基础；RDNA 2 支持光线追踪、AMD Infinity Cache 与可变速率着色。",
+      "Sony PlayStation 5 与 Microsoft Xbox Series S / X 游戏主机采用 AMD RDNA 图形架构。",
+      "APU 将 CPU 与 GPU 集成在单芯片上，为价值型与主流 PC 提供视觉处理功能；独立 GPU（dGPU）提供跨平台的高性能图形处理。",
+      "AMD 利用其图形与处理技术开发半定制（semi-custom）解决方案，与系统设计方和制造商协作。"
+    ],
+    "raw_excerpt": "Graphics processing is a fundamental component across many of our products and can be found in an APU, GPU, SoC or a combination of a discrete GPU ... platforms, including desktop PCs, notebook PCs, All-in-Ones (AIOs), professional workstations, and the data center. ... The Sony PlayStation 5 and Microsoft Xbox Series S™ and X™ game consoles also feature our RDNA graphics architecture. ... We leverage our core IP, including our graphics and processing technologies to develop semi-custom solutions."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Embedded 分部产品范围（嵌入式 EPYC / Ryzen V、R 系列）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p9",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 面向嵌入式平台的产品包括 AMD Embedded EPYC CPU、AMD Embedded Ryzen V-Series APU/CPU/SoC、AMD Embedded Ryzen R-Series APU/CPU/SoC。",
+      "这些嵌入式处理器与 GPU 面向高带宽网络连接与安全、企业与云基础设施的高性能存储需求。",
+      "嵌入式产品同时面向汽车信息娱乐系统的 3D 图形性能与 4K 多媒体需求。"
+    ],
+    "raw_excerpt": "Our products for embedded platforms include AMD Embedded EPYC CPUs, AMD Embedded Ryzen V-Series APUs, CPUs and SoCs, AMD Embedded Ryzen R-Series APUs, CPUs and SoCs. Our embedded processors and GPUs are designed to support high performance and bandwidth network connectivity and security, high-performance storage requirements for enterprise and cloud infrastructure, 3D graphics performance and 4K multimedia requirements of automotive infotainment systems."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: 产品品牌与产品类别的对应关系",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p11",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 的客户端处理器品牌包括 AMD Ryzen、Ryzen PRO、Ryzen Threadripper、Ryzen Threadripper PRO、Athlon、Athlon PRO 与 PRO A-Series，服务于台式机与笔记本电脑。",
+      "消费级图形市场的产品品牌为 AMD Radeon graphics；嵌入式图形市场的品牌为 AMD Embedded Radeon graphics。",
+      "专业图形产品的品牌为 AMD Radeon PRO graphics。",
+      "数据中心图形产品的品牌为 Radeon Instinct、Radeon PRO V-series，以及面向服务器的 AMD Instinct 加速器。",
+      "服务器微处理器的产品品牌为 AMD EPYC processors。",
+      "AMD 也销售 AMD Athlon 的低功耗版本，以及 AMD Geode、AMD Ryzen、AMD EPYC、AMD R-Series 与 G-Series 处理器作为嵌入式处理器方案。",
+      "FPGA 产品品牌为 Virtex-6、Virtex-7、Virtex UltraScale+、Kintex-7、Kintex UltraScale、Kintex UltraScale+、Artix-7、Artix UltraScale+、Spartan-6 与 Spartan-7。",
+      "Adaptive SoC 产品品牌为 Zynq-7000、Zynq UltraScale+ MPSoC、Zynq UltraScale+ RFSoC、Versal HBM、Versal Premium、Versal Prime、Versal AI Core、Versal AI Edge，以及 Vitis 与 Vivado。",
+      "计算与网络加速板卡产品以 Alveo 品牌销售。"
+    ],
+    "raw_excerpt": "Our client processors include: AMD Ryzen, AMD Ryzen PRO, Ryzen Threadripper, Ryzen Threadripper PRO, AMD Athlon, AMD Athlon PRO, and AMD PRO A-Series. These products service desktop and notebook personal computers. Our product brand for the consumer graphics market is AMD Radeon graphics, and AMD Embedded Radeon graphics is our product brand for the embedded graphics market. ... Our product brands for data center graphics are Radeon Instinct, Radeon PRO V-series, and AMD Instinct accelerators for servers. ... Our product brand for server microprocessors is AMD EPYC processors. ... Our FPGA product brands are Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6 and Spartan-7. Our product brands for Adaptive SoCs are Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis and Vivado. Our compute and network acceleration board products are sold under the Alveo brand."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: 分部净收入与经营利润表（FY2022 vs FY2021）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 净收入：Data Center 60.43 亿美元、Client 62.01 亿美元、Gaming 68.05 亿美元、Embedded 45.52 亿美元，合计 236.01 亿美元。",
+      "FY2021 净收入：Data Center 36.94 亿美元、Client 68.87 亿美元、Gaming 56.07 亿美元、Embedded 2.46 亿美元，合计 164.34 亿美元。",
+      "FY2022 经营利润：Data Center 18.48 亿美元、Client 11.90 亿美元、Gaming 9.53 亿美元、Embedded 22.52 亿美元、All Other 亏损 49.79 亿美元，合计 12.64 亿美元。",
+      "FY2021 经营利润：Data Center 9.91 亿美元、Client 20.88 亿美元、Gaming 9.34 亿美元、Embedded 0.44 亿美元、All Other 亏损 4.09 亿美元，合计 36.48 亿美元。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434 ... Operating income (loss): Data Center $ 1,848 $ 991 / Client 1,190 2,088 / Gaming 953 934 / Embedded 2,252 44 / All Other (4,979) (409) / Total operating income (loss) $ 1,264 $ 3,648"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: 各分部收入变动的驱动因素",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48–p49",
+    "published_at": "2023",
+    "key_points": [
+      "Data Center 2022 年净收入约 60 亿美元，同比增长 64%，主要驱动为 EPYC 服务器处理器销量上升。",
+      "Client 2022 年净收入 62 亿美元，同比下降 10%，主要因出货量下降 24%，部分被平均售价上升 19% 抵消。",
+      "Client 出货量下降源于 PC 市场环境艰难以及 2022 年下半年 PC 供应链的大幅库存修正；ASP 上升主要因 Ryzen 移动处理器销售占比提升。",
+      "Gaming 2022 年净收入 68 亿美元，同比增长 21%，由游戏主机 SoC 需求带动的半定制产品销售增长驱动，部分被游戏显卡销量下降抵消。",
+      "Embedded 2022 年净收入 46 亿美元，较 2021 年的 2.46 亿美元大幅增长，主要因 2022 年 2 月完成 Xilinx 收购后纳入 Xilinx 嵌入式产品收入。",
+      "All Other 2022 年经营亏损 50 亿美元，主要包含 35 亿美元收购相关无形资产摊销、11 亿美元股权激励费用与 4.52 亿美元收购相关成本。"
+    ],
+    "raw_excerpt": "Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors. ... Client net revenue of $6.2 billion in 2022 decreased by 10% ... primarily driven by a 24% decrease in unit shipment, partially offset by a 19% increase in average selling price. ... Gaming net revenue of $6.8 billion in 2022 increased by 21% ... driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales ... Embedded net revenue of $4.6 billion in 2022 increased significantly ... primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 附注：商誉按新分部结构重新分配（确认 FY22 分部口径）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p75",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 第二季度，AMD 因分部报告结构变化而在更新后的报告分部之间重新分配商誉余额。",
+      "变更前的报告分部为 Enterprise, Embedded and Semi-Custom 与 Xilinx。",
+      "变更后的报告分部为 Data Center、Gaming、Embedded。",
+      "截至 2022 年 12 月 31 日，商誉按分部为：Data Center 28.84 亿美元、Gaming 2.38 亿美元、Embedded 210.55 亿美元，合计 241.77 亿美元。",
+      "AMD 在分部变更前后均进行商誉减值测试，结论为不存在商誉减值迹象。"
+    ],
+    "raw_excerpt": "In the second quarter of fiscal year 2022, the Company reassigned goodwill balances among the updated reportable segments to reflect changes in its segment reporting structure. ... Reportable segments before segment change: Enterprise, Embedded and Semi-Custom $ 289 $ — $ (289) $ — / Xilinx — 22,794 (22,794) — / Reportable segments after segment change: Data Center — 1,094 1,790 2,884 / Gaming — — 238 238 / Embedded — — 21,055 21,055 / Total $ 289 $ 23,888 $ — $ 24,177"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 附注：Xilinx 业绩计入 Embedded 与 Data Center 分部",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71",
+    "published_at": "2023",
+    "key_points": [
+      "Xilinx 的业绩自 Xilinx 收购日起至 2022 年 12 月 31 日纳入 AMD 合并财务报表。",
+      "Xilinx 业绩在 Embedded 与 Data Center 两个分部下报告。"
+    ],
+    "raw_excerpt": "results of Xilinx are included in the Company's consolidated financial statements from the Xilinx Acquisition Date to December 31, 2022 and are reported under the Embedded and Data Center segments."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 1 The Company: 公司层面的产品范围",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023",
+    "key_points": [
+      "AMD 是一家全球性半导体公司。",
+      "AMD 的产品包括 x86 微处理器（CPU）与图形处理器（GPU），以独立器件或 SoC 形式提供。",
+      "产品范围还包括微处理器与 SoC 开发服务及技术、数据处理单元（DPU）、现场可编程门阵列（FPGA）与 Adaptive SoC 产品。",
+      "AMD 可能不时出售或授权其知识产权（IP）组合的部分内容。",
+      "AMD 于 2022 年 2 月 14 日完成对 Xilinx 的收购，于 2022 年 5 月 26 日完成对 Pensando Systems 的收购。"
+    ],
+    "raw_excerpt": "Advanced Micro Devices, Inc. is a global semiconductor company. ... AMD's products include x86 microprocessors (CPUs) and graphics processing units (GPUs), as standalone devices or as ... (SoC) products, microprocessor and SoC development services and technology, data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive SoC products. From time to time, the Company may also sell or license portions of its intellectual property (IP) portfolio."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Data Center Products / Server CPUs (EPYC 9004/7003/7002)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p7",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 销售的 EPYC 服务器处理器家族为三代并存：AMD EPYC 9004 Series、AMD EPYC 7003 Series、AMD EPYC 7002 Series。",
+      "第 4 代 AMD EPYC 9004 Series 处理器基于 \"Zen 4\" 核心。",
+      "该段落未给出任何 EPYC 型号的核心数、制程节点或 TDP 数值。"
+    ],
+    "raw_excerpt": "Server CPUs. Our CPUs for server platforms currently include the AMD EPYC™ Series processors – AMD EPYC 9004 Series, AMD EPYC 7003 Series and AMD EPYC 7002 Series. Our 4th Gen AMD EPYC 9004 Series processors are built on the \"Zen 4\" core and are designed to deliver leadership performance and"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: FY22 product launches (EPYC 3D V-Cache, Radeon RX 7900, Instinct MI210, Kria, Versal VCK5000)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p44",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 内 AMD 发布了带 AMD 3D V-Cache 技术的第三代 EPYC 处理器，面向技术计算（technical computing）负载。",
+      "FY22 内发布 Radeon RX 7900 XTX 与 Radeon RX 7900 XT 游戏显卡，基于 RDNA 3 架构。",
+      "FY22 内为 Radeon RX 6000 系列新增三款：RX 6950 XT、RX 6750 XT、RX 6650 XT，基于 RDNA 2 架构，GDDR6 显存最高 18Gbps。",
+      "FY22 内推出 Radeon PRO W6400 显卡，基于 RDNA 2 架构。",
+      "FY22 内宣布 AMD Instinct 生态可用，并推出 AMD Instinct MI210 加速器与 ROCm 5 软件。",
+      "FY22 内推出 7 nm Versal ACAP VCK5000 开发卡，定位 AI 推理性能。",
+      "FY22 内推出 Kria Robotics Starter Kit，为 Kria 产品组合新增成员，面向机器人、机器视觉与工业通信控制。",
+      "FY22 内推出 Ryzen 6000 系列移动处理器（\"Zen 3+\"，集成 RDNA 2 核显）与 Ryzen 5000 C-Series（\"Zen 3\"，最高 8 个 x86 核心，面向 Chrome OS）。",
+      "FY22 内推出 Ryzen Threadripper PRO 5000 WX-Series 工作站处理器与 Ryzen PRO 7030 Series 移动处理器。",
+      "上述发布均只给到「FY22 内」的年度粒度，未给出具体月/日。"
+    ],
+    "raw_excerpt": "also unveiled our 3rd Gen AMD EPYC processors with AMD 3D V-Cache technology for leadership performance in technical computing workloads. We introduced the 7 nm Versal™ ACAP VCK5000 development card designed to offer leadership AI inference performance. We announced the availability of the AMD Instinct™ ecosystem, the new AMD Instinct MI210 accelerator and ROCm™ 5 software. ... In the Gaming segment, we unveiled the AMD Radeon™ RX 7900 XTX and the Radeon RX 7900 XT gaming graphics cards that are built on next-generation high performance, energy-efficient AMD RDNA™ 3 architecture. We announced new graphics cards to the AMD Radeon RX 6000 Series product line: the AMD Radeon RX 6950 XT, the AMD Radeon RX 6750 XT and the AMD Radeon RX 6650 XT. These new graphics cards are built on AMD RDNA 2 gaming architecture and GDDR6 memory at up to 18Gbps."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Client Products / Desktop CPUs (Ryzen 7000, Ryzen 5000)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "桌面平台 CPU 包括 AMD Ryzen 与 AMD Athlon 系列处理器。",
+      "Ryzen 7000 Series 桌面处理器基于 \"Zen 4\" 架构。",
+      "Ryzen 5000 Series 桌面处理器家族基于 \"Zen 3\" 核心架构，最高 16 核。",
+      "Ryzen 5000 Series 是首个采用 AMD 3D V-Cache 技术的 Ryzen 处理器，用于提升游戏性能。"
+    ],
+    "raw_excerpt": "Desktop CPUs. Our CPUs for desktop platforms currently include the AMD Ryzen™ and AMD Athlon™ series processors. Our Ryzen 7000 Series desktop processors are based on \"Zen 4\" architecture and deliver leadership performance for gamers and content creators. Our AMD Ryzen 5000 Series desktop processor family powered by our \"Zen 3\" core architecture has up to 16 cores and is the first AMD Ryzen processor to feature AMD 3D V-Cache technology to improve gaming performance."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Notebook CPUs / Commercial CPUs / Chipsets",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p8",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "移动 APU 包括面向商用与消费市场的 AMD Ryzen 与 AMD Athlon 移动处理器。",
+      "Ryzen 7000 Series 移动处理器最高 16 个 \"Zen 4\" 架构核心。",
+      "Ryzen 6000 Series 移动处理器基于 \"Zen 3+\" 架构；Ryzen 5000 Series 移动处理器基于 \"Zen 3\" 核心架构。",
+      "商用产品以 AMD PRO Mobile 与 AMD PRO 桌面处理器形式销售，搭配 Radeon 显卡。",
+      "Ryzen Threadripper PRO 5000 WX-Series 基于 \"Zen 3\" 核心架构，面向多类工作站负载。",
+      "另有 Ryzen PRO 7030 Series 移动处理器，基于 \"Zen 3\" 核心架构。",
+      "AM5 平台提供 X670 芯片组（支持 PCIe 5.0）与 B650 芯片组。",
+      "AM4 生态提供 X570、B550、A520 芯片组，并继续提供 B450 与 A320。",
+      "HEDT 与工作站段提供 WRX80 芯片组。"
+    ],
+    "raw_excerpt": "Our AMD Ryzen 7000 Series processors for mobile applications have up to 16 \"Zen 4\" architecture cores. We also offer AMD Ryzen 6000 Series mobile processors, built on \"Zen 3+\" architecture and AMD Ryzen 5000 Series mobile processors, which are powered with our \"Zen 3\" core architecture. ... including chipsets for the AM5 socket like the X670 chipsets which support PCIe 5.0 ... In the AM5 platform we also offer B650 chipsets ... In the AM4 ecosystem for 5000-series processors and prior, we offer the X570, B550 and A520 chipsets ... we continue to offer the B450 and A320 chipsets ... In the High-End Desktop (HEDT) and Workstation segments, we offer the WRX80 chipsets"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Discrete Desktop and Notebook GPUs (Radeon RX 7900 process nodes, RX 6000)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p9",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Radeon RX 7900 系列采用 chiplet 设计，结合 5 nm 与 6 nm 两种制程节点，各自针对 GPU 内不同芯片优化。",
+      "AMD 继续提供基于 RDNA 2 架构的 Radeon RX 6000 系列独立显卡，面向高性能游戏台式机与笔记本。",
+      "Radeon 独立 GPU 支持 DirectX 12 Ultimate、Vulkan 等 API 与 AMD FreeSync 高刷新率显示技术。"
+    ],
+    "raw_excerpt": "Radeon RX 7900 series chiplet design combines 5 nm and 6 nm process nodes, each optimized for specific chips in the GPU. We continue to offer AMD Radeon RX 6000 series discrete graphics, based on our RDNA2 architecture, for high-performance gaming desktops and notebooks."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: Embedded Products (Embedded EPYC, Ryzen V-Series, R-Series)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p9",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "嵌入式平台产品包括 AMD Embedded EPYC CPU、AMD Embedded Ryzen V-Series APU/CPU/SoC、AMD Embedded Ryzen R-Series APU/CPU/SoC。",
+      "嵌入式处理器与 GPU 面向高带宽网络连接与安全、高性能存储、3D 图形与 4K 多媒体（车载信息娱乐）等需求。",
+      "该段落未给出任何嵌入式型号的核心数、制程节点或 TDP。"
+    ],
+    "raw_excerpt": "Embedded CPUs, APUs and GPUs. Our products for embedded platforms include AMD Embedded EPYC CPUs, AMD Embedded Ryzen V-Series APUs, CPUs and SoCs, AMD Embedded Ryzen R-Series APUs, CPUs and SoCs. Our embedded processors and GPUs are designed to support high performance and bandwidth network connectivity and security, high-performance storage requirements for enterprise and cloud infrastructure, 3D graphics performance and 4K multimedia requirements of automotive infotainment systems."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: FPGA and Adaptive SoC product brands (Versal sub-families, Alveo)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p11",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FPGA 产品品牌为 Virtex-6、Virtex-7、Virtex UltraScale+、Kintex-7、Kintex UltraScale、Kintex UltraScale+、Artix-7、Artix UltraScale+、Spartan-6、Spartan-7。",
+      "Adaptive SoC 产品品牌为 Zynq-7000、Zynq UltraScale+ MPSoC、Zynq UltraScale+ RFSoC、Versal HBM、Versal Premium、Versal Prime、Versal AI Core、Versal AI Edge，以及 Vitis 与 Vivado。",
+      "计算与网络加速板卡产品以 Alveo 品牌销售。"
+    ],
+    "raw_excerpt": "Our FPGA product brands are Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6 and Spartan-7. Our product brands for Adaptive SoCs are Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis and Vivado. Our compute and network acceleration board products are sold under the Alveo brand."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: FPGAs and Adaptive SoCs process nodes",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p10",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FPGA 家族包括 UltraScale+（16 nm 制程）、UltraScale（20 nm）、7 Series（28 nm）及更早系列。",
+      "Adaptive SoC 产品包括 Zynq SoC 与 UltraScale+ Multi-Processing System on a Chip（MPSoC）。"
+    ],
+    "raw_excerpt": "Our FPGA families include UltraScale+™ (based on 16 nm technology), UltraScale™ (20 nm), 7 Series (28 nm) and older series. Adaptive SoC products include the Zynq SoC and UltraScale+ Multi-Processing System on a Chip"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 7 MD&A: segment net revenue FY22 vs FY21",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY22 分部净收入：Data Center 60.43 亿美元、Client 62.01 亿美元、Gaming 68.05 亿美元、Embedded 45.52 亿美元，合计 236.01 亿美元。",
+      "FY21 对应分部净收入：Data Center 36.94 亿美元、Client 68.87 亿美元、Gaming 56.07 亿美元、Embedded 2.46 亿美元，合计 164.34 亿美元。",
+      "Data Center 收入增长主要驱动为 EPYC 服务器处理器销量提升；Client 收入下降主要因 PC 市场疲弱与渠道库存修正。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 / Client 6,201 6,887 / Gaming 6,805 5,607 / Embedded 4,552 246 / Total net revenue $ 23,601 $ 16,434 ... Data Center net revenue of $6 billion in 2022 increased by 64%, compared to net revenue of $3.7 billion in 2021. The increase was primarily driven by higher sales of our EPYC server processors."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Trademark list (product brand existence)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p5",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "10-K 商标清单包含：AMD CDNA、AMD Instinct、AMD RDNA、Alveo、Artix、Athlon、CoolRunner、EPYC、FidelityFX、FirePro、FreeSync、Geode、Infinity Fabric、Kinex、Pensando、Radeon、Radeon Instinct、ROCm、Ryzen、Spartan、Threadripper、UltraScale、UltraScale+、V-Cache、Versal、Virtex、Vitis、Vivado。",
+      "商标清单可佐证上述品牌在 FY22 属 AMD 在售/在用的产品品牌，但不含任何规格参数。"
+    ],
+    "raw_excerpt": "AMD, the AMD Arrow logo, AMD CDNA, AMD Instinct, AMD RDNA, Alveo, Artix, Athlon, CoolRunner, EPYC, FidelityFX, FirePro, FreeSync, Geode, Infinity Fabric, Kinex, Pensando, Radeon, Radeon Instinct, ROCm, Ryzen, Spartan, Threadripper, UltraScale, UltraScale+, V-Cache, Versal, Virtex, Vitis, Vivado"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 1 The Company / product scope statement",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "AMD 产品包括 x86 微处理器（CPU）与图形处理器（GPU），以独立器件或与 SoC 产品、微处理器与 SoC 开发服务、DPU、FPGA、Adaptive SoC 产品组合形式销售。",
+      "AMD 于 2022 年 2 月 14 日完成对 Xilinx 的收购，于 2022 年 5 月 26 日完成对 Pensando Systems 的收购。",
+      "FY22 为 53 周财年，截至 2022 年 12 月 31 日。"
+    ],
+    "raw_excerpt": "AMD's products include x86 microprocessors (CPUs) and graphics processing units (GPUs), as standalone devices or as ... (SoC) products, microprocessor and SoC development services and technology, data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive SoC products. ... On February 14, 2022 (the Xilinx Acquisition Date), the Company completed the acquisition of Xilinx, Inc. (Xilinx). On May 26, 2022 (the Pensando Acquisition Date), the Company completed the acquisition of Pensando Systems, Inc. (Pensando)."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note: 按分部的净收入与经营利润汇总表（2022 / 2021 / 2020）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68（分部信息表）；同表亦见 p48（MD&A Results of Operations）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 净收入：Data Center $6,043M；Client $6,201M；Gaming $6,805M；Embedded $4,552M；合计 $23,601M。",
+      "FY2021 净收入：Data Center $3,694M；Client $6,887M；Gaming $5,607M；Embedded $246M；合计 $16,434M。",
+      "FY2020 净收入：Data Center $1,685M；Client $5,189M；Gaming $2,746M；Embedded $143M；合计 $9,763M。",
+      "FY2022 分部经营利润：Data Center $1,848M；Client $1,190M；Gaming $953M；Embedded $2,252M；All Other $(4,979)M；合计 $1,264M。",
+      "FY2021 分部经营利润：Data Center $991M；Client $2,088M；Gaming $934M；Embedded $44M；All Other $(409)M；合计 $3,648M。",
+      "FY2020 分部经营利润：Data Center $198M；Client $1,608M；Gaming $(138)M；Embedded $(11)M；All Other $(288)M；合计 $1,369M。",
+      "公司不向经营分部单独分配资产，管理层也不使用分部资产信息评估分部。",
+      "FY2022 按客户账单地区的外部客户销售：美国 $8,049M；中国（含香港）$5,207M；日本 $4,177M；台湾 $2,369M；欧洲 $1,773M；新加坡 $1,380M；其他 $646M；合计 $23,601M。"
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685 / Client 6,201 6,887 5,189 / Gaming 6,805 5,607 2,746 / Embedded 4,552 246 143 / Total net revenue $ 23,601 $ 16,434 $ 9,763 ... Operating income (loss): Data Center $ 1,848 $ 991 $ 198 / Client 1,190 2,088 1,608 / Gaming 953 934 (138) / Embedded 2,252 44 (11) / All Other (4,979) (409) (288) / Total operating income (loss) $ 1,264 $ 3,648 $ 1,369"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Results of Operations：各分部收入变动的驱动因素",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48–p49（Item 7 MD&A, Results of Operations）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "Data Center：2022 年净收入 $6B，同比 +64%（2021 年 $3.7B），主要由 EPYC 服务器处理器销量增长驱动。",
+      "Data Center 经营利润 2022 年 $1.8B，2021 年 $991M；增长主要因收入提高，部分被经营费用上升抵消。",
+      "Client：2022 年净收入 $6.2B，同比 −10%（2021 年 $6.9B），主因出货量下降 24%，部分被平均售价上升 19% 抵消。",
+      "Client 出货量下降源于 PC 市场环境艰难及 2022 下半年 PC 供应链的大幅库存修正；ASP 上升主要因 Ryzen 移动处理器销售占比提升。",
+      "Client 经营利润 2022 年 $1.2B，2021 年 $2.1B；下降主要因收入降低与经营费用上升。",
+      "Gaming：2022 年净收入 $6.8B，同比 +21%（2021 年 $5.6B），由半定制产品销售增长（游戏主机 SoC 需求上升）驱动，部分被游戏显卡销量下降抵消。",
+      "Gaming 显卡销量下降源于 2022 下半年宏观环境走弱导致的消费需求疲软。",
+      "Gaming 经营利润 2022 年 $953M，2021 年 $934M。",
+      "Embedded：2022 年净收入 $4.6B，较 2021 年 $246M 大幅增长，主要因 2022 年 2 月完成 Xilinx 收购后并入 Xilinx 嵌入式产品收入。",
+      "Embedded 经营利润 2022 年 $2.3B，2021 年 $44M；增长主要因并入 Xilinx 嵌入式产品收入。"
+    ],
+    "raw_excerpt": "Embedded net revenue of $4.6 billion in 2022 increased significantly, compared to net revenue of $246 million in 2021. The significant increase in net revenue was primarily driven by the inclusion of Xilinx embedded product revenue as a result of the acquisition of Xilinx in February 2022. ... Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — FY2022 第二季度报告分部变更与商誉重新分配",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48（Results of Operations 引言）；p75（Note 6 Acquisition-related Intangible Assets and Goodwill）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 财年第二季度，公司变更报告分部，以使其财务报告与按战略终端市场管理业务的方式一致，并与 CODM 评估财务绩效、分配资源的方式一致。",
+      "变更前的报告分部为 \"Enterprise, Embedded and Semi-Custom\"，其 2021 年末商誉 $289M 在变更中全部转出。",
+      "变更后商誉按新分部重新分配：Data Center $2,884M；Gaming $238M；Embedded $21,055M；合计 $24,177M。",
+      "2021 年末商誉仅 $289M，2022 年末为 $24,177M，增量主要来自 Xilinx 收购带来的 $22,794M 商誉。",
+      "公司在分部变更前后均执行了商誉减值测试，结论为不存在商誉减值迹象。"
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. ... Reportable segments before segment change: Enterprise, Embedded and Semi-Custom $ 289 $ — $ (289) $ — / Xilinx — 22,794 (22,794) — / Reportable segments after segment change: Data Center — 1,094 1,790 2,884 / Gaming — — 238 238 / Embedded — — 21,055 21,055 / Total $ 289 $ 23,888 $ — $ 24,177"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations：Xilinx 收购条款、对价与产品组合扩展",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p71（Note 5 – Xilinx Acquisition）；p95（Critical Audit Matter）；p59（现金流量表补充信息）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 年 2 月 14 日，公司完成对 Xilinx 全部已发行股份的收购，总购买对价 $48.8B（扣除取得现金 $2.4B 后净额 $46.4B）。",
+      "对价构成：向 Xilinx 股东发行 429M 股公司普通股（公允价值 $48.5B，按 2022-02-11 收盘价 $113.18/股计价）+ $275M 替换股权激励（对应收购前已提供服务）。",
+      "收购使公司产品组合扩展至包含 adaptable hardware platforms；自此公司提供 FPGAs、Adaptive SoC 产品与 ACAP 产品。",
+      "Xilinx 收购产生的商誉 $22,784M，分配给 Embedded 与 Data Center 两个分部；商誉主要归因于整合 Xilinx 预期实现的协同效应。",
+      "Xilinx 收购取得的可辨认无形资产合计 $27,308M，其中 developed technology $12,295M（加权平均 16 年）、customer relationships $12,290M（14 年）、customer backlog $793M（1 年）、product trademarks $895M（12 年）、IPR&D $970M（不摊销）。",
+      "Xilinx 收购按业务合并（business combination）会计处理；Ernst & Young 将其列为关键审计事项，原因是估值不确定性重大。"
+    ],
+    "raw_excerpt": "On February 14, 2022, the Company completed the acquisition of all issued and outstanding shares of Xilinx, a leading provider of adaptive computing solutions, for a total purchase consideration of $48.8 billion ($46.4 billion, net of cash acquired of $2.4 billion). The acquisition of Xilinx expands the Company's product portfolio to include adaptable hardware platforms that enable hardware acceleration and rapid innovation across a variety of technologies. With the acquisition of Xilinx, the Company now offers FPGAs, Adaptive SoC products and ACAP products."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations：Pensando 收购（DPU）及归属 Data Center 分部",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69–p71（Note 5 – Pensando Acquisition）；p6（Item 1 Business）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "2022 年 5 月 26 日，公司完成对 Pensando 全部已发行股份的收购，交易估值约 $1.9B。",
+      "入账购买对价 $1.7B（$1,655M），为扣除需未来服务的递延现金补偿及惯常交割调整后的净额。",
+      "Pensando 收购产生的商誉 $1,098M，全部分配至 Data Center 分部；商誉主要归因于整合 Pensando 预期带来的市场机会扩大。",
+      "自 Pensando 收购日至 2022 年 12 月 31 日，合并利润表中归属于 Pensando 的收入与经营成果不重大，归入 Data Center 分部报告。",
+      "2022 年 Pensando 收购相关成本 $102M，计入销售成本、研发费用与管理费用。",
+      "Pensando 收购取得的可辨认无形资产合计 $349M，其中 developed technology $60M（4 年）、customer relationships $34M（3 年）、IPR&D $220M（不摊销）。",
+      "因 2022 年 5 月收购 Pensando，公司提供高性能 DPU 与下一代数据中心解决方案。"
+    ],
+    "raw_excerpt": "On May 26, 2022, the Company completed the acquisition of all issued and outstanding shares of Pensando, a leader in next-generation distributed computing, for a transaction valued at approximately $1.9 billion. The recorded purchase consideration of $1.7 billion is net of deferred cash compensation requiring future services and other customary closing adjustments. ... Goodwill arising from the Pensando acquisition was assigned to the Company's Data Center segment."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business：四个报告分部的产品线构成",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p6–p11（Item 1. Business）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "公司有四个报告分部：Data Center、Client、Gaming、Embedded；此外有非报告分部的 All Other 类别。",
+      "Data Center 分部主要包括 server CPUs、GPUs、DPUs、FPGAs 与 Adaptive SoC 产品。",
+      "Data Center 服务器 CPU 产品线为 AMD EPYC 系列：EPYC 9004 系列（Zen 4）、EPYC 7003 系列（含 3D V-Cache）、EPYC 7002 系列。",
+      "Data Center GPU 产品线为 AMD Instinct 家族，含基于 2 代 CDNA 架构的 Instinct MI200 系列，面向 AI 训练与超算负载，配套 ROCm 开放软件栈。",
+      "Data Center DPU 产品用于大型 IaaS 云厂商提升虚拟化与裸金属负载性能，并用于 Aruba CX 10000 架顶式网络交换机。",
+      "Client 分部产品线包括：Ryzen / Athlon 移动 APU；Ryzen 7000（Zen 4，最高 16 核）、6000（Zen 3+）、5000（Zen 3）系列移动处理器；AMD PRO 商用处理器（Ryzen PRO、Threadripper PRO、Athlon PRO）；芯片组（AM5 的 X670 / B650，AM4 的 X570 / B550 / A520 / B450 / A320，HEDT 与工作站的 WRX80）。",
+      "Gaming 分部产品线包括：Radeon RX 7900 XTX / 7900 XT（RDNA 3）、Radeon RX 6950 XT / 6750 XT / 6650 XT（RDNA 2）、Radeon PRO GPU，以及面向游戏主机的半定制 SoC 解决方案。",
+      "Embedded 分部 FPGA 品牌：Virtex-6、Virtex-7、Virtex UltraScale+、Kintex-7、Kintex UltraScale、Kintex UltraScale+、Artix-7、Artix UltraScale+、Spartan-6、Spartan-7。",
+      "Embedded 分部 Adaptive SoC 品牌：Zynq-7000、Zynq UltraScale+ MPSoC、Zynq UltraScale+ RFSoC、Versal HBM、Versal Premium、Versal Prime、Versal AI Core、Versal AI Edge，以及 Vitis 与 Vivado 软件。",
+      "计算与网络加速板卡产品以 Alveo 品牌销售；Vivado ML Edition 为硬件设计团队提供设计工具与方法学。"
+    ],
+    "raw_excerpt": "The Data Center segment primarily includes server CPUs, GPUs, DPUs, FPGAs, and Adaptive SoC products. ... Our FPGA product brands are Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6 and Spartan-7. Our product brands for Adaptive SoCs are Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis and Vivado. Our compute and network acceleration board products are sold under the Alveco brand."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview 与 All Other：Xilinx 收购对毛利、经营利润与净利润的影响",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43（Overview）；p49（All Other）；p54（合并利润表）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "公司称 2022 年是\"转型之年\"（transformative year），采取了多项重大举措以扩大并重塑业务；2022 年 2 月完成对 Xilinx 的战略收购。",
+      "FY2022 净收入 $23,601M，同比 +44%（2021 年 $16,434M）。",
+      "FY2022 毛利率 45%，2021 年 48%；下降主要因 Xilinx 收购相关的无形资产摊销。",
+      "FY2022 经营利润 $1,264M，2021 年 $3,648M；下降主要因 Xilinx 收购相关的无形资产摊销。",
+      "FY2022 净利润 $1,320M，2021 年 $3,162M；下降主要因经营利润降低。",
+      "FY2022 销售成本中含收购相关无形资产摊销 $1,448M（2021 年为 0），经营费用中含收购相关无形资产摊销 $2,100M（2021 年为 0）。",
+      "All Other 经营亏损 $4,979M，含：收购相关无形资产摊销 $3,548M、股权激励费用 $1,081M、收购相关成本 $452M（含交易成本、Xilinx 存货公允价值上调摊销、Xilinx 固定资产公允价值上调折旧、Xilinx 与 Pensando 收购相关补偿费用及许可收益）。",
+      "FY2022 收购相关无形资产摊销费用合计 $3.5B；2021 年末收购相关无形资产余额不重大。"
+    ],
+    "raw_excerpt": "2022 was a transformative year for AMD as we took several major steps that scaled and reshaped our business. In February 2022, we completed our strategic [acquisition of Xilinx] ... Gross margin as a percentage of net revenue was 45% in 2022 compared to 48% in 2021. The decrease in gross margin was primarily due to amortization of intangible assets associated with the Xilinx acquisition. ... All Other operating loss of $5.0 billion in 2022 primarily consisted of $3.5 billion of amortization of acquisition-related intangibles, $1.1 billion of stock-based compensation expense, and $452 million of acquisition-related costs"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 主要客户集中度（Gaming 与 Client 分部）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69（Note 4 – 主要客户销售表）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "FY2022 Customer A 占合并净收入 16%（2021 年 14%，2020 年低于 10%）。",
+      "Customer B 2021 年占合并净收入 11%，2022 年与 2020 年均低于 10%。",
+      "对 Customer A 与 Customer B 的销售分别来自 Gaming 分部与 Client 分部的产品。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: ... Customer A 16 % 14 % * / Customer B * 11 % * ... Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5：Xilinx 与 Pensando 未经审计 pro forma 信息的编制口径",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p74（Note 5 – 未经审计 pro forma 信息说明）",
+    "published_at": "2023-02-27",
+    "key_points": [
+      "公司财年截止于每年 12 月最后一个周六；Xilinx 财年截止于最接近 3 月 31 日的周六；Pensando 财年截止于 1 月 31 日。",
+      "pro forma 信息按公司财年口径编制：截至 2022-12-31 的十二个月包含 Xilinx 2022-01-02 至 2022-12-31 的业绩，以及 Pensando 2022-01-01 至 2022-12-31 的业绩。",
+      "截至 2021-12-25 的十二个月包含 Xilinx 截至 2022-01-01 的十二个月业绩，以及 Pensando 截至 2021-12-31 的十二个月业绩。",
+      "pro forma 信息仅为说明目的，假设 Xilinx 与 Pensando 收购在 FY2021 年初完成，不代表实际可实现的结果，也不预示未来经营成果。",
+      "pro forma 调整主要涉及购买会计处理，包括收购相关无形资产摊销、固定资产折旧费用及承接股权激励费用；FY2021 还包含 Xilinx 存货公允价值上调摊销 $184M，FY2022 无此项。"
+    ],
+    "raw_excerpt": "The unaudited pro forma information above is presented on the basis of the Company's fiscal year and combines the historical results of the fiscal periods of the Company with the following historical results of Xilinx and Pensando: the twelve months ended December 31, 2022 includes Xilinx results for the twelve-month period beginning January 2, 2022 through December 31, 2022 and Pensando results for the twelve-month period beginning January 1, 2022 through December 31, 2022 ... The unaudited pro forma financial information presented is for informational purposes only and is not necessarily indicative of the results of operations that would have been achieved if the Xilinx and Pensando acquisitions were completed at the beginning of fiscal year 2021"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Our Strategy（软件平台作为五大战略支柱之一）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p6",
+    "published_at": "2023-02（FY22 10-K 提交期，正文覆盖截至 2022-12-31 财年）",
+    "key_points": [
+      "AMD 的战略聚焦五大支柱，其中一项为「提供软件平台与开发者赋能」（providing software platforms and developer enablement），另一项为「设计定制芯片与解决方案」。",
+      "AMD 明确表示其开发用于使能自家高性能产品的软件平台，范围包括面向 CPU、GPU 与 FPGA 的开发工具、编译器与驱动。",
+      "AMD 将「软件与产品领导力」并列为公司定位的一部分（high-performance and adaptive computing technology, software and product leadership）。",
+      "AMD 通过 CPU/GPU/FPGA/DPU 组合提供芯片级差异化方案（半定制 SoC、Adaptive SoC、APU）与系统级方案（PC、嵌入式平台、服务器）。"
+    ],
+    "raw_excerpt": "Our strategy is focused on five strategic pillars: compute technology leadership, expanding data center leadership, enabling pervasive artificial intelligence (AI), providing software platforms and developer enablement, and designing custom silicon and solutions. … We develop world-class software platforms that are used to enable our high-performance products. Our software platforms include development tools, compilers, and drivers for our CPUs, GPUs and FPGAs."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Data Center Products: Data Center GPUs 与 ROCm",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p7",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD Instinct MI200 系列基于第二代 AMD CDNA 架构，面向 AI 训练与超算等计算加速型数据中心负载。",
+      "AMD 将 Instinct GPU 加速器与「AMD ROCm 开放软件」并列陈述，ROCm 被定位为 Instinct 数据中心的配套软件栈。",
+      "AMD 将数据中心 GPU 品牌列为 Radeon Instinct、Radeon PRO V 系列与面向服务器的 AMD Instinct 加速器（见 p11 品牌清单）。"
+    ],
+    "raw_excerpt": "Our AMD Instinct™ family of GPU accelerator products, including AMD Instinct MI200 Series which is based on 2 Gen AMD CDNA architecture, and are specifically designed to address the growing demand for compute-accelerated data center workloads, including AI training and a range of supercomputing applications where the compute capabilities of GPUs provide additional performance. Combined with our AMD ROCm™ open software…"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Data Center Products: DPUs（Pensando P4 DPU 与配套软件栈）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p7",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD Pensando P4 可编程 DPU 用于把数据中心基础设施服务从 CPU 上卸载。",
+      "该 DPU 与 AMD 的「comprehensive software stack」配套销售，用于帮助云与企业客户在云规模下优化网络、存储与安全服务性能。",
+      "DPU 面向低延迟、低抖动、低功耗影响设计，可帮助大型 IaaS 云厂商提升托管虚拟化与裸金属负载性能。",
+      "AMD DPU 为 Aruba CX 10000 机架顶部（top-of-rack）网络交换机提供动力，使企业客户可采用分布式服务的云模式。"
+    ],
+    "raw_excerpt": "Our P4 programmable AMD Pensando DPUs are designed to help offload data center infrastructure services from the CPU, and coupled with our comprehensive software stack, help enable cloud and enterprise customers to optimize performance for network, storage, and security services at cloud scale. Designed for minimal latency, jitter and power impact, our DPUs can help large Infrastructure as a service (IaaS) cloud providers improve hosted virtualized and bare-metal workload performance. Our DPUs power the Aruba CX 10000 top-of-rack network switch, designed to enable enterprise customers to adopt the cloud model of distributed services."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 5 Business Combinations: Pensando 收购与 distributed services platform",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD 于 2022 年 5 月 26 日完成对 Pensando 的收购，交易估值约 19 亿美元，记录的对价 17 亿美元（已扣除需未来服务条件的递延现金补偿及惯常交割调整）。",
+      "10-K 将 Pensando 描述为「下一代分布式计算的领导者」，其「leading distributed services platform」被列为收购的核心资产。",
+      "该收购被表述为扩展 AMD 面向云、企业与边缘客户提供领先解决方案的能力。"
+    ],
+    "raw_excerpt": "On May 26, 2022, the Company completed the acquisition of all issued and outstanding shares of Pensando, a leader in next-generation distributed computing, for a transaction valued at approximately $1.9 billion. The recorded purchase consideration of $1.7 billion is net of deferred cash compensation requiring future services and other customary closing adjustments. The acquisition of Pensando and its leading distributed services platform expands the Company's ability to offer leadership solutions for cloud, enterprise, and edge customers."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A Overview: Pensando 带来「complements our existing products」的软件栈",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p43",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "MD&A 概述称，2022 年 5 月收购 Pensando 后，AMD 提供高性能 DPU 以及「a software stack that complements our existing products」。",
+      "AMD 称凭借 Xilinx 与 Pensando 两项收购，可提供业界最广泛的计算引擎与加速器组合，覆盖性能、安全、灵活性与总拥有成本。",
+      "FY22 净营收 236.01 亿美元，同比增长 44%（2021 年为 164.34 亿美元）。"
+    ],
+    "raw_excerpt": "In May 2022, we expanded our data center solutions capabilities with the acquisition of Pensando Systems, Inc. (Pensando). We now offer high-performance data processing units (DPUs) and a software stack that complements our existing products. With the Xilinx and Pensando acquisitions, we are well positioned to provide the industry's broadest set of leadership compute engines and accelerators to help enable best performance, security, flexibility and total cost of ownership for leading-edge data centers."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Gaming Products: Semi-Custom Products 与主机客户",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p8",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD 的半定制产品是基于其 CPU、GPU 与多媒体技术的、与客户共同开发（co-developed）的高性能客户专属方案。",
+      "AMD 开发了为 Sony PlayStation 5 以及 Microsoft Xbox Series S 与 X 游戏主机提供动力的半定制 SoC 产品。",
+      "AMD 与 Valve 合作打造了面向掌上游戏的半定制 APU，用于驱动 Steam Deck。",
+      "AMD 称其已与当今众多领先的游戏主机与掌上 PC 游戏厂商采用这种协同共研模式，并可提供从完全定制 SoC 到对现有 CPU/APU/GPU 产品做适度改型与集成的多种方案。"
+    ],
+    "raw_excerpt": "Our semi-custom products are tailored, co-developed, high-performance, customer-specific solutions based on our CPU, GPU and multi-media technologies. We work closely with our customers to define solutions to precisely match the requirements of the device or application. We developed the semi-custom SoC products that power both the Sony PlayStation 5 as well as the Microsoft Xbox Series S and X game consoles. We partnered with Valve to create a semi-custom APU optimized for handheld gaming to power the Steam Deck™."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 分部构成与「semi-custom SoC products and development services」",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p4",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "10-K 在业务概述中把「discrete GPUs, and semi-custom SoC products and development services」列为一项产品/服务类别，即设计开发服务被作为独立列示的业务内容。",
+      "AMD 四个可报告分部为 Data Center、Client、Gaming、Embedded；Gaming 分部主要包含独立 GPU、半定制 SoC 产品与开发服务。",
+      "AMD 表示会不时出售或授权其 IP 组合的部分内容。"
+    ],
+    "raw_excerpt": "• discrete GPUs, and semi-custom SoC products and development services; and • embedded CPUs, GPUs, APUs, FPGAs, and Adaptive SoC products. From time to time, we may also sell or license portions of our intellectual property (IP) portfolio."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 客户合作模式：NRE 设计开发服务费",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "部分客户就设计与开发服务向 AMD 支付非经常性工程费用（non-recurring engineering fees），并就由此产生的产品支付采购价款。",
+      "AMD 与客户共同创造基于其 CPU、GPU 与 APU 技术的差异化产品。",
+      "单一客户占 FY22 合并净营收的 16%，该客户销售全部来自 Gaming 分部；失去该客户将对业务造成重大不利影响。"
+    ],
+    "raw_excerpt": "We also work with our customers to create differentiated products that leverage our CPU, GPU and APU technology. Certain customers pay us non-recurring engineering fees for design and development services and a purchase price for the resulting products. One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Data Center Products: Alveo 与 FPGA-as-a-Service 云供给",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p7",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD Alveo 加速卡提供在数据中心、边缘或云端加速负载的平台。",
+      "Alveo 已在多数主流 OEM 服务器平台上可用，并在提供 FPGA-as-a-Service（FaaS）的各主要云厂商中「growing presence」。",
+      "数据中心 FPGA/Adaptive SoC 产品包括 Virtex 与 Kintex FPGA、Zynq、Zynq MPSoC 与 Versal Adaptive SoC。"
+    ],
+    "raw_excerpt": "Our Alveo™ accelerator cards provide a platform for accelerating workloads in the data center, at the edge or the cloud. To make it accessible for developers, Alveo is available on most major OEM server platforms, as well as a growing presence across all major cloud providers who provide FPGA-as-a-Service (FaaS)."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 产品品牌清单：Vitis 与 Vivado 被列为 Adaptive SoC 品牌",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p11",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD 将 Vitis 与 Vivado 列入其 Adaptive SoC 的产品品牌清单，与 Zynq-7000、Zynq UltraScale+ MPSoC/RFSoC、Versal HBM/Premium/Prime/AI Core/AI Edge 并列。",
+      "AMD 的计算与网络加速板产品以 Alveo 品牌销售。",
+      "AMD 通过直销与联合营销（co-marketing）项目销售产品，并与客户及第三方开展合作广告与市场开发基金项目。"
+    ],
+    "raw_excerpt": "Our product brands for Adaptive SoCs are Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis and Vivado. Our compute and network acceleration board products are sold under the Alveo brand."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 1/Note 2：收入几乎全部来自产品销售，服务占比极小",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p60",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "AMD 的绝大部分收入来自产品销售，产品销售构成单一履约义务（single performance obligation）。",
+      "AMD 的产品范围在附注中被表述为包含「semi-custom System-on-Chip (SoC) products, microprocessor and SoC development services and technology」、DPU、FPGA 与 Adaptive SoC。",
+      "AMD 会不时出售或授权其 IP 组合的部分内容。"
+    ],
+    "raw_excerpt": "AMD's products include x86 microprocessors (CPUs) and graphics processing units (GPUs), as standalone devices or as incorporated into accelerated processing units (APUs), chipsets, data center and professional GPUs, embedded processors, semi-custom System-on-Chip (SoC) products, microprocessor and SoC development services and technology, data processing units (DPUs), Field Programmable Gate Arrays (FPGAs), and Adaptive SoC products. … Substantially all the Company's revenue is derived from product sales, representing a single performance obligation."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 客户集中度表（Gaming 分部大客户）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "FY22 客户 A 占合并净营收 16%（FY21 为 14%），客户 B 在 FY22 低于 10%（FY21 为 11%）。",
+      "客户 A 与客户 B 的销售分别来自 Gaming 分部与 Client 分部。"
+    ],
+    "raw_excerpt": "Customer A 16 % 14 % * / Customer B * 11 % * / Less than 10% / Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Gaming 分部业绩：半定制产品（主机 SoC）驱动增长",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023-02（FY22 10-K）",
+    "key_points": [
+      "Gaming 分部 FY22 净营收 68 亿美元，同比增长 21%（2021 年为 56 亿美元）。",
+      "增长由半定制产品销售上升驱动，原因是游戏主机 SoC 需求上升；部分被游戏显卡销量下降抵消。",
+      "Gaming 分部 FY22 经营利润 9.53 亿美元（2021 年为 9.34 亿美元）。"
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales due to a decrease in unit shipments driven by soft consumer demand given weakened macroeconomic conditions experienced in the second half of 2022."
+  }
+]

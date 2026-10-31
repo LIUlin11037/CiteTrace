@@ -1,0 +1,452 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — MD&A Consolidated Results of Operations (key indicators table)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24（印刷页 22）",
+    "published_at": null,
+    "key_points": [
+      "MD&A 的合并经营成果关键指标表列示「Effective income tax rate」：FY2022 为 (0.6)%，FY2021 为 14.8%，FY2020 为 17.5%。",
+      "同一表格列示 FY2022 经营亏损 ($3,547)M、经营利润率 (5.3)%；FY2021 经营亏损 ($2,902)M、经营利润率 (4.7)%。",
+      "同一表格列示归属于 Boeing 股东的净亏损：FY2022 ($4,935)M，FY2021 ($4,202)M。"
+    ],
+    "raw_excerpt": "Effective income tax rate (0.6) % 14.8 % 17.5 %\nNet loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873)\n（列标题：Years ended December 31, 2022 / 2021 / 2020）"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Consolidated Statements of Operations",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55（印刷页 53）",
+    "published_at": null,
+    "key_points": [
+      "FY2022 税前亏损（Loss before income taxes）为 ($5,022) 百万美元；所得税（费用）/收益为 ($31) 百万美元。",
+      "FY2021 税前亏损为 ($5,033) 百万美元；所得税（费用）/收益为 $743 百万美元（即净税收收益）。",
+      "FY2022 净亏损 ($5,053)M，FY2021 净亏损 ($4,290)M；FY2020 税前亏损 ($14,476)M、所得税收益 $2,535M。",
+      "FY2022 总收入 $66,608M，FY2021 总收入 $62,286M。"
+    ],
+    "raw_excerpt": "Loss before income taxes (5,022) (5,033) (14,476)\nIncome tax (expense)/benefit (31) 743 2,535\nNet loss (5,053) (4,290) (11,941)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — MD&A Other Earnings Items",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p27（印刷页 25）",
+    "published_at": null,
+    "key_points": [
+      "MD&A「Other Earnings Items」表重复列示 FY2022 税前亏损 ($5,022)M、所得税（费用）/收益 ($31)M；FY2021 税前亏损 ($5,033)M、所得税收益 $743M。",
+      "该表列示 FY2022 持续经营净亏损 ($5,053)M，FY2021 ($4,290)M。",
+      "该表列示 FY2022 其他收入净额 $1,058M、利息与债务费用 ($2,533)M；FY2021 分别为 $551M 与 ($2,682)M。"
+    ],
+    "raw_excerpt": "Loss before income taxes (5,022) (5,033) (14,476)\nIncome tax (expense)/benefit (31) 743 2,535\nNet loss from continuing operations (5,053) (4,290) (11,941)"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4 Income Taxes (components of loss before taxes and of the tax provision)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p76（印刷页 72）",
+    "published_at": null,
+    "key_points": [
+      "Note 4 列示税前亏损构成：FY2022 美国 ($5,457)M、非美国 $435M、合计 ($5,022)M；FY2021 美国 ($5,475)M、非美国 $442M、合计 ($5,033)M。",
+      "Note 4 列示所得税（收益）/费用总额：FY2022 为 $31M 费用，FY2021 为 ($743)M 收益，FY2020 为 ($2,535)M 收益。",
+      "当期与递延拆分：FY2022 当期税合计 $42M（美国联邦 ($58)M、非美国 $142M、美国州 ($42)M），递延税合计 ($11)M；FY2021 当期税合计 $100M，递延税合计 ($843)M。",
+      "FY2022 净退税/缴税为 ($1,317)M，FY2021 为 ($1,480)M。"
+    ],
+    "raw_excerpt": "Total ($5,022) ($5,033) ($14,476)\n...\nTotal current 42 100 (3,799)\nTotal deferred (11) (843) 1,264\nTotal income tax expense/(benefit) $31 ($743) ($2,535)\nNet income tax (refunds)/payments were ($1,317), ($1,480) and $37 in 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4 statutory-to-actual tax rate reconciliation",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77（印刷页 73）",
+    "published_at": null,
+    "key_points": [
+      "税率调节表末行列示实际所得税费用/(收益)：FY2022 为 $31M、税率 (0.6)%；FY2021 为 ($743)M、税率 14.7%；FY2020 为 ($2,535)M、税率 17.5%。",
+      "最大调节项为估值备抵（Valuation allowance）：FY2022 为 $1,199M / (23.9)%，FY2021 为 $512M / (10.2)%，FY2020 为 $2,603M / (18.0)%。",
+      "其他调节项 FY2022 vs FY2021：研发抵免 ($204)M/4.1% vs ($189)M/3.8%；州所得税（扣除联邦影响）$90M/1.8% vs $94M/1.9%；非美国活动税 $64M/(1.3)% vs $47M/(0.9)%；CARES 法案影响 ($5)M/0.1% vs $3M/(0.1)%；其他准备调整 $121M/(2.4)% vs $35M/(0.8)%。",
+      "美国联邦法定税率 FY2022 与 FY2021 均为 21.0%，对应法定税额分别为 ($1,054)M 与 ($1,057)M。",
+      "FY2022、FY2021、FY2020 与 NOL 结转条款相关的税收影响分别为收益 $5M、费用 $3M、收益 $1,175M。"
+    ],
+    "raw_excerpt": "U.S. federal statutory tax ($1,054) 21.0 % ($1,057) 21.0 % ($3,039) 21.0 %\nValuation allowance 1,199 (23.9) 512 (10.2) 2,603 (18.0)\n...\nIncome tax expense/(benefit) $31 (0.6)% ($743) 14.7 % ($2,535) 17.5 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4 deferred tax assets and valuation allowance balances",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77（印刷页 73）",
+    "published_at": null,
+    "key_points": [
+      "FY2022 估值备抵前递延税资产/(负债) 总额为 $2,995M，FY2021 为 $2,282M。",
+      "估值备抵余额 FY2022 为 ($3,162)M，FY2021 为 ($2,423)M。",
+      "扣除估值备抵后净递延税资产/(负债)：FY2022 ($167)M，FY2021 ($141)M。",
+      "联邦 NOL、抵免、利息及其他结转的递延税资产 FY2022 为 $2,082M，FY2021 为 $1,522M。"
+    ],
+    "raw_excerpt": "Gross deferred tax assets/(liabilities) before valuation allowance $2,995 $2,282\nValuation allowance (3,162) (2,423)\nNet deferred tax assets/(liabilities) after valuation allowance ($167) ($141)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4 Income Taxes: 联邦法定税至实际所得税的税率调节表（2022/2021/2020）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "税率调节表中估值备抵（Valuation allowance）行：2022 年为 $1,199M / (23.9)%，2021 年为 $512M / (10.2)%，是各调节项中同比变动最大的一项（增量约 $687M、约 13.7 个百分点）。",
+      "美国联邦法定税 2022 年为 $(1,054)M / 21.0%，2021 年为 $(1,057)M / 21.0%，两年基本持平。",
+      "研发抵免（Research and development credits）2022 年为 $(204)M / 4.1%，2021 年为 $(189)M / 3.8%，同比仅小幅增加。",
+      "州所得税（扣除联邦税影响后）2022 年为 $(90)M / 1.8%，2021 年为 $(94)M / 1.9%，基本持平。",
+      "非美国经营活动税项（Tax on non-U.S. activities）2022 年为 $64M / (1.3)%，2021 年为 $47M / (0.9)%。",
+      "CARES Act 影响 2022 年为 $(5)M / 0.1%，2021 年为 $3M / (0.1)%；正文说明 2022、2021、2020 年与 NOL 结转条款相关的分别为 $5M 税收利益、$3M 税收费用、$1,175M 税收利益。",
+      "其他准备调整（Other provision adjustments）2022 年为 $121M / (2.4)%，2021 年为 $35M / (0.8)%。",
+      "调节表合计：所得税费用/(利益) 2022 年为 $31M / (0.6)%，2021 年为 $(743)M / 14.7%。",
+      "2020 年第四季度就 2015-2017 年度联邦税务审计达成和解，确认 $587M 税收利益（仅影响 2020 年，非 2021→2022 变动因素）。"
+    ],
+    "raw_excerpt": "The following is a reconciliation of the U.S. federal statutory tax to actual income tax (benefit)/expense: Years ended December 31, 2022 2021 2020 Amount Rate Amount Rate Amount Rate / U.S. federal statutory tax ($1,054) 21.0 % ($1,057) 21.0 % ($3,039) 21.0 % / Valuation allowance 1,199 (23.9) 512 (10.2) 2,603 (18.0) / Research and development credits (204) 4.1 (189) 3.8 (284) 2.0 / State income tax provision, net of effects on U.S. federal tax (90) 1.8 (94) 1.9 (168) 1.2 / Tax on non-U.S. activities 64 (1.3) 47 (0.9) 7 (0.1) / Impact of CARES Act (5) 0.1 3 (0.1) (1,175) 8.1 / Other provision adjustments 121 (2.4) 35 (0.8) 108 (0.8) / Audit settlements (587) 4.1 / Income tax expense/(benefit) $31 (0.6)% ($743) 14.7 % ($2,535) 17.5 % ... In 2022, 2021, and 2020, we recorded tax benefits of $5, tax expense of $3, and tax benefits of $1,175 related to the NOL carryback provision."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — MD&A Other Earnings Items 与合并利润表：税前亏损与所得税费用/利益",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p27（Other Earnings Items）、p55（Consolidated Statements of Operations）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年税前亏损 $(5,022)M，2021 年税前亏损 $(5,033)M，两年税前亏损规模几乎相同。",
+      "2022 年所得税费用 $(31)M，2021 年所得税利益 $743M，即由税收利益转为小额税收费用。",
+      "2022 年有效所得税率为 (0.6)%，2021 年为 14.8%（MD&A 关键指标表口径）。",
+      "2022 年净亏损 $(5,053)M，2021 年净亏损 $(4,290)M；归属于 Boeing 股东的净亏损分别为 $(4,935)M 与 $(4,202)M。",
+      "2022 年 8 月签署的《2022 年通胀削减法案》含 2023 年 1 月 1 日生效的 15% 企业最低税与 1% 股票回购消费税，公司表示预计不会对经营成果产生重大影响。"
+    ],
+    "raw_excerpt": "Loss from operations ($3,547) ($2,902) ($12,767) / Other income, net 1,058 551 447 / Interest and debt expense (2,533) (2,682) (2,156) / Loss before income taxes (5,022) (5,033) (14,476) / Income tax (expense)/benefit (31) 743 2,535 / Net loss from continuing operations (5,053) (4,290) (11,941) ... Effective income tax rate (0.6) % 14.8 % 17.5 %"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4：递延所得税资产/负债净额与估值备抵余额变动",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p78",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "递延所得税资产总额由 2021 年 $11,258M 增至 2022 年 $12,301M；递延所得税负债由 $(8,976)M 增至 $(9,306)M。",
+      "估值备抵余额由 2021 年 $2,423M 增至 2022 年 $3,162M，增加 $739M。",
+      "递延所得税净额由 2021 年 $(141)M 变为 2022 年 $(167)M。",
+      "公司称其 $12,301M 递延所得税资产可用于未来年度抵减应税所得、减少应交所得税。"
+    ],
+    "raw_excerpt": "Net deferred tax assets/(liabilities) at December 31 were as follows: 2022 2021 / Deferred tax assets $12,301 $11,258 / Deferred tax liabilities (9,306) (8,976) / Valuation allowance (3,162) (2,423) / Net deferred tax assets/(liabilities) ($167) ($141) / The Company's deferred income tax assets of $12,301 can be used in future years to offset taxable income and reduce income taxes payable."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4：三年累计税前亏损与估值备抵判断依据",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p78（估值备抵讨论段）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "公司在 2020 年第四季度以及整个 2021 年和 2022 年处于三年累计税前亏损状态。",
+      "公司在评估时对收益及其他综合收益（OCI）中的某些非经常性项目进行了正常化处理，并得出正常化后的三年累计结论（该句在检索片段中被截断）。",
+      "公司提及 2021 年产生的税务 NOL 以及 2021、2022 年的利息结转可无限期结转，联邦研发抵免可结转 20 年。"
+    ],
+    "raw_excerpt": "In the fourth quarter of 2020 and throughout 2021 and 2022, the Company was in a three-year cumulative pre-tax loss position. We also normalized earnings and other comprehensive income (OCI) for certain non-recurring items and reached a normalized three-year cumulative ... generated tax NOL in 2021 and interest carryovers in 2021 and 2022 that can be carried forward indefinitely and federal research and development credits that can be carried forward 20 years."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4：递延所得税资产/负债构成明细（含 737 MAX 客户让步、研发支出资本化）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77（递延所得税构成表）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "存货与长期合同收入确认方法形成递延所得税负债 $(4,369)M（2021 年 $(3,827)M）。",
+      "联邦 NOL、抵免、利息及其他结转形成递延所得税资产 $2,082M（2021 年 $1,522M）。",
+      "「737 MAX 客户让步及其他对价」相关递延所得税资产由 2021 年 $682M 降至 2022 年 $425M。",
+      "2022 年新增「研发支出（Research expenditures）」递延所得税资产 $1,464M，2021 年为零。",
+      "养老金福利相关递延所得税资产由 2021 年 $1,739M 降至 2022 年 $1,146M。",
+      "估值备抵前递延所得税资产/(负债)总额为 2022 年 $2,995M、2021 年 $2,282M；估值备抵为 $(3,162)M 与 $(2,423)M。",
+      "联邦 NOL、抵免、利息及其他结转形成的递延所得税资产中，$742M 于 2042 年 12 月 31 日或之前到期，$1,340M 可无限期结转。"
+    ],
+    "raw_excerpt": "Inventory and long-term contract methods of income recognition ($4,369) ($3,827) / Federal net operating loss, credit, interest and other carryovers 2,082 1,522 / Fixed assets, intangibles and goodwill (1,641) (1,657) / Research expenditures 1,464 / Pension benefits 1,146 1,739 / Other employee benefits 1,095 991 / State net operating loss, credit, interest and other carryovers 1,021 929 / Accrued expenses and reserves 933 763 / Other postretirement benefit obligations 660 913 / 737 MAX customer concessions and other considerations 425 682 / Other 179 227 / Gross deferred tax assets/(liabilities) before valuation allowance $2,995 $2,282 / Valuation allowance (3,162) (2,423)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4：研发支出资本化新税法对当期应税所得的影响",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p78（R&D capitalization 说明段）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年起生效的研发支出资本化税法使资本化金额增加了当年应税所得，但该金额可在未来期间摊销扣除。",
+      "因此公司就资本化的研发支出确认了递延所得税资产。"
+    ],
+    "raw_excerpt": "Additionally, as the result of the new R&D capitalization tax law effective in 2022, the capitalized amounts resulted in increased current year taxable income, but which are deductible as amortized in future periods. Therefore, the Company recorded a deferred tax asset for the capitalized R&D expenditures."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 4：所得税费用构成（当期/递延，分美国联邦、州、非美国）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p76（Note 4 – Income Taxes）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "税前亏损的地域构成：2022 年美国 $(5,457)M、非美国 $435M；2021 年美国 $(5,475)M、非美国 $442M。",
+      "当期所得税：2022 年美国联邦 $(58)M、非美国 $142M、美国州 $(42)M，合计 $42M；2021 年分别为 $(89)M、$147M、$42M，合计 $100M。",
+      "递延所得税：2022 年美国联邦 $(62)M、非美国 $(3)M、美国州 $54M，合计 $(11)M；2021 年分别为 $(855)M、$(12)M、$24M，合计 $(843)M。",
+      "所得税费用/(利益)合计：2022 年 $31M，2021 年 $(743)M，2020 年 $(2,535)M。",
+      "2022、2021、2020 年净所得税（退税）/缴纳额分别为 $(1,317)M、$(1,480)M、$37M。"
+    ],
+    "raw_excerpt": "The components of Loss before income taxes were: Years ended December 31, 2022 2021 2020 / U.S. ($5,457) ($5,475) ($14,882) / Non-U.S. 435 442 406 / Total ($5,022) ($5,033) ($14,476) ... Total current 42 100 (3,799) / Total deferred (11) (843) 1,264 / Total income tax expense/(benefit) $31 ($743) ($2,535) / Net income tax (refunds)/payments were ($1,317), ($1,480) and $37 in 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 7 与现金流量表：787/777X reach-forward loss 与 737 MAX 客户让步支付",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p81（Note 7）、p59（Consolidated Statements of Cash Flows）、p43（MD&A 流动性）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2021 年第四季度，公司判定 787 项目预计完工成本加上已计入 787 存货的成本超过预计收入，确认 $3,460M reach-forward loss，冲减递延生产成本。",
+      "现金流量表非现金项目中「787 与 777X reach-forward losses」2022 年为 $3,460M，2021 年为 $6,493M。",
+      "2022 与 2021 年支付给 737 MAX 客户的让步金额分别为 $1.0B 与 $2.5B。",
+      "2022 年非现金项目减少 $3.4B，主要由于 2021 年记录的 787 项目 $3.5B reach-forward loss。",
+      "2022 年净亏损 $5.1B 相比 2021 年 $4.3B 增加 $0.8B，主要由于 2022 年没有所得税利益。",
+      "2022 与 2021 年分别收到所得税退税 $1.5B 与 $1.7B。"
+    ],
+    "raw_excerpt": "During the fourth quarter of 2021, we determined that estimated costs to complete the 787 program plus costs already included in 787 inventory exceed estimated revenues from the program. The resulting reach-forward loss of $3,460 was recorded as a reduction to deferred production costs. ... 787 and 777X reach-forward losses 3,460 6,493 ... Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021. ... The $0.8 billion year-over-year increase in the net loss is primarily driven by the absence of an income tax benefit in 2022."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 合并综合收益表：OCI 与养老金精算利得（估值备抵评估中被正常化的项目）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p56（Consolidated Statements of Comprehensive Income）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "其他综合收益（税后）2022 年为 $2,109M，2021 年为 $5,474M，2020 年为 $(980)M。",
+      "设定受益养老金及其他退休后福利计划相关的 OCI（税后）2022 年为 $2,202M，2021 年为 $5,500M。",
+      "其中当期产生的净精算利得（税后）2022 年为 $1,533M，2021 年为 $4,262M。",
+      "2022 年综合亏损 $(2,944)M，2021 年综合收益 $1,184M。"
+    ],
+    "raw_excerpt": "Other comprehensive income/(loss), net of tax 2,109 5,474 (980) / Comprehensive (loss)/income, net of tax (2,944) 1,184 (12,921) ... Defined benefit pension plans & other postretirement benefits: Net actuarial gain/(loss) arising during the period, net of tax of ($22), ($32) and $111 1,533 4,262 (1,956) ... Total defined benefit pension plans & other postretirement benefits, net of tax 2,202 5,500 (1,119)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 13：737 MAX 停飞客户让步负债余额变动",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87（Note 13 – Liabilities, Commitments and Contingencies）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "737 MAX 停飞客户让步及其他对价负债：2022 年初 $2,940M，支付减少 $1,031M，让步及实物对价减少 $29M，估计变更减少 $16M，2022 年末 $1,864M。",
+      "2021 年初该负债为 $5,537M，支付减少 $2,535M，年末 $2,940M。",
+      "2022 年末 $1.9B 负债中，$1.6B 为已签约客户让步及其他负债，$0.3B 取决于与客户的谈判结果。",
+      "应计负债中「Forward loss recognition」由 2021 年 $2,014M 增至 2022 年 $4,060M。"
+    ],
+    "raw_excerpt": "737 MAX Grounding / The following table summarizes changes in the 737 MAX customer concessions and other considerations liability during 2022 and 2021. 2022 2021 / Beginning balance – January 1 $2,940 $5,537 / Reductions for payments made (1,031) (2,535) / Reductions for concessions and other in-kind considerations (29) (48) / Changes in estimates (16) (14) / Ending balance – December 31 $1,864 $2,940 ... Forward loss recognition 4,060 2,014"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Consolidated Results of Operations (key indicators table)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's consolidated results table reports an effective income tax rate of (0.6)% for FY2022, 14.8% for FY2021, and 17.5% for FY2020.",
+      "The FY2022 rate is a swing of roughly 15.4 percentage points versus FY2021, moving from a positive rate to a near-zero/negative rate.",
+      "FY2022 net loss attributable to Boeing shareholders was $4,935M (diluted loss per share $8.30) versus $4,202M ($7.15) in FY2021."
+    ],
+    "raw_excerpt": "Effective income tax rate (0.6) % 14.8 % 17.5 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Other Earnings Items (pre-tax loss and tax line)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p27",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 loss before income taxes was ($5,022)M with income tax expense of $31M; FY2021 loss before income taxes was ($5,033)M with an income tax benefit of $743M.",
+      "Pre-tax losses were essentially flat year over year ($5,022M vs $5,033M), so the effective-rate change is driven by the tax line rather than by pre-tax results.",
+      "The same figures appear in the Consolidated Statements of Operations (p55) and the segment data note (p62)."
+    ],
+    "raw_excerpt": "Loss before income taxes (5,022) (5,033) (14,476) / Income tax (expense)/benefit (31) 743 2,535"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Note 4 Income Taxes: statutory-to-actual rate reconciliation",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77",
+    "published_at": "2023",
+    "key_points": [
+      "The valuation allowance line in the rate reconciliation contributed 1,199 (23.9)% in FY2022 versus 512 (10.2)% in FY2021, a swing of about 13.7 percentage points that accounts for most of the effective-rate movement.",
+      "Research and development credits contributed (204) 4.1% in FY2022 versus (189) 3.8% in FY2021.",
+      "State income tax, net of federal effect, contributed 1.8% in FY2022 versus 1.9% in FY2021; tax on non-U.S. activities (1.3)% versus (0.9)%.",
+      "The reconciliation totals (0.6)% for FY2022 and 14.7% for FY2021 against a 21.0% U.S. federal statutory rate in both years."
+    ],
+    "raw_excerpt": "Valuation allowance 1,199 (23.9) 512 (10.2) 2,603 (18.0) … Income tax expense/(benefit) $31 (0.6)% ($743) 14.7 % ($2,535) 17.5 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Note 4 Income Taxes: deferred tax assets and valuation allowance",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77-p78",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's valuation allowance increased to $3,162M at December 31, 2022 from $2,423M at December 31, 2021.",
+      "Gross deferred tax assets were $12,301M in 2022 and $11,258M in 2021; deferred tax liabilities were $9,306M and $8,976M respectively.",
+      "Net deferred tax assets/(liabilities) after valuation allowance were ($167)M at year-end 2022 versus ($141)M at year-end 2021."
+    ],
+    "raw_excerpt": "Valuation allowance (3,162) (2,423) / Net deferred tax assets/(liabilities) after valuation allowance ($167) ($141)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — MD&A liquidity discussion (company's own characterization of the tax effect)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing attributes the year-over-year increase in net loss primarily to the absence of an income tax benefit in 2022.",
+      "Boeing received income tax refunds of $1.5 billion in 2022 and $1.7 billion in 2021.",
+      "The 10-K does not use the word \"unusual\" to describe the effective tax rate; the characterization is limited to the absence of a tax benefit widening the net loss."
+    ],
+    "raw_excerpt": "Net loss for 2022 was $5.1 billion compared with net loss of $4.3 billion in 2021. The $0.8 billion year-over-year increase in the net loss is primarily driven by the absence of an income tax benefit in 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Note 4 Income Taxes: current vs deferred components",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p76",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 total current tax expense was $42M (U.S. federal benefit ($58)M, non-U.S. $142M, U.S. state ($42)M) and total deferred tax benefit was ($11)M.",
+      "FY2021 total current tax expense was $100M and total deferred tax benefit was ($843)M, of which U.S. federal deferred was ($855)M.",
+      "The FY2021 tax benefit was overwhelmingly deferred rather than current."
+    ],
+    "raw_excerpt": "Total current 42 100 (3,799) … Total deferred (11) (843) 1,264 … Total income tax expense/(benefit) $31 ($743) ($2,535)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "The Boeing Company 2022 Form 10-K — Note 4 Income Taxes: geographic split of pre-tax loss",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p76",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022 U.S. loss before income taxes was ($5,457)M while non-U.S. income before income taxes was $435M.",
+      "FY2021 U.S. loss before income taxes was ($5,475)M while non-U.S. income before income taxes was $442M.",
+      "The pre-tax loss is almost entirely U.S.-sourced in both years, which is the context for a U.S. valuation allowance being the operative mechanism."
+    ],
+    "raw_excerpt": "U.S. ($5,457) ($5,475) ($14,882) / Non-U.S. 435 442 406 / Total ($5,022) ($5,033) ($14,476)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Other Earnings Items (p27): loss before income taxes and income tax (expense)/benefit, FY2020–FY2022",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p27",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "FY2022 loss before income taxes was ($5,022) million; FY2021 was ($5,033) million; FY2020 was ($14,476) million.",
+      "FY2022 income tax (expense)/benefit was ($31) million (an expense); FY2021 was $743 million (a benefit); FY2020 was $2,535 million (a benefit).",
+      "Net loss from continuing operations was ($5,053) million in FY2022 and ($4,290) million in FY2021.",
+      "Both FY2021 and FY2022 had a negative pre-tax result, so any ETR computed as tax provision divided by pre-tax income is computed on a negative denominator."
+    ],
+    "raw_excerpt": "Loss from operations ($3,547) ($2,902) ($12,767) / Other income, net 1,058 551 447 / Interest and debt expense (2,533) (2,682) (2,156) / Loss before income taxes (5,022) (5,033) (14,476) / Income tax (expense)/benefit (31) 743 2,535 / Net loss from continuing operations (5,053) (4,290) (11,941)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Consolidated Results of Operations key indicators (p24): reported effective income tax rate",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Reported effective income tax rate was (0.6)% in FY2022, 14.8% in FY2021, and 17.5% in FY2020.",
+      "The FY2022 rate is negative while the FY2021 rate is positive, even though both years had a pre-tax loss — the sign flip arises because FY2022 recorded a tax expense and FY2021 recorded a tax benefit.",
+      "The same table presents non-GAAP core operating loss and core loss per share, which exclude pension/OPEB components; no non-GAAP effective tax rate is presented."
+    ],
+    "raw_excerpt": "GAAP / Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % / Effective income tax rate (0.6) % 14.8 % 17.5 % / Net loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4 Income Taxes: statutory-to-actual rate reconciliation (p77)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The rate reconciliation shows the statutory federal tax at 21.0% as a negative dollar amount in loss years: ($1,054) million in FY2022 and ($1,057) million in FY2021.",
+      "The reconciliation's bottom line shows income tax expense/(benefit) of $31 million at (0.6)% for FY2022 and ($743) million at 14.7% for FY2021.",
+      "The FY2021 effective rate appears as 14.7% in the Note 4 reconciliation but as 14.8% in the MD&A summary table on p24 — an internal inconsistency (rounding/computational-base difference) that matters when quoting a single figure.",
+      "Valuation allowance was the largest reconciling item: $1,199 million (23.9)% in FY2022 versus $512 million (10.2)% in FY2021.",
+      "Research and development credits were $204 million (4.1%) in FY2022 versus $189 million (3.8%) in FY2021.",
+      "CARES Act NOL carryback impact was a $5 million benefit (0.1%) in FY2022 versus $3 million expense (0.1%) in FY2021, versus a $1,175 million benefit (8.1%) in FY2020.",
+      "A $587 million (4.1%) tax benefit in FY2020 related to the settlement of the 2015-2017 federal tax audit."
+    ],
+    "raw_excerpt": "U.S. federal statutory tax ($1,054) 21.0 % ($1,057) 21.0 % ($3,039) 21.0 % / Valuation allowance 1,199 (23.9) 512 (10.2) 2,603 (18.0) / Research and development credits (204) 4.1 (189) 3.8 (284) 2.0 / Impact of CARES Act (5) 0.1 3 (0.1) (1,175) 8.1 / Income tax expense/(benefit) $31 (0.6)% ($743) 14.7 % ($2,535) 17.5 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4 Income Taxes: components of loss before income taxes and of the tax provision (p76)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p76",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Pre-tax results by jurisdiction: U.S. ($5,457) million and Non-U.S. $435 million in FY2022; U.S. ($5,475) million and Non-U.S. $442 million in FY2021.",
+      "Total current tax was $42 million in FY2022 versus $100 million in FY2021; total deferred tax was ($11) million in FY2022 versus ($843) million in FY2021.",
+      "Total income tax expense/(benefit) was $31 million in FY2022 versus ($743) million in FY2021.",
+      "Net income tax (refunds)/payments were ($1,317) million in FY2022, ($1,480) million in FY2021, and $37 million in FY2020 — i.e., net refunds in both comparison years."
+    ],
+    "raw_excerpt": "U.S. ($5,457) ($5,475) ($14,882) / Non-U.S. 435 442 406 / Total ($5,022) ($5,033) ($14,476) … Total current 42 100 (3,799) / Total deferred (11) (843) 1,264 / Total income tax expense/(benefit) $31 ($743) ($2,535) / Net income tax (refunds)/payments were ($1,317), ($1,480) and $37 in 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 4: deferred tax assets/liabilities and valuation allowance (p77–p78)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p77-p78",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Gross deferred tax assets/(liabilities) before valuation allowance were $2,995 million at December 31, 2022 and $2,282 million at December 31, 2021.",
+      "The valuation allowance balance was $3,162 million at December 31, 2022 versus $2,423 million at December 31, 2021.",
+      "Net deferred tax assets/(liabilities) after valuation allowance were ($167) million at December 31, 2022 versus ($141) million at December 31, 2021.",
+      "Gross deferred tax assets were $12,301 million, deferred tax liabilities $9,306 million, and the valuation allowance $3,162 million at December 31, 2022.",
+      "The filing states that additional valuation allowances may have to be recorded until the Company generates sustained profitability, with adverse impacts on earnings and/or OCI."
+    ],
+    "raw_excerpt": "Gross deferred tax assets/(liabilities) before valuation allowance $2,995 $2,282 / Valuation allowance (3,162) (2,423) / Net deferred tax assets/(liabilities) after valuation allowance ($167) ($141) … Until the Company generates sustained levels of profitability, additional valuation allowances may have to be recorded with corresponding adverse impacts on earnings and/or OCI."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Liquidity and cash flows discussion (p43): attribution of the higher FY2022 net loss",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p43",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Net loss was $5.1 billion in FY2022 versus $4.3 billion in FY2021.",
+      "The Company attributes the $0.8 billion year-over-year increase in the net loss primarily to the absence of an income tax benefit in FY2022.",
+      "The Company received income tax refunds of $1.5 billion in FY2022 and $1.7 billion in FY2021."
+    ],
+    "raw_excerpt": "Net loss for 2022 was $5.1 billion compared with net loss of $4.3 billion in 2021. The $0.8 billion year-over-year increase in the net loss is primarily driven by the absence of an income tax benefit in 2022. … Additionally, in 2022 and 2021 we received income tax refunds of $1.5 billion and $1.7 billion."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Report of Independent Registered Public Accounting Firm (p119): audit period and absence of restatement",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p119",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The audit opinion covers the consolidated statements of operations, comprehensive income, equity, and cash flows for each of the three years in the period ended December 31, 2022.",
+      "The opinion is unqualified: the financial statements present fairly, in all material respects, in conformity with U.S. GAAP.",
+      "The audit report is dated January 27, 2023, and the auditor is Deloitte & Touche LLP.",
+      "The filing contains no disclosure of a restatement or revision of previously issued financial statements."
+    ],
+    "raw_excerpt": "We have audited the accompanying consolidated statements of financial position of The Boeing Company and subsidiaries (the \"Company\") as of December 31, 2022 and 2021, the related consolidated statements of operations, comprehensive income, equity, and cash flows, for each of the three years in the period ended December 31, 2022 … In our opinion, the financial statements present fairly, in all material respects … in conformity with accounting principles generally accepted in the United States of America."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Note 1 Summary of Significant Accounting Policies / basis of presentation (p63)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p63",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The consolidated financial statements are prepared in conformity with U.S. GAAP and cover the years ended December 31, 2022, 2021 and 2020.",
+      "The Company operates in four reportable segments: Commercial Airplanes (BCA), Defense, Space & Security (BDS), Global Services (BGS) and Boeing Capital (BCC).",
+      "The Company uses the duration of the related contract or program as its operating cycle for classifying certain current assets and liabilities, which is generally longer than one year."
+    ],
+    "raw_excerpt": "The Boeing Company and Subsidiaries / Notes to the Consolidated Financial Statements / Years ended December 31, 2022, 2021 and 2020 … These statements include the accounts of all majority-owned subsidiaries and variable interest entities that are required to be consolidated. … For classification of certain current assets and liabilities, we use the duration of the related contract or program as our operating cycle, which is generally longer than one year."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company FY2022 Form 10-K — Other Earnings Items (p27): Inflation Reduction Act of 2022 timing",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p27",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The Inflation Reduction Act of 2022 was signed into law in August 2022 and contained provisions effective January 1, 2023, including a 15% corporate minimum tax and a 1% excise tax on stock buybacks.",
+      "The Company stated it does not expect the IRA provisions to have a material impact on its results of operations, financial condition or cash flows.",
+      "Because the IRA provisions take effect January 1, 2023, they are not a driver of the FY2022 effective tax rate."
+    ],
+    "raw_excerpt": "In August 2022, the President signed into law the Inflation Reduction Act of 2022, which contained provisions effective January 1, 2023, including a 15% corporate minimum tax and a 1% excise tax on stock buybacks, both of which we do not expect to have a material impact on our results of operations, financial condition or cash flows."
+  }
+]

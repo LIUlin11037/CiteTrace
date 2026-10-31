@@ -1,0 +1,553 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for fiscal year ended December 31, 2022 — Consolidated Statements of Income (p96)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "The Consolidated Statements of Income begins with \"Revenues\", split into Non-interest revenues and Interest income; there is no \"Gross profit\", \"Cost of goods sold\", \"Cost of services\" or \"Cost of sales\" line anywhere in the statement.",
+      "Non-interest revenues line items (2022 / 2021 / 2020, $M): Discount revenue 30,739 / 24,563 / 19,435; Net card fees 6,070 / 5,195 / 4,664; Service fees and other revenue 4,521 / 3,316 / 2,702; Processed revenue 1,637 / 1,556 / 1,301; Total non-interest revenues 42,967 / 34,630 / 28,102.",
+      "Interest income line items: Interest on loans 11,967 / 8,850 / 9,779; Interest and dividends on investment securities 96 / 83 / 127; Deposits with banks and other 595 / 100 / 177; Total interest income 12,658 / 9,033 / 10,083.",
+      "Interest expense line items: Deposits 1,527 / 458 / 943; Long-term debt and other 1,236 / 825 / 1,155; Total interest expense 2,763 / 1,283 / 2,098; Net interest income 9,895 / 7,750 / 7,985.",
+      "Top-line metric is \"Total revenues net of interest expense\" = 52,862 / 42,380 / 36,087, i.e. total revenues are presented net of interest expense rather than as a gross revenue figure.",
+      "Provisions for credit losses are presented as a separate block between revenue and expenses: Card Member receivables 627 / (73) / 1,015; Card Member loans 1,514 / (1,155) / 3,453; Other 41 / (191) / 262; Total provisions for credit losses 2,182 / (1,419) / 4,730; followed by \"Total revenues net of interest expense after provisions for credit losses\" 50,680 / 43,799 / 31,357.",
+      "Expenses line items: Card Member rewards 14,002 / 11,007 / 8,041; Business development 4,943 / 3,762 / 3,051; Card Member services 2,959 / 1,993 / 1,230; Marketing 5,458 / 5,291 / 3,696; Salaries and employee benefits 7,252 / 6,240 / 5,718; Other, net 6,481 / 4,817 / 5,325; Total expenses 41,095 / 33,110 / 27,061.",
+      "Bottom of statement: Pretax income 9,585 / 10,689 / 4,296; Income tax provision 2,071 / 2,629 / 1,161; Net income 7,514 / 8,060 / 3,135; Basic EPS 9.86 / 10.04 / 3.77; Diluted EPS 9.85 / 10.02 / 3.77."
+    ],
+    "raw_excerpt": "CONSOLIDATED STATEMENTS OF INCOME / Year Ended December 31 (Millions, except per share amounts) 2022 2021 2020 / Revenues / Non-interest revenues / Discount revenue $ 30,739 $ 24,563 $ 19,435 / Net card fees 6,070 5,195 4,664 / Service fees and other revenue 4,521 3,316 2,702 / Processed revenue 1,637 1,556 1,301 / Total non-interest revenues 42,967 34,630 28,102 / Interest income / Interest on loans 11,967 8,850 9,779 / Interest and dividends on investment securities 96 83 127 / Deposits with banks and other 595 100 177 / Total interest income 12,658 9,033 10,083 / Interest expense / Deposits 1,527 458 943 / Long-term debt and other 1,236 825 1,155 / Total interest expense 2,763 1,283 2,098 / Net interest income 9,895 7,750 7,985 / Total revenues net of interest expense 52,862 42,380 36,087 / Provisions for credit losses / Card Member receivables 627 (73) 1,015 / Card Member loans 1,514 (1,155) 3,453 / Other 41 (191) 262 / Total provisions for credit losses 2,182 (1,419) 4,730 / Total revenues net of interest expense after provisions for credit losses 50,680 43,799 31,357 / Expenses / Card Member rewards 14,002 11,007 8,041 / Business development 4,943 3,762 3,051 / Card Member services 2,959 1,993 1,230 / Marketing 5,458 5,291 3,696 / Salaries and employee benefits 7,252 6,240 5,718 / Other, net 6,481 4,817 5,325 / Total expenses 41,095 33,110 27,061 / Pretax income 9,585 10,689 4,296 / Income tax provision 2,071 2,629 1,161 / Net income $ 7,514 $ 8,060 $ 3,135"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 4: Expenses Summary (p49)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p49",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "AXP's expense taxonomy consists of exactly six functional categories: Card Member rewards, Business development, Card Member services, Marketing, Salaries and employee benefits, and Other, net — none of which is labeled cost of goods sold or cost of services.",
+      "Total expenses were 41,095 (2022), 33,110 (2021) and 27,061 (2020), up $7,985M or 24% year over year in 2022.",
+      "Year-over-year 2022 changes by category: Card Member rewards +$2,995M (+27%); Business development +$1,181M (+31%); Card Member services +$966M (+48%); Marketing +$167M (+3%); Salaries and employee benefits +$1,012M (+16%); Other, net +$1,664M (+35%).",
+      "Card Member rewards increase was driven by Membership Rewards and cash back rewards expenses of ~$2.0 billion plus cobrand rewards expense of ~$1.0 billion, both primarily driven by higher billed business.",
+      "Business development expense rose on increased partner payments and client incentives driven by higher network volumes; Card Member services rose on higher usage of travel-related benefits; Marketing rose on business investments to drive growth and accelerate new card acquisitions.",
+      "Other, net increased primarily due to net losses on Amex Ventures investments in the current year versus net gains in the prior year."
+    ],
+    "raw_excerpt": "TABLE 4: EXPENSES SUMMARY ... Card Member rewards $ 14,002 $ 11,007 $ 8,041 $ 2,995 27 % $ 2,966 37 % / Business development 4,943 3,762 3,051 1,181 31 711 23 / Card Member services 2,959 1,993 1,230 966 48 763 62 / Marketing 5,458 5,291 3,696 167 3 1,595 43 / Salaries and employee benefits 7,252 6,240 5,718 1,012 16 522 9 / Other, net 6,481 4,817 5,325 1,664 35 (508) (10) / Total expenses $ 41,095 $ 33,110 $ 27,061 $ 7,985 24 % $ 6,049 22 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 2: Total Revenues Net of Interest Expense Summary (p47)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "AXP's headline revenue measure is \"Total revenues net of interest expense\" (52,862 in 2022; 42,380 in 2021; 36,087 in 2020), i.e. revenue is presented after deducting interest expense rather than as a gross top line.",
+      "2022 revenue components and growth: Discount revenue 30,739 (+25%, +$6,176M); Net card fees 6,070 (+17%, +$875M); Service fees and other revenue 4,521 (+36%, +$1,205M); Processed revenue 1,637 (+5%, +$81M); Total non-interest revenues 42,967 (+24%).",
+      "Total interest income 12,658 (+40%); total interest expense 2,763 (variance of 100% or more); net interest income 9,895 (+28%).",
+      "Discount revenue growth was primarily driven by a 23% increase in billed business; net card fees growth was primarily driven by growth in premium card portfolios.",
+      "Service fees and other revenue growth was driven by FX-related revenues on Card Member cross-currency spending, higher travel commissions and fees, and growth in delinquency fees, partly offset by a prior-year non-cash gain related to GBTG's equity book value."
+    ],
+    "raw_excerpt": "TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY ... Discount revenue $ 30,739 $ 24,563 $ 19,435 $ 6,176 25 % ... Net card fees 6,070 5,195 4,664 875 17 ... Total revenues net of interest expense $ 52,862 $ 42,380 $ 36,087 $ 10,482 25 %"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Consolidated Results of Operations: 2022 reporting presentation changes (p47)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Beginning Q1 2022, AXP separately presented revenues earned from processed volumes — previously reported within Discount revenue, Other fees and commissions and Other revenue — as a new line \"Processed revenue\".",
+      "The remaining balances of Other fees and commissions and Other revenue were combined into \"Service fees and other revenue\".",
+      "AXP also disaggregated the former combined \"Marketing and business development\" expense into two separate lines: Business development expense and Marketing expense.",
+      "Prior-period amounts in the FY2022 10-K were recast to conform to the current presentation, with no impact to Total non-interest revenues or Total expenses — so the FY2021 comparatives shown are restated, not as originally filed.",
+      "For discussion of 2021 versus 2020, the filing explicitly refers readers to the FY2021 Form 10-K filed with the SEC on February 11, 2022."
+    ],
+    "raw_excerpt": "Beginning in the first quarter of 2022, we made reporting presentation changes to our Consolidated Statements of Income to separately present revenues earned from processed volumes, previously reported in Discount revenue, Other fees and commissions and Other revenue, as Processed revenue. The remaining balances from Other fees and commissions and Other revenue were combined as Service fees and other revenue. We also disaggregated Marketing and business development expense into Business Development expense and Marketing expense. Prior period amounts presented herein have been recast to conform to the current period presentation; there was no impact to Total non-interest revenues or Total expenses."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — MD&A narrative on expense variability and marketing investment (p46)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p46",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "AXP describes Card Member rewards, Card Member services and Business development expenses as generally correlated to volumes or variable based on usage, rising with network volume growth and higher usage of travel-related benefits.",
+      "Marketing is characterized as discretionary growth investment (\"significant investments in marketing to drive growth momentum and accelerate new card acquisitions\") rather than as a cost of delivering a product.",
+      "Operating expenses increased 24% year over year, driven by net losses on Amex Ventures equity investments versus prior-year net gains, plus higher compensation costs from an increased colleague base.",
+      "AXP frames its cost management as \"driving marketing and operating expense efficiencies, while continuing to invest in our growth strategy\"."
+    ],
+    "raw_excerpt": "Card Member rewards, Card Member services and Business development expenses are generally correlated to volumes or are variable based on usage, and increased year-over year due to network volume growth and higher usage of travel-related benefits. Card Member rewards expense growth was also driven by a larger proportion of billed business in categories that earn incremental rewards such as travel. During the year, we continued to make significant investments in marketing to drive growth momentum and accelerate new card acquisitions."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Revenue recognition and contra-revenue accounting policies (p102–p103)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p102–p103",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Processed revenue represents royalties, fees and amounts earned for facilitating transactions on cards issued by network partners, recorded at the time the Card Member transaction occurs.",
+      "The issuer rate paid to network card issuing partners is recorded as contra-revenue within Processed revenue to the extent there is revenue from the same customer; any additional issuer rate is recorded as expense in Business development.",
+      "Payments made under contractual arrangements with merchants, network partners and other customers are classified as contra-revenue, except where AXP receives goods, services or other benefits with determinable and measurable fair value, in which case they are recorded as expense.",
+      "Marketing expense includes costs for development and initial placement of advertising, expensed in the period the advertising first takes place; all other marketing expenses are generally expensed as incurred.",
+      "These policies show that partner/merchant economics are netted against revenue or classified as business development expense, rather than being accumulated into a cost-of-sales line."
+    ],
+    "raw_excerpt": "Our network card issuing partners receive an issuer rate that is individually negotiated between that issuer and us and is recorded as contra-revenue within Processed revenue to the extent that there is revenue from the same customer, after which any additional issuer rate is recorded as expense in Business development. ... Contra-revenue — Payments made pursuant to contractual arrangements with our merchants, network partners, and other customers are classified as contra-revenue, except where we receive goods, services or other benefits for which the fair value is determinable and measurable, in which case they are recorded as expense."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Segment selected income statement data (USCS p54, CS p57, ICS p60, GMNS p63)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p54, p57, p60, p63",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "All four reportable segments (U.S. Consumer Services, Commercial Services, International Card Services, Global Merchant and Network Services) use the same income statement template: Non-interest revenues → Interest income → Interest expense → Net interest income → Total revenues net of interest expense → Provisions for credit losses → Total expenses → Pretax segment income.",
+      "No segment table contains a gross profit or cost of goods/services sold line.",
+      "USCS 2022: non-interest revenues 16,440; total revenues net of interest expense 23,914; provisions for credit losses 1,021; total expenses 17,493; pretax segment income 5,400.",
+      "CS 2022: non-interest revenues 12,196; total revenues net of interest expense 13,569; provisions for credit losses 565; total expenses 10,124; pretax segment income 2,880.",
+      "ICS 2022: non-interest revenues 8,262; total revenues net of interest expense 9,061; provisions for credit losses 584; total expenses 7,899; pretax segment income 578.",
+      "GMNS 2022: non-interest revenues 6,123; total revenues net of interest expense 6,475; provisions for credit losses 7; total expenses 3,514; pretax segment income 2,954; network volumes 1,552.8 billion."
+    ],
+    "raw_excerpt": "TABLE 9: USCS SELECTED INCOME STATEMENT DATA ... Revenues / Non-interest revenues $ 16,440 $ 12,989 $ 10,125 ... Total revenues net of interest expense 23,914 18,922 16,347 ... Provisions for credit losses 1,021 (919) 2,617 ... Total expenses 17,493 13,883 10,627 ... Pretax segment income $ 5,400 $ 5,958 $ 3,103"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "Control comparison: AMD FY2022 10-K and Boeing FY2022 10-K income statements (both contain COGS / gross profit lines)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54; kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p55",
+    "published_at": null,
+    "key_points": [
+      "AMD's Consolidated Statements of Operations contains \"Cost of sales\", \"Total cost of sales\" and an explicit \"Gross profit\" line (2022 gross profit 10,603 on net revenue 23,601).",
+      "Boeing's Consolidated Statements of Operations contains \"Cost of products\" (53,969) and \"Cost of services\" (9,109) and \"Total costs and expenses\" (63,106).",
+      "A keyword search for \"gross profit / cost of goods sold\" across the knowledge base returned only these manufacturing issuers, not American Express — indicating AXP's absence of such lines is substantive rather than a retrieval miss."
+    ],
+    "raw_excerpt": "AMD: \"Net revenue $ 23,601 ... Cost of sales 11,550 ... Total cost of sales 12,998 ... Gross profit 10,603 ...\" / Boeing: \"Sales of products $55,893 ... Cost of products (53,969) ... Cost of services (9,109) ... Total costs and expenses (63,106)\""
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Consolidated Statements of Income (p.96)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": null,
+    "key_points": [
+      "AXP's audited Consolidated Statements of Income contains no \"Cost of goods sold\", \"Gross profit\", or \"Gross margin\" line item.",
+      "The statement's line-item sequence is: Non-interest revenues (Discount revenue, Net card fees, Service fees and other revenue, Processed revenue) → Total interest income → Total interest expense → Net interest income → Total revenues net of interest expense → Provisions for credit losses → Total revenues net of interest expense after provisions for credit losses → Expenses → Total expenses → Pretax income → Income tax provision → Net income.",
+      "Total revenues net of interest expense was 52,862 / 42,380 / 36,087 (millions) for 2022 / 2021 / 2020.",
+      "Total expenses were 41,095 / 33,110 / 27,061 (millions) for 2022 / 2021 / 2020.",
+      "Pretax income was 9,585 / 10,689 / 4,296 (millions) for 2022 / 2021 / 2020."
+    ],
+    "raw_excerpt": "Total revenues net of interest expense 52,862 42,380 36,087 / Provisions for credit losses … Total provisions for credit losses 2,182 (1,419) 4,730 / Total revenues net of interest expense after provisions for credit losses 50,680 43,799 31,357 / Expenses / Card Member rewards 14,002 … Total expenses 41,095 33,110 27,061 / Pretax income 9,585 10,689 4,296"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Expense categories in Consolidated Statements of Income (p.96)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": null,
+    "key_points": [
+      "AXP's expense lines are Card Member rewards, Business development, Card Member services, Marketing, Salaries and employee benefits, and Other, net — all classified by nature.",
+      "There is no single cost pool presented that is matched against revenue to form a \"cost of sales\" subtotal.",
+      "Card Member rewards was 14,002 / 11,007 / 8,041 (millions) for 2022 / 2021 / 2020; Marketing was 5,458 / 5,291 / 3,696; Salaries and employee benefits was 7,252 / 6,240 / 5,718; Other, net was 6,481 / 4,817 / 5,325."
+    ],
+    "raw_excerpt": "Expenses / Card Member rewards 14,002 11,007 8,041 / Business development 4,943 3,762 3,051 / Card Member services 2,959 1,993 1,230 / Marketing 5,458 5,291 3,696 / Salaries and employee benefits 7,252 6,240 5,718 / Other, net 6,481 4,817 5,325"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Provisions for credit losses as a separate subtotal layer (p.96)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": null,
+    "key_points": [
+      "Provisions for credit losses is presented as its own subtotal layer between \"Total revenues net of interest expense\" and \"Expenses\", not inside any cost-of-sales caption.",
+      "Total provisions for credit losses were 2,182 / (1,419) / 4,730 (millions) for 2022 / 2021 / 2020 — i.e., the line can be negative (a net reserve release) as well as positive.",
+      "The provisions line is disaggregated into Card Member receivables (627 / (73) / 1,015), Card Member loans (1,514 / (1,155) / 3,453), and Other (41 / (191) / 262)."
+    ],
+    "raw_excerpt": "Provisions for credit losses / Card Member receivables 627 (73) 1,015 / Card Member loans 1,514 (1,155) 3,453 / Other 41 (191) 262 / Total provisions for credit losses 2,182 (1,419) 4,730"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — MD&A Table 1 Summary of Financial Performance and Table 2 Total Revenues Net of Interest Expense (pp.44, 47)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44, p47",
+    "published_at": null,
+    "key_points": [
+      "In MD&A \"Selected Income Statement Data\", AXP's top-line revenue metric is \"Total revenues net of interest expense\" (52,862 / 42,380 / 36,087 for 2022 / 2021 / 2020), i.e., interest expense is deducted before reaching the headline revenue figure.",
+      "Table 2 shows the build-up: Total non-interest revenues 42,967 + Net interest income 9,895 = Total revenues net of interest expense 52,862, where Net interest income = Total interest income 12,658 − Total interest expense 2,763.",
+      "Total interest income was 12,658 / 9,033 / 10,083 and Total interest expense was 2,763 / 1,283 / 2,098 (millions) for 2022 / 2021 / 2020.",
+      "Total revenues net of interest expense grew 25% (+10,482) in 2022 vs 2021, while Total expenses grew 24% (+7,985) and Provisions for credit losses swung from (1,419) to 2,182 (+3,601); Pretax income fell 10% (−1,104)."
+    ],
+    "raw_excerpt": "Total revenues net of interest expense $ 52,862 $ 42,380 $ 36,087 $ 10,482 25 % $ 6,293 17 % … Total non-interest revenues 42,967 … Total interest income 12,658 … Total interest expense 2,763 … Net interest income 9,895 … Total revenues net of interest expense $ 52,862"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Company description, Note 1 policies, and Appendix Statistical Disclosure by Bank Holding Companies (pp.4, 101, 168)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p4, p101, p168",
+    "published_at": null,
+    "key_points": [
+      "AXP describes itself as \"a globally integrated payments company\" providing credit and charge cards to consumers, small businesses, mid-sized companies and large corporations.",
+      "The 10-K includes an appendix titled \"STATISTICAL DISCLOSURE BY BANK HOLDING COMPANIES\", disclosing interest-earning assets by average balance / interest income / average yield — a bank-style disclosure format.",
+      "In that appendix, Total interest-earning assets averaged $128,416 million with $12,658 million interest income at a 9.9% average yield for 2022.",
+      "AXP adopted the Current Expected Credit Loss (CECL) methodology effective January 1, 2020 for reserves on loans and receivables.",
+      "AXP notes FASB guidance on troubled debt restructurings and write-offs (issued March 2022, effective January 1, 2023) applicable to entities that adopted ASC 326."
+    ],
+    "raw_excerpt": "We are a globally integrated payments company, providing customers with access to products, insights and experiences that enrich lives and build business … Appendix / STATISTICAL DISCLOSURE BY BANK HOLDING COMPANIES … Interest-earning assets … Average Balance / Interest Income / Average Yield … we adopted the new credit reserving methodology, applicable to certain financial instruments, known as the Current Expected Credit Loss (CECL) methodology"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "American Express 2022 Form 10-K — Selected Metrics and Ratios; Table 8 Net Interest Yield on Average Card Member Loans (pp.44, 52)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44, p52",
+    "published_at": null,
+    "key_points": [
+      "AXP's \"Selected Metrics and Ratios\" list Return on average equity (32.3% / 33.7% / 14.2%), Net interest income divided by average Card Member loans (10.4% / 10.2% / 10.7%), Net interest yield on average Card Member loans (10.6% / 10.7% / 11.5%), Effective tax rate, and Common Equity Tier 1 — no gross margin metric is listed.",
+      "AXP labels Adjusted net interest income and Net interest yield on average Card Member loans as non-GAAP measures and explains why it believes they are useful to investors.",
+      "Table 8 reconciles Net interest income 9,895 to Adjusted net interest income 10,140 by excluding interest expense not attributable to the Card Member loan portfolio (1,268) and interest income not attributable to it (1,023)."
+    ],
+    "raw_excerpt": "Selected Metrics and Ratios … Return on average equity 32.3 % 33.7 % 14.2 % / Net interest income divided by average Card Member loans 10.4 % 10.2 % 10.7 % / Net interest yield on average Card Member loans 10.6 % 10.7 % 11.5 % … Adjusted net interest income and net interest yield on average Card Member loans are non-GAAP measures."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Consolidated Statements of Operations showing Gross profit (p.54)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p54",
+    "published_at": null,
+    "key_points": [
+      "AMD's Consolidated Statements of Operations presents Cost of sales 11,550, Amortization of acquisition-related intangibles 1,448, Total cost of sales 12,998, and then a Gross profit line of 10,603 (millions) for 2022.",
+      "Gross profit was 10,603 / 7,929 / 4,347 (millions) for 2022 / 2021 / 2020, derived from Net revenue 23,601 / 16,434 / 9,763 less Total cost of sales 12,998 / 8,505 / 5,416.",
+      "This shows a company with a cost-of-sales structure does present a gross profit subtotal, in contrast to AXP's statement which has none."
+    ],
+    "raw_excerpt": "Net revenue $ 23,601 $ 16,434 $ 9,763 / Cost of sales 11,550 8,505 5,416 / Amortization of acquisition-related intangibles 1,448 — — / Total cost of sales 12,998 8,505 5,416 / Gross profit 10,603 7,929 4,347"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "Boeing 2022 Form 10-K — Program accounting and gross margin usage (pp.35, 50)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35, p50",
+    "published_at": null,
+    "key_points": [
+      "Boeing uses \"gross profit margin\" / \"combined gross margins\" in the context of program accounting, meaning the estimated margin over the accounting quantity of a long-term contract, not a company-wide revenue-minus-COGS ratio.",
+      "Boeing discloses sensitivity: a ±1% change in combined gross margins on profitable long-term contracts would change 2022 pre-tax income by approximately $300 million.",
+      "Boeing states the 777X program had near break-even gross margins at December 31, 2022."
+    ],
+    "raw_excerpt": "Program accounting requires the demonstrated ability to reliably estimate revenues, costs and gross profit margin for the defined program accounting quantity. … If the combined gross margins for our profitable long-term contracts had been estimated to be higher or lower by 1% during 2022, it would have increased or decreased pre-tax income for the year by approximately $300 million. … The 777X program had near break-even gross margins at December 31, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "American Express Company Form 10-K for FY2022 — Consolidated Statements of Income (p96)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "FY2022 total revenues net of interest expense were $52,862M, versus $42,380M in FY2021 and $36,087M in FY2020.",
+      "FY2022 total non-interest revenues were $42,967M (2021: $34,630M); discount revenue $30,739M (2021: $24,563M); net card fees $6,070M (2021: $5,195M); service fees and other revenue $4,521M (2021: $3,316M); processed revenue $1,637M (2021: $1,556M).",
+      "FY2022 total interest income was $12,658M (2021: $9,033M) and total interest expense $2,763M (2021: $1,283M), giving net interest income of $9,895M (2021: $7,750M).",
+      "FY2022 total provisions for credit losses were $2,182M, versus a net benefit of $(1,419)M in FY2021 and $4,730M in FY2020; components were Card Member receivables $627M (2021: $(73)M), Card Member loans $1,514M (2021: $(1,155)M), Other $41M (2021: $(191)M).",
+      "FY2022 Card Member rewards expense was $14,002M (2021: $11,007M); Business development $4,943M (2021: $3,762M); Card Member services $2,959M (2021: $1,993M); Marketing $5,458M (2021: $5,291M); salaries and employee benefits $7,252M (2021: $6,240M); other, net $6,481M (2021: $4,817M); total expenses $41,095M (2021: $33,110M).",
+      "FY2022 pretax income was $9,585M (2021: $10,689M), income tax provision $2,071M (2021: $2,629M), and net income $7,514M (2021: $8,060M; 2020: $3,135M).",
+      "FY2022 diluted EPS was $9.85 versus $10.02 in FY2021; basic EPS $9.86 versus $10.04.",
+      "The consolidated income statement contains no cost-of-goods-sold line and no gross profit subtotal; it runs from revenues through provisions and expenses directly to pretax income."
+    ],
+    "raw_excerpt": "Total revenues net of interest expense 52,862 42,380 36,087 ... Total provisions for credit losses 2,182 (1,419) 4,730 ... Card Member rewards 14,002 11,007 8,041 / Business development 4,943 3,762 3,051 / Card Member services 2,959 1,993 1,230 / Marketing 5,458 5,291 3,696 / Salaries and employee benefits 7,252 6,240 5,718 / Other, net 6,481 4,817 5,325 / Total expenses 41,095 33,110 27,061 / Pretax income 9,585 10,689 4,296 / Income tax provision 2,071 2,629 1,161 / Net income $ 7,514 $ 8,060 $ 3,135 ... Diluted $ 9.85 $ 10.02 $ 3.77"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 2: Total Revenues Net of Interest Expense Summary (p47)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p47",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total revenues net of interest expense rose $10,482M, or 25%, in 2022 versus 2021 (2021 vs 2020: +$6,293M, +17%).",
+      "Total non-interest revenues rose $8,337M (+24%) and net interest income rose $2,145M (+28%) year over year.",
+      "Total interest expense rose $1,480M, a variance denoted as 100% or more.",
+      "MD&A attributes discount revenue growth primarily to a 23% increase in billed business.",
+      "MD&A attributes net card fees growth primarily to growth in premium card portfolios.",
+      "MD&A attributes interest income growth primarily to higher average Card Member loan balances and interest rates, and interest expense growth primarily to higher interest rates paid on deposits and debt outstanding.",
+      "Beginning Q1 2022 AXP separately presents Business Development expense and Marketing expense, splitting the former combined line; prior periods were recast with no impact to total non-interest revenues or total expenses."
+    ],
+    "raw_excerpt": "Total revenues net of interest expense $ 52,862 $ 42,380 $ 36,087 $ 10,482 25 % $ 6,293 17 % ... Discount revenue increased, primarily driven by an increase in billed business of 23 percent. ... Net card fees increased, primarily driven by growth in our premium card portfolios. ... Interest income increased, primarily driven by higher average Card Member loan balances and interest rates. Interest expense increased, primarily driven by higher interest rates paid on deposits and debt outstanding."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 4: Expenses Summary and Expenses discussion (p49)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p49",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Card Member rewards expense rose $2,995M (+27%) to $14,002M; Business development rose $1,181M (+31%) to $4,943M; Card Member services rose $966M (+48%) to $2,959M; Marketing rose only $167M (+3%) to $5,458M.",
+      "Total expenses rose $7,985M (+24%) to $41,095M in 2022.",
+      "Rewards growth was driven by Membership Rewards plus cash back rewards expenses collectively up $2.0B and cobrand rewards expense up $1.0B, both primarily driven by higher billed business.",
+      "Rewards growth was additionally driven by a larger proportion of spend in categories that earn incremental rewards such as travel, and a higher mix of redemptions in travel-related categories.",
+      "The Membership Rewards Ultimate Redemption Rate (URR) for current program participants was 96% (rounded down) at both December 31, 2022 and 2021.",
+      "Business development expense rose primarily due to increased partner payments and client incentives, both driven by higher network volumes.",
+      "Other expenses rose primarily due to net losses on Amex Ventures investments in 2022 versus net gains in the prior year.",
+      "The effective tax rate was 21.6% in 2022 versus 24.6% in 2021, with the reduction primarily reflecting discrete tax benefits related to resolution of prior-year tax items."
+    ],
+    "raw_excerpt": "Card Member rewards $ 14,002 $ 11,007 $ 8,041 $ 2,995 27 % ... Business development 4,943 3,762 3,051 1,181 31 ... Card Member services 2,959 1,993 1,230 966 48 ... Marketing 5,458 5,291 3,696 167 3 ... Card Member rewards expense increased, primarily driven by increases in Membership Rewards and cash back rewards expenses, collectively, of $2.0 billion, and cobrand rewards expense of $1.0 billion, both of which were primarily driven by higher billed business. The increase in Membership Rewards expense was also driven by a larger proportion of spend in categories that earn incremental rewards such as travel and a higher mix of redemptions in travel-related categories."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 3: Provisions for Credit Losses Summary (p48)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p48",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Total provisions for credit losses were $2,182M in 2022 versus $(1,419)M in 2021, a change of $3,601M denoted as 100% or more.",
+      "Card Member loans provisions were $1,514M in 2022 versus $(1,155)M in 2021, comprising net write-offs of $1,066M (2021: $879M) and a reserve build of $448M (2021: reserve release of $2,034M).",
+      "Card Member receivables provisions were $627M in 2022 versus $(73)M in 2021, comprising net write-offs of $462M (2021: $129M) and a reserve build of $165M (2021: reserve release of $202M).",
+      "Other provisions were $41M in 2022 versus $(191)M in 2021.",
+      "Net write-offs increased year over year in both Card Member loans and Card Member receivables."
+    ],
+    "raw_excerpt": "Card Member loans / Net write-offs $ 1,066 $ 879 $ 2,170 $ 187 21 % ... Reserve build (release) 448 (2,034) 1,283 2,482 # ... Total 1,514 (1,155) 3,453 2,669 # ... Card Member receivables / Net write-offs 462 129 881 333 # ... Reserve build (release) 165 (202) 134 367 # ... Total provisions for credit losses $ 2,182 $ (1,419) $ 4,730 $ 3,601 # %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Business Environment (p45)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "AXP reported FY2022 net income of $7.5 billion, or $9.85 per share, versus $8.1 billion, or $10.02 per share, a year earlier.",
+      "Management attributes the reduction in net income to credit reserve builds and net losses in the Amex Ventures strategic investment portfolio in 2022, versus sizeable credit reserve releases and significant net gains in that portfolio in 2021.",
+      "Provisions for credit losses increased versus the prior year, reflecting a reserve build of $617 million compared with a reserve release of $2.5 billion in the prior year.",
+      "Worldwide network volumes rose 21% (24% FX-adjusted) and billed business rose 23% (25% FX-adjusted) in 2022.",
+      "Billed business represented 86% of total network volumes and is described as the most significant driver of AXP's financial results.",
+      "U.S. Consumer billed business grew 24% and Commercial Services billed business grew 21% year over year.",
+      "International billed business grew 23% (36% FX-adjusted), driven by a strong recovery in spend across consumer and commercial customers.",
+      "T&E spending momentum remained strong throughout the year, while year-over-year Goods & Services spending growth slowed toward the end of 2022 after large pandemic-recovery growth rates earlier in the year.",
+      "Inflation was a modest contributor to billed business growth, while the strengthening U.S. dollar had a negative impact on international billings.",
+      "Total revenues net of interest expense rose 25% (27% FX-adjusted), reflecting strong growth in all revenue lines; discount revenue +25%, net card fees +17%, service fees and other revenues +36% partly on higher travel-related revenues, net interest income +28% on Card Member loan growth.",
+      "Card Member loans increased 22% year over year, with the majority of growth from existing Card Members.",
+      "Rising interest rates had a fairly neutral impact on full-year 2022 results but a modest negative impact on net interest income toward year end."
+    ],
+    "raw_excerpt": "For 2022, we reported net income of $7.5 billion, or $9.85 per share, compared with net income of $8.1 billion, or $10.02 per share, a year ago. The reduction in net income reflected credit reserve builds and net losses in our Amex Ventures strategic investment portfolio in the current year compared with sizeable credit reserve releases and significant net gains in our Amex Ventures strategic investment portfolio in the prior year. ... Provisions for credit losses increased versus the prior year, reflecting a reserve build of $617 million compared with a reserve release of $2.5 billion in the prior year ... T&E spending momentum remained strong throughout the year, while year-over-year Goods & Services spending growth slowed towards the end of the year following the large pandemic recovery growth rates experienced earlier in the year."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Provisions for Credit Losses narrative (p61)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p61",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Card Member loans and receivables provisions increased primarily due to reserve builds in 2022 versus reserve releases in 2021, plus higher net write-offs in 2022.",
+      "The 2022 reserve builds were primarily driven by an increase in loans and receivables outstanding and higher delinquencies.",
+      "The 2021 reserve releases were driven by improved portfolio quality and macroeconomic forecasts, partially offset by an increase in loans and receivables outstanding.",
+      "Provisions decreased in 2021 versus 2020 primarily driven by reserve releases in 2021 versus reserve builds in 2020.",
+      "Total expenses increased primarily driven by Card Member rewards expense and Business development expense.",
+      "Card Member services expense increased primarily driven by higher usage of travel-related benefits.",
+      "Marketing expense decreased at this segment, but was flat when adjusted for changes in foreign exchange rates."
+    ],
+    "raw_excerpt": "Card Member loans and receivables provisions for credit losses increased, primarily due to reserve builds in the current year, versus reserve releases in the prior year, and higher net write-offs in the current year. The reserve builds in the current year were primarily driven by an increase in loans and receivables outstanding and higher delinquencies. The reserve releases in the prior year were driven by improved portfolio quality and macroeconomic forecasts, partially offset by an increase in loans and receivables outstanding. ... Card Member services expense increased, primarily driven by higher usage of travel-related benefits. Marketing expense decreased, but was flat when adjusted for changes in foreign exchange rates."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 5 and Table 6: Card-Related and Network Volumes Statistical Information (p50)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Network volumes were $1,552.8B in 2022 versus $1,284.2B in 2021 (+21%); billed business $1,338.3B versus $1,089.8B (+23%); processed volumes $214.5B versus $194.4B (+10%).",
+      "T&E-related billed business was 25% of billed business in 2022 versus 19% in 2021, and grew 64% year over year (67% FX-adjusted).",
+      "G&S-related billed business was 75% of billed business in 2022 versus 81% in 2021, and grew 13% year over year (16% FX-adjusted).",
+      "Airline-related billed business was 6% of billed business in 2022 versus 3% in 2021, and grew 119% year over year (125% FX-adjusted).",
+      "Average discount rate was 2.34% in 2022 versus 2.30% in 2021; average fee per card was $82 versus $74 (+11%).",
+      "Average proprietary basic Card Member spending was $23,496 in 2022 versus $20,392 in 2021 (+15%).",
+      "Cards-in-force were 133.3 million in 2022 versus 121.7 million in 2021 (+10%)."
+    ],
+    "raw_excerpt": "Network volumes (billions) $ 1,552.8 $ 1,284.2 $ 1,037.8 21 % 24 % / Billed business $ 1,338.3 $ 1,089.8 $ 870.7 23 25 ... G&S-related (75% and 81% of billed business for 2022 and 2021, respectively) 13 16 19 18 / T&E-related (25% and 19% of billed business for 2022 and 2021, respectively) 64 67 59 58 / Airline-related (6% and 3% of billed business for 2022 and 2021, respectively) 119 % 125 % 63 % 61 %"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Segment Results: USCS (p54), Commercial Services (p57), ICS (p60)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p54, p57, p60",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "U.S. Consumer Services: total revenues net of interest expense $23,914M in 2022 versus $18,922M in 2021 (+26%); provisions $1,021M versus $(919)M; pretax segment income $5,400M versus $5,958M (−9%).",
+      "Commercial Services: total revenues net of interest expense $13,569M versus $10,911M (+24%); provisions $565M versus $(420)M; pretax segment income $2,880M versus $2,936M (−2%).",
+      "International Card Services: total revenues net of interest expense $9,061M versus $7,435M (+22%); provisions $584M versus $(43)M; pretax segment income $578M versus $929M (−38%).",
+      "Global Merchant and Network Services: total revenues net of interest expense $6,475M versus $5,129M (+26%); provisions $7M versus $(37)M; pretax segment income $2,954M versus $1,874M (+58%).",
+      "USCS non-interest revenues rose across all categories, driven by discount revenue (+25% on 24% U.S. consumer billed business growth) and net card fees (+24% on premium card portfolio growth).",
+      "USCS service fees and other revenue rose 50%, primarily driven by higher travel commissions and fees from the consumer travel business.",
+      "ICS discount revenue rose 25% (37% FX-adjusted) on billed business growth of 23% (36% FX-adjusted); ICS net card fees rose 3% (14% FX-adjusted).",
+      "Commercial Services service fees and other revenue rose 60%, primarily due to higher foreign exchange related revenues associated with Card Member cross-currency transactions."
+    ],
+    "raw_excerpt": "USCS: Total revenues net of interest expense 23,914 18,922 16,347 4,992 26 ... Provisions for credit losses 1,021 (919) 2,617 1,940 # ... Pretax segment income $ 5,400 $ 5,958 $ 3,103 $ (558) (9)% ... CS: Total revenues net of interest expense 13,569 10,911 9,234 2,658 24 ... Pretax segment income $ 2,880 $ 2,936 $ 1,013 $ (56) (2)% ... ICS: Total revenues net of interest expense 9,061 7,435 6,742 1,626 22 ... Pretax segment income $ 578 $ 929 $ 521 $ (351) (38)%"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Expense structure commentary and Consolidated Results of Operations preamble (p46, p47)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p46, p47",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "AXP states that Card Member rewards, Card Member services and Business development expenses are generally correlated to volumes or variable based on usage, and increased year over year due to network volume growth and higher usage of travel-related benefits.",
+      "The FY2022 10-K explicitly defers discussion of 2021 versus 2020 results to the FY2021 Form 10-K filed with the SEC on February 11, 2022.",
+      "Reporting presentation changes in Q1 2022 separately presented certain revenues and split business development expense into Business Development and Marketing, with prior periods recast and no impact to total non-interest revenues or total expenses."
+    ],
+    "raw_excerpt": "Card Member rewards, Card Member services and Business development expenses are generally correlated to volumes or are variable based on usage, and increased year-over year due to network volume growth and higher usage of travel-related benefits. ... For a discussion of the financial condition and results of operations for 2021 compared to 2020, please refer to Part II, Item 7. \"Management's Discussion and Analysis of Financial Condition and Results of Operations\" in our Annual Report on Form 10-K for the year ended December 31, 2021, filed with the SEC on February 11, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Changes in Card Member loans and receivables reserves for credit losses (p116, p117)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p116, p117",
+    "published_at": "2022-12-31",
+    "key_points": [
+      "Card Member loans reserve for credit losses rose from $3,305M at December 31, 2021 to $3,747M at December 31, 2022, with provisions of $1,514M.",
+      "Card Member receivables reserve rose from $64M at December 31, 2021 to $229M at December 31, 2022, with provisions of $627M.",
+      "The Card Member receivables reserve increase in 2022 was primarily driven by higher delinquencies and growth in receivables outstanding.",
+      "The 2021 receivables reserve decrease was primarily due to improved portfolio quality and macroeconomic forecasts, largely driven by improvement in unemployment rate projections, partially offset by an increase in receivables outstanding.",
+      "AXP discloses that it experienced higher delinquency and write-off rates for the year ended December 31, 2022 compared with 2021, and that such rates are expected to continue to increase."
+    ],
+    "raw_excerpt": "Card Member receivables reserve for credit losses increased for the year ended December 31, 2022, primarily driven by higher delinquencies and growth in receivables outstanding. Card Member receivables reserve for credit losses decreased for the year ended December 31, 2021, primarily due to improved portfolio quality and macroeconomic forecasts, in large part driven by improvement in unemployment rate projections, partially offset by an increase in receivables outstanding. ... Beginning Balance $ 64 $ 267 $ 126 / Provisions 627 (73) 1,015 / Net write-offs (462) (129) (881) / Ending Balance $ 229 $ 64 $ 267"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "American Express Company FY2022 Form 10-K — Table 1: Summary of Financial Performance (Selected Metrics and Ratios)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "AXP's own 'Selected Metrics and Ratios' block lists: Network volumes, Return on average equity, Net interest income divided by average Card Member loans, Net interest yield on average Card Member loans, Effective tax rate, and Common Equity Tier 1.",
+      "The summary table contains no gross profit or gross margin line item.",
+      "Total revenues net of interest expense were $52,862M in 2022 vs $42,380M in 2021 (+25%).",
+      "Total expenses were $41,095M in 2022 vs $33,110M in 2021 (+24%).",
+      "Pretax income was $9,585M in 2022 vs $10,689M in 2021 (-10%); net income $7,514M vs $8,060M (-7%).",
+      "Return on average equity was 32.3% in 2022, 33.7% in 2021, 14.2% in 2020.",
+      "Net interest yield on average Card Member loans was 10.6% in 2022, 10.7% in 2021, 11.5% in 2020.",
+      "Net interest income divided by average Card Member loans was 10.4% in 2022, 10.2% in 2021, 10.7% in 2020.",
+      "Common Equity Tier 1 was 10.3% in 2022, 10.5% in 2021, 13.5% in 2020."
+    ],
+    "raw_excerpt": "Selected Metrics and Ratios / Network volumes (Billions) $ 1,552.8 $ 1,284.2 $ 1,037.8 $ 269 21 % $ 246 24 % / Return on average equity 32.3 % 33.7 % 14.2 % / Net interest income divided by average Card Member loans 10.4 % 10.2 % 10.7 % / Net interest yield on average Card Member loans 10.6 % 10.7 % 11.5 % / Effective tax rate 21.6 % 24.6 % 27.0 % / Common Equity Tier 1 10.3 % 10.5 % 13.5 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 1 footnotes (c) and (d): definitions of ROE and net interest yield",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p44 (footnotes c, d)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "ROE is defined by AXP as net income for the period divided by average shareholders' equity for the period.",
+      "Net interest yield on average Card Member loans is defined as adjusted net interest income divided by average Card Member loans, annualized.",
+      "AXP explicitly labels adjusted net interest income and net interest yield on average Card Member loans as non-GAAP measures, reconciled in Table 8."
+    ],
+    "raw_excerpt": "Return on average equity (ROE) is calculated by dividing (i) net income for the period by (ii) average shareholders' equity for the period. ... Net interest yield on average Card Member loans reflects adjusted net interest income divided by average Card Member loans, computed on an annualized basis. Adjusted net interest income and net interest yield on average Card Member loans are non-GAAP measures. Refer to Table 8 for a reconciliation to Net interest income divided by average Card Member loans."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 8: Net Interest Yield on Average Card Member Loans (GAAP to non-GAAP reconciliation)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p52",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Consolidated net interest income was $9,895M in 2022, $7,750M in 2021, $7,985M in 2020.",
+      "Adjusted net interest income (excluding interest expense not attributable to the Card Member loan portfolio and interest income not attributable to that portfolio) was $10,140M in 2022, $8,109M in 2021, $8,612M in 2020.",
+      "Average Card Member loans grew to $95.4B in 2022 from $76.0B in 2021 and $74.6B in 2020.",
+      "Net interest yield on average Card Member loans declined to 10.6% in 2022 from 10.7% in 2021 and 11.5% in 2020."
+    ],
+    "raw_excerpt": "Adjusted net interest income $ 10,140 $ 8,109 $ 8,612 / Average Card Member loans (billions) $ 95.4 $ 76.0 $ 74.6 / Net interest income divided by average Card Member loans 10.4 % 10.2 % 10.7 % / Net interest yield on average Card Member loans 10.6 % 10.7 % 11.5 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Segment net interest yield tables (USCS Table 10, ICS Table 14, CS Table 12)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p56, p62, p59",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "U.S. Consumer Services net interest yield on average Card Member loans: 11.6% (2022), 11.5% (2021), 11.9% (2020).",
+      "International Card Services net interest yield on average Card Member loans: 8.4% (2022), 9.1% (2021), 11.7% (2020) — a decline in both years.",
+      "Commercial Services net interest yield on average Card Member loans: 8.9% (2022), 8.7% (2021), 9.9% (2020).",
+      "ICS net interest income divided by average Card Member loans fell to 6.5% in 2022 from 7.0% in 2021 and 9.6% in 2020."
+    ],
+    "raw_excerpt": "Net interest yield on average Card Member loans 8.4 % 9.1 % 11.7 % (ICS) ... Net interest yield on average Card Member loans 11.6 % 11.5 % 11.9 % (USCS) ... Net interest yield on average Card Member loans 8.9 % 8.7 % 9.9 % (CS)"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Business Environment (MD&A): billed business as the primary driver",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p45",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Billed business represented 86% of total network volumes and is described by management as 'the most significant driver of our financial results'.",
+      "Billed business increased 23% year-over-year in 2022 (25% on an FX-adjusted basis).",
+      "Worldwide network volumes increased 21% (24% FX-adjusted).",
+      "Discount revenue, AXP's largest revenue line, increased 25% year-over-year, driven primarily by Card Member spending volumes.",
+      "Net card fees increased 17% year-over-year on record new card acquisitions.",
+      "Management states billed business growth 'began to moderate towards the end of the year as we lapped the steep phase of recovery'.",
+      "Provisions for credit losses increased versus the prior year, reflecting a $617M reserve build versus a $2.5B reserve release in the prior year."
+    ],
+    "raw_excerpt": "Billed business, which represented 86 percent of our total network volumes and is the most significant driver of our financial results, increased 23 percent year-over-year (25 percent on an FX-adjusted basis) ... growth in billed business, which began to moderate towards the end of the year as we lapped the steep phase of recovery. Provisions for credit losses increased versus the prior year, reflecting a reserve build of $617 million compared with a reserve release of $2.5 billion in the prior year"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Table 5: Selected Card-Related Statistical Information (discount rate, fee per card)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p50",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Average discount rate was 2.34% in 2022, 2.30% in 2021, 2.28% in 2020 — a modest upward trend.",
+      "Average fee per card was $82 in 2022, $74 in 2021, $67 in 2020 (+11% in 2022).",
+      "Billed business was $1,338.3B in 2022 vs $1,089.8B in 2021 (+23%) and $870.7B in 2020.",
+      "Processed volumes were $214.5B in 2022 vs $194.4B in 2021 (+10%).",
+      "Proprietary basic cards-in-force were 59.1M in 2022 vs 54.7M in 2021 (+8%)."
+    ],
+    "raw_excerpt": "Average discount rate 2.34 % 2.30 % 2.28 % / Average fee per card (dollars) $ 82 $ 74 $ 67 11 % 10 % (a) Average fee per card is computed on an annualized basis based on proprietary Net card fees divided by average proprietary total cards-in-force."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — MD&A expense discussion: revenue vs expense growth, no efficiency ratio disclosed",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p46",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Management states operating expenses increased 24 percent year-over-year, driven by net losses on Amex Ventures equity investments (versus net gains in the prior year) and higher compensation costs from an increased colleague base.",
+      "Management states it remains 'focused on driving marketing and operating expense efficiencies, while continuing to invest in our growth strategy'.",
+      "Card Member rewards, Card Member services and Business development expenses are described as generally correlated to volumes or variable based on usage.",
+      "AXP returned $4.9B of capital to shareholders in 2022 through buybacks and dividends while keeping CET1 within its 10-11% target range.",
+      "AXP expected to raise the regular quarterly common dividend by 15% beginning with the Q1 2023 declaration.",
+      "The 10-K does not present an 'efficiency ratio' or 'pre-provision profit margin' metric by name."
+    ],
+    "raw_excerpt": "Operating expenses increased 24 percent year-over-year, primarily driven by net losses in the current year associated with our Amex Ventures equity investments as compared to net gains in the prior year, as well as higher compensation costs due to an increase in our colleague base to support business growth and compensation decisions we made. We remain focused on driving marketing and operating expense efficiencies, while continuing to invest in our growth strategy."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Consolidated Statements of Income (revenue and expense structure)",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p96",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "Revenue is presented as non-interest revenues (discount revenue $30,739M; net card fees $6,070M; service fees and other $4,521M; processed revenue $1,637M) plus net interest income ($9,895M) to arrive at 'Total revenues net of interest expense' of $52,862M.",
+      "Interest expense ($2,763M in 2022 vs $1,283M in 2021) is deducted within the revenue presentation rather than shown as a cost of sales.",
+      "The income statement contains no 'cost of sales' or 'gross profit' line; expenses are classified as Card Member rewards ($14,002M), Business development ($4,943M), Card Member services ($2,959M), Marketing ($5,458M), Salaries and employee benefits ($7,252M) and Other, net ($6,481M).",
+      "Total interest expense more than doubled in 2022 ($2,763M vs $1,283M), with deposits interest expense rising to $1,527M from $458M."
+    ],
+    "raw_excerpt": "Total non-interest revenues 42,967 34,630 28,102 ... Net interest income 9,895 7,750 7,985 / Total revenues net of interest expense 52,862 42,380 36,087 ... Expenses / Card Member rewards 14,002 11,007 8,041 / Business development 4,943 3,762 3,051 / Card Member services 2,959 1,993 1,230 / Marketing 5,458 5,291 3,696 / Salaries and employee benefits 7,252 6,240 5,718 / Other, net 6,481 4,817 5,325 / Total expenses 41,095 33,110 27,061"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Note 25 / Schedule A: ROE used as executive compensation plan metric",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p236 (Schedule A, Deferral Account Schedule Rate)",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "AXP's deferred compensation plan sets the interest crediting rate based on where AXP's annual ROE falls relative to its announced 'ROE Target Range'.",
+      "Below the ROE target range the rate is the Moody's A Rate; within the range 9%; above the range 11%.",
+      "This indicates ROE is an internally used, compensation-linked performance metric at AXP."
+    ],
+    "raw_excerpt": "Amex's ROE Schedule Rate / Below ROE Target Range Moody's A Rate / Within ROE Target Range 9% / Above ROE Target Range 11% ... Amex's 'ROE' for a calendar year means Amex's consolidated annual return on equity for such calendar year, as reported by Amex, subject to adjustment for significant accounting changes as determined by the Committee in its sole discretion."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AXP FY2022 10-K — Segment income statement data (USCS, CS, ICS, GMNS) for margin analysis",
+    "url": "kb_demo/financebench/pdfs/AMERICANEXPRESS_2022_10K.pdf · p54, p57, p60, p63",
+    "published_at": "2023-02-10",
+    "key_points": [
+      "USCS: total revenues net of interest expense $23,914M (+26%), total expenses $17,493M (+26%), pretax segment income $5,400M (-9%).",
+      "Commercial Services: total revenues net of interest expense $13,569M (+24%), total expenses $10,124M (+21%), pretax segment income not shown in excerpt but provisions rose to $565M from -$420M.",
+      "ICS: total revenues net of interest expense $9,061M (+22%), total expenses $7,899M (+21%), pretax segment income $578M (-38%).",
+      "GMNS: total revenues net of interest expense $6,475M (+26%), total expenses $3,514M (+7%), pretax segment income $2,954M (+58%).",
+      "Segment reporting shows expenses growing roughly in line with revenue at USCS and ICS, while GMNS expenses grew far slower than revenue."
+    ],
+    "raw_excerpt": "USCS: Total revenues net of interest expense 23,914 18,922 16,347 4,992 26 ... Total expenses 17,493 13,883 10,627 3,610 26 ... Pretax segment income $ 5,400 $ 5,958 $ 3,103 $ (558) (9)% | ICS: Total revenues net of interest expense 9,061 7,435 6,742 1,626 22 ... Total expenses 7,899 6,549 5,487 1,350 21 ... Pretax segment income $ 578 $ 929 $ 521 $ (351) (38)% | GMNS: Total revenues net of interest expense 6,475 5,129 4,309 1,346 26 ... Total expenses 3,514 3,292 2,928 222 7 ... Pretax segment income 2,954 1,874 1,294 1,080 58"
+  }
+]

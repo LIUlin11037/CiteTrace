@@ -1,0 +1,151 @@
+{
+  "n_questions": 11,
+  "mean_citation_existence": 1.0,
+  "mean_alignment": 0.9039256198347108,
+  "alignment_questions": 11,
+  "mean_coverage": 0.9090909090909091,
+  "per_subdomain": {
+    "finance": {
+      "n": 11.0,
+      "citation_existence": 1.0,
+      "alignment": 0.9039256198347108,
+      "coverage": 0.9090909090909091
+    }
+  },
+  "scores": [
+    {
+      "question_id": "fb-01",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 18,
+      "citations_missing": [],
+      "alignment_rate": 0.7727272727272727,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "30 亿美元商业票据计划（2022-11-03 设立）年末亦无余额",
+        "截至 2022-12-31，AMD 的无条件采购承诺约 86 亿美元，其中 65 亿美元落在 FY2023"
+      ]
+    },
+    {
+      "question_id": "fb-02",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 20,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-03",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 0.7272727272727273,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "现金及短期投资增加主要来自 Xilinx 收购带来的 $2.4B 现金与 $1.6B 短期投资、发行 3.924% 与 4.393% 票据所得 $1.0B，以及经营现金流，部分被股票回购与 Pensando 收购现金支出抵消",
+        "合并 pro forma 口径说明：Xilinx 财年截至 3 月 31 日最近周六、Pensando 截至 1 月 31 日，十二个月包含 Xilinx 2022-01-02 至 12-31、Pensando 2022-01-01 至 12-31 的结果，并注明仅供参考"
+      ]
+    },
+    {
+      "question_id": "fb-04",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 22,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-05",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 10,
+      "citations_missing": [],
+      "alignment_rate": 0.9545454545454546,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-06",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 9,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-07",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 16,
+      "citations_missing": [],
+      "alignment_rate": 0.75,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "FY2022 国际销售额占净收入 66%"
+      ]
+    },
+    {
+      "question_id": "fb-08",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 15,
+      "citations_missing": [],
+      "alignment_rate": 0.9545454545454546,
+      "coverage_rate": 0.0,
+      "missed_key_points": [
+        "最终答案与「There are none」一致（数值相同，允许适当四舍五入与单位换算）",
+        "答案的依据来自 AMERICANEXPRESS_2022_10K（原文线索：Registrants telephone number, including area code: (212) 640-2000 Securities registered pursuant to Section 12(b) of the）"
+      ],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-09",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 1.0,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-10",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 0.9090909090909091,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": []
+    },
+    {
+      "question_id": "fb-11",
+      "subdomain": "finance",
+      "citation_existence_rate": 1.0,
+      "citations_total": 23,
+      "citations_missing": [],
+      "alignment_rate": 0.875,
+      "coverage_rate": 1.0,
+      "missed_key_points": [],
+      "unsupported_claims": [
+        "ROE 被定义为净利润除以期间平均股东权益"
+      ]
+    }
+  ]
+}

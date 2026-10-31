@@ -1,0 +1,746 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: 行业长期需求驱动与 GDP 假设（p23）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 称行业长期前景由经济增长、贸易与全球化带来的出行倾向提升等基本面驱动。",
+      "其 Commercial Market Outlook 以长期全球 GDP 年均增长 2.6% 为假设。",
+      "基于该假设，预测 20 年客运与货运流量增速 3.8%，约 41,170 架新飞机需求。"
+    ],
+    "raw_excerpt": "The long-term outlook for the industry remains positive due to the fundamental drivers of air travel demand: economic growth, increasing propensity to travel due to increased trade, globalization and improved airline services driven by liberalization of air traffic rights between countries. Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period. Based on long-term global economic growth projections of 2.6% in average annual gross domestic product, we project demand for approximately 41,170 new airplanes over the next 20 years."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: 行业对外生冲击的脆弱性（p23）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 明确列出行业易受燃料价格飙升、信贷市场冲击、恐怖袭击、自然灾害、冲突、流行病/大流行、环境监管收紧等外生因素影响。",
+      "该表述说明其周期暴露并非仅由 GDP 单一变量刻画。"
+    ],
+    "raw_excerpt": "The industry remains vulnerable to exogenous developments including fuel price spikes, credit market shocks, acts of terrorism, natural disasters, conflicts, epidemics, pandemics and increased global environmental regulations."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 7 MD&A: 航空公司财务表现作为需求传导变量（p22）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 称航空公司财务表现影响其产品需求。",
+      "引用 IATA 数据：航空业 2020 年净亏损 1,380 亿美元，2021 年净亏损 420 亿美元。",
+      "IATA 预测 2022 年全球航空业亏损 69 亿美元（其中北美盈利约 99 亿美元），2023 年全球盈利 46 亿美元。"
+    ],
+    "raw_excerpt": "Airline financial performance, which influences dem[and]... the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note: Summary of Business Segment Data 2020–2022（p62）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2023",
+    "key_points": [
+      "BCA 收入 2020/2021/2022 分别为 16,162 / 19,493 / 25,867 百万美元；BCA 经营损益分别为 −13,847 / −6,475 / −2,370 百万美元。",
+      "BDS 收入分别为 26,257 / 26,540 / 23,162 百万美元；BDS 经营损益分别为 1,539 / 1,544 / −3,544 百万美元。",
+      "BGS 收入分别为 15,543 / 16,328 / 17,611 百万美元；经营损益分别为 450 / 2,017 / 2,727 百万美元。",
+      "公司总收入分别为 58,158 / 62,286 / 66,608 百万美元；经营损益分别为 −12,767 / −2,902 / −3,547 百万美元。"
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 ... (Loss)/earnings from operations: Commercial Airplanes ($2,370) ($6,475) ($13,847) / Defense, Space & Security (3,544) 1,544 1,539 / Global Services 2,727 2,017 450"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1 Business: 四个报告分部构成（p3）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 按产品与服务划分为四个报告分部：Commercial Airplanes (BCA)、Defense, Space & Security (BDS)、Global Services (BGS)、Boeing Capital (BCC)。",
+      "BCA 面向全球商用航空业开发、生产与销售商用喷气客机。",
+      "BDS 从事军用与无人飞行器、武器系统的研发、生产与改装，客户为军方与政府。"
+    ],
+    "raw_excerpt": "We are organized based on the products and services we offer. We operate in four reportable segments: • Commercial Airplanes (BCA); • Defense, Space & Security (BDS); • Global Services (BGS); • Boeing Capital (BCC). ... This segment develops, produces and markets commercial jet aircraft principally to the commercial airline industry worldwide."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BDS Business Environment: 国防需求由拨款/预算周期驱动（p37）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2023",
+    "key_points": [
+      "BDS 需求取决于美国国防与航天拨款：FY23 拨款含 DoD 8,170 亿美元、NASA 254 亿美元。",
+      "Boeing 称 FY2024 及以后的项目级拨款存在持续不确定性，美国政府可自由支配支出（含国防）可能继续承压。",
+      "预算削减或投资优先级变化可能导致现有合同或项目被削减、取消或延迟。",
+      "截至 2022 年末，BDS 积压订单中 28% 来自非美国客户。"
+    ],
+    "raw_excerpt": "The Consolidated Appropriations Act, 2023, enacted in December 2022, provided fiscal year 2023 (FY23) appropriations for government departments and agencies, including $817 billion for the U.S. DoD and $25.4 billion for NASA. ... There is ongoing uncertainty with respect to program-level appropriations for the U.S. DoD, NASA and other government agencies for fiscal year 2024 and beyond. U.S. government discretionary spending, including defense spending, is likely to continue to be subject to pressure."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BDS 分部：长周期合同导致期间可比性受限（p37）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p37",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 称其经营周期长，涉及多种开发与生产合同，交付与里程碑安排各异。",
+      "因此单期经营结果不必然指示未来经营结果。",
+      "积压订单（backlog）的期间比较也不必然指示未来工作量。"
+    ],
+    "raw_excerpt": "Since our operating cycle is long-term and involves many different types of development and production contracts with varying delivery and milestone schedules, the operating results of a particular period may not be indicative of future operating results. ... As a result, period-to-period comparisons of backlog are not necessarily indicative of future workloads."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Results of Operations / Revenues (p24)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing total revenues were $58,158M (2020), $62,286M (2021), $66,608M (2022).",
+      "Commercial Airplanes (BCA) revenues: $16,162M (2020), $19,493M (2021), $25,867M (2022).",
+      "Defense, Space & Security (BDS) revenues: $26,257M (2020), $26,540M (2021), $23,162M (2022).",
+      "Global Services (BGS) revenues: $15,543M (2020), $16,328M (2021), $17,611M (2022).",
+      "Boeing Capital revenues: $261M (2020), $272M (2021), $199M (2022); unallocated items/eliminations $(65)M / $(347)M / $(231)M.",
+      "Loss from operations: $(12,767)M (2020), $(2,902)M (2021), $(3,547)M (2022); operating margins (22.0)%, (4.7)%, (5.3)%.",
+      "Net loss attributable to Boeing shareholders: $(11,873)M (2020), $(4,202)M (2021), $(4,935)M (2022).",
+      "Core (non-GAAP) operating loss: $(14,150)M (2020), $(4,075)M (2021), $(4,690)M (2022)."
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 … Commercial Airplanes $25,867 $19,493 $16,162 / Defense, Space & Security 23,162 26,540 26,257 / Global Services 17,611 16,328 15,543 / Boeing Capital 199 272 261 / Unallocated items, eliminations and other (231) (347) (65) / Total $66,608 $62,286 $58,158 … Loss from operations ($3,547) ($2,902) ($12,767) / Operating margins (5.3) % (4.7) % (22.0) % … Net loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873) … Core operating loss ($4,690) ($4,075) ($14,150)"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Commercial Airplanes Results of Operations (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "BCA represented 28% (2020), 31% (2021) and 39% (2022) of total company revenues.",
+      "BCA loss from operations: $(13,847)M (2020), $(6,475)M (2021), $(2,370)M (2022).",
+      "BCA operating margins: (85.7)% (2020), (33.2)% (2021), (9.2)% (2022).",
+      "BCA R&D expense: $1,385M (2020), $1,140M (2021), $1,510M (2022).",
+      "BCA revenue increase of $6,374M in 2022 vs 2021 was primarily due to higher 737 and 787 deliveries."
+    ],
+    "raw_excerpt": "Revenues $25,867 $19,493 $16,162 / % of total company revenues 39 % 31 % 28 % / Loss from operations ($2,370) ($6,475) ($13,847) / Operating margins (9.2)% (33.2)% (85.7)% / Research and development $1,510 $1,140 $1,385 … BCA revenues increased by $6,374 million in 2022 compared with 2021 primarily due to higher 737 and 787 deliveries in 2022."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA deliveries by model, 2020–2022 (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "Total BCA deliveries: 157 (2020), 340 (2021), 480 (2022).",
+      "737 deliveries: 43 (2020), 263 (2021), 387 (2022).",
+      "787 deliveries: 53 (2020), 14 (2021), 31 (2022).",
+      "777 deliveries: 26 (2020), 24 (2021), 24 (2022); 767 deliveries: 30 (2020), 32 (2021), 33 (2022); 747 deliveries: 5 (2020), 7 (2021), 5 (2022).",
+      "Cumulative deliveries at 12/31/2022: 737 8,132; 747 1,572; 767 1,271; 777 1,701; 787 1,037.",
+      "Delivery figures include intercompany deliveries, shown in parentheses (e.g., 737 intercompany 13 in 2022, 16 in 2021, 14 in 2020)."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: 737 * 747 767 * 777 787 Total / 2022 Cumulative deliveries 8,132 1,572 1,271 1,701 1,037 / Deliveries 387 (13) 5 33 (15) 24 31 480 / 2021 Cumulative deliveries 7,745 1,567 1,238 1,677 1,006 / Deliveries 263 (16) 7 32 (13) 24 14 340 / 2020 Cumulative deliveries 7,482 1,560 1,206 1,653 992 / Deliveries 43 (14) 5 30 (11) 26 53 157 / * Intercompany deliveries identified by parentheses"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog by segment in dollars (p29)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023",
+    "key_points": [
+      "Total backlog: $377,499M at 12/31/2021 and $404,381M at 12/31/2022.",
+      "Commercial Airplanes backlog: $296,882M (2021) → $329,824M (2022).",
+      "Defense, Space & Security backlog: $59,828M (2021) → $54,373M (2022).",
+      "Global Services backlog: $20,496M (2021) → $19,338M (2022).",
+      "Contractual backlog $356,362M → $381,977M; unobligated backlog $21,137M → $22,404M.",
+      "Contractual backlog of unfilled orders excludes purchase options and announced orders for which definitive contracts have not been executed."
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 / Defense, Space & Security 54,373 59,828 / Global Services 19,338 20,496 / Unallocated items, eliminations and other 846 293 / Total Backlog $404,381 $377,499 / Contractual backlog $381,977 $356,362 / Unobligated backlog 22,404 21,137 / Total Backlog $404,381 $377,499"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Accounting quantities and firm orders by program (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Undelivered units under firm orders at 12/31/2022: 737 3,653; 747 1; 767 106; 777 69; 777X 244; 787 505.",
+      "Undelivered units under firm orders at 12/31/2021: 737 3,414; 747 6; 767 108; 777 58; 777X 253; 787 411.",
+      "Undelivered units under firm orders at 12/31/2020: 737 3,282; 747 8; 767 75; 777 41; 777X 191; 787 458.",
+      "Cumulative firm orders at 12/31/2022: 737 11,785; 747 1,573; 767 1,377; 777 1,770; 777X 244; 787 1,542.",
+      "Program accounting quantities at 12/31/2022: 737 10,800; 747 1,574; 767 1,267; 777 1,790; 777X 400; 787 1,600.",
+      "Cumulative firm orders represent cumulative deliveries plus undelivered firm orders; firm orders include military derivative aircraft not included in program accounting quantities."
+    ],
+    "raw_excerpt": "2022 Program accounting quantities 10,800 1,574 1,267 1,790 400 1,600 / Undelivered units under firm orders 3,653 1 106 69 244 505 (8) / Cumulative firm orders 11,785 1,573 1,377 1,770 244 1,542 … 2020 Program accounting quantities 10,000 1,574 1,207 1,700 350 1,500 / Undelivered units under firm orders 3,282 8 75 41 191 458 (22) / Cumulative firm orders 10,764 1,568 1,281 1,694 191 1,450"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 Program: production rate and abnormal costs (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing increased the 737 production rate to 31 per month in 2022.",
+      "Boeing expected further gradual 737 production rate increases based on market demand and supply chain capacity.",
+      "Abnormal production costs expensed on the 737 program: $188M (2022) and $1,887M (2021).",
+      "The 737 program accounting quantity increased by 400 units during 2022."
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 Program: delivery suspension, inventory, production rate (p35)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023",
+    "key_points": [
+      "787 deliveries were suspended from May 2021 until resumption in August 2022 (FAA authorization to resume received July 28, 2022).",
+      "Boeing delivered 31 787s in 2022; in 2021 it delivered 14 aircraft between March and May 2021 before deliveries were paused in May 2021 due to production quality issues.",
+      "Boeing stated it was 'currently producing at low rates' on the 787 and expected to 'gradually return to 5 per month in 2023'.",
+      "Approximately 100 787 aircraft were in inventory at 12/31/2022 versus approximately 110 at 12/31/2021; most 2022 year-end inventory was expected to deliver by end-2024.",
+      "Boeing adjusted its total estimate of 787 abnormal production costs up to $2.8 billion in Q4 2022, most to be incurred by end-2023 (vs ~$2 billion expected at 12/31/2021)."
+    ],
+    "raw_excerpt": "We received FAA authorization to resume delivery on July 28, 2022 and deliveries resumed in August. During 2022, we delivered 31 aircraft to customers. We continue to conduct inspections and rework on undelivered aircraft. During 2021, we delivered 14 aircraft between March and May 2021 prior to deliveries being paused in May 2021 due to production quality issues including in our supply chain. … At December 31, 2022, and 2021, we had approximately 100 and 110 aircraft in inventory. Most of the aircraft in inventory at December 31, 2022 are expected to deliver by the end of 2024. We are currently producing at low rates and expect to gradually return to 5 per month in 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Statements of Cash Flows (p59)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p59",
+    "published_at": "2023",
+    "key_points": [
+      "Net cash provided/(used) by operating activities: $3,512M (2022), $(3,416)M (2021), $(18,410)M (2020).",
+      "Payments to acquire property, plant and equipment (capex): $1,222M (2022), $980M (2021), $1,303M (2020).",
+      "Cash and cash equivalents including restricted at year-end: $14,647M (2022), $8,104M (2021), $7,835M (2020).",
+      "Net loss in the cash flow reconciliation: $(5,053)M (2022), $(4,290)M (2021), $(11,941)M (2020).",
+      "Non-cash 787 and 777X reach-forward losses: $3,460M (2021) and $6,493M (2020)."
+    ],
+    "raw_excerpt": "Net loss ($5,053) ($4,290) ($11,941) … 787 and 777X reach-forward losses 3,460 6,493 … Net cash provided/(used) by operating activities 3,512 (3,416) (18,410) / Cash flows – investing activities: Payments to acquire property, plant and equipment (1,222) (980) (1,303) … Cash & cash equivalents, including restricted, at end of year 14,647 8,104 7,835"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program loss drivers: 777X and 787 reach-forward losses (p31, p81 Note 7)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31, p81",
+    "published_at": "2023",
+    "key_points": [
+      "The 2020 BCA loss reflects a $6,493M reach-forward loss on the 777X program.",
+      "The 2021 BCA loss reflects a $3,460M reach-forward loss on the 787 program, $1,887M of 737 abnormal production costs and $468M of 787 abnormal production costs.",
+      "Total abnormal production costs in 2022 were $1,753M: $1,240M 787, $325M 777X, $188M 737.",
+      "Boeing decided in April 2022 to pause 777X-9 production during 2022 and 2023, expected to result in approximately $1.5 billion of abnormal production costs.",
+      "The 777X program had near break-even gross margins at 12/31/2022."
+    ],
+    "raw_excerpt": "The 2020 loss reflects the reach-forward loss on the 777X program of $6,493 million, lower deliveries and lower program margins resulting from the COVID-19 pandemic … The 2021 loss also reflects a reach-forward loss on the 787 program of $3,460 million … Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program. … In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n]"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA backlog discussion: cancellations and ASC 606 adjustments (p32)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p32",
+    "published_at": "2023",
+    "key_points": [
+      "BCA total backlog rose from $296,882M at 12/31/2021 to $329,824M at 12/31/2022, reflecting new orders in excess of deliveries and price escalation, offset by cancellations and ASC 606 adjustments.",
+      "Aircraft order cancellations during 2022 totaled $11,251M and related to 737 and 787 aircraft.",
+      "Net ASC 606 adjustments in 2022 decreased backlog by $4,675M, primarily a net increase of 777X aircraft in the ASC 606 reserve."
+    ],
+    "raw_excerpt": "BCA total backlog of $329,824 million at December 31, 2022 increased from $296,882 million at December 31, 2021, reflecting new orders in excess of deliveries and price escalation, offset by order cancellations and by an increase in the value of existing orders that in our assessment do not meet the accounting requirements of ASC 606 for inclusion in backlog. Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million and relate to 737 and 787 aircraft. The net ASC 606 adjustments for the year ended December 31, 2022 resulted in a decrease to backlog of $4,675 million"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 MAX grounding concessions liability and payments (p87 Note 13, p43)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87, p43",
+    "published_at": "2023",
+    "key_points": [
+      "737 MAX grounding customer concessions and other considerations liability: $5,537M at 1/1/2021, $2,940M at 12/31/2021, $1,864M at 12/31/2022.",
+      "Reductions for payments made on that liability: $2,535M (2021) and $1,031M (2022).",
+      "Concessions paid to 737 MAX customers totaled $1.0 billion (2022) and $2.5 billion (2021).",
+      "Compensation payments to 737 MAX customers totaled $2.5 billion (2021) and $2.2 billion (2020)."
+    ],
+    "raw_excerpt": "737 MAX grounding customer concessions and other considerations 1,864 2,940 … Beginning balance – January 1 $2,940 $5,537 / Reductions for payments made (1,031) (2,535) / Reductions for concessions and other in-kind considerations (29) (48) / Changes in estimates (16) (14) / Ending balance – December 31 $1,864 $2,940 … Concessions paid to 737 MAX customers totaled $1.0 billion and $2.5 billion during 2022 and 2021. … Compensation payments to 737 MAX customers totaled $2.5 billion in 2021 and $2.2 billion in 2020."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 MAX backlog units and certification status (p34)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34",
+    "published_at": "2023",
+    "key_points": [
+      "At end-2022 Boeing had 236 737-7 and 720 737-10 aircraft in backlog.",
+      "Boeing had delivered a total of 1,033 737 MAX aircraft as of the 2022 10-K.",
+      "The 737-7 and 737-10 models were still going through FAA certification at the time of the filing."
+    ],
+    "raw_excerpt": "The 737-7 and 737-10 models are currently going through FAA certification. … 737-10 aircraft in inventory and 236 737-7 and 720 737-10 aircraft in backlog and have delivered a total of 1,033 737 MAX aircraft. If we experience delays in achieving certification and/or incorporating safety enhancements, future revenues, cash flows and results of operations could be adversely impacted."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Revenue by customer location and U.S. government share (p114 Note 21)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p114",
+    "published_at": "2023",
+    "key_points": [
+      "Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily at BDS and BGS, were 40% (2022), 49% (2021) and 51% (2020) of consolidated revenues.",
+      "Total non-U.S. revenues: $21,677M (2020), $23,196M (2021), $27,374M (2022).",
+      "U.S. revenues: $36,979M (2020), $39,076M (2021), $39,218M (2022).",
+      "BCA revenues by customer location 2022: Asia $4,484M, Europe $4,038M, Middle East $2,003M, other non-U.S. $3,042M, United States $12,167M."
+    ],
+    "raw_excerpt": "Total non-U.S. revenues 27,374 23,196 21,677 / United States 39,218 39,076 36,979 … Total revenues $66,608 $62,286 $58,158 … Revenues from the U.S. government (including foreign military sales through the U.S. government), primarily recorded at BDS and BGS, represented 40%, 49% and 51% of consolidated revenues for 2022, 2021 and 2020, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Human Capital: workforce and labor agreement expirations (p2)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p2",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's total workforce was approximately 156,000 at 12/31/2022 versus approximately 142,000 at 12/31/2021.",
+      "Approximately 50,000 employees were union members as of 12/31/2022.",
+      "IAM represented 20% of employees, with two major agreements expiring September 2024 and July 2025.",
+      "SPEEA represented 10% of employees, with two major agreements expiring October 2026."
+    ],
+    "raw_excerpt": "As of December 31, 2022 and 2021, Boeing's total workforce was approximately 156,000 and 142,000 with 13% and 12% located outside of the U.S. As of December 31, 2022, our workforce included approximately 50,000 union members. … The International Association of Machinists and Aerospace Workers (IAM) 20% We have two major agreements; one expiring in September 2024 and one in July 2025. The Society of Professional Engineering Employees in Aerospace (SPEEA) 10% We have two major agreements expiring in October 2026."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program development schedules: 737-7/737-10/777X (p36)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p36",
+    "published_at": "2023",
+    "key_points": [
+      "Planned initial delivery dates as of the 2022 10-K: 737-7 (go-ahead 2011) 2023; 737-10 (go-ahead 2017) 2024; 777X-9 (go-ahead 2013) 2025; 777X-8F (go-ahead 2022) 2027.",
+      "Boeing stated these development schedules are subject to uncertainties including changes in certification requirements."
+    ],
+    "raw_excerpt": "Go-ahead and Initial Delivery / 737-7 2011 2023 / 737-10 2017 2024 / 777X-9 2013 2025 / 777X-8F 2022 2027 / Reflects models in development during 2022 … The development schedules shown above are subject to a number of uncertainties, including changes in certification requirements."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note: Summary of Business Segment Data (consolidated revenue and earnings, FY2020–FY2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2023",
+    "key_points": [
+      "Total revenues were $58,158M (2020), $62,286M (2021) and $66,608M (2022).",
+      "Loss from operations was $(12,767)M (2020), $(2,902)M (2021) and $(3,547)M (2022).",
+      "Net loss attributable to Boeing shareholders was $(11,873)M (2020), $(4,202)M (2021) and $(4,935)M (2022).",
+      "Segment operating loss was $(11,795)M (2020), $(2,808)M (2021) and $(3,158)M (2022).",
+      "Commercial Airplanes segment revenue was $16,162M (2020), $19,493M (2021) and $25,867M (2022).",
+      "Commercial Airplanes segment operating result was $(13,847)M (2020), $(6,475)M (2021) and $(2,370)M (2022)."
+    ],
+    "raw_excerpt": "Revenues: Commercial Airplanes $25,867 $19,493 $16,162 … Total revenues $66,608 $62,286 $58,158 … Segment operating loss (3,158) (2,808) (11,795) … Loss from operations (3,547) (2,902) (12,767) … Net loss attributable to Boeing Shareholders ($4,935) ($4,202) ($11,873)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Results of Operations (margin and EPS amplitude)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023",
+    "key_points": [
+      "GAAP operating margin was (22.0)% in 2020, (4.7)% in 2021 and (5.3)% in 2022.",
+      "Core operating margin (non-GAAP) was (24.3)% in 2020, (6.5)% in 2021 and (7.0)% in 2022.",
+      "Diluted loss per share was $(20.88) in 2020, $(7.15) in 2021 and $(8.30) in 2022.",
+      "Core loss per share was $(23.25) in 2020, $(9.44) in 2021 and $(11.06) in 2022.",
+      "Effective income tax rate was 17.5% (2020), 14.8% (2021) and (0.6)% (2022)."
+    ],
+    "raw_excerpt": "Operating margins (5.3) % (4.7) % (22.0) % … Core operating margins (7.0 %) (6.5 %) (24.3 %) … Diluted loss per share ($8.30) ($7.15) ($20.88) … Core loss per share ($11.06) ($9.44) ($23.25)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Commercial Airplanes Results of Operations (deliveries, revenue, margins)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "BCA revenues were $16,162M (2020), $19,493M (2021) and $25,867M (2022).",
+      "BCA operating margins were (85.7)% (2020), (33.2)% (2021) and (9.2)% (2022).",
+      "BCA total deliveries were 157 units in 2020, 340 in 2021 and 480 in 2022.",
+      "737 deliveries were 43 (2020), 263 (2021) and 387 (2022); 787 deliveries were 53 (2020), 14 (2021) and 31 (2022).",
+      "BCA represented 28% (2020), 31% (2021) and 39% (2022) of total company revenues.",
+      "BCA R&D spending was $1,385M (2020), $1,140M (2021) and $1,510M (2022)."
+    ],
+    "raw_excerpt": "Revenues $25,867 $19,493 $16,162 … Loss from operations ($2,370) ($6,475) ($13,847) … Operating margins (9.2)% (33.2)% (85.7)% … Deliveries 387 (13) 5 33 (15) 24 31 480 / 263 (16) 7 32 (13) 24 14 340 / 43 (14) 5 30 (11) 26 53 157"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA Backlog and order cancellations",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p32",
+    "published_at": "2023",
+    "key_points": [
+      "Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million, relating to 737 and 787 aircraft.",
+      "Net ASC 606 adjustments for FY2022 decreased backlog by $4,675 million, primarily due to a net increase of 777X aircraft in the ASC 606 reserve.",
+      "BCA total backlog was $329,824M at 12/31/2022 versus $296,882M at 12/31/2021.",
+      "The BCA backlog increase reflected new orders in excess of deliveries and price escalation, offset by order cancellations."
+    ],
+    "raw_excerpt": "BCA total backlog of $329,824 million at December 31, 2022 increased from $296,882 million at December 31, 2021, reflecting new orders in excess of deliveries and price escalation, offset by order cancellations … Aircraft order cancellations during the year ended December 31, 2022 totaled $11,251 million and relate to 737 and 787 aircraft. The net ASC 606 adjustments for the year ended December 31, 2022 resulted in a decrease to backlog of $4,675 million"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog (total and firm-order unit counts, 2020–2022)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023",
+    "key_points": [
+      "Total backlog was $377,499M at 12/31/2021 and $404,381M at 12/31/2022.",
+      "Commercial Airplanes backlog was $296,882M (2021) and $329,824M (2022); Defense, Space & Security backlog was $59,828M (2021) and $54,373M (2022).",
+      "Undelivered units under firm orders for the 737 program were 3,282 (2020), 3,414 (2021) and 3,653 (2022).",
+      "Undelivered units under firm orders for the 787 program were 458 (2020), 411 (2021) and 505 (2022).",
+      "Undelivered units under firm orders for the 777X program were 191 (2020), 253 (2021) and 244 (2022).",
+      "737 production rate was increased to 31 per month in 2022; abnormal production costs of $188M (2022) and $1,887M (2021) were expensed."
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 … Total Backlog $404,381 $377,499 … Undelivered units under firm orders 3,653 1 106 69 244 505 (8) / 3,414 6 108 58 253 411 (14) / 3,282 8 75 41 191 458 (22)"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Overview: long-run traffic and GDP growth assumptions, and exogenous vulnerability",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing's Commercial Market Outlook projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period.",
+      "The forecast is based on long-term global economic growth projections of 2.6% average annual GDP.",
+      "Boeing projects demand for approximately 41,170 new airplanes over the next 20 years.",
+      "Boeing states the industry remains vulnerable to exogenous developments including fuel price spikes, credit market shocks, acts of terrorism, natural disasters, conflicts, epidemics, pandemics and increased global environmental regulations.",
+      "Boeing names economic growth, increasing propensity to travel due to increased trade, globalization and liberalization of air traffic rights as the fundamental drivers of air travel demand.",
+      "Commercial services volume at BGS recovered to pre-pandemic levels during 2022."
+    ],
+    "raw_excerpt": "Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period. Based on long-term global economic growth projections of 2.6% in average annual gross domestic product, we project demand for approximately 41,170 new airplanes over the next 20 years. The industry remains vulnerable to exogenous developments including fuel price spikes, credit market shocks, acts of terrorism, natural disasters, conflicts, epidemics, pandemics and increased global environmental regulations."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Overview: airline industry profitability cycle per IATA",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2023",
+    "key_points": [
+      "According to IATA, airline industry net losses were $138 billion in 2020 and $42 billion in 2021.",
+      "IATA forecast $6.9 billion of industry losses globally for 2022, with approximately $9.9 billion of profits in North America offset by losses in other regions.",
+      "For 2023, IATA forecast $4.6 billion in profits for the industry globally.",
+      "Boeing states that airline financial performance influences demand for new capacity and was adversely impacted by the COVID-19 pandemic."
+    ],
+    "raw_excerpt": "Airline financial performance, which influences demand for new capacity, has been adversely impacted by the COVID-19 pandemic. According to the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA Results of Operations: program-specific charges driving the earnings drawdown",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "The 2020 BCA loss reflects a reach-forward loss on the 777X program of $6,493 million plus lower deliveries and lower program margins resulting from the COVID-19 pandemic.",
+      "The 2021 BCA loss reflects a reach-forward loss on the 787 program of $3,460 million and abnormal production costs related to the 737 program of $1,887 million.",
+      "Abnormal production costs in 2022 were $1,753 million, comprising $1,240 million for the 787 program, $325 million for the 777X program and $188 million for the 737 program.",
+      "The 2021 loss also included $468 million of abnormal production costs related to the 787 program from production issues, inspections and rework."
+    ],
+    "raw_excerpt": "The 2020 loss reflects the reach-forward loss on the 777X program of $6,493 million, lower deliveries and lower program margins resulting from the COVID-19 pandemic … The 2021 loss reflects the reach-forward loss on the 787 program of $3,460 million, abnormal production costs related to the 737 program of $1,887 million, and abnormal production costs related to the 787 program of $468 million resulting from continued production issues, inspections and rework"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Liquidity and capital resources: suspension of buybacks and dividend",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p44",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing did not repurchase any shares through its open market share repurchase program in 2022, 2021 or 2020; repurchases have been suspended since April 2019.",
+      "In March 2020 the Board of Directors terminated its prior authorization to repurchase shares in the open market.",
+      "In March 2020 Boeing announced suspension of its dividend until further notice; no dividends were paid in 2022 and 2021 versus $1.2 billion paid in 2020.",
+      "Total debt balances were $57.0 billion at 12/31/2022 and $58.1 billion at 12/31/2021, of which $5.2 billion and $1.3 billion were short-term."
+    ],
+    "raw_excerpt": "During the years ended December 31, 2022, 2021 and 2020, we did not repurchase any shares through our open market share repurchase program. Share repurchases under this program have been suspended since April 2019. In March 2020, the Board of Directors terminated its prior authorization to repurchase shares of the Company's outstanding common stock in the open market … In March 2020, we announced the suspension of our dividend until further notice. As a result, we did not pay any dividends in 2022 and 2021 compared with $1.2 billion paid in 2020."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Consolidated Statements of Financial Position and Statements of Equity (equity/retained earnings drawdown)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p57, p61",
+    "published_at": "2023",
+    "key_points": [
+      "Total shareholders' deficit was $(15,883)M at 12/31/2022 and $(14,999)M at 12/31/2021; total equity was $(15,848)M and $(14,846)M respectively.",
+      "Retained earnings were $50,482M at January 1, 2020, $38,610M at 12/31/2020, $34,408M at 12/31/2021 and $29,473M at 12/31/2022.",
+      "Accumulated other comprehensive loss was $(16,153)M at 1/1/2020 and $(9,550)M at 12/31/2022.",
+      "Total assets were $137,100M at 12/31/2022 and $138,552M at 12/31/2021; inventories were $78,151M and $78,823M.",
+      "Long-term debt was $51,811M at 12/31/2022 and $56,806M at 12/31/2021."
+    ],
+    "raw_excerpt": "Total shareholders' deficit (15,883) (14,999) … Retained earnings 29,473 34,408 … Balance at January 1, 2020 … Retained Earnings $50,482 … Balance at December 31, 2022 … $29,473"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 5 / cover page: incidental share-price anchors",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p1, p21",
+    "published_at": "2023",
+    "key_points": [
+      "As of June 30, 2022, there were 593,451,225 common shares outstanding held by nonaffiliates, with aggregate market value of approximately $81.1 billion based on the NYSE closing price.",
+      "The number of common shares outstanding as of January 20, 2023 was 598,239,585.",
+      "Shares transferred from employees in satisfaction of tax withholding during Q4 2022 totaled 25,742 at an average price paid of $169.94.",
+      "Boeing common stock trades on the NYSE under the symbol BA; there were 88,322 shareholders of record as of January 20, 2023.",
+      "Boeing did not purchase any shares of common stock in the open market pursuant to a repurchase program during Q4 2022."
+    ],
+    "raw_excerpt": "As of June 30, 2022, there were 593,451,225 common shares outstanding held by nonaffiliates of the registrant, and the aggregate market value of the common shares (based upon the closing price of these shares on the New York Stock Exchange) was approximately $81.1 billion … Total 25,742 $169.94"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K for fiscal year ended December 31, 2022 — Competition / Commercial Airplanes business environment (p30)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p30",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing describes facing \"aggressive international competitors\" intent on increasing market share, offering competitive products with access to most of the same customers and suppliers.",
+      "Airbus has historically invested heavily, with government support, to build a product family competing with Boeing's.",
+      "After acquiring a majority share of Bombardier's C Series (now A220) in 2018, Airbus continues to expand in the 100-150 seat transcontinental market.",
+      "COMAC delivered its first C919 aircraft in 2022; other competitors are at different phases of developing commercial jets.",
+      "70% of Commercial Airplanes' total backlog, in dollar terms, is with non-U.S. airlines."
+    ],
+    "raw_excerpt": "70% of Commercial Airplanes' total backlog, in dollar terms, is with non-U.S. airlines. We face aggressive international competitors who are intent on increasing their market share. They offer competitive products and have access to most of the same customers and suppliers. ... With government support, Airbus has historically invested heavily to create a family of products to compete with ours. After the acquisition of a majority share of Bombardier's C Series (now A220) in 2018, Airbus continues to expand in the 100-150 seat transcontinental market. Other competitors are also in different phases of developing commercial jet aircraft, including Commercial Aircraft Corporation of China, Ltd. (COMAC), which delivered its first C919 aircraft in 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — 737 MAX grounding impact on single-aisle market share (p30)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p30",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The 2019 grounding of the 737 MAX and the associated suspension of 737 MAX deliveries in multiple jurisdictions significantly reduced Boeing's market share in single-aisle deliveries.",
+      "Boeing states this may provide competitors an opportunity to obtain more orders and increase market share."
+    ],
+    "raw_excerpt": "The grounding of the 737 MAX in 2019 and the associated suspension of 737 MAX deliveries in multiple jurisdictions significantly reduced our market share with respect to deliveries of single aisle aircraft and may provide competitors with an opportunity to obtain more orders and increase market share."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Backlog by segment (p29)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Total backlog at December 31, 2022 was $404,381 million, up from $377,499 million at December 31, 2021.",
+      "Backlog composition at 2022 year-end: Commercial Airplanes $329,824M; Defense, Space & Security $54,373M; Global Services $19,338M; Unallocated items, eliminations and other $846M.",
+      "Contractual backlog was $381,977M and unobligated backlog was $22,404M at December 31, 2022.",
+      "The 2022 increase in contractual backlog was primarily due to an increase in BCA backlog, partially offset by a decrease in BDS backlog."
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 \nDefense, Space & Security 54,373 59,828 \nGlobal Services 19,338 20,496 \nUnallocated items, eliminations and other 846 293 \nTotal Backlog $404,381 $377,499 \nContractual backlog $381,977 $356,362 \nUnobligated backlog 22,404 21,137"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Backlog conversion timing (Note 22, p116)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing expects approximately 17% of the $404,381M backlog to convert to revenue through 2023 and approximately 71% through 2026, with the remainder thereafter.",
+      "Boeing states there is significant uncertainty regarding the timing of backlog conversion, citing timing of 787 deliveries from inventory, timing of 737 MAX delivery resumption in China, timing of entry into service of the 777X, 737-7 and/or 737-10, and lingering effects of COVID-19."
+    ],
+    "raw_excerpt": "Our backlog at December 31, 2022 was $404,381. We expect approximately 17% to be converted to revenue through 2023 and approximately 71% through 2026, with the remainder thereafter. There is significant uncertainty regarding the timing of when backlog will convert into revenue due to timing of 787 deliveries from inventory, timing of 737 MAX delivery resumption in China, timing of entry into service of the 777X, 737-7 and/or 737-10, and the lingering effects of the COVID-19 pandemic."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Contractual backlog exclusions and cancellation risk (p29)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Contractual backlog excludes purchase options, announced orders for which definitive contracts have not been executed, orders where customers have the unilateral right to terminate, and unobligated U.S. and non-U.S. government contract funding.",
+      "Boeing states that if it remains unable to deliver 737 MAX aircraft in China for an extended period and/or entry into service of the 777X, 737-7 and/or 737-10 is further delayed, it may experience reductions to backlog and/or significant order cancellations."
+    ],
+    "raw_excerpt": "Contractual backlog of unfilled orders excludes purchase options, announced orders for which definitive contracts have not been executed, orders where customers have the unilateral right to terminate, and unobligated U.S. and non-U.S. government contract funding. ... If we remain unable to deliver 737 MAX aircraft in China for an extended period of time, and/or entry into service of the 777X, 737-7 and/or 737-10 is further delayed, we may experience reductions to backlog and/or significant order cancellations."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Segment revenue and operating results, 2020-2022 (Note 22, p62; also p24)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p62",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 revenues: Commercial Airplanes $25,867M; Defense, Space & Security $23,162M; Global Services $17,611M; Boeing Capital $199M; unallocated/eliminations -$231M; total $66,608M.",
+      "2021 revenues: BCA $19,493M; BDS $26,540M; BGS $16,328M; total $62,286M. 2020 revenues: BCA $16,162M; BDS $26,257M; BGS $15,543M; total $58,158M.",
+      "2022 segment operating results: BCA -$2,370M; BDS -$3,544M; BGS +$2,727M; BCC +$29M.",
+      "2021 segment operating results: BCA -$6,475M; BDS +$1,544M; BGS +$2,017M. 2020: BCA -$13,847M; BDS +$1,539M; BGS +$450M.",
+      "In 2022, BDS+BGS revenues of $40,773M represented roughly 61% of total company revenues of $66,608M."
+    ],
+    "raw_excerpt": "Revenues:\nCommercial Airplanes $25,867 $19,493 $16,162 \nDefense, Space & Security 23,162 26,540 26,257 \nGlobal Services 17,611 16,328 15,543 \nBoeing Capital 199 272 261 \nUnallocated items, eliminations and other (231) (347) (65)\nTotal revenues $66,608 $62,286 $58,158 \n(Loss)/earnings from operations:\nCommercial Airplanes ($2,370) ($6,475) ($13,847)\nDefense, Space & Security (3,544) 1,544 1,539 \nGlobal Services 2,727 2,017 450"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Global Services segment results and margins (p40)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p40",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BGS revenues were $17,611M in 2022, $16,328M in 2021 and $15,543M in 2020, representing 26%, 26% and 27% of total company revenues respectively.",
+      "BGS earnings from operations were $2,727M (2022), $2,017M (2021) and $450M (2020); operating margins were 15.5%, 12.4% and 2.9%.",
+      "BGS was the only segment with positive operating earnings in all three years 2020-2022.",
+      "BGS 2022 revenue increase of $1,283M was primarily due to higher commercial services volume, partially offset by lower government services volume and performance."
+    ],
+    "raw_excerpt": "Revenues $17,611 $16,328 $15,543 \n% of total company revenues 26 % 26 % 27 %\nEarnings from operations $2,727 $2,017 $450 \nOperating margins 15.5 % 12.4 % 2.9 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — BGS revenue split commercial vs. government (Note 22, p116)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p116",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BGS revenue from contracts with customers in 2022: Commercial $9,560M; Government $7,681M; total $17,241M (plus $370M intersegment).",
+      "2021: Commercial $7,527M; Government $8,553M. 2020: Commercial $6,936M; Government $8,368M.",
+      "BGS revenue recognized at a point in time was 50% (2022), 45% (2021), 47% (2020); revenue on fixed-price contracts was 88% (2022), 86% (2021), 87% (2020).",
+      "Revenue from the U.S. government was 33% of BGS revenue in 2022, 40% in 2021 and 41% in 2020."
+    ],
+    "raw_excerpt": "Revenue from contracts with customers:\nCommercial $9,560 $7,527 $6,936 \nGovernment 7,681 8,553 8,368 \nTotal revenues from contracts with customers 17,241 16,080 15,304 \nIntersegment revenues eliminated on consolidation 370 248 239 \nTotal segment revenues $17,611 $16,328 $15,543 \nRevenue recognized at a point in time 50 % 45 % 47 %\nRevenue recognized on fixed-price contracts 88 % 86 % 87 %\nRevenue from the U.S. government 33 % 40 % 41 %"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Management statement on BDS and government services demand stability (p23)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing states it continues to see stable demand at BDS, reflecting the role of its products and services in national security.",
+      "Boeing states the demand outlook for its government services business remains stable.",
+      "Boeing states commercial services volume at BGS recovered to pre-pandemic levels during 2022 and expects BGS commercial revenues to remain strong in future quarters."
+    ],
+    "raw_excerpt": "During 2022, commercial services volume at BGS recovered to pre-pandemic levels. We expect BGS commercial revenues to remain strong in future quarters as the commercial airline industry continues to recover. The demand outlook for our government services business remains stable. At BDS, we continue to see stable demand reflecting the important role our products and services have in ensuring our national security."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Commercial Market Outlook 20-year forecast (p23)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p23",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing's Commercial Market Outlook projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period.",
+      "Based on long-term global economic growth projections of 2.6% average annual GDP, Boeing projects demand for approximately 41,170 new airplanes over the next 20 years.",
+      "Boeing attributes the long-term positive outlook to economic growth, increasing propensity to travel due to increased trade, globalization and improved airline services driven by liberalization of air traffic rights.",
+      "In the same passage Boeing states the industry remains vulnerable to exogenous developments including fuel price spikes, credit market shocks, acts of terrorism, natural disasters, conflicts, epidemics, pandemics and increased global environmental regulations."
+    ],
+    "raw_excerpt": "The long-term outlook for the industry remains positive due to the fundamental drivers of air travel demand: economic growth, increasing propensity to travel due to increased trade, globalization and improved airline services driven by liberalization of air traffic rights between countries. Our Commercial Market Outlook forecast projects a 3.8% growth rate for passenger and cargo traffic over a 20-year period. Based on long-term global economic growth projections of 2.6% in average annual gross domestic product, we project demand for approximately 41,170 new airplanes over the next 20 years. The industry remains vulnerable to exogenous developments including fuel price spikes, credit market shocks, acts of terrorism, natural disasters, conflicts, epidemics, pandemics and increased global environmental regulations."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — IATA airline industry profitability data cited in MD&A (p22)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "According to IATA, airline industry net losses were $138 billion in 2020 and $42 billion in 2021.",
+      "IATA forecast $6.9 billion of industry-wide losses for 2022, with approximately $9.9 billion of profits in North America offset by losses in other regions.",
+      "For 2023, IATA forecast $4.6 billion in profits for the industry globally.",
+      "Boeing states airline financial performance, which influences demand for new capacity, has been adversely impacted by the COVID-19 pandemic."
+    ],
+    "raw_excerpt": "Airline financial performance, which influences demand for new capacity, has been adversely impacted by the COVID-19 pandemic. According to the International Air Transport Association (IATA), net losses for the airline industry were $138 billion in 2020 and $42 billion in 2021. IATA also forecasts $6.9 billion of losses for the industry globally in 2022, with approximately $9.9 billion of profits in North America driven by the robust domestic market being more than offset by losses in other regions. For 2023, IATA is forecasting $4.6 billion in profits for the industry globally."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Production rates and abnormal production costs by program (p33-p35)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing increased the 737 production rate to 31 per month in 2022 and expects further gradual increases based on market demand and supply chain capacity.",
+      "Boeing expensed abnormal production costs of $188 million in 2022 and $1,887 million in 2021.",
+      "767 program is producing at a combined rate of 3 aircraft per month; 777/777X programs at a combined 3 per month.",
+      "787 program was producing at low rates with an expected gradual return to 5 per month in 2023; total estimated abnormal production costs were raised to $2.8 billion in Q4 2022.",
+      "777X-9 first delivery was moved from late 2023 to 2025; production of the 777X-9 was paused during 2022 and 2023, expected to result in abnormal production costs of approximately $1.5 billion."
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021. ... We are currently producing at low rates and expect to gradually return to 5 per month in 2023. ... In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billion"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Program go-ahead to initial delivery timeline (p36)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p36",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing discloses go-ahead and planned initial delivery years: 737-7 (2011 to 2023), 737-10 (2017 to 2024), 777X-9 (2013 to 2025), 777X-8F (2022 to 2027).",
+      "Boeing states these development schedules are subject to uncertainties including changes in certification requirements, with timing ultimately determined by regulators."
+    ],
+    "raw_excerpt": "Go-ahead and Initial Delivery\n737-7 2011 2023\n737-10 2017 2024\n777X-9 2013 2025\n777X-8F 2022 2027\nReflects models in development during 2022 ... The development schedules shown above are subject to a number of uncertainties, including changes in certification requirements. The timing of certifications will ultimately be determined by the regulators."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Workforce, union representation and IAM/SPEEA contract expiry (p3)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing's total workforce was approximately 156,000 at December 31, 2022 (142,000 at December 31, 2021), with 13% and 12% located outside the U.S.",
+      "As of December 31, 2022, approximately 50,000 employees were union members.",
+      "IAM represents 20% of employees, with two major agreements expiring in September 2024 and July 2025.",
+      "SPEEA represents 10% of employees, with two major agreements expiring in October 2026."
+    ],
+    "raw_excerpt": "As of December 31, 2022, our workforce included approximately 50,000 union members. Our principal collective bargaining agreements and their current status are summarized in the following table:\nUnion | Percent of our Employees Represented | Status of the Agreements with Major Union\nThe International Association of Machinists and Aerospace Workers (IAM) | 20% | We have two major agreements; one expiring in September 2024 and one in July 2025.\nThe Society of Professional Engineering Employees in Aerospace (SPEEA) | 10% | We have two major agreements expiring in October 2026."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Labor instability cited as a factor in 777X profitability (p35)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing states 777X program profitability is subject to factors including continued production disruption due to labor instability and supply chain disruption, customer negotiations, further production rate adjustments, and contraction of the accounting quantity."
+    ],
+    "raw_excerpt": "The 777X program had near break-even gross margins at December 31, 2022. The level of profitability on the 777X program will be subject to a number of factors. These factors include continued production disruption due to labor instability and supply chain disruption, customer negotiations, further production rate adjustments for the 777X or other commercial aircraft programs, contraction of the accounting quantity and"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — 737 MAX grounding customer concessions liability (Note 13, p87)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p87",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "The 737 MAX grounding customer concessions and other considerations liability was $1,864M at December 31, 2022, down from $2,940M at December 31, 2021 and a beginning balance of $5,537M at January 1, 2021.",
+      "Reductions for payments made were $1,031M in 2022 and $2,535M in 2021.",
+      "The $1.9 billion balance at December 31, 2022 includes $1.6 billion of contracted customer concessions and $0.3 billion still subject to negotiation."
+    ],
+    "raw_excerpt": "737 MAX grounding customer concessions and other considerations 1,864 2,940 \n...\nBeginning balance – January 1 $2,940 $5,537 \nReductions for payments made (1,031) (2,535)\nReductions for concessions and other in-kind considerations (29) (48)\nChanges in estimates (16) (14)\nEnding balance – December 31 $1,864 $2,940"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — 787 delivery suspension and customer contractual remedies (p9, p18)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p9",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing experienced production quality issues, including in its supply chain, contributing to lower 787 deliveries, including a suspension of 787 deliveries from May 2021 to August 2022.",
+      "A number of customers have contractual remedies, including compensation for late deliveries or rights to reject individual airplane deliveries based on delivery delays.",
+      "Delays on the 737, 777X and 787 programs have resulted in, and may continue to result in, customers having the right to terminate orders, be compensated for late deliveries and/or substitute orders for other Boeing aircraft."
+    ],
+    "raw_excerpt": "In addition, we have experienced production quality issues, including in our supply chain, which have contributed to lower 787 deliveries, including a suspension of 787 deliveries from May 2021 to August 2022. We continue to conduct inspections and rework on built and stored 787 aircraft. A number of our customers have contractual remedies, including compensation for late deliveries or rights to reject individual airplane deliveries based on delivery delays. Delays on the 737, 777X and 787 programs have resulted in, and may continue to result in, customers having the right to terminate orders, be compensated for late deliveries and/or substitute orders for other Boeing aircraft."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Debt load, maturities and financing commitments (p18, p47)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p18",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Total debt was $57.0 billion at December 31, 2022, of which approximately $14.5 billion of principal payments become due over the next three years.",
+      "Airplane financing commitments totaled $16.1 billion at December 31, 2022.",
+      "Boeing states its debt balances increased significantly since 2019, driven primarily by the 737 MAX grounding and the COVID-19 pandemic, and that the increased debt balance resulted in credit rating downgrades in 2020."
+    ],
+    "raw_excerpt": "We depend, in part, upon the issuance of debt to fund our operations and contractual commitments. In addition, our debt balances have increased significantly since 2019, driven primarily by impacts related to the 737 MAX grounding and the COVID-19 pandemic, and we expect to continue to actively manage our liquidity. As of December 31, 2022, our debt totaled $57.0 billion of which approximately $14.5 billion of principal payments on outstanding debt will become due over the next three years. In addition, as of December 31, 2022, our airplane financing commitments totaled $16.1 billion. Our increased debt balance resulted in downgrades to our credit ratings in 2020, and our ratings remained unchanged in 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — BDS backlog decline and development-program risk (p39)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p39",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "BDS total backlog of $54,373M at December 31, 2022 was $5,455M lower than December 31, 2021, due to the timing of awards and revenue recognized on contracts awarded in prior years.",
+      "Boeing states its BDS business includes a variety of development programs with complex design and technical challenges.",
+      "The U.S. government services market is the single largest individual market, comprising over 50 percent of the government services markets Boeing serves."
+    ],
+    "raw_excerpt": "Total backlog of $54,373 million at December 31, 2022 was $5,455 million lower than December 31, 2021 due to the timing of awards and revenue recognized on contracts awarded in prior years. ... Our BDS business includes a variety of development programs which have complex design and technical challenges. ... The U.S. government services market is the single largest individual market, comprising over 50 percent of the government services markets served."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "The Boeing Company Form 10-K FY2022 — Consolidated results and segment loss drivers 2020-2022 (p24-p25)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p24",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Consolidated revenues were $66,608M (2022), $62,286M (2021) and $58,158M (2020); GAAP loss from operations was $3,547M, $2,902M and $12,767M respectively.",
+      "BDS had a loss from operations of $3,544M in 2022 versus earnings of $1,544M in 2021, primarily due to charges on development programs.",
+      "BCA loss from operations decreased by $4,105M in 2022 primarily due to the absence of the $3,460M reach-forward loss taken on the 787 program in 2021, higher 737 deliveries and lower abnormal production costs.",
+      "Boeing states revenues will continue to be significantly impacted until the global supply chain stabilizes, labor instability diminishes, and deliveries ramp up."
+    ],
+    "raw_excerpt": "Revenues $66,608 $62,286 $58,158 \nGAAP\nLoss from operations ($3,547) ($2,902) ($12,767)\n...\nBDS had a loss from operations of $3,544 million compared with earnings of $1,544 million during 2021, primarily due to charges on development programs. ... Revenues will continue to be significantly impacted until the global supply chain stabilizes, labor instability diminishes, and deliveries ramp up."
+  }
+]

@@ -1,0 +1,348 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business（客户集中度段落）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "FY2022（截至 2022-12-31 财年）有一个客户占 AMD 合并净收入（consolidated net revenue）的 16%。",
+      "该客户的销售来自公司 Gaming 分部。",
+      "10-K 明确表述失去该客户将对公司业务产生重大不利影响（material adverse effect）。",
+      "该披露位于 Item 1 Business 正文中，紧接在描述与客户共同开发差异化产品、收取非经常性工程费用（non-recurring engineering fees）的段落后，位于 Original Equipment Manufacturers 小节之前。"
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — 大客户销售表（Note 4 Segment Reporting 之后，Note 5 之前）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "10-K 含一张「占公司合并净收入至少 10% 的大客户销售」三年对比表（FY2022 / FY2021 / FY2020）。",
+      "FY2022：Customer A 占 16%，Customer B 标注为 *（即低于 10%）。",
+      "FY2021：Customer A 占 14%，Customer B 占 11%。",
+      "FY2020：Customer A 与 Customer B 均为 *（低于 10%）。",
+      "脚注说明 * 表示 Less than 10%。",
+      "对 Customer A 与 Customer B 的销售分别来自 Gaming 与 Client 分部的产品。",
+      "该表在版面上位于 Note 4 Segment Reporting 相关内容之后、NOTE 5 – Business Combinations 之前。"
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * ; * Less than 10% ; Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — NOTE 10 Concentrations of Credit Risk",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": "2023",
+    "key_points": [
+      "Note 10 标题为「Concentrations of Credit Risk」，讨论时间存款、可供出售债务证券与应收账款（trade receivables）的信用风险集中。",
+      "截至 2022-12-31，一个客户约占合并应收账款余额（total consolidated accounts receivable balance）的 18%。",
+      "截至 2021-12-25，两个客户分别约占合并应收账款余额的 20% 和 15%。",
+      "公司称应收账款信用风险集中度有限，理由是客户群数量大且地域分散（a large number of geographically diverse customers）。",
+      "公司基于过往收款经验与当前信用质量评估，认为这些客户的应收余额不构成重大信用风险。"
+    ],
+    "raw_excerpt": "NOTE 10 – Concentrations of Credit Risk … The Company believes that concentrations of credit risk with respect to trade receivables are limited because a large number of geographically diverse customers make up the Company's customer base, thus diluting the trade credit risk. One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors（风险因素摘要列表）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p17",
+    "published_at": "2023",
+    "key_points": [
+      "Item 1A Risk Factors 的「Risk Factors Summary」列表中，Economic and Strategic Risks 类别下设有专门条目：The loss of a significant customer may have a material adverse effect on us.",
+      "该条目与 Intel 主导地位、全球经济不确定性、半导体行业周期性等风险并列，属于公司自认的主要风险之一。"
+    ],
+    "raw_excerpt": "ITEM 1A. RISK FACTORS … Risk Factors Summary … Economic and Strategic Risks … • The loss of a significant customer may have a material adverse effect on us."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors 正文（客户付款风险段落）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19",
+    "published_at": "2023",
+    "key_points": [
+      "Item 1A 正文指出，公司预期少数客户（a small number of customers）将持续占其收入的很大一部分（a substantial part of our revenue）。",
+      "公司据此认为客户违约或延迟支付应收账款的风险被放大。"
+    ],
+    "raw_excerpt": "The risk related to our customers potentially defaulting on or delaying payments to us is increased because we expect that a small number of customers will continue to account for a substantial part of our revenue."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 1 Business: 单一客户占合并净收入 16%（Gaming 分部）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": null,
+    "key_points": [
+      "One customer accounted for 16% of AMD's consolidated net revenue for the year ended December 31, 2022.",
+      "Sales to this customer consisted of sales of products from the Gaming segment.",
+      "The filing states that a loss of this customer would have a material adverse effect on AMD's business."
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 4 Segment Reporting: 主要客户销售占比表（≥10% 门槛，FY2020–FY2022）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": null,
+    "key_points": [
+      "The disclosure table covers sales to major customers that accounted for at least 10% of consolidated net revenue for the respective years.",
+      "Customer A: 16% in FY2022, 14% in FY2021, and less than 10% (marked *) in FY2020.",
+      "Customer B: less than 10% (marked *) in FY2022, 11% in FY2021, and less than 10% (marked *) in FY2020.",
+      "Sales to Customer A and Customer B consisted of products from the Gaming and Client segments, respectively.",
+      "Only one customer met the 10% threshold in FY2022, versus two customers in FY2021.",
+      "The same 10% threshold and the same table format are applied across FY2020, FY2021 and FY2022."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % *; Customer B * 11 % *; * Less than 10%. Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 10 Concentrations of Credit Risk: 应收账款客户集中度",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": null,
+    "key_points": [
+      "One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022.",
+      "Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021.",
+      "AMD states it does not believe the receivable balance from these customers represents a significant credit risk based on past collection experience and review of current credit quality.",
+      "The accounts receivable concentration figures are expressed with 'approximately' and no explicit percentage threshold is stated in the note."
+    ],
+    "raw_excerpt": "The Company believes that concentrations of credit risk with respect to trade receivables are limited because a large number of geographically diverse customers make up the Company's customer base, thus diluting the trade credit risk. One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts receivable balance as of December 25, 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 1A Risk Factors: 对少数客户的依赖",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p20",
+    "published_at": null,
+    "key_points": [
+      "AMD states it depends on a small number of customers for a substantial portion of its business.",
+      "AMD expects a small number of customers will continue to account for a significant part of its revenue in the future.",
+      "The risk factor is titled 'The loss of a significant customer may have a material adverse effect on us.'",
+      "The risk factor summary in Item 1A also lists 'The loss of a significant customer may have a material adverse effect on us.' among principal risks."
+    ],
+    "raw_excerpt": "The loss of a significant customer may have a material adverse effect on us. We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue in the future. If one of our key customers decides to stop buying our products, or if one of these customers materially reduces its operations or its demand for our products, our business would be materially adversely affected."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Item 7 MD&A: FY2022 第二季度起变更报告分部（口径变化）",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p48",
+    "published_at": null,
+    "key_points": [
+      "During the second quarter of fiscal year 2022, AMD changed its reporting segments to align financial reporting with how it manages the business in strategic end markets.",
+      "AMD reports performance based on four reportable segments: Data Center, Client, Gaming, and Embedded.",
+      "The change is described as consistent with how the Chief Operating Decision Maker assesses financial performance and allocates resources."
+    ],
+    "raw_excerpt": "During the second quarter of fiscal year 2022, we changed our reporting segments to align our financial reporting with how we manage our business in strategic end markets. This is consistent with how our Chief Operating Decision Maker (CODM) assesses our financial performance and allocates resources. As a result, we report our financial performance based on the following four reportable segments: Data Center, Client, Gaming, and Embedded."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "AMD FY2022 Form 10-K — Note 4 Segment Reporting: FY2020–FY2022 分部净收入与地区收入对比表",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p68",
+    "published_at": null,
+    "key_points": [
+      "Total net revenue was $23,601 million in FY2022, $16,434 million in FY2021 and $9,763 million in FY2020.",
+      "Segment net revenue FY2022/FY2021/FY2020: Data Center $6,043M/$3,694M/$1,685M; Client $6,201M/$6,887M/$5,189M; Gaming $6,805M/$5,607M/$2,746M; Embedded $4,552M/$246M/$143M.",
+      "The three-year segment table presents FY2021 and FY2020 comparatives under the new four-segment structure.",
+      "Sales to external customers by geographic region for FY2022 included United States $8,049M and China (including Hong Kong) $5,207M."
+    ],
+    "raw_excerpt": "Net revenue: Data Center $ 6,043 $ 3,694 $ 1,685; Client 6,201 6,887 5,189; Gaming 6,805 5,607 2,746; Embedded 4,552 246 143; Total net revenue $ 23,601 $ 16,434 $ 9,763"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business: one customer 16% of consolidated net revenue (FY2022)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "One customer accounted for 16% of AMD's consolidated net revenue for the year ended December 31, 2022.",
+      "Sales to this customer consisted of sales of products (i.e., product revenue, not licensing or services)."
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4: table of customers accounting for at least 10% of consolidated net revenue (Customer A / Customer B)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "Customer A accounted for 16% of consolidated net revenue in FY2022, 14% in FY2021, and less than 10% in FY2020.",
+      "Customer B accounted for 11% of consolidated net revenue in FY2021, and less than 10% in both FY2022 and FY2020.",
+      "Only two customers exceeded the 10% threshold across FY2020-FY2022; AMD discloses them under anonymous labels (Customer A, Customer B) rather than by name."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: ... Customer A 16 % 14 % * / Customer B * 11 % * / Less than 10%"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4: segment attribution of the two major customers (Gaming and Client)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "Sales to Customer A consisted of products from the Gaming segment.",
+      "Sales to Customer B consisted of products from the Client segment.",
+      "Neither of the two >=10% customers is attributed to the Data Center segment."
+    ],
+    "raw_excerpt": "Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1 Business, Cautionary Statement Regarding Forward-Looking Statements",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p4",
+    "published_at": "2023",
+    "key_points": [
+      "AMD states in its forward-looking statements that a small number of customers will continue to account for a substantial part of its revenue in the future."
+    ],
+    "raw_excerpt": "a small number of customers will continue to account for a substantial part of AMD's revenue in the future."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors Summary: 'The loss of a significant customer may have a material adverse effect on us'",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p17",
+    "published_at": "2023",
+    "key_points": [
+      "Under the 'Economic and Strategic Risks' category of the Risk Factors Summary, AMD lists 'The loss of a significant customer may have a material adverse effect on us.'",
+      "The risk-factor summary also lists reliance on third-party distributors and add-in-board (AIB) partners as a separate principal risk."
+    ],
+    "raw_excerpt": "Economic and Strategic Risks ... • The loss of a significant customer may have a material adverse effect on us."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors body: customer concentration and customer ability to pay",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p19",
+    "published_at": "2023",
+    "key_points": [
+      "The risk-factor body states that a (small) number of customers will continue to account for a substantial part of AMD's revenue.",
+      "The same passage raises the risk that current or potential future customers may be unable to pay AMD (receivables/credit exposure)."
+    ],
+    "raw_excerpt": "number of customers will continue to account for a substantial part of our revenue. Any inability of our current or potential future customers to pay us for"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A Risk Factors Summary: reliance on third-party distributors and AIB partners",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p18",
+    "published_at": "2023",
+    "key_points": [
+      "AMD lists 'Our reliance on third-party distributors and add-in-board (AIB) partners subjects us to certain risks' as a principal risk in the Risk Factors Summary."
+    ],
+    "raw_excerpt": "• Our reliance on third-party distributors and add-in-board (AIB) partners subjects us to certain risks."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A: sales channel structure (direct to OEMs and through authorized distributors) and gray market risk",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "AMD markets and sells its products directly to OEMs and through authorized third-party distributors.",
+      "AMD describes gray-market diversion of its products outside authorized distribution channels as a risk that obscures inventory visibility and harms demand and margins."
+    ],
+    "raw_excerpt": "We market and sell our products directly to OEMs and through authorized third-party distributors. From time to time, our products are diverted from our authorized distribution channels and are sold on the \"gray market.\""
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Item 1A: uncertainties involving ordering and shipment (purchase-order basis, no long-term customer commitments)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p28",
+    "published_at": "2023",
+    "key_points": [
+      "AMD typically sells products pursuant to individual purchase orders and generally does not have long-term supply arrangements with customers or minimum purchase commitments.",
+      "AMD states customers may change inventory practices on short notice, and cites the H2 2022 Client segment decline driven by weak PC market conditions and inventory correction across the PC supply chain."
+    ],
+    "raw_excerpt": "We typically sell our products pursuant to individual purchase orders. We generally do not have long-term supply arrangements with our customers or minimum"
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — MD&A: Gaming segment revenue growth driven by semi-custom console SoC sales",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p49",
+    "published_at": "2023",
+    "key_points": [
+      "Gaming segment net revenue was $6.8 billion in FY2022, up 21% year over year.",
+      "The Gaming increase was driven by higher semi-custom product sales due to higher demand for gaming console SoCs, partially offset by lower gaming graphics sales."
+    ],
+    "raw_excerpt": "Gaming net revenue of $6.8 billion in 2022 increased by 21%, compared to net revenue of $5.6 billion in 2021. The increase in net revenue was driven by higher semi-custom product sales due to higher demand for gaming console SoCs"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 4/segment note: sales to major customers accounting for at least 10% of consolidated net revenue (FY2022/2021/2020)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p69",
+    "published_at": "2023",
+    "key_points": [
+      "AMD's FY2022 10-K presents a table titled \"sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years\", i.e. the company's own disclosure threshold is 10% of consolidated net revenue.",
+      "Customer A accounted for 16% of consolidated net revenue in 2022 and 14% in 2021.",
+      "Customer B accounted for 11% of consolidated net revenue in 2021 and is marked \"*\" (less than 10%) for 2022 and 2020.",
+      "The filing states sales to Customer A and Customer B consisted of products from the Gaming and Client segments, respectively.",
+      "The table legend defines \"*\" as \"Less than 10%\".",
+      "Customers are anonymized as \"Customer A\" / \"Customer B\" rather than named."
+    ],
+    "raw_excerpt": "The following table summarizes sales to major customers that accounted for at least 10% of the Company's consolidated net revenue for the respective years: Year Ended December 31, 2022 / December 25, 2021 / December 26, 2020 — Customer A 16 % 14 % * ; Customer B * 11 % * … Less than 10% … Sales to customers A and B consisted of sales of products from the Gaming and Client segments, respectively."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Part I, Item 1 Business: narrative disclosure of one customer at 16% of net revenue",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p12",
+    "published_at": "2023",
+    "key_points": [
+      "In Item 1 (Business), AMD states that one customer accounted for 16% of consolidated net revenue for the year ended December 31, 2022.",
+      "That customer's sales consisted of products from the Gaming segment.",
+      "The filing states that a loss of this customer would have a material adverse effect on the business.",
+      "Customer concentration is therefore disclosed narratively in Item 1 in addition to the tabular note disclosure."
+    ],
+    "raw_excerpt": "One customer accounted for 16% of our consolidated net revenue for the year ended December 31, 2022. Sales to this customer consisted of sales of products from our Gaming segment. A loss of this customer would have a material adverse effect on our business."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Part I, Item 1A Risk Factors: dedicated risk factor on loss of a significant customer",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p20",
+    "published_at": "2023",
+    "key_points": [
+      "Item 1A contains a dedicated risk factor headed \"The loss of a significant customer may have a material adverse effect on us.\"",
+      "The risk factor states AMD depends on a small number of customers for a substantial portion of its business and expects a small number of customers to continue to account for a significant part of revenue in the future.",
+      "The risk factor summary list in Item 1A also includes the bullet \"The loss of a significant customer may have a material adverse effect on us.\"",
+      "The risk factor is qualitative and does not restate the 16% figure in the excerpted passage."
+    ],
+    "raw_excerpt": "The loss of a significant customer may have a material adverse effect on us. We depend on a small number of customers for a substantial portion of our business and we expect that a small number of customers will continue to account for a significant part of our revenue in the future. If one of our key customers decides to stop buying our products, or if one of these customers materially reduces its operations or its demand for our products, our business would be materially adversely affected."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — Note 10 Concentrations of Credit Risk: accounts receivable concentration",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p80",
+    "published_at": "2023",
+    "key_points": [
+      "AMD discloses customer concentration on the receivables side in a note titled \"Concentrations of Credit Risk\".",
+      "One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022.",
+      "The excerpt also contains a sentence beginning \"Two customers each accounted for approximately 20% and 15% of the total consolidated accounts\" — the fiscal year this sentence refers to is not determinable from the retrieved excerpt and must be verified against the full note.",
+      "AMD states it believes trade-receivable credit risk is limited because a large number of geographically diverse customers make up its customer base."
+    ],
+    "raw_excerpt": "The Company believes that concentrations of credit risk with respect to trade receivables are limited because a large number of geographically diverse customers make up the Company's customer base, thus diluting the trade credit risk. One customer accounted for approximately 18% of the total consolidated accounts receivable balance as of December 31, 2022. Two customers each accounted for approximately 20% and 15% of the total consolidated accounts"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "AMD 2022 Form 10-K — table of contents (Item structure of the Form 10-K)",
+    "url": "kb_demo/financebench/pdfs/AMD_2022_10K.pdf · p3",
+    "published_at": "2023",
+    "key_points": [
+      "The FY2022 Form 10-K follows the standard Form 10-K item structure: Item 1 Business (p.1), Item 1A Risk Factors (p.14), Item 1B Unresolved Staff Comments (p.36), Item 2 Properties (p.37), Item 3 Legal Proceedings (p.37), Item 4 Mine Safety Disclosures (p.37).",
+      "Part II includes Item 7 MD&A (p.40), Item 7A Quantitative and Qualitative Disclosure About Market Risk (p.50), Item 8 Financial Statements and Supplementary Data (p.51).",
+      "Item 6 is marked \"[Reserved]\" and Item 16 is \"Form 10-K Summary\".",
+      "This supports the structural observation that customer-concentration content in AMD's filing is spread across Item 1, Item 1A and the Item 8 financial statement notes."
+    ],
+    "raw_excerpt": "INDEX PART I 1 ITEM 1. Business 1 ITEM 1A. Risk Factors 14 ITEM 1B. Unresolved Staff Comments 36 ITEM 2. Properties 37 ITEM 3. Legal Proceedings 37 ITEM 4. Mine Safety Disclosures 37 PART II 38 … ITEM 6. [Reserved] 39 ITEM 7. Management's Discussion and Analysis of Financial Condition and Results of Operations 40 ITEM 7A. Quantitative and Qualitative Disclosure About Market Risk 50 ITEM 8. Financial Statements and Supplementary Data 51"
+  }
+]

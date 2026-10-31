@@ -1,0 +1,396 @@
+[
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Commercial Airplanes Program Highlights, 737 Program (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": null,
+    "key_points": [
+      "波音在 2022 年将 737 产能提升至每月 31 架。",
+      "10-K 仅表示预计将根据市场需求与供应链能力实施「进一步的逐步提产」，未给出任何 FY2023 的具体月度产能数字。",
+      "737 项目 2022 年计入 1.88 亿美元异常生产成本（2021 年为 18.87 亿美元）。",
+      "截至 2022 年 12 月 31 日，737 项目会计数量（program accounting quantity）为 10,800 架，较 2021 年的 10,400 架增加 400 架。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 Program, production rate and abnormal costs (p35)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": null,
+    "key_points": [
+      "787 项目当前处于低速生产状态，波音预计 2023 年逐步恢复至每月 5 架。",
+      "波音在 2021 年第三季度判定低于每月 5 架属于「异常低产能」，会产生异常生产成本。",
+      "截至 2022 年 12 月 31 日累计异常成本为 17 亿美元；2022 年第四季度将异常成本总额估计上调至 28 亿美元，其中大部分将在 2023 年底前发生（2021 年末的估计约为 20 亿美元）。",
+      "787 于 2022 年 7 月 28 日获 FAA 授权恢复交付，8 月起恢复交付；2022 年交付 31 架。",
+      "截至 2022 年 12 月 31 日约有 100 架 787 在库存中（2021 年为约 110 架），其中大部分预计在 2024 年底前交付。"
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 7 Inventories: 777X-9 production pause during 2022 and 2023 (p81)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p81",
+    "published_at": null,
+    "key_points": [
+      "波音于 2022 年 4 月决定在 2022 与 2023 年暂停 777X-9 的生产（即该期间产能为零，而非提产）。",
+      "停产期间产生的异常生产成本按发生额计入费用，直至 777X-9 恢复生产；2022 年计入 3.25 亿美元。",
+      "777X 项目在 2022 年 12 月 31 日的利润率接近盈亏平衡。",
+      "截至 2022 年 12 月 31 日，777X 项目库存包含 40.59 亿美元在制品（2021 年为 33.63 亿美元）。"
+    ],
+    "raw_excerpt": "In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. The production pause is resulting in abnormal production costs that are being expensed as incurred until 777X-9 production resumes. We expensed abnormal production costs of $325 during the year ended December 31, 2022. The 777X program has near break-even margins at December 31, 2022."
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Development schedule: go-ahead and planned initial delivery (p36)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p36",
+    "published_at": null,
+    "key_points": [
+      "777X-9 的立项年份为 2013 年，计划首次交付年份为 2025 年。",
+      "737-7 为 2011 年立项 / 2023 年首次交付；737-10 为 2017 年 / 2024 年；777X-8F 为 2022 年 / 2027 年。",
+      "上述开发时间表受认证要求变化等不确定性影响，认证时间最终由监管机构决定。"
+    ],
+    "raw_excerpt": "Go-ahead and Initial Delivery / 737-7 2011 2023 / 737-10 2017 2024 / 777X-9 2013 2025 / 777X-8F 2022 2027 / Reflects models in development during 2022"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA deliveries by program, 2020–2022 (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": null,
+    "key_points": [
+      "2022 年交付量：737 为 387 架（含 13 架公司间交付）、747 为 5 架、767 为 33 架（含 15 架公司间交付）、777 为 24 架、787 为 31 架，合计 480 架。",
+      "2021 年交付量：737 为 263 架、747 为 7 架、767 为 32 架、777 为 24 架、787 为 14 架，合计 340 架。",
+      "2020 年交付量：737 为 43 架、747 为 5 架、767 为 30 架、777 为 26 架、787 为 53 架，合计 157 架。",
+      "2022 年 BCA 异常生产成本合计 17.53 亿美元，其中 787 项目 12.40 亿美元、777X 项目 3.25 亿美元、737 项目 1.88 亿美元。"
+    ],
+    "raw_excerpt": "737 * 747 767 * 777 787 Total / 2022 / Cumulative deliveries 8,132 1,572 1,271 1,701 1,037 / Deliveries 387 (13) 5 33 (15) 24 31 480"
+  },
+  {
+    "sub_question_id": "q1",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1 Business: in-production commercial airplane family (p3)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p3",
+    "published_at": null,
+    "key_points": [
+      "波音在产商用飞机家族包括 737 窄体机以及 767、777、787 宽体机。",
+      "747 宽体机的生产已于 2022 年结束。",
+      "777X 项目以及 737-7、737-10 衍生型的开发仍在继续。"
+    ],
+    "raw_excerpt": "This family of commercial jet aircraft in production includes the 737 narrow-body model and the 767, 777 and 787 wide-body models. We ended production of the 747 wide-body model in 2022. Development continues on the 777X program and the 737-7 and 737-10 derivatives."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1 Business, Program Highlights: 737 Program (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing raised the 737 production rate to 31 per month during 2022.",
+      "The filing states Boeing expects to implement further gradual production rate increases, conditioned on market demand and supply chain capacity.",
+      "No numeric 38-per-month 737 target is stated anywhere in this filing.",
+      "Boeing expensed abnormal production costs of $188 million (2022) and $1,887 million (2021) on the 737 program."
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Item 1 Business, Program Highlights: 787 Program (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "As of the FY2022 10-K, Boeing was producing 787s at low rates.",
+      "Boeing expected to gradually return to 5 per month in 2023.",
+      "No 10-per-month 787 target is stated anywhere in this filing."
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 delivery resumption and inventory (p33)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing received FAA authorization to resume 787 deliveries on July 28, 2022, and deliveries resumed in August 2022.",
+      "Boeing delivered 31 787 aircraft to customers during 2022.",
+      "Boeing had approximately 100 787s in inventory at December 31, 2022 (vs approximately 110 at December 31, 2021).",
+      "Most 787s in inventory at December 31, 2022 were expected to deliver by the end of 2024."
+    ],
+    "raw_excerpt": "We received FAA authorization to resume delivery on July 28, 2022 and deliveries resumed in August. During 2022, we delivered 31 aircraft to customers. ... At December 31, 2022, and 2021, we had approximately 100 and 110 aircraft in inventory. Most of the aircraft in inventory at December 31, 2022 are expected to deliver by the end of 2024."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA deliveries table (p31)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing delivered 387 737 aircraft in 2022, including 13 intercompany deliveries, versus 263 in 2021.",
+      "Boeing delivered 31 787 aircraft in 2022 versus 14 in 2021.",
+      "Total BCA deliveries were 480 in 2022 versus 340 in 2021.",
+      "Boeing delivered 24 777 aircraft in 2022, unchanged from 2021."
+    ],
+    "raw_excerpt": "BCA deliveries, including intercompany deliveries, as of December 31 were as follows: 737 * 747 767 * 777 787 Total / 2022 ... Deliveries 387 (13) 5 33 (15) 24 31 480 / 2021 ... Deliveries 263 (16) 7 32 (13) 24 14 340"
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 777/777X production rate and 777X-9 production pause (p34, p81)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34, p81",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing was producing the 777/777X programs at a combined production rate of 3 per month.",
+      "In April 2022 Boeing decided to pause 777X-9 production during 2022 and 2023.",
+      "The 777X-9 production pause was expected to result in abnormal production costs of approximately $1.5 billion.",
+      "Boeing expensed $325 million of abnormal production costs on the 777X program in 2022."
+    ],
+    "raw_excerpt": "We are currently producing at a combined production rate of 3 per month for the 777/777X programs. ... In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n] ... We expensed abnormal production costs of $325 during the year ended December 31, 2022."
+  },
+  {
+    "sub_question_id": "q2",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — MD&A risk discussion on supply chain constraints during production ramp-up (p22)",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing stated that supply-chain constraints while ramping up production reduced overall productivity.",
+      "Boeing stated these factors adversely impacted its financial position, results of operations and cash flows."
+    ],
+    "raw_excerpt": "supply chain as we ramp up production. These factors have reduced overall productivity and adversely impacted our financial position, results of operations and cash flows."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 Program Highlights（p33）与 Item 1 风险叙述（p9）：产能爬坡以「供应链产能」为门槛",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33（Program Highlights, 737 Program）；p9（Item 1 / 风险叙述）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 于 2022 年将 737 生产速率提升至每月 31 架，并预期基于市场需求与「供应链产能」实施进一步的渐进式提产。",
+      "737 项目在将产量稳定在每月 31 架的过程中遭遇了运营与供应链挑战。",
+      "Boeing 计划基于市场需求与供应链产能渐进提升 737 生产速率。",
+      "737 项目 2022 年与 2021 年分别计入异常生产成本 1.88 亿美元与 18.87 亿美元。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. … The 737 program has experienced operational and supply chain challenges stabilizing production at 31 per month. We plan to gradually increase 737 production rates based on market demand and supply chain capacity. … We expensed abnormal production costs of $188 million and $1,887 million during the years ended December 31, 2022 and 2021."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 供应商部件交付风险与供应链中断的泛化表述（p10）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p10",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 声明：若供应商无法以达成目标所需的成本与速率及时交付部件，公司可能无法满足交付计划。",
+      "供应商部件延迟或缺陷、未达成内部绩效计划、未取得所需监管批准，可能导致额外的脱序作业（out-of-sequence work）与生产成本上升。",
+      "Boeing 及其供应商正因 COVID-19 的持续影响、全球供应链约束与劳动力不稳定而经历供应链中断，并承受通胀压力。",
+      "Boeing 称这些因素降低了整体生产率并对财务表现造成不利影响。",
+      "该段落未点名任何具体供应商（未出现 Spirit AeroSystems、CFM、GE、Safran 等名称）。"
+    ],
+    "raw_excerpt": "…if our suppliers cannot timely deliver components to us at the cost and rates necessary to achieve our targets, we may be unable to meet delivery schedules… Operational issues, including delays or defects in supplier components, failure to meet internal performance plans, or delays or failures to achieve required regulatory approval, could result in additional out-of-sequence work and increased production costs… We and our suppliers are experiencing supply chain disruptions as a result of the lingering impacts of COVID-19, global supply chain constraints, and labor instability. We and our suppliers are also experiencing inflationary pressures. … These factors have reduced overall productivity and adversely impacted our financial [performance]."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737-7 / 737-10 的 FAA 取证门槛、ACSAA §116 修订与库存/订单敞口（p34、p9、p36）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34（737 Program）；p9（ACSAA §116）；p36（Program Development 图表）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "737-7 与 737-10 两个机型当时正在接受 FAA 型号合格证审定。",
+      "《2023 年综合拨款法》修订了 ACSAA 第 116 条：2020 年 12 月 27 日之前提交的原始或修订型号合格证申请（含 737-7 与 737-10）不再受第 116 条机组告警系统规格约束。",
+      "自 FAA 颁发 737-10 型号合格证满一年起，任何新的 737 MAX 飞机必须包含特定安全增强项才能获得 FAA 原始适航证；这些增强项的充分性由 FAA 判定。",
+      "Boeing 预期 737-7 于 2023 年开始 FAA 取证试飞；737-10 于 2023 年开始 FAA 取证试飞、2024 年首次交付。",
+      "截至 2022 年 12 月 31 日，库存中有 27 架 737-7 与 3 架 737-10；订单储备中有 236 架 737-7 与 720 架 737-10；737 MAX 累计已交付 1,033 架。",
+      "Boeing 声明：若取证延迟或安全增强项整合延迟，未来收入、现金流与经营业绩可能受到不利影响。",
+      "10-K 的 Program Development 图表列出 737-7 计划初始交付年份为 2023、737-10 为 2024。",
+      "Boeing 指出 777X、737-7、737-10 等新机型与衍生机型的推出，在满足开发、测试、取证与生产进度方面风险上升，原因包括 737 MAX 事故后全球对开发机型的监管审查加强。"
+    ],
+    "raw_excerpt": "The 737-7 and 737-10 models are currently going through FAA certification. The Consolidated Appropriations Act, 2023 amended Section 116 of the ACSAA, such that applications for original or amended type certifications that were submitted to the FAA prior to December 27, 2020, including those of the 737-7 and 737-10, are no longer subject to the crew alerting specifications of Section 116. Additionally, beginning one year after the FAA issues the type certificate for the 737-10, any new 737 MAX aircraft must include certain safety enhancements… the sufficiency of these enhancements will be determined by the FAA. … the 737-7 to begin FAA certification flight testing in 2023, and the 737-10 to begin FAA certification flight testing in 2023 with first delivery in 2024. At December 31, 2022, we had 27 737-7 and 3 737-10 aircraft in inventory and 236 737-7 and 720 737-10 aircraft in backlog and have delivered a total of 1,033 737 MAX aircraft. If we experience delays in achieving certification and/or incorporating safety enhancements, future revenues, cash flows and results of operations could be adversely impacted."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 返工：交付暂停、5 架/月路径与 28 亿美元异常成本估算（p35、p81、p9）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35（787 Program）；p81（Note 7）；p9",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "787 交付于 2021 年 5 月至 2022 年 8 月期间暂停；Boeing 于 2022 年 7 月 28 日获得 FAA 恢复交付授权，8 月恢复交付。",
+      "2022 年全年交付 31 架 787。",
+      "Boeing 当时以低速率生产，预期 2023 年逐步恢复至每月 5 架。",
+      "Boeing 持续对已建造与已入库飞机进行检查与返工；截至 2022 年 12 月 31 日库存约 100 架（2021 年约 110 架），其中大部分预期在 2024 年底前交付。",
+      "截至 2022 年 12 月 31 日累计已计入的异常成本为 17 亿美元。",
+      "2022 年第四季度将异常生产成本总估算上调至 28 亿美元，其中大部分将在 2023 年底前发生；而 2021 年 12 月 31 日时的累计预期约为 20 亿美元。",
+      "该上调「主要由于 2022 年第四季度决定因供应链约束与检查返工成本上升而放缓近期生产」。",
+      "787 项目 2022 年与 2021 年分别计入异常生产成本 12.40 亿美元与 4.68 亿美元。",
+      "2021 年第四季度因返工导致交付延迟超出预期，787 项目计入 34.60 亿美元 reach-forward 损失。",
+      "787 交付暂停的原因是生产质量问题，包括供应链中的质量问题。"
+    ],
+    "raw_excerpt": "We received FAA authorization to resume delivery on July 28, 2022 and deliveries resumed in August. During 2022, we delivered 31 aircraft to customers. We continue to conduct inspections and rework on undelivered aircraft. … At December 31, 2022, and 2021, we had approximately 100 and 110 aircraft in inventory. … We are currently producing at low rates and expect to gradually return to 5 per month in 2023. … Cumulative abnormal costs recorded through December 31, 2022 totaled $1.7 billion. During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023. At December 31, 2021, we were expecting to incur approximately $2 billion of abnormal production costs on a cumulative basis. The increase was primarily driven by a decision in the fourth quarter of 2022 to slow down near-term production due to supply chain constraints and increased inspection and rework costs."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 777X 取证延期与生产暂停作为并行的监管/速率约束（p34、p81）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p34（777 and 777X Programs）；p81（Note 7）",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "2022 年第一季度，Boeing 将 777X-9 的预计首次交付时间从此前的 2023 年末修订为 2025 年，依据是对满足取证要求所需时间的重新评估。",
+      "Boeing 当时正推进型号检验授权（TIA）以启动 FAA 取证试飞；TIA 与取证时点最终由监管机构决定。",
+      "2022 年 4 月 Boeing 决定在 2022 与 2023 年暂停 777X-9 生产，该暂停于 2022 年第二季度实施，预计产生约 15 亿美元异常生产成本。",
+      "2022 年计入 777X 异常生产成本 3.25 亿美元。",
+      "777/777X 项目合计生产速率为每月 3 架；767 项目合计生产速率为每月 3 架。",
+      "777X 项目盈利能力受劳动力不稳定与供应链中断导致的持续生产扰动、进一步生产速率调整、测试项目与取证时点风险等因素影响。"
+    ],
+    "raw_excerpt": "During the first quarter of 2022, we revised the estimated first delivery date of the 777X-9, previously expected in late 2023, and now expect it will occur in 2025, based on an updated assessment of the time required to meet certification requirements. We are working towards Type Inspection Authorization (TIA) which will enable us to begin FAA certification flight testing. The timing of TIA and certification will ultimately be determined by the regulators… In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. We implemented the production pause during the second quarter of 2022, and it is expected to result in abnormal production costs of approximately $1.5 billio[n]… We expensed abnormal production costs of $325 during the year ended December 31, 2022."
+  },
+  {
+    "sub_question_id": "q3",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 原材料（钛）采购：暂停俄罗斯采购但称未造成运营中断（p7）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p7",
+    "published_at": "2023-01-27",
+    "key_points": [
+      "Boeing 的关键原材料包括铝（板材、厚板、锻件、挤压件）、钛（板材、厚板、锻件、挤压件）与复合材料。",
+      "替代来源通常存在，但来源认证（qualification）可能耗时一年以上。",
+      "2022 年因俄乌战争，Boeing 暂停从俄罗斯采购钛；Boeing 称此举未中断其运营。",
+      "该段落未将原材料供应列为 FY2023 产能爬坡的门槛因素。"
+    ],
+    "raw_excerpt": "…are aluminum (sheet, plate, forgings and extrusions), titanium (sheet, plate, forgings and extrusions) and composites (including carbon and boron). Although alternative sources generally exist for these raw materials, qualification of the sources could take a year or more. During 2022, as a result of the Russia Ukraine war, we suspended purchasing titanium from Russia. This has not disrupted our operations…"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 737 Program Highlights（生产速率与订单簿表）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p33",
+    "published_at": "2023",
+    "key_points": [
+      "Boeing 在 2022 年将 737 生产速率提高至每月 31 架。",
+      "对后续增产的表述为\"further gradual production rate increases\"，且明确以 market demand 与 supply chain capacity 为条件，未给出 FY2023 具体目标数字。",
+      "2022 年末 737 未交付确定订单（undelivered units under firm orders）为 3,653 架，2021 年末为 3,414 架。",
+      "2022 年末 787 未交付确定订单为 505 架（其中 BCC 订购 8 架），2021 年末为 411 架（BCC 14 架）。",
+      "2022 年末 777 未交付确定订单 69 架、777X 244 架、767 106 架。",
+      "2022 年末 737 在库约 250 架，其中约 140 架已指定客户。",
+      "737 项目 2022 年异常生产成本 1.88 亿美元（2021 年为 18.87 亿美元）。"
+    ],
+    "raw_excerpt": "We increased the production rate to 31 per month in 2022, and expect to implement further gradual production rate increases based on market demand and supply chain capacity. ... Undelivered units under firm orders 3,653 1 106 69 244 505 (8) ... We have approximately 250 aircraft in inventory as of December 31, 2022, including approximately 140 aircraft in inventory that are designated"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — 787 Program（FY2023 回到 5/月、异常成本上调至 28 亿美元）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p35",
+    "published_at": "2023",
+    "key_points": [
+      "787 当前以低速率生产，公司预计 2023 年逐步回到每月 5 架。",
+      "自 2021 年 Q3 起，低于每月 5 架被判定为异常低生产速率，相关成本须作为异常生产成本即期费用化。",
+      "截至 2022 年末累计已发生异常生产成本 17 亿美元。",
+      "2022 年 Q4 将异常生产成本总额估算上调至 28 亿美元，其中大部分将在 2023 年底前发生。",
+      "上调主因是 2022 年 Q4 因供应链约束与成本上升而决定放慢近期生产。",
+      "2022 年末 787 在库约 100 架（2021 年约 110 架），其中大部分预计 2024 年底前交付。",
+      "2022 年 787 交付 31 架；2021 年交付 14 架。"
+    ],
+    "raw_excerpt": "We are currently producing at low rates and expect to gradually return to 5 per month in 2023. In the third quarter of 2021, we determined that production rates below 5 per month represented abnormally low production rates and result in abnormal production costs. ... During the fourth quarter of 2022 we adjusted the total estimate of abnormal production costs up to $2.8 billion with most being incurred by the end of 2023. ... The increase was primarily driven by a decision in the fourth quarter of 2022 to slow down near-term production due to supply chain constraints and increased"
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Backlog（订单簿金额与下行风险披露）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p29",
+    "published_at": "2023",
+    "key_points": [
+      "Commercial Airplanes backlog 2022 年末为 3,298.24 亿美元，2021 年末为 2,968.82 亿美元。",
+      "公司总 backlog 2022 年末为 4,043.81 亿美元（2021 年末 3,774.99 亿美元），其中 contractual backlog 3,819.77 亿美元。",
+      "公司明确披露：若长期无法在中国交付 737 MAX，或 777X / 737-7 / 737-10 投运进一步延迟，可能发生订单簿缩减和/或重大订单取消。",
+      "2022 年 contractual backlog 增长主要来自 BCA 订单簿增加，部分被 BDS 订单簿下降抵消。"
+    ],
+    "raw_excerpt": "Commercial Airplanes $329,824 $296,882 ... If we remain unable to deliver 737 MAX aircraft in China for an extended period of time, and/or entry into service of the 777X, 737-7 and/or 737-10 is further delayed, we may experience reductions to backlog and/or significant order cancellations."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — BCA Deliveries（2020–2022 实际交付量）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p31",
+    "published_at": "2023",
+    "key_points": [
+      "2022 年 BCA 总交付 480 架：737 387 架（含公司内部 13 架）、767 33 架（含内部 15 架）、777 24 架、787 31 架、747 5 架。",
+      "2021 年 BCA 总交付 340 架：737 263 架、787 14 架、777 24 架、767 32 架、747 7 架。",
+      "2020 年 BCA 总交付 157 架：737 43 架、787 53 架。",
+      "2022 年 BCA 营收 258.67 亿美元，营业亏损 23.70 亿美元，营业利润率 -9.2%。",
+      "2022 年 BCA 异常生产成本合计 17.53 亿美元，其中 787 项目 12.40 亿、777X 项目 3.25 亿、737 项目 1.88 亿。"
+    ],
+    "raw_excerpt": "Deliveries 387 (13) 5 33 (15) 24 31 480 ... 2021 ... Deliveries 263 (16) 7 32 (13) 24 14 340 ... Abnormal production costs in 2022 were $1,753 million, including $1,240 million related to the 787 program, $325 million related to the 777X program, and $188 million related to the 737 program."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Overview / 供应链与劳动力约束",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p22",
+    "published_at": "2023",
+    "key_points": [
+      "公司与供应商均遭遇 COVID-19 后续影响、全球供应链约束与劳动力不稳定，并面临通胀压力。",
+      "公司称上述因素降低了整体生产率，并对财务状况、经营成果与现金流造成不利影响。",
+      "公司称在增产（ramp up production）过程中持续监控供应链的健康与稳定。",
+      "Boeing 转引 IATA 数据：2020 年行业净亏 1,380 亿美元、2021 年亏 420 亿、2022 年预计亏 69 亿；2023 年 IATA 预测全球行业利润 46 亿美元。"
+    ],
+    "raw_excerpt": "We and our suppliers are experiencing supply chain disruptions as a result of the lingering impacts of COVID-19, global supply chain constraints, and labor instability. We and our suppliers are also experiencing inflationary pressures. We continue to monitor the health and stability of the supply chain as we ramp up production. These factors have reduced overall productivity and adversely impacted our financial position, results of operations and cash flows."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Risk Factors（供应商交付速率风险）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p10",
+    "published_at": "2023",
+    "key_points": [
+      "风险因素明确：若供应商无法按达成目标所需的成本与速率及时交付部件，公司可能无法满足交付计划，或项目财务表现受损。",
+      "风险因素提及商业飞机总装设施若延迟或严重扰乱生产系统，同样影响交付目标。"
+    ],
+    "raw_excerpt": "commercial aircraft assembly facilities are delayed or create significant disruption to our production system, or if our suppliers cannot timely deliver components to us at the cost and rates necessary to achieve our targets, we may be unable to meet delivery schedules and/or the financial performance of one or more of our programs may suffer."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Commercial Airplanes 竞争格局（Airbus / COMAC，仅定性）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p30",
+    "published_at": "2023",
+    "key_points": [
+      "按金额计，Commercial Airplanes 总订单簿约 70% 来自非美国航空公司。",
+      "公司称 2019 年 737 MAX 停飞及多辖区交付暂停显著降低了其在单通道飞机交付方面的市场份额，并可能给竞争对手扩大订单与份额的机会。",
+      "公司提及 Airbus 在 2018 年收购 Bombardier C Series 多数股权（现 A220）后持续扩展 100–150 座市场。",
+      "公司提及 COMAC 于 2022 年交付首架 C919。",
+      "该段落不含任何 Airbus 月产量、订单量或交付量数字。"
+    ],
+    "raw_excerpt": "Approximately 70% of Commercial Airplanes' total backlog, in dollar terms, is with non-U.S. airlines. ... The grounding of the 737 MAX in 2019 and the associated suspension of 737 MAX deliveries in multiple jurisdictions significantly reduced our market share with respect to deliveries of single aisle aircraft and may provide competitors with an opportunity to obtain more orders and increase market share. ... After the acquisition of a majority share of Bombardier's C Series (now A220) in 2018, Airbus continues to expand in the 100-150 seat transcontinental market."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Note 7 / 777X 生产暂停与 787 递延成本",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p81",
+    "published_at": "2023",
+    "key_points": [
+      "2022 年 4 月公司决定在 2022 与 2023 年暂停 777X-9 生产，暂停期间相关异常生产成本即期费用化。",
+      "2022 年因 777X-9 生产暂停发生异常生产成本 3.25 亿美元。",
+      "777X 项目 2022 年末毛利率接近盈亏平衡。",
+      "2022 年末 787 递延生产成本 126.89 亿美元（2021 年末 116.93 亿美元），供应商预付款 18.31 亿美元。",
+      "2022 年 787 异常生产成本 12.40 亿美元（2021 年 4.68 亿美元）。"
+    ],
+    "raw_excerpt": "In April 2022, we decided to pause production of the 777X-9 during 2022 and 2023. The production pause is resulting in abnormal production costs that are being expensed as incurred until 777X-9 production resumes. We expensed abnormal production costs of $325 during the year ended December 31, 2022. The 777X program has near break-even margins at December 31, 2022."
+  },
+  {
+    "sub_question_id": "q4",
+    "source_type": "kb",
+    "title": "BOEING_2022_10K — Program Development 时间表（737-7 / 737-10 / 777X-9 首次交付）",
+    "url": "kb_demo/financebench/pdfs/BOEING_2022_10K.pdf · p36",
+    "published_at": "2023",
+    "key_points": [
+      "737-7 项目启动 2011 年，计划首次交付 2023 年。",
+      "737-10 项目启动 2017 年，计划首次交付 2024 年。",
+      "777X-9 项目启动 2013 年，计划首次交付 2025 年。",
+      "公司称上述开发时间表受认证要求变化等不确定性影响，认证时点最终由监管机构决定。"
+    ],
+    "raw_excerpt": "737-7 2011 2023 / 737-10 2017 2024 / 777X-9 2013 2025 ... The development schedules shown above are subject to a number of uncertainties, including changes in certification requirements. The timing of certifications will ultimately be determined by the regulators."
+  }
+]
